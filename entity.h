@@ -23,6 +23,8 @@ public:
 private:
 };
 
-class Player : public Entity
-{
-};
+//TODO : add set position and other functions; make get pos return position struct
+//TODO : figure out how to make gun work
+//TODO : make enemies and behavior
+//TODO : create player class
+//TODO : NPCs and Interaction

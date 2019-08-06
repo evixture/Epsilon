@@ -25,9 +25,11 @@ void Engine::render()
 void Engine::createCanvas(int x, int y)
 {
 	TCODConsole::setCustomFont("data/moddedterminal16x16_gs_ro.png", TCOD_FONT_TYPE_GRAYSCALE | TCOD_FONT_LAYOUT_ASCII_INROW);
-	TCODConsole::initRoot(x, y, "TEMP TITLE", false, TCOD_RENDERER_OPENGL2);
+	TCODConsole::initRoot(x, y, "TEMP TITLE SWAT", false, TCOD_RENDERER_OPENGL2);
 
 	TCODSystem::setFps(maxFps);
 	TCODConsole::root->printf(1, 1, "THIS IS A TEST");
 	TCODConsole::root->printf(1, 2, "to see and CHecK VisaBilIty AnD REadaILity");
 }
+
+//TODO : NON BLOCKING INPUT use system check for event

@@ -13,4 +13,9 @@ int main()
 	}
 }
 
-//TODO : ACTUALLY MAKE SOMETHING
+//TODO : test static class vectors that pushes itself in constructor
+//TODO : optimization
+//TODO : test renderer performance
+//TODO : add more structs
+//TODO : try templates
+//TODO : add logger

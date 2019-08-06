@@ -5,7 +5,7 @@ class Engine
 {
 public:
 
-	enum gameState {STARTUP, MAIN, GAMEOVER, EXIT} gameState;
+	enum gameState { STARTUP, MAIN, GAMEOVER, EXIT } gameState;
 	int maxFps = 60;
 
 	int windowx;
@@ -33,7 +33,6 @@ public:
 	void createCanvas(int x, int y);
 
 private:
-
 };
 
 //struct Font
@@ -42,3 +41,11 @@ private:
 //};
 
 extern Engine engine;
+
+//TODO : create an input class
+//TODO : render map , player, etc
+//TODO : Bullet travel
+//TODO : better game states
+//TODO : make font class
+//TODO : rename engine into systems
+//TODO : keyboard and mouse input
