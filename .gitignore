@@ -1,0 +1,15 @@
+
+*.vcxproj
+*.vcxproj
+*.log
+*.pch
+*.tlog
+*.idb
+*.obj
+*.pdb
+*.user
+*.filters
+*.vcxproj
+*.vcxproj
+*.filters
+*.user

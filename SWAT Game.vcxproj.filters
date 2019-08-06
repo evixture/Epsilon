@@ -13,10 +13,30 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Precompiled Header">
+      <UniqueIdentifier>{691ea733-3c94-4724-80ed-69738476dbeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MAIN">
+      <UniqueIdentifier>{1940c91b-af80-44ae-ad17-8d3f85e6ece5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{fb5615d5-19b8-4e9e-a4aa-ca93bda62906}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SWAT Game.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files\MAIN</Filter>
     </ClCompile>
+    <ClCompile Include="engine.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.hpp">
+      <Filter>Source Files\MAIN</Filter>
+    </ClInclude>
+    <ClInclude Include="engine.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
