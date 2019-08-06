@@ -1,6 +1,7 @@
 #include "main.hpp"
 
-Engine engine(20, 20);
+//current window dimensions goos for 1080p
+Engine engine(120, 64);
 
 int main()
 {
@@ -11,3 +12,5 @@ int main()
 		TCODConsole::flush();
 	}
 }
+
+//TODO : ACTUALLY MAKE SOMETHING

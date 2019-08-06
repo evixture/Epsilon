@@ -165,12 +165,18 @@
   <ItemGroup>
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="entity.cpp" />
+    <ClCompile Include="gui.cpp" />
+    <ClCompile Include="behavior.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="gui.h" />
+    <ClInclude Include="behavior.h" />
     <ClInclude Include="main.hpp" />
+    <ClInclude Include="map.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
