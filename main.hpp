@@ -1,14 +1,19 @@
 #pragma once
 
 //std and tcod libs
+
 #include <iostream> // for debug printing to console
 #include <memory>
 #include <vector>
 #include <libtcod.hpp>
 
 //project files
+
+//#include "behavior.h"
+//#include "map.h"
+#include "entity.h"
+#include "gui.h"
 #include "engine.h"
-//#include "entity.h"
 
 //TODO : Look at maps
 //TODO : clean up code

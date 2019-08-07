@@ -1,44 +1,53 @@
 #include "main.hpp"
 
-//for main tcod functions and call tree
+class Input
+{
+public:
+
+	TCOD_key_t key;
+	TCOD_mouse_t mouse;
+
+	Input();
+	~Input();
+
+	void getKeyInp(TCOD_key_t key);
+
+	void getMouseInp(TCOD_mouse_t);
+};
+
+struct Font
+{
+	const char* filePath;
+	int format;
+	int charH;
+	int charV;
+
+	Font(const char* filePath, int format);
+	~Font();
+
+	void setFont(std::shared_ptr<Font> font);
+};
+
 class Engine
 {
 public:
 
 	enum gameState { STARTUP, MAIN, GAMEOVER, EXIT } gameState;
-	int maxFps = 60;
 
-	int windowx;
-	int windowy;
+	std::shared_ptr<Input> input;
+	std::shared_ptr<Font> terminalFont;
+	std::shared_ptr<Gui> gui;
 
-	/*std::vector<std::shared_ptr<Entity>> entityList;
-	std::shared_ptr<Entity> player;*/
+	std::shared_ptr<Entity> player;
+	std::vector<std::shared_ptr<Entity>> entityList;
 
-	TCOD_key_t key;
-	TCOD_mouse_t mouse;
-
-	//start of funcs
 	Engine(int winx, int winy);
-
 	~Engine();
 
-	//start of update functions
 	void update();
 
-	void input();
-
-	//start of render functions
 	void render();
-
-	void createCanvas(int x, int y);
-
-private:
 };
-
-//struct Font
-//{
-//	const char* fontPath;
-//};
 
 extern Engine engine;
 

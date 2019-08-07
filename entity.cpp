@@ -13,6 +13,15 @@ void Entity::update()
 {
 }
 
+void Entity::setPosition(int x, int y)
+{
+}
+
+Position Entity::getPosition(std::shared_ptr<Entity> entity)
+{
+	return Position();
+}
+
 void Entity::render()
 {
 	TCODConsole::root->setChar(x, y, ch);
