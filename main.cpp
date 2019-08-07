@@ -11,6 +11,8 @@ int main()
 		engine.render();
 		TCODConsole::flush();
 	}
+	TCOD_quit();
+	return 0;
 }
 
 //TODO : test static class vectors that pushes itself in constructor

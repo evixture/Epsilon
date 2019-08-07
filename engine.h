@@ -6,13 +6,12 @@ public:
 
 	TCOD_key_t key;
 	TCOD_mouse_t mouse;
+	TCOD_event_t event;
 
 	Input();
 	~Input();
 
-	void getKeyInp(TCOD_key_t key);
-
-	void getMouseInp(TCOD_mouse_t);
+	void getInp(std::shared_ptr<Entity> entity);
 };
 
 struct Font

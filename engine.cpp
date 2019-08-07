@@ -1,6 +1,7 @@
 #include "main.hpp"
 
 Input::Input()
+	:key(TCODConsole::checkForKeypress(TCOD_KEY_PRESSED))
 {
 }
 
@@ -8,12 +9,52 @@ Input::~Input()
 {
 }
 
-void Input::getKeyInp(TCOD_key_t key)
+void Input::getInp(std::shared_ptr<Entity> entity)
 {
-}
+	int ix = 0;
+	int iy = 0;
 
-void Input::getMouseInp(TCOD_mouse_t)
-{
+	switch (key.vk)
+	{
+	case TCODK_UP:
+		iy = -1;
+		break;
+	case TCODK_DOWN:
+		iy = 1;
+		break;
+	case TCODK_LEFT:
+		ix = -1;
+		break;
+	case TCODK_RIGHT:
+		ix = 1;
+		break;
+	default:
+		break;
+	}
+
+	switch (key.c)
+	{
+	case 'w':
+		iy = -1;
+		break;
+	case 's':
+		iy = 1;
+		break;
+	case 'a':
+		ix = -1;
+		break;
+	case 'd':
+		ix = 1;
+		break;
+	default:
+		break;
+	}
+
+	if (ix != 0 || iy != 0)
+	{
+		entity->x = entity->x + ix;
+		entity->y = entity->y + iy;
+	}
 }
 
 Font::Font(const char* filePath, int format)
@@ -41,7 +82,7 @@ Engine::Engine(int winx, int winy)
 	gui = std::make_shared<Gui>(winx, winy);
 	gui->createCanvas();
 
-	player = std::make_shared<Entity>(1, 1, '@', TCODColor::blue, "player")
+	player = std::make_shared<Entity>(1, 1, '@', TCODColor::blue, "player");
 }
 
 Engine::~Engine()
@@ -50,6 +91,7 @@ Engine::~Engine()
 
 void Engine::update()
 {
+	input->getInp(player);
 }
 
 void Engine::render()
