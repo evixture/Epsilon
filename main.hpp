@@ -10,7 +10,7 @@
 //project files
 
 //#include "behavior.h"
-//#include "map.h"
+#include "map.h"
 #include "entity.h"
 #include "gui.h"
 #include "engine.h"

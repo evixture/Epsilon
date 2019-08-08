@@ -14,7 +14,12 @@ public:
 	Gui(int windowx, int windowy);
 	~Gui();
 
+	//creates initial canvas
 	void createCanvas();
+
+	void update();
+
+	void render();
 };
 
 //TODO : set up gui

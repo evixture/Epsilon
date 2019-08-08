@@ -1,4 +1,4 @@
-#include "entity.h"
+#include "main.hpp"
 
 Entity::Entity(int x, int y, int ch, TCODColor fgcol, const char* name)
 	:x(x), y(y), ch(ch), fgcol(fgcol), name(name)

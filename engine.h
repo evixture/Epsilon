@@ -4,6 +4,7 @@ class Input
 {
 public:
 
+	//events
 	TCOD_key_t key;
 	TCOD_mouse_t mouse;
 	TCOD_event_t event;
@@ -11,19 +12,23 @@ public:
 	Input();
 	~Input();
 
+	//handles input
 	void getInp(std::shared_ptr<Entity> entity);
 };
 
 struct Font
 {
+	//font properties
 	const char* filePath;
 	int format;
 	int charH;
 	int charV;
 
 	Font(const char* filePath, int format);
+	Font(const char* filePath, int format, int xsize, int ysize);
 	~Font();
 
+	//sets the used font
 	void setFont(std::shared_ptr<Font> font);
 };
 
@@ -31,7 +36,8 @@ class Engine
 {
 public:
 
-	enum gameState { STARTUP, MAIN, GAMEOVER, EXIT } gameState;
+	//main engine state, other states in gui etc.
+	enum gameState { enSTARTUP, enMAIN, enGAMEOVER, enEXIT } gameState;
 
 	std::shared_ptr<Input> input;
 	std::shared_ptr<Font> terminalFont;
@@ -43,8 +49,10 @@ public:
 	Engine(int winx, int winy);
 	~Engine();
 
+	//head of all other updates
 	void update();
 
+	//head of all other render functions
 	void render();
 };
 

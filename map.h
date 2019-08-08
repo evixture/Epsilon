@@ -1,10 +1,9 @@
 #include "main.hpp"
+
 struct Tile
 {
-	int x;
-	int y;
-
 	TCODColor bgcol;
+	TCODColor destcol;
 
 	bool blocksMove;
 	bool blocksLight;
@@ -17,9 +16,9 @@ struct Tile
 
 	void destroy();
 
-	TCODColor disColor();
+	void dispColor();
 
-	//void render();
+	void render();
 };
 
 class Map
@@ -28,11 +27,23 @@ public:
 
 	int w;
 	int h;
+	int conw;
+	int conh;
 
-	std::vector<Tile> tiles;
+	TCODConsole* mapWin;
 
-	Map(int x, int y);
+	std::vector<std::shared_ptr<Tile>> tiles;
+
+	std::shared_ptr<TCODMap> tcodMap;
+
+	Map(int conw, int conh, int w, int h);
 	~Map();
+
+	void setWall(int x, int y);
+
+	void setWindow(int x, int y);
+
+	void setDest(int x, int y);
 
 	bool canWalk(int x, int y);
 
