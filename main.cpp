@@ -7,6 +7,7 @@ int main()
 {
 	while (!TCODConsole::isWindowClosed())
 	{
+		TCODConsole::root->clear();
 		engine.update();
 		engine.render();
 		TCODConsole::flush();
