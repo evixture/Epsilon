@@ -13,8 +13,6 @@ void Gui::createCanvas()
 {
 	TCODConsole::initRoot(windowx, windowy, windowTitle, windowFullscreen, TCOD_RENDERER_OPENGL2);
 	TCODSystem::setFps(maxFps);
-	TCODConsole::root->printf(1, 1, "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
-	TCODConsole::root->printf(1, 2, "The quick brown fox jumps over a lazy dog");
 }
 
 void Gui::update()

@@ -46,6 +46,8 @@ public:
 	std::shared_ptr<Entity> player;
 	std::vector<std::shared_ptr<Entity>> entityList;
 
+	std::shared_ptr<Map> map;
+
 	Engine(int winx, int winy);
 	~Engine();
 

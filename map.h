@@ -12,6 +12,8 @@ struct Tile
 	//add args?
 	Tile();
 
+	Tile(TCODColor bgcol, bool blocksMove, bool blocksLight, bool destructible);
+
 	~Tile();
 
 	void destroy();
@@ -21,19 +23,30 @@ struct Tile
 	void render();
 };
 
+struct TextMap
+{
+	const char* filePath;
+
+	TextMap(const char* filePath);
+
+	~TextMap();
+
+	void textToVector(std::vector<std::shared_ptr<Tile>>& vector);
+};
+
 class Map
 {
 public:
 
-	int w;
-	int h;
+	//map and console dimensions
+	int mapw;
+	int maph;
 	int conw;
 	int conh;
 
+	//map console and tiles
 	TCODConsole* mapWin;
-
-	std::vector<std::shared_ptr<Tile>> tiles;
-
+	std::vector<std::shared_ptr<Tile>> tileList;
 	std::shared_ptr<TCODMap> tcodMap;
 
 	Map(int conw, int conh, int w, int h);

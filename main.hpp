@@ -3,6 +3,7 @@
 //std and tcod libs
 
 #include <iostream> // for debug printing to console
+#include <fstream>  // for map interpretation
 #include <memory>
 #include <vector>
 #include <libtcod.hpp>
@@ -15,6 +16,7 @@
 #include "gui.h"
 #include "engine.h"
 
+//TODO : check for "new" usages
 //TODO : Look at maps
 //TODO : clean up code
 //TODO : figure out mouse to cell thing in tutorial

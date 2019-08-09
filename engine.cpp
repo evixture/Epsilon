@@ -90,7 +90,7 @@ Engine::Engine(int winx, int winy)
 	input = std::make_shared<Input>();
 
 	//font init
-	terminalFont = std::make_shared<Font>("data/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE);
+	terminalFont = std::make_shared<Font>("data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE);
 	terminalFont->setFont(terminalFont);
 
 	//gui init
@@ -100,6 +100,9 @@ Engine::Engine(int winx, int winy)
 	//player init
 	player = std::make_shared<Entity>(1, 1, '@', TCODColor::blue, "player");
 	entityList.push_back(player);
+
+	//map init
+	map = std::make_shared<Map>(62, 62, 62, 62);
 
 	gameState = enMAIN;
 }
@@ -117,5 +120,9 @@ void Engine::update()
 //head of all other render functions
 void Engine::render()
 {
+	map->render();
+
 	player->render();
 }
+
+//TODO : find a way to check player bounds

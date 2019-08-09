@@ -29,6 +29,18 @@ public:
 	void render();
 };
 
+class Player : public Entity
+{
+};
+
+class Enemy : public Entity
+{
+};
+
+class Item : public Entity
+{
+};
+
 //TODO : add set position and other functions; make get pos return position struct
 //TODO : figure out how to make gun work
 //TODO : make enemies and behavior

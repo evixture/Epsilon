@@ -11,6 +11,8 @@ public:
 	bool windowFullscreen;
 	int maxFps;
 
+	TCODConsole* guiWin;
+
 	Gui(int windowx, int windowy);
 	~Gui();
 
