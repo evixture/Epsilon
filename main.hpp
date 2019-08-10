@@ -10,9 +10,9 @@
 
 //project files
 
-//#include "behavior.h"
-#include "map.h"
+//#include "behavior.h
 #include "entity.h"
+#include "map.h"
 #include "gui.h"
 #include "engine.h"
 

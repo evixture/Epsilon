@@ -26,7 +26,7 @@ public:
 
 	Position getPosition(std::shared_ptr<Entity> entity);
 
-	void render();
+	void render(TCODConsole* console);
 };
 
 class Player : public Entity

@@ -1,24 +1,24 @@
 #include "main.hpp"
 
-Gui::Gui(int windowx, int windowy)
+Window::Window(int windowx, int windowy)
 	:windowx(windowx), windowy(windowy), windowTitle("TEMP TITLE"), windowFullscreen(false), maxFps(60)
 {
 }
 
-Gui::~Gui()
+Window::~Window()
 {
 }
 
-void Gui::createCanvas()
+void Window::createCanvas()
 {
 	TCODConsole::initRoot(windowx, windowy, windowTitle, windowFullscreen, TCOD_RENDERER_OPENGL2);
 	TCODSystem::setFps(maxFps);
 }
 
-void Gui::update()
+void Window::update()
 {
 }
 
-void Gui::render()
+void Window::render()
 {
 }

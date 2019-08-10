@@ -94,12 +94,8 @@ Engine::Engine(int winx, int winy)
 	terminalFont->setFont(terminalFont);
 
 	//gui init
-	gui = std::make_shared<Gui>(winx, winy);
+	gui = std::make_shared<Window>(winx, winy);
 	gui->createCanvas();
-
-	//player init
-	player = std::make_shared<Entity>(1, 1, '@', TCODColor::blue, "player");
-	entityList.push_back(player);
 
 	//map init
 	map = std::make_shared<Map>(62, 62, 62, 62);
@@ -114,15 +110,13 @@ Engine::~Engine()
 //head of all other updates
 void Engine::update()
 {
-	input->getInp(player);
+	input->getInp(map->player);
 }
 
 //head of all other render functions
 void Engine::render()
 {
 	map->render();
-
-	player->render();
 }
 
 //TODO : find a way to check player bounds

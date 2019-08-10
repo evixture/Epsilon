@@ -41,10 +41,7 @@ public:
 
 	std::shared_ptr<Input> input;
 	std::shared_ptr<Font> terminalFont;
-	std::shared_ptr<Gui> gui;
-
-	std::shared_ptr<Entity> player;
-	std::vector<std::shared_ptr<Entity>> entityList;
+	std::shared_ptr<Window> gui;
 
 	std::shared_ptr<Map> map;
 

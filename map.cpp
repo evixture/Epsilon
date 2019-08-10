@@ -1,5 +1,6 @@
 #include "main.hpp"
 
+//Tile class
 Tile::Tile()
 	:bgcol(TCODColor::pink), destcol(TCODColor::green), blocksMove(false), blocksLight(false), destructible(false)
 {
@@ -27,12 +28,12 @@ void Tile::render()
 {
 }
 
+//Text Map Class
 TextMap::TextMap(const char* filePath)
 	:filePath(filePath)
 {
 }
 
-//need to return
 TextMap::~TextMap()
 {
 }
@@ -51,18 +52,29 @@ void TextMap::textToVector(std::vector<std::shared_ptr<Tile>>& vector)
 			case '.':
 				vector.push_back(std::make_shared<Tile>(TCODColor::crimson, false, false, false));
 				break;
+			default:
+				break;
 			}
 		}
 	}
 }
 
+//Map Class
 Map::Map(int conw, int conh, int w, int h)
 	:conw(conw), conh(conh), mapw(w), maph(h)
 {
-	for (int i = 0; i < (w * h); i++)
+	//player init
+	player = std::make_shared<Entity>(1, 1, '@', TCODColor::blue, "player");
+	entityList.push_back(player);
+
+	//main map init
+	/*for (int i = 0; i < (w * h); i++)
 	{
 		tileList.push_back(std::make_shared<Tile>());
-	}
+	}*/
+
+	textMap->textToVector(tileList);
+
 	mapWin = new TCODConsole(conw, conh);
 	tcodMap = std::make_shared<TCODMap>(w, h);
 }
@@ -103,13 +115,14 @@ void Map::render()
 	{
 		for (int y = 0; y < maph; y++)
 		{
-			mapWin->setCharBackground(x, y, TCODColor::pink);
+			mapWin->setCharBackground(x, y, tileList[x + y * mapw]->bgcol);
 		}
 	}
 
-	//test rendering
-	//mapWin->printf(1, 1, "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
-	//mapWin->printf(1, 2, "The quick brown fox jumps over the lazy dog");
+	for (auto entity : entityList)
+	{
+		entity->render(mapWin);
+	}
 
 	TCODConsole::blit(mapWin, 0, 0, conw, conh, TCODConsole::root, 1, 1);
 }

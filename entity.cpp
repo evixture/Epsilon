@@ -22,8 +22,8 @@ Position Entity::getPosition(std::shared_ptr<Entity> entity)
 	return Position();
 }
 
-void Entity::render()
+void Entity::render(TCODConsole* console)
 {
-	TCODConsole::root->setChar(x, y, ch);
-	TCODConsole::root->setCharForeground(x, y, fgcol);
+	console->setChar(x, y, ch);
+	console->setCharForeground(x, y, fgcol);
 }

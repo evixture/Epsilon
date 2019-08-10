@@ -1,6 +1,6 @@
 #include "main.hpp"
 
-class Gui
+class Window
 {
 public:
 
@@ -13,8 +13,8 @@ public:
 
 	TCODConsole* guiWin;
 
-	Gui(int windowx, int windowy);
-	~Gui();
+	Window(int windowx, int windowy);
+	~Window();
 
 	//creates initial canvas
 	void createCanvas();
@@ -24,5 +24,13 @@ public:
 	void render();
 };
 
+class Message
+{
+	const char* message;
+};
+
+class Gui
+{
+};
 //TODO : set up gui
 //TODO : Effects and weapons
