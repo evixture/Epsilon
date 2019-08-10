@@ -26,20 +26,27 @@ public:
 
 	Position getPosition(std::shared_ptr<Entity> entity);
 
-	void render(TCODConsole* console);
+	virtual void render(TCODConsole* console);
 };
 
 class Player : public Entity
 {
+public:
+
+	Player(int x, int y);
 };
 
-class Enemy : public Entity
-{
-};
-
-class Item : public Entity
-{
-};
+//class Player : public Entity
+//{
+//};
+//
+//class Enemy : public Entity
+//{
+//};
+//
+//class Item : public Entity
+//{
+//};
 
 //TODO : add set position and other functions; make get pos return position struct
 //TODO : figure out how to make gun work

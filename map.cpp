@@ -38,6 +38,7 @@ TextMap::~TextMap()
 {
 }
 
+//creates map
 void TextMap::textToVector(std::vector<std::shared_ptr<Tile>>& vector)
 {
 	std::ifstream mapFile;
@@ -50,7 +51,10 @@ void TextMap::textToVector(std::vector<std::shared_ptr<Tile>>& vector)
 			switch (mapFile.get())
 			{
 			case '.':
-				vector.push_back(std::make_shared<Tile>(TCODColor::crimson, false, false, false));
+				vector.push_back(std::make_shared<Tile>(TCODColor::darkestGreen, false, false, false));
+				break;
+			case 'W':
+				vector.push_back(std::make_shared<Tile>(TCODColor::lightGrey, true, false, false));
 				break;
 			default:
 				break;
@@ -64,15 +68,10 @@ Map::Map(int conw, int conh, int w, int h)
 	:conw(conw), conh(conh), mapw(w), maph(h)
 {
 	//player init
-	player = std::make_shared<Entity>(1, 1, '@', TCODColor::blue, "player");
+	player = std::make_shared<Player>(1, 1);
 	entityList.push_back(player);
 
 	//main map init
-	/*for (int i = 0; i < (w * h); i++)
-	{
-		tileList.push_back(std::make_shared<Tile>());
-	}*/
-
 	textMap->textToVector(tileList);
 
 	mapWin = new TCODConsole(conw, conh);

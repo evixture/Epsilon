@@ -51,7 +51,7 @@ public:
 	std::shared_ptr<TextMap> textMap;
 
 	//player init
-	std::shared_ptr<Entity> player;
+	std::shared_ptr<Player> player;
 	std::vector<std::shared_ptr<Entity>> entityList;
 
 	Map(int conw, int conh, int w, int h);
