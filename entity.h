@@ -1,11 +1,5 @@
 #include "main.hpp"
 
-struct Position
-{
-	int x;
-	int y;
-};
-
 class Entity
 {
 public:

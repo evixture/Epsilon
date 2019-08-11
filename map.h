@@ -76,3 +76,13 @@ public:
 //TODO : figure out how to turn a string to a vector of tiles
 //TODO : teleporting tiles and map floors
 //TODO : map scrolling
+//TODO : multilevel maps
+
+/*
+
+vector for stages
+	vector for floor
+		vector for height level
+			vector for tiles
+
+*/

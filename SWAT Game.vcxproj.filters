@@ -27,6 +27,9 @@
     <Filter Include="Source Files\Behavior">
       <UniqueIdentifier>{c701fe1d-3add-420d-8520-c6b307d65457}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Utility">
+      <UniqueIdentifier>{81f213b1-828a-4d18-b27b-8e45e4e1ff44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -47,6 +50,9 @@
     <ClCompile Include="behavior.cpp">
       <Filter>Source Files\Behavior</Filter>
     </ClCompile>
+    <ClCompile Include="utility.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.hpp">
@@ -66,6 +72,9 @@
     </ClInclude>
     <ClInclude Include="behavior.h">
       <Filter>Source Files\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="utility.h">
+      <Filter>Source Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

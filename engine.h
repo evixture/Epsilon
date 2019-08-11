@@ -1,37 +1,5 @@
 #include "main.hpp"
 
-class Input
-{
-public:
-
-	//events
-	TCOD_key_t key;
-	TCOD_mouse_t mouse;
-	TCOD_event_t event;
-
-	Input();
-	~Input();
-
-	//handles input
-	void getInp(std::shared_ptr<Entity> entity);
-};
-
-struct Font
-{
-	//font properties
-	const char* filePath;
-	int format;
-	int charH;
-	int charV;
-
-	Font(const char* filePath, int format);
-	Font(const char* filePath, int format, int xsize, int ysize);
-	~Font();
-
-	//sets the used font
-	void setFont(std::shared_ptr<Font> font);
-};
-
 class Engine
 {
 public:

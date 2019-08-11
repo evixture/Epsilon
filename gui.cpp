@@ -5,20 +5,8 @@ Window::Window(int windowx, int windowy)
 {
 }
 
-Window::~Window()
-{
-}
-
 void Window::createCanvas()
 {
 	TCODConsole::initRoot(windowx, windowy, windowTitle, windowFullscreen, TCOD_RENDERER_OPENGL2);
 	TCODSystem::setFps(maxFps);
-}
-
-void Window::update()
-{
-}
-
-void Window::render()
-{
 }

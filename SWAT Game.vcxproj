@@ -169,6 +169,7 @@
     <ClCompile Include="behavior.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
+    <ClCompile Include="utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="behavior.h" />
     <ClInclude Include="main.hpp" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

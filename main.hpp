@@ -2,6 +2,7 @@
 
 //std and tcod libs
 
+#include <map>
 #include <iostream> // for debug printing to console
 #include <fstream>  // for map interpretation
 #include <memory>
@@ -11,6 +12,7 @@
 //project files
 
 //#include "behavior.h
+#include "utility.h"
 #include "entity.h"
 #include "map.h"
 #include "gui.h"

@@ -18,10 +18,6 @@ public:
 
 	//creates initial canvas
 	void createCanvas();
-
-	void update();
-
-	void render();
 };
 
 class Message
