@@ -11,20 +11,23 @@ Tile::Tile(TCODColor bgcol, bool blocksMove, bool blocksLight, bool destructible
 {
 }
 
-Tile::~Tile()
-{
-}
-
 void Tile::destroy()
 {
 	bgcol = destcol;
 }
 
-void Tile::dispColor()
+//tilemap struct
+TileMap::TileMap()
 {
+	//color, blocks move, blocks light, destructible
+
+	tileMap.insert(std::make_pair
+	("grass", Tile(TCODColor::darkestGreen, false, false, false)));
+	tileMap.insert(std::make_pair
+	("defWall", Tile(TCODColor::TCODColor::lighterSepia, false, false, false)));
 }
 
-void Tile::render()
+TileMap::~TileMap()
 {
 }
 
@@ -51,10 +54,10 @@ void TextMap::textToVector(std::vector<std::shared_ptr<Tile>>& vector)
 			switch (mapFile.get())
 			{
 			case '.':
-				vector.push_back(std::make_shared<Tile>(TCODColor::darkestGreen, false, false, false));
+				vector.push_back(std::make_shared<Tile>(TCODColor(0, 41, 41), false, false, false));
 				break;
 			case 'W':
-				vector.push_back(std::make_shared<Tile>(TCODColor::lightGrey, true, false, false));
+				vector.push_back(std::make_shared<Tile>(TCODColor(63, 63, 63), true, false, false));
 				break;
 			default:
 				break;
@@ -81,6 +84,17 @@ Map::Map(int conw, int conh, int w, int h)
 Map::~Map()
 {
 	delete mapWin;
+}
+
+void Map::createMap()
+{
+	for (int x = 0; x < mapw; x++)
+	{
+		for (int y = 0; y < maph; y++)
+		{
+			tcodMap->setProperties(x, y, blocksLight(x, y), canWalk(x, y));
+		}
+	}
 }
 
 void Map::setWall(int x, int y)

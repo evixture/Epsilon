@@ -11,8 +11,7 @@ Engine::Engine(int winx, int winy)
 	terminalFont->setFont(terminalFont);
 
 	//gui init
-	gui = std::make_shared<Window>(winx, winy);
-	gui->createCanvas();
+	gui = std::make_shared<Gui>(winx, winy);
 
 	//map init
 	map = std::make_shared<Map>(62, 62, 62, 62);

@@ -6,15 +6,10 @@ struct Position
 	int y;
 
 	Position(int x, int y);
-};
 
-struct TileMap
-{
-	std::map<std::string, Tile> tileMap;
+	void setPosition(int nx, int ny);
 
-	TileMap();
-
-	~TileMap();
+	Position getPosition(std::shared_ptr<Entity> entity);
 };
 
 struct Window
@@ -24,7 +19,7 @@ struct Window
 
 	TCODConsole* console;
 
-	Window();
+	Window(int x, int y);
 
 	~Window();
 
@@ -48,24 +43,5 @@ struct Font
 	//sets the used font
 	void setFont(std::shared_ptr<Font> font);
 };
-
-class Input
-{
-public:
-
-	//events
-	TCOD_key_t key;
-	TCOD_mouse_t mouse;
-	TCOD_event_t event;
-
-	Input();
-	~Input();
-
-	//handles input
-	void getInp(std::shared_ptr<Entity> entity);
-};
-
-
-
 
 //TODO : Implement position and other utilities into classes

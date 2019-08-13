@@ -1,15 +1,19 @@
 #pragma once
 
+//need to fix errors
+
 //std and tcod libs
 
 #include <map>
-#include <iostream> // for debug printing to console
-#include <fstream>  // for map interpretation
 #include <memory>
 #include <vector>
+#include <fstream>
+#include <iostream>
 #include <libtcod.hpp>
 
 //project files
+
+class Entity;
 
 //#include "behavior.h
 #include "utility.h"

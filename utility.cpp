@@ -1,4 +1,4 @@
-#include "utility.h"
+#include "main.hpp"
 
 //position struct
 Position::Position(int x, int y)
@@ -6,28 +6,36 @@ Position::Position(int x, int y)
 {
 }
 
-//tilemap struct
-TileMap::TileMap()
+void Position::setPosition(int nx, int ny)
 {
-	//color, blocks move, blocks light, destructible
-
-	tileMap.insert(std::make_pair
-		("grass", Tile(TCODColor::darkestGreen, false, false, false)));
-	tileMap.insert(std::make_pair
-		("defWall", Tile(TCODColor::TCODColor::lighterSepia, false, false, false)));
+	x = nx;
+	y = ny;
 }
 
-TileMap::~TileMap()
+Position Position::getPosition(std::shared_ptr<Entity> entity)
 {
+	return entity->position;
 }
 
 //window struct
-Window::Window()
+Window::Window(int x, int y)
+	:winX(x), winY(y), console(new TCODConsole(x, y))
 {
 }
 
 Window::~Window()
 {
+	delete console;
+}
+
+void Window::update()
+{
+
+}
+
+void Window::render()
+{
+
 }
 
 //font struct
@@ -48,70 +56,5 @@ Font::~Font()
 void Font::setFont(std::shared_ptr<Font> font)
 {
 	TCODConsole::setCustomFont(font->filePath, font->format);
-}
-
-//input class
-Input::Input()
-	:key(TCODConsole::checkForKeypress(TCOD_KEY_PRESSED))
-{
-}
-
-Input::~Input()
-{
-}
-
-//handles input
-void Input::getInp(std::shared_ptr<Entity> entity)
-{
-	TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS | TCOD_EVENT_MOUSE, &key, &mouse);
-
-	if (engine.gameState == engine.enMAIN)
-	{
-		int ix = 0;
-		int iy = 0;
-
-		switch (key.vk)
-		{
-		case TCODK_UP:
-			iy = -1;
-			break;
-		case TCODK_DOWN:
-			iy = 1;
-			break;
-		case TCODK_LEFT:
-			ix = -1;
-			break;
-		case TCODK_RIGHT:
-			ix = 1;
-			break;
-		default:
-			break;
-		}
-
-		switch (key.c)
-		{
-		case 'w':
-			iy = -1;
-			break;
-		case 's':
-			iy = 1;
-			break;
-		case 'a':
-			ix = -1;
-			break;
-		case 'd':
-			ix = 1;
-			break;
-		default:
-			break;
-		}
-
-		if (ix != 0 || iy != 0)
-		{
-			entity->x += ix;
-			entity->y += iy;
-		}
-		std::cout << entity->x << ':' << entity->y << std::endl;
-	}
 }
 

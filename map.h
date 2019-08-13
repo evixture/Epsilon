@@ -9,18 +9,22 @@ struct Tile
 	bool blocksLight;
 	bool destructible;
 
-	//add args?
+	//int tileHeight;
+
 	Tile();
 
 	Tile(TCODColor bgcol, bool blocksMove, bool blocksLight, bool destructible);
 
-	~Tile();
-
 	void destroy();
+};
 
-	void dispColor();
+struct TileMap
+{
+	std::map<std::string, Tile> tileMap;
 
-	void render();
+	TileMap();
+
+	~TileMap();
 };
 
 struct TextMap
@@ -56,6 +60,8 @@ public:
 
 	Map(int conw, int conh, int w, int h);
 	~Map();
+
+	void createMap();
 
 	void setWall(int x, int y);
 

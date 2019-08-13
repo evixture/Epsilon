@@ -1,11 +1,26 @@
 #include "main.hpp"
 
+class Input
+{
+public:
+
+	//events
+	TCOD_key_t key;
+	TCOD_mouse_t mouse;
+	TCOD_event_t event;
+
+	Input();
+	~Input();
+
+	//handles input
+	void getInp(std::shared_ptr<Entity> entity);
+};
+
 class Entity
 {
 public:
 
-	int x;
-	int y;
+	Position position;
 	int ch;
 
 	TCODColor fgcol;
