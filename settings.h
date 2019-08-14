@@ -1,7 +1,5 @@
 #include "main.hpp"
 
-class Map
+class Settings
 {
-
 };
-
