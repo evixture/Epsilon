@@ -1,6 +1,12 @@
 #include "main.hpp"
 
-int main
-{
+Engine engine(120, 64);
 
+int main()
+{
+	while (TCODConsole::isWindowClosed())
+	{
+		TCODConsole::root->clear();
+	}
+	return 0;
 }
