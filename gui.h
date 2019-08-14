@@ -11,18 +11,13 @@ public:
 	int maxFps;
 
 	Gui(int windowx, int windowy);
-
 	~Gui();
 };
 
-class StanceWindow
+class Message
 {
-public:
-	enum Stance { NONE, PRONE, CROUCH, STAND } stance;
-
-	void update();
-
-	void render();
+	const char* message;
 };
+
 //TODO : set up gui
 //TODO : Effects and weapons

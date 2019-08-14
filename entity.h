@@ -10,6 +10,7 @@ public:
 	TCOD_event_t event;
 
 	Input();
+	~Input();
 
 	//handles input
 	void getInp(std::shared_ptr<Entity> entity);
@@ -27,9 +28,9 @@ public:
 	const char* name;
 
 	Entity(int x, int y, int ch, TCODColor fgcol, const char* name);
+	~Entity();
 
 	void update();
-
 	void setPosition(int x, int y);
 
 	Position getPosition(std::shared_ptr<Entity> entity);
@@ -37,18 +38,26 @@ public:
 	virtual void render(TCODConsole* console);
 };
 
-class Weapon : public Entity
-{
-};
-
 class Player : public Entity
 {
 public:
-	int health;
 
 	Player(int x, int y);
 };
 
+//class Player : public Entity
+//{
+//};
+//
+//class Enemy : public Entity
+//{
+//};
+//
+//class Item : public Entity
+//{
+//};
+
+//TODO : add set position and other functions; make get pos return position struct
 //TODO : figure out how to make gun work
 //TODO : make enemies and behavior
 //TODO : create player class
