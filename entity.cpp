@@ -10,8 +10,8 @@ Entity::Entity(Position pos, int symbol, const char* name, TCODColor color)
 {
 }
 
-void Entity::render(TCODConsole console)
+void Entity::render(std::shared_ptr<Window> window)
 {
-	console.setChar(position.x, position.y, symbol);
-	console.setCharForeground(position.x, position.y, color);
+	window->console->setChar(position.x, position.y, symbol);
+	window->console->setCharForeground(position.x, position.y, color);
 }

@@ -10,5 +10,7 @@ public:
 	std::shared_ptr<Entity> player;
 
 	Map(int w, int h);
+
+	void render();
 };
 

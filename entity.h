@@ -18,5 +18,5 @@ public:
 
 	Entity(Position pos, int symbol, const char* name, TCODColor color);
 
-	void render(TCODConsole console);
+	void render(std::shared_ptr<Window> window);
 };

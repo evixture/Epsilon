@@ -4,8 +4,8 @@
 #include <vector>
 #include <libtcod.hpp>
 
+#include "gui.h"
 #include "entity.h"
 #include "settings.h"
-#include "gui.h"
 #include "map.h"
 #include "engine.h"
