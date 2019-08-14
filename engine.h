@@ -24,10 +24,6 @@ public:
 
 extern Engine engine;
 
-//TODO : create an input class
-//TODO : render map , player, etc
 //TODO : Bullet travel
 //TODO : better game states
-//TODO : make font class
-//TODO : rename engine into systems
 //TODO : keyboard and mouse input

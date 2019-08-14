@@ -1,45 +1,11 @@
 #include "main.hpp"
 
-//Default Entity Class
-Entity::Entity(int x, int y, int ch, TCODColor fgcol, const char* name)
-	:position(Position(x, y)), ch(ch), fgcol(fgcol), name(name)
-{
-}
-
-Entity::~Entity()
-{
-}
-
-void Entity::update()
-{
-}
-
-void Entity::setPosition(int x, int y)
-{
-}
-
-Position Entity::getPosition(std::shared_ptr<Entity> entity)
-{
-	return position;
-}
-
-void Entity::render(TCODConsole* console)
-{
-	console->setChar(position.x, position.y, ch);
-	console->setCharForeground(position.x, position.y, fgcol);
-}
-
 //input class
 Input::Input()
 	:key(TCODConsole::checkForKeypress(TCOD_KEY_PRESSED))
 {
 }
 
-Input::~Input()
-{
-}
-
-//handles input
 void Input::getInp(std::shared_ptr<Entity> entity)
 {
 	TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS | TCOD_EVENT_MOUSE, &key, &mouse);
@@ -87,11 +53,36 @@ void Input::getInp(std::shared_ptr<Entity> entity)
 
 		if (ix != 0 || iy != 0)
 		{
-			entity->position.x += ix;
+			if ()
+				entity->position.x += ix;
 			entity->position.y += iy;
 		}
-		std::cout << entity->position.x << ':' << entity->position.y << std::endl;
 	}
+}
+
+//Default Entity Class
+Entity::Entity(int x, int y, int ch, TCODColor fgcol, const char* name)
+	:position(Position(x, y)), ch(ch), fgcol(fgcol), name(name)
+{
+}
+
+void Entity::update()
+{
+}
+
+void Entity::setPosition(int x, int y)
+{
+}
+
+Position Entity::getPosition(std::shared_ptr<Entity> entity)
+{
+	return position;
+}
+
+void Entity::render(TCODConsole* console)
+{
+	console->setChar(position.x, position.y, ch);
+	console->setCharForeground(position.x, position.y, fgcol);
 }
 
 //Player Class
