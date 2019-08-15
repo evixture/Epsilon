@@ -4,10 +4,12 @@
 #include <vector>
 #include <libtcod.hpp>
 
-#include "gui.h"
+struct Window;
+
 #include "entity.h"
-#include "settings.h"
 #include "map.h"
+#include "settings.h"
+#include "gui.h"
 #include "engine.h"
 
 //TODO : optimize and test access modifiers

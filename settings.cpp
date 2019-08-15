@@ -25,7 +25,7 @@ void Font::setfont(std::shared_ptr<Font> font)
 Settings::Settings(int w, int h)
 	: windowX(w), windowY(h), windowTitle("Epsilon v. Alpha"), fullscreen(false), maxFps(60), renderer(TCOD_RENDERER_OPENGL2)
 {
-	terminalfont = std::make_shared<Font>("data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INCOL | TCOD_FONT_TYPE_GRAYSCALE);
+	terminalfont = std::make_shared<Font>("data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE);
 	terminalfont->setfont(terminalfont);
 
 	TCODConsole::initRoot(windowX, windowY, windowTitle, fullscreen, renderer);

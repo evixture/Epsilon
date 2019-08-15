@@ -13,7 +13,7 @@ class Entity
 public:
 	Position position;
 	int symbol;
-	TCODColor color;
+	const TCODColor color;
 	const char* name;
 
 	Entity(Position pos, int symbol, const char* name, TCODColor color);
