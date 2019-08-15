@@ -4,10 +4,11 @@
 Engine::Engine(int windowX, int windowY)
 	:gamestate(INIT)
 {
-	map = std::make_shared<Map>(62, 62);
+	//gui
+	settings = std::make_shared<Settings>(windowX, windowY);
 }
 
 void Engine::render()
 {
-	map->render();
+	//map->render();
 }

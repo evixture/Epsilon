@@ -12,5 +12,5 @@ struct Window
 
 class Gui
 {
+	std::shared_ptr<Map> map;
 };
-
