@@ -10,6 +10,8 @@ public:
 
 	Engine(int windowX, int windowY);
 
+	void update();
+
 	void render();
 };
 

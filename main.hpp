@@ -9,6 +9,7 @@ struct Window;
 #include "entity.h"
 #include "map.h"
 #include "settings.h"
+#include "window.h"
 #include "gui.h"
 #include "engine.h"
 

@@ -8,7 +8,12 @@ Engine::Engine(int windowX, int windowY)
 	settings = std::make_shared<Settings>(windowX, windowY);
 }
 
+void Engine::update()
+{
+	//input
+}
+
 void Engine::render()
 {
-	//map->render();
+	//gui render
 }
