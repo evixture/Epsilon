@@ -2,5 +2,9 @@
 
 class Gui
 {
-	//windows that need to be rendered
+	std::vector<std::shared_ptr<GuiWindow>> windowList;
+
+	Gui(int windowX, int windowY);
+
+	void render();
 };

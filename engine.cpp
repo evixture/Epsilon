@@ -15,5 +15,5 @@ void Engine::update()
 
 void Engine::render()
 {
-	//gui render
+	//gui->render();
 }

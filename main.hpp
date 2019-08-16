@@ -5,6 +5,7 @@
 #include <libtcod.hpp>
 
 struct Window;
+struct Entity;
 
 #include "entity.h"
 #include "map.h"
