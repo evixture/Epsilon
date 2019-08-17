@@ -5,7 +5,7 @@
 #include <libtcod.hpp>
 
 struct Window;
-struct Entity;
+class Entity;
 
 #include "entity.h"
 #include "map.h"
@@ -17,3 +17,4 @@ struct Entity;
 //TODO : optimize and test access modifiers
 //TODO : Remember to clear vectors in destructors
 //TODO : to create and push to vector use vector.push(create ent here)
+//TODO : tcod consoles start at 0, 0

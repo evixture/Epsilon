@@ -30,19 +30,31 @@ Message::Message(const char* text, TCODColor color)
 }
 
 GuiWindow::GuiWindow(int w, int h, const char* guiWindowName, int rx, int ry)
-	:w(w), h(h), guiWindowName(guiWindowName), renderpos(Position(rx, ry))
+	: w(w), h(h), guiWindowName(guiWindowName), renderpos(Position(rx, ry))
 {
 	mainWindow = std::make_shared<Window>(w, h);
 	ribon = std::make_shared<Ribon>(guiWindowName, w);
 	drawWindow = std::make_shared<Window>(w, h - 1);
 }
 
-void GuiWindow::render(std::shared_ptr<Window> window)
+void GuiWindow::render()
 {
-	ribon->render(window);
+	ribon->render(mainWindow);
 	ribon->ribonWindow->console->blit(ribon->ribonWindow->console, 1, 1, w, 1, mainWindow->console, 1, 1);
 
 	//draw window render
 
 	mainWindow->console->blit(mainWindow->console, 1, 1, w, h, TCODConsole::root, renderpos.x, renderpos.y);
+}
+
+GuiMap::GuiMap(int w, int h, int rx, int ry)
+{
+	mapWindow = std::make_shared<GuiWindow>(w, h, "Map", rx, ry);
+	map = std::make_shared<Map>(w, h);
+}
+
+void GuiMap::render()
+{
+	map->render();
+	mapWindow->render();
 }

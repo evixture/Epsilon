@@ -43,5 +43,16 @@ struct GuiWindow
 
 	GuiWindow(int w, int h, const char* guiWindowName, int rx, int ry);
 
-	void render(std::shared_ptr<Window> window);
+	void render();
+};
+
+struct GuiMap
+{
+	std::shared_ptr<Map> map;
+	std::shared_ptr<TCODMap> tcodMap;
+	std::shared_ptr<GuiWindow> mapWindow;
+
+	GuiMap(int w, int h, int rx, int ry);
+
+	void render();
 };

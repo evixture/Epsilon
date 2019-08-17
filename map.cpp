@@ -3,7 +3,8 @@
 Map::Map(int x, int y)
 	:mapW(x), mapH(y)
 {
-	entityList.push_back(std::make_shared<Entity>(Position(1, 1), '@', "Player", TCODColor::darkBlue));
+	player = std::make_shared<Entity>(Position(1, 1), '@', "Player", TCODColor::darkBlue);
+	entityList.push_back(player);
 	window = std::make_shared<Window>(x, y);
 }
 
