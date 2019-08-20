@@ -5,6 +5,7 @@
 #include <libtcod.hpp>
 
 struct Window;
+struct GuiWindow;
 class Entity;
 
 #include "entity.h"

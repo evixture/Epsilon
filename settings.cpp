@@ -36,7 +36,7 @@ void Input::getKeyInput(std::shared_ptr<Entity> entity)
 		int ix = 0;
 		int iy = 0;
 
-		TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS | TCOD_EVENT_MOUSE, &keyboard, &mouse);
+		TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS | TCOD_EVENT_MOUSE, &keyboard, NULL);
 
 		switch (keyboard.c)
 		{

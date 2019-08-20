@@ -6,7 +6,10 @@ struct Window
 	int consoleH;
 	TCODConsole* console;
 
-	Window(int consoleW, int consoleH);
+	TCODColor bgColor;
+	TCODColor fgColor;
+
+	Window(int consoleW, int consoleH, TCODColor bgColor, TCODColor fgColor);
 	~Window();
 };
 
@@ -43,7 +46,7 @@ struct GuiWindow
 
 	GuiWindow(int w, int h, const char* guiWindowName, int rx, int ry);
 
-	void render();
+	virtual void render();
 };
 
 struct GuiMap

@@ -1,9 +1,11 @@
 #include "main.hpp"
 
-Window::Window(int consoleW, int consoleH)
-	:consoleW(consoleW), consoleH(consoleH)
+Window::Window(int consoleW, int consoleH, TCODColor bgColor, TCODColor fgColor)
+	:consoleW(consoleW), consoleH(consoleH), bgColor(bgColor), fgColor(fgColor)
 {
 	console = new TCODConsole(consoleW, consoleH);
+	console->setDefaultBackground(bgColor);
+	console->setDefaultForeground(fgColor);
 }
 
 Window::~Window()
@@ -14,13 +16,16 @@ Window::~Window()
 Ribon::Ribon(const char* windowName, int windowW)
 	: windowName(windowName), windowW(windowW)
 {
-	ribonWindow = std::make_shared<Window>(windowW, 1);
-	ribonWindow->console->setDefaultBackground(TCODColor::darkBlue);
-	ribonWindow->console->setDefaultForeground(TCODColor::white);
+	ribonWindow = std::make_shared<Window>(windowW, 1, TCODColor::darkBlue, TCODColor::white);
 }
 
 void Ribon::render(std::shared_ptr<Window> window)
 {
+	for (int x = 0; x < windowW; x++)
+	{
+		ribonWindow->console->setCharBackground(x, 0, ribonWindow->bgColor);
+	}
+
 	window->console->printf(2, 1, windowName);
 }
 
@@ -32,9 +37,9 @@ Message::Message(const char* text, TCODColor color)
 GuiWindow::GuiWindow(int w, int h, const char* guiWindowName, int rx, int ry)
 	: w(w), h(h), guiWindowName(guiWindowName), renderpos(Position(rx, ry))
 {
-	mainWindow = std::make_shared<Window>(w, h);
+	mainWindow = std::make_shared<Window>(w, h, TCODColor::black, TCODColor::white);
 	ribon = std::make_shared<Ribon>(guiWindowName, w);
-	drawWindow = std::make_shared<Window>(w, h - 1);
+	drawWindow = std::make_shared<Window>(w, h - 1, TCODColor::black, TCODColor::white);
 }
 
 void GuiWindow::render()
@@ -45,6 +50,8 @@ void GuiWindow::render()
 	//draw window render
 
 	mainWindow->console->blit(mainWindow->console, 1, 1, w, h, TCODConsole::root, renderpos.x, renderpos.y);
+
+	//mainWindow->console->printf(0, 0, "Test");
 }
 
 GuiMap::GuiMap(int w, int h, int rx, int ry)
@@ -55,6 +62,6 @@ GuiMap::GuiMap(int w, int h, int rx, int ry)
 
 void GuiMap::render()
 {
-	map->render();
+	map->render(mapWindow);
 	mapWindow->render();
 }
