@@ -1,5 +1,6 @@
 #include "main.hpp"
 
+//Font Struct
 Font::Font(const char* filePath, int format)
 	:filePath(filePath), format(format), charW(0), charH(0)
 {
@@ -22,6 +23,7 @@ void Font::setfont(std::shared_ptr<Font> font)
 	}
 }
 
+//Input Struct
 Input::Input()
 	:keyboard(TCODConsole::checkForKeypress(TCOD_KEY_PRESSED))
 {
@@ -41,10 +43,10 @@ void Input::getKeyInput(std::shared_ptr<Entity> entity)
 		switch (keyboard.c)
 		{
 		case 'w':
-			iy++;
+			iy--;
 			break;
 		case 's':
-			iy--;
+			iy++;
 			break;
 		case 'a':
 			ix--;
@@ -55,13 +57,14 @@ void Input::getKeyInput(std::shared_ptr<Entity> entity)
 		default:
 			break;
 		}
+
 		switch (keyboard.vk)
 		{
 		case TCODK_UP:
-			iy++;
+			iy--;
 			break;
 		case TCODK_DOWN:
-			iy--;
+			iy++;
 			break;
 		case TCODK_LEFT:
 			ix--;
@@ -82,6 +85,7 @@ void Input::getKeyInput(std::shared_ptr<Entity> entity)
 	}
 }
 
+//Settings Class
 Settings::Settings(int w, int h)
 	: windowX(w), windowY(h), windowTitle("Epsilon v. Alpha"), fullscreen(false), maxFps(60), renderer(TCOD_RENDERER_OPENGL2)
 {

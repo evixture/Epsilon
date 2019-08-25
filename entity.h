@@ -1,5 +1,6 @@
 #include "main.hpp"
 
+//Position Struct
 struct Position
 {
 	int x;
@@ -8,6 +9,7 @@ struct Position
 	Position(int x, int y);
 };
 
+//Default Entity Class
 class Entity
 {
 public:

@@ -1,5 +1,6 @@
 #include "main.hpp"
 
+//Gui Class
 class Gui
 {
 public:

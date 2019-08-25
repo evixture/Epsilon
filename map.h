@@ -1,5 +1,6 @@
 #include "main.hpp"
 
+//Map Class
 class Map
 {
 public:

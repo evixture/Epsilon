@@ -1,13 +1,16 @@
 #pragma once
 
+//Std Library Imports
 #include <memory>
 #include <vector>
 #include <libtcod.hpp>
 
+//Class Declarations
 struct Window;
 struct GuiWindow;
 class Entity;
 
+//Class File Imports
 #include "entity.h"
 #include "map.h"
 #include "settings.h"
@@ -19,3 +22,5 @@ class Entity;
 //TODO : Remember to clear vectors in destructors
 //TODO : to create and push to vector use vector.push(create ent here)
 //TODO : tcod consoles start at 0, 0
+
+//TODO : blitting consoles requires a background flag

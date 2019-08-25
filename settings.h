@@ -1,5 +1,6 @@
 #include "main.hpp"
 
+//Font Struct
 struct Font
 {
 	const char* filePath;
@@ -13,6 +14,7 @@ struct Font
 	void setfont(std::shared_ptr<Font> font);
 };
 
+//Input Struct
 struct Input
 {
 	TCOD_key_t keyboard;
@@ -23,6 +25,7 @@ struct Input
 	void getKeyInput(std::shared_ptr<Entity> entity);
 };
 
+//Settings Class
 class Settings
 {
 public:

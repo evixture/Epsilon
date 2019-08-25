@@ -1,12 +1,14 @@
 #include "main.hpp"
 
+//Position Struct
 Position::Position(int x, int y)
 	:x(x), y(y)
 {
 }
 
+//Default Entity Class
 Entity::Entity(Position pos, int symbol, const char* name, TCODColor color)
-	:position(pos), symbol(symbol), name(name), color(color)
+	: position(pos), symbol(symbol), name(name), color(color)
 {
 }
 

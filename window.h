@@ -1,5 +1,15 @@
 #include "main.hpp"
 
+//Message Struct
+struct Message
+{
+	const char* text;
+	TCODColor color;
+
+	Message(const char* text, TCODColor color);
+};
+
+//Window Struct
 struct Window
 {
 	int consoleW;
@@ -11,8 +21,11 @@ struct Window
 
 	Window(int consoleW, int consoleH, TCODColor bgColor, TCODColor fgColor);
 	~Window();
+
+	void render();
 };
 
+//Ribon Struct
 struct Ribon
 {
 	const char* windowName;
@@ -22,17 +35,10 @@ struct Ribon
 
 	Ribon(const char* windowName, int windowW);
 
-	void render(std::shared_ptr<Window> window);
+	void render();
 };
 
-struct Message
-{
-	const char* text;
-	TCODColor color;
-
-	Message(const char* text, TCODColor color);
-};
-
+//GuiWindow Struct
 struct GuiWindow
 {
 	int w;
@@ -40,15 +46,16 @@ struct GuiWindow
 	const char* guiWindowName;
 	Position renderpos;
 
-	std::shared_ptr<Window> mainWindow;
 	std::shared_ptr<Ribon> ribon;
+	std::shared_ptr<Window> mainWindow;
 	std::shared_ptr<Window> drawWindow;
 
 	GuiWindow(int w, int h, const char* guiWindowName, int rx, int ry);
 
-	virtual void render();
+	void render();
 };
 
+//GuiMap Struct
 struct GuiMap
 {
 	std::shared_ptr<Map> map;
