@@ -9,11 +9,11 @@ Map::Map(int x, int y)
 }
 
 //Map Render
-void Map::render(std::shared_ptr<GuiWindow> window)
+void Map::render(std::shared_ptr<Window> window)
 {
 	//window->drawWindow->console->clear();
 	for (auto& entity : entityList)
 	{
-		entity->render(window->drawWindow);
+		entity->render(window);
 	}
 }

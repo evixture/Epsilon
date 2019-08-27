@@ -13,7 +13,8 @@ Engine::Engine(int windowX, int windowY)
 //Head of Update Loop
 void Engine::update()
 {
-	settings->update(gui->guiMap->map->player);
+	TCODConsole::root->clear();
+	settings->update(gui->mapWindow->map->player);
 }
 
 //Head of Render Loop
@@ -21,4 +22,5 @@ void Engine::render()
 {
 	settings->printLogo();
 	gui->render();
+	TCODConsole::flush();
 }

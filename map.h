@@ -12,5 +12,5 @@ public:
 
 	Map(int w, int h);
 
-	void render(std::shared_ptr<GuiWindow> window);
+	void render(std::shared_ptr<Window> window);
 };

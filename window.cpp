@@ -48,27 +48,40 @@ GuiWindow::GuiWindow(int w, int h, const char* guiWindowName, int rx, int ry)
 	drawWindow = std::make_shared<Window>(w, h - 1, TCODColor::darkestGrey, TCODColor::white);
 }
 
-//GuiWindow Render
-void GuiWindow::render()
+//GuiWindow clears window
+void GuiWindow::clearWindow()
 {
 	ribon->render();
-	ribon->ribonWindow->console->blit(ribon->ribonWindow->console, 0, 0, ribon->ribonWindow->consoleW, ribon->ribonWindow->consoleH, mainWindow->console, 0, 0, 1, 1);
 	drawWindow->render();
-	drawWindow->console->blit(drawWindow->console, 0, 0, drawWindow->consoleW, drawWindow->consoleH, mainWindow->console, 0, 1, 1, 1);
 	//mainWindow->console->clear(); renders incorrectly
+}
+
+//GuiWindow blits the consoles together and pushes to root
+void GuiWindow::pushWindow()
+{
+	ribon->ribonWindow->console->blit(ribon->ribonWindow->console, 0, 0, ribon->ribonWindow->consoleW, ribon->ribonWindow->consoleH, mainWindow->console, 0, 0, 1, 1);
+	drawWindow->console->blit(drawWindow->console, 0, 0, drawWindow->consoleW, drawWindow->consoleH, mainWindow->console, 0, 1, 1, 1);
 	mainWindow->console->blit(mainWindow->console, 0, 0, w, h, TCODConsole::root, renderpos.x, renderpos.y, 1, 1);
+}
+
+void GuiWindow::render()
+{
+	clearWindow();
+	//rendery parts
+	pushWindow();
 }
 
 //GuiMap Struct
 GuiMap::GuiMap(int w, int h, int rx, int ry)
+	:GuiWindow(w, h, "Map", rx, ry)
 {
-	mapWindow = std::make_shared<GuiWindow>(w, h, "Map", rx, ry);
 	map = std::make_shared<Map>(w, h);
 }
 
-//GuiMap Rander
+//GuiMap Render
 void GuiMap::render()
 {
-	mapWindow->render();
-	map->render(mapWindow);
+	clearWindow();
+	map->render(drawWindow);
+	pushWindow();
 }

@@ -23,4 +23,5 @@ class Entity;
 //TODO : to create and push to vector use vector.push(create ent here)
 //TODO : tcod consoles start at 0, 0
 
-//TODO : blitting consoles requires a background flag
+//!NOTE : blitting consoles requires a background flag
+//!NOTE : Documentation is done in declaration
