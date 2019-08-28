@@ -1,14 +1,15 @@
 #pragma once
 
 //Std Library Imports
+#include <fstream>
 #include <memory>
 #include <vector>
 #include <libtcod.hpp>
 
 //Class Declarations
 struct Window;
-struct GuiWindow;
-class Entity;
+//struct GuiWindow;
+//class Entity;
 
 //Class File Imports
 #include "entity.h"

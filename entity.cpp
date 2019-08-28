@@ -6,6 +6,12 @@ Position::Position(int x, int y)
 {
 }
 
+void Position::setPosition(int nx, int ny)
+{
+	this->x = nx;
+	this->y = ny;
+}
+
 //Default Entity Class
 Entity::Entity(Position pos, int symbol, const char* name, TCODColor color)
 	: position(pos), symbol(symbol), name(name), color(color)

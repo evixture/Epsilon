@@ -13,13 +13,13 @@ Engine::Engine(int windowX, int windowY)
 //Head of Update Loop
 void Engine::update()
 {
-	TCODConsole::root->clear();
 	settings->update(gui->mapWindow->map->player);
 }
 
 //Head of Render Loop
 void Engine::render()
 {
+	TCODConsole::root->clear();
 	settings->printLogo();
 	gui->render();
 	TCODConsole::flush();

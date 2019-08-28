@@ -7,6 +7,8 @@ struct Position
 	int y;
 
 	Position(int x, int y);
+
+	void setPosition(int x, int y);
 };
 
 //Default Entity Class
@@ -21,4 +23,12 @@ public:
 	Entity(Position pos, int symbol, const char* name, TCODColor color);
 
 	void render(std::shared_ptr<Window> window);
+};
+
+class Player : public Entity
+{
+public :
+	int health;
+	int height;
+	//inventory (struct)
 };
