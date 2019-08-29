@@ -40,6 +40,8 @@ public:
 	bool fullscreen;
 	int maxFps;
 	TCOD_renderer_t renderer;
+	TCOD_fov_algorithm_t fovtype;
+	bool computeFov;
 
 	std::shared_ptr<Input> input;
 

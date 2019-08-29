@@ -6,6 +6,7 @@ Engine::Engine(int windowX, int windowY)
 {
 	gui = std::make_shared<Gui>(windowX, windowY);
 	settings = std::make_shared<Settings>(windowX, windowY);
+	gui->mapWindow->map->computeFov();
 	gamestate = MAIN;
 	TCODConsole::root->setDefaultBackground(TCODColor::black);
 }

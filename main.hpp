@@ -20,9 +20,10 @@ struct Window;
 #include "engine.h"
 
 //TODO : optimize and test access modifiers
-//TODO : Remember to clear vectors in destructors
+//TODO : Remember to clear vectors in destructors and close files after use
 //TODO : to create and push to vector use vector.push(create ent here)
 //TODO : tcod consoles start at 0, 0
 
 //!NOTE : blitting consoles requires a background flag
 //!NOTE : Documentation is done in declaration
+//!NOTE : create generic items for tiles and then push them 

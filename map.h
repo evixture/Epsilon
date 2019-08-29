@@ -8,6 +8,7 @@ struct Tile
 	TCODColor bgcol;
 	int maxHeight;
 
+	bool explored;
 	bool walkable;
 	bool transparent;
 	bool destructible;
@@ -38,6 +39,22 @@ public:
 	Map(int w, int h);
 
 	void createMap(const char* filePath);
+
+	bool isInFov(int x, int y);
+
+	bool isExplored(int x, int y);
+
+	void computeFov();
+
+	TCODColor getBgColor(int x, int y);
+
+	TCODColor getFgColor(int x, int y);
+
+	int getCh(int x, int y);
+
+	bool getTransparency(int x, int y);
+
+	bool getWalkability(int x, int y);
 
 	void render(std::shared_ptr<Window> window);
 };
