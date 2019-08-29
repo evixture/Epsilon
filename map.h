@@ -56,5 +56,7 @@ public:
 
 	bool getWalkability(int x, int y);
 
+	void update(std::shared_ptr<Window> window);
+
 	void render(std::shared_ptr<Window> window);
 };

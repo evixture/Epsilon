@@ -25,6 +25,11 @@ struct Input
 	TCOD_key_t keyboard;
 	TCOD_mouse_t mouse;
 
+	bool movingup;
+	bool movingdown;
+	bool movingleft;
+	bool movingright;
+
 	Input();
 
 	void getKeyInput(std::shared_ptr<Entity> entity);
@@ -52,6 +57,8 @@ public:
 	Settings(int w, int h);
 
 	void printLogo();
+
+	void printFps();
 
 	void update(std::shared_ptr<Entity> entity);
 };

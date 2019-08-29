@@ -30,7 +30,7 @@ void Font::setfont(std::shared_ptr<Font> font)
 
 //Input Struct
 Input::Input()
-	:keyboard(TCODConsole::checkForKeypress(TCOD_KEY_PRESSED)), mouse()
+	:keyboard(TCODConsole::checkForKeypress(TCOD_KEY_PRESSED)), mouse(), movingup(false), movingdown(false), movingleft(false), movingright(false)
 {
 }
 
@@ -98,7 +98,6 @@ void Input::getKeyInput(std::shared_ptr<Entity> entity)
 		{
 			entity->position.x += ix;
 			entity->position.y += iy;
-			engine.gui->mapWindow->map->computeFov();
 			std::cout << entity->position.x << " : " << entity->position.y << std::endl;
 		}
 	}
@@ -106,7 +105,7 @@ void Input::getKeyInput(std::shared_ptr<Entity> entity)
 
 //Settings Class
 Settings::Settings(int w, int h)
-	: windowX(w), windowY(h), windowTitle("Epsilon v. Alpha"), fullscreen(false), maxFps(60), renderer(TCOD_RENDERER_OPENGL2), fovtype(FOV_PERMISSIVE_1), computeFov(true)
+	: windowX(w), windowY(h), windowTitle("Epsilon v. Alpha"), fullscreen(false), maxFps(60), renderer(TCOD_RENDERER_OPENGL2), fovtype(FOV_PERMISSIVE_8), computeFov(true)
 {
 	fontList.push_back(terminal16x16 = std::make_shared<Font>("Terminal", "16", "16", "data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE));
 	terminal16x16->setfont(terminal16x16);
@@ -121,6 +120,11 @@ Settings::Settings(int w, int h)
 void Settings::printLogo()
 {
 	TCODConsole::root->printf(1, 0, "Epsilon");
+}
+
+void Settings::printFps()
+{
+	TCODConsole::root->printf(20, 0, "%i", TCODSystem::getFps());
 }
 
 void Settings::update(std::shared_ptr<Entity> entity)

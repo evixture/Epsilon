@@ -12,6 +12,11 @@ Gui::Gui(int windowX, int windowY)
 	windowList.push_back(mapWindow       = std::make_shared<GuiMap>   (61, 61, 1, 2));
 }
 
+void Gui::update()
+{
+	mapWindow->update();
+}
+
 //Gui Render
 void Gui::render()
 {
@@ -19,6 +24,4 @@ void Gui::render()
 	{
 		window->render();
 	}
-
-	mapWindow->render();
 }

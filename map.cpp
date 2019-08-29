@@ -17,11 +17,11 @@ Map::Map(int w, int h)
 
 void Map::createMap(const char* filePath)
 {
-	//..TILES......
+	//..TILES............
 	std::shared_ptr<Tile> grass = std::make_shared<Tile>('.', TCODColor::darkerGreen, TCODColor::darkestGreen, 4, true, true, false);
 	std::shared_ptr<Tile> wall = std::make_shared<Tile>('#', TCODColor::lighterSepia, TCODColor::sepia, 4, false, false, false);
 	std::shared_ptr<Tile> floor = std::make_shared<Tile>(' ', TCODColor::darkerSepia, TCODColor::darkestSepia, 4, true, true, false);
-	//.............
+	//...................
 
 
 	std::ifstream textFile;
@@ -96,12 +96,24 @@ bool Map::isInFov(int x, int y)
 	}
 	if (fovMap->isInFov(x, y))
 	{
-		tileList[x + y * mapW]->explored = true;
+		//tileList[x + y * mapW]->explored = true;
 		return true;
 	}
 	return false;
 }
 
+//Map update
+void Map::update(std::shared_ptr<Window> window)
+{
+	for (int y = 0; y < window->consoleH; y++)
+	{
+		for (int x = 0; x < window->consoleW; x++)
+		{
+			fovMap->setProperties(x, y, getTransparency(x, y), getWalkability(x, y));
+		}
+	}
+	computeFov();
+}
 //Map Render
 void Map::render(std::shared_ptr<Window> window)
 {
@@ -109,8 +121,6 @@ void Map::render(std::shared_ptr<Window> window)
 	{
 		for (int x = 0; x < window->consoleW; x++)
 		{
-			fovMap->setProperties(x, y, getTransparency(x, y), getWalkability(x, y));
-
 			if (isInFov(x, y))
 			{
 				window->console->setCharBackground(x, y, getBgColor(x, y));
@@ -119,15 +129,14 @@ void Map::render(std::shared_ptr<Window> window)
 			}
 			else if (isExplored(x, y))
 			{
-				window->console->setCharBackground(x, y, TCODColor::darkestGrey);
-				window->console->setCharForeground(x, y, TCODColor::darkerGrey);
+				window->console->setCharBackground(x, y, TCODColor::pink);
+				window->console->setCharForeground(x, y, TCODColor::lightPink);
 				window->console->setChar(x, y, getCh(x, y));
 			}
 			else
 			{
-				window->console->setCharBackground(x, y, TCODColor::black);
-				window->console->setCharForeground(x, y, TCODColor::black);
-				//window->console->setChar(x, y, getCh(x, y));
+				window->console->setCharBackground(x, y, TCODColor::green);
+				window->console->setCharForeground(x, y, TCODColor::lightGreen);
 			}
 		}
 	}

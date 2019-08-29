@@ -62,9 +62,10 @@ struct GuiMap : public GuiWindow
 {
 	std::shared_ptr<Map> map;
 	std::shared_ptr<TCODMap> tcodMap;
-	//std::shared_ptr<GuiWindow> mapWindow;
 
 	GuiMap(int w, int h, int rx, int ry);
+
+	void update();
 
 	void render();
 };

@@ -79,6 +79,11 @@ GuiMap::GuiMap(int w, int h, int rx, int ry)
 	map->createMap("data/maps/debugmap.txt");
 }
 
+void GuiMap::update()
+{
+	map->update(drawWindow);
+}
+
 //GuiMap Render
 void GuiMap::render()
 {
