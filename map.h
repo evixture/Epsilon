@@ -1,5 +1,6 @@
 #include "main.hpp"
 
+
 //Tile struct
 struct Tile
 {
@@ -38,8 +39,6 @@ public:
 
 	Map(int w, int h);
 
-	void createMap(const char* filePath);
-
 	bool isInFov(int x, int y);
 
 	bool isExplored(int x, int y);
@@ -47,14 +46,14 @@ public:
 	void computeFov();
 
 	TCODColor getBgColor(int x, int y);
-
 	TCODColor getFgColor(int x, int y);
-
 	int getCh(int x, int y);
-
 	bool getTransparency(int x, int y);
-
 	bool getWalkability(int x, int y);
+
+	void updateProperties(std::shared_ptr<Window> window);
+
+	void createMap(const char* filePath);
 
 	void update(std::shared_ptr<Window> window);
 

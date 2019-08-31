@@ -1,5 +1,11 @@
 #include "main.hpp"
 
+//============TILES=======================CH===FOREGROUND=COLOR======BACKGROUND=COLOR====HEIGHT==WALK==TRANS==DESTR==
+#define TILE_grass std::make_shared<Tile>('.', TCODColor::darkerGreen, TCODColor::darkestGreen, 4, true, true, false)
+#define TILE_wall  std::make_shared<Tile>(' ', TCODColor::lighterSepia, TCODColor::sepia, 4, false, false, false)
+#define TILE_floor std::make_shared<Tile>('#', TCODColor::darkerSepia, TCODColor::darkestSepia, 4, true, true, false)
+//============TILES==================================================================================================
+
 //Tile struct
 Tile::Tile(int ch, TCODColor fgcol, TCODColor bgcol, int maxHeight, bool walkable, bool transparent, bool destructible)
 	:ch(ch), fgcol(fgcol), bgcol(bgcol), maxHeight(maxHeight), walkable(walkable), transparent(transparent), destructible(destructible), explored(false)
@@ -11,19 +17,12 @@ Map::Map(int w, int h)
 	:mapW(w), mapH(h), lookHeight(4)
 {
 	fovMap = std::make_shared<TCODMap>(w, h);
-	player = std::make_shared<Entity>(Position(1, 1), '@', "Player", TCODColor::darkBlue);
+	player = std::make_shared<Entity>(Position(6, 7), '@', "Player", TCODColor::darkBlue);
 	entityList.push_back(player);
 }
 
 void Map::createMap(const char* filePath)
 {
-	//..TILES............
-	std::shared_ptr<Tile> grass = std::make_shared<Tile>('.', TCODColor::darkerGreen, TCODColor::darkestGreen, 4, true, true, false);
-	std::shared_ptr<Tile> wall = std::make_shared<Tile>('#', TCODColor::lighterSepia, TCODColor::sepia, 4, false, false, false);
-	std::shared_ptr<Tile> floor = std::make_shared<Tile>(' ', TCODColor::darkerSepia, TCODColor::darkestSepia, 4, true, true, false);
-	//...................
-
-
 	std::ifstream textFile;
 	textFile.open(filePath);
 
@@ -34,13 +33,13 @@ void Map::createMap(const char* filePath)
 			switch (textFile.get())
 			{
 			case '.':
-				tileList.push_back(grass);
+				tileList.push_back(TILE_grass);
 				break;
 			case '#':
-				tileList.push_back(wall);
+				tileList.push_back(TILE_wall);
 				break;
 			case '_':
-				tileList.push_back(floor);
+				tileList.push_back(TILE_floor);
 				break;
 			default:
 				break;
@@ -87,6 +86,17 @@ bool Map::getWalkability(int x, int y)
 	return tileList[x + y * mapW]->walkable;
 }
 
+void Map::updateProperties(std::shared_ptr<Window> window)
+{
+	for (int y = 0; y < window->consoleH; y++)
+	{
+		for (int x = 0; x < window->consoleW; x++)
+		{
+			fovMap->setProperties(x, y, getTransparency(x, y), getWalkability(x, y));
+		}
+	}
+}
+
 //check tcodmap fov
 bool Map::isInFov(int x, int y)
 {
@@ -96,7 +106,7 @@ bool Map::isInFov(int x, int y)
 	}
 	if (fovMap->isInFov(x, y))
 	{
-		//tileList[x + y * mapW]->explored = true;
+		tileList[x + y * mapW]->explored = true;
 		return true;
 	}
 	return false;
@@ -105,13 +115,7 @@ bool Map::isInFov(int x, int y)
 //Map update
 void Map::update(std::shared_ptr<Window> window)
 {
-	for (int y = 0; y < window->consoleH; y++)
-	{
-		for (int x = 0; x < window->consoleW; x++)
-		{
-			fovMap->setProperties(x, y, getTransparency(x, y), getWalkability(x, y));
-		}
-	}
+	updateProperties(window);
 	computeFov();
 }
 //Map Render
@@ -129,14 +133,14 @@ void Map::render(std::shared_ptr<Window> window)
 			}
 			else if (isExplored(x, y))
 			{
-				window->console->setCharBackground(x, y, TCODColor::pink);
-				window->console->setCharForeground(x, y, TCODColor::lightPink);
+				window->console->setCharBackground(x, y, TCODColor::darkestGrey);
+				window->console->setCharForeground(x, y, TCODColor::darkerGrey);
 				window->console->setChar(x, y, getCh(x, y));
 			}
 			else
 			{
-				window->console->setCharBackground(x, y, TCODColor::green);
-				window->console->setCharForeground(x, y, TCODColor::lightGreen);
+				window->console->setCharBackground(x, y, TCODColor::black);
+				window->console->setCharForeground(x, y, TCODColor::darkerGrey);
 			}
 		}
 	}

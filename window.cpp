@@ -71,12 +71,15 @@ void GuiWindow::render()
 	pushWindow();
 }
 
+//NEED TO LOOK INTO HOW THE MAP IS CREATED
+
 //GuiMap Struct
 GuiMap::GuiMap(int w, int h, int rx, int ry)
 	:GuiWindow(w, h, "Map", rx, ry)
 {
 	map = std::make_shared<Map>(w, h);
 	map->createMap("data/maps/debugmap.txt");
+	map->updateProperties(drawWindow);
 }
 
 void GuiMap::update()
