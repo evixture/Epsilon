@@ -32,7 +32,10 @@ struct Input
 
 	Input();
 
-	void getKeyInput(std::shared_ptr<Entity> entity);
+	//not sure if ent param is needed
+	void getInput(std::shared_ptr<Player> player);
+	void getKeyInput(std::shared_ptr<Player> player);
+	void getMouseInput();
 };
 
 //Settings Class
@@ -60,5 +63,5 @@ public:
 
 	void printFps();
 
-	void update(std::shared_ptr<Entity> entity);
+	void update(std::shared_ptr<Player> player);
 };

@@ -2,8 +2,8 @@
 
 //============TILES=======================CH===FOREGROUND=COLOR======BACKGROUND=COLOR====HEIGHT==WALK==TRANS==DESTR==
 #define TILE_grass std::make_shared<Tile>('.', TCODColor::darkerGreen, TCODColor::darkestGreen, 4, true, true, false)
-#define TILE_wall  std::make_shared<Tile>(' ', TCODColor::lighterSepia, TCODColor::sepia, 4, false, false, false)
-#define TILE_floor std::make_shared<Tile>('#', TCODColor::darkerSepia, TCODColor::darkestSepia, 4, true, true, false)
+#define TILE_wall  std::make_shared<Tile>(' ', TCODColor::lightestSepia, TCODColor::lighterSepia, 4, false, false, false)
+#define TILE_floor std::make_shared<Tile>('#', TCODColor::darkSepia, TCODColor::darkestSepia, 4, true, true, false)
 //============TILES==================================================================================================
 
 //Tile struct
@@ -17,7 +17,7 @@ Map::Map(int w, int h)
 	:mapW(w), mapH(h), lookHeight(4)
 {
 	fovMap = std::make_shared<TCODMap>(w, h);
-	player = std::make_shared<Entity>(Position(6, 7), '@', "Player", TCODColor::darkBlue);
+	player = std::make_shared<Player>(Position(6, 7), '@', "Player", TCODColor::darkBlue);
 	entityList.push_back(player);
 }
 
@@ -81,9 +81,9 @@ bool Map::getTransparency(int x, int y)
 	return tileList[x + y * mapW]->transparent;
 }
 
-bool Map::getWalkability(int x, int y)
+bool Map::getWalkability(int tx, int ty)
 {
-	return tileList[x + y * mapW]->walkable;
+	return tileList[tx + ty * mapW]->walkable;
 }
 
 void Map::updateProperties(std::shared_ptr<Window> window)

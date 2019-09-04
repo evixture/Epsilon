@@ -34,31 +34,37 @@ Input::Input()
 {
 }
 
-void Input::getKeyInput(std::shared_ptr<Entity> entity)
+void Input::getMouseInput()
+{
+	TCODSystem::checkForEvent(TCOD_EVENT_MOUSE, NULL, &mouse);
+	return;
+}
+
+void Input::getKeyInput(std::shared_ptr<Player> player)
 {
 	//check for mortality
-	//add momentum etc
+		//add momentum etc
 
 	if (engine.gamestate == Engine::MAIN)
 	{
 		int ix = 0;
 		int iy = 0;
 
-		TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS | TCOD_EVENT_MOUSE, &keyboard, NULL);
+		TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS, &keyboard, NULL);
 
 		switch (keyboard.c)
 		{
 		case 'w':
-			iy--;
+			iy = -1;
 			break;
 		case 's':
-			iy++;
+			iy = 1;
 			break;
 		case 'a':
-			ix--;
+			ix = -1;
 			break;
 		case 'd':
-			ix++;
+			ix = 1;
 			break;
 		default:
 			break;
@@ -93,14 +99,29 @@ void Input::getKeyInput(std::shared_ptr<Entity> entity)
 		default:
 			break;
 		}
-
+		
 		if (ix != 0 || iy != 0)
 		{
-			entity->position.x += ix;
-			entity->position.y += iy;
-			std::cout << entity->position.x << " : " << entity->position.y << std::endl;
+			int jx = ix;
+			int jy = iy;
+			if (engine.gui->mapWindow->map->getWalkability((ix += player->position.getPosition().x), (iy += player->position.getPosition().y)))
+			{
+				player->position.x += jx;
+				player->position.y += jy;
+
+				//std::cout << entity->position.x << " : " << entity->position.y << std::endl;
+			}
 		}
+		std::cout << player->position.x << " : " << player->position.y << std::endl;
+		/*ix = 0;
+		iy = 0;*/
 	}
+}
+
+void Input::getInput(std::shared_ptr<Player> player)
+{
+	getKeyInput(player);
+
 }
 
 //Settings Class
@@ -127,7 +148,7 @@ void Settings::printFps()
 	TCODConsole::root->printf(20, 0, "%i", TCODSystem::getFps());
 }
 
-void Settings::update(std::shared_ptr<Entity> entity)
+void Settings::update(std::shared_ptr<Player> player)
 {
-	input->getKeyInput(entity);
+	input->getInput(player);
 }

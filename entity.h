@@ -8,6 +8,7 @@ struct Position
 
 	Position(int x, int y);
 
+	Position getPosition();
 	void setPosition(int x, int y);
 };
 
@@ -30,5 +31,7 @@ class Player : public Entity
 public :
 	int health;
 	int height;
+
+	Player(Position pos, int symbol, const char* name, TCODColor color);
 	//inventory (struct)
 };

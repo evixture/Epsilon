@@ -34,7 +34,7 @@ public:
 	std::vector<std::shared_ptr<Tile>> tileList;
 
 	//main entity core
-	std::shared_ptr<Entity> player;
+	std::shared_ptr<Player> player;
 	std::vector<std::shared_ptr<Entity>> entityList;
 
 	Map(int w, int h);
@@ -49,7 +49,7 @@ public:
 	TCODColor getFgColor(int x, int y);
 	int getCh(int x, int y);
 	bool getTransparency(int x, int y);
-	bool getWalkability(int x, int y);
+	bool getWalkability(int tx, int ty);
 
 	void updateProperties(std::shared_ptr<Window> window);
 
