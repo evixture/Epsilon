@@ -17,7 +17,7 @@ Map::Map(int w, int h)
 	:mapW(w), mapH(h), lookHeight(4)
 {
 	fovMap = std::make_shared<TCODMap>(w, h);
-	player = std::make_shared<Player>(Position(6, 7), '@', "Player", TCODColor::darkBlue);
+	player = std::make_shared<Player>(Position(2, 2), '@', "Player", TCODColor::darkBlue);
 	entityList.push_back(player);
 }
 

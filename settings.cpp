@@ -30,41 +30,36 @@ void Font::setfont(std::shared_ptr<Font> font)
 
 //Input Struct
 Input::Input()
-	:keyboard(TCODConsole::checkForKeypress(TCOD_KEY_PRESSED)), mouse(), movingup(false), movingdown(false), movingleft(false), movingright(false)
+	:keyboard(), mouse(), movingUp(false), movingDown(false), movingLeft(false), movingRight(false), moveTimer(0), moveWait(10)
 {
+	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &keyboard, &mouse);
 }
 
 void Input::getMouseInput()
 {
-	TCODSystem::checkForEvent(TCOD_EVENT_MOUSE, NULL, &mouse);
 	return;
 }
 
-void Input::getKeyInput(std::shared_ptr<Player> player)
+void Input::getKeyDown()
 {
-	//check for mortality
-		//add momentum etc
-
-	if (engine.gamestate == Engine::MAIN)
+	if (keyEvent == TCOD_KEY_PRESSED)
 	{
-		int ix = 0;
-		int iy = 0;
-
-		TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS, &keyboard, NULL);
+		/*int ix = 0;
+		int iy = 0;*/
 
 		switch (keyboard.c)
 		{
 		case 'w':
-			iy = -1;
+			movingUp = true;
 			break;
 		case 's':
-			iy = 1;
+			movingDown = true;
 			break;
 		case 'a':
-			ix = -1;
+			movingLeft = true;
 			break;
 		case 'd':
-			ix = 1;
+			movingRight = true;
 			break;
 		default:
 			break;
@@ -73,16 +68,16 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 		switch (keyboard.vk)
 		{
 		case TCODK_UP:
-			iy--;
+			movingUp = true;
 			break;
 		case TCODK_DOWN:
-			iy++;
+			movingDown = true;
 			break;
 		case TCODK_LEFT:
-			ix--;
+			movingLeft = true;
 			break;
 		case TCODK_RIGHT:
-			ix++;
+			movingRight = true;
 			break;
 		case TCODK_F11:
 			if (!engine.settings->fullscreen)
@@ -99,27 +94,113 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 		default:
 			break;
 		}
-		
-		if (ix != 0 || iy != 0)
-		{
-			int jx = ix;
-			int jy = iy;
-			if (engine.gui->mapWindow->map->getWalkability((ix += player->position.getPosition().x), (iy += player->position.getPosition().y)))
-			{
-				player->position.x += jx;
-				player->position.y += jy;
+	}
+}
 
-				//std::cout << entity->position.x << " : " << entity->position.y << std::endl;
+void Input::getKeyUp()
+{
+	if (keyEvent == TCOD_KEY_RELEASED)
+	{
+		switch (keyboard.c)
+		{
+		case 'w':
+			movingUp = false;
+			break;
+		case 's':
+			movingDown = false;
+			break;
+		case 'a':
+			movingLeft = false;
+			break;
+		case 'd':
+			movingRight = false;
+			break;
+		default:
+			break;
+		}
+
+		switch (keyboard.vk)
+		{
+		case TCODK_UP:
+			movingUp = false;
+			break;
+		case TCODK_DOWN:
+			movingDown = false;
+			break;
+		case TCODK_LEFT:
+			movingLeft = false;
+			break;
+		case TCODK_RIGHT:
+			movingRight = false;
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+
+void Input::getKeyInput(std::shared_ptr<Player> player)
+{
+	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &keyboard, &mouse);
+
+	if (engine.gamestate == Engine::MAIN)
+	{
+		getKeyDown();
+		getKeyUp();
+	}
+
+	//reset move speed so that it doesnt add up MIGHT NEED TO CHANGE
+	moveXSpeed = 0;
+	moveYSpeed = 0;
+
+	if (movingUp)
+	{
+		moveYSpeed--;
+	}
+	if (movingDown)
+	{
+		moveYSpeed++;
+	}
+	if (movingLeft)
+	{
+		moveXSpeed--;
+	}
+	if (movingRight)
+	{
+		moveXSpeed++;
+	}
+		
+	if (moveXSpeed != 0 || moveYSpeed != 0)
+	{
+		if (moveTimer == 0)
+		{
+			if (   player->position.x + moveXSpeed >= 0 
+				&& player->position.y + moveYSpeed >= 0 
+				&& player->position.x + moveXSpeed < engine.gui->mapWindow->map->mapW 
+				&& player->position.y + moveYSpeed < engine.gui->mapWindow->map->mapH)
+			{
+				if (engine.gui->mapWindow->map->getWalkability(player->position.x + moveXSpeed, player->position.y + moveYSpeed))
+				{
+					player->position.x += moveXSpeed;
+					player->position.y += moveYSpeed;
+
+					moveTimer = moveWait;
+
+					std::cout << player->position.x << " : " << player->position.y << std::endl;
+				}
 			}
 		}
-		std::cout << player->position.x << " : " << player->position.y << std::endl;
-		/*ix = 0;
-		iy = 0;*/
+		else
+		{
+			moveTimer--;
+		}
 	}
 }
 
 void Input::getInput(std::shared_ptr<Player> player)
 {
+	//check mortality in here
 	getKeyInput(player);
 
 }
@@ -145,7 +226,7 @@ void Settings::printLogo()
 
 void Settings::printFps()
 {
-	TCODConsole::root->printf(20, 0, "%i", TCODSystem::getFps());
+	TCODConsole::root->printf(10, 0, "%i  ix %i, iy %i up:%i, down:%i, left:%i, right:%i", TCODSystem::getFps(), input->moveXSpeed, input->moveYSpeed, input->movingUp, input->movingDown, input->movingLeft, input->movingRight);
 }
 
 void Settings::update(std::shared_ptr<Player> player)
