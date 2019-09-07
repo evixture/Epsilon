@@ -139,7 +139,6 @@ void Input::getKeyUp()
 	}
 }
 
-
 void Input::getKeyInput(std::shared_ptr<Player> player)
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &keyboard, &mouse);
@@ -180,9 +179,16 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 				&& player->position.x + moveXSpeed < engine.gui->mapWindow->map->mapW 
 				&& player->position.y + moveYSpeed < engine.gui->mapWindow->map->mapH)
 			{
-				if (engine.gui->mapWindow->map->getWalkability(player->position.x + moveXSpeed, player->position.y + moveYSpeed))
+				if (engine.gui->mapWindow->map->getWalkability(player->position.x + moveXSpeed, player->position.y))
 				{
 					player->position.x += moveXSpeed;
+
+					moveTimer = moveWait;
+
+					std::cout << player->position.x << " : " << player->position.y << std::endl;
+				}
+				if (engine.gui->mapWindow->map->getWalkability(player->position.x, player->position.y + moveYSpeed))
+				{
 					player->position.y += moveYSpeed;
 
 					moveTimer = moveWait;

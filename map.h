@@ -1,6 +1,5 @@
 #include "main.hpp"
 
-
 //Tile struct
 struct Tile
 {
@@ -12,10 +11,13 @@ struct Tile
 	bool explored;
 	bool walkable;
 	bool transparent;
+
+	Tile(int ch, TCODColor fgcol, TCODColor bgcol, int maxHeight, bool walkable, bool transparent);
+};
+
+struct Destructible : public Tile
+{
 	bool destructible;
-
-	Tile(int ch, TCODColor fgcol, TCODColor bgcol, int maxHeight, bool walkable, bool transparent, bool destructible);
-
 };
 
 //Map Class

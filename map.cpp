@@ -1,14 +1,14 @@
 #include "main.hpp"
 
 //============TILES=======================CH===FOREGROUND=COLOR======BACKGROUND=COLOR====HEIGHT==WALK==TRANS==DESTR==
-#define TILE_grass std::make_shared<Tile>('.', TCODColor::darkerGreen, TCODColor::darkestGreen, 4, true, true, false)
-#define TILE_wall  std::make_shared<Tile>(' ', TCODColor::lightestSepia, TCODColor::lighterSepia, 4, false, false, false)
-#define TILE_floor std::make_shared<Tile>('#', TCODColor::darkSepia, TCODColor::darkestSepia, 4, true, true, false)
+#define TILE_grass std::make_shared<Tile>('v', TCODColor::darkerGreen, TCODColor::darkestGreen, 4, true, true)
+#define TILE_wall  std::make_shared<Tile>(' ', TCODColor::lightestSepia, TCODColor::lighterSepia, 4, false, false)
+#define TILE_floor std::make_shared<Tile>(' ', TCODColor::darkSepia, TCODColor::darkerSepia, 4, true, true)
 //============TILES==================================================================================================
 
 //Tile struct
-Tile::Tile(int ch, TCODColor fgcol, TCODColor bgcol, int maxHeight, bool walkable, bool transparent, bool destructible)
-	:ch(ch), fgcol(fgcol), bgcol(bgcol), maxHeight(maxHeight), walkable(walkable), transparent(transparent), destructible(destructible), explored(false)
+Tile::Tile(int ch, TCODColor fgcol, TCODColor bgcol, int maxHeight, bool walkable, bool transparent)
+	:ch(ch), fgcol(fgcol), bgcol(bgcol), maxHeight(maxHeight), walkable(walkable), transparent(transparent), explored(false)
 {
 }
 
@@ -17,7 +17,7 @@ Map::Map(int w, int h)
 	:mapW(w), mapH(h), lookHeight(4)
 {
 	fovMap = std::make_shared<TCODMap>(w, h);
-	player = std::make_shared<Player>(Position(2, 2), '@', "Player", TCODColor::darkBlue);
+	player = std::make_shared<Player>(Position(2, 2), '@', "Player", TCODColor::azure);
 	entityList.push_back(player);
 }
 
