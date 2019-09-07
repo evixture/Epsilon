@@ -60,6 +60,8 @@ struct GuiWindow
 //GuiMap Struct
 struct GuiMap : public GuiWindow
 {
+	std::shared_ptr<Window> mapSidePanel;
+
 	std::shared_ptr<Map> map;
 	std::shared_ptr<TCODMap> tcodMap;
 

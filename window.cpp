@@ -1,5 +1,8 @@
 #include "main.hpp"
 
+//TODO : add more defs for colors in window
+#define RIBONBGCOLOR TCODColor::darkBlue
+
 //Window Struct
 Window::Window(int consoleW, int consoleH, TCODColor bgColor, TCODColor fgColor)
 	:consoleW(consoleW), consoleH(consoleH), bgColor(bgColor), fgColor(fgColor)
@@ -23,7 +26,7 @@ void Window::render()
 Ribon::Ribon(const char* windowName, int windowW)
 	: windowName(windowName), windowW(windowW)
 {
-	ribonWindow = std::make_shared<Window>(windowW, 1, TCODColor::darkBlue, TCODColor::white);
+	ribonWindow = std::make_shared<Window>(windowW, 1, RIBONBGCOLOR, TCODColor::white);
 }
 
 //Ribon Render
@@ -53,7 +56,6 @@ void GuiWindow::clearWindow()
 {
 	ribon->render();
 	drawWindow->render();
-	//mainWindow->console->clear(); renders incorrectly
 }
 
 //GuiWindow blits the consoles together and pushes to root
@@ -67,7 +69,6 @@ void GuiWindow::pushWindow()
 void GuiWindow::render()
 {
 	clearWindow();
-	//rendery parts
 	pushWindow();
 }
 
@@ -77,6 +78,8 @@ void GuiWindow::render()
 GuiMap::GuiMap(int w, int h, int rx, int ry)
 	:GuiWindow(w, h, "Map", rx, ry)
 {
+	mapSidePanel = std::make_shared<Window>(1, 61, RIBONBGCOLOR, TCODColor::white);
+
 	map = std::make_shared<Map>(w, h);
 	map->createMap("data/maps/debugmap.txt");
 	map->updateProperties(drawWindow);
@@ -93,4 +96,7 @@ void GuiMap::render()
 	clearWindow();
 	map->render(drawWindow);
 	pushWindow();
+
+	mapSidePanel->render();
+	mapSidePanel->console->blit(mapSidePanel->console, 0, 0, 1, 61, TCODConsole::root, 62, 2, 1, 1);
 }
