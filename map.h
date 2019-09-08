@@ -1,23 +1,16 @@
 #include "main.hpp"
 
-//Tile struct
-struct Tile
+struct MapFile
 {
-	int ch;
-	TCODColor fgcol;
-	TCODColor bgcol;
-	int maxHeight;
+	const char* filePath;
 
-	bool explored;
-	bool walkable;
-	bool transparent;
+	int textLength;
 
-	Tile(int ch, TCODColor fgcol, TCODColor bgcol, int maxHeight, bool walkable, bool transparent);
-};
+	int getMapTextLenght(const char* filepath);
 
-struct Destructible : public Tile
-{
-	bool destructible;
+	//MapFile();
+
+	MapFile(const char* filePath);
 };
 
 //Map Class
@@ -28,10 +21,11 @@ public:
 	int mapH;
 	int lookHeight;
 
-	const char* debugTextMap;
+	MapFile debugmap = MapFile("data/maps/debugmap.txt");
 
 	//main map core
 	std::shared_ptr<TCODMap> fovMap;
+	//make mapfile shared ptr
 	std::vector<const char*> textMapList;
 	std::vector<std::shared_ptr<Tile>> tileList;
 
@@ -46,7 +40,7 @@ public:
 	bool isExplored(int x, int y);
 
 	void computeFov();
-
+	
 	TCODColor getBgColor(int x, int y);
 	TCODColor getFgColor(int x, int y);
 	int getCh(int x, int y);
@@ -55,7 +49,7 @@ public:
 
 	void updateProperties(std::shared_ptr<Window> window);
 
-	void createMap(const char* filePath);
+	void createMap(MapFile mapFile);
 
 	void update(std::shared_ptr<Window> window);
 

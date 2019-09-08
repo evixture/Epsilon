@@ -10,14 +10,15 @@ struct Window;
 
 //Class File Imports
 #include "entity.h"
+#include "tile.h"
 #include "map.h"
+#include "input.h"
 #include "settings.h"
 #include "window.h"
 #include "gui.h"
 #include "engine.h"
 
 //TODO : optimize and test access modifiers
-//TODO : Remember to clear vectors in destructors and close files after use
 //TODO : to create and push to vector use vector.push(create ent here)
 //TODO : tcod consoles start at 0, 0
 //TODO : Figure out what fov algo to use
@@ -26,3 +27,6 @@ struct Window;
 //!NOTE : blitting consoles requires a background flag
 //!NOTE : Documentation is done in declaration
 //!NOTE : create generic items for tiles and then push them 
+
+//need to change "length" vars to be more easily typed
+//need to clean up mapfile code

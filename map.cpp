@@ -2,29 +2,67 @@
 
 //============TILES=======================CH===FOREGROUND=COLOR======BACKGROUND=COLOR====HEIGHT==WALK==TRANS==DESTR==
 #define TILE_grass std::make_shared<Tile>('v', TCODColor::darkerGreen, TCODColor::darkestGreen, 4, true, true)
-#define TILE_wall  std::make_shared<Tile>(' ', TCODColor::lightestSepia, TCODColor::lighterSepia, 4, false, false)
+#define TILE_wall  std::make_shared<Tile>('#', TCODColor::lightSepia, TCODColor::lighterSepia, 4, false, false)
 #define TILE_floor std::make_shared<Tile>(' ', TCODColor::darkSepia, TCODColor::darkerSepia, 4, true, true)
 //============TILES==================================================================================================
 
-//Tile struct
-Tile::Tile(int ch, TCODColor fgcol, TCODColor bgcol, int maxHeight, bool walkable, bool transparent)
-	:ch(ch), fgcol(fgcol), bgcol(bgcol), maxHeight(maxHeight), walkable(walkable), transparent(transparent), explored(false)
+//MapFile Struct
+int MapFile::getMapTextLenght(const char* filepath)
 {
+	std::ifstream textFile(filepath);
+	//textFile.open(filePath, std::ios::binary);
+
+	int fileLength = 0;
+
+	if (textFile.is_open())
+	{
+		while (!textFile.eof())
+		{
+			textFile.get();
+			fileLength++;
+		}
+	}
+	return fileLength;
 }
+
+//MapFile::MapFile()
+//{
+//	return;
+//}
+
+MapFile::MapFile(const char* filePath)
+	:filePath(filePath)
+{
+	textLength = getMapTextLenght(filePath);
+	std::cout << textLength << std::endl;
+}
+
+
 
 //Map Class
 Map::Map(int w, int h)
 	:mapW(w), mapH(h), lookHeight(4)
 {
+	
+
 	fovMap = std::make_shared<TCODMap>(w, h);
 	player = std::make_shared<Player>(Position(2, 2), '@', "Player", TCODColor::azure);
 	entityList.push_back(player);
 }
 
-void Map::createMap(const char* filePath)
+
+
+
+void Map::createMap(MapFile mapFile)
 {
-	std::ifstream textFile;
-	textFile.open(filePath);
+	std::ifstream textFile(mapFile.filePath);
+	//textFile.open(filePath, std::ios::binary);
+
+	//int fileLength = getMapFileLenght(filePath);
+
+	//std::cout << fileLength << std::endl;
+
+	textFile.seekg(0, std::ios::beg);
 
 	if (textFile.is_open())
 	{
