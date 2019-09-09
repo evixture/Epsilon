@@ -29,6 +29,8 @@ public:
 	int windowY;
 
 	TCOD_fov_algorithm_t fovtype;
+	int fovRad;
+	bool lightWalls;
 
 	std::shared_ptr<Input> input;
 

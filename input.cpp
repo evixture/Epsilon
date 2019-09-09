@@ -14,11 +14,6 @@ void Input::getMouseInput()
 
 void Input::getKeyDown()
 {
-
-	if (keyboard.shift) moveWait = 5;
-	else if (keyboard.lctrl) moveWait = 20;
-	else moveWait = 10;
-
 	if (keyEvent == TCOD_KEY_PRESSED)
 	{
 		switch (keyboard.c)
@@ -116,21 +111,25 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 		moveXSpeed = 0;
 		moveYSpeed = 0;
 
+		if (keyboard.shift) moveWait = 5;
+		else if (keyboard.lctrl) moveWait = 20;
+		else moveWait = 10;
+
 		if (movingUp)
 		{
-			moveYSpeed--;
+			moveYSpeed = -1;
 		}
 		if (movingDown)
 		{
-			moveYSpeed++;
+			moveYSpeed = 1;
 		}
 		if (movingLeft)
 		{
-			moveXSpeed--;
+			moveXSpeed = -1;
 		}
 		if (movingRight)
 		{
-			moveXSpeed++;
+			moveXSpeed = 1;
 		}
 
 		if (moveXSpeed != 0 || moveYSpeed != 0)

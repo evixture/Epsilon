@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 //============TILES=======================CH===FOREGROUND=COLOR======BACKGROUND=COLOR====HEIGHT==WALK==TRANS==DESTR==
-#define TILE_grass std::make_shared<Tile>('v', TCODColor::darkerGreen, TCODColor::darkestGreen, 4, true, true)
+#define TILE_grass std::make_shared<Tile>('.', TCODColor::darkerGreen, TCODColor::darkestGreen, 4, true, true)
 #define TILE_wall  std::make_shared<Tile>('#', TCODColor::lightSepia, TCODColor::lighterSepia, 4, false, false)
 #define TILE_floor std::make_shared<Tile>(' ', TCODColor::darkSepia, TCODColor::darkerSepia, 4, true, true)
 //============TILES==================================================================================================
@@ -79,7 +79,7 @@ void Map::createMap(MapFile mapFile)
 //TcodMap compute Fov
 void Map::computeFov()
 {
-	fovMap->computeFov(player->position.x, player->position.y, 0, engine.settings->fovtype);
+	fovMap->computeFov(player->position.x, player->position.y, engine.settings->fovRad, engine.settings->lightWalls, engine.settings->fovtype);
 }
 
 //Returns to tiles
