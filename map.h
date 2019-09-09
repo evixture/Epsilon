@@ -4,24 +4,25 @@ struct MapFile
 {
 	const char* filePath;
 
+	int mapW;
+	int mapH;
+
 	int textLength;
 
-	int getMapTextLenght(const char* filepath);
+	int getMapTextLength();
 
-	//MapFile();
-
-	MapFile(const char* filePath);
+	MapFile(const char* filePath, int mapWidth, int mapHeight);
 };
 
 //Map Class
 class Map
 {
 public:
-	int mapW;
-	int mapH;
+	//int mapW;
+	//int mapH;
 	int lookHeight;
 
-	MapFile debugmap = MapFile("data/maps/debugmap.txt");
+	MapFile debugmap;
 
 	//main map core
 	std::shared_ptr<TCODMap> fovMap;
@@ -33,7 +34,7 @@ public:
 	std::shared_ptr<Player> player;
 	std::vector<std::shared_ptr<Entity>> entityList;
 
-	Map(int w, int h);
+	Map();
 
 	bool isInFov(int x, int y);
 

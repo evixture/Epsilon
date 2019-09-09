@@ -4,20 +4,23 @@
 class Gui
 {
 public:
-	std::vector<std::shared_ptr<GuiWindow>> windowList;
-
+	
 	//Main Windows
-	std::shared_ptr<GuiWindow> playerWindow;
-	std::shared_ptr<GuiWindow> statusWindow;
-	std::shared_ptr<GuiWindow> inventoryWindow;
-	std::shared_ptr<GuiWindow> proximityWindow;
-	std::shared_ptr<GuiWindow> actionsWindow;
-	std::shared_ptr<GuiWindow> eventLogWindow;
+	std::shared_ptr<Panel> playerWindow;
+	std::shared_ptr<Panel> statusWindow;
+	std::shared_ptr<Panel> inventoryWindow;
+	std::shared_ptr<Panel> proximityWindow;
+	std::shared_ptr<Panel> actionsWindow;
+	std::shared_ptr<Panel> eventLogWindow;
 	std::shared_ptr<GuiMap> mapWindow;
 
 	Gui(int windowX, int windowY);
 
 	void update();
-
 	void render();
+
+private:
+
+	std::vector<std::shared_ptr<Panel>> windowList;
+
 };

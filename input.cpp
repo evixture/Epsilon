@@ -14,11 +14,13 @@ void Input::getMouseInput()
 
 void Input::getKeyDown()
 {
+
+	if (keyboard.shift) moveWait = 5;
+	else if (keyboard.lctrl) moveWait = 20;
+	else moveWait = 10;
+
 	if (keyEvent == TCOD_KEY_PRESSED)
 	{
-		/*int ix = 0;
-		int iy = 0;*/
-
 		switch (keyboard.c)
 		{
 		case 'w':
@@ -36,7 +38,7 @@ void Input::getKeyDown()
 		default:
 			break;
 		}
-
+ 
 		switch (keyboard.vk)
 		{
 		case TCODK_UP:
@@ -52,16 +54,7 @@ void Input::getKeyDown()
 			movingRight = true;
 			break;
 		case TCODK_F11:
-			if (!engine.settings->fullscreen)
-			{
-				TCODConsole::setFullscreen(true);
-				engine.settings->fullscreen = true;
-			}
-			else if (engine.settings->fullscreen)
-			{
-				TCODConsole::setFullscreen(false);
-				engine.settings->fullscreen = false;
-			}
+			engine.settings->setFullscreen();
 			break;
 		default:
 			break;
@@ -146,8 +139,8 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 			{
 				if (player->position.x + moveXSpeed >= 0 &&
 					player->position.y + moveYSpeed >= 0 &&
-					player->position.x + moveXSpeed < engine.gui->mapWindow->map->mapW &&
-					player->position.y + moveYSpeed < engine.gui->mapWindow->map->mapH)
+					player->position.x + moveXSpeed < engine.gui->mapWindow->map->debugmap.mapW &&
+					player->position.y + moveYSpeed < engine.gui->mapWindow->map->debugmap.mapH)
 				{
 					if (engine.gui->mapWindow->map->getWalkability(player->position.x + moveXSpeed, player->position.y))
 					{
@@ -173,5 +166,4 @@ void Input::getInput(std::shared_ptr<Player> player)
 {
 	//check mortality in here
 	getKeyInput(player);
-
 }

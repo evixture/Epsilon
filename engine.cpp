@@ -1,18 +1,15 @@
 #include "main.hpp"
 
 //Engine Class
-Engine::Engine(int windowX, int windowY)
-	:gamestate(MAIN)
+Engine::Engine(int screenX, int screenY)
+	:gamestate(MAIN), gui(std::make_shared<Gui>(screenX, screenY)), settings(std::make_shared<Settings>(screenX, screenY))
 {
-	gui = std::make_shared<Gui>(windowX, windowY);
-	settings = std::make_shared<Settings>(windowX, windowY);
 	TCODConsole::root->setDefaultBackground(TCODColor::black);
 }
 
 //Head of Update Loop
 void Engine::update()
 {
-	//gamestate = MAIN;
 	settings->update(gui->mapWindow->map->player);
 	gui->update();
 }
@@ -21,8 +18,9 @@ void Engine::update()
 void Engine::render()
 {
 	TCODConsole::root->clear();
-	settings->printLogo();
-	settings->printFps();
+
+	settings->render();
 	gui->render();
+
 	TCODConsole::flush();
 }

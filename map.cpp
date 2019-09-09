@@ -7,10 +7,10 @@
 //============TILES==================================================================================================
 
 //MapFile Struct
-int MapFile::getMapTextLenght(const char* filepath)
+int MapFile::getMapTextLength()
 {
-	std::ifstream textFile(filepath);
-	//textFile.open(filePath, std::ios::binary);
+	//ERROR HERE WHEN OPENING FILES
+	std::ifstream textFile(filePath, std::ios::binary);
 
 	int fileLength = 0;
 
@@ -22,47 +22,36 @@ int MapFile::getMapTextLenght(const char* filepath)
 			fileLength++;
 		}
 	}
+	textFile.close();
 	return fileLength;
 }
 
-//MapFile::MapFile()
-//{
-//	return;
-//}
-
-MapFile::MapFile(const char* filePath)
-	:filePath(filePath)
+MapFile::MapFile(const char* filepath, int mapWidth, int mapHeight)
+	:filePath(filepath), mapW(mapWidth), mapH(mapHeight)
 {
-	textLength = getMapTextLenght(filePath);
+	textLength = getMapTextLength();
 	std::cout << textLength << std::endl;
 }
 
-
-
 //Map Class
-Map::Map(int w, int h)
-	:mapW(w), mapH(h), lookHeight(4)
+Map::Map()
+	:lookHeight(4), debugmap(MapFile("data/maps/debugmap.txt", 61, 60))
 {
-	
-
-	fovMap = std::make_shared<TCODMap>(w, h);
+	fovMap = std::make_shared<TCODMap>(debugmap.mapW, debugmap.mapH);
 	player = std::make_shared<Player>(Position(2, 2), '@', "Player", TCODColor::azure);
 	entityList.push_back(player);
 }
 
-
-
-
 void Map::createMap(MapFile mapFile)
 {
-	std::ifstream textFile(mapFile.filePath);
+	std::ifstream textFile(mapFile.filePath, std::ios::binary);
 	//textFile.open(filePath, std::ios::binary);
 
 	//int fileLength = getMapFileLenght(filePath);
 
 	//std::cout << fileLength << std::endl;
 
-	textFile.seekg(0, std::ios::beg);
+	//textFile.seekg(0, std::ios::beg);
 
 	if (textFile.is_open())
 	{
@@ -96,34 +85,35 @@ void Map::computeFov()
 //Returns to tiles
 bool Map::isExplored(int x, int y)
 {
-	return tileList[x + y * mapW]->explored;
+	return tileList[x + y * debugmap.mapW]->explored;
 }
 
 TCODColor Map::getBgColor(int x, int y)
 {
-	return tileList[x + y * mapW]->bgcol;
+	return tileList[x + y * debugmap.mapW]->bgcol;
 }
 
 TCODColor Map::getFgColor(int x, int y)
 {
-	return tileList[x + y * mapW]->fgcol;
+	return tileList[x + y * debugmap.mapW]->fgcol;
 }
 
 int Map::getCh(int x, int y)
 {
-	return tileList[x + y * mapW]->ch;
+	return tileList[x + y * debugmap.mapW]->ch;
 }
 
 bool Map::getTransparency(int x, int y)
 {
-	return tileList[x + y * mapW]->transparent;
+	return tileList[x + y * debugmap.mapW]->transparent;
 }
 
 bool Map::getWalkability(int tx, int ty)
 {
-	return tileList[tx + ty * mapW]->walkable;
+	return tileList[tx + ty * debugmap.mapW]->walkable;
 }
 
+//check limits
 void Map::updateProperties(std::shared_ptr<Window> window)
 {
 	for (int y = 0; y < window->consoleH; y++)
@@ -138,13 +128,13 @@ void Map::updateProperties(std::shared_ptr<Window> window)
 //check tcodmap fov
 bool Map::isInFov(int x, int y)
 {
-	if (x < 0 || x >= mapW || y < 0 || y >= mapH)
+	if (x < 0 || x >= debugmap.mapW || y < 0 || y >= debugmap.mapH)
 	{
 		return false;
 	}
 	if (fovMap->isInFov(x, y))
 	{
-		tileList[x + y * mapW]->explored = true;
+		tileList[x + y * debugmap.mapW]->explored = true;
 		return true;
 	}
 	return false;
@@ -182,7 +172,6 @@ void Map::render(std::shared_ptr<Window> window)
 			}
 		}
 	}
-
 
 	for (auto& entity : entityList)
 	{

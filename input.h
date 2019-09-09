@@ -28,5 +28,4 @@ struct Input
 	void getKeyUp();
 
 	void getMouseInput();
-
 };

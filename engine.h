@@ -9,10 +9,9 @@ public:
 	std::shared_ptr<Gui> gui;
 	std::shared_ptr<Settings> settings;
 
-	Engine(int windowX, int windowY);
+	Engine(int screenX, int screenY);
 
 	void update();
-
 	void render();
 };
 

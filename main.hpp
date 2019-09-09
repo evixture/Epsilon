@@ -5,6 +5,7 @@
 #include <memory>
 #include <vector>
 #include <libtcod.hpp>
+#include <iostream>
 
 struct Window;
 
@@ -30,3 +31,4 @@ struct Window;
 
 //need to change "length" vars to be more easily typed
 //need to clean up mapfile code
+//need to figure out good fov type;
