@@ -36,12 +36,18 @@
     <ClInclude Include="input.h" />
     <ClInclude Include="main.hpp" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="settings.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="data\maps\debugmap.txt" />
+    <Image Include="data\Epsilon.ico">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Epsilon.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
