@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{8585f5c4-486d-4331-bf02-30010f07d6ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{bbd0e168-fed3-4a8c-b61b-64b48f8f98cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Input">
+      <UniqueIdentifier>{e7c88694-2386-4d82-b5c1-299d933cc466}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Engine">
+      <UniqueIdentifier>{dae90952-a638-47ea-b1bf-925a3480cb0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Entity">
+      <UniqueIdentifier>{4d996fbf-874b-4cb5-8d60-f8bf9d28563e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Gui">
+      <UniqueIdentifier>{9f0ab124-8dc3-4fe5-beb4-9f4c27cdf89b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Main">
+      <UniqueIdentifier>{b6544644-1ea1-4402-8a61-30bae7bf16e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Map">
+      <UniqueIdentifier>{625b7d2a-b52d-4d83-abe3-1dd2b9c894d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Tile">
+      <UniqueIdentifier>{1d2cb065-207d-4fe5-b2ad-8e471280a1f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Settings">
+      <UniqueIdentifier>{18e6c5d5-3a8a-4d55-bc16-1311527c999d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Window">
+      <UniqueIdentifier>{52e5245e-01ce-4aa9-aa3f-c6541fa7d592}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="engine.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="main.hpp">
+      <Filter>Source\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
+      <Filter>Source\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="gui.h">
+      <Filter>Source\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="settings.h">
+      <Filter>Source\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="entity.h">
+      <Filter>Source\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="window.h">
+      <Filter>Source\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>Source\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="tile.h">
+      <Filter>Source\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="engine.cpp">
+      <Filter>Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>Source\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="gui.cpp">
+      <Filter>Source\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="settings.cpp">
+      <Filter>Source\Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
+      <Filter>Source\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="window.cpp">
+      <Filter>Source\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>Source\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="tile.cpp">
+      <Filter>Source\Tile</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\Epsilon.ico">
+      <Filter>Resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Epsilon.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

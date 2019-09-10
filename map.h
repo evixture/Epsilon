@@ -1,94 +1,58 @@
 #include "main.hpp"
 
-struct Tile
-{
-	TCODColor bgcol;
-	TCODColor destcol;
-
-	bool blocksMove;
-	bool blocksLight;
-	bool destructible;
-
-	//int tileHeight;
-
-	Tile();
-
-	Tile(TCODColor bgcol, bool blocksMove, bool blocksLight, bool destructible);
-
-	void destroy();
-};
-
-struct TileMap
-{
-	std::map<std::string, Tile> tileMap;
-
-	TileMap();
-
-	~TileMap();
-};
-
-struct TextMap
+struct MapFile
 {
 	const char* filePath;
 
-	TextMap(const char* filePath);
+	int mapW;
+	int mapH;
 
-	~TextMap();
+	int textLength;
 
-	void textToVector(std::vector<std::shared_ptr<Tile>>& vector);
+	int getMapTextLength();
+
+	MapFile(const char* filePath, int mapWidth, int mapHeight);
 };
 
+//Map Class
 class Map
 {
 public:
+	//int mapW;
+	//int mapH;
+	int lookHeight;
 
-	//map and console dimensions
-	int mapw;
-	int maph;
-	int conw;
-	int conh;
+	MapFile debugmap;
 
-	//map console and tiles
-	TCODConsole* mapWin;
+	//main map core
+	std::shared_ptr<TCODMap> fovMap;
+	//make mapfile shared ptr
+	std::vector<const char*> textMapList;
 	std::vector<std::shared_ptr<Tile>> tileList;
-	std::shared_ptr<TCODMap> tcodMap;
-	std::shared_ptr<TextMap> textMap;
 
-	//player init
+	//main entity core
 	std::shared_ptr<Player> player;
 	std::vector<std::shared_ptr<Entity>> entityList;
 
-	Map(int conw, int conh, int w, int h);
-	~Map();
+	Map();
 
-	void createMap();
+	bool isInFov(int x, int y);
 
-	void setWall(int x, int y);
+	bool isExplored(int x, int y);
 
-	void setWindow(int x, int y);
+	void computeFov();
+	
+	TCODColor getBgColor(int x, int y);
+	TCODColor getFgColor(int x, int y);
+	int getCh(int x, int y);
+	bool getTransparency(int x, int y);
+	bool getWalkability(int tx, int ty);
 
-	void setDest(int x, int y);
+	void updateProperties(std::shared_ptr<Window> window);
 
-	bool canWalk(int x, int y);
+	void createMap(MapFile mapFile);
 
-	bool blocksLight(int x, int y);
+	void update(std::shared_ptr<Window> window);
 
-	//void update();
-
-	void render();
+	void render(std::shared_ptr<Window> window);
 };
-
-//TODO : make map class and destructible tiles
-//TODO : figure out how to turn a string to a vector of tiles
-//TODO : teleporting tiles and map floors
-//TODO : map scrolling
-//TODO : multilevel maps
-
-/*
-
-vector for stages
-	vector for floor
-		vector for height level
-			vector for tiles
-
-*/

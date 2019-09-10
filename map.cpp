@@ -1,141 +1,180 @@
 #include "main.hpp"
 
-//Tile class
-Tile::Tile()
-	:bgcol(TCODColor::pink), destcol(TCODColor::green), blocksMove(false), blocksLight(false), destructible(false)
+//============TILES=======================CH===FOREGROUND=COLOR======BACKGROUND=COLOR====HEIGHT==WALK==TRANS==DESTR==
+#define TILE_grass std::make_shared<Tile>('.', TCODColor::darkerGreen, TCODColor::darkestGreen, 4, true, true)
+#define TILE_wall  std::make_shared<Tile>('#', TCODColor::lightSepia, TCODColor::lighterSepia, 4, false, false)
+#define TILE_floor std::make_shared<Tile>(' ', TCODColor::darkSepia, TCODColor::darkerSepia, 4, true, true)
+//============TILES==================================================================================================
+
+//MapFile Struct
+int MapFile::getMapTextLength()
 {
-}
+	//ERROR HERE WHEN OPENING FILES
+	std::ifstream textFile(filePath, std::ios::binary);
 
-Tile::Tile(TCODColor bgcol, bool blocksMove, bool blocksLight, bool destructible)
-	: bgcol(bgcol), destcol(TCODColor::green), blocksMove(blocksMove), blocksLight(blocksLight), destructible(destructible)
-{
-}
+	int fileLength = 0;
 
-void Tile::destroy()
-{
-	bgcol = destcol;
-}
-
-//tilemap struct
-TileMap::TileMap()
-{
-	//color, blocks move, blocks light, destructible
-
-	tileMap.insert(std::make_pair
-	("grass", Tile(TCODColor::darkestGreen, false, false, false)));
-	tileMap.insert(std::make_pair
-	("defWall", Tile(TCODColor::TCODColor::lighterSepia, false, false, false)));
-}
-
-TileMap::~TileMap()
-{
-}
-
-//Text Map Class
-TextMap::TextMap(const char* filePath)
-	:filePath(filePath)
-{
-}
-
-TextMap::~TextMap()
-{
-}
-
-//creates map
-void TextMap::textToVector(std::vector<std::shared_ptr<Tile>>& vector)
-{
-	std::ifstream mapFile;
-	mapFile.open("data/maps/testmap.txt");
-
-	if (mapFile.is_open())
+	if (textFile.is_open())
 	{
-		while (!mapFile.eof())
+		while (!textFile.eof())
 		{
-			switch (mapFile.get())
+			textFile.get();
+			fileLength++;
+		}
+	}
+	textFile.close();
+	return fileLength;
+}
+
+MapFile::MapFile(const char* filepath, int mapWidth, int mapHeight)
+	:filePath(filepath), mapW(mapWidth), mapH(mapHeight)
+{
+	textLength = getMapTextLength();
+	std::cout << textLength << std::endl;
+}
+
+//Map Class
+Map::Map()
+	:lookHeight(4), debugmap(MapFile("data/maps/debugmap.txt", 61, 60))
+{
+	fovMap = std::make_shared<TCODMap>(debugmap.mapW, debugmap.mapH);
+	player = std::make_shared<Player>(Position(2, 2), '@', "Player", TCODColor::azure);
+	entityList.push_back(player);
+}
+
+void Map::createMap(MapFile mapFile)
+{
+	std::ifstream textFile(mapFile.filePath, std::ios::binary);
+	//textFile.open(filePath, std::ios::binary);
+
+	//int fileLength = getMapFileLenght(filePath);
+
+	//std::cout << fileLength << std::endl;
+
+	//textFile.seekg(0, std::ios::beg);
+
+	if (textFile.is_open())
+	{
+		while (!textFile.eof())
+		{
+			switch (textFile.get())
 			{
 			case '.':
-				vector.push_back(std::make_shared<Tile>(TCODColor(0, 41, 41), false, false, false));
+				tileList.push_back(TILE_grass);
 				break;
-			case 'W':
-				vector.push_back(std::make_shared<Tile>(TCODColor(63, 63, 63), true, false, false));
+			case '#':
+				tileList.push_back(TILE_wall);
+				break;
+			case '_':
+				tileList.push_back(TILE_floor);
 				break;
 			default:
 				break;
 			}
 		}
+		textFile.close();
 	}
 }
 
-//Map Class
-Map::Map(int conw, int conh, int w, int h)
-	:conw(conw), conh(conh), mapw(w), maph(h)
+//TcodMap compute Fov
+void Map::computeFov()
 {
-	//player init
-	player = std::make_shared<Player>(1, 1);
-	entityList.push_back(player);
-
-	//main map init
-	textMap->textToVector(tileList);
-
-	mapWin = new TCODConsole(conw, conh);
-	tcodMap = std::make_shared<TCODMap>(w, h);
+	fovMap->computeFov(player->position.x, player->position.y, engine.settings->fovRad, engine.settings->lightWalls, engine.settings->fovtype);
 }
 
-Map::~Map()
+//Returns to tiles
+bool Map::isExplored(int x, int y)
 {
-	delete mapWin;
+	return tileList[x + y * debugmap.mapW]->explored;
 }
 
-void Map::createMap()
+TCODColor Map::getBgColor(int x, int y)
 {
-	for (int x = 0; x < mapw; x++)
+	return tileList[x + y * debugmap.mapW]->bgcol;
+}
+
+TCODColor Map::getFgColor(int x, int y)
+{
+	return tileList[x + y * debugmap.mapW]->fgcol;
+}
+
+int Map::getCh(int x, int y)
+{
+	return tileList[x + y * debugmap.mapW]->ch;
+}
+
+bool Map::getTransparency(int x, int y)
+{
+	return tileList[x + y * debugmap.mapW]->transparent;
+}
+
+bool Map::getWalkability(int tx, int ty)
+{
+	return tileList[tx + ty * debugmap.mapW]->walkable;
+}
+
+//check limits
+void Map::updateProperties(std::shared_ptr<Window> window)
+{
+	for (int y = 0; y < window->consoleH; y++)
 	{
-		for (int y = 0; y < maph; y++)
+		for (int x = 0; x < window->consoleW; x++)
 		{
-			tcodMap->setProperties(x, y, blocksLight(x, y), canWalk(x, y));
+			fovMap->setProperties(x, y, getTransparency(x, y), getWalkability(x, y));
 		}
 	}
 }
 
-void Map::setWall(int x, int y)
+//check tcodmap fov
+bool Map::isInFov(int x, int y)
 {
-}
-
-void Map::setWindow(int x, int y)
-{
-}
-
-void Map::setDest(int x, int y)
-{
-}
-
-bool Map::canWalk(int x, int y)
-{
-	return !tileList[x + y * mapw]->blocksMove;
-}
-
-bool Map::blocksLight(int x, int y)
-{
-	return tileList[x + y * mapw]->blocksLight;
-}
-
-void Map::render()
-{
-	mapWin->setDefaultBackground(TCODColor::white);
-	mapWin->clear();
-
-	for (int x = 0; x < mapw; x++)
+	if (x < 0 || x >= debugmap.mapW || y < 0 || y >= debugmap.mapH)
 	{
-		for (int y = 0; y < maph; y++)
+		return false;
+	}
+	if (fovMap->isInFov(x, y))
+	{
+		tileList[x + y * debugmap.mapW]->explored = true;
+		return true;
+	}
+	return false;
+}
+
+//Map update
+void Map::update(std::shared_ptr<Window> window)
+{
+	updateProperties(window);
+	computeFov();
+}
+//Map Render
+void Map::render(std::shared_ptr<Window> window)
+{
+	for (int y = 0; y < window->consoleH; y++)
+	{
+		for (int x = 0; x < window->consoleW; x++)
 		{
-			mapWin->setCharBackground(x, y, tileList[x + y * mapw]->bgcol);
+			if (isInFov(x, y))
+			{
+				window->console->setCharBackground(x, y, getBgColor(x, y));
+				window->console->setCharForeground(x, y, getFgColor(x, y));
+				window->console->setChar(x, y, getCh(x, y));
+			}
+			else if (isExplored(x, y))
+			{
+				window->console->setCharBackground(x, y, TCODColor::darkestGrey);
+				window->console->setCharForeground(x, y, TCODColor::darkerGrey);
+				window->console->setChar(x, y, getCh(x, y));
+			}
+			else
+			{
+				window->console->setCharBackground(x, y, TCODColor::black);
+				window->console->setCharForeground(x, y, TCODColor::darkerGrey);
+			}
 		}
 	}
 
-	for (auto entity : entityList)
+	for (auto& entity : entityList)
 	{
-		entity->render(mapWin);
+		entity->render(window);
 	}
-
-	TCODConsole::blit(mapWin, 0, 0, conw, conh, TCODConsole::root, 1, 1);
 }

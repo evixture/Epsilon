@@ -1,101 +1,33 @@
 #include "main.hpp"
 
+//Position Struct
+Position::Position(int x, int y)
+	:x(x), y(y)
+{
+}
+
+Position Position::getPosition()
+{
+	return Position(x, y);
+}
+
+void Position::setPosition(int nx, int ny)
+{
+	this->x = nx;
+	this->y = ny;
+}
+
 //Default Entity Class
-Entity::Entity(int x, int y, int ch, TCODColor fgcol, const char* name)
-	:position(Position(x, y)), ch(ch), fgcol(fgcol), name(name)
+Entity::Entity(Position pos, int symbol, const char* name, TCODColor color)
+	: position(pos), symbol(symbol), name(name), color(color)
+{}
+
+void Entity::render(std::shared_ptr<Window> window)
 {
+	window->console->setChar(position.x, position.y, symbol);
+	window->console->setCharForeground(position.x, position.y, color);
 }
 
-Entity::~Entity()
-{
-}
-
-void Entity::update()
-{
-}
-
-void Entity::setPosition(int x, int y)
-{
-}
-
-Position Entity::getPosition(std::shared_ptr<Entity> entity)
-{
-	return position;
-}
-
-void Entity::render(TCODConsole* console)
-{
-	console->setChar(position.x, position.y, ch);
-	console->setCharForeground(position.x, position.y, fgcol);
-}
-
-//input class
-Input::Input()
-	:key(TCODConsole::checkForKeypress(TCOD_KEY_PRESSED))
-{
-}
-
-Input::~Input()
-{
-}
-
-//handles input
-void Input::getInp(std::shared_ptr<Entity> entity)
-{
-	TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS | TCOD_EVENT_MOUSE, &key, &mouse);
-
-	if (engine.gameState == engine.enMAIN)
-	{
-		int ix = 0;
-		int iy = 0;
-
-		switch (key.vk)
-		{
-		case TCODK_UP:
-			iy = -1;
-			break;
-		case TCODK_DOWN:
-			iy = 1;
-			break;
-		case TCODK_LEFT:
-			ix = -1;
-			break;
-		case TCODK_RIGHT:
-			ix = 1;
-			break;
-		default:
-			break;
-		}
-
-		switch (key.c)
-		{
-		case 'w':
-			iy = -1;
-			break;
-		case 's':
-			iy = 1;
-			break;
-		case 'a':
-			ix = -1;
-			break;
-		case 'd':
-			ix = 1;
-			break;
-		default:
-			break;
-		}
-
-		if (ix != 0 || iy != 0)
-		{
-			entity->position.x += ix;
-			entity->position.y += iy;
-		}
-		std::cout << entity->position.x << ':' << entity->position.y << std::endl;
-	}
-}
-
-//Player Class
-Player::Player(int x, int y)
-	:Entity(x, y, '@', TCODColor::blue, "Player")
-{
-}
+Player::Player(Position pos, int symbol, const char* name, TCODColor color)
+	:Entity( pos, symbol, name, color), health(100), height(5)
+{}

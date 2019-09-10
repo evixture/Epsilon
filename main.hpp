@@ -1,45 +1,34 @@
 #pragma once
 
-//need to fix errors
-
-//std and tcod libs
-
-#include <map>
+//STD Library Imports
+#include <fstream>
 #include <memory>
 #include <vector>
-#include <fstream>
-#include <iostream>
 #include <libtcod.hpp>
+#include <iostream>
 
-//project files
+struct Window;
 
-class Entity;
-
-//#include "behavior.h
-#include "utility.h"
+//Class File Imports
 #include "entity.h"
+#include "tile.h"
 #include "map.h"
+#include "input.h"
+#include "settings.h"
+#include "window.h"
 #include "gui.h"
 #include "engine.h"
 
-//TODO : check for "new" usages
-//TODO : Look at maps
-//TODO : clean up code
-//TODO : figure out mouse to cell thing in tutorial
-//TODO : test out console blitting
-//TODO : look at vs shortcuts
-//TODO : remake font
-//TODO : look up "This" and usage
-//TODO : see if unsigned helps performance
-//TODO : try to fix code definition thing
-//TODO : rework file system
-//TODO : look at vs addons for file windows
-//TODO : look at tutorial for ref to mouse and weapons
-//TODO : plan dev in doc
-//TODO : Label functions
-//TODO : look at DF tileset
-//TODO : figure out sounds and music
-//TODO : look at c++ vids
-//TODO : make readme for game
-//TODO : thing of name for game
-//TODO : look at other vs addons
+//TODO : optimize and test access modifiers
+//TODO : to create and push to vector use vector.push(create ent here)
+//TODO : tcod consoles start at 0, 0
+//TODO : Figure out what fov algo to use
+//TODO : fov is computed every update, try to optimize later
+
+//!NOTE : blitting consoles requires a background flag
+//!NOTE : Documentation is done in declaration
+//!NOTE : create generic items for tiles and then push them 
+
+//need to change "length" vars to be more easily typed
+//need to clean up mapfile code
+//need to figure out good fov type;

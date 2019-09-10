@@ -1,64 +1,37 @@
 #include "main.hpp"
 
-class Input
+//Position Struct
+struct Position
 {
-public:
+	int x;
+	int y;
 
-	//events
-	TCOD_key_t key;
-	TCOD_mouse_t mouse;
-	TCOD_event_t event;
-
-	Input();
-	~Input();
-
-	//handles input
-	void getInp(std::shared_ptr<Entity> entity);
+	Position(int x, int y);
+  
+	Position getPosition();
+	void setPosition(int x, int y);
 };
 
+//Default Entity Class
 class Entity
 {
 public:
-
 	Position position;
-	int ch;
-
-	TCODColor fgcol;
-
+	int symbol;
+	const TCODColor color;
 	const char* name;
 
-	Entity(int x, int y, int ch, TCODColor fgcol, const char* name);
-	~Entity();
+	Entity(Position pos, int symbol, const char* name, TCODColor color);
 
-	void update();
-	void setPosition(int x, int y);
-
-	Position getPosition(std::shared_ptr<Entity> entity);
-
-	virtual void render(TCODConsole* console);
+	void render(std::shared_ptr<Window> window);
 };
 
 class Player : public Entity
 {
-public:
+public :
+	int health;
+	int height;
 
-	Player(int x, int y);
+	Player(Position pos, int symbol, const char* name, TCODColor color);
+	//inventory (struct)
 };
-
-//class Player : public Entity
-//{
-//};
-//
-//class Enemy : public Entity
-//{
-//};
-//
-//class Item : public Entity
-//{
-//};
-
-//TODO : add set position and other functions; make get pos return position struct
-//TODO : figure out how to make gun work
-//TODO : make enemies and behavior
-//TODO : create player class
-//TODO : NPCs and Interaction

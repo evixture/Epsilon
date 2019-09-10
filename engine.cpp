@@ -1,38 +1,26 @@
 #include "main.hpp"
 
-Engine::Engine(int winx, int winy)
-	:gameState(enSTARTUP)
+//Engine Class
+Engine::Engine(int screenX, int screenY)
+	:gamestate(MAIN), gui(std::make_shared<Gui>(screenX, screenY)), settings(std::make_shared<Settings>(screenX, screenY))
 {
-	//input init
-	input = std::make_shared<Input>();
-
-	//font init
-	terminalFont = std::make_shared<Font>("data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE);
-	terminalFont->setFont(terminalFont);
-
-	//gui init
-	gui = std::make_shared<Gui>(winx, winy);
-
-	//map init
-	map = std::make_shared<Map>(62, 62, 62, 62);
-
-	gameState = enMAIN;
+	TCODConsole::root->setDefaultBackground(TCODColor::black);
 }
 
-Engine::~Engine()
-{
-}
-
-//head of all other updates
+//Head of Update Loop
 void Engine::update()
 {
-	input->getInp(map->player);
+	settings->update(gui->mapWindow->map->player);
+	gui->update();
 }
 
-//head of all other render functions
+//Head of Render Loop
 void Engine::render()
 {
-	map->render();
-}
+	TCODConsole::root->clear();
 
-//TODO : find a way to check player bounds
+	settings->render();
+	gui->render();
+
+	TCODConsole::flush();
+}
