@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 //Window Struct
-struct Window
+struct Pane
 {
 	int consoleW;
 	int consoleH;
@@ -10,8 +10,8 @@ struct Window
 	TCODColor bgColor;
 	TCODColor fgColor;
 
-	Window(int consoleW, int consoleH, TCODColor bgColor, TCODColor fgColor);
-	~Window();
+	Pane(int consoleW, int consoleH, TCODColor bgColor, TCODColor fgColor);
+	~Pane();
 
 	void render();
 };
@@ -22,7 +22,7 @@ struct Ribon
 	const char* windowName;
 	int windowW;
 
-	std::shared_ptr<Window> ribonWindow;
+	std::shared_ptr<Pane> ribonWindow;
 
 	Ribon(const char* windowName, int windowW);
 
@@ -30,7 +30,7 @@ struct Ribon
 };
 
 //GuiWindow Struct
-struct Panel
+struct Window
 {
 public:
 
@@ -39,9 +39,9 @@ public:
 	const char* panelName;
 	Position renderpos;
 
-	std::shared_ptr<Window> drawWindow;
+	std::shared_ptr<Pane> drawWindow;
 
-	Panel(int w, int h, const char* panelName, int rx, int ry);
+	Window(int w, int h, const char* panelName, int rx, int ry);
 	
 	virtual void update();
 	virtual void render();
@@ -52,21 +52,8 @@ public:
 private:
 
 	std::shared_ptr<Ribon> ribon;
-	std::shared_ptr<Window> mainWindow;
+	std::shared_ptr<Pane> mainWindow;
 
 };
 
 //GuiMap Struct
-struct GuiMap : public Panel
-{
-	std::shared_ptr<Window> mapSidePanel;
-
-	std::shared_ptr<Map> map;
-	std::shared_ptr<TCODMap> tcodMap;
-
-	GuiMap(int w, int h, int rx, int ry);
-
-	void update();
-
-	void render();
-};

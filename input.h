@@ -23,9 +23,8 @@ struct Input
 	//not sure if ent param is needed
 	void getInput(std::shared_ptr<Player> player);
 
-	void getKeyInput(std::shared_ptr<Player> player);
 	void getKeyDown();
-	void getKeyUp();
+	void getKeyInput(std::shared_ptr<Player> player);
 
 	void getMouseInput();
 };

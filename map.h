@@ -48,11 +48,11 @@ public:
 	bool getTransparency(int x, int y);
 	bool getWalkability(int tx, int ty);
 
-	void updateProperties(std::shared_ptr<Window> window);
+	void updateProperties(std::shared_ptr<Pane> window);
 
 	void createMap(MapFile mapFile);
 
-	void update(std::shared_ptr<Window> window);
+	void update(std::shared_ptr<Pane> window);
 
-	void render(std::shared_ptr<Window> window);
+	void render(std::shared_ptr<Pane> window);
 };

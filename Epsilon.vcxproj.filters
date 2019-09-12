@@ -34,6 +34,9 @@
     <Filter Include="Source\Window">
       <UniqueIdentifier>{52e5245e-01ce-4aa9-aa3f-c6541fa7d592}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Panel">
+      <UniqueIdentifier>{dacce39a-8a02-4be4-9a86-c92951cddb4e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h">
@@ -66,6 +69,9 @@
     <ClInclude Include="resource.h">
       <Filter>Resources</Filter>
     </ClInclude>
+    <ClInclude Include="panel.h">
+      <Filter>Source\Panel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -94,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="tile.cpp">
       <Filter>Source\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="panel.cpp">
+      <Filter>Source\Panel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

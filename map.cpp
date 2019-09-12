@@ -1,11 +1,5 @@
 #include "main.hpp"
 
-//============TILES=======================CH===FOREGROUND=COLOR======BACKGROUND=COLOR====HEIGHT==WALK==TRANS==DESTR==
-#define TILE_grass std::make_shared<Tile>('.', TCODColor::darkerGreen, TCODColor::darkestGreen, 4, true, true)
-#define TILE_wall  std::make_shared<Tile>('#', TCODColor::lightSepia, TCODColor::lighterSepia, 4, false, false)
-#define TILE_floor std::make_shared<Tile>(' ', TCODColor::darkSepia, TCODColor::darkerSepia, 4, true, true)
-//============TILES==================================================================================================
-
 //MapFile Struct
 int MapFile::getMapTextLength()
 {
@@ -38,7 +32,7 @@ Map::Map()
 	:lookHeight(4), debugmap(MapFile("data/maps/debugmap.txt", 61, 60))
 {
 	fovMap = std::make_shared<TCODMap>(debugmap.mapW, debugmap.mapH);
-	player = std::make_shared<Player>(Position(2, 2), '@', "Player", TCODColor::azure);
+	player = std::make_shared<Player>(Position(2, 50), '@', "Player", TCODColor::azure);
 	entityList.push_back(player);
 }
 
@@ -114,7 +108,7 @@ bool Map::getWalkability(int tx, int ty)
 }
 
 //check limits
-void Map::updateProperties(std::shared_ptr<Window> window)
+void Map::updateProperties(std::shared_ptr<Pane> window)
 {
 	for (int y = 0; y < window->consoleH; y++)
 	{
@@ -141,13 +135,13 @@ bool Map::isInFov(int x, int y)
 }
 
 //Map update
-void Map::update(std::shared_ptr<Window> window)
+void Map::update(std::shared_ptr<Pane> window)
 {
 	updateProperties(window);
 	computeFov();
 }
 //Map Render
-void Map::render(std::shared_ptr<Window> window)
+void Map::render(std::shared_ptr<Pane> window)
 {
 	for (int y = 0; y < window->consoleH; y++)
 	{

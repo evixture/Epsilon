@@ -4,7 +4,10 @@
 Engine engine(120, 64);
 
 //Main Game Loop
-int main()
+
+//change to main to have terminal show up
+//else use WinMain to hide console
+int main ()
 {
 	while (!TCODConsole::isWindowClosed())
 	{

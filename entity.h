@@ -23,7 +23,7 @@ public:
 
 	Entity(Position pos, int symbol, const char* name, TCODColor color);
 
-	void render(std::shared_ptr<Window> window);
+	void render(std::shared_ptr<Pane> window);
 };
 
 class Player : public Entity
