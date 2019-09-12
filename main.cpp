@@ -9,7 +9,7 @@ Engine engine(120, 64);
 //else use WinMain to hide console
 int main ()
 {
-	while (!TCODConsole::isWindowClosed())
+	while (!TCODConsole::isWindowClosed() && engine.settings->isActive)
 	{
 		engine.update();
 		engine.render();

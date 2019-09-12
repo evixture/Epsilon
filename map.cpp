@@ -104,6 +104,11 @@ bool Map::getTransparency(int x, int y)
 
 bool Map::getWalkability(int tx, int ty)
 {
+	if (tx < 0) return false;
+	if (ty < 0) return false;
+	if (tx >= debugmap.mapW) return false;
+	if (ty >= debugmap.mapH) return false;
+
 	return tileList[tx + ty * debugmap.mapW]->walkable;
 }
 

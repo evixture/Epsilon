@@ -13,10 +13,12 @@ struct Input
 	int moveTimer;
 	int moveWait;
 
-	bool movingUp;
-	bool movingDown;
-	bool movingLeft;
-	bool movingRight;
+	bool moveUp;
+	bool moveDown;
+	bool moveLeft;
+	bool moveRight;
+
+	bool f11Toggle;
 
 	Input();
 

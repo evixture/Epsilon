@@ -2,7 +2,7 @@
 
 //Input Struct
 Input::Input()
-	:keyboard(), mouse(), movingUp(false), movingDown(false), movingLeft(false), movingRight(false), moveTimer(0), moveWait(10)
+	:keyboard(), mouse(), moveUp(false), moveDown(false), moveLeft(false), moveRight(false), moveTimer(0), moveWait(10), f11Toggle(false)
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &keyboard, &mouse);
 }
@@ -15,109 +15,74 @@ void Input::getMouseInput()
 //TODO : figure out how to get char and vk switches working
 void Input::getKeyDown()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) movingUp = true;
-	else movingUp = false;
+	/*---------- PLAYER AND MENU MOVEMENT KEYS ----------*/
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) movingDown = true;
-	else movingDown = false;
+	//	W & UP
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		moveUp = true;
+	}
+	else moveUp = false;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) movingLeft = true;
-	else movingLeft = false;
+	//	S & DOWN
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		moveDown = true;
+	}
+	else moveDown = false;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) movingRight = true;
-	else movingRight = false;	
+	//	A & DOWN
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		moveLeft = true;
+	}
+	else moveLeft = false;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) movingUp = true;
-	else movingUp = false;
+	//	D & RIGHT
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		moveRight = true;
+	}
+	else moveRight = false;	
+	
+	//	SHIFT
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+	{
+		moveWait = 5;
+	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) movingDown = true;
-	else movingDown = false;
+	//	LEFT CONTROL
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
+	{
+		moveWait = 20;
+	}
+	else
+	{
+		moveWait = 10;
+	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) movingLeft = true;
-	else movingLeft = false;
+	/*---------- FUNCTION KEYS ----------*/
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) movingRight = true;
-	else movingRight = false;
+	//	F11
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F11)) 
+	{
+		if (f11Toggle)
+		{
+			engine.settings->setFullscreen();
+			f11Toggle = false;
+		}
+	}
+	else
+	{
+		f11Toggle = true;
+	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F11)) engine.settings->setFullscreen();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+	{
+		engine.settings->isActive = false;
+	}
 
-	/*
-	case TCODK_F11:
-		engine.settings->setFullscreen();
-		break;
-	}*/
 }
-
-
-//void Input::getKeyUp()
-//{
-//	if (keyEvent == TCOD_KEY_RELEASED)
-//	{
-//		switch (keyboard.c)
-//		{
-//		case 'i':
-//			if (movingUp)
-//			{
-//				movingUp = false;
-//				std::cout << "up released" << std::endl;
-//			}
-//			break;
-//		case 'k':
-//			if (movingDown)
-//			{
-//				movingDown = false;
-//				std::cout << "down released" << std::endl;
-//			}
-//			break;
-//		case 'j':
-//			if (movingLeft)
-//			{
-//				movingLeft = false;
-//				std::cout << "left released" << std::endl;
-//			}
-//			break;
-//		case 'l':
-//			if (movingRight)
-//			{
-//				movingRight = false;
-//				std::cout << "right released" << std::endl;
-//			}
-//			break;
-//		}
-//
-//		switch (keyboard.vk)
-//		{
-//		case TCODK_UP:
-//			if (movingUp)
-//			{
-//			movingUp = false;
-//			std::cout << "up released" << std::endl;
-//			}
-//			break;
-//		case TCODK_DOWN:
-//			if (movingDown)
-//			{
-//			movingDown = false;
-//			std::cout << "down released" << std::endl;
-//			}
-//			break;
-//		case TCODK_LEFT:
-//			if (movingLeft)
-//			{
-//			movingLeft = false;
-//			std::cout << "left released" << std::endl;
-//			}
-//			break;
-//		case TCODK_RIGHT:
-//			if (movingRight)
-//			{
-//			movingRight = false;
-//			std::cout << "right released" << std::endl;
-//			}
-//			break;
-//		}
-//	}
-//}
 
 void Input::getKeyInput(std::shared_ptr<Player> player)
 {
@@ -127,36 +92,22 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 	{
 		getKeyDown();
 
-		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		{
-			movingUp = true;
-			std::cout << "up press" << std::endl;
-		}*/
-		/*else
-		{
-			movingUp = false;
-		}*/
-
-		if (keyboard.shift) moveWait = 5;
-		else if (keyboard.lctrl) moveWait = 20;
-		else moveWait = 10;
-
 		moveXSpeed = 0;
 		moveYSpeed = 0;
 		
-		if (movingUp)
+		if (moveUp)
 		{
 			moveYSpeed = -1;
 		}
-		if (movingDown)
+		if (moveDown)
 		{
 			moveYSpeed = 1;
 		}
-		if (movingLeft)
+		if (moveLeft)
 		{
 			moveXSpeed = -1;
 		}
-		if (movingRight)
+		if (moveRight)
 		{
 			moveXSpeed = 1;
 		}

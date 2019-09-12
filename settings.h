@@ -25,6 +25,9 @@ struct Font
 class Settings
 {
 public:
+
+	bool isActive;
+
 	int windowX;
 	int windowY;
 
