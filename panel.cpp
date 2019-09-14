@@ -2,12 +2,12 @@
 
 //GuiMap Struct
 MapPane::MapPane(int w, int h, int rx, int ry)
-	:Window(w, h, "Map", rx, ry)
+	:Window(w, h, "World", rx, ry)
 {
 	mapSidePanel = std::make_shared<Pane>(1, 61, RIBONBGCOLOR, TCODColor::white);
 
-	map = std::make_shared<Map>();
-	map->createMap(map->debugmap);
+	map = std::make_shared<World>();
+	//map->createMap(map->debugmap);
 	map->updateProperties(drawWindow);
 }
 

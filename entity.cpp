@@ -19,7 +19,7 @@ void Position::setPosition(int nx, int ny)
 
 //Default Entity Class
 Entity::Entity(Position pos, int symbol, const char* name, TCODColor color)
-	: position(pos), symbol(symbol), name(name), color(color)
+	: position(pos), symbol(symbol), name(name), color(color), level(0)
 {}
 
 void Entity::render(std::shared_ptr<Pane> window)

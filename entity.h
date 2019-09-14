@@ -21,6 +21,8 @@ public:
 	const TCODColor color;
 	const char* name;
 
+	int level;
+
 	Entity(Position pos, int symbol, const char* name, TCODColor color);
 
 	void render(std::shared_ptr<Pane> window);

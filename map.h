@@ -1,56 +1,64 @@
 #include "main.hpp"
 
-struct MapFile
+struct Level
+{
+	std::vector<std::shared_ptr<Tile>> tileList;
+
+	Level();
+};
+
+struct Map : public TCODMap
 {
 	const char* filePath;
 
+	const char* mapName;
+	int floorNum;
+	int totalFloors;
 	int mapW;
 	int mapH;
 
-	int textLength;
+	//std::vector<std::shared_ptr<Tile>> tileList;
+	std::vector<Level> levelList;
 
-	int getMapTextLength();
-
-	MapFile(const char* filePath, int mapWidth, int mapHeight);
+	Map(const char* cFilePath);
 };
 
-//Map Class
-class Map
+//World Class  LEVELS AND ENTS
+class World
 {
 public:
-	//int mapW;
-	//int mapH;
+	//move to ent
 	int lookHeight;
 
-	MapFile debugmap;
+	std::shared_ptr<Map> debugmap;
 
 	//main map core
-	std::shared_ptr<TCODMap> fovMap;
+	//std::shared_ptr<TCODMap> fovMap;
 	//make mapfile shared ptr
-	std::vector<const char*> textMapList;
-	std::vector<std::shared_ptr<Tile>> tileList;
+	//std::vector<const char*> textMapList;
+	//std::vector<std::shared_ptr<Tile>> tileList;
 
 	//main entity core
 	std::shared_ptr<Player> player;
 	std::vector<std::shared_ptr<Entity>> entityList;
 
-	Map();
+	World();
 
-	bool isInFov(int x, int y);
+	bool isInFov(int x, int y, int level);
 
-	bool isExplored(int x, int y);
+	bool isExplored(int x, int y, int level);
 
 	void computeFov();
 	
-	TCODColor getBgColor(int x, int y);
-	TCODColor getFgColor(int x, int y);
-	int getCh(int x, int y);
-	bool getTransparency(int x, int y);
-	bool getWalkability(int tx, int ty);
+	TCODColor getBgColor(int x, int y, int level);
+	TCODColor getFgColor(int x, int y, int level);
+	int getCh(int x, int y, int level);
+	bool getTransparency(int x, int y, int level);
+	bool getWalkability(int tx, int ty, int level);
 
 	void updateProperties(std::shared_ptr<Pane> window);
 
-	void createMap(MapFile mapFile);
+	//void createMap(Map mapFile);
 
 	void update(std::shared_ptr<Pane> window);
 

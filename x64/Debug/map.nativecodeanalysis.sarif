@@ -13,7 +13,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/dependencies/libtcod/console/console.h"
+                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console/console.h"
                 },
                 "region": {
                   "startLine": 122,
@@ -35,7 +35,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/dependencies/libtcod/console/console.h"
+                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console/console.h"
                 },
                 "region": {
                   "startLine": 126,
@@ -57,7 +57,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/dependencies/libtcod/tileset/tileset.h"
+                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tileset/tileset.h"
                 },
                 "region": {
                   "startLine": 52,
@@ -82,7 +82,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/dependencies/libtcod/tileset/tileset.h"
+                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tileset/tileset.h"
                 },
                 "region": {
                   "startLine": 78,
@@ -104,7 +104,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/dependencies/libtcod/tileset/observer.h"
+                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tileset/observer.h"
                 },
                 "region": {
                   "startLine": 63,
@@ -126,7 +126,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/dependencies/libtcod/tileset/observer.h"
+                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tileset/observer.h"
                 },
                 "region": {
                   "startLine": 66,
@@ -148,7 +148,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/dependencies/libtcod/bsp.hpp"
+                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp"
                 },
                 "region": {
                   "startLine": 77,
@@ -173,7 +173,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/dependencies/libtcod/bsp.hpp"
+                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp"
                 },
                 "region": {
                   "startLine": 77,
@@ -198,7 +198,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/dependencies/libtcod/bsp.hpp"
+                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp"
                 },
                 "region": {
                   "startLine": 77,
@@ -223,7 +223,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/dependencies/libtcod/bsp.hpp"
+                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp"
                 },
                 "region": {
                   "startLine": 77,
@@ -248,7 +248,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/dependencies/libtcod/bsp.hpp"
+                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp"
                 },
                 "region": {
                   "startLine": 77,
@@ -273,7 +273,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/dependencies/libtcod/bsp.hpp"
+                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp"
                 },
                 "region": {
                   "startLine": 77,
@@ -298,7 +298,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/dependencies/libtcod/bsp.hpp"
+                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp"
                 },
                 "region": {
                   "startLine": 78,
@@ -323,7 +323,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/dependencies/libtcod/bsp.hpp"
+                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp"
                 },
                 "region": {
                   "startLine": 78,
@@ -338,6 +338,160 @@
           "properties": {
             "targetSymbol": "TCODBsp::horizontal"
           }
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
+                },
+                "region": {
+                  "startLine": 82,
+                  "startColumn": 18,
+                  "endLine": 82,
+                  "endColumn": 34
+                }
+              },
+              "fullyQualifiedLogicalName": "public: bool __cdecl Map::isExplored(int,int)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
+                },
+                "region": {
+                  "startLine": 87,
+                  "startColumn": 18,
+                  "endLine": 87,
+                  "endColumn": 34
+                }
+              },
+              "fullyQualifiedLogicalName": "public: class TCODColor __cdecl Map::getBgColor(int,int)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
+                },
+                "region": {
+                  "startLine": 92,
+                  "startColumn": 18,
+                  "endLine": 92,
+                  "endColumn": 34
+                }
+              },
+              "fullyQualifiedLogicalName": "public: class TCODColor __cdecl Map::getFgColor(int,int)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
+                },
+                "region": {
+                  "startLine": 97,
+                  "startColumn": 18,
+                  "endLine": 97,
+                  "endColumn": 34
+                }
+              },
+              "fullyQualifiedLogicalName": "public: int __cdecl Map::getCh(int,int)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
+                },
+                "region": {
+                  "startLine": 102,
+                  "startColumn": 18,
+                  "endLine": 102,
+                  "endColumn": 34
+                }
+              },
+              "fullyQualifiedLogicalName": "public: bool __cdecl Map::getTransparency(int,int)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
+                },
+                "region": {
+                  "startLine": 112,
+                  "startColumn": 18,
+                  "endLine": 112,
+                  "endColumn": 36
+                }
+              },
+              "fullyQualifiedLogicalName": "public: bool __cdecl Map::getWalkability(int,int)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
+                },
+                "region": {
+                  "startLine": 136,
+                  "startColumn": 12,
+                  "endLine": 136,
+                  "endColumn": 28
+                }
+              },
+              "fullyQualifiedLogicalName": "public: bool __cdecl Map::isInFov(int,int)"
+            }
+          ]
         }
       ],
       "tool": {
@@ -348,367 +502,607 @@
       },
       "invocations": [
         {
-          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x00FB2090 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_0e58b66cast -typedil -f map.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -ZB64 -D_INTEGRAL_MAX_BITS=64 -pc \\:/ -D_MSC_VER=1922 -D_MSC_FULL_VER=192227905 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Projects\\Visual Studio\\Libtcod Development\\dependencies\\ -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Ot -DCODE_ANALYSIS -D_DEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D__MSVC_RUNTIME_CHECKS -RTCs -RTCu -D_DEBUG -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Debug\\map.obj -Fdx64\\Debug\\vc142.pdb -Gd -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\SWAT Game -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.7.2\\Include\\um"
+          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x00412090 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_baa966c7ast -typedil -f map.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -ZB64 -D_INTEGRAL_MAX_BITS=64 -pc \\:/ -D_MSC_VER=1922 -D_MSC_FULL_VER=192227905 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\libtcod-1.12.3-x86_64-msvc\\include -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Ot -DCODE_ANALYSIS -D_DEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D__MSVC_RUNTIME_CHECKS -RTCs -RTCu -D_DEBUG -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Debug\\map.obj -Fdx64\\Debug\\vc142.pdb -Gd -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.7.2\\Include\\um"
         }
       ],
       "files": {
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/color.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/color.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/projects/visual studio/libtcod development/swat game/map.cpp": {
+        "file:///e:/projects/visual studio/libtcod development/epsilon/map.cpp": {
           "roles": [
             "analysisTarget",
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/tree.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/utility.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/swat game/map.h": {
+        "file:///e:/projects/visual studio/libtcod development/epsilon/main.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/swat game/main.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/image.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console/console.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/image.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/console/console.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/portability.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/portability.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/zip.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/libtcod.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/libtcod.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/utility.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/version.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/sdl2/event.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/lex.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/version.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bresenham.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/bresenham.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/lex.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/bresenham.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bresenham.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/bsp.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/tileset/observer.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/bsp.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/color.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/tileset/tile.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tileset/tile.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/console/rexpaint.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/mouse_types.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/mersenne_types.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/color.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/console.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/mersenne_types.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/console.h": {
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/utf.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/color/color.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tree.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/utility/matrix.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/color/color.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/console/drawing.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/utility/matrix.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/console_types.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console/drawing.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/engine/error.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/engine/display.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/console/printing.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console_types.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/list.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/mouse.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/fov.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/mouse.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/tileset/tileset.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/mersenne.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/parser.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/mersenne.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/fov.h": {
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/cursor.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/heightmap.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console/printing.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/heightmap.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console/rexpaint.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/fov_types.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/sdl2/event.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/noise.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/list.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/engine/globals.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/parser.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/noise_defaults.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/image.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/lex.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/parser.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/lex.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/image.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/swat game/entity.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/fov.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/mersenne.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tileset/tileset.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/sys.h": {
+        "file:///e:/projects/visual studio/libtcod development/epsilon/window.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/mersenne.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/fov.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/sys.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/fov_types.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/swat game/gui.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/heightmap.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/mouse.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/heightmap.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/mouse.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/noise.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/mouse_types.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tileset/observer.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/namegen.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/noise_defaults.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/namegen.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/engine/globals.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/path.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/namegen.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/txtfield.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/namegen.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/engine/display.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/path.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/zip.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/engine/error.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/engine/backend.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/sys.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/color/canvas.h": {
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/videomode.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/utility/vector2.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/txtfield.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/tileset/tilesheet.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/engine/backend.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/list.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/color/canvas.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/tree.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/utility/vector2.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/noise.hpp": {
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/thread.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/parser.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tileset/tilesheet.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/path.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/list.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/txtfield.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tree.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/dependencies/libtcod/zip.hpp": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/noise.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/swat game/engine.h": {
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/path.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/sys.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/lock.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/txtfield.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/zip.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/config.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/clock.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/export.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/time.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/err.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/fileinputstream.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/inputstream.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/noncopyable.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/memoryinputstream.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/contextsettings.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/mutex.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/sleep.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/string.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/utf.inl": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/string.inl": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/thread.inl": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/event.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/threadlocal.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/threadlocalptr.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/threadlocalptr.inl": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/vector2.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/vector2.inl": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/vector3.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/vector3.inl": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/clipboard.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/tile.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/export.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/context.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/glresource.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/joystick.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/keyboard.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/mouse.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/sensor.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/touch.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/window.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/windowhandle.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/windowstyle.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/entity.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/map.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/input.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/settings.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/panel.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/gui.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/engine.h": {
           "roles": [
             "resultFile"
           ]
