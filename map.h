@@ -1,13 +1,13 @@
 #include "main.hpp"
 
-struct Level
+struct Level : public TCODMap
 {
 	std::vector<std::shared_ptr<Tile>> tileList;
 
-	Level();
+	Level(int fovmapW, int fovmapH);
 };
 
-struct Map : public TCODMap
+struct Map
 {
 	const char* filePath;
 
@@ -30,7 +30,10 @@ public:
 	//move to ent
 	int lookHeight;
 
+	std::vector<std::shared_ptr<Map>> mapList;
 	std::shared_ptr<Map> debugmap;
+
+	std::shared_ptr<Map> currentMap;
 
 	//main map core
 	//std::shared_ptr<TCODMap> fovMap;
@@ -56,7 +59,7 @@ public:
 	bool getTransparency(int x, int y, int level);
 	bool getWalkability(int tx, int ty, int level);
 
-	void updateProperties(std::shared_ptr<Pane> window);
+	void updateProperties();
 
 	//void createMap(Map mapFile);
 

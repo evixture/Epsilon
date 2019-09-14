@@ -12,11 +12,7 @@ struct Font
 	const char* xDim;
 	const char* yDim;
 
-	Font(const char* filePath, int format);
-	Font(const char* filePath, int format, int charW, int charH);
-	Font(const char* fontName, const char* xdim, const char* ydim, const char* filePath, int format);
-
-	
+	Font(const char* fontName, const char* xdim, const char* ydim, const char* filePath, int format, int charW, int charH);
 };
 
 

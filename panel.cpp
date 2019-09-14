@@ -8,7 +8,7 @@ MapPane::MapPane(int w, int h, int rx, int ry)
 
 	map = std::make_shared<World>();
 	//map->createMap(map->debugmap);
-	map->updateProperties(drawWindow);
+	map->updateProperties();
 }
 
 void MapPane::update()

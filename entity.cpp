@@ -18,8 +18,8 @@ void Position::setPosition(int nx, int ny)
 }
 
 //Default Entity Class
-Entity::Entity(Position pos, int symbol, const char* name, TCODColor color)
-	: position(pos), symbol(symbol), name(name), color(color), level(0)
+Entity::Entity(Position pos, int symbol, const char* name, TCODColor color, int level)
+	: position(pos), symbol(symbol), name(name), color(color), level(level)
 {}
 
 void Entity::render(std::shared_ptr<Pane> window)
@@ -29,5 +29,5 @@ void Entity::render(std::shared_ptr<Pane> window)
 }
 
 Player::Player(Position pos, int symbol, const char* name, TCODColor color)
-	:Entity( pos, symbol, name, color), health(100), height(5)
+	:Entity( pos, symbol, name, color, 0), health(100), height(5)
 {}

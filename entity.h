@@ -23,7 +23,7 @@ public:
 
 	int level;
 
-	Entity(Position pos, int symbol, const char* name, TCODColor color);
+	Entity(Position pos, int symbol, const char* name, TCODColor color, int level);
 
 	void render(std::shared_ptr<Pane> window);
 };

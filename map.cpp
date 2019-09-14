@@ -1,18 +1,18 @@
 #include "main.hpp"
 
 //Level Strct
-Level::Level()
-	:tileList()
+Level::Level(int fovmapW, int fovmapH)
+	:tileList(), TCODMap(fovmapW, fovmapH)
 {
 	tileList.reserve(1);
 }
 
 //Map Struct
 Map::Map(const char* cFilePath)
-	:filePath(cFilePath), TCODMap(mapW, mapH), floorNum(0)
+	:filePath(cFilePath), floorNum(0)
 {
 	//levelList.reserve(1);
-	Level tempFloor;
+	//Level tempFloor;
 	int cFloorNum = 0;
 
 	std::ifstream fileIn(filePath, std::ios::in);
@@ -25,6 +25,7 @@ Map::Map(const char* cFilePath)
 		fileIn >> sMapName >> totalFloors >> mapW >> mapH;
 		mapName = sMapName.c_str();
 
+		Level tempFloor(mapW, mapH);
 		std::cout << mapName << totalFloors << mapW << mapH;
 
 		while (!fileIn.eof())
@@ -32,7 +33,7 @@ Map::Map(const char* cFilePath)
 			if (fileIn.good())
 			{
 				fileIn >> sTempTile;
-			
+
 				if (tempFloor.tileList.size() % (mapW * mapH) == 0 && tempFloor.tileList.size() != 0)
 				{
 					levelList.push_back(tempFloor);
@@ -42,6 +43,9 @@ Map::Map(const char* cFilePath)
 
 				switch (sTempTile[0])
 				{
+				case '=':
+					//map layer divider
+					break;
 				case '.':
 					tempFloor.tileList.push_back(TILE_grass);
 					break;
@@ -57,85 +61,53 @@ Map::Map(const char* cFilePath)
 				}
 			}
 		}
+				fileIn.close();
 	}
-	//TCODMap(mapW, mapH);
 }
 
 //World Class
 World::World()
-	:lookHeight(4)//, debugmap("data/maps/debugmap.txt")
+	:lookHeight(4)
 {
 	debugmap = std::make_shared<Map>("data/maps/debugmap.txt");
+	mapList.push_back(debugmap);
 
 	//fovMap = std::make_shared<TCODMap>(debugmap.mapW, debugmap.mapH);
 	player = std::make_shared<Player>(Position(2, 50), '@', "Player", TCODColor::azure);
 	entityList.push_back(player);
+
+	currentMap = mapList[player->level];
 }
 
-//void World::createMap(Map mapFile)
-//{
-//	std::ifstream textFile(mapFile.filePath, std::ios::binary);
-//	//textFile.open(filePath, std::ios::binary);
-//
-//	//int fileLength = getMapFileLenght(filePath);
-//
-//	//std::cout << fileLength << std::endl;
-//
-//	//textFile.seekg(0, std::ios::beg);
-//
-//	if (textFile.is_open())
-//	{
-//		while (!textFile.eof())
-//		{
-//			switch (textFile.get())
-//			{
-//			case '.':
-//				tileList.push_back(TILE_grass);
-//				break;
-//			case '#':
-//				tileList.push_back(TILE_wall);
-//				break;
-//			case '_':
-//				tileList.push_back(TILE_floor);
-//				break;
-//			default:
-//				break;
-//			}
-//		}
-//		textFile.close();
-//	}
-//}
-
-//TcodMap compute Fov
 void World::computeFov()
 {
-	debugmap->computeFov(player->position.x, player->position.y, engine.settings->fovRad, engine.settings->lightWalls, engine.settings->fovtype);
+	currentMap->levelList[player->level].computeFov(player->position.x, player->position.y, engine.settings->fovRad, engine.settings->lightWalls, engine.settings->fovtype);
 }
 
 //Returns to tiles
 bool World::isExplored(int x, int y, int level) 
 {
-	return debugmap->levelList[level].tileList[x + y * debugmap->mapW]->explored;
+	return currentMap->levelList[level].tileList[x + y * currentMap->mapW]->explored;
 }
 
 TCODColor World::getBgColor(int x, int y, int level) 
 {
-	return debugmap->levelList[level].tileList[x + y * debugmap->mapW]->bgcol;
+	return currentMap->levelList[level].tileList[x + y * currentMap->mapW]->bgcol;
 }
 
 TCODColor World::getFgColor(int x, int y, int level) 
 {
-	return debugmap->levelList[level].tileList[x + y * debugmap->mapW]->fgcol;
+	return currentMap->levelList[level].tileList[x + y * currentMap->mapW]->fgcol;
 }
 
 int World::getCh(int x, int y, int level)
 {
-	return debugmap->levelList[level].tileList[x + y * debugmap->mapW]->ch;
+	return currentMap->levelList[level].tileList[x + y * currentMap->mapW]->ch;
 }
 
 bool World::getTransparency(int x, int y, int level)
 {
-	return debugmap->levelList[level].tileList[x + y * debugmap->mapW]->transparent;
+	return currentMap->levelList[level].tileList[x + y * currentMap->mapW]->transparent;
 }
 
 bool World::getWalkability(int tx, int ty, int level)
@@ -145,17 +117,17 @@ bool World::getWalkability(int tx, int ty, int level)
 	if (tx >= debugmap->mapW) return false;
 	if (ty >= debugmap->mapH) return false;
 
-	return debugmap->levelList[level].tileList[tx + ty * debugmap->mapW]->walkable;
+	return currentMap->levelList[level].tileList[tx + ty * currentMap->mapW]->walkable;
 }
 
 //check limits
-void World::updateProperties(std::shared_ptr<Pane> window)
+void World::updateProperties()
 {
-	for (int y = 0; y < window->consoleH; y++)
+	for (int y = 0; y < debugmap->mapH; y++)
 	{
-		for (int x = 0; x < window->consoleW; x++)
+		for (int x = 0; x < debugmap->mapW; x++)
 		{
-			debugmap->setProperties(x, y, getTransparency(x, y, player->level), getWalkability(x, y, player->level));
+			currentMap->levelList[player->level].setProperties(x, y, getTransparency(x, y, player->level), getWalkability(x, y, player->level));
 		}
 	}
 }
@@ -163,13 +135,13 @@ void World::updateProperties(std::shared_ptr<Pane> window)
 //check tcodmap fov
 bool World::isInFov(int x, int y, int level)
 {
-	if (x < 0 || x >= debugmap->mapW || y < 0 || y >= debugmap->mapH)
+	if (x < 0 || x >= currentMap->mapW || y < 0 || y >= currentMap->mapH)
 	{
 		return false;
 	}
-	if (debugmap->isInFov(x, y))
+	if (currentMap->levelList[player->level].isInFov(x, y))
 	{
-		debugmap->levelList[level].tileList[x + y * debugmap->mapW]->explored = true;
+		currentMap->levelList[level].tileList[x + y * debugmap->mapW]->explored = true;
 		return true;
 	}
 	return false;
@@ -178,7 +150,8 @@ bool World::isInFov(int x, int y, int level)
 //World update
 void World::update(std::shared_ptr<Pane> window)
 {
-	updateProperties(window);
+	currentMap = mapList[player->level];
+	updateProperties();
 	computeFov();
 }
 //World Render
