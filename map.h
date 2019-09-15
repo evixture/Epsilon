@@ -52,7 +52,7 @@ public:
 	bool isExplored(int x, int y, int level);
 
 	void computeFov();
-
+	
 	TCODColor getBgColor(int x, int y, int level);
 	TCODColor getFgColor(int x, int y, int level);
 	int getCh(int x, int y, int level);

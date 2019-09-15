@@ -15,6 +15,8 @@ struct Font
 	Font(const char* fontName, const char* xdim, const char* ydim, const char* filePath, int format, int charW, int charH);
 };
 
+
+
 //Settings Class
 class Settings
 {
@@ -52,4 +54,5 @@ private:
 	void setfont(std::shared_ptr<Font> font);
 	void printLogo();
 	void printFps();
+
 };

@@ -6,21 +6,21 @@ MapPane::MapPane(int w, int h, int rx, int ry)
 {
 	mapSidePanel = std::make_shared<Pane>(1, 61, RIBONBGCOLOR, TCODColor::white);
 
-	world = std::make_shared<World>();
-	//world->createMap(world->debugmap);
-	world->updateProperties();
+	map = std::make_shared<World>();
+	//map->createMap(map->debugmap);
+	map->updateProperties();
 }
 
 void MapPane::update()
 {
-	world->update(drawWindow);
+	map->update(drawWindow);
 }
 
 //GuiMap Render
 void MapPane::render()
 {
 	clearWindow();
-	world->render(drawWindow);
+	map->render(drawWindow);
 	pushWindow();
 
 	mapSidePanel->render();

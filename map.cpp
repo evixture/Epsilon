@@ -61,7 +61,7 @@ Map::Map(const char* cFilePath)
 				}
 			}
 		}
-		fileIn.close();
+				fileIn.close();
 	}
 }
 
@@ -85,17 +85,17 @@ void World::computeFov()
 }
 
 //Returns to tiles
-bool World::isExplored(int x, int y, int level)
+bool World::isExplored(int x, int y, int level) 
 {
 	return currentMap->levelList[level].tileList[x + y * currentMap->mapW]->explored;
 }
 
-TCODColor World::getBgColor(int x, int y, int level)
+TCODColor World::getBgColor(int x, int y, int level) 
 {
 	return currentMap->levelList[level].tileList[x + y * currentMap->mapW]->bgcol;
 }
 
-TCODColor World::getFgColor(int x, int y, int level)
+TCODColor World::getFgColor(int x, int y, int level) 
 {
 	return currentMap->levelList[level].tileList[x + y * currentMap->mapW]->fgcol;
 }
