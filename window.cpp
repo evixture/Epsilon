@@ -1,7 +1,5 @@
 #include "main.hpp"
 
-
-
 //Window Struct
 Pane::Pane(int consoleW, int consoleH, TCODColor bgColor, TCODColor fgColor)
 	:consoleW(consoleW), consoleH(consoleH), bgColor(bgColor), fgColor(fgColor)
@@ -69,4 +67,3 @@ void Window::render()
 	clearWindow();
 	pushWindow();
 }
-

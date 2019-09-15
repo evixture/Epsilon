@@ -7,7 +7,7 @@ Font::Font(const char* fontName, const char* xdim, const char* ydim, const char*
 
 //Settings Class
 Settings::Settings(int w, int h)
-	: windowX(w), windowY(h), windowTitle("Epsilon v. Alpha 2"), fullscreen(false), maxFps(60),fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_OPENGL2), fovRad(0), lightWalls(true), isActive(true)
+	: windowX(w), windowY(h), windowTitle("Epsilon v. Alpha 2"), fullscreen(false), maxFps(60), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_OPENGL2), fovRad(0), lightWalls(true), isActive(true)
 {
 	//fontList.push_back(terminal16x16 = std::make_shared<Font>("Terminal", "16", "16", "data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16));
 	//setfont(terminal16x16);
@@ -37,7 +37,7 @@ void Settings::setFullscreen()
 
 void Settings::setfont(std::shared_ptr<Font> font)
 {
-		TCODConsole::setCustomFont(font->filePath, font->format, (font->charW) ? font->charW : NULL, (font->charH) ? font->charH : NULL);
+	TCODConsole::setCustomFont(font->filePath, font->format, (font->charW) ? font->charW : NULL, (font->charH) ? font->charH : NULL);
 }
 
 void Settings::printLogo()
@@ -48,7 +48,7 @@ void Settings::printLogo()
 void Settings::printFps()
 {
 	TCODConsole::root->printf(10, 0, "FPS %i px: %i py: %i",
-		TCODSystem::getFps(), engine.gui->mapWindow->map->player->position.x, engine.gui->mapWindow->map->player->position.y);
+		TCODSystem::getFps(), engine.gui->mapWindow->world->player->position.x, engine.gui->mapWindow->world->player->position.y);
 
 	/*
 	TCODConsole::root->printf(10, 0, "%i up:%i, down:%i, left:%i, right:%i, movewait:%i, shift:%i, ctrl:%i",

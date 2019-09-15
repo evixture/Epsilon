@@ -82,6 +82,16 @@ void Input::getKeyDown()
 		//CLOSES APPLICATION
 		engine.settings->isActive = false;
 	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad0))
+	{
+		engine.gui->mapWindow->world->player->level = 0;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1))
+	{
+		engine.gui->mapWindow->world->player->level = 1;
+	}
 }
 
 void Input::getKeyInput(std::shared_ptr<Player> player)
@@ -116,13 +126,13 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 		{
 			if (moveTimer == 0)
 			{
-				if (engine.gui->mapWindow->map->getWalkability(player->position.x + moveXSpeed, player->position.y, player->level))
+				if (engine.gui->mapWindow->world->getWalkability(player->position.x + moveXSpeed, player->position.y, player->level))
 				{
 					player->position.x += moveXSpeed;
 					moveXSpeed = 0;
 					moveTimer = moveWait;
 				}
-				if (engine.gui->mapWindow->map->getWalkability(player->position.x, player->position.y + moveYSpeed, player->level))
+				if (engine.gui->mapWindow->world->getWalkability(player->position.x, player->position.y + moveYSpeed, player->level))
 				{
 					player->position.y += moveYSpeed;
 					moveYSpeed = 0;
