@@ -42,7 +42,7 @@ public:
 	std::shared_ptr<Pane> drawWindow;
 
 	Window(int w, int h, const char* panelName, int rx, int ry);
-	
+
 	virtual void update();
 	virtual void render();
 
@@ -53,7 +53,6 @@ private:
 
 	std::shared_ptr<Ribon> ribon;
 	std::shared_ptr<Pane> mainWindow;
-
 };
 
 //GuiMap Struct

@@ -4,7 +4,7 @@
 class Gui
 {
 public:
-	
+
 	//Main Windows
 	std::shared_ptr<Window> playerWindow;
 	std::shared_ptr<Window> statusWindow;
@@ -22,5 +22,4 @@ public:
 private:
 
 	std::vector<std::shared_ptr<Window>> windowList;
-
 };

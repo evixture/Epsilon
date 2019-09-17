@@ -13,4 +13,3 @@ struct Tile
 
 	Tile(int ch, TCODColor fgcol, TCODColor bgcol, int maxHeight, bool walkable, bool transparent);
 };
-

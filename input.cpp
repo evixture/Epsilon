@@ -43,8 +43,8 @@ void Input::getKeyDown()
 	{
 		moveRight = true;
 	}
-	else moveRight = false;	
-	
+	else moveRight = false;
+
 	//	SHIFT
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
 	{
@@ -64,7 +64,7 @@ void Input::getKeyDown()
 	/*---------- FUNCTION KEYS ----------*/
 
 	//	F11
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F11)) 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F11))
 	{
 		if (f11Toggle)
 		{
@@ -94,7 +94,7 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 
 		moveXSpeed = 0;
 		moveYSpeed = 0;
-		
+
 		if (moveUp)
 		{
 			moveYSpeed = -1;
@@ -111,7 +111,7 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 		{
 			moveXSpeed = 1;
 		}
-		
+
 		if (moveXSpeed != 0 || moveYSpeed != 0)
 		{
 			if (moveTimer == 0)

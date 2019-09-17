@@ -29,5 +29,5 @@ void Entity::render(std::shared_ptr<Pane> window)
 }
 
 Player::Player(Position pos, int symbol, const char* name, TCODColor color)
-	:Entity( pos, symbol, name, color, 0), health(100), height(5)
+	:Entity(pos, symbol, name, color, 0), health(100), height(5)
 {}

@@ -42,7 +42,7 @@ struct Pane;
 
 //!NOTE : blitting consoles requires a background flag
 //!NOTE : Documentation is done in declaration
-//!NOTE : create generic items for tiles and then push them 
+//!NOTE : create generic items for tiles and then push them
 
 //need to change "length" vars to be more easily typed
 //need to clean up mapfile code

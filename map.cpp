@@ -9,7 +9,7 @@ Level::Level(int fovmapW, int fovmapH)
 
 //Map Struct
 Map::Map(const char* cFilePath)
-	:filePath(cFilePath), floorNum(0)
+	:filePath(cFilePath), floorNum(0), mapW(60), mapH(61), mapName("error"), totalFloors(2)
 {
 	//levelList.reserve(1);
 	//Level tempFloor;
@@ -17,11 +17,11 @@ Map::Map(const char* cFilePath)
 
 	std::ifstream fileIn(filePath, std::ios::in);
 
-	std::string sMapName;
-	std::string sTempTile;
-
 	if (fileIn.is_open())
 	{
+		std::string sMapName;
+		std::string sTempTile;
+
 		fileIn >> sMapName >> totalFloors >> mapW >> mapH;
 		mapName = sMapName.c_str();
 
@@ -61,7 +61,7 @@ Map::Map(const char* cFilePath)
 				}
 			}
 		}
-				fileIn.close();
+		fileIn.close();
 	}
 }
 
@@ -85,17 +85,17 @@ void World::computeFov()
 }
 
 //Returns to tiles
-bool World::isExplored(int x, int y, int level) 
+bool World::isExplored(int x, int y, int level)
 {
 	return currentMap->levelList[level].tileList[x + y * currentMap->mapW]->explored;
 }
 
-TCODColor World::getBgColor(int x, int y, int level) 
+TCODColor World::getBgColor(int x, int y, int level)
 {
 	return currentMap->levelList[level].tileList[x + y * currentMap->mapW]->bgcol;
 }
 
-TCODColor World::getFgColor(int x, int y, int level) 
+TCODColor World::getFgColor(int x, int y, int level)
 {
 	return currentMap->levelList[level].tileList[x + y * currentMap->mapW]->fgcol;
 }
@@ -127,7 +127,7 @@ void World::updateProperties()
 	{
 		for (int x = 0; x < debugmap->mapW; x++)
 		{
-			currentMap->levelList[player->level].setProperties(x, y, getTransparency(x, y, player->level), getWalkability(x, y, player->level));
+			//currentMap->levelList[player->level].setProperties(x, y, getTransparency(x, y, player->level), getWalkability(x, y, player->level));
 		}
 	}
 }
@@ -150,36 +150,36 @@ bool World::isInFov(int x, int y, int level)
 //World update
 void World::update(std::shared_ptr<Pane> window)
 {
-	currentMap = mapList[player->level];
-	updateProperties();
-	computeFov();
+	//currentMap = mapList[player->level];
+	////updateProperties();
+	//computeFov();
 }
 //World Render
 void World::render(std::shared_ptr<Pane> window)
 {
-	for (int y = 0; y < window->consoleH; y++)
-	{
-		for (int x = 0; x < window->consoleW; x++)
-		{
-			if (isInFov(x, y, player->level))
-			{
-				window->console->setCharBackground(x, y, getBgColor(x, y, player->level));
-				window->console->setCharForeground(x, y, getFgColor(x, y, player->level));
-				window->console->setChar(x, y, getCh(x, y, player->level));
-			}
-			else  // if (isExplored(x, y, player->level))
-			{
-				window->console->setCharBackground(x, y, TCODColor::darkestGrey);
-				window->console->setCharForeground(x, y, TCODColor::darkerGrey);
-				window->console->setChar(x, y, getCh(x, y, player->level));
-			}
-			/*else
-			{
-				window->console->setCharBackground(x, y, TCODColor::black);
-				window->console->setCharForeground(x, y, TCODColor::darkerGrey);
-			}*/
-		}
-	}
+	//for (int y = 0; y < window->consoleH; y++)
+	//{
+	//	for (int x = 0; x < window->consoleW; x++)
+	//	{
+	//		if (isInFov(x, y, player->level))
+	//		{
+	//			window->console->setCharBackground(x, y, getBgColor(x, y, player->level));
+	//			window->console->setCharForeground(x, y, getFgColor(x, y, player->level));
+	//			window->console->setChar(x, y, getCh(x, y, player->level));
+	//		}
+	//		else  // if (isExplored(x, y, player->level))
+	//		{
+	//			window->console->setCharBackground(x, y, TCODColor::darkestGrey);
+	//			window->console->setCharForeground(x, y, TCODColor::darkerGrey);
+	//			window->console->setChar(x, y, getCh(x, y, player->level));
+	//		}
+	//		/*else
+	//		{
+	//			window->console->setCharBackground(x, y, TCODColor::black);
+	//			window->console->setCharForeground(x, y, TCODColor::darkerGrey);
+	//		}*/
+	//	}
+	//}
 
 	for (auto& entity : entityList)
 	{

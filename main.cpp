@@ -7,7 +7,7 @@ Engine engine(120, 64);
 
 //change to main to have terminal show up
 //else use WinMain to hide console
-int main ()
+int WinMain()
 {
 	while (!TCODConsole::isWindowClosed() && engine.settings->isActive)
 	{

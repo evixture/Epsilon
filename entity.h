@@ -7,7 +7,7 @@ struct Position
 	int y;
 
 	Position(int x, int y);
-  
+
 	Position getPosition();
 	void setPosition(int x, int y);
 };
@@ -30,7 +30,7 @@ public:
 
 class Player : public Entity
 {
-public :
+public:
 	int health;
 	int height;
 
