@@ -15,4 +15,4 @@ public:
 	void render();
 };
 
-extern Engine engine;
+extern std::shared_ptr<Engine> engine;

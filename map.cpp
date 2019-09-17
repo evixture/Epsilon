@@ -81,7 +81,7 @@ World::World()
 
 void World::computeFov()
 {
-	currentMap->levelList[player->level].computeFov(player->position.x, player->position.y, engine.settings->fovRad, engine.settings->lightWalls, engine.settings->fovtype);
+	currentMap->levelList[player->level].computeFov(player->position.x, player->position.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
 }
 
 //Returns to tiles

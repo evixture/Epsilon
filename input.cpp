@@ -68,7 +68,7 @@ void Input::getKeyDown()
 	{
 		if (f11Toggle)
 		{
-			engine.settings->setFullscreen();
+			engine->settings->setFullscreen();
 			f11Toggle = false;
 		}
 	}
@@ -80,7 +80,7 @@ void Input::getKeyDown()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
 		//CLOSES APPLICATION
-		engine.settings->isActive = false;
+		engine->settings->isActive = false;
 	}
 }
 
@@ -88,7 +88,7 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &keyboard, &mouse);
 
-	if (engine.gamestate == Engine::MAIN)
+	if (engine->gamestate == Engine::MAIN)
 	{
 		getKeyDown();
 
@@ -116,13 +116,13 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 		{
 			if (moveTimer == 0)
 			{
-				if (engine.gui->mapWindow->map->getWalkability(player->position.x + moveXSpeed, player->position.y, player->level))
+				if (engine->gui->mapWindow->world->getWalkability(player->position.x + moveXSpeed, player->position.y, player->level))
 				{
 					player->position.x += moveXSpeed;
 					moveXSpeed = 0;
 					moveTimer = moveWait;
 				}
-				if (engine.gui->mapWindow->map->getWalkability(player->position.x, player->position.y + moveYSpeed, player->level))
+				if (engine->gui->mapWindow->world->getWalkability(player->position.x, player->position.y + moveYSpeed, player->level))
 				{
 					player->position.y += moveYSpeed;
 					moveYSpeed = 0;

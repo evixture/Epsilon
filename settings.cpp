@@ -48,7 +48,7 @@ void Settings::printLogo()
 void Settings::printFps()
 {
 	TCODConsole::root->printf(10, 0, "FPS %i px: %i py: %i",
-		TCODSystem::getFps(), engine.gui->mapWindow->map->player->position.x, engine.gui->mapWindow->map->player->position.y);
+		TCODSystem::getFps(), engine->gui->mapWindow->world->player->position.x, engine->gui->mapWindow->world->player->position.y);
 
 	/*
 	TCODConsole::root->printf(10, 0, "%i up:%i, down:%i, left:%i, right:%i, movewait:%i, shift:%i, ctrl:%i",

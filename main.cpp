@@ -1,7 +1,8 @@
 #include "main.hpp"
 
 //Initializtion Through Engine Constructor
-Engine engine(120, 64);
+std::shared_ptr<Engine> engine = std::make_shared<Engine>(120, 60);
+//std::shared_ptr<Engine> engine(120, 64);
 
 //Main Game Loop
 
@@ -9,10 +10,10 @@ Engine engine(120, 64);
 //else use WinMain to hide console
 int WinMain()
 {
-	while (!TCODConsole::isWindowClosed() && engine.settings->isActive)
+	while (!TCODConsole::isWindowClosed() && engine->settings->isActive)
 	{
-		engine.update();
-		engine.render();
+		engine->update();
+		engine->render();
 	}
 	TCOD_quit();
 	return 0;
