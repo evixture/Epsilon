@@ -82,6 +82,17 @@ void Input::getKeyDown()
 		//CLOSES APPLICATION
 		engine->settings->isActive = false;
 	}
+
+	//HARD CHANGES THE MAP RENDERED
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad0))
+	{
+		engine->gui->mapWindow->world->player->level = 0;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1))
+	{
+		engine->gui->mapWindow->world->player->level = 1;
+	}
 }
 
 void Input::getKeyInput(std::shared_ptr<Player> player)
