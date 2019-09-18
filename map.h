@@ -1,26 +1,42 @@
 #include "main.hpp"
 
-struct Level : public TCODMap
-{
-	std::vector<std::shared_ptr<Tile>> tileList;
+//struct Level : public TCODMap
+//{
+//	std::vector<std::shared_ptr<Tile>> tileList;
+//
+//	Level(int fovmapW, int fovmapH);
+//};
 
-	Level(int fovmapW, int fovmapH);
-};
+//struct Map
+//{
+//	const char* filePath;
+//
+//	const char* mapName;
+//	int floorNum;
+//	int totalFloors;
+//	int mapW;
+//	int mapH;
+//
+//	//std::vector<std::shared_ptr<Tile>> tileList;
+//	std::vector<Level> levelList;
+//
+//	Map(const char* cFilePath);
+//};
 
 struct Map
 {
 	const char* filePath;
 
 	const char* mapName;
-	int floorNum;
+	int floorNumber;
 	int totalFloors;
 	int mapW;
 	int mapH;
 
-	//std::vector<std::shared_ptr<Tile>> tileList;
-	std::vector<Level> levelList;
+	std::vector<std::vector< Tile >> levelList;
+	//std::shared_ptr< std::vector< std::shared_ptr< std::vector< std::shared_ptr< Tile >>>>> levelList;
 
-	Map(const char* cFilePath);
+	Map(const char* filePath);
 };
 
 //World Class  LEVELS AND ENTS
@@ -30,16 +46,13 @@ public:
 	//move to ent
 	int lookHeight;
 
-	std::vector<std::shared_ptr<Map>> mapList;
+	//std::vector<std::shared_ptr<Map>> mapList;
 	std::shared_ptr<Map> debugmap;
 
-	std::shared_ptr<Map> currentMap;
+	//std::shared_ptr<Map> currentMap;
 
 	//main map core
-	//std::shared_ptr<TCODMap> fovMap;
-	//make mapfile shared ptr
-	//std::vector<const char*> textMapList;
-	//std::vector<std::shared_ptr<Tile>> tileList;
+	TCODMap fovMap;
 
 	//main entity core
 	std::shared_ptr<Player> player;
