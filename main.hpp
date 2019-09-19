@@ -9,7 +9,7 @@
 #define TILE_grass Tile('.', TCODColor::darkerGreen, TCODColor::darkestGreen, 4, true,  true)
 #define TILE_wall  Tile('#', TCODColor::lightSepia,  TCODColor::lighterSepia, 4, false, false)
 #define TILE_floor Tile(' ', TCODColor::darkSepia,   TCODColor::darkerSepia,  4, true,  true)
-#define TILE_error Tile('%', TCODColor::black,       TCODColor::pink,         4, true,  true)
+#define TILE_error Tile('%', TCODColor::black,       TCODColor::pink,         4, false,  false)
 //============COLORS=================================================================================================
 #define RIBONBGCOLOR TCODColor::darkBlue
 

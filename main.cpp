@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 //Initializtion Through Engine Constructor
-std::shared_ptr<Engine> engine = std::make_shared<Engine>(120, 60);
+std::shared_ptr<Engine> engine = std::make_shared<Engine>(120, 64);
 //std::shared_ptr<Engine> engine(120, 64);
 
 //Main Game Loop
