@@ -60,7 +60,7 @@ Map::Map(const char* filePath)
 World::World()
 	:lookHeight(4)
 {
-	debugmap = std::make_shared<Map>("data/maps/debugmap.txt");
+	debugmap = std::make_shared<Map>("data/maps/debugmap.em");
 	//mapList.push_back(debugmap);
 
 	player = std::make_shared<Player>(Position(2, 50), '@', "Player", TCODColor::azure);
