@@ -51,5 +51,5 @@ private:
 
 	void setfont(std::shared_ptr<Font> font);
 	void printLogo();
-	void printFps();
+	void printDebugStats();
 };

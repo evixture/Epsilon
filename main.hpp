@@ -1,17 +1,32 @@
 #pragma once
 
+/*
+	FLOOR HEIGHTS
+
+	4 :: Top    ^
+	3 :: Stand  ^ 
+	2 :: Crouch ^
+	1 :: Prone  ^
+	0 :: Floor & Window  ^
+
+	if player height > floor height , visibility is true, else set to default vis
+	stand can see over crouch
+*/
+
 //	DEFINES
-//============TILES=======================CH===FOREGROUND=COLOR======BACKGROUND=COLOR========HEIGHT==WALK==TRANS=====
-//#define TILE_grass std::make_shared<Tile>('.', TCODColor::darkerGreen, TCODColor::darkestGreen, 4, true,  true)
-//#define TILE_wall  std::make_shared<Tile>('#', TCODColor::lightSepia,  TCODColor::lighterSepia, 4, false, false)
-//#define TILE_floor std::make_shared<Tile>(' ', TCODColor::darkSepia,   TCODColor::darkerSepia,  4, true,  true)
-//#define TILE_error std::make_shared<Tile>('%', TCODColor::black,       TCODColor::pink,         4, true,  true)
-#define TILE_grass Tile('.', TCODColor::darkerGreen, TCODColor::darkestGreen, 4, true,  true)
-#define TILE_wall  Tile('#', TCODColor::lightSepia,  TCODColor::lighterSepia, 4, false, false)
-#define TILE_floor Tile(' ', TCODColor::darkSepia,   TCODColor::darkerSepia,  4, true,  true)
-#define TILE_error Tile('%', TCODColor::black,       TCODColor::pink,         4, false,  false)
-//============COLORS=================================================================================================
+//============TILES==============================CH===FOREGROUND=COLOR==========BACKGROUND=COLOR==========H==WALK==TRANS |
+#define TILE_BasicGrass   std::make_shared<Tile>('.', TCODColor::darkerGreen,   TCODColor::darkestGreen,  0, true,  true )
+#define TILE_BasicWall    std::make_shared<Tile>('=', TCODColor::lightSepia,    TCODColor::lighterSepia,  4, false, false)
+#define TILE_BasicFloor   std::make_shared<Tile>(' ', TCODColor::darkSepia,     TCODColor::darkerSepia,   0, true,  true )
+#define TILE_BasicDoor    std::make_shared<Tile>('#', TCODColor::darkSepia,     TCODColor::darkestSepia,  4, true,  false)
+#define TILE_BasicWindow  std::make_shared<Tile>('_', TCODColor::lightCyan,     TCODColor::darkerSky,     0, false, true )
+#define TILE_BasicSky     std::make_shared<Tile>(' ', TCODColor::lightestCyan,  TCODColor::sky,           0, false, true )
+#define TILE_BasicTable   std::make_shared<Tile>('n', TCODColor::lighterSepia,  TCODColor::darkerSepia,   2, false, true )
+
+#define TILE_error        std::make_shared<Tile>('%', TCODColor::black,         TCODColor::pink,          4, true,  true )
+//============COLORS==================================================================================================== |
 #define RIBONBGCOLOR TCODColor::darkBlue
+#define RIBONFGCOLOR TCODColor::lightestGrey
 
 //STD
 #include <fstream>

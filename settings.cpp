@@ -45,15 +45,10 @@ void Settings::printLogo()
 	TCODConsole::root->printf(1, 0, "Epsilon");
 }
 
-void Settings::printFps()
+void Settings::printDebugStats()
 {
-	TCODConsole::root->printf(10, 0, "FPS %i px: %i py: %i",
-		TCODSystem::getFps(), engine->gui->mapWindow->world->player->position.x, engine->gui->mapWindow->world->player->position.y);
-
-	/*
-	TCODConsole::root->printf(10, 0, "%i up:%i, down:%i, left:%i, right:%i, movewait:%i, shift:%i, ctrl:%i",
-		TCODSystem::getFps(), input->moveUp, input->moveDown, input->moveLeft, input->moveRight, input->moveWait, input->keyboard.shift, input->keyboard.lctrl);
-	*/
+	TCODConsole::root->printf(10, 0, "FPS %i px: %i py: %i pheight: %i",
+		TCODSystem::getFps(), engine->gui->mapPane->world->player->position.x, engine->gui->mapPane->world->player->position.y, engine->gui->mapPane->world->player->height);
 }
 
 void Settings::update(std::shared_ptr<Player> player)
@@ -64,5 +59,5 @@ void Settings::update(std::shared_ptr<Player> player)
 void Settings::render()
 {
 	printLogo();
-	printFps();
+	printDebugStats();
 }

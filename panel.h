@@ -13,3 +13,17 @@ struct MapPane : public Window
 
 	void render();
 };
+
+struct StatusPane : public Window
+{
+	int displayHealth;
+	int displayArmor;
+
+	StatusPane(int w, int h, int rx, int ry);
+
+	void drawBar(std::shared_ptr<Pane> window, int x, int y, const char* barTitle, int barValue, int barMax);
+
+	void update();
+
+	void render();
+};

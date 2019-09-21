@@ -22,6 +22,7 @@ public:
 	const char* name;
 
 	int level;
+	int height;
 
 	Entity(Position pos, int symbol, const char* name, TCODColor color, int level);
 
@@ -32,7 +33,7 @@ class Player : public Entity
 {
 public:
 	int health;
-	int height;
+	int armor;
 
 	Player(Position pos, int symbol, const char* name, TCODColor color);
 	//inventory (struct)

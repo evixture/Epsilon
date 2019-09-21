@@ -10,6 +10,7 @@ struct Input
 	int moveXSpeed = 0;
 	int moveYSpeed = 0;
 
+	int baseMoveWait;
 	int moveTimer;
 	int moveWait;
 

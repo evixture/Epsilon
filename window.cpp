@@ -23,7 +23,7 @@ void Pane::render()
 Ribon::Ribon(const char* windowName, int windowW)
 	: windowName(windowName), windowW(windowW)
 {
-	ribonWindow = std::make_shared<Pane>(windowW, 1, RIBONBGCOLOR, TCODColor::white);
+	ribonWindow = std::make_shared<Pane>(windowW, 1, RIBONBGCOLOR, RIBONFGCOLOR);
 }
 
 //Ribon Render
@@ -45,6 +45,11 @@ Window::Window(int w, int h, const char* panelName, int rx, int ry)
 void Window::update()
 {
 	return;
+}
+
+void Window::setRibonName(const char* ribonName)
+{
+	ribon->windowName = ribonName;
 }
 
 //GuiWindow clears window

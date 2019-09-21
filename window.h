@@ -26,6 +26,8 @@ struct Ribon
 
 	Ribon(const char* windowName, int windowW);
 
+	void updateRibonName(const char* ribonName);
+
 	void render();
 };
 
@@ -46,11 +48,11 @@ public:
 	virtual void update();
 	virtual void render();
 
+	void setRibonName(const char* ribonName);
 	void clearWindow();
 	void pushWindow();
 
 private:
-
 	std::shared_ptr<Ribon> ribon;
 	std::shared_ptr<Pane> mainWindow;
 };

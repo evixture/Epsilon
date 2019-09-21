@@ -15,11 +15,7 @@ Map::Map(const char* filePath)
 		fileIn >> s_mapName >> totalFloors >> mapW >> mapH;
 		mapName = s_mapName.c_str();
 
-		//make more shared_ptrs
-		//std::vector <std::vector < Tile > > 
-		//, std::vector < Tile >(mapW * mapH));
-
-		levelList = std::vector <std::vector < Tile > > (totalFloors);
+		levelList = std::vector < std::vector < std::shared_ptr < Tile >>> (totalFloors);
 		
 		while (!fileIn.eof())
 		{
@@ -27,7 +23,6 @@ Map::Map(const char* filePath)
 			{
 				fileIn >> s_tempTile;
 
-				// && levelList[currentFloor].size() != 0
 				if (levelList[currentFloor].size() == mapW * mapH)
 				{
 					currentFloor++;
@@ -35,17 +30,29 @@ Map::Map(const char* filePath)
 
 				switch (s_tempTile[0])
 				{
-				case '=':
+				case '~':
 					//map layer divider
 					break;
 				case '.':
-					levelList[currentFloor].push_back(TILE_grass);
+					levelList[currentFloor].push_back(TILE_BasicGrass);
 					break;
-				case '#':
-					levelList[currentFloor].push_back(TILE_wall);
+				case '=':
+					levelList[currentFloor].push_back(TILE_BasicWall);
 					break;
 				case '_':
-					levelList[currentFloor].push_back(TILE_floor);
+					levelList[currentFloor].push_back(TILE_BasicFloor);
+					break;
+				case '#':
+					levelList[currentFloor].push_back(TILE_BasicDoor);
+					break;
+				case 'O':
+					levelList[currentFloor].push_back(TILE_BasicWindow);
+					break;
+				case '`':
+					levelList[currentFloor].push_back(TILE_BasicSky);
+					break;
+				case 'n':
+					levelList[currentFloor].push_back(TILE_BasicTable);
 					break;
 				default:
 					levelList[currentFloor].push_back(TILE_error);
@@ -60,46 +67,41 @@ Map::Map(const char* filePath)
 World::World()
 	:lookHeight(4)
 {
-	debugmap = std::make_shared<Map>("data/maps/debugmap.em");
+	debugmap = std::make_shared<Map>("data/maps/debugmap.txt");
 	//mapList.push_back(debugmap);
 
 	player = std::make_shared<Player>(Position(2, 50), '@', "Player", TCODColor::azure);
 	entityList.push_back(player);
 
 	fovMap = std::make_shared<TCODMap>(debugmap->mapW, debugmap->mapH);
-	//currentMap = mapList[player->level];
+	//currentMap = mapList[player->level]; 
 }
 
-void World::computeFov()
-{
-	//debugmap->levelList[player->level].computeFov(player->position.x, player->position.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
-	fovMap->computeFov(player->position.x, player->position.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
-}
 
 //Returns to tiles
 bool World::isExplored(int x, int y, int level)
 {
-	return debugmap->levelList[level][x + y * debugmap->mapW].explored;
+	return debugmap->levelList[level][x + y * debugmap->mapW]->explored;
 }
 
 TCODColor World::getBgColor(int x, int y, int level)
 {
-	return debugmap->levelList[level][x + y * debugmap->mapW].bgcol;
+	return debugmap->levelList[level][x + y * debugmap->mapW]->bgcol;
 }
 
 TCODColor World::getFgColor(int x, int y, int level)
 {
-	return debugmap->levelList[level][x + y * debugmap->mapW].fgcol;
+	return debugmap->levelList[level][x + y * debugmap->mapW]->fgcol;
 }
 
 int World::getCh(int x, int y, int level)
 {
-	return debugmap->levelList[level][x + y * debugmap->mapW].ch;
+	return debugmap->levelList[level][x + y * debugmap->mapW]->ch;
 }
 
-bool World::getTransparency(int x, int y, int level)
+int World::getHeight(int tx, int ty, int level)
 {
-	return debugmap->levelList[level][x + y * debugmap->mapW].transparent;
+	return debugmap->levelList[level][tx + ty * debugmap->mapW]->height;
 }
 
 bool World::getWalkability(int tx, int ty, int level)
@@ -109,7 +111,19 @@ bool World::getWalkability(int tx, int ty, int level)
 	if (tx >= debugmap->mapW) return false;
 	if (ty >= debugmap->mapH) return false;
 
-	return debugmap->levelList[level][tx + ty * debugmap->mapW].walkable;
+	return debugmap->levelList[level][tx + ty * debugmap->mapW]->walkable;
+}
+
+bool World::getTransparency(int x, int y, int level, int height)
+{
+	if (height <= debugmap->levelList[level][x + y * debugmap->mapW]->height)
+	{
+		return false;
+	}
+	else
+	{
+		return debugmap->levelList[level][x + y * debugmap->mapW]->transparent;
+	}
 }
 
 //check limits
@@ -119,10 +133,15 @@ void World::updateProperties()
 	{
 		for (int x = 0; x < debugmap->mapW; x++)
 		{
-			//ERROR when getting tile props here
-			fovMap->setProperties(x, y, getTransparency(x, y, player->level), getWalkability(x, y, player->level));
+			fovMap->setProperties(x, y, getTransparency(x, y, player->level, player->height), getWalkability(x, y, player->level));
 		}
 	}
+}
+
+void World::computeFov()
+{
+	//debugmap->levelList[player->level].computeFov(player->position.x, player->position.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
+	fovMap->computeFov(player->position.x, player->position.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
 }
 
 //check tcodmap fov
@@ -134,7 +153,7 @@ bool World::isInFov(int x, int y, int level)
 	}
 	if (fovMap->isInFov(x, y))
 	{
-		debugmap->levelList[level][x + y * debugmap->mapW].explored = true;
+		debugmap->levelList[level][x + y * debugmap->mapW]->explored = true;
 		return true;
 	}
 	return false;

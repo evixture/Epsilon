@@ -6,13 +6,13 @@ class Gui
 public:
 
 	//Main Windows
-	std::shared_ptr<Window> playerWindow;
-	std::shared_ptr<Window> statusWindow;
-	std::shared_ptr<Window> inventoryWindow;
-	std::shared_ptr<Window> proximityWindow;
-	std::shared_ptr<Window> actionsWindow;
-	std::shared_ptr<Window> eventLogWindow;
-	std::shared_ptr<MapPane> mapWindow;
+	std::shared_ptr<Window> playerPane;
+	std::shared_ptr<Window> statusPane;
+	std::shared_ptr<Window> inventoryPane;
+	std::shared_ptr<Window> proximityPane;
+	std::shared_ptr<Window> actionsPane;
+	std::shared_ptr<Window> eventLogPane;
+	std::shared_ptr<MapPane> mapPane;
 
 	Gui(int windowX, int windowY);
 

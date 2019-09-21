@@ -9,7 +9,7 @@ struct Map
 	int mapW;
 	int mapH;
 
-	std::vector<std::vector< Tile >> levelList;
+	std::vector<std::vector< std::shared_ptr<Tile >>> levelList;
 
 	Map(const char* filePath);
 };
@@ -35,11 +35,12 @@ public:
 
 	World();
 
-	TCODColor getBgColor(int x, int y, int level);
-	TCODColor getFgColor(int x, int y, int level);
-	int getCh(int x, int y, int level);
-	bool getTransparency(int x = 0, int y = 0, int level = 0);
-	bool getWalkability(int tx = 0, int ty = 0, int level = 0);
+	TCODColor getBgColor       (int x, int y, int level);
+	TCODColor getFgColor       (int x, int y, int level);
+	int       getCh            (int x, int y, int level);
+	bool      getTransparency  (int x, int y, int level, int height);
+	bool      getWalkability   (int tx, int ty, int level);
+	int       getHeight        (int tx, int ty, int level);
 
 	bool isInFov(int x, int y, int level);
 	bool isExplored(int x, int y, int level);

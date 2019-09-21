@@ -2,7 +2,7 @@
 
 //Input Struct
 Input::Input()
-	:keyboard(), mouse(), moveUp(false), moveDown(false), moveLeft(false), moveRight(false), moveTimer(0), moveWait(10), f11Toggle(false)
+	:keyboard(), mouse(), moveUp(false), moveDown(false), moveLeft(false), moveRight(false), moveTimer(0), moveWait(10), f11Toggle(false), baseMoveWait(0)
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &keyboard, &mouse);
 }
@@ -45,22 +45,34 @@ void Input::getKeyDown()
 	}
 	else moveRight = false;
 
-	//	SHIFT
+	//	SPEED
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
 	{
-		moveWait = 5;
+		baseMoveWait = 15;
 	}
-
-	//	LEFT CONTROL
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
 	{
-		moveWait = 20;
+		baseMoveWait = 60;
 	}
 	else
 	{
-		moveWait = 10;
+		baseMoveWait = 30;
 	}
 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+	{
+		engine->gui->mapPane->world->player->height = 1;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
+	{
+		engine->gui->mapPane->world->player->height = 2;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::C))
+	{
+		engine->gui->mapPane->world->player->height = 3;
+	}
 	/*---------- FUNCTION KEYS ----------*/
 
 	//	F11
@@ -77,24 +89,30 @@ void Input::getKeyDown()
 		f11Toggle = true;
 	}
 
+		//CLOSES APPLICATION
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
-		//CLOSES APPLICATION
 		engine->settings->isActive = false;
 	}
 
-	//HARD CHANGES THE MAP RENDERED
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad0))
+	// ALT + KEY COMMANDS
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt))
 	{
-		engine->gui->mapWindow->world->player->level = 0;
-	}
+		//HARD CHANGES THE MAP RENDERED
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
+		{
+			engine->gui->mapPane->world->player->level = 0;
+		}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1))
-	{
-		engine->gui->mapWindow->world->player->level = 1;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
+		{
+			engine->gui->mapPane->world->player->level = 1;
+		}
+
 	}
 }
 
+//multiply speed by height for slower movement at lower heights
 void Input::getKeyInput(std::shared_ptr<Player> player)
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &keyboard, &mouse);
@@ -105,6 +123,8 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 
 		moveXSpeed = 0;
 		moveYSpeed = 0;
+		
+		moveWait = baseMoveWait / engine->gui->mapPane->world->player->height;
 
 		if (moveUp)
 		{
@@ -127,13 +147,13 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 		{
 			if (moveTimer == 0)
 			{
-				if (engine->gui->mapWindow->world->getWalkability(player->position.x + moveXSpeed, player->position.y, player->level))
+				if (engine->gui->mapPane->world->getWalkability(player->position.x + moveXSpeed, player->position.y, player->level))
 				{
 					player->position.x += moveXSpeed;
 					moveXSpeed = 0;
 					moveTimer = moveWait;
 				}
-				if (engine->gui->mapWindow->world->getWalkability(player->position.x, player->position.y + moveYSpeed, player->level))
+				if (engine->gui->mapPane->world->getWalkability(player->position.x, player->position.y + moveYSpeed, player->level))
 				{
 					player->position.y += moveYSpeed;
 					moveYSpeed = 0;
@@ -150,6 +170,5 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 
 void Input::getInput(std::shared_ptr<Player> player)
 {
-	//check mortality in here
 	getKeyInput(player);
 }

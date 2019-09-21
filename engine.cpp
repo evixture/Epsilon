@@ -10,7 +10,7 @@ Engine::Engine(int screenX, int screenY)
 //Head of Update Loop
 void Engine::update()
 {
-	settings->update(gui->mapWindow->world->player);
+	settings->update(gui->mapPane->world->player);
 	gui->update();
 }
 
