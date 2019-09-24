@@ -7,7 +7,7 @@ Font::Font(const char* fontName, const char* xdim, const char* ydim, const char*
 
 //Settings Class
 Settings::Settings(int w, int h)
-	: windowX(w), windowY(h), windowTitle("Epsilon v. Alpha 2"), fullscreen(false), maxFps(0), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_OPENGL2), 
+	: windowX(w), windowY(h), windowTitle("Epsilon v. Alpha 2"), fullscreen(false), maxFps(60), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_OPENGL2), 
 	fovRad(0), lightWalls(true), isActive(true)
 {
 	//fontList.push_back(terminal16x16 = std::make_shared<Font>("Terminal", "16", "16", "data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16));

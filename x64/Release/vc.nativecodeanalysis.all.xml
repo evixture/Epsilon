@@ -114,58 +114,6 @@
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>entity.cpp</FILENAME>
-      <LINE>42</LINE>
-      <COLUMN>33</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>Weapon::render</FUNCTION>
-    <DECORATED>?render@Weapon@@QEAAXHHHH@Z</DECORATED>
-    <FUNCLINE>40</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT><DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>entity.cpp</FILENAME>
-      <LINE>42</LINE>
-      <COLUMN>28</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>Weapon::render</FUNCTION>
-    <DECORATED>?render@Weapon@@QEAAXHHHH@Z</DECORATED>
-    <FUNCLINE>40</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT><DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>entity.cpp</FILENAME>
-      <LINE>42</LINE>
-      <COLUMN>58</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>Weapon::render</FUNCTION>
-    <DECORATED>?render@Weapon@@QEAAXHHHH@Z</DECORATED>
-    <FUNCLINE>40</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT><DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>entity.cpp</FILENAME>
-      <LINE>42</LINE>
-      <COLUMN>53</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>Weapon::render</FUNCTION>
-    <DECORATED>?render@Weapon@@QEAAXHHHH@Z</DECORATED>
-    <FUNCLINE>40</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT><DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
       <LINE>26</LINE>
       <COLUMN>47</COLUMN>
@@ -308,18 +256,5 @@
     <FUNCTION>World::isInFov</FUNCTION>
     <DECORATED>?isInFov@World@@QEAA_NHHH@Z</DECORATED>
     <FUNCLINE>148</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT><DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>200</LINE>
-      <COLUMN>40</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::render</FUNCTION>
-    <DECORATED>?render@World@@QEAAXV?$shared_ptr@UPane@@@std@@@Z</DECORATED>
-    <FUNCLINE>175</FUNCLINE>
     <PATH></PATH>
   </DEFECT></DEFECTS>

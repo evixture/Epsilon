@@ -23,13 +23,10 @@ public:
 
 	//std::vector<std::shared_ptr<Map>> mapList;
 	std::shared_ptr<Map> debugmap;
-
 	//std::shared_ptr<Map> currentMap;
 
-	//main map core
 	std::shared_ptr<TCODMap> fovMap;
 
-	//main entity core
 	std::shared_ptr<Player> player;
 	std::vector<std::shared_ptr<Entity>> entityList;
 

@@ -1,5 +1,7 @@
 #include "main.hpp"
 
+#define WORLD engine->gui->mapPane->world
+
 struct Tile
 {
 	int ch;
@@ -15,5 +17,7 @@ struct Tile
 	Tile(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable, bool transparent);
 
 	//bad performance
-	virtual void render(int x, int y, std::shared_ptr<Pane> pane);
+
+	//inline void render(int x, int y, std::shared_ptr<Pane> pane);
+	
 };

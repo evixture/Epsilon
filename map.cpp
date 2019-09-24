@@ -209,6 +209,10 @@ void World::render(std::shared_ptr<Pane> pane)
 
 	for (auto& entity : entityList)
 	{
+		if (entity->name == "Player")
+		{
+			player->render(player, pane);
+		}
 		entity->render(pane);
 	}
 }
