@@ -28,12 +28,16 @@
 #define RIBONBGCOLOR TCODColor::darkBlue
 #define RIBONFGCOLOR TCODColor::lightestGrey
 
+constexpr auto PI = 3.14159265;
+//TODO : move defines to settings
+
 //STD
 #include <fstream>
 #include <memory>
 #include <vector>
 #include <iostream>
 #include <string>
+#include <math.h>
 //#include <stdexcept>
 //Libraries
 #include <libtcod.hpp>

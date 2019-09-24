@@ -1,18 +1,8 @@
-﻿  engine.cpp
-  entity.cpp
-  gui.cpp
-  input.cpp
-  main.cpp
-  map.cpp
-  panel.cpp
-  settings.cpp
-  tile.cpp
-  window.cpp
-  Compiling...
+﻿  map.cpp
   Generating code
-  136 of 738 functions (18.4%) were compiled, the rest were copied from previous compilation.
-    104 functions were new in current compilation
-    63 functions had inline decision re-evaluated but remain unchanged
+  9 of 766 functions ( 1.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    24 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Release\Epsilon.exe
 E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\console\console.h(122): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
@@ -21,14 +11,21 @@ E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\tileset\tileset.h(52): war
 E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\tileset\tileset.h(78): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
 E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\tileset\observer.h(63): warning C26439: This kind of function may not throw. Declare it 'noexcept' (f.6).
 E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\tileset\observer.h(66): warning C26439: This kind of function may not throw. Declare it 'noexcept' (f.6).
-E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\bsp.hpp(77): warning C26495: Variable 'TCODBsp::horizontal' is uninitialized. Always initialize a member variable (type.6).
-E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\bsp.hpp(78): warning C26495: Variable 'TCODBsp::horizontal' is uninitialized. Always initialize a member variable (type.6).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(31): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
+E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\bsp.hpp(77): warning C26495: Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6).
+E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\bsp.hpp(78): warning C26495: Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(42): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(42): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(42): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(42): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(26): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(3): warning C26495: Variable 'Map::mapH' is uninitialized. Always initialize a member variable (type.6).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(82): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(87): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(92): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(97): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(102): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(112): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(137): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(84): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(89): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(94): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(99): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(104): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(114): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(119): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(125): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(156): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(200): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).

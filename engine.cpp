@@ -2,9 +2,10 @@
 
 //Engine Class
 Engine::Engine(int screenX, int screenY)
-	:gamestate(MAIN), gui(std::make_shared<Gui>(screenX, screenY)), settings(std::make_shared<Settings>(screenX, screenY))
+	:gamestate(INIT), gui(std::make_shared<Gui>(screenX, screenY)), settings(std::make_shared<Settings>(screenX, screenY))
 {
 	TCODConsole::root->setDefaultBackground(TCODColor::black);
+	gamestate = MAIN;
 }
 
 //Head of Update Loop

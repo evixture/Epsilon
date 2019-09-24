@@ -165,36 +165,50 @@ void World::update(std::shared_ptr<Pane> window)
 	//currentMap = mapList[player->level];
 	updateProperties();
 	computeFov();
+
+	for (auto& entity : entityList)
+	{
+		entity->update();
+	}
 }
 //World Render
-void World::render(std::shared_ptr<Pane> window)
+void World::render(std::shared_ptr<Pane> pane)
 {
-	for (int y = 0; y < window->consoleH; y++)
+	for (int y = 0; y < pane->consoleH; y++)
 	{
-		for (int x = 0; x < window->consoleW; x++)
+		for (int x = 0; x < pane->consoleW; x++)
 		{
+			//this has better performance for debug
 			if (isInFov(x, y, player->level))
 			{
-				window->console->setCharBackground(x, y, getBgColor(x, y, player->level));
-				window->console->setCharForeground(x, y, getFgColor(x, y, player->level));
-				window->console->setChar(x, y, getCh(x, y, player->level));
+				pane->console->setCharBackground(x, y,getBgColor(x, y, player->level));
+				pane->console->setCharForeground(x, y, getFgColor(x, y, player->level));
+				pane->console->setChar(x, y, getCh(x, y, player->level));
 			}
 			else if (isExplored(x, y, player->level))
 			{
-				window->console->setCharBackground(x, y, TCODColor::darkestGrey);
-				window->console->setCharForeground(x, y, TCODColor::darkerGrey);
-				window->console->setChar(x, y, getCh(x, y, player->level));
+				pane->console->setCharBackground(x, y, TCODColor::darkestGrey);
+				pane->console->setCharForeground(x, y, TCODColor::darkerGrey);
+				pane->console->setChar(x, y, getCh(x, y, player->level));
 			}
 			else
 			{
-				window->console->setCharBackground(x, y, TCODColor::black);
-				window->console->setCharForeground(x, y, TCODColor::darkerGrey);
+				pane->console->setCharBackground(x, y, TCODColor::black);
+				pane->console->setCharForeground(x, y, TCODColor::darkerGrey);
+			}
+
+			//serverely limits fps for some reason
+			//debugmap->levelList[player->level][x + y * debugmap->mapW]->render(x, y, pane);
+
+			if (x + 1 == engine->settings->input->mouse.cx && y + 3 == engine->settings->input->mouse.cy)
+			{
+				pane->console->setCharBackground(x, y, TCODColor::white);
 			}
 		}
 	}
 
 	for (auto& entity : entityList)
 	{
-		entity->render(window);
+		entity->render(pane);
 	}
 }

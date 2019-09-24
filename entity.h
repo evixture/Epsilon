@@ -26,7 +26,17 @@ public:
 
 	Entity(Position pos, int symbol, const char* name, TCODColor color, int level);
 
-	void render(std::shared_ptr<Pane> window);
+	void virtual update();
+	void virtual render(std::shared_ptr<Pane> window);
+};
+
+//change name
+struct Weapon
+{
+	double angle;
+
+	Weapon(double ang);
+	void render(int x, int y, int mx, int my);
 };
 
 class Player : public Entity
@@ -35,6 +45,11 @@ public:
 	int health;
 	int armor;
 
+	std::shared_ptr<Weapon> testWeapon;
+
 	Player(Position pos, int symbol, const char* name, TCODColor color);
 	//inventory (struct)
+
+	void update();
+	void render(std::shared_ptr<Pane> window);
 };

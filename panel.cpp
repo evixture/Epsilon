@@ -13,7 +13,7 @@ MapPane::MapPane(int w, int h, int rx, int ry)
 void MapPane::update()
 {
 	world->update(drawWindow);
-	setRibonName(world->debugmap->mapName);
+	//setRibonName(world->debugmap->mapName);
 }
 
 //GuiMap Render
@@ -30,7 +30,7 @@ void MapPane::render()
 
 //StatusPane Struct
 StatusPane::StatusPane(int w, int h, int rx, int ry)
-	:Window(w, h, "Status", rx, ry),displayHealth(0), displayArmor(0)
+	:Window(w, h, "Status", rx, ry), displayHealth(0), displayArmor(0)
 {
 
 }

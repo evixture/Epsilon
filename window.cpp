@@ -26,6 +26,11 @@ Ribon::Ribon(const char* windowName, int windowW)
 	ribonWindow = std::make_shared<Pane>(windowW, 1, RIBONBGCOLOR, RIBONFGCOLOR);
 }
 
+//void Ribon::updateRibonName(const char* ribonName)
+//{
+//	windowName = ribonName;
+//}
+
 //Ribon Render
 void Ribon::render()
 {
@@ -69,6 +74,6 @@ void Window::pushWindow()
 
 void Window::render()
 {
-	clearWindow();
+	clearWindow(); 
 	pushWindow();
 }
