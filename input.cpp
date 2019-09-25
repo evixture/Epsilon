@@ -59,20 +59,20 @@ void Input::getKeyDown()
 		baseMoveWait = 30;
 	}
 
+	//HEIGHT
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
 	{
 		engine->gui->mapPane->world->player->height = 1;
 	}
-
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
 	{
 		engine->gui->mapPane->world->player->height = 2;
 	}
-
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::C))
 	{
 		engine->gui->mapPane->world->player->height = 3;
 	}
+
 	/*---------- FUNCTION KEYS ----------*/
 
 	//	F11

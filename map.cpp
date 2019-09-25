@@ -33,27 +33,70 @@ Map::Map(const char* filePath)
 				case '~':
 					//map layer divider
 					break;
-				case '.':
-					levelList[currentFloor].push_back(TILE_BasicGrass);
+
+				//FLOORS
+				case 'f':
+					switch (s_tempTile[1])
+					{
+					case '.':
+						levelList[currentFloor].push_back(TILE_BasicGrass);
+						break;
+					case '_':
+						levelList[currentFloor].push_back(TILE_BasicFloor);
+						break;
+					case '!':
+						levelList[currentFloor].push_back(TILE_BasicConcrete);
+						break;
+					default:
+						levelList[currentFloor].push_back(TILE_error);
+						break;
+					}
 					break;
-				case '=':
-					levelList[currentFloor].push_back(TILE_BasicWall);
+
+				//WALLS
+				case 'w':
+					switch (s_tempTile[1])
+					{
+					case '=':
+						levelList[currentFloor].push_back(TILE_BasicWall);
+						break;
+					case 'O':
+						levelList[currentFloor].push_back(TILE_BasicWindow);
+						break;
+					}
 					break;
-				case '_':
-					levelList[currentFloor].push_back(TILE_BasicFloor);
+
+				//DOORS
+				case 'd':
+					switch (s_tempTile[1])
+					{
+					case '#':
+						levelList[currentFloor].push_back(TILE_BasicDoor);
+						break;
+					}
 					break;
-				case '#':
-					levelList[currentFloor].push_back(TILE_BasicDoor);
+
+				//SKIES
+				case 's':
+					switch (s_tempTile[1])
+					{
+					case '`':
+						levelList[currentFloor].push_back(TILE_BasicSky);
+						break;
+					}
 					break;
-				case 'O':
-					levelList[currentFloor].push_back(TILE_BasicWindow);
+
+				//PART HEIGHT
+				case 'p':
+					switch (s_tempTile[1])
+					{
+					case 'n':
+						levelList[currentFloor].push_back(TILE_BasicTable);
+						break;
+					}
 					break;
-				case '`':
-					levelList[currentFloor].push_back(TILE_BasicSky);
-					break;
-				case 'n':
-					levelList[currentFloor].push_back(TILE_BasicTable);
-					break;
+
+				//ERROR TILE
 				default:
 					levelList[currentFloor].push_back(TILE_error);
 					break;

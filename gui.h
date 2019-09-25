@@ -6,8 +6,8 @@ class Gui
 public:
 
 	//Main Windows
-	std::shared_ptr<Window> playerPane;
-	std::shared_ptr<Window> statusPane;
+	std::shared_ptr<PlayerPane> playerPane;
+	std::shared_ptr<StatusPane> statusPane;
 	std::shared_ptr<Window> inventoryPane;
 	std::shared_ptr<Window> proximityPane;
 	std::shared_ptr<Window> actionsPane;

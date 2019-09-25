@@ -35,11 +35,11 @@ StatusPane::StatusPane(int w, int h, int rx, int ry)
 
 }
 
-void StatusPane::drawBar(std::shared_ptr<Pane> window, int x, int y, const char* barTitle, int barValue, int barMax)
-{
-	window->console->printf(x, y, "%s : [", barTitle);
-
-}
+//void StatusPane::drawBar(std::shared_ptr<Pane> window, int x, int y, const char* barTitle, int barValue, int barMax)
+//{
+//	window->console->printf(x, y, "%s : [", barTitle);
+//
+//}
 
 void StatusPane::update()
 {
@@ -51,25 +51,71 @@ void StatusPane::render()
 {
 	clearWindow();
 
-	drawWindow->console->printf(0, 0, "Health : [");
-	drawWindow->console->printf(0, 1, "Armor  : [");
+	drawWindow->console->printf(0, 0, "Health : [%i/100]", engine->gui->mapPane->world->player->health);
+	drawWindow->console->printf(0, 1, "Armor  : [%i/100]", engine->gui->mapPane->world->player->armor);
 
-	for (int healthPrint = 0; healthPrint < displayHealth; healthPrint++)
+	//for (int healthPrint = 0; healthPrint < displayHealth; healthPrint++)
+	//{
+	//	if (healthPrint < (engine->gui->mapPane->world->player->health * 5))
+	//	{
+	//	drawWindow->console->printf(healthPrint, 0, "=");
+	//	}
+	//}
+	//
+	//
+	//for (int armorPrint = 0; armorPrint < displayArmor; armorPrint++)
+	//{
+	//	if (armorPrint < (engine->gui->mapPane->world->player->armor * 5))
+	//	{
+	//		drawWindow->console->printf(armorPrint, 1, "=");
+	//	}
+	//}
+
+	pushWindow();
+}
+
+PlayerPane::PlayerPane(int w, int h, int rx, int ry)
+	:Window(w, h, "Player", rx, ry), playerSpeed("still"), playerStance("Standing")
+{
+}
+
+void PlayerPane::update()
+{
+	//playerWindow is 10x9
+
+	if (engine->gui->mapPane->world->player->height == 1)
 	{
-		if (healthPrint < (engine->gui->mapPane->world->player->health * 5))
-		{
-		drawWindow->console->printf(healthPrint, 0, "=");
-		}
+		playerStance = "Prone";
+	}
+	else if (engine->gui->mapPane->world->player->height == 2)
+	{
+		playerStance = "Crouching";
+	}
+	else if (engine->gui->mapPane->world->player->height == 3)
+	{
+		playerStance = "Standing";
 	}
 
-
-	for (int armorPrint = 0; armorPrint < displayArmor; armorPrint++)
+	if (engine->settings->input->baseMoveWait == 30)
 	{
-		if (armorPrint < (engine->gui->mapPane->world->player->armor * 5))
-		{
-			drawWindow->console->printf(armorPrint, 1, "=");
-		}
+		playerSpeed = "Walking";
 	}
+	if (engine->settings->input->baseMoveWait == 15)
+	{
+		playerSpeed = "Running";
+	}
+	if (engine->settings->input->baseMoveWait == 60)
+	{
+		playerSpeed = "Creeping";
+	}
+}
+
+void PlayerPane::render()
+{
+	clearWindow();
+
+	drawWindow->console->printf(0, 0, playerStance);
+	drawWindow->console->printf(0, 1, playerSpeed);
 
 	pushWindow();
 }

@@ -33,14 +33,20 @@ public:
 //change name
 struct Weapon
 {
-	double angle;
-	int dx;
-	int dy;
+	TCODColor weaponColor;
 
-	Weapon(double ang);
+	double angle;
+
+	Weapon(TCODColor color);
 
 	void update(int x, int y, int mx, int my);
 	void render(std::shared_ptr<Entity> entity, std::shared_ptr<Pane> window);
+
+private:
+
+	int dx;
+	int dy;
+
 };
 
 class Player : public Entity

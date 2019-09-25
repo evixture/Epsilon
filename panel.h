@@ -1,5 +1,19 @@
 #include "main.hpp"
 
+struct StatusPane : public Window
+{
+	int displayHealth;
+	int displayArmor;
+
+	StatusPane(int w, int h, int rx, int ry);
+
+	//void drawBar(std::shared_ptr<Pane> window, int x, int y, const char* barTitle, int barValue, int barMax);
+
+	void update();
+
+	void render();
+};
+
 struct MapPane : public Window
 {
 	std::shared_ptr<Pane> mapSidePanel;
@@ -14,14 +28,12 @@ struct MapPane : public Window
 	void render();
 };
 
-struct StatusPane : public Window
+struct PlayerPane : public Window
 {
-	int displayHealth;
-	int displayArmor;
+	const char* playerSpeed;
+	const char* playerStance;
 
-	StatusPane(int w, int h, int rx, int ry);
-
-	void drawBar(std::shared_ptr<Pane> window, int x, int y, const char* barTitle, int barValue, int barMax);
+	PlayerPane(int w, int h, int rx, int ry);
 
 	void update();
 

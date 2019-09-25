@@ -33,8 +33,8 @@ void Entity::render(std::shared_ptr<Pane> window)
 	window->console->setCharForeground(position.x, position.y, color);
 }
 
-Weapon::Weapon(double ang)
-	:angle(ang), dx(0), dy(0)
+Weapon::Weapon(TCODColor color)
+	:weaponColor(color), angle(0), dx(0), dy(0)
 {}
 
 void Weapon::update(int x, int y, int mx, int my)
@@ -60,23 +60,23 @@ void Weapon::render(std::shared_ptr<Entity> entity, std::shared_ptr<Pane> window
 	.+..|..+.
 	....|....
 	*/
-	TCODColor WEPCOL = TCODColor::lighterGrey;
+	
 	if (dx >= 0 && dy >= 0)
 	{
 		if (angle <= 22.5)
 		{
 			window->console->setChar(entity->position.x + 1, entity->position.y, TCOD_CHAR_HLINE);
-			window->console->setCharForeground(entity->position.x + 1, entity->position.y, WEPCOL);
+			window->console->setCharForeground(entity->position.x + 1, entity->position.y, weaponColor);
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
 			window->console->setChar(entity->position.x + 1, entity->position.y + 1, '\\');
-			window->console->setCharForeground(entity->position.x + 1, entity->position.y + 1, WEPCOL);
+			window->console->setCharForeground(entity->position.x + 1, entity->position.y + 1, weaponColor);
 		}
 		else if (angle >= 67.5)
 		{
 			window->console->setChar(entity->position.x, entity->position.y + 1, TCOD_CHAR_VLINE);
-			window->console->setCharForeground(entity->position.x, entity->position.y + 1, WEPCOL);
+			window->console->setCharForeground(entity->position.x, entity->position.y + 1, weaponColor);
 		}
 	}
 	else if (dx >= 0 && dy <= 0)
@@ -84,17 +84,17 @@ void Weapon::render(std::shared_ptr<Entity> entity, std::shared_ptr<Pane> window
 		if (angle >= -22.5)
 		{
 			window->console->setChar(entity->position.x + 1, entity->position.y, TCOD_CHAR_HLINE);
-			window->console->setCharForeground(entity->position.x + 1, entity->position.y, WEPCOL);
+			window->console->setCharForeground(entity->position.x + 1, entity->position.y, weaponColor);
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
 			window->console->setChar(entity->position.x + 1, entity->position.y - 1, '/');
-			window->console->setCharForeground(entity->position.x + 1, entity->position.y - 1, WEPCOL);
+			window->console->setCharForeground(entity->position.x + 1, entity->position.y - 1, weaponColor);
 		}
 		else if (angle <= -67.5)
 		{
 			window->console->setChar(entity->position.x, entity->position.y - 1, TCOD_CHAR_VLINE);
-			window->console->setCharForeground(entity->position.x, entity->position.y - 1, WEPCOL);
+			window->console->setCharForeground(entity->position.x, entity->position.y - 1, weaponColor);
 		}
 	}
 	else if (dx <= 0 && dy >= 0)
@@ -102,17 +102,17 @@ void Weapon::render(std::shared_ptr<Entity> entity, std::shared_ptr<Pane> window
 		if (angle >= -22.5)
 		{
 			window->console->setChar(entity->position.x - 1, entity->position.y, TCOD_CHAR_HLINE);
-			window->console->setCharForeground(entity->position.x - 1, entity->position.y, WEPCOL);
+			window->console->setCharForeground(entity->position.x - 1, entity->position.y, weaponColor);
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
 			window->console->setChar(entity->position.x - 1, entity->position.y + 1, '/');
-			window->console->setCharForeground(entity->position.x - 1, entity->position.y + 1, WEPCOL);
+			window->console->setCharForeground(entity->position.x - 1, entity->position.y + 1, weaponColor);
 		}
 		else if (angle <= -67.5)
 		{
 			window->console->setChar(entity->position.x, entity->position.y + 1, TCOD_CHAR_VLINE);
-			window->console->setCharForeground(entity->position.x, entity->position.y + 1, WEPCOL);
+			window->console->setCharForeground(entity->position.x, entity->position.y + 1, weaponColor);
 		}
 	}
 	else if (dx <= 0 && dy <= 0)
@@ -120,23 +120,23 @@ void Weapon::render(std::shared_ptr<Entity> entity, std::shared_ptr<Pane> window
 		if (angle <= 22.5)
 		{
 			window->console->setChar(entity->position.x - 1, entity->position.y, TCOD_CHAR_HLINE);
-			window->console->setCharForeground(entity->position.x - 1, entity->position.y, WEPCOL);
+			window->console->setCharForeground(entity->position.x - 1, entity->position.y, weaponColor);
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
 			window->console->setChar(entity->position.x - 1, entity->position.y - 1, '\\');
-			window->console->setCharForeground(entity->position.x - 1, entity->position.y - 1, WEPCOL);
+			window->console->setCharForeground(entity->position.x - 1, entity->position.y - 1, weaponColor);
 		}
 		else if (angle >= 67.5)
 		{
 			window->console->setChar(entity->position.x, entity->position.y - 1, TCOD_CHAR_VLINE);
-			window->console->setCharForeground(entity->position.x, entity->position.y - 1, WEPCOL);
+			window->console->setCharForeground(entity->position.x, entity->position.y - 1, weaponColor);
 		}
 	}
 }
 
 Player::Player(Position pos, int symbol, const char* name, TCODColor color)
-	:Entity(pos, symbol, name, color, 0), health(100), armor(0), testWeapon(std::make_shared<Weapon>(0.0))
+	:Entity(pos, symbol, name, color, 0), health(100), armor(0), testWeapon(std::make_shared<Weapon>(TCODColor::lighterGrey))
 {}
 
 void Player::update()
