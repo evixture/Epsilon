@@ -44,6 +44,7 @@ constexpr auto PI = 3.14159265;
 #include <string>
 #include <math.h>
 //#include <stdexcept>
+
 //Libraries
 #include <libtcod.hpp>
 #include <SFML/Window.hpp>
@@ -51,6 +52,7 @@ constexpr auto PI = 3.14159265;
 struct Pane;
 
 //Class File Imports
+#include "utility.h"
 #include "entity.h"
 #include "tile.h"
 #include "map.h"
@@ -61,7 +63,9 @@ struct Pane;
 #include "gui.h"
 #include "engine.h"
 
-//TODO : NEED TO HAVE A VIRTUAL DESTRUCTOR FOR FIRTUAL CLASSES
+//TODO : TRY TO MAKE ALL RENDER FUNCS CONST
+
+//TODO : NEED TO HAVE A VIRTUAL DESTRUCTOR FOR VIRTUAL CLASSES
 
 //TODO : add more defs for colors in window
 //TODO : optimize and test access modifiers

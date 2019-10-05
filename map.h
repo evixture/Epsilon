@@ -46,5 +46,5 @@ public:
 
 	void update(std::shared_ptr<Pane> window);
 
-	void render(std::shared_ptr<Pane> window);
+	void render(std::shared_ptr<Pane> window) ;
 };

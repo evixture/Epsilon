@@ -19,6 +19,8 @@ struct Input
 	bool moveLeft;
 	bool moveRight;
 
+	bool leftMouseClick;
+
 	bool f11Toggle;
 
 	Input();

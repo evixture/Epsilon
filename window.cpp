@@ -12,7 +12,7 @@ Pane::~Pane()
 	delete console;
 }
 
-void Pane::render()
+void Pane::render() const
 {
 	console->setDefaultBackground(bgColor);
 	console->setDefaultForeground(fgColor);
@@ -32,10 +32,10 @@ Ribon::Ribon(const char* windowName, int windowW)
 //}
 
 //Ribon Render
-void Ribon::render()
+void Ribon::render() const
 {
 	ribonWindow->render();
-	ribonWindow->console->printf(0, 0, "[%s]", windowName);
+	ribonWindow->console->printf(0, 0, "|%s|", windowName);
 }
 
 //GuiWindow Struct

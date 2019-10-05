@@ -37,6 +37,9 @@
     <Filter Include="Source\Panel">
       <UniqueIdentifier>{dacce39a-8a02-4be4-9a86-c92951cddb4e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Utility">
+      <UniqueIdentifier>{51ece757-f2d9-4fb4-9f13-11a7d8a2090d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h">
@@ -72,6 +75,9 @@
     <ClInclude Include="panel.h">
       <Filter>Source\Panel</Filter>
     </ClInclude>
+    <ClInclude Include="utility.h">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -103,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="panel.cpp">
       <Filter>Source\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="utility.cpp">
+      <Filter>Source\Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

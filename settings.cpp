@@ -50,23 +50,13 @@ void Settings::printDebugStats()
 {
 	if (engine->gamestate == engine->MAIN)
 	{
-		/*
-		%i : int
-		%f : float and double
-		*/
-		//TCODConsole::root->printf(10, 0, "FPS %i px: %i py: %i pheight: %i mouseAng:%f",
-		//	TCODSystem::getFps(), 
-		//	engine->gui->mapPane->world->player->position.x, 
-		//	engine->gui->mapPane->world->player->position.y,
-		//	engine->gui->mapPane->world->player->height, 
-		//	engine->gui->mapPane->world->player->testWeapon->angle ? engine->gui->mapPane->world->player->testWeapon->angle : 0);
-
-		TCODConsole::root->printf(10, 0, "FPS %i mx: %i my: %i mouseAng: %f",
+		TCODConsole::root->printf(10, 0, "FPS %i mx: %i px: %i my: %i py: %i #bul: %i",
 			TCODSystem::getFps(), 
-			//(double)((my + 3) - y) / (double)((mx + 1) - x)
-			(engine->settings->input->mouse.cx  - 1) - engine->gui->mapPane->world->player->position.x,
-			(engine->settings->input->mouse.cy  - 3) - engine->gui->mapPane->world->player->position.y,
-			engine->gui->mapPane->world->player->testWeapon->angle ? engine->gui->mapPane->world->player->testWeapon->angle : 0);
+			engine->settings->input->mouse.cx  - 1,
+			engine->gui->mapPane->world->player->position.x,
+			engine->settings->input->mouse.cy - 3,
+			engine->gui->mapPane->world->player->position.y,
+			engine->gui->mapPane->world->player->testWeapon->bulletList.size());
 	}
 }
 

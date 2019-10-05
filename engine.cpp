@@ -16,7 +16,7 @@ void Engine::update()
 }
 
 //Head of Render Loop
-void Engine::render()
+void Engine::render() const
 {
 	TCODConsole::root->clear();
 

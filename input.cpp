@@ -2,14 +2,23 @@
 
 //Input Struct
 Input::Input()
-	:keyboard(), mouse(), moveUp(false), moveDown(false), moveLeft(false), moveRight(false), moveTimer(0), moveWait(10), f11Toggle(false), baseMoveWait(0)
+	:keyboard(), mouse(), moveUp(false), moveDown(false), moveLeft(false), moveRight(false), moveTimer(0), moveWait(10), f11Toggle(false), baseMoveWait(0), leftMouseClick(false)
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &keyboard, &mouse);
 }
 
 void Input::getMouseInput()
 {
-	return;
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		leftMouseClick = true;
+		//engine->gui->mapPane->world->player->testWeapon->weaponFire(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, engine->gui->mapPane->drawWindow);
+	}
+	else
+	{
+		//TCODLine::init(player->testWeapon->wx, player->testWeapon->wy, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
+		leftMouseClick = false;
+	}
 }
 
 //TODO : figure out how to get char and vk switches working
@@ -73,6 +82,8 @@ void Input::getKeyDown()
 		engine->gui->mapPane->world->player->height = 3;
 	}
 
+	
+
 	/*---------- FUNCTION KEYS ----------*/
 
 	//	F11
@@ -120,6 +131,7 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 	if (engine->gamestate == Engine::MAIN)
 	{
 		getKeyDown();
+		getMouseInput();
 
 		moveXSpeed = 0;
 		moveYSpeed = 0;

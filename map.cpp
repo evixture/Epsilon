@@ -120,7 +120,6 @@ World::World()
 	//currentMap = mapList[player->level]; 
 }
 
-
 //Returns to tiles
 bool World::isExplored(int x, int y, int level)
 {
@@ -214,8 +213,9 @@ void World::update(std::shared_ptr<Pane> window)
 		entity->update();
 	}
 }
+
 //World Render
-void World::render(std::shared_ptr<Pane> pane)
+void World::render(std::shared_ptr<Pane> pane) 
 {
 	for (int y = 0; y < pane->consoleH; y++)
 	{
@@ -258,4 +258,17 @@ void World::render(std::shared_ptr<Pane> pane)
 		}
 		entity->render(pane);
 	}
+
+	//need to move to input
+		//if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		//{
+		//	//leftMouseClick = true;
+		//	engine->gui->mapPane->world->player->testWeapon->weaponFire(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, engine->gui->mapPane->drawWindow);
+		//}
+		//else
+		//{
+		//	TCODLine::init(player->testWeapon->wx, player->testWeapon->wy, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
+		//	//leftMouseClick = false;
+		//}
+
 }

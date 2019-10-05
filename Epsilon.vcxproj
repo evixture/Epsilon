@@ -28,6 +28,7 @@
     <ClCompile Include="panel.cpp" />
     <ClCompile Include="settings.cpp" />
     <ClCompile Include="tile.cpp" />
+    <ClCompile Include="utility.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -41,6 +42,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="settings.h" />
     <ClInclude Include="tile.h" />
+    <ClInclude Include="utility.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -129,7 +131,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include;E:\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Libtcod\custom-libtcod-master\src;E:\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>precomp.hpp</PrecompiledHeaderFile>
       <LanguageStandard>Default</LanguageStandard>
       <EnablePREfast>false</EnablePREfast>
@@ -138,7 +140,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\SFML\SFML-2.5.1\lib;E:\Libtcod\libtcod-1.12.3-x86_64-msvc</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\SFML\SFML-2.5.1\lib;E:\Libtcod\custom-libtcod-master\build\msvs\libtcod\x64\Release</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-window.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libtcod.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -150,7 +152,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include;E:\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Libtcod\custom-libtcod-master\src;E:\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>precomp.hpp</PrecompiledHeaderFile>
       <LanguageStandard>Default</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
@@ -159,7 +161,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\SFML\SFML-2.5.1\lib;E:\Libtcod\libtcod-1.12.3-x86_64-msvc</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\SFML\SFML-2.5.1\lib;E:\Libtcod\custom-libtcod-master\build\msvs\libtcod\x64\Release</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-window.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libtcod.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

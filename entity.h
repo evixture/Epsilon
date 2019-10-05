@@ -30,6 +30,27 @@ public:
 	void virtual render(std::shared_ptr<Pane> window);
 };
 
+struct Bullet
+{
+	int bx;
+	int by;
+
+	int tox;
+	int toy;
+
+	int xbound;
+	int ybound;
+
+	bool hitWall;
+
+	BLine travel;
+
+	Bullet(int startx, int starty, int dx, int dy, int xbound, int ybound);
+
+	void update();
+	void render(std::shared_ptr<Pane> pane);
+};
+
 //change name
 struct Weapon
 {
@@ -37,7 +58,20 @@ struct Weapon
 
 	double angle;
 
-	Weapon(TCODColor color);
+	int wx;
+	int wy;
+
+	int fireWait;
+	int fireCap;
+
+	std::vector<std::shared_ptr<Bullet>> bulletList;
+
+	//int bx;
+	//int by;
+
+	Weapon(TCODColor color, int fireWait);
+
+	//void weaponFire(int endx, int endy, std::shared_ptr<Pane> pane, int xbound, int ybound);
 
 	void update(int x, int y, int mx, int my);
 	void render(std::shared_ptr<Entity> entity, std::shared_ptr<Pane> window);

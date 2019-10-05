@@ -21,7 +21,7 @@ void Gui::update()
 }
 
 //Gui Render
-void Gui::render()
+void Gui::render() const
 {
 	for (auto& window : windowList)
 	{

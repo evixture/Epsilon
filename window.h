@@ -13,7 +13,7 @@ struct Pane
 	Pane(int consoleW, int consoleH, TCODColor bgColor, TCODColor fgColor);
 	~Pane();
 
-	void render();
+	void render() const;
 };
 
 //Ribon Struct
@@ -28,7 +28,7 @@ struct Ribon
 
 	void updateRibonName(const char* ribonName);
 
-	void render();
+	void render() const;
 };
 
 //GuiWindow Struct

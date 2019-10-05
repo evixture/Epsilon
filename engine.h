@@ -12,7 +12,7 @@ public:
 	Engine(int screenX, int screenY);
 
 	void update();
-	void render();
+	void render() const;
 };
 
 extern std::shared_ptr<Engine> engine;
