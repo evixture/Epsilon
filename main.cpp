@@ -10,7 +10,7 @@ std::shared_ptr<Engine> engine = std::make_shared<Engine>(120, 64);
 //else use WinMain to hide console
 int WinMain()
 {
-	while (!TCODConsole::isWindowClosed() && engine->settings->isActive)
+	while (!TCODConsole::isWindowClosed() && engine->gamestate != Engine::EXIT)
 	{
 		engine->update();
 		engine->render();

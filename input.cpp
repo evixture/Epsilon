@@ -103,7 +103,7 @@ void Input::getKeyDown()
 		//CLOSES APPLICATION
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
-		engine->settings->isActive = false;
+		engine->gamestate = Engine::EXIT;
 	}
 
 	// ALT + KEY COMMANDS
