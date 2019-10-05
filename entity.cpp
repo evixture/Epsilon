@@ -86,8 +86,8 @@ void Bullet::render(std::shared_ptr<Pane> pane)
 }
 
 //Weapon Struct
-Weapon::Weapon(TCODColor color, int ammoCap, int fireRate)
-	:weaponColor(color), angle(0), dx(0), dy(0), wx(0), wy(0), fireCap(fireRate), fireWait(0), ammoCap(ammoCap), ammoAmount(ammoCap)
+Weapon::Weapon(TCODColor color, int ammoCap, int numberMags, int fireRate)
+	:weaponColor(color), angle(0), dx(0), dy(0), wx(0), wy(0), fireCap(fireRate), fireWait(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags)
 {}
 
 /*
@@ -167,7 +167,12 @@ void Weapon::update(int x, int y, int mx, int my)
 	//ON RELOAD
 	if (engine->settings->input->reload)
 	{
-		ammoAmount = ammoCap;
+		if (numberMags != 0)
+		{
+			ammoAmount = ammoCap;
+			numberMags--;
+			//engine->settings->input->reload = false;
+		}
 	}
 
 	for (auto& bullet : bulletList)
@@ -307,7 +312,7 @@ void Weapon::render(std::shared_ptr<Entity> entity, std::shared_ptr<Pane> window
 }
 
 Player::Player(Position pos, int symbol, const char* name, TCODColor color)
-	:Entity(pos, symbol, name, color, 0), health(100), armor(0), testWeapon(std::make_shared<Weapon>(TCODColor::lighterGrey, 30, 5))
+	:Entity(pos, symbol, name, color, 0), health(100), armor(0), testWeapon(std::make_shared<Weapon>(TCODColor::lighterGrey, 30, 5, 5))
 {}
 
 void Player::update()

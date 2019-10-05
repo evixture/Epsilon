@@ -61,6 +61,9 @@ struct Weapon
 	int wx;
 	int wy;
 
+	//later make magazine class
+	int numberMags;
+
 	int ammoCap;
 	int ammoAmount;
 
@@ -72,7 +75,7 @@ struct Weapon
 	//int bx;
 	//int by;
 
-	Weapon(TCODColor color, int ammoCap, int fireWait);
+	Weapon(TCODColor color, int ammoCap, int numberMags, int fireRate);
 
 	//void weaponFire(int endx, int endy, std::shared_ptr<Pane> pane, int xbound, int ybound);
 

@@ -20,6 +20,7 @@ struct Input
 	bool moveRight;
 
 	bool reload;
+	bool reloadToggle;
 
 	bool leftMouseClick;
 
@@ -27,8 +28,10 @@ struct Input
 
 	Input();
 
+	//TODO : Move key checks to funcs with buttton params for config support
+
 	//not sure if ent param is needed
-	void getInput(std::shared_ptr<Player> player);
+	void update(std::shared_ptr<Player> player);
 
 	void getKeyDown();
 	void getKeyInput(std::shared_ptr<Player> player);

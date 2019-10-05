@@ -2,7 +2,7 @@
 
 //Input Struct
 Input::Input()
-	:keyboard(), mouse(), moveUp(false), moveDown(false), moveLeft(false), moveRight(false), moveTimer(0), moveWait(10), f11Toggle(false), baseMoveWait(0), leftMouseClick(false)
+	:keyboard(), mouse(), moveUp(false), moveDown(false), moveLeft(false), moveRight(false), moveTimer(0), moveWait(10), f11Toggle(false), baseMoveWait(0), leftMouseClick(false), reload(false)
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &keyboard, &mouse);
 }
@@ -84,12 +84,22 @@ void Input::getKeyDown()
 	//WEAPONS
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 	{
-		reload = true;
+		if (!reloadToggle)
+		{
+			reloadToggle = true;
+			reload = true;
+		}
+		else if (reloadToggle)
+		{
+			reload = false;
+		}
 	}
 	else
 	{
 		reload = false;
+		reloadToggle = false;
 	}
+
 
 	/*---------- FUNCTION KEYS ----------*/
 
@@ -138,7 +148,6 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 	if (engine->gamestate == Engine::MAIN)
 	{
 		getKeyDown();
-		getMouseInput();
 
 		moveXSpeed = 0;
 		moveYSpeed = 0;
@@ -187,7 +196,8 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 	}
 }
 
-void Input::getInput(std::shared_ptr<Player> player)
+void Input::update(std::shared_ptr<Player> player)
 {
 	getKeyInput(player);
+	getMouseInput();
 }

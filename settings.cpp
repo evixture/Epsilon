@@ -50,20 +50,23 @@ void Settings::printDebugStats()
 {
 	if (engine->gamestate == engine->MAIN)
 	{
-		TCODConsole::root->printf(10, 0, "FPS %i mx: %i px: %i my: %i py: %i #bul: %i ammo: %i",
-			TCODSystem::getFps(), 
-			engine->settings->input->mouse.cx  - 1,
+		TCODConsole::root->printf(10, 0, "FPS %i mx: %i px: %i my: %i py: %i #bul: %i ammo: %i, mags: %i reload: %i f11: %i",
+			TCODSystem::getFps(),
+			engine->settings->input->mouse.cx - 1,
 			engine->gui->mapPane->world->player->position.x,
 			engine->settings->input->mouse.cy - 3,
 			engine->gui->mapPane->world->player->position.y,
 			engine->gui->mapPane->world->player->testWeapon->bulletList.size(),
-			engine->gui->mapPane->world->player->testWeapon->ammoAmount);
+			engine->gui->mapPane->world->player->testWeapon->ammoAmount,
+			engine->gui->mapPane->world->player->testWeapon->numberMags,
+			engine->settings->input->reload,
+			engine->settings->input->f11Toggle);
 	}
 }
 
 void Settings::update(std::shared_ptr<Player> player)
 {
-	input->getInput(player);
+	input->update(player);
 }
 
 void Settings::render()
