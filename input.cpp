@@ -21,7 +21,6 @@ void Input::getMouseInput()
 	}
 }
 
-//TODO : figure out how to get char and vk switches working
 void Input::getKeyDown()
 {
 	/*---------- PLAYER AND MENU MOVEMENT KEYS ----------*/
@@ -82,7 +81,15 @@ void Input::getKeyDown()
 		engine->gui->mapPane->world->player->height = 3;
 	}
 
-	
+	//WEAPONS
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+	{
+		reload = true;
+	}
+	else
+	{
+		reload = false;
+	}
 
 	/*---------- FUNCTION KEYS ----------*/
 

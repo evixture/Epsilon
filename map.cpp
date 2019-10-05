@@ -258,17 +258,4 @@ void World::render(std::shared_ptr<Pane> pane)
 		}
 		entity->render(pane);
 	}
-
-	//need to move to input
-		//if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-		//{
-		//	//leftMouseClick = true;
-		//	engine->gui->mapPane->world->player->testWeapon->weaponFire(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, engine->gui->mapPane->drawWindow);
-		//}
-		//else
-		//{
-		//	TCODLine::init(player->testWeapon->wx, player->testWeapon->wy, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
-		//	//leftMouseClick = false;
-		//}
-
 }

@@ -3,8 +3,7 @@
 //Position Struct
 Position::Position(int x, int y)
 	:x(x), y(y)
-{
-}
+{}
 
 Position Position::getPosition()
 {
@@ -37,7 +36,7 @@ void Entity::render(std::shared_ptr<Pane> window)
 Bullet::Bullet(int startx, int starty, int dx, int dy, int xbound, int ybound)
 	:bx(startx), by(starty), xbound(xbound), ybound(ybound), hitWall(false), tox(dx), toy(dy), travel(BLine(bx, by, tox, toy))
 {
-	while (((tox + bx < xbound && tox + bx > 0) && tox != 0 ) || ((toy + by < ybound && toy + by > 0) && toy != 0 ))
+	do
 	{
 		if (tox != 0)
 		{
@@ -47,10 +46,10 @@ Bullet::Bullet(int startx, int starty, int dx, int dy, int xbound, int ybound)
 		{
 			toy *= 2;
 		}
-	}
+	} while (((tox + bx < xbound && tox + bx > 0) && tox != 0) || ((toy + by < ybound && toy + by > 0) && toy != 0));
 
-	tox = tox + bx;
-	toy = toy + by;
+	tox += bx;
+	toy += by;
 
 	travel = BLine(bx, by, tox, toy);
 }
@@ -61,7 +60,7 @@ void Bullet::update()
 	{
 		if (bx < xbound && by < ybound)
 		{
-			if (engine->gui->mapPane->world->getWalkability(travel.x, travel.y, engine->gui->mapPane->world->player->level))
+			if (engine->gui->mapPane->world->getWalkability(travel.x, travel.y, engine->gui->mapPane->world->player->level) != false)
 			{
 				travel.step();
 			}
@@ -87,8 +86,8 @@ void Bullet::render(std::shared_ptr<Pane> pane)
 }
 
 //Weapon Struct
-Weapon::Weapon(TCODColor color, int fireCap)
-	:weaponColor(color), angle(0), dx(0), dy(0), wx(0), wy(0), fireCap(fireCap), fireWait(0)
+Weapon::Weapon(TCODColor color, int ammoCap, int fireRate)
+	:weaponColor(color), angle(0), dx(0), dy(0), wx(0), wy(0), fireCap(fireRate), fireWait(0), ammoCap(ammoCap), ammoAmount(ammoCap)
 {}
 
 /*
@@ -143,12 +142,14 @@ void Weapon::update(int x, int y, int mx, int my)
 	//weird range, check actual angle by checking x and y sign with angle
 	angle = atan(itan) * 180 / PI;
 
-	//deletes oldest bullet if greater than hard code cap
-
-	if (engine->settings->input->leftMouseClick && fireWait == 0)
+	if (engine->settings->input->leftMouseClick && fireWait == 0 && ammoAmount != 0)
 	{
-		fireWait = fireCap;
-		bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(wx, wy, dx, dy, engine->gui->mapPane->world->debugmap->mapW, engine->gui->mapPane->world->debugmap->mapH));
+		if (!(wx == dx + wx && wy == dy + wy))
+		{
+			fireWait = fireCap;
+			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(wx, wy, dx, dy, engine->gui->mapPane->world->debugmap->mapW, engine->gui->mapPane->world->debugmap->mapH));
+			ammoAmount--;
+		}
 	}
 
 	else if (fireWait != 0)
@@ -156,27 +157,21 @@ void Weapon::update(int x, int y, int mx, int my)
 		fireWait--;
 	}
 
-	if (bulletList.size() > 20)
+	//CLEAR BULLETS
+	if (bulletList.size() > ammoCap)
 	{
 		bulletList.pop_back();
 	}
 
+	//TODO : FIND A WAY TO SOMEHOW LIMIT RELOAD SPAMMING
+	//ON RELOAD
+	if (engine->settings->input->reload)
+	{
+		ammoAmount = ammoCap;
+	}
+
 	for (auto& bullet : bulletList)
 	{
-		/*if (bullet->hitWall)
-		{
-			delete &bullet;
-		}
-		else
-		{
-		bullet->update();
-		}*/
-		//if (bullet->hitWall)
-		//{
-		//	delete &bullet;
-		//	return;
-		//}
-
 		bullet->update();
 	}
 }
@@ -312,7 +307,7 @@ void Weapon::render(std::shared_ptr<Entity> entity, std::shared_ptr<Pane> window
 }
 
 Player::Player(Position pos, int symbol, const char* name, TCODColor color)
-	:Entity(pos, symbol, name, color, 0), health(100), armor(0), testWeapon(std::make_shared<Weapon>(TCODColor::lighterGrey, 10))
+	:Entity(pos, symbol, name, color, 0), health(100), armor(0), testWeapon(std::make_shared<Weapon>(TCODColor::lighterGrey, 30, 5))
 {}
 
 void Player::update()

@@ -61,6 +61,9 @@ struct Weapon
 	int wx;
 	int wy;
 
+	int ammoCap;
+	int ammoAmount;
+
 	int fireWait;
 	int fireCap;
 
@@ -69,7 +72,7 @@ struct Weapon
 	//int bx;
 	//int by;
 
-	Weapon(TCODColor color, int fireWait);
+	Weapon(TCODColor color, int ammoCap, int fireWait);
 
 	//void weaponFire(int endx, int endy, std::shared_ptr<Pane> pane, int xbound, int ybound);
 

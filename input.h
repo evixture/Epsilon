@@ -19,6 +19,8 @@ struct Input
 	bool moveLeft;
 	bool moveRight;
 
+	bool reload;
+
 	bool leftMouseClick;
 
 	bool f11Toggle;

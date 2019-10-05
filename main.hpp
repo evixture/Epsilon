@@ -69,15 +69,6 @@ struct Pane;
 
 //TODO : add more defs for colors in window
 //TODO : optimize and test access modifiers
-//TODO : to create and push to vector use vector.push(create ent here)
-//TODO : tcod consoles start at 0, 0
-//TODO : Figure out what fov algo to use
 //TODO : fov is computed every update, try to optimize later
 
-//!NOTE : blitting consoles requires a background flag
-//!NOTE : Documentation is done in declaration
 //!NOTE : create generic items for tiles and then push them
-
-//need to change "length" vars to be more easily typed
-//need to clean up mapfile code
-//need to figure out good fov type;

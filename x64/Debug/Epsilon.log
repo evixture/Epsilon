@@ -1,2 +1,13 @@
-﻿  main.cpp
+﻿  engine.cpp
+  entity.cpp
+  gui.cpp
+  input.cpp
+  main.cpp
+  map.cpp
+  panel.cpp
+  settings.cpp
+  tile.cpp
+  utility.cpp
+  window.cpp
+  Generating Code...
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe
