@@ -121,50 +121,69 @@ World::World()
 }
 
 //Returns to tiles
-bool World::isExplored(int x, int y, int level)
+std::shared_ptr<Tile> World::getTile(int x, int y, int level) const
+{
+	return debugmap->levelList[level][x + y * debugmap->mapW];
+}
+
+bool World::isExplored(int x, int y, int level) const
 {
 	return debugmap->levelList[level][x + y * debugmap->mapW]->explored;
 }
 
-TCODColor World::getBgColor(int x, int y, int level)
+TCODColor World::getBgColor(int x, int y, int level) const
 {
 	return debugmap->levelList[level][x + y * debugmap->mapW]->bgcol;
 }
 
-TCODColor World::getFgColor(int x, int y, int level)
+TCODColor World::getFgColor(int x, int y, int level) const
 {
 	return debugmap->levelList[level][x + y * debugmap->mapW]->fgcol;
 }
 
-int World::getCh(int x, int y, int level)
+int World::getCh(int x, int y, int level) const
 {
 	return debugmap->levelList[level][x + y * debugmap->mapW]->ch;
 }
 
-int World::getHeight(int tx, int ty, int level)
+int World::getHeight(int tx, int ty, int level) const
 {
 	return debugmap->levelList[level][tx + ty * debugmap->mapW]->height;
 }
 
-bool World::getWalkability(int tx, int ty, int level)
+bool World::inMapBounds(int x, int y, int level)
 {
-	if (tx < 0) return false;
-	if (ty < 0) return false;
-	if (tx >= debugmap->mapW) return false;
-	if (ty >= debugmap->mapH) return false;
-
-	return debugmap->levelList[level][tx + ty * debugmap->mapW]->walkable;
+	if (level < 0 || level > debugmap->totalFloors - 1) return false;
+	if (x < 0 || x > debugmap->mapW - 1) return false;
+	if (y < 0 || y > debugmap->mapH - 1) return false;
+	return true;
 }
 
-bool World::getTransparency(int x, int y, int level, int height)
+bool World::getWalkability(int x, int y, int level) const
 {
+	if (x < 0) return false;
+	if (y < 0) return false;
+	if (x >= debugmap->mapW) return false;
+	if (y >= debugmap->mapH) return false;
+
+	return debugmap->levelList[level][x + y * debugmap->mapW]->walkable;
+}
+
+bool World::getTransparency(int x, int y, int level, int height) const
+{
+	//BUG HERE
 	if (height <= debugmap->levelList[level][x + y * debugmap->mapW]->height)
 	{
+		if (debugmap->levelList[level][x + y * debugmap->mapW]->destroyed)
+		{
+			return true;
+		}
+		
 		return false;
 	}
-	else
+	else if (height > debugmap->levelList[level][x + y * debugmap->mapW]->height)
 	{
-		return debugmap->levelList[level][x + y * debugmap->mapW]->transparent;
+		return true;
 	}
 }
 
@@ -182,12 +201,11 @@ void World::updateProperties()
 
 void World::computeFov()
 {
-	//debugmap->levelList[player->level].computeFov(player->position.x, player->position.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
 	fovMap->computeFov(player->position.x, player->position.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
 }
 
 //check tcodmap fov
-bool World::isInFov(int x, int y, int level)
+bool World::isInFov(int x, int y, int level) const
 {
 	if (x < 0 || x >= debugmap->mapW || y < 0 || y >= debugmap->mapH)
 	{
@@ -202,9 +220,8 @@ bool World::isInFov(int x, int y, int level)
 }
 
 //World update
-void World::update(std::shared_ptr<Pane> window)
+void World::update()
 {
-	//currentMap = mapList[player->level];
 	updateProperties();
 	computeFov();
 
@@ -215,7 +232,7 @@ void World::update(std::shared_ptr<Pane> window)
 }
 
 //World Render
-void World::render(std::shared_ptr<Pane> pane) 
+void World::render(const std::shared_ptr<Pane>& pane) const
 {
 	for (int y = 0; y < pane->consoleH; y++)
 	{

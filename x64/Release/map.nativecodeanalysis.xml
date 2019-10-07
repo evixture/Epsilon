@@ -314,8 +314,8 @@
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::isExplored</FUNCTION>
-    <DECORATED>?isExplored@World@@QEAA_NHHH@Z</DECORATED>
+    <FUNCTION>World::getTile</FUNCTION>
+    <DECORATED>?getTile@World@@QEBA?AV?$shared_ptr@UTile@@@std@@HHH@Z</DECORATED>
     <FUNCLINE>124</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
@@ -328,8 +328,8 @@
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getBgColor</FUNCTION>
-    <DECORATED>?getBgColor@World@@QEAA?AVTCODColor@@HHH@Z</DECORATED>
+    <FUNCTION>World::isExplored</FUNCTION>
+    <DECORATED>?isExplored@World@@QEBA_NHHH@Z</DECORATED>
     <FUNCLINE>129</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
@@ -342,8 +342,8 @@
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getFgColor</FUNCTION>
-    <DECORATED>?getFgColor@World@@QEAA?AVTCODColor@@HHH@Z</DECORATED>
+    <FUNCTION>World::getBgColor</FUNCTION>
+    <DECORATED>?getBgColor@World@@QEBA?AVTCODColor@@HHH@Z</DECORATED>
     <FUNCLINE>134</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
@@ -356,8 +356,8 @@
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getCh</FUNCTION>
-    <DECORATED>?getCh@World@@QEAAHHHH@Z</DECORATED>
+    <FUNCTION>World::getFgColor</FUNCTION>
+    <DECORATED>?getFgColor@World@@QEBA?AVTCODColor@@HHH@Z</DECORATED>
     <FUNCLINE>139</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
@@ -366,12 +366,12 @@
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
       <LINE>146</LINE>
-      <COLUMN>38</COLUMN>
+      <COLUMN>37</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getHeight</FUNCTION>
-    <DECORATED>?getHeight@World@@QEAAHHHH@Z</DECORATED>
+    <FUNCTION>World::getCh</FUNCTION>
+    <DECORATED>?getCh@World@@QEBAHHHH@Z</DECORATED>
     <FUNCLINE>144</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
@@ -379,13 +379,13 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>156</LINE>
+      <LINE>151</LINE>
       <COLUMN>38</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getWalkability</FUNCTION>
-    <DECORATED>?getWalkability@World@@QEAA_NHHH@Z</DECORATED>
+    <FUNCTION>World::getHeight</FUNCTION>
+    <DECORATED>?getHeight@World@@QEBAHHHH@Z</DECORATED>
     <FUNCLINE>149</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
@@ -393,56 +393,70 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>161</LINE>
+      <LINE>169</LINE>
+      <COLUMN>37</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>World::getWalkability</FUNCTION>
+    <DECORATED>?getWalkability@World@@QEBA_NHHH@Z</DECORATED>
+    <FUNCLINE>162</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>map.cpp</FILENAME>
+      <LINE>175</LINE>
       <COLUMN>44</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getTransparency</FUNCTION>
-    <DECORATED>?getTransparency@World@@QEAA_NHHHH@Z</DECORATED>
-    <FUNCLINE>159</FUNCLINE>
+    <DECORATED>?getTransparency@World@@QEBA_NHHHH@Z</DECORATED>
+    <FUNCLINE>172</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>167</LINE>
-      <COLUMN>38</COLUMN>
+      <LINE>177</LINE>
+      <COLUMN>35</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getTransparency</FUNCTION>
-    <DECORATED>?getTransparency@World@@QEAA_NHHHH@Z</DECORATED>
-    <FUNCLINE>159</FUNCLINE>
+    <DECORATED>?getTransparency@World@@QEBA_NHHHH@Z</DECORATED>
+    <FUNCLINE>172</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>198</LINE>
+      <LINE>184</LINE>
+      <COLUMN>48</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>World::getTransparency</FUNCTION>
+    <DECORATED>?getTransparency@World@@QEBA_NHHHH@Z</DECORATED>
+    <FUNCLINE>172</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>map.cpp</FILENAME>
+      <LINE>216</LINE>
       <COLUMN>31</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::isInFov</FUNCTION>
-    <DECORATED>?isInFov@World@@QEAA_NHHH@Z</DECORATED>
-    <FUNCLINE>190</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>244</LINE>
-      <COLUMN>40</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::render</FUNCTION>
-    <DECORATED>?render@World@@QEAAXV?$shared_ptr@UPane@@@std@@@Z</DECORATED>
-    <FUNCLINE>218</FUNCLINE>
+    <DECORATED>?isInFov@World@@QEBA_NHHH@Z</DECORATED>
+    <FUNCLINE>208</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

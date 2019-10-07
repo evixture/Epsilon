@@ -3,12 +3,26 @@
 //#define WORLD engine->gui->mapPane->world
 
 //Tile struct
-Tile::Tile(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable, bool transparent)
-	:ch(ch), fgcol(fgcol), bgcol(bgcol), height(height), walkable(walkable), transparent(transparent), explored(false)
+Tile::Tile(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable, bool destructible)
+	:ch(ch), fgcol(fgcol), bgcol(bgcol), height(height), walkable(walkable), destroyed(false), explored(false), destructible(destructible)
 {}
 
 
-void Tile::render(int x, int y, std::shared_ptr<Pane> pane)
+void Tile::destroy(int destCH, TCODColor destBGCOL, TCODColor destFGCOL, bool destWALK)
+{
+	if (!destructible) return;
+	else
+	{
+		ch = destCH;
+		bgcol = destBGCOL;
+		fgcol = destFGCOL;
+		walkable = destWALK;
+		//change name later
+		destroyed = true;
+	}
+}
+
+void Tile::render(int x, int y, const std::shared_ptr<Pane>& pane) const
 {
 	if (WORLD->isInFov(x, y, WORLD->player->level))
 	{

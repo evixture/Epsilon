@@ -11,7 +11,7 @@ struct StatusPane : public Window
 
 	void update();
 
-	void render();
+	void render() const;
 };
 
 struct MapPane : public Window
@@ -25,7 +25,7 @@ struct MapPane : public Window
 
 	void update();
 
-	void render();
+	void render() const;
 };
 
 struct PlayerPane : public Window
@@ -37,5 +37,5 @@ struct PlayerPane : public Window
 
 	void update();
 
-	void render();
+	void render() const;
 };

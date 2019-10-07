@@ -32,19 +32,23 @@ public:
 
 	World();
 
-	TCODColor getBgColor       (int x, int y, int level);
-	TCODColor getFgColor       (int x, int y, int level);
-	int       getCh            (int x, int y, int level);
-	bool      getTransparency  (int x, int y, int level, int height);
-	bool      getWalkability   (int tx, int ty, int level);
-	int       getHeight        (int tx, int ty, int level);
+	std::shared_ptr<Tile> getTile	(int x, int y, int level) const;
+	TCODColor getBgColor			(int x, int y, int level) const;
+	TCODColor getFgColor			(int x, int y, int level) const;
+	int       getCh					(int x, int y, int level) const;
+	bool      getTransparency		(int x, int y, int level, int height) const;
+	bool      getWalkability		(int tx, int ty, int level) const;
+	int       getHeight				(int tx, int ty, int level) const;
 
-	bool isInFov(int x, int y, int level);
-	bool isExplored(int x, int y, int level);
+	bool inMapBounds(int x, int y, int level);
+
+	bool isInFov(int x, int y, int level) const;
+	bool isExplored(int x, int y, int level) const;
 	void computeFov();
 	void updateProperties();
 
-	void update(std::shared_ptr<Pane> window);
+	void update();
 
-	void render(std::shared_ptr<Pane> window) ;
+	//make const
+	void render(const std::shared_ptr<Pane> &pane) const;
 };

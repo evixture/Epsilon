@@ -223,4 +223,21 @@
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>entity.cpp</FILENAME>
+      <LINE>100</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Weapon::ch' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Weapon::{ctor}</FUNCTION>
+    <DECORATED>??0Weapon@@QEAA@VTCODColor@@HHH@Z</DECORATED>
+    <FUNCLINE>100</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Weapon::ch</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
 </DEFECTS>

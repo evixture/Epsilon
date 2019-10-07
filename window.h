@@ -46,11 +46,11 @@ public:
 	Window(int w, int h, const char* panelName, int rx, int ry);
 
 	virtual void update();
-	virtual void render();
+	virtual void render() const;
 
 	void setRibonName(const char* ribonName);
-	void clearWindow();
-	void pushWindow();
+	void clearWindow() const;
+	void pushWindow() const;
 
 private:
 	std::shared_ptr<Ribon> ribon;

@@ -12,12 +12,12 @@ MapPane::MapPane(int w, int h, int rx, int ry)
 
 void MapPane::update()
 {
-	world->update(drawWindow);
+	world->update();
 	//setRibonName(world->debugmap->mapName);
 }
 
 //GuiMap Render
-void MapPane::render()
+void MapPane::render() const
 {
 	clearWindow();
 	world->render(drawWindow);
@@ -47,7 +47,7 @@ void StatusPane::update()
 	displayArmor = engine->gui->mapPane->world->player->armor;
 }
 
-void StatusPane::render()
+void StatusPane::render() const
 {
 	clearWindow();
 
@@ -110,7 +110,7 @@ void PlayerPane::update()
 	}
 }
 
-void PlayerPane::render()
+void PlayerPane::render() const
 {
 	clearWindow();
 

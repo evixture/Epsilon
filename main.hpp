@@ -14,21 +14,21 @@
 */
 
 //	DEFINES
-//============TILES===============================CH===FOREGROUND=COLOR==========BACKGROUND=COLOR==========H==WALK==TRANS |
+//============TILES===============================CH===FOREGROUND=COLOR==========BACKGROUND=COLOR==========H==WALK===DEST |
 //GROUND
-#define TILE_BasicGrass    std::make_shared<Tile>('.', TCODColor::darkerGreen,   TCODColor::darkestGreen,  0, true,  true )
-#define TILE_BasicFloor    std::make_shared<Tile>(' ', TCODColor::darkSepia,     TCODColor::darkerSepia,   0, true,  true )
-#define TILE_BasicConcrete std::make_shared<Tile>('`', TCODColor::darkGrey,      TCODColor::grey,          0, true,  true )
+#define TILE_BasicGrass    std::make_shared<Tile>('.', TCODColor::darkerGreen,   TCODColor::darkestGreen,  0, true,  false)
+#define TILE_BasicFloor    std::make_shared<Tile>(' ', TCODColor::darkSepia,     TCODColor::darkerSepia,   0, true,  false)
+#define TILE_BasicConcrete std::make_shared<Tile>('`', TCODColor::darkGrey,      TCODColor::grey,          0, true,  false)
 //WALL
-#define TILE_BasicWall     std::make_shared<Tile>('=', TCODColor::lightSepia,    TCODColor::lighterSepia,  4, false, false)
+#define TILE_BasicWall     std::make_shared<Tile>('=', TCODColor::lightSepia,    TCODColor::lighterSepia,  4, false, true )
 #define TILE_BasicDoor     std::make_shared<Tile>('#', TCODColor::darkSepia,     TCODColor::darkestSepia,  4, true,  false)
 #define TILE_BasicWindow   std::make_shared<Tile>('_', TCODColor::lightCyan,     TCODColor::darkerSky,     0, false, true )
 //PART HEIGHT
 #define TILE_BasicTable    std::make_shared<Tile>('n', TCODColor::lighterSepia,  TCODColor::darkerSepia,   2, false, true )
 //SKY
-#define TILE_BasicSky      std::make_shared<Tile>(' ', TCODColor::lightestCyan,  TCODColor::sky,           0, false, true )
+#define TILE_BasicSky      std::make_shared<Tile>(' ', TCODColor::lightestCyan,  TCODColor::sky,           0, false, false)
 //ERROR
-#define TILE_error         std::make_shared<Tile>('%', TCODColor::black,         TCODColor::pink,          4, true,  true )
+#define TILE_error         std::make_shared<Tile>('%', TCODColor::black,         TCODColor::pink,          4, true,  false)
 //============COLORS===================================================================================================== |
 #define RIBONBGCOLOR TCODColor::darkBlue
 #define RIBONFGCOLOR TCODColor::lightestGrey
@@ -62,8 +62,6 @@ struct Pane;
 #include "panel.h"
 #include "gui.h"
 #include "engine.h"
-
-//TODO : TRY TO MAKE ALL RENDER FUNCS CONST
 
 //TODO : NEED TO HAVE A VIRTUAL DESTRUCTOR FOR VIRTUAL CLASSES
 

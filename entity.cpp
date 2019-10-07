@@ -26,10 +26,10 @@ void Entity::update()
 	return;
 }
 
-void Entity::render(std::shared_ptr<Pane> window)
+void Entity::render(const std::shared_ptr<Pane>& pane) const
 {
-	window->console->setChar(position.x, position.y, symbol);
-	window->console->setCharForeground(position.x, position.y, color);
+	pane->console->setChar(position.x, position.y, symbol);
+	pane->console->setCharForeground(position.x, position.y, color);
 }
 
 //Bullet Struct
@@ -60,13 +60,24 @@ void Bullet::update()
 	{
 		if (bx < xbound && by < ybound)
 		{
-			if (engine->gui->mapPane->world->getWalkability(travel.x, travel.y, engine->gui->mapPane->world->player->level) != false)
+			if (engine->gui->mapPane->world->inMapBounds(travel.x, travel.y, engine->gui->mapPane->world->player->level) 
+				&& engine->gui->mapPane->world->getWalkability(travel.x, travel.y, engine->gui->mapPane->world->player->level) != false)
 			{
 				travel.step();
 			}
 			else
 			{
-				hitWall = true;
+				if (engine->gui->mapPane->world->inMapBounds(travel.x, travel.y, engine->gui->mapPane->world->player->level))
+				{
+					engine->gui->mapPane->world->getTile(travel.x, travel.y, engine->gui->mapPane->world->player->level)->destroy('%',
+						engine->gui->mapPane->world->getBgColor(travel.x, travel.y, engine->gui->mapPane->world->player->level) * TCODColor::darkGrey,
+						engine->gui->mapPane->world->getFgColor(travel.x, travel.y, engine->gui->mapPane->world->player->level) * TCODColor::lightGrey, true);
+					hitWall = true;
+				}
+				else
+				{
+					hitWall = true;
+				}
 			}
 		}
 		else
@@ -76,7 +87,7 @@ void Bullet::update()
 	}
 }
 
-void Bullet::render(std::shared_ptr<Pane> pane)
+void Bullet::render(const std::shared_ptr<Pane>& pane) const
 {
 	if (!hitWall)
 	{
@@ -136,12 +147,98 @@ if left click
 
 void Weapon::update(int x, int y, int mx, int my)
 {
+	//get angle
 	dx = (mx - 1) - x;
 	dy = (my - 3) - y;
 	double itan = (double)(dy) / (double)(dx);
-	//weird range, check actual angle by checking x and y sign with angle
 	angle = atan(itan) * 180 / PI;
 
+	if (dx >= 0 && dy >= 0)
+	{
+		if (angle <= 22.5)
+		{
+			wx = x + 1;
+			wy = y;
+			ch = TCOD_CHAR_HLINE;
+		}
+		else if (angle >= 22.5 && angle <= 67.5)
+		{
+			wx = x + 1;
+			wy = y + 1;
+			ch = '\\';
+		}
+		else if (angle >= 67.5)
+		{
+			wx = x;
+			wy = y + 1;
+			ch = TCOD_CHAR_VLINE;
+		}
+	}
+	else if (dx >= 0 && dy <= 0)
+	{
+		if (angle >= -22.5)
+		{
+			wx = x + 1;
+			wy = y;
+			ch = TCOD_CHAR_HLINE;
+		}
+		else if (angle <= -22.5 && angle >= -67.5)
+		{
+			wx = x + 1;
+			wy = y - 1;
+			ch = '/';
+		}
+		else if (angle <= -67.5)
+		{
+			wx = x;
+			wy = y - 1;
+			ch = TCOD_CHAR_VLINE;
+		}
+	}
+	else if (dx <= 0 && dy >= 0)
+	{
+		if (angle >= -22.5)
+		{
+			wx = x - 1;
+			wy = y;
+			ch = TCOD_CHAR_HLINE;
+		}
+		else if (angle <= -22.5 && angle >= -67.5)
+		{
+			wx = x - 1;
+			wy = y + 1;
+			ch = '/';
+		}
+		else if (angle <= -67.5)
+		{
+			wx = x;
+			wy = y + 1;
+			ch = TCOD_CHAR_VLINE;
+		}
+	}
+	else if (dx <= 0 && dy <= 0)
+	{
+		if (angle <= 22.5)
+		{
+			wx = x - 1;
+			wy = y;
+			ch = TCOD_CHAR_HLINE;
+		}
+		else if (angle >= 22.5 && angle <= 67.5)
+		{
+			wx = x - 1;
+			wy = y - 1;
+			ch = '\\';
+		}
+		else if (angle >= 67.5)
+		{
+			wx = x;
+			wy = y - 1;
+			ch = TCOD_CHAR_VLINE;
+		}
+	}
+
+	//Fire bullet
 	if (engine->settings->input->leftMouseClick && fireWait == 0 && ammoAmount != 0)
 	{
 		if (!(wx == dx + wx && wy == dy + wy))
@@ -171,7 +268,6 @@ void Weapon::update(int x, int y, int mx, int my)
 		{
 			ammoAmount = ammoCap;
 			numberMags--;
-			//engine->settings->input->reload = false;
 		}
 	}
 
@@ -181,7 +277,7 @@ void Weapon::update(int x, int y, int mx, int my)
 	}
 }
 
-void Weapon::render(std::shared_ptr<Entity> entity, std::shared_ptr<Pane> window)
+void Weapon::render(std::shared_ptr<Entity> entity, const std::shared_ptr<Pane>& pane) const
 {
 	/*
 	dx and dy values
@@ -196,123 +292,17 @@ void Weapon::render(std::shared_ptr<Entity> entity, std::shared_ptr<Pane> window
 	....|....
 	*/
 	
-	if (dx >= 0 && dy >= 0)
-	{
-		if (angle <= 22.5)
-		{
-			wx = entity->position.x + 1;
-			wy = entity->position.y;
-
-			window->console->setChar(wx, wy, TCOD_CHAR_HLINE);
-			window->console->setCharForeground(wx, wy, weaponColor);
-		}
-		else if (angle >= 22.5 && angle <= 67.5)
-		{
-			wx = entity->position.x + 1;
-			wy = entity->position.y + 1;
-
-			window->console->setChar(wx, wy, '\\');
-			window->console->setCharForeground(wx, wy, weaponColor);
-		}
-		else if (angle >= 67.5)
-		{
-			wx = entity->position.x;
-			wy = entity->position.y + 1;
-
-			window->console->setChar(wx, wy, TCOD_CHAR_VLINE);
-			window->console->setCharForeground(wx, wy, weaponColor);
-		}
-	}
-	else if (dx >= 0 && dy <= 0)
-	{
-		if (angle >= -22.5)
-		{
-			wx = entity->position.x + 1;
-			wy = entity->position.y;
-
-			window->console->setChar(wx, wy, TCOD_CHAR_HLINE);
-			window->console->setCharForeground(wx, wy, weaponColor);
-		}
-		else if (angle <= -22.5 && angle >= -67.5)
-		{
-			wx = entity->position.x + 1;
-			wy = entity->position.y - 1;
-
-			window->console->setChar(wx, wy, '/');
-			window->console->setCharForeground(wx, wy, weaponColor);
-		}
-		else if (angle <= -67.5)
-		{
-			wx = entity->position.x;
-			wy = entity->position.y - 1;
-
-			window->console->setChar(wx, wy, TCOD_CHAR_VLINE);
-			window->console->setCharForeground(wx, wy, weaponColor);
-		}
-	}
-	else if (dx <= 0 && dy >= 0)
-	{
-		if (angle >= -22.5)
-		{
-			wx = entity->position.x - 1;
-			wy = entity->position.y;
-
-			window->console->setChar(wx, wy, TCOD_CHAR_HLINE);
-			window->console->setCharForeground(wx, wy, weaponColor);
-		}
-		else if (angle <= -22.5 && angle >= -67.5)
-		{
-			wx = entity->position.x - 1;
-			wy = entity->position.y + 1;
-
-			window->console->setChar(wx, wy, '/');
-			window->console->setCharForeground(wx, wy, weaponColor);
-		}
-		else if (angle <= -67.5)
-		{
-			wx = entity->position.x;
-			wy = entity->position.y + 1;
-
-			window->console->setChar(wx, wy, TCOD_CHAR_VLINE);
-			window->console->setCharForeground(wx, wy, weaponColor);
-		}
-	}
-	else if (dx <= 0 && dy <= 0)
-	{
-		if (angle <= 22.5)
-		{
-			wx = entity->position.x - 1;
-			wy = entity->position.y;
-
-			window->console->setChar(wx, wy, TCOD_CHAR_HLINE);
-			window->console->setCharForeground(wx, wy, weaponColor);
-		}
-		else if (angle >= 22.5 && angle <= 67.5)
-		{
-			wx = entity->position.x - 1;
-			wy = entity->position.y - 1;
-
-			window->console->setChar(wx, wy, '\\');
-			window->console->setCharForeground(wx, wy, weaponColor);
-		}
-		else if (angle >= 67.5)
-		{
-			wx = entity->position.x;
-			wy = entity->position.y - 1;
-
-			window->console->setChar(wx, wy, TCOD_CHAR_VLINE);
-			window->console->setCharForeground(wx, wy, weaponColor);
-		}
-	}
+	pane->console->setChar(wx, wy, ch);
+	pane->console->setCharForeground(wx, wy, weaponColor);
 
 	for (auto& bullet : bulletList)
 	{
-		bullet->render(window);
+		bullet->render(pane);
 	}
 }
 
 Player::Player(Position pos, int symbol, const char* name, TCODColor color)
-	:Entity(pos, symbol, name, color, 0), health(100), armor(0), testWeapon(std::make_shared<Weapon>(TCODColor::lighterGrey, 30, 5, 5))
+	:Entity(pos, symbol, name, color, 0), health(100), armor(0), testWeapon(std::make_shared<Weapon>(TCODColor::lighterGrey, 30, 10, 5))
 {}
 
 void Player::update()
@@ -320,9 +310,9 @@ void Player::update()
 	testWeapon->update(position.x, position.y, engine->settings->input->mouse.cx, engine->settings->input->mouse.cy);
 }
 
-void Player::render(std::shared_ptr<Entity> entity, std::shared_ptr<Pane> window)
+void Player::render(std::shared_ptr<Entity> entity, const std::shared_ptr<Pane>& pane) const
 {
-	window->console->setChar(position.x, position.y, symbol);
-	window->console->setCharForeground(position.x, position.y, color);
-	testWeapon->render(entity, window);
+	pane->console->setChar(position.x, position.y, symbol);
+	pane->console->setCharForeground(position.x, position.y, color);
+	testWeapon->render(entity, pane);
 }

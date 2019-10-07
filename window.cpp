@@ -58,21 +58,21 @@ void Window::setRibonName(const char* ribonName)
 }
 
 //GuiWindow clears window
-void Window::clearWindow()
+void Window::clearWindow() const
 {
 	ribon->render();
 	drawWindow->render();
 }
 
 //GuiWindow blits the consoles together and pushes to root
-void Window::pushWindow()
+void Window::pushWindow() const
 {
 	ribon->ribonWindow->console->blit(ribon->ribonWindow->console, 0, 0, ribon->ribonWindow->consoleW, ribon->ribonWindow->consoleH, mainWindow->console, 0, 0, 1, 1);
 	drawWindow->console->blit(drawWindow->console, 0, 0, drawWindow->consoleW, drawWindow->consoleH, mainWindow->console, 0, 1, 1, 1);
 	mainWindow->console->blit(mainWindow->console, 0, 0, w, h, TCODConsole::root, renderpos.x, renderpos.y, 1, 1);
 }
 
-void Window::render()
+void Window::render() const
 {
 	clearWindow(); 
 	pushWindow();

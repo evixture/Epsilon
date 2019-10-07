@@ -27,7 +27,7 @@ public:
 	Entity(Position pos, int symbol, const char* name, TCODColor color, int level);
 
 	void virtual update();
-	void virtual render(std::shared_ptr<Pane> window);
+	void virtual render(const std::shared_ptr<Pane> &pane) const;
 };
 
 struct Bullet
@@ -48,7 +48,7 @@ struct Bullet
 	Bullet(int startx, int starty, int dx, int dy, int xbound, int ybound);
 
 	void update();
-	void render(std::shared_ptr<Pane> pane);
+	void render(const std::shared_ptr<Pane>& pane) const;
 };
 
 //change name
@@ -57,9 +57,6 @@ struct Weapon
 	TCODColor weaponColor;
 
 	double angle;
-
-	int wx;
-	int wy;
 
 	//later make magazine class
 	int numberMags;
@@ -70,17 +67,19 @@ struct Weapon
 	int fireWait;
 	int fireCap;
 
-	std::vector<std::shared_ptr<Bullet>> bulletList;
+	//display
+	int wx;
+	int wy;
+	int ch;
 
-	//int bx;
-	//int by;
+	std::vector<std::shared_ptr<Bullet>> bulletList;
 
 	Weapon(TCODColor color, int ammoCap, int numberMags, int fireRate);
 
 	//void weaponFire(int endx, int endy, std::shared_ptr<Pane> pane, int xbound, int ybound);
 
 	void update(int x, int y, int mx, int my);
-	void render(std::shared_ptr<Entity> entity, std::shared_ptr<Pane> window);
+	void render(std::shared_ptr<Entity> entity, const std::shared_ptr<Pane>& pane) const;
 
 private:
 
@@ -101,5 +100,5 @@ public:
 	//inventory (struct)
 
 	void update();
-	void render(std::shared_ptr<Entity> entity, std::shared_ptr<Pane> window);
+	void render(std::shared_ptr<Entity> entity, const std::shared_ptr<Pane>& pane) const;
 };
