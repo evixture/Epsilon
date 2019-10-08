@@ -16,25 +16,35 @@
 //	DEFINES
 //============TILES===============================CH===FOREGROUND=COLOR==========BACKGROUND=COLOR==========H==WALK===DEST |
 //GROUND
-#define TILE_BasicGrass    std::make_shared<Tile>('.', TCODColor::darkerGreen,   TCODColor::darkestGreen,  0, true,  false)
-#define TILE_BasicFloor    std::make_shared<Tile>(' ', TCODColor::darkSepia,     TCODColor::darkerSepia,   0, true,  false)
-#define TILE_BasicConcrete std::make_shared<Tile>('`', TCODColor::darkGrey,      TCODColor::grey,          0, true,  false)
+#define TILE_BasicGrass    std::make_shared<Tile>		 ('.', TCODColor::darkerGreen,   TCODColor::darkestGreen,  0, true, "static")
+#define TILE_BasicFloor    std::make_shared<Tile>		 (' ', TCODColor::darkSepia,     TCODColor::darkerSepia,   0, true, "static")
+#define TILE_BasicConcrete std::make_shared<Tile>		 ('`', TCODColor::darkGrey,      TCODColor::grey,          0, true, "static")
+
 //WALL
-#define TILE_BasicWall     std::make_shared<Tile>('=', TCODColor::lightSepia,    TCODColor::lighterSepia,  4, false, true )
-#define TILE_BasicDoor     std::make_shared<Tile>('#', TCODColor::darkSepia,     TCODColor::darkestSepia,  4, true,  false)
-#define TILE_BasicWindow   std::make_shared<Tile>('_', TCODColor::lightCyan,     TCODColor::darkerSky,     0, false, true )
+#define TILE_BasicDoor     std::make_shared<Tile>		 ('#', TCODColor::darkSepia,     TCODColor::darkestSepia,  4, true, "static")
+#define TILE_BasicWall     std::make_shared<Destructible>('=', TCODColor::lightSepia,    TCODColor::lighterSepia,  4, false, 4 )
+#define TILE_BasicWindow   std::make_shared<Destructible>('_', TCODColor::lightCyan,     TCODColor::darkerSky,     0, false, 1 )
+
 //PART HEIGHT
-#define TILE_BasicTable    std::make_shared<Tile>('n', TCODColor::lighterSepia,  TCODColor::darkerSepia,   2, false, true )
+#define TILE_BasicTable    std::make_shared<Destructible>('n', TCODColor::lighterSepia,  TCODColor::darkerSepia,   2, false, 2 )
+
+//STAIR
+#define TILE_UpStair	   std::make_shared<Stair>		 ('/', TCODColor::lightSepia, TCODColor::darkerSepia, 2, true, 1)
+#define TILE_DownStair	   std::make_shared<Stair>		 ('\\', TCODColor::lightSepia, TCODColor::darkerSepia, 2, true, -1)
+
+
 //SKY
-#define TILE_BasicSky      std::make_shared<Tile>(' ', TCODColor::lightestCyan,  TCODColor::sky,           0, false, false)
+#define TILE_BasicSky      std::make_shared<Tile>		 (' ', TCODColor::lightestCyan,  TCODColor::sky,           0, false, "static")
+
 //ERROR
-#define TILE_error         std::make_shared<Tile>('%', TCODColor::black,         TCODColor::pink,          4, true,  false)
+#define TILE_error         std::make_shared<Tile>		 ('%', TCODColor::black,         TCODColor::pink,          4, true , "static")
 //============COLORS===================================================================================================== |
 #define RIBONBGCOLOR TCODColor::darkBlue
 #define RIBONFGCOLOR TCODColor::lightestGrey
 
 constexpr auto PI = 3.14159265;
 //TODO : move defines to settings
+//TILE STRENGTH IS FROM 0
 
 //STD
 #include <fstream>
@@ -43,6 +53,7 @@ constexpr auto PI = 3.14159265;
 #include <iostream>
 #include <string>
 #include <math.h>
+#include <thread>
 //#include <stdexcept>
 
 //Libraries
@@ -64,6 +75,8 @@ struct Pane;
 #include "engine.h"
 
 //TODO : NEED TO HAVE A VIRTUAL DESTRUCTOR FOR VIRTUAL CLASSES
+
+//TODO : BULETS STILL GET STUCK ON MAP BOUNDS
 
 //TODO : add more defs for colors in window
 //TODO : optimize and test access modifiers

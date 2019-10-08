@@ -22,6 +22,9 @@ struct Input
 	bool reload;
 	bool reloadToggle;
 
+	bool changeFloor;
+	bool changeFloorToggle;
+
 	bool leftMouseClick;
 
 	bool f11Toggle;

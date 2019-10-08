@@ -69,9 +69,10 @@ void Bullet::update()
 			{
 				if (engine->gui->mapPane->world->inMapBounds(travel.x, travel.y, engine->gui->mapPane->world->player->level))
 				{
-					engine->gui->mapPane->world->getTile(travel.x, travel.y, engine->gui->mapPane->world->player->level)->destroy('%',
-						engine->gui->mapPane->world->getBgColor(travel.x, travel.y, engine->gui->mapPane->world->player->level) * TCODColor::darkGrey,
-						engine->gui->mapPane->world->getFgColor(travel.x, travel.y, engine->gui->mapPane->world->player->level) * TCODColor::lightGrey, true);
+					if (engine->gui->mapPane->world->getTile(travel.x, travel.y, engine->gui->mapPane->world->player->level)->tag == "destructible")
+					{
+						engine->gui->mapPane->world->getTile(travel.x, travel.y, engine->gui->mapPane->world->player->level)->interact();
+					}
 					hitWall = true;
 				}
 				else
@@ -91,14 +92,14 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 {
 	if (!hitWall)
 	{
-		pane->console->setCharForeground(travel.x, travel.y, TCODColor::white);
-		pane->console->setChar(travel.x, travel.y, TCOD_CHAR_BULLET);
+		pane->console->setCharForeground(travel.x, travel.y, TCODColor::copper);
+		pane->console->setChar(travel.x, travel.y, 248);
 	}
 }
-
+//TCOD_CHAR_BULLET
 //Weapon Struct
 Weapon::Weapon(TCODColor color, int ammoCap, int numberMags, int fireRate)
-	:weaponColor(color), angle(0), dx(0), dy(0), wx(0), wy(0), fireCap(fireRate), fireWait(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags)
+	:weaponColor(color), angle(0), dx(0), dy(0), wx(0), wy(0), fireCap(fireRate), fireWait(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), ch(NULL)
 {}
 
 /*
@@ -302,12 +303,25 @@ void Weapon::render(std::shared_ptr<Entity> entity, const std::shared_ptr<Pane>&
 }
 
 Player::Player(Position pos, int symbol, const char* name, TCODColor color)
-	:Entity(pos, symbol, name, color, 0), health(100), armor(0), testWeapon(std::make_shared<Weapon>(TCODColor::lighterGrey, 30, 10, 5))
+	:Entity(pos, symbol, name, color, 0), health(100), armor(0), testWeapon(std::make_shared<Weapon>(TCODColor::darkestGrey, 30, 10, 5))
 {}
 
 void Player::update()
 {
 	testWeapon->update(position.x, position.y, engine->settings->input->mouse.cx, engine->settings->input->mouse.cy);
+
+	if (engine->settings->input->changeFloor == true)
+	{
+		if (WORLD->getTile(position.x, position.y, level)->tag == "stair")
+		{
+			WORLD->getTile(position.x, position.y, level)->interact();
+		}
+	}
+
+	//if (WORLD->getTile(position.x, position.y, height)->tag == "stair" && engine->settings->input->changeFloor)
+	//{
+	//	WORLD->getTile(position.x, position.y, height)->interact();
+	//}
 }
 
 void Player::render(std::shared_ptr<Entity> entity, const std::shared_ptr<Pane>& pane) const

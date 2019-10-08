@@ -2,7 +2,7 @@
 
 //Input Struct
 Input::Input()
-	:keyboard(), mouse(), moveUp(false), moveDown(false), moveLeft(false), moveRight(false), moveTimer(0), moveWait(10), f11Toggle(false), baseMoveWait(0), leftMouseClick(false), reload(false)
+	:keyboard(), mouse(), moveUp(false), moveDown(false), moveLeft(false), moveRight(false), moveTimer(0), moveWait(10), f11Toggle(false), baseMoveWait(0), leftMouseClick(false), reload(false), changeFloor(false)
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &keyboard, &mouse);
 }
@@ -52,6 +52,25 @@ void Input::getKeyDown()
 		moveRight = true;
 	}
 	else moveRight = false;
+
+	//CHANGE FLOOR
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		if (!changeFloorToggle)
+		{
+			changeFloor = true;
+			changeFloorToggle = true;
+		}
+		else if (changeFloorToggle)
+		{
+			changeFloor = false;
+		}
+	}
+	else
+	{
+		changeFloor = false;
+		changeFloorToggle = false;
+	}
 
 	//	SPEED
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))

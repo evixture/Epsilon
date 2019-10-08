@@ -1,40 +1,37 @@
 #include "main.hpp"
 
-//#define WORLD engine->gui->mapPane->world
-
 //Tile struct
-Tile::Tile(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable, bool destructible)
-	:ch(ch), fgcol(fgcol), bgcol(bgcol), height(height), walkable(walkable), destroyed(false), explored(false), destructible(destructible)
+Tile::Tile(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable)
+	:ch(ch), fgcol(fgcol), bgcol(bgcol), height(height), walkable(walkable), explored(false), tag("static")
 {}
 
+Tile::Tile(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable, const char* tag)
+	: ch(ch), fgcol(fgcol), bgcol(bgcol), height(height), walkable(walkable), explored(false), tag(tag)
+{}
 
-void Tile::destroy(int destCH, TCODColor destBGCOL, TCODColor destFGCOL, bool destWALK)
+bool Tile::getDestroyed()
 {
-	if (!destructible) return;
-	else
-	{
-		ch = destCH;
-		bgcol = destBGCOL;
-		fgcol = destFGCOL;
-		walkable = destWALK;
-		//change name later
-		destroyed = true;
-	}
+	return false;
+}
+
+void Tile::interact()
+{
+	return;
 }
 
 void Tile::render(int x, int y, const std::shared_ptr<Pane>& pane) const
 {
 	if (WORLD->isInFov(x, y, WORLD->player->level))
 	{
-		pane->console->setCharBackground(x, y, WORLD->getBgColor(x, y, WORLD->player->level));
-		pane->console->setCharForeground(x, y, WORLD->getFgColor(x, y, WORLD->player->level));
-		pane->console->setChar          (x, y, WORLD->getCh(x, y, WORLD->player->level));
+		pane->console->setCharBackground(x, y, bgcol);
+		pane->console->setCharForeground(x, y, fgcol);
+		pane->console->setChar          (x, y, ch);
 	}
 	else if (WORLD->isExplored(x, y, WORLD->player->level))
 	{
 		pane->console->setCharBackground(x, y, TCODColor::darkestGrey);
 		pane->console->setCharForeground(x, y, TCODColor::darkerGrey);
-		pane->console->setChar          (x, y, WORLD->getCh(x, y, WORLD->player->level));
+		pane->console->setChar          (x, y, ch);
 	}
 	else
 	{
@@ -43,7 +40,39 @@ void Tile::render(int x, int y, const std::shared_ptr<Pane>& pane) const
 	}
 }
 
-void Tile::update()
+Destructible::Destructible(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable, int strength)
+	: Tile(ch, fgcol, bgcol, height, walkable, "destructible"), strength(strength), destroyed(false)
 {
-	return;
+}
+
+bool Destructible::getDestroyed()
+{
+	return destroyed;
+}
+
+void Destructible::interact()
+{
+	if (strength > 0)
+	{
+		strength--;
+	}
+	else
+	{
+		ch = '%';
+		bgcol = bgcol * TCODColor::darkGrey;
+		fgcol = fgcol * TCODColor::lightGrey;
+		walkable = false;
+		destroyed = true;
+	}
+
+}
+
+Stair::Stair(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable, int moveDist)
+	: Tile(ch, fgcol, bgcol, height, true, "stair"), moveDist(moveDist)
+{
+}
+
+void Stair::interact()
+{
+	engine->gui->mapPane->world->player->level += moveDist;
 }

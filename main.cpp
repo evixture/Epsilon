@@ -12,9 +12,14 @@ int WinMain()
 {
 	while (!TCODConsole::isWindowClosed() && engine->gamestate != Engine::EXIT)
 	{
+		//std::thread updateThread(&Engine::update, engine);
+		//std::thread renderThread(&Engine::render, engine);
+
 		engine->update();
 		engine->render();
 	}
+
+	
 	TCOD_quit();
 	return 0;
 }

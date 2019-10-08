@@ -7,7 +7,7 @@ Font::Font(const char* fontName, const char* xdim, const char* ydim, const char*
 
 //Settings Class
 Settings::Settings(int w, int h)
-	: windowX(w), windowY(h), windowTitle("Epsilon v. Alpha 3"), fullscreen(false), maxFps(60), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_OPENGL2), 
+	: windowX(w), windowY(h), windowTitle("Epsilon v. Alpha 3"), fullscreen(false), maxFps(0), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_OPENGL2), 
 	fovRad(0), lightWalls(true)
 {
 	//fontList.push_back(terminal16x16 = std::make_shared<Font>("Terminal", "16", "16", "data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16));
@@ -50,14 +50,16 @@ void Settings::printDebugStats()
 {
 	if (engine->gamestate == engine->MAIN)
 	{
-		TCODConsole::root->printf(10, 0, "FPS>%i mx>%i px>%i my>%i py>%i ammo>%i, mags>%i",
+		TCODConsole::root->printf(10, 0, "FPS>%i mx>%i px>%i my>%i py>%i ammo>%i, mags>%i ph>%i, space>%i",
 			TCODSystem::getFps(),
 			engine->settings->input->mouse.cx - 1,
 			engine->gui->mapPane->world->player->position.x,
 			engine->settings->input->mouse.cy - 3,
 			engine->gui->mapPane->world->player->position.y,
 			engine->gui->mapPane->world->player->testWeapon->ammoAmount,
-			engine->gui->mapPane->world->player->testWeapon->numberMags);
+			engine->gui->mapPane->world->player->testWeapon->numberMags,
+			engine->gui->mapPane->world->player->level,
+			engine->settings->input->changeFloor);
 	}
 }
 

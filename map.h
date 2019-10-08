@@ -40,7 +40,7 @@ public:
 	bool      getWalkability		(int tx, int ty, int level) const;
 	int       getHeight				(int tx, int ty, int level) const;
 
-	bool inMapBounds(int x, int y, int level);
+	bool inMapBounds(int x, int y, int level) const;
 
 	bool isInFov(int x, int y, int level) const;
 	bool isExplored(int x, int y, int level) const;

@@ -4,6 +4,8 @@
 
 struct Tile
 {
+	const char* tag;
+
 	int ch;
 	int height;
 
@@ -11,30 +13,40 @@ struct Tile
 	TCODColor bgcol;
 
 	bool explored;
-	bool walkable;
-	//bool transparent;
-	bool destructible;
-	bool destroyed;
+	bool walkable;	
 
-	Tile(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable, bool destructible);
+	Tile(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable);
 
-	void destroy(int destCH, TCODColor destBGCOL, TCODColor destFGCOL, bool destWALK);
+	Tile(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable, const char* tag);
 
-	//bad performance
+	virtual bool getDestroyed();
+
+	virtual void interact();
+
 	void render(int x, int y, const std::shared_ptr<Pane>& pane) const;
-	
-	void update();
 };
 
-//struct Destructible : public Tile
-//{
-//	TCODColor destFgColor;
-//	TCODColor destBgColor;
-//	TCODColor destCh;
-//
-//	Destructible(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable, bool transparent);
-//
-//	virtual void render(int x, int y, const std::shared_ptr<Pane>& pane) const;
-//
-//	virtual void update();
-//};
+//, const char * tag
+
+struct Destructible : public Tile
+{
+	bool destroyed;
+
+	int strength;
+
+	Destructible(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable, int strength);
+
+	bool getDestroyed();
+
+	void interact();
+};
+
+struct Stair : public Tile
+{
+
+	int moveDist;
+	
+	Stair(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable, int moveDist);
+
+	void interact();
+};

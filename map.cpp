@@ -95,6 +95,17 @@ Map::Map(const char* filePath)
 						break;
 					}
 					break;
+				case 't':
+					switch (s_tempTile[1])
+					{
+					case '/':
+						levelList[currentFloor].push_back(TILE_UpStair);
+						break;
+					case '\\':
+						levelList[currentFloor].push_back(TILE_DownStair);
+						break;
+					}
+					break;
 
 				//ERROR TILE
 				default:
@@ -121,9 +132,17 @@ World::World()
 }
 
 //Returns to tiles
+
 std::shared_ptr<Tile> World::getTile(int x, int y, int level) const
 {
-	return debugmap->levelList[level][x + y * debugmap->mapW];
+	if (inMapBounds(x, y, level))
+	{
+		return debugmap->levelList[level][x + y * debugmap->mapW];
+	}
+	else
+	{
+		return TILE_error;
+	}
 }
 
 bool World::isExplored(int x, int y, int level) const
@@ -151,7 +170,7 @@ int World::getHeight(int tx, int ty, int level) const
 	return debugmap->levelList[level][tx + ty * debugmap->mapW]->height;
 }
 
-bool World::inMapBounds(int x, int y, int level)
+bool World::inMapBounds(int x, int y, int level) const
 {
 	if (level < 0 || level > debugmap->totalFloors - 1) return false;
 	if (x < 0 || x > debugmap->mapW - 1) return false;
@@ -174,7 +193,7 @@ bool World::getTransparency(int x, int y, int level, int height) const
 	//BUG HERE
 	if (height <= debugmap->levelList[level][x + y * debugmap->mapW]->height)
 	{
-		if (debugmap->levelList[level][x + y * debugmap->mapW]->destroyed)
+		if (debugmap->levelList[level][x + y * debugmap->mapW]->tag == "destructible" && debugmap->levelList[level][x + y * debugmap->mapW]->getDestroyed())
 		{
 			return true;
 		}
@@ -238,27 +257,27 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 	{
 		for (int x = 0; x < pane->consoleW; x++)
 		{
-			//this has better performance for debug
-			if (isInFov(x, y, player->level))
-			{
-				pane->console->setCharBackground(x, y,getBgColor(x, y, player->level));
-				pane->console->setCharForeground(x, y, getFgColor(x, y, player->level));
-				pane->console->setChar(x, y, getCh(x, y, player->level));
-			}
-			else if (isExplored(x, y, player->level))
-			{
-				pane->console->setCharBackground(x, y, TCODColor::darkestGrey);
-				pane->console->setCharForeground(x, y, TCODColor::darkerGrey);
-				pane->console->setChar(x, y, getCh(x, y, player->level));
-			}
-			else
-			{
-				pane->console->setCharBackground(x, y, TCODColor::black);
-				pane->console->setCharForeground(x, y, TCODColor::darkerGrey);
-			}
+			////this has better performance for debug
+			//if (isInFov(x, y, player->level))
+			//{
+			//	pane->console->setCharBackground(x, y,getBgColor(x, y, player->level));
+			//	pane->console->setCharForeground(x, y, getFgColor(x, y, player->level));
+			//	pane->console->setChar(x, y, getCh(x, y, player->level));
+			//}
+			//else if (isExplored(x, y, player->level))
+			//{
+			//	pane->console->setCharBackground(x, y, TCODColor::darkestGrey);
+			//	pane->console->setCharForeground(x, y, TCODColor::darkerGrey);
+			//	pane->console->setChar(x, y, getCh(x, y, player->level));
+			//}
+			//else
+			//{
+			//	pane->console->setCharBackground(x, y, TCODColor::black);
+			//	pane->console->setCharForeground(x, y, TCODColor::darkerGrey);
+			//}
 
 			//serverely limits fps for some reason
-			//debugmap->levelList[player->level][x + y * debugmap->mapW]->render(x, y, pane);
+			debugmap->levelList[player->level][x + y * debugmap->mapW]->render(x, y, pane);
 
 			if (x + 1 == engine->settings->input->mouse.cx && y + 3 == engine->settings->input->mouse.cy)
 			{
