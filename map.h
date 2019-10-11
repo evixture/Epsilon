@@ -21,6 +21,9 @@ public:
 	//move to ent
 	int lookHeight;
 
+	int xOffset;
+	int yOffset;
+
 	//std::vector<std::shared_ptr<Map>> mapList;
 	std::shared_ptr<Map> debugmap;
 	//std::shared_ptr<Map> currentMap;
@@ -41,6 +44,7 @@ public:
 	int       getHeight				(int tx, int ty, int level) const;
 
 	bool inMapBounds(int x, int y, int level) const;
+	int getOffset(int playerx, int mapw, int renderw);
 
 	bool isInFov(int x, int y, int level) const;
 	bool isExplored(int x, int y, int level) const;

@@ -21,13 +21,13 @@ void Tile::interact()
 
 void Tile::render(int x, int y, const std::shared_ptr<Pane>& pane) const
 {
-	if (WORLD->isInFov(x, y, WORLD->player->level))
+	if (WORLD->isInFov(x + WORLD->xOffset, y + WORLD->yOffset, WORLD->player->level))
 	{
 		pane->console->setCharBackground(x, y, bgcol);
 		pane->console->setCharForeground(x, y, fgcol);
 		pane->console->setChar          (x, y, ch);
 	}
-	else if (WORLD->isExplored(x, y, WORLD->player->level))
+	else if (WORLD->isExplored(x + WORLD->xOffset, y + WORLD->yOffset, WORLD->player->level))
 	{
 		pane->console->setCharBackground(x, y, TCODColor::darkestGrey);
 		pane->console->setCharForeground(x, y, TCODColor::darkerGrey);
@@ -61,7 +61,7 @@ void Destructible::interact()
 		ch = '%';
 		bgcol = bgcol * TCODColor::darkGrey;
 		fgcol = fgcol * TCODColor::lightGrey;
-		walkable = false;
+		walkable = true;
 		destroyed = true;
 	}
 

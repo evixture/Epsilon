@@ -178,6 +178,22 @@ bool World::inMapBounds(int x, int y, int level) const
 	return true;
 }
 
+int World::getOffset(int playerx, int mapw, int renderw)
+{
+	if (playerx > renderw / 2 && playerx < mapw - renderw / 2)
+	{
+		return playerx - renderw / 2;
+	}
+	else if (playerx <= renderw / 2)
+	{
+		return 0;
+	}
+	else if (playerx >= mapw - renderw / 2)
+	{
+		return mapw - renderw;
+	}
+}
+
 bool World::getWalkability(int x, int y, int level) const
 {
 	if (x < 0) return false;
@@ -191,19 +207,23 @@ bool World::getWalkability(int x, int y, int level) const
 bool World::getTransparency(int x, int y, int level, int height) const
 {
 	//BUG HERE
-	if (height <= debugmap->levelList[level][x + y * debugmap->mapW]->height)
+	if (debugmap->levelList[level][x + y * debugmap->mapW])
 	{
-		if (debugmap->levelList[level][x + y * debugmap->mapW]->tag == "destructible" && debugmap->levelList[level][x + y * debugmap->mapW]->getDestroyed())
+		if (height <= debugmap->levelList[level][x + y * debugmap->mapW]->height)
+		{
+			if (debugmap->levelList[level][x + y * debugmap->mapW]->tag == "destructible" && debugmap->levelList[level][x + y * debugmap->mapW]->getDestroyed())
+			{
+				return true;
+			}
+
+			return false;
+		}
+		else if (height > debugmap->levelList[level][x + y * debugmap->mapW]->height)
 		{
 			return true;
 		}
-		
-		return false;
 	}
-	else if (height > debugmap->levelList[level][x + y * debugmap->mapW]->height)
-	{
-		return true;
-	}
+	else return false;
 }
 
 //check limits
@@ -220,7 +240,7 @@ void World::updateProperties()
 
 void World::computeFov()
 {
-	fovMap->computeFov(player->position.x, player->position.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
+	fovMap->computeFov(player->mapPosition.x, player->mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
 }
 
 //check tcodmap fov
@@ -241,6 +261,9 @@ bool World::isInFov(int x, int y, int level) const
 //World update
 void World::update()
 {
+	xOffset = getOffset(player->mapPosition.x, debugmap->mapW, engine->gui->mapPane->drawWindow->consoleW);
+	yOffset = getOffset(player->mapPosition.y, debugmap->mapH, engine->gui->mapPane->drawWindow->consoleH);
+
 	updateProperties();
 	computeFov();
 
@@ -253,35 +276,34 @@ void World::update()
 //World Render
 void World::render(const std::shared_ptr<Pane>& pane) const
 {
-	for (int y = 0; y < pane->consoleH; y++)
+	for (int y = yOffset; y < pane->consoleH + yOffset; y++)
 	{
-		for (int x = 0; x < pane->consoleW; x++)
+		for (int x = xOffset; x < pane->consoleW + xOffset; x++)
 		{
 			////this has better performance for debug
-			//if (isInFov(x, y, player->level))
+			//if (isInFov(x - xOffset, y - yOffset, player->level))
 			//{
-			//	pane->console->setCharBackground(x, y,getBgColor(x, y, player->level));
-			//	pane->console->setCharForeground(x, y, getFgColor(x, y, player->level));
-			//	pane->console->setChar(x, y, getCh(x, y, player->level));
+			//	pane->console->setCharBackground(x - xOffset, y - yOffset,getBgColor(x - xOffset, y - yOffset, player->level));
+			//	pane->console->setCharForeground(x - xOffset, y - yOffset, getFgColor(x - xOffset, y - yOffset, player->level));
+			//	pane->console->setChar(x - xOffset, y - yOffset, getCh(x - xOffset, y - yOffset, player->level));
 			//}
-			//else if (isExplored(x, y, player->level))
+			//else if (isExplored(x - xOffset, y, player->level))
 			//{
-			//	pane->console->setCharBackground(x, y, TCODColor::darkestGrey);
-			//	pane->console->setCharForeground(x, y, TCODColor::darkerGrey);
-			//	pane->console->setChar(x, y, getCh(x, y, player->level));
+			//	pane->console->setCharBackground(x - xOffset, y - yOffset, TCODColor::darkestGrey);
+			//	pane->console->setCharForeground(x - xOffset, y - yOffset, TCODColor::darkerGrey);
+			//	pane->console->setChar(x - xOffset, y - yOffset, getCh(x - xOffset, y - yOffset, player->level));
 			//}
 			//else
 			//{
-			//	pane->console->setCharBackground(x, y, TCODColor::black);
-			//	pane->console->setCharForeground(x, y, TCODColor::darkerGrey);
+			//	pane->console->setCharBackground(x - xOffset, y - yOffset, TCODColor::black);
+			//	pane->console->setCharForeground(x - xOffset, y - yOffset, TCODColor::darkerGrey);
 			//}
 
-			//serverely limits fps for some reason
-			debugmap->levelList[player->level][x + y * debugmap->mapW]->render(x, y, pane);
+			debugmap->levelList[player->level][x + y * debugmap->mapW]->render(x - xOffset, y - yOffset, pane);
 
 			if (x + 1 == engine->settings->input->mouse.cx && y + 3 == engine->settings->input->mouse.cy)
 			{
-				pane->console->setCharBackground(x, y, TCODColor::white);
+				pane->console->setCharBackground(x - 0, y - 0, TCODColor::white);
 			}
 		}
 	}
@@ -292,6 +314,9 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 		{
 			player->render(player, pane);
 		}
-		entity->render(pane);
+		else
+		{
+			entity->render(pane);
+		}
 	}
 }

@@ -16,7 +16,8 @@ struct Position
 class Entity
 {
 public:
-	Position position;
+	Position mapPosition;
+	Position renderPosition;
 	int symbol;
 	const TCODColor color;
 	const char* name;
@@ -51,6 +52,12 @@ struct Bullet
 	void render(const std::shared_ptr<Pane>& pane) const;
 };
 
+//struct Magazine
+//{
+//	int maxCapacity;
+//	int currentCapacity;
+//};
+
 //change name
 struct Weapon
 {
@@ -67,6 +74,9 @@ struct Weapon
 	int fireWait;
 	int fireCap;
 
+	int reloadTimer;
+	int reloadWait;
+
 	//display
 	int wx;
 	int wy;
@@ -74,7 +84,7 @@ struct Weapon
 
 	std::vector<std::shared_ptr<Bullet>> bulletList;
 
-	Weapon(TCODColor color, int ammoCap, int numberMags, int fireRate);
+	Weapon(TCODColor color, int ammoCap, int numberMags, int fireRate, int reloadSpeed);
 
 	//void weaponFire(int endx, int endy, std::shared_ptr<Pane> pane, int xbound, int ybound);
 

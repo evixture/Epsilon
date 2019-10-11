@@ -18,7 +18,7 @@ void Position::setPosition(int nx, int ny)
 
 //Default Entity Class
 Entity::Entity(Position pos, int symbol, const char* name, TCODColor color, int level)
-	: position(pos), symbol(symbol), name(name), color(color), level(level), height(3)
+	: mapPosition(pos), renderPosition(pos), symbol(symbol), name(name), color(color), level(level), height(3)
 {}
 
 void Entity::update()
@@ -28,8 +28,8 @@ void Entity::update()
 
 void Entity::render(const std::shared_ptr<Pane>& pane) const
 {
-	pane->console->setChar(position.x, position.y, symbol);
-	pane->console->setCharForeground(position.x, position.y, color);
+	pane->console->setChar(mapPosition.x, mapPosition.y, symbol);
+	pane->console->setCharForeground(mapPosition.x, mapPosition.y, color);
 }
 
 //Bullet Struct
@@ -98,8 +98,8 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 }
 //TCOD_CHAR_BULLET
 //Weapon Struct
-Weapon::Weapon(TCODColor color, int ammoCap, int numberMags, int fireRate)
-	:weaponColor(color), angle(0), dx(0), dy(0), wx(0), wy(0), fireCap(fireRate), fireWait(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), ch(NULL)
+Weapon::Weapon(TCODColor color, int ammoCap, int numberMags, int fireRate, int reloadSpeed)
+	:weaponColor(color), angle(0), dx(0), dy(0), wx(0), wy(0), fireCap(fireRate), fireWait(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), ch(NULL), reloadTimer(reloadSpeed), reloadWait(0)
 {}
 
 /*
@@ -263,13 +263,23 @@ void Weapon::update(int x, int y, int mx, int my)
 
 	//TODO : FIND A WAY TO SOMEHOW LIMIT RELOAD SPAMMING
 	//ON RELOAD
-	if (engine->settings->input->reload)
+	if (reloadWait == 0)
 	{
-		if (numberMags != 0)
+		if (engine->settings->input->reload)
 		{
-			ammoAmount = ammoCap;
-			numberMags--;
+			if (numberMags != 0 && ammoAmount != ammoCap)
+			{
+			
+					ammoAmount = ammoCap;
+					numberMags--;
+					reloadWait = reloadTimer;
+			
+			}
 		}
+	}
+	else
+	{
+		reloadWait--;
 	}
 
 	for (auto& bullet : bulletList)
@@ -303,30 +313,33 @@ void Weapon::render(std::shared_ptr<Entity> entity, const std::shared_ptr<Pane>&
 }
 
 Player::Player(Position pos, int symbol, const char* name, TCODColor color)
-	:Entity(pos, symbol, name, color, 0), health(100), armor(0), testWeapon(std::make_shared<Weapon>(TCODColor::darkestGrey, 30, 10, 5))
+	:Entity(pos, symbol, name, color, 0), health(100), armor(0), testWeapon(std::make_shared<Weapon>(TCODColor::darkestGrey, 30, 10, 5, 120))
 {}
 
 void Player::update()
 {
-	testWeapon->update(position.x, position.y, engine->settings->input->mouse.cx, engine->settings->input->mouse.cy);
+	renderPosition.x = mapPosition.x - WORLD->xOffset;
+	renderPosition.y = mapPosition.y - WORLD->yOffset;
+
+	testWeapon->update(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx, engine->settings->input->mouse.cy);
 
 	if (engine->settings->input->changeFloor == true)
 	{
-		if (WORLD->getTile(position.x, position.y, level)->tag == "stair")
+		if (WORLD->getTile(mapPosition.x, mapPosition.y, level)->tag == "stair")
 		{
-			WORLD->getTile(position.x, position.y, level)->interact();
+			WORLD->getTile(mapPosition.x, mapPosition.y, level)->interact();
 		}
 	}
 
-	//if (WORLD->getTile(position.x, position.y, height)->tag == "stair" && engine->settings->input->changeFloor)
+	//if (WORLD->getTile(mapPosition.x, mapPosition.y, height)->tag == "stair" && engine->settings->input->changeFloor)
 	//{
-	//	WORLD->getTile(position.x, position.y, height)->interact();
+	//	WORLD->getTile(mapPosition.x, mapPosition.y, height)->interact();
 	//}
 }
 
 void Player::render(std::shared_ptr<Entity> entity, const std::shared_ptr<Pane>& pane) const
 {
-	pane->console->setChar(position.x, position.y, symbol);
-	pane->console->setCharForeground(position.x, position.y, color);
+	pane->console->setChar(renderPosition.x, renderPosition.y, symbol);
+	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
 	testWeapon->render(entity, pane);
 }

@@ -194,15 +194,15 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 		{
 			if (moveTimer == 0)
 			{
-				if (engine->gui->mapPane->world->getWalkability(player->position.x + moveXSpeed, player->position.y, player->level))
+				if (engine->gui->mapPane->world->getWalkability(player->mapPosition.x + moveXSpeed, player->mapPosition.y, player->level))
 				{
-					player->position.x += moveXSpeed;
+					player->mapPosition.x += moveXSpeed;
 					moveXSpeed = 0;
 					moveTimer = moveWait;
 				}
-				if (engine->gui->mapPane->world->getWalkability(player->position.x, player->position.y + moveYSpeed, player->level))
+				if (engine->gui->mapPane->world->getWalkability(player->mapPosition.x, player->mapPosition.y + moveYSpeed, player->level))
 				{
-					player->position.y += moveYSpeed;
+					player->mapPosition.y += moveYSpeed;
 					moveYSpeed = 0;
 					moveTimer = moveWait;
 				}
