@@ -147,6 +147,9 @@ std::shared_ptr<Tile> World::getTile(int x, int y, int level) const
 
 bool World::isExplored(int x, int y, int level) const
 {
+	x += xOffset;
+	y += yOffset;
+
 	return debugmap->levelList[level][x + y * debugmap->mapW]->explored;
 }
 
@@ -196,6 +199,9 @@ int World::getOffset(int playerx, int mapw, int renderw)
 
 bool World::getWalkability(int x, int y, int level) const
 {
+	//x += xOffset;
+	//y += yOffset;
+
 	if (x < 0) return false;
 	if (y < 0) return false;
 	if (x >= debugmap->mapW) return false;
@@ -246,6 +252,9 @@ void World::computeFov()
 //check tcodmap fov
 bool World::isInFov(int x, int y, int level) const
 {
+	x += xOffset;
+	y += yOffset;
+
 	if (x < 0 || x >= debugmap->mapW || y < 0 || y >= debugmap->mapH)
 	{
 		return false;

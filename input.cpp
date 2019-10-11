@@ -9,15 +9,18 @@ Input::Input()
 
 void Input::getMouseInput()
 {
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	if (TCODConsole::hasMouseFocus())
 	{
-		leftMouseClick = true;
-		//engine->gui->mapPane->world->player->testWeapon->weaponFire(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, engine->gui->mapPane->drawWindow);
-	}
-	else
-	{
-		//TCODLine::init(player->testWeapon->wx, player->testWeapon->wy, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
-		leftMouseClick = false;
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			leftMouseClick = true;
+			//engine->gui->mapPane->world->player->testWeapon->weaponFire(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, engine->gui->mapPane->drawWindow);
+		}
+		else
+		{
+			//TCODLine::init(player->testWeapon->wx, player->testWeapon->wy, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
+			leftMouseClick = false;
+		}
 	}
 }
 
@@ -214,6 +217,7 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 		}
 	}
 }
+
 
 void Input::update(std::shared_ptr<Player> player)
 {

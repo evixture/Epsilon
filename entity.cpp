@@ -60,18 +60,18 @@ void Bullet::update()
 	{
 		if (bx < xbound && by < ybound)
 		{
-			if (engine->gui->mapPane->world->inMapBounds(travel.x, travel.y, engine->gui->mapPane->world->player->level) 
-				&& engine->gui->mapPane->world->getWalkability(travel.x, travel.y, engine->gui->mapPane->world->player->level) != false)
+			if (engine->gui->mapPane->world->inMapBounds(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, engine->gui->mapPane->world->player->level)
+				&& engine->gui->mapPane->world->getWalkability(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, engine->gui->mapPane->world->player->level) != false)
 			{
 				travel.step();
 			}
 			else
 			{
-				if (engine->gui->mapPane->world->inMapBounds(travel.x, travel.y, engine->gui->mapPane->world->player->level))
+				if (engine->gui->mapPane->world->inMapBounds(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, engine->gui->mapPane->world->player->level))
 				{
-					if (engine->gui->mapPane->world->getTile(travel.x, travel.y, engine->gui->mapPane->world->player->level)->tag == "destructible")
+					if (engine->gui->mapPane->world->getTile(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, engine->gui->mapPane->world->player->level)->tag == "destructible")
 					{
-						engine->gui->mapPane->world->getTile(travel.x, travel.y, engine->gui->mapPane->world->player->level)->interact();
+						engine->gui->mapPane->world->getTile(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, engine->gui->mapPane->world->player->level)->interact();
 					}
 					hitWall = true;
 				}
