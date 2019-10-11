@@ -199,9 +199,6 @@ int World::getOffset(int playerx, int mapw, int renderw)
 
 bool World::getWalkability(int x, int y, int level) const
 {
-	//x += xOffset;
-	//y += yOffset;
-
 	if (x < 0) return false;
 	if (y < 0) return false;
 	if (x >= debugmap->mapWidth) return false;
@@ -310,9 +307,10 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 
 			debugmap->levelList[player->level][x + y * debugmap->mapWidth]->render(x - xOffset, y - yOffset, pane);
 
-			if (x + 1 == engine->settings->input->mouse.cx && y + 3 == engine->settings->input->mouse.cy)
+			if (x + 1 - xOffset == engine->settings->input->mouse.cx && y + 3 - yOffset == engine->settings->input->mouse.cy)
 			{
-				pane->console->setCharBackground(x - 0, y - 0, TCODColor::white);
+				pane->console->setCharBackground(x - xOffset, y - yOffset, getBgColor(x , y , player->level) - TCODColor::darkestGrey);
+				pane->console->setChar(x - xOffset, y - yOffset, '+');
 			}
 		}
 	}

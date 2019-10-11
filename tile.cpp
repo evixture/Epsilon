@@ -29,8 +29,8 @@ void Tile::render(int x, int y, const std::shared_ptr<Pane>& pane) const
 	}
 	else if (WORLD->isExplored(x, y, WORLD->player->level))
 	{
-		pane->console->setCharBackground(x, y, TCODColor::darkestGrey);
-		pane->console->setCharForeground(x, y, TCODColor::darkerGrey);
+		pane->console->setCharBackground(x, y, TCODColor::black);
+		pane->console->setCharForeground(x, y, TCODColor::darkestGrey);
 		pane->console->setChar          (x, y, ch);
 	}
 	else
