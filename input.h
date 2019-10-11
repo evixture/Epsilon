@@ -7,12 +7,7 @@ struct Input
 	TCOD_key_t keyboard;
 	TCOD_mouse_t mouse;
 
-	int moveXSpeed = 0;
-	int moveYSpeed = 0;
-
 	int baseMoveWait;
-	int moveTimer;
-	int moveWait;
 
 	bool moveUp;
 	bool moveDown;
@@ -20,14 +15,8 @@ struct Input
 	bool moveRight;
 
 	bool reload;
-	bool reloadToggle;
-
 	bool changeFloor;
-	bool changeFloorToggle;
-
 	bool leftMouseClick;
-
-	bool f11Toggle;
 
 	Input();
 
@@ -40,4 +29,16 @@ struct Input
 	void getKeyInput(std::shared_ptr<Player> player);
 
 	void getMouseInput();
+
+private:
+
+	int moveXSpeed;
+	int moveYSpeed;
+
+	int moveTimer;
+	int moveWait;
+
+	bool reloadToggle;
+	bool changeFloorToggle;
+	bool f11Toggle;
 };

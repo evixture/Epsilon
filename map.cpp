@@ -12,7 +12,7 @@ Map::Map(const char* filePath)
 		std::string s_mapName;
 		std::string s_tempTile;
 		
-		fileIn >> s_mapName >> totalFloors >> mapW >> mapH;
+		fileIn >> s_mapName >> totalFloors >> mapWidth >> mapHeight;
 		mapName = s_mapName.c_str();
 
 		levelList = std::vector < std::vector < std::shared_ptr < Tile >>> (totalFloors);
@@ -23,7 +23,7 @@ Map::Map(const char* filePath)
 			{
 				fileIn >> s_tempTile;
 
-				if (levelList[currentFloor].size() == mapW * mapH)
+				if (levelList[currentFloor].size() == mapWidth * mapHeight)
 				{
 					currentFloor++;
 				}
@@ -127,7 +127,7 @@ World::World()
 	player = std::make_shared<Player>(Position(2, 50), '@', "Player", TCODColor::azure);
 	entityList.push_back(player);
 
-	fovMap = std::make_shared<TCODMap>(debugmap->mapW, debugmap->mapH);
+	fovMap = std::make_shared<TCODMap>(debugmap->mapWidth, debugmap->mapHeight);
 	//currentMap = mapList[player->level]; 
 }
 
@@ -137,7 +137,7 @@ std::shared_ptr<Tile> World::getTile(int x, int y, int level) const
 {
 	if (inMapBounds(x, y, level))
 	{
-		return debugmap->levelList[level][x + y * debugmap->mapW];
+		return debugmap->levelList[level][x + y * debugmap->mapWidth];
 	}
 	else
 	{
@@ -150,34 +150,34 @@ bool World::isExplored(int x, int y, int level) const
 	x += xOffset;
 	y += yOffset;
 
-	return debugmap->levelList[level][x + y * debugmap->mapW]->explored;
+	return debugmap->levelList[level][x + y * debugmap->mapWidth]->explored;
 }
 
 TCODColor World::getBgColor(int x, int y, int level) const
 {
-	return debugmap->levelList[level][x + y * debugmap->mapW]->bgcol;
+	return debugmap->levelList[level][x + y * debugmap->mapWidth]->backgroundColor;
 }
 
 TCODColor World::getFgColor(int x, int y, int level) const
 {
-	return debugmap->levelList[level][x + y * debugmap->mapW]->fgcol;
+	return debugmap->levelList[level][x + y * debugmap->mapWidth]->foregroundColor;
 }
 
 int World::getCh(int x, int y, int level) const
 {
-	return debugmap->levelList[level][x + y * debugmap->mapW]->ch;
+	return debugmap->levelList[level][x + y * debugmap->mapWidth]->ch;
 }
 
 int World::getHeight(int tx, int ty, int level) const
 {
-	return debugmap->levelList[level][tx + ty * debugmap->mapW]->height;
+	return debugmap->levelList[level][tx + ty * debugmap->mapWidth]->height;
 }
 
 bool World::inMapBounds(int x, int y, int level) const
 {
 	if (level < 0 || level > debugmap->totalFloors - 1) return false;
-	if (x < 0 || x > debugmap->mapW - 1) return false;
-	if (y < 0 || y > debugmap->mapH - 1) return false;
+	if (x < 0 || x > debugmap->mapWidth - 1) return false;
+	if (y < 0 || y > debugmap->mapHeight - 1) return false;
 	return true;
 }
 
@@ -204,27 +204,27 @@ bool World::getWalkability(int x, int y, int level) const
 
 	if (x < 0) return false;
 	if (y < 0) return false;
-	if (x >= debugmap->mapW) return false;
-	if (y >= debugmap->mapH) return false;
+	if (x >= debugmap->mapWidth) return false;
+	if (y >= debugmap->mapHeight) return false;
 
-	return debugmap->levelList[level][x + y * debugmap->mapW]->walkable;
+	return debugmap->levelList[level][x + y * debugmap->mapWidth]->walkable;
 }
 
 bool World::getTransparency(int x, int y, int level, int height) const
 {
 	//BUG HERE
-	if (debugmap->levelList[level][x + y * debugmap->mapW])
+	if (debugmap->levelList[level][x + y * debugmap->mapWidth])
 	{
-		if (height <= debugmap->levelList[level][x + y * debugmap->mapW]->height)
+		if (height <= debugmap->levelList[level][x + y * debugmap->mapWidth]->height)
 		{
-			if (debugmap->levelList[level][x + y * debugmap->mapW]->tag == "destructible" && debugmap->levelList[level][x + y * debugmap->mapW]->getDestroyed())
+			if (debugmap->levelList[level][x + y * debugmap->mapWidth]->tag == "destructible" && debugmap->levelList[level][x + y * debugmap->mapWidth]->getDestroyed())
 			{
 				return true;
 			}
 
 			return false;
 		}
-		else if (height > debugmap->levelList[level][x + y * debugmap->mapW]->height)
+		else if (height > debugmap->levelList[level][x + y * debugmap->mapWidth]->height)
 		{
 			return true;
 		}
@@ -235,9 +235,9 @@ bool World::getTransparency(int x, int y, int level, int height) const
 //check limits
 void World::updateProperties()
 {
-	for (int y = 0; y < debugmap->mapH; y++)
+	for (int y = 0; y < debugmap->mapHeight; y++)
 	{
-		for (int x = 0; x < debugmap->mapW; x++)
+		for (int x = 0; x < debugmap->mapWidth; x++)
 		{
 			fovMap->setProperties(x, y, getTransparency(x, y, player->level, player->height), getWalkability(x, y, player->level));
 		}
@@ -255,13 +255,13 @@ bool World::isInFov(int x, int y, int level) const
 	x += xOffset;
 	y += yOffset;
 
-	if (x < 0 || x >= debugmap->mapW || y < 0 || y >= debugmap->mapH)
+	if (x < 0 || x >= debugmap->mapWidth || y < 0 || y >= debugmap->mapHeight)
 	{
 		return false;
 	}
 	if (fovMap->isInFov(x, y))
 	{
-		debugmap->levelList[level][x + y * debugmap->mapW]->explored = true;
+		debugmap->levelList[level][x + y * debugmap->mapWidth]->explored = true;
 		return true;
 	}
 	return false;
@@ -270,8 +270,8 @@ bool World::isInFov(int x, int y, int level) const
 //World update
 void World::update()
 {
-	xOffset = getOffset(player->mapPosition.x, debugmap->mapW, engine->gui->mapPane->drawWindow->consoleW);
-	yOffset = getOffset(player->mapPosition.y, debugmap->mapH, engine->gui->mapPane->drawWindow->consoleH);
+	xOffset = getOffset(player->mapPosition.x, debugmap->mapWidth, engine->gui->mapPane->drawWindow->consoleW);
+	yOffset = getOffset(player->mapPosition.y, debugmap->mapHeight, engine->gui->mapPane->drawWindow->consoleH);
 
 	updateProperties();
 	computeFov();
@@ -308,7 +308,7 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 			//	pane->console->setCharForeground(x - xOffset, y - yOffset, TCODColor::darkerGrey);
 			//}
 
-			debugmap->levelList[player->level][x + y * debugmap->mapW]->render(x - xOffset, y - yOffset, pane);
+			debugmap->levelList[player->level][x + y * debugmap->mapWidth]->render(x - xOffset, y - yOffset, pane);
 
 			if (x + 1 == engine->settings->input->mouse.cx && y + 3 == engine->settings->input->mouse.cy)
 			{

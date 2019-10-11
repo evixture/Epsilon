@@ -19,8 +19,8 @@ struct Font
 class Settings
 {
 public:
-	int windowX;
-	int windowY;
+	int screenCharWidth;
+	int screenCharHeight;
 
 	TCOD_fov_algorithm_t fovtype;
 	int fovRad;
@@ -32,7 +32,7 @@ public:
 	std::vector<std::shared_ptr<Font>> fontList;
 
 	//main init
-	Settings(int w, int h);
+	Settings(int screenCharWidth, int screenCharHeight);
 
 	void setFullscreen();
 

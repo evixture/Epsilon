@@ -1,12 +1,12 @@
 #include "main.hpp"
 
 //Tile struct
-Tile::Tile(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable)
-	:ch(ch), fgcol(fgcol), bgcol(bgcol), height(height), walkable(walkable), explored(false), tag("static")
+Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable)
+	:ch(ch), foregroundColor(foregroundColor), backgroundColor(backgroundColor), height(height), walkable(walkable), explored(false), tag("static")
 {}
 
-Tile::Tile(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable, const char* tag)
-	: ch(ch), fgcol(fgcol), bgcol(bgcol), height(height), walkable(walkable), explored(false), tag(tag)
+Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable, const char* tag)
+	: ch(ch), foregroundColor(foregroundColor), backgroundColor(backgroundColor), height(height), walkable(walkable), explored(false), tag(tag)
 {}
 
 bool Tile::getDestroyed()
@@ -23,8 +23,8 @@ void Tile::render(int x, int y, const std::shared_ptr<Pane>& pane) const
 {
 	if (WORLD->isInFov(x, y, WORLD->player->level))
 	{
-		pane->console->setCharBackground(x, y, bgcol);
-		pane->console->setCharForeground(x, y, fgcol);
+		pane->console->setCharBackground(x, y, backgroundColor);
+		pane->console->setCharForeground(x, y, foregroundColor);
 		pane->console->setChar          (x, y, ch);
 	}
 	else if (WORLD->isExplored(x, y, WORLD->player->level))
@@ -40,8 +40,8 @@ void Tile::render(int x, int y, const std::shared_ptr<Pane>& pane) const
 	}
 }
 
-Destructible::Destructible(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable, int strength)
-	: Tile(ch, fgcol, bgcol, height, walkable, "destructible"), strength(strength), destroyed(false)
+Destructible::Destructible(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable, int strength)
+	: Tile(ch, foregroundColor, backgroundColor, height, walkable, "destructible"), strength(strength), destroyed(false)
 {
 }
 
@@ -59,16 +59,16 @@ void Destructible::interact()
 	else
 	{
 		ch = '%';
-		bgcol = bgcol * TCODColor::darkGrey;
-		fgcol = fgcol * TCODColor::lightGrey;
+		backgroundColor = backgroundColor * TCODColor::darkGrey;
+		foregroundColor = foregroundColor * TCODColor::lightGrey;
 		walkable = true;
 		destroyed = true;
 	}
 
 }
 
-Stair::Stair(int ch, TCODColor fgcol, TCODColor bgcol, int height, bool walkable, int moveDist)
-	: Tile(ch, fgcol, bgcol, height, true, "stair"), moveDist(moveDist)
+Stair::Stair(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable, int moveDist)
+	: Tile(ch, foregroundColor, backgroundColor, height, true, "stair"), moveDist(moveDist)
 {
 }
 

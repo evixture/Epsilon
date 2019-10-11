@@ -6,8 +6,8 @@ struct Map
 
 	const char* mapName;
 	int totalFloors;
-	int mapW;
-	int mapH;
+	int mapWidth;
+	int mapHeight;
 
 	std::vector<std::vector< std::shared_ptr<Tile >>> levelList;
 
@@ -40,8 +40,8 @@ public:
 	TCODColor getFgColor			(int x, int y, int level) const;
 	int       getCh					(int x, int y, int level) const;
 	bool      getTransparency		(int x, int y, int level, int height) const;
-	bool      getWalkability		(int tx, int ty, int level) const;
-	int       getHeight				(int tx, int ty, int level) const;
+	bool      getWalkability		(int x, int y, int level) const;
+	int       getHeight				(int x, int y, int level) const;
 
 	bool inMapBounds(int x, int y, int level) const;
 	int getOffset(int playerx, int mapw, int renderw);

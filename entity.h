@@ -7,9 +7,6 @@ struct Position
 	int y;
 
 	Position(int x, int y);
-
-	Position getPosition();
-	void setPosition(int x, int y);
 };
 
 //Default Entity Class
@@ -33,8 +30,8 @@ public:
 
 struct Bullet
 {
-	int bx;
-	int by;
+	int bulletx;
+	int bullety;
 
 	int tox;
 	int toy;
@@ -78,8 +75,8 @@ struct Weapon
 	int reloadWait;
 
 	//display
-	int wx;
-	int wy;
+	int weaponx;
+	int weapony;
 	int ch;
 
 	std::vector<std::shared_ptr<Bullet>> bulletList;

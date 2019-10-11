@@ -5,17 +5,6 @@ Position::Position(int x, int y)
 	:x(x), y(y)
 {}
 
-Position Position::getPosition()
-{
-	return Position(x, y);
-}
-
-void Position::setPosition(int nx, int ny)
-{
-	this->x = nx;
-	this->y = ny;
-}
-
 //Default Entity Class
 Entity::Entity(Position pos, int symbol, const char* name, TCODColor color, int level)
 	: mapPosition(pos), renderPosition(pos), symbol(symbol), name(name), color(color), level(level), height(3)
@@ -34,7 +23,7 @@ void Entity::render(const std::shared_ptr<Pane>& pane) const
 
 //Bullet Struct
 Bullet::Bullet(int startx, int starty, int dx, int dy, int xbound, int ybound)
-	:bx(startx), by(starty), xbound(xbound), ybound(ybound), hitWall(false), tox(dx), toy(dy), travel(BLine(bx, by, tox, toy))
+	:bulletx(startx), bullety(starty), xbound(xbound), ybound(ybound), hitWall(false), tox(dx), toy(dy), travel(BLine(bulletx, bullety, tox, toy))
 {
 	do
 	{
@@ -46,19 +35,19 @@ Bullet::Bullet(int startx, int starty, int dx, int dy, int xbound, int ybound)
 		{
 			toy *= 2;
 		}
-	} while (((tox + bx < xbound && tox + bx > 0) && tox != 0) || ((toy + by < ybound && toy + by > 0) && toy != 0));
+	} while (((tox + bulletx < xbound && tox + bulletx > 0) && tox != 0) || ((toy + bullety < ybound && toy + bullety > 0) && toy != 0));
 
-	tox += bx;
-	toy += by;
+	tox += bulletx;
+	toy += bullety;
 
-	travel = BLine(bx, by, tox, toy);
+	travel = BLine(bulletx, bullety, tox, toy);
 }
 
 void Bullet::update() 
 {
 	if (!hitWall)
 	{
-		if (bx < xbound && by < ybound)
+		if (bulletx < xbound && bullety < ybound)
 		{
 			if (engine->gui->mapPane->world->inMapBounds(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, engine->gui->mapPane->world->player->level)
 				&& engine->gui->mapPane->world->getWalkability(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, engine->gui->mapPane->world->player->level) != false)
@@ -99,7 +88,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 //TCOD_CHAR_BULLET
 //Weapon Struct
 Weapon::Weapon(TCODColor color, int ammoCap, int numberMags, int fireRate, int reloadSpeed)
-	:weaponColor(color), angle(0), dx(0), dy(0), wx(0), wy(0), fireCap(fireRate), fireWait(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), ch(NULL), reloadTimer(reloadSpeed), reloadWait(0)
+	:weaponColor(color), angle(0), dx(0), dy(0), weaponx(0), weapony(0), fireCap(fireRate), fireWait(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), ch(NULL), reloadTimer(reloadSpeed), reloadWait(0)
 {}
 
 /*
@@ -118,7 +107,7 @@ if left click
 //void Weapon::weaponFire(int endx, int endy, std::shared_ptr<Pane> pane, int xbound, int ybound)
 //{
 //
-//	//TCODLine::init(wx, wy, endx, endy);
+//	//TCODLine::init(weaponx, weapony, endx, endy);
 //	int x = endx;
 //	int y = endy;
 //
@@ -132,12 +121,12 @@ if left click
 //		x = x * 2;
 //	}
 //	
-//	if (!TCODLine::step(&wx, &wy))
+//	if (!TCODLine::step(&weaponx, &weapony))
 //	{
-//		if (engine->gui->mapPane->world->getWalkability(wx, wy, engine->gui->mapPane->world->player->level))
+//		if (engine->gui->mapPane->world->getWalkability(weaponx, weapony, engine->gui->mapPane->world->player->level))
 //		{
-//		pane->console->setCharBackground(wx, wy, TCODColor::pink);
-//		TCODLine::step(&wx, &wy);
+//		pane->console->setCharBackground(weaponx, weapony, TCODColor::pink);
+//		TCODLine::step(&weaponx, &weapony);
 //		}
 //		else
 //		{
@@ -158,20 +147,20 @@ void Weapon::update(int x, int y, int mx, int my)
 	{
 		if (angle <= 22.5)
 		{
-			wx = x + 1;
-			wy = y;
+			weaponx = x + 1;
+			weapony = y;
 			ch = TCOD_CHAR_HLINE;
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
-			wx = x + 1;
-			wy = y + 1;
+			weaponx = x + 1;
+			weapony = y + 1;
 			ch = '\\';
 		}
 		else if (angle >= 67.5)
 		{
-			wx = x;
-			wy = y + 1;
+			weaponx = x;
+			weapony = y + 1;
 			ch = TCOD_CHAR_VLINE;
 		}
 	}
@@ -179,20 +168,20 @@ void Weapon::update(int x, int y, int mx, int my)
 	{
 		if (angle >= -22.5)
 		{
-			wx = x + 1;
-			wy = y;
+			weaponx = x + 1;
+			weapony = y;
 			ch = TCOD_CHAR_HLINE;
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
-			wx = x + 1;
-			wy = y - 1;
+			weaponx = x + 1;
+			weapony = y - 1;
 			ch = '/';
 		}
 		else if (angle <= -67.5)
 		{
-			wx = x;
-			wy = y - 1;
+			weaponx = x;
+			weapony = y - 1;
 			ch = TCOD_CHAR_VLINE;
 		}
 	}
@@ -200,20 +189,20 @@ void Weapon::update(int x, int y, int mx, int my)
 	{
 		if (angle >= -22.5)
 		{
-			wx = x - 1;
-			wy = y;
+			weaponx = x - 1;
+			weapony = y;
 			ch = TCOD_CHAR_HLINE;
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
-			wx = x - 1;
-			wy = y + 1;
+			weaponx = x - 1;
+			weapony = y + 1;
 			ch = '/';
 		}
 		else if (angle <= -67.5)
 		{
-			wx = x;
-			wy = y + 1;
+			weaponx = x;
+			weapony = y + 1;
 			ch = TCOD_CHAR_VLINE;
 		}
 	}
@@ -221,20 +210,20 @@ void Weapon::update(int x, int y, int mx, int my)
 	{
 		if (angle <= 22.5)
 		{
-			wx = x - 1;
-			wy = y;
+			weaponx = x - 1;
+			weapony = y;
 			ch = TCOD_CHAR_HLINE;
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
-			wx = x - 1;
-			wy = y - 1;
+			weaponx = x - 1;
+			weapony = y - 1;
 			ch = '\\';
 		}
 		else if (angle >= 67.5)
 		{
-			wx = x;
-			wy = y - 1;
+			weaponx = x;
+			weapony = y - 1;
 			ch = TCOD_CHAR_VLINE;
 		}
 	}
@@ -242,10 +231,10 @@ void Weapon::update(int x, int y, int mx, int my)
 	//Fire bullet
 	if (engine->settings->input->leftMouseClick && fireWait == 0 && ammoAmount != 0)
 	{
-		if (!(wx == dx + wx && wy == dy + wy))
+		if (!(weaponx == dx + weaponx && weapony == dy + weapony))
 		{
 			fireWait = fireCap;
-			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(wx, wy, dx, dy, engine->gui->mapPane->world->debugmap->mapW, engine->gui->mapPane->world->debugmap->mapH));
+			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(weaponx, weapony, dx, dy, engine->gui->mapPane->world->debugmap->mapWidth, engine->gui->mapPane->world->debugmap->mapHeight));
 			ammoAmount--;
 		}
 	}
@@ -269,11 +258,9 @@ void Weapon::update(int x, int y, int mx, int my)
 		{
 			if (numberMags != 0 && ammoAmount != ammoCap)
 			{
-			
 					ammoAmount = ammoCap;
 					numberMags--;
 					reloadWait = reloadTimer;
-			
 			}
 		}
 	}
@@ -303,8 +290,8 @@ void Weapon::render(std::shared_ptr<Entity> entity, const std::shared_ptr<Pane>&
 	....|....
 	*/
 	
-	pane->console->setChar(wx, wy, ch);
-	pane->console->setCharForeground(wx, wy, weaponColor);
+	pane->console->setChar(weaponx, weapony, ch);
+	pane->console->setCharForeground(weaponx, weapony, weaponColor);
 
 	for (auto& bullet : bulletList)
 	{

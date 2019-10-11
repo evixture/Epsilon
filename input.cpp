@@ -18,7 +18,7 @@ void Input::getMouseInput()
 		}
 		else
 		{
-			//TCODLine::init(player->testWeapon->wx, player->testWeapon->wy, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
+			//TCODLine::init(player->testWeapon->weaponx, player->testWeapon->weapony, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
 			leftMouseClick = false;
 		}
 	}

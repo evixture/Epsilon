@@ -1,8 +1,8 @@
 #include "main.hpp"
 
 //Engine Class
-Engine::Engine(int screenX, int screenY)
-	:gamestate(INIT), gui(std::make_shared<Gui>(screenX, screenY)), settings(std::make_shared<Settings>(screenX, screenY))
+Engine::Engine(int screenCharWidth, int screenCharHeight)
+	:gamestate(INIT), gui(std::make_shared<Gui>(screenCharWidth, screenCharHeight)), settings(std::make_shared<Settings>(screenCharWidth, screenCharHeight))
 {
 	TCODConsole::root->setDefaultBackground(TCODColor::black);
 	gamestate = MAIN;

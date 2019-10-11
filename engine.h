@@ -9,7 +9,7 @@ public:
 	std::shared_ptr<Settings> settings;
 	std::shared_ptr<Gui> gui;
 
-	Engine(int screenX, int screenY);
+	Engine(int screenCharWidth, int screenCharHeight);
 
 	void update();
 	void render() const;
