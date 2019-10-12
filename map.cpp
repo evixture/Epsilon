@@ -119,13 +119,11 @@ Map::Map(const char* filePath)
 
 //World Class
 World::World()
-	:lookHeight(4)
 {
 	debugmap = std::make_shared<Map>("data/maps/debugmap.txt");
 	//mapList.push_back(debugmap);
 
-	player = std::make_shared<Player>(Position(2, 50), '@', "Player", TCODColor::azure);
-	entityList.push_back(player);
+	entityList.push_back(player = std::make_shared<Player>(Position(2, 50, 0)));
 
 	fovMap = std::make_shared<TCODMap>(debugmap->mapWidth, debugmap->mapHeight);
 	//currentMap = mapList[player->level]; 
@@ -168,10 +166,10 @@ TCODColor World::getBgColor(int x, int y, int level) const
 //	return debugmap->levelList[level][x + y * debugmap->mapWidth]->ch;
 //}
 
-int World::getHeight(int tx, int ty, int level) const
-{
-	return debugmap->levelList[level][tx + ty * debugmap->mapWidth]->height;
-}
+//int World::getHeight(int tx, int ty, int level) const
+//{
+//	return debugmap->levelList[level][tx + ty * debugmap->mapWidth]->height;
+//}
 
 bool World::inMapBounds(int x, int y, int level) const
 {
@@ -236,7 +234,7 @@ void World::updateProperties()
 	{
 		for (int x = 0; x < debugmap->mapWidth; x++)
 		{
-			fovMap->setProperties(x, y, getTransparency(x, y, player->level, player->height), getWalkability(x, y, player->level));
+			fovMap->setProperties(x, y, getTransparency(x, y, player->mapPosition.level, player->height), getWalkability(x, y, player->mapPosition.level));
 		}
 	}
 }
@@ -305,11 +303,11 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 			//	pane->console->setCharForeground(x - xOffset, y - yOffset, TCODColor::darkerGrey);
 			//}
 
-			getTile(x, y, player->level)->render(x - xOffset, y - yOffset, pane);
+			getTile(x, y, player->mapPosition.level)->render(x - xOffset, y - yOffset, pane);
 
 			if (x + 1 - xOffset == engine->settings->input->mouse.cx && y + 3 - yOffset == engine->settings->input->mouse.cy)
 			{
-				pane->console->setCharBackground(x - xOffset, y - yOffset, getTile(x , y , player->level)->backgroundColor - TCODColor::darkestGrey);
+				pane->console->setCharBackground(x - xOffset, y - yOffset, getTile(x , y , player->mapPosition.level)->backgroundColor - TCODColor::darkestGrey);
 				pane->console->setChar(x - xOffset, y - yOffset, '+');
 			}
 		}
@@ -319,7 +317,7 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 	{
 		if (entity->name == "Player")
 		{
-			player->render(player, pane);
+			player->render(pane);
 		}
 		else
 		{

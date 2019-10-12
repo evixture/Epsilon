@@ -50,7 +50,7 @@ constexpr auto PI = 3.14159265;
 #include <fstream>
 #include <memory>
 #include <vector>
-#include <iostream>
+//#include <iostream>
 #include <string>
 #include <math.h>
 //#include <thread>
@@ -61,9 +61,11 @@ constexpr auto PI = 3.14159265;
 #include <SFML/Window.hpp>
 
 struct Pane;
+struct Entity;
 
 //Class File Imports
 #include "utility.h"
+#include "tool.h"
 #include "entity.h"
 #include "tile.h"
 #include "map.h"

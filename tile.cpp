@@ -21,13 +21,13 @@ void Tile::interact()
 
 void Tile::render(int x, int y, const std::shared_ptr<Pane>& pane) const
 {
-	if (WORLD->isInFov(x, y, WORLD->player->level))
+	if (WORLD->isInFov(x, y, WORLD->player->mapPosition.level))
 	{
 		pane->console->setCharBackground(x, y, backgroundColor);
 		pane->console->setCharForeground(x, y, foregroundColor);
 		pane->console->setChar          (x, y, ch);
 	}
-	else if (WORLD->isExplored(x, y, WORLD->player->level))
+	else if (WORLD->isExplored(x, y, WORLD->player->mapPosition.level))
 	{
 		pane->console->setCharBackground(x, y, TCODColor::black);
 		pane->console->setCharForeground(x, y, TCODColor::darkestGrey);
@@ -74,5 +74,5 @@ Stair::Stair(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int h
 
 void Stair::interact()
 {
-	engine->gui->mapPane->world->player->level += moveDist;
+	engine->gui->mapPane->world->player->mapPosition.level += moveDist;
 }

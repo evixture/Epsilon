@@ -58,7 +58,7 @@ void Settings::printDebugStats()
 			engine->gui->mapPane->world->player->mapPosition.y,
 			engine->gui->mapPane->world->player->testWeapon->ammoAmount,
 			engine->gui->mapPane->world->player->testWeapon->numberMags,
-			engine->gui->mapPane->world->player->level,
+			engine->gui->mapPane->world->player->mapPosition.level,
 			engine->settings->input->changeFloor,
 			engine->gui->mapPane->world->xOffset,
 			engine->gui->mapPane->world->yOffset);

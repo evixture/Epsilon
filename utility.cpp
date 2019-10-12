@@ -103,3 +103,11 @@ bool BLine::end()
 */
 	return false;
 }
+
+double getAngle(int ix, int iy, int tx, int ty)
+{
+	int dx = tx - ix;
+	int dy = ty - iy;
+	double itan = (double)(dy) / (double)(dx);
+	return atan(itan) * 180 / PI;
+}

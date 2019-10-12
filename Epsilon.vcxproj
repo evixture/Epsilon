@@ -28,6 +28,7 @@
     <ClCompile Include="panel.cpp" />
     <ClCompile Include="settings.cpp" />
     <ClCompile Include="tile.cpp" />
+    <ClCompile Include="tool.cpp" />
     <ClCompile Include="utility.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
@@ -42,6 +43,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="settings.h" />
     <ClInclude Include="tile.h" />
+    <ClInclude Include="tool.h" />
     <ClInclude Include="utility.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>

@@ -22,3 +22,5 @@ private:
 	int destx;
 	int desty;
 };
+
+double getAngle(int ix, int iy, int tx, int ty);

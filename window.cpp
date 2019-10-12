@@ -40,7 +40,7 @@ void Ribon::render() const
 
 //GuiWindow Struct
 Window::Window(int w, int h, const char* panelName, int rx, int ry)
-	: w(w), h(h), panelName(panelName), renderpos(Position(rx, ry))
+	: w(w), h(h), panelName(panelName), renderpos(Position(rx, ry, NULL))
 {
 	mainWindow = std::make_shared<Pane>(w, h, TCODColor::black, TCODColor::white);
 	ribon = std::make_shared<Ribon>(panelName, w);

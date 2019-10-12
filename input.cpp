@@ -145,21 +145,21 @@ void Input::getKeyDown()
 		engine->gamestate = Engine::EXIT;
 	}
 
-	// ALT + KEY COMMANDS
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt))
-	{
-		//HARD CHANGES THE MAP RENDERED
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
-		{
-			engine->gui->mapPane->world->player->level = 0;
-		}
+	//// ALT + KEY COMMANDS
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt))
+	//{
+	//	//HARD CHANGES THE MAP RENDERED
+	//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
+	//	{
+	//		engine->gui->mapPane->world->player->level = 0;
+	//	}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
-		{
-			engine->gui->mapPane->world->player->level = 1;
-		}
+	//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
+	//	{
+	//		engine->gui->mapPane->world->player->level = 1;
+	//	}
 
-	}
+	//}
 }
 
 //multiply speed by height for slower movement at lower heights
@@ -197,13 +197,13 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 		{
 			if (moveTimer == 0)
 			{
-				if (engine->gui->mapPane->world->getWalkability(player->mapPosition.x + moveXSpeed, player->mapPosition.y, player->level))
+				if (engine->gui->mapPane->world->getWalkability(player->mapPosition.x + moveXSpeed, player->mapPosition.y, player->mapPosition.level))
 				{
 					player->mapPosition.x += moveXSpeed;
 					moveXSpeed = 0;
 					moveTimer = moveWait;
 				}
-				if (engine->gui->mapPane->world->getWalkability(player->mapPosition.x, player->mapPosition.y + moveYSpeed, player->level))
+				if (engine->gui->mapPane->world->getWalkability(player->mapPosition.x, player->mapPosition.y + moveYSpeed, player->mapPosition.level))
 				{
 					player->mapPosition.y += moveYSpeed;
 					moveYSpeed = 0;

@@ -40,6 +40,9 @@
     <Filter Include="Source\Utility">
       <UniqueIdentifier>{51ece757-f2d9-4fb4-9f13-11a7d8a2090d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Tool">
+      <UniqueIdentifier>{5af26a73-35a8-426d-af15-3015e9ad1a6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h">
@@ -78,6 +81,9 @@
     <ClInclude Include="utility.h">
       <Filter>Source\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="tool.h">
+      <Filter>Source\Tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -112,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="utility.cpp">
       <Filter>Source\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="tool.cpp">
+      <Filter>Source\Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

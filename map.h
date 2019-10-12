@@ -18,9 +18,6 @@ struct Map
 class World
 {
 public:
-	//move to ent
-	int lookHeight;
-
 	int xOffset;
 	int yOffset;
 
@@ -39,9 +36,9 @@ public:
 	TCODColor getBgColor			(int x, int y, int level) const;
 	//TCODColor getFgColor			(int x, int y, int level) const;
 	//int       getCh					(int x, int y, int level) const;
+	//int       getHeight				(int x, int y, int level) const;
 	bool      getTransparency		(int x, int y, int level, int height) const;
 	bool      getWalkability		(int x, int y, int level) const;
-	int       getHeight				(int x, int y, int level) const;
 
 	bool inMapBounds(int x, int y, int level) const;
 	int getOffset(int playerx, int mapw, int renderw);
