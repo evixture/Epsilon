@@ -36,7 +36,7 @@ void Tile::render(int x, int y, const std::shared_ptr<Pane>& pane) const
 	else
 	{
 		pane->console->setCharBackground(x, y, TCODColor::black);
-		pane->console->setCharForeground(x, y, TCODColor::darkerGrey);
+		//pane->console->setCharForeground(x, y, TCODColor::darkerGrey);
 	}
 }
 

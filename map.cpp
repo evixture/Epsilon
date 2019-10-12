@@ -158,15 +158,15 @@ TCODColor World::getBgColor(int x, int y, int level) const
 	return debugmap->levelList[level][x + y * debugmap->mapWidth]->backgroundColor;
 }
 
-TCODColor World::getFgColor(int x, int y, int level) const
-{
-	return debugmap->levelList[level][x + y * debugmap->mapWidth]->foregroundColor;
-}
+//TCODColor World::getFgColor(int x, int y, int level) const
+//{
+//	return debugmap->levelList[level][x + y * debugmap->mapWidth]->foregroundColor;
+//}
 
-int World::getCh(int x, int y, int level) const
-{
-	return debugmap->levelList[level][x + y * debugmap->mapWidth]->ch;
-}
+//int World::getCh(int x, int y, int level) const
+//{
+//	return debugmap->levelList[level][x + y * debugmap->mapWidth]->ch;
+//}
 
 int World::getHeight(int tx, int ty, int level) const
 {
@@ -305,11 +305,11 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 			//	pane->console->setCharForeground(x - xOffset, y - yOffset, TCODColor::darkerGrey);
 			//}
 
-			debugmap->levelList[player->level][x + y * debugmap->mapWidth]->render(x - xOffset, y - yOffset, pane);
+			getTile(x, y, player->level)->render(x - xOffset, y - yOffset, pane);
 
 			if (x + 1 - xOffset == engine->settings->input->mouse.cx && y + 3 - yOffset == engine->settings->input->mouse.cy)
 			{
-				pane->console->setCharBackground(x - xOffset, y - yOffset, getBgColor(x , y , player->level) - TCODColor::darkestGrey);
+				pane->console->setCharBackground(x - xOffset, y - yOffset, getTile(x , y , player->level)->backgroundColor - TCODColor::darkestGrey);
 				pane->console->setChar(x - xOffset, y - yOffset, '+');
 			}
 		}
