@@ -1,8 +1,7 @@
 #include "main.hpp"
 
 //Initializtion Through Engine Constructor
-std::shared_ptr<Engine> engine = std::make_shared<Engine>(120, 64);
-//std::shared_ptr<Engine> engine(120, 64);
+ std::shared_ptr<Engine> engine = std::make_shared<Engine>(120, 64);
 
 //Main Game Loop
 
@@ -10,13 +9,25 @@ std::shared_ptr<Engine> engine = std::make_shared<Engine>(120, 64);
 //else use WinMain to hide console
 int WinMain()
 {
-	while (!TCODConsole::isWindowClosed() && engine->gamestate != Engine::EXIT)
+	std::thread updateThread(&Engine::update, engine);
+	std::thread renderThread(&Engine::render, engine);
+	
+	//if (!TCODConsole::isWindowClosed() && engine->gamestate != Engine::EXIT)
+	//{
+	//	//error here, thread cannot be reinitialized multiple times
+	//	//updateThread;// = std::thread(&Engine::update, engine);
+	//	//renderThread;// = std::thread(&Engine::render, engine);
+	//
+	//	std::thread updateThread(&Engine::update, engine);
+	//	std::thread renderThread(&Engine::render, engine);
+	//}
+
+	if (TCODConsole::isWindowClosed())
 	{
-		engine->update();
-		engine->render();
+		updateThread.join();
+		renderThread.join();
 	}
 
-	
 	TCOD_quit();
 	return 0;
 }

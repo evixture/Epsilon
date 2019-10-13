@@ -54,7 +54,9 @@ constexpr auto PI = 3.14159265;
 //#include <iostream>
 #include <string>
 #include <math.h>
-//#include <thread>
+#include <thread>
+#include <mutex>
+#include <atomic>
 //#include <stdexcept>
 
 //Libraries
@@ -76,6 +78,7 @@ struct Entity;
 #include "panel.h"
 #include "gui.h"
 #include "engine.h"
+
 
 //TODO : NEED TO HAVE A VIRTUAL DESTRUCTOR FOR VIRTUAL CLASSES
 

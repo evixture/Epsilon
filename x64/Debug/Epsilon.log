@@ -1,5 +1,4 @@
-﻿  map.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(202): warning C4715: 'World::getOffset': not all control paths return a value
+﻿  engine.cpp
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
 engine.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:REF' specification
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe
