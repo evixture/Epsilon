@@ -50,6 +50,9 @@ Map::Map(const char* filePath)
 					case '*':
 						levelList[currentFloor].push_back(TILE_BasicFlower);
 						break;
+					case '3':
+						levelList[currentFloor].push_back(TILE_BasicShingle);
+						break;
 					default:
 						levelList[currentFloor].push_back(TILE_error);
 						break;
