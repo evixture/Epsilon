@@ -47,6 +47,9 @@ Map::Map(const char* filePath)
 					case '!':
 						levelList[currentFloor].push_back(TILE_BasicConcrete);
 						break;
+					case '*':
+						levelList[currentFloor].push_back(TILE_BasicFlower);
+						break;
 					default:
 						levelList[currentFloor].push_back(TILE_error);
 						break;
@@ -123,7 +126,7 @@ World::World()
 	debugmap = std::make_shared<Map>("data/maps/debugmap.txt");
 	//mapList.push_back(debugmap);
 
-	entityList.push_back(player = std::make_shared<Player>(Position(2, 50, 0)));
+	entityList.push_back(player = std::make_shared<Player>(Position(2, 2, 0)));
 
 	fovMap = std::make_shared<TCODMap>(debugmap->mapWidth, debugmap->mapHeight);
 	//currentMap = mapList[player->level]; 

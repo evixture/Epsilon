@@ -38,11 +38,11 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 }
 
 Player::Player(Position pos)
-	:Creature(Position(pos), '@', "player", TCODColor::azure, 100, 0)
+	:Creature(Position(pos), '@', "player", TCODColor::azure, 100, 0), weaponSelection(0)
 {
+	toolList.push_back(hands = std::make_shared<Tool>(TCODColor::peach));
 	toolList.push_back(testWeapon = std::make_shared<Weapon>(TCODColor::darkestGrey, 30, 10, 5, 120));
-	toolList.push_back(hands = std::make_shared<Tool>(TCODColor::lightestSepia));
-	currentTool = testWeapon;
+	currentTool = toolList[0];
 }
 
 void Player::update()
@@ -51,9 +51,28 @@ void Player::update()
 	renderPosition.y = mapPosition.y - WORLD->yOffset;
 	renderPosition.level = mapPosition.level;
 
+	if (engine->settings->input->mouse.wheel_up || engine->settings->input->mouse.wheel_down)
+	{
+		if (engine->settings->input->mouse.wheel_down)
+		{
+			if (weaponSelection < toolList.size() - 1)
+			{
+				weaponSelection++;
+			}
+		}
+		if (engine->settings->input->mouse.wheel_up)
+		{
+			if (weaponSelection > 0)
+			{
+				weaponSelection--;
+			}
+		}
+		currentTool = toolList[weaponSelection];
+	}
+
 	angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
 
-	testWeapon->update(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, angle);
+	currentTool->update(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, angle);
 
 	if (engine->settings->input->changeFloor == true)
 	{

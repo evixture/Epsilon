@@ -16,9 +16,10 @@
 //	DEFINES
 //============TILES===============================CH===FOREGROUND=COLOR==========BACKGROUND=COLOR==========H==WALK===DEST |
 //GROUND
-#define TILE_BasicGrass    std::make_shared<Tile>		 ('.', TCODColor::darkerGreen,   TCODColor::darkestGreen,  0, true, "static")
-#define TILE_BasicFloor    std::make_shared<Tile>		 (' ', TCODColor::darkSepia,     TCODColor::darkerSepia,   0, true, "static")
-#define TILE_BasicConcrete std::make_shared<Tile>		 ('`', TCODColor::darkGrey,      TCODColor::grey,          0, true, "static")
+#define TILE_BasicGrass    std::make_shared<Tile>		 ('.', TCODColor(119, 161, 63),  TCODColor(32, 70, 19),  0, true, "static")
+#define TILE_BasicFlower   std::make_shared<Tile>		 ('*', TCODColor::darkChartreuse,TCODColor::darkestSepia,  2, true, "static")
+#define TILE_BasicFloor    std::make_shared<Tile>		 (' ', TCODColor::darkSepia  ,   TCODColor::darkerSepia ,  0, true, "static")
+#define TILE_BasicConcrete std::make_shared<Tile>		 ('`', TCODColor::darkGrey   ,   TCODColor::grey        ,  0, true, "static")
 
 //WALL
 #define TILE_BasicDoor     std::make_shared<Tile>		 ('#', TCODColor::darkSepia,     TCODColor::darkestSepia,  4, true, "static")
@@ -31,7 +32,6 @@
 //STAIR
 #define TILE_UpStair	   std::make_shared<Stair>		 ('/', TCODColor::lightSepia, TCODColor::darkerSepia, 2, true, 1)
 #define TILE_DownStair	   std::make_shared<Stair>		 ('\\', TCODColor::lightSepia, TCODColor::darkerSepia, 2, true, -1)
-
 
 //SKY
 #define TILE_BasicSky      std::make_shared<Tile>		 (' ', TCODColor::lightestCyan,  TCODColor::sky,           0, false, "static")

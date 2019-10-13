@@ -8,7 +8,7 @@ Tool::Tool(TCODColor color)
 
 void Tool::update(int x, int y, int mx, int my, double angle)
 {
-	ch = TCOD_CHAR_BULLET;
+	ch = 249;
 	dx = mx - x;
 	dy = my - y;
 
@@ -88,6 +88,8 @@ void Tool::update(int x, int y, int mx, int my, double angle)
 
 void Tool::render(const std::shared_ptr<Pane>& pane) const
 {
+	pane->console->setChar(toolx, tooly, ch);
+	pane->console->setCharForeground(toolx, tooly, color);
 }
 
 
@@ -151,7 +153,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 {
 	if (!hitWall)
 	{
-		pane->console->setCharForeground(travel.x, travel.y, TCODColor::copper);
+		pane->console->setCharForeground(travel.x, travel.y, TCODColor::brass);
 		pane->console->setChar(travel.x, travel.y, 248);
 	}
 }

@@ -1,2 +1,16 @@
-﻿  entity.cpp
+﻿  engine.cpp
+  entity.cpp
+  gui.cpp
+  input.cpp
+  main.cpp
+  map.cpp
+  panel.cpp
+  settings.cpp
+  tile.cpp
+  tool.cpp
+  utility.cpp
+  window.cpp
+  Generating Code...
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(199): warning C4715: 'World::getOffset': not all control paths return a value
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(231): warning C4715: 'World::getTransparency': not all control paths return a value
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

@@ -50,18 +50,13 @@ void Settings::printDebugStats()
 {
 	if (engine->gamestate == engine->MAIN)
 	{
-		TCODConsole::root->printf(10, 0, "FPS>%i mx>%i my>%i px>%i py>%i ammo>%i, mags>%i ph>%i, space>%i xoff> %i yoff%i",
+		TCODConsole::root->printf(10, 0, "FPS>%i mx>%i my>%i px>%i py>%i  ph>%i, ",
 			TCODSystem::getFps(),
 			engine->settings->input->mouse.cx - 1,
 			engine->settings->input->mouse.cy - 3,
 			engine->gui->mapPane->world->player->mapPosition.x,
 			engine->gui->mapPane->world->player->mapPosition.y,
-			engine->gui->mapPane->world->player->testWeapon->ammoAmount,
-			engine->gui->mapPane->world->player->testWeapon->numberMags,
-			engine->gui->mapPane->world->player->mapPosition.level,
-			engine->settings->input->changeFloor,
-			engine->gui->mapPane->world->xOffset,
-			engine->gui->mapPane->world->yOffset);
+			engine->gui->mapPane->world->player->mapPosition.level);
 	}
 }
 

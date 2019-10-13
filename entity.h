@@ -47,6 +47,8 @@ struct Creature : public Entity
 class Player : public Creature
 {
 public:
+	int weaponSelection;
+
 	std::shared_ptr<Weapon> testWeapon;
 	//, int symbol, const char* name, TCODColor color
 	Player(Position pos);
