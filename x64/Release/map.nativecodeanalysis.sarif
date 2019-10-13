@@ -140,6 +140,28 @@
           ]
         },
         {
+          "ruleId": "26812",
+          "message": {
+            "text": "The enum type 'TCOD_distribution_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/mersenne.hpp"
+                },
+                "region": {
+                  "startLine": 222,
+                  "startColumn": 15,
+                  "endLine": 222,
+                  "endColumn": 15
+                }
+              },
+              "fullyQualifiedLogicalName": "public: void __cdecl TCODRandom::setDistribution(enum TCOD_distribution_t)"
+            }
+          ]
+        },
+        {
           "ruleId": "26495",
           "message": {
             "text": "Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6)."
@@ -354,7 +376,7 @@
                   "startLine": 26,
                   "startColumn": 43,
                   "endLine": 26,
-                  "endColumn": 50
+                  "endColumn": 54
                 }
               },
               "fullyQualifiedLogicalName": "public: __cdecl Map::Map(char const *)"
@@ -364,7 +386,7 @@
         {
           "ruleId": "26495",
           "message": {
-            "text": "Variable 'Map::mapH' is uninitialized. Always initialize a member variable (type.6)."
+            "text": "Variable 'Map::mapHeight' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
             {
@@ -383,13 +405,13 @@
             }
           ],
           "properties": {
-            "targetSymbol": "Map::mapH"
+            "targetSymbol": "Map::mapHeight"
           }
         },
         {
           "ruleId": "26495",
           "message": {
-            "text": "Variable 'Map::mapW' is uninitialized. Always initialize a member variable (type.6)."
+            "text": "Variable 'Map::mapWidth' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
             {
@@ -408,7 +430,7 @@
             }
           ],
           "properties": {
-            "targetSymbol": "Map::mapW"
+            "targetSymbol": "Map::mapWidth"
           }
         },
         {
@@ -473,10 +495,10 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
                 },
                 "region": {
-                  "startLine": 126,
-                  "startColumn": 36,
-                  "endLine": 126,
-                  "endColumn": 52
+                  "startLine": 141,
+                  "startColumn": 37,
+                  "endLine": 141,
+                  "endColumn": 53
                 }
               },
               "fullyQualifiedLogicalName": "public: class std::shared_ptr<struct Tile> __cdecl World::getTile(int,int,int)const "
@@ -495,9 +517,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
                 },
                 "region": {
-                  "startLine": 131,
+                  "startLine": 154,
                   "startColumn": 36,
-                  "endLine": 131,
+                  "endLine": 154,
                   "endColumn": 52
                 }
               },
@@ -517,9 +539,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
                 },
                 "region": {
-                  "startLine": 136,
+                  "startLine": 159,
                   "startColumn": 36,
-                  "endLine": 136,
+                  "endLine": 159,
                   "endColumn": 52
                 }
               },
@@ -539,75 +561,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
                 },
                 "region": {
-                  "startLine": 141,
+                  "startLine": 208,
                   "startColumn": 36,
-                  "endLine": 141,
-                  "endColumn": 52
-                }
-              },
-              "fullyQualifiedLogicalName": "public: class TCODColor __cdecl World::getFgColor(int,int,int)const "
-            }
-          ]
-        },
-        {
-          "ruleId": "26451",
-          "message": {
-            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
-                },
-                "region": {
-                  "startLine": 146,
-                  "startColumn": 36,
-                  "endLine": 146,
-                  "endColumn": 52
-                }
-              },
-              "fullyQualifiedLogicalName": "public: int __cdecl World::getCh(int,int,int)const "
-            }
-          ]
-        },
-        {
-          "ruleId": "26451",
-          "message": {
-            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
-                },
-                "region": {
-                  "startLine": 151,
-                  "startColumn": 36,
-                  "endLine": 151,
-                  "endColumn": 54
-                }
-              },
-              "fullyQualifiedLogicalName": "public: int __cdecl World::getHeight(int,int,int)const "
-            }
-          ]
-        },
-        {
-          "ruleId": "26451",
-          "message": {
-            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
-                },
-                "region": {
-                  "startLine": 169,
-                  "startColumn": 36,
-                  "endLine": 169,
+                  "endLine": 208,
                   "endColumn": 52
                 }
               },
@@ -627,54 +583,10 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
                 },
                 "region": {
-                  "startLine": 175,
-                  "startColumn": 43,
-                  "endLine": 175,
-                  "endColumn": 59
-                }
-              },
-              "fullyQualifiedLogicalName": "public: bool __cdecl World::getTransparency(int,int,int,int)const "
-            }
-          ]
-        },
-        {
-          "ruleId": "26451",
-          "message": {
-            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
-                },
-                "region": {
-                  "startLine": 177,
-                  "startColumn": 34,
-                  "endLine": 177,
-                  "endColumn": 50
-                }
-              },
-              "fullyQualifiedLogicalName": "public: bool __cdecl World::getTransparency(int,int,int,int)const "
-            }
-          ]
-        },
-        {
-          "ruleId": "26451",
-          "message": {
-            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
-                },
-                "region": {
-                  "startLine": 184,
-                  "startColumn": 47,
-                  "endLine": 184,
-                  "endColumn": 63
+                  "startLine": 214,
+                  "startColumn": 33,
+                  "endLine": 214,
+                  "endColumn": 49
                 }
               },
               "fullyQualifiedLogicalName": "public: bool __cdecl World::getTransparency(int,int,int,int)const "
@@ -694,8 +606,96 @@
                 },
                 "region": {
                   "startLine": 216,
-                  "startColumn": 30,
+                  "startColumn": 44,
                   "endLine": 216,
+                  "endColumn": 60
+                }
+              },
+              "fullyQualifiedLogicalName": "public: bool __cdecl World::getTransparency(int,int,int,int)const "
+            }
+          ]
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
+                },
+                "region": {
+                  "startLine": 218,
+                  "startColumn": 35,
+                  "endLine": 218,
+                  "endColumn": 51
+                }
+              },
+              "fullyQualifiedLogicalName": "public: bool __cdecl World::getTransparency(int,int,int,int)const "
+            }
+          ]
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
+                },
+                "region": {
+                  "startLine": 218,
+                  "startColumn": 116,
+                  "endLine": 218,
+                  "endColumn": 132
+                }
+              },
+              "fullyQualifiedLogicalName": "public: bool __cdecl World::getTransparency(int,int,int,int)const "
+            }
+          ]
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
+                },
+                "region": {
+                  "startLine": 225,
+                  "startColumn": 48,
+                  "endLine": 225,
+                  "endColumn": 64
+                }
+              },
+              "fullyQualifiedLogicalName": "public: bool __cdecl World::getTransparency(int,int,int,int)const "
+            }
+          ]
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
+                },
+                "region": {
+                  "startLine": 262,
+                  "startColumn": 30,
+                  "endLine": 262,
                   "endColumn": 46
                 }
               },
@@ -707,12 +707,12 @@
       "tool": {
         "name": "PREfast",
         "fullName": "PREfast Code Analysis",
-        "version": "14.22.27905.0",
-        "fileVersion": "14.00.27905.00"
+        "version": "14.23.28106.4",
+        "fileVersion": "14.00.28106.04"
       },
       "invocations": [
         {
-          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x00A72090 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_e266cfedast -typedil -f map.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -ZB64 -D_INTEGRAL_MAX_BITS=64 -pc \\:/ -D_MSC_VER=1922 -D_MSC_FULL_VER=192227905 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\libtcod-1.12.3-x86_64-msvc\\include -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -GF -Og -Ot -Oy -Oi -ltcg -DCODE_ANALYSIS -DNDEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Release\\map.obj -Fdx64\\Release\\vc142.pdb -Gd -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
+          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.23.28105\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x00103170 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_79f38f1bast -typedil -f map.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -ZB64 -D_INTEGRAL_MAX_BITS=64 -pc \\:/ -D_MSC_VER=1923 -D_MSC_FULL_VER=192328106 -D_MSC_BUILD=4 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\libtcod-1.12.3-x86_64-msvc\\include -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -GF -Og -Ot -Oy -Oi -ltcg -DCODE_ANALYSIS -DNDEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Release\\map.obj -Fdx64\\Release\\vc142.pdb -Gd -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.23.28105\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.23.28105\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.23.28105\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
         }
       ],
       "files": {
@@ -1293,6 +1293,11 @@
             "resultFile"
           ]
         },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/tool.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
         "file:///e:/projects/visual studio/libtcod development/epsilon/entity.h": {
           "roles": [
             "resultFile"
@@ -1329,6 +1334,12 @@
           ]
         },
         "file:///e:/projects/visual studio/libtcod development/epsilon/utility.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp": {
           "roles": [
             "analysisTarget",
             "resultFile"
@@ -2478,6 +2489,17 @@
             },
             "helpUri": ""
           },
+          "26812": {
+            "id": "26812",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
           "6328": {
             "id": "6328",
             "name": "",
@@ -3129,6 +3151,17 @@
           },
           "26454": {
             "id": "26454",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "26478": {
+            "id": "26478",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",

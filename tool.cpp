@@ -253,7 +253,7 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	}
 
 	//Fire bullet
-	if (engine->settings->input->leftMouseClick && fireWait == 0 && ammoAmount != 0)
+	if (engine->settings->input->leftMouseClick && fireWait == 0 && ammoAmount != 0 && reloadWait == 0)
 	{
 		if (!(toolx == dx + toolx && tooly == dy + tooly))
 		{
