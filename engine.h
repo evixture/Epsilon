@@ -4,9 +4,6 @@
 class Engine
 {
 public:
-	std::mutex mutex;
-	mutable std::mutex mutexC;
-
 	std::shared_ptr<Settings> settings;
 	std::shared_ptr<Gui> gui;
 

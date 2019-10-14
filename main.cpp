@@ -9,23 +9,10 @@
 //else use WinMain to hide console
 int WinMain()
 {
-	std::thread updateThread(&Engine::update, engine);
-	std::thread renderThread(&Engine::render, engine);
-	
-	//if (!TCODConsole::isWindowClosed() && engine->gamestate != Engine::EXIT)
-	//{
-	//	//error here, thread cannot be reinitialized multiple times
-	//	//updateThread;// = std::thread(&Engine::update, engine);
-	//	//renderThread;// = std::thread(&Engine::render, engine);
-	//
-	//	std::thread updateThread(&Engine::update, engine);
-	//	std::thread renderThread(&Engine::render, engine);
-	//}
-
-	if (TCODConsole::isWindowClosed())
+	while (!TCODConsole::isWindowClosed() && engine->gamestate != Engine::EXIT)
 	{
-		updateThread.join();
-		renderThread.join();
+		engine->update();
+		engine->render();
 	}
 
 	TCOD_quit();
