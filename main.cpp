@@ -10,22 +10,15 @@
 int WinMain()
 {
 	std::thread updateThread(&Engine::update, engine);
-	std::thread renderThread(&Engine::render, engine);
 	
-	//if (!TCODConsole::isWindowClosed() && engine->gamestate != Engine::EXIT)
-	//{
-	//	//error here, thread cannot be reinitialized multiple times
-	//	//updateThread;// = std::thread(&Engine::update, engine);
-	//	//renderThread;// = std::thread(&Engine::render, engine);
-	//
-	//	std::thread updateThread(&Engine::update, engine);
-	//	std::thread renderThread(&Engine::render, engine);
-	//}
+	while (!TCODConsole::isWindowClosed() && engine->gamestate != Engine::EXIT)
+	{
+		engine->render();
+	}
 
-	if (TCODConsole::isWindowClosed())
+	if (TCODConsole::isWindowClosed() && updateThread.joinable())
 	{
 		updateThread.join();
-		renderThread.join();
 	}
 
 	TCOD_quit();

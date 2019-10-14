@@ -104,6 +104,10 @@ bool BLine::end()
 	return false;
 }
 
+Clock::Clock()
+{
+}
+
 double getAngle(int ix, int iy, int tx, int ty)
 {
 	int dx = tx - ix;

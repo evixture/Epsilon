@@ -57,6 +57,7 @@ constexpr auto PI = 3.14159265;
 #include <thread>
 #include <mutex>
 #include <atomic>
+#include <chrono>
 //#include <stdexcept>
 
 //Libraries

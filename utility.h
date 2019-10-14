@@ -23,4 +23,11 @@ private:
 	int desty;
 };
 
+struct Clock
+{
+	double startTime;
+
+	Clock();
+};
+
 double getAngle(int ix, int iy, int tx, int ty);

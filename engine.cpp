@@ -12,27 +12,21 @@ Engine::Engine(int screenCharWidth, int screenCharHeight)
 void Engine::update()
 {
 	//std::lock_guard<std::mutex> lock(mutex);
-	mutex.lock();
+	//mutex.lock();
 	while (!TCODConsole::isWindowClosed() && engine->gamestate != Engine::EXIT)
 	{
 		settings->update(gui->mapPane->world->player);
 		gui->update();
 	}
-	mutex.unlock();
+	//mutex.unlock();
 }
 
 //Head of Render Loop
 void Engine::render() const
 {
-	//std::lock_guard<mutable std::mutex> lock(mutexC);
-	mutexC.lock();
-	while (!TCODConsole::isWindowClosed() && engine->gamestate != Engine::EXIT)
-	{
-		//error here, tcod methods create error
-		TCODConsole::root->clear();
-		settings->render();
-		gui->render();
-		TCODConsole::flush();
-	}
-	mutexC.unlock();
+	//error here, tcod methods create error
+	TCODConsole::root->clear();
+	settings->render();
+	gui->render();
+	TCODConsole::flush();
 }
