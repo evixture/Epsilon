@@ -1,12 +1,28 @@
 #include "main.hpp"
 
-//Tool Struct
-Tool::Tool(TCODColor color)
-	:color(color), toolx(0), tooly(0), ch(NULL), dx(0), dy(0), Container()
+//Container struct
+Container::Container(const char* name)
+	:name(name)
 {
 }
 
-void Tool::update(int x, int y, int mx, int my, double angle)
+void Container::update()
+{
+	return;
+}
+
+void Container::render()
+{
+	return;
+}
+
+//Tool Struct
+Tool::Tool(const char* name, TCODColor color)
+	:color(color), toolx(0), tooly(0), ch(NULL), dx(0), dy(0), Container(name)
+{
+}
+
+void Tool ::update(int x, int y, int mx, int my, double angle)
 {
 	ch = 249;
 	dx = mx - x;
@@ -86,7 +102,7 @@ void Tool::update(int x, int y, int mx, int my, double angle)
 	}
 }
 
-void Tool::render(const std::shared_ptr<Pane>& pane) const
+void Tool ::render(const std::shared_ptr<Pane>& pane) const
 {
 	pane->console->setChar(toolx, tooly, ch);
 	pane->console->setCharForeground(toolx, tooly, color);
@@ -157,14 +173,17 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 	}
 }
 //Weapon Struct
-Weapon::Weapon(TCODColor color, int ammoCap, int numberMags, int fireRate, int reloadSpeed)
-	:Tool(color), fireCap(fireRate), fireWait(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), reloadTimer(reloadSpeed), reloadWait(0)
+Weapon::Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed)
+	: Tool(name, color), baseFireCap(fireRate), fireWait(0), fireCap(60), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), reloadTimer(60), reloadWait(0), baseReloadTimer(reloadSpeed)
 {}
 
 void Weapon::update(int x, int y, int mx, int my, double angle)
 {
 	dx = mx - x;
 	dy = my - y;
+
+	fireCap = (int)(baseFireCap * TCODSystem::getFps());
+	reloadTimer = (int)(baseReloadTimer * TCODSystem::getFps());
 
 	if (dx >= 0 && dy >= 0)
 	{
@@ -312,23 +331,9 @@ void Weapon::render(const std::shared_ptr<Pane>& pane) const
 	}
 }
 
-Container::Container()
-	:active(false)
-{
-}
 
-void Container::update()
-{
-	return;
-}
-
-void Container::render()
-{
-	return;
-}
-
-Item::Item(std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool)
-	:tile(tile), tool(tool), Container()
+Item::Item(const char* name, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool)
+	:tile(tile), tool(tool), Container(name)
 {
 }
 

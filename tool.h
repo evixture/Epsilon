@@ -3,8 +3,9 @@
 struct Container
 {
 	bool active;
+	const char* name;
 
-	Container();
+	Container(const char* name);
 
 	virtual void update();
 	virtual void render();
@@ -21,7 +22,7 @@ struct Tool : public Container
 	int dx;
 	int dy;
 
-	Tool(TCODColor color);
+	Tool(const char* name, TCODColor color);
 
 	virtual void update(int x, int y, int mx, int my, double angle);
 	virtual void render(const std::shared_ptr<Pane>& pane) const;
@@ -49,12 +50,6 @@ struct Bullet
 	void render(const std::shared_ptr<Pane>& pane) const;
 };
 
-//struct Magazine
-//{
-//	int maxCapacity;
-//	int currentCapacity;
-//};
-
 //change name
 struct Weapon : public Tool
 {
@@ -64,14 +59,16 @@ struct Weapon : public Tool
 	int ammoAmount;
 
 	int fireWait;
+	float baseFireCap;
 	int fireCap;
 
 	int reloadTimer;
+	float baseReloadTimer;
 	int reloadWait;
 
 	std::vector<std::shared_ptr<Bullet>> bulletList;
 
-	Weapon(TCODColor color, int ammoCap, int numberMags, int fireRate, int reloadSpeed);
+	Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed);
 
 	//void weaponFire(int endx, int endy, std::shared_ptr<Pane> pane, int xbound, int ybound);
 
@@ -87,7 +84,7 @@ struct Item : public Container
 	std::shared_ptr<Tile> tile;
 	std::shared_ptr<Tool> tool;
 
-	Item(std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool);
+	Item(const char* name, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool);
 
 	void update();
 	void render();

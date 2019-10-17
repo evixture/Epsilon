@@ -2,7 +2,7 @@
 
 //Input Struct
 Input::Input()
-	:keyboard(), mouse(), moveUp(false), moveDown(false), moveLeft(false), moveRight(false), moveTimer(0), moveWait(10), f11Toggle(false), baseMoveWait(0), leftMouseClick(false), reload(false), changeFloor(false)
+	:keyboard(), mouse(), moveUp(false), moveDown(false), moveLeft(false), moveRight(false), moveTimer(0), moveWait(10), f11Toggle(false), baseMoveWait(0.0f), leftMouseClick(false), reload(false), changeFloor(false)
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &keyboard, &mouse);
 }
@@ -78,15 +78,15 @@ void Input::getKeyDown()
 	//	SPEED
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
 	{
-		baseMoveWait = 15;
+		baseMoveWait = .25f;
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
 	{
-		baseMoveWait = 60;
+		baseMoveWait = 1.0f;
 	}
 	else
 	{
-		baseMoveWait = 30;
+		baseMoveWait = .5f;
 	}
 
 	//HEIGHT
@@ -144,22 +144,6 @@ void Input::getKeyDown()
 	{
 		engine->gamestate = Engine::EXIT;
 	}
-
-	//// ALT + KEY COMMANDS
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt))
-	//{
-	//	//HARD CHANGES THE MAP RENDERED
-	//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
-	//	{
-	//		engine->gui->mapPane->world->player->level = 0;
-	//	}
-
-	//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
-	//	{
-	//		engine->gui->mapPane->world->player->level = 1;
-	//	}
-
-	//}
 }
 
 //multiply speed by height for slower movement at lower heights
@@ -174,7 +158,7 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 		moveXSpeed = 0;
 		moveYSpeed = 0;
 		
-		moveWait = baseMoveWait / engine->gui->mapPane->world->player->height;
+		moveWait = (int)((baseMoveWait / engine->gui->mapPane->world->player->height) * TCODSystem::getFps());
 
 		if (moveUp)
 		{

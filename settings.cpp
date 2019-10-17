@@ -7,7 +7,7 @@ Font::Font(const char* fontName, const char* xdim, const char* ydim, const char*
 
 //Settings Class
 Settings::Settings(int screenCharWidth, int screenCharHeight)
-	: screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 5"), fullscreen(false), maxFps(60), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_GLSL), 
+	: screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 5"), fullscreen(false), maxFps(0), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_GLSL), 
 	fovRad(0), lightWalls(true)
 {
 	//fontList.push_back(terminal16x16 = std::make_shared<Font>("Terminal", "16", "16", "data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16));
@@ -53,8 +53,8 @@ void Settings::printDebugStats()
 	{
 		TCODConsole::root->printf(10, 0, "FPS>%i mx>%i my>%i px>%i py>%i  ph>%i, ",
 			TCODSystem::getFps(),
-			settings->input->mouse.cx - 1,
-			settings->input->mouse.cy - 3,
+			engine->settings->input->mouse.cx - 1,
+			engine->settings->input->mouse.cy - 3,
 			engine->gui->mapPane->world->player->mapPosition.x,
 			engine->gui->mapPane->world->player->mapPosition.y,
 			engine->gui->mapPane->world->player->mapPosition.level);

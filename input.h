@@ -7,7 +7,7 @@ struct Input
 	TCOD_key_t keyboard;
 	TCOD_mouse_t mouse;
 
-	int baseMoveWait;
+	float baseMoveWait;
 
 	bool moveUp;
 	bool moveDown;

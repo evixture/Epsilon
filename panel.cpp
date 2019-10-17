@@ -100,11 +100,11 @@ void PlayerPane::update()
 	{
 		playerSpeed = "Walking";
 	}
-	if (engine->settings->input->baseMoveWait == 15)
+	else if (engine->settings->input->baseMoveWait == 15)
 	{
 		playerSpeed = "Running";
 	}
-	if (engine->settings->input->baseMoveWait == 60)
+	else if (engine->settings->input->baseMoveWait == 60)
 	{
 		playerSpeed = "Creeping";
 	}

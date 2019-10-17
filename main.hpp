@@ -70,9 +70,9 @@ struct Entity;
 
 //Class File Imports
 #include "utility.h"
+#include "tile.h"
 #include "tool.h"
 #include "entity.h"
-#include "tile.h"
 #include "map.h"
 #include "input.h"
 #include "settings.h"
