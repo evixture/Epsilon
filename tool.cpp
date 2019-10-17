@@ -2,7 +2,7 @@
 
 //Tool Struct
 Tool::Tool(TCODColor color)
-	:color(color), toolx(0), tooly(0), ch(NULL), dx(0), dy(0)
+	:color(color), toolx(0), tooly(0), ch(NULL), dx(0), dy(0), Container()
 {
 }
 
@@ -91,7 +91,6 @@ void Tool::render(const std::shared_ptr<Pane>& pane) const
 	pane->console->setChar(toolx, tooly, ch);
 	pane->console->setCharForeground(toolx, tooly, color);
 }
-
 
 //Bullet Struct
 Bullet::Bullet(int startx, int starty, int dx, int dy, int xbound, int ybound)
@@ -311,4 +310,32 @@ void Weapon::render(const std::shared_ptr<Pane>& pane) const
 	{
 		bullet->render(pane);
 	}
+}
+
+Container::Container()
+	:active(false)
+{
+}
+
+void Container::update()
+{
+	return;
+}
+
+void Container::render()
+{
+	return;
+}
+
+Item::Item(std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool)
+	:tile(tile), tool(tool), Container()
+{
+}
+
+void Item::update()
+{
+}
+
+void Item::render()
+{
 }

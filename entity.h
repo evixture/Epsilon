@@ -34,6 +34,9 @@ struct Creature : public Entity
 	int health;
 	int armor;
 
+	int inventorySelection;
+	std::shared_ptr<std::vector<std::shared_ptr<Container>>> inventory;
+
 	std::shared_ptr<Tool> hands;
 	std::vector<std::shared_ptr<Tool>> toolList;
 	std::shared_ptr<Tool> currentTool;
@@ -50,9 +53,7 @@ public:
 	int weaponSelection;
 
 	std::shared_ptr<Weapon> testWeapon;
-	//, int symbol, const char* name, TCODColor color
 	Player(Position pos);
-	//inventory (struct)
 
 	void update();
 	void render(const std::shared_ptr<Pane>& pane) const;

@@ -40,7 +40,10 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 Player::Player(Position pos)
 	:Creature(Position(pos), '@', "player", TCODColor::azure, 100, 0), weaponSelection(0)
 {
-	toolList.push_back(hands = std::make_shared<Tool>(TCODColor::peach));
+	inventory->push_back(hands = std::make_shared<Tool>(TCODColor::peach));
+	//inventory->push_back(std::make_shared<Tool>(TCODColor::peach));
+
+	//toolList.push_back(hands = std::make_shared<Tool>(TCODColor::peach));
 	toolList.push_back(testWeapon = std::make_shared<Weapon>(TCODColor::darkestGrey, 30, 10, 5, 120));
 	currentTool = toolList[0];
 }

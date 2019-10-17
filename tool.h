@@ -1,6 +1,16 @@
 #include "main.hpp"
 
-struct Tool
+struct Container
+{
+	bool active;
+
+	Container();
+
+	virtual void update();
+	virtual void render();
+};
+
+struct Tool : public Container
 {
 	TCODColor color;
 	int ch;
@@ -48,9 +58,6 @@ struct Bullet
 //change name
 struct Weapon : public Tool
 {
-	//TCODColor weaponColor;
-
-	//later make magazine class
 	int numberMags;
 
 	int ammoCap;
@@ -62,11 +69,6 @@ struct Weapon : public Tool
 	int reloadTimer;
 	int reloadWait;
 
-	//display
-	//int weaponx;
-	//int weapony;
-	//int ch;
-
 	std::vector<std::shared_ptr<Bullet>> bulletList;
 
 	Weapon(TCODColor color, int ammoCap, int numberMags, int fireRate, int reloadSpeed);
@@ -75,10 +77,18 @@ struct Weapon : public Tool
 
 	void update(int x, int y, int mx, int my, double angle);
 	void render(const std::shared_ptr<Pane>& pane) const;
+};
 
-//private:
-//
-//	int dx;
-//	int dy;
 
+struct Item : public Container
+{
+	bool onMap;
+
+	std::shared_ptr<Tile> tile;
+	std::shared_ptr<Tool> tool;
+
+	Item(std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool);
+
+	void update();
+	void render();
 };

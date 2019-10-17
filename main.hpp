@@ -39,7 +39,9 @@
 
 //ERROR
 #define TILE_error         std::make_shared<Tile>		 ('%', TCODColor::black,         TCODColor::pink,          4, true , "static")
-//============COLORS===================================================================================================== |
+//============WEAPONS===================================================================================================== |
+#define TESTWEAPON std::shared_ptr<Weapon>(TCODColor::darkestGrey, 30, 10, 5, 120)
+
 #define RIBONBGCOLOR TCODColor::darkBlue
 #define RIBONFGCOLOR TCODColor::lightestGrey
 

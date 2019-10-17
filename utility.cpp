@@ -104,10 +104,22 @@ bool BLine::end()
 	return false;
 }
 
+int square(int x)
+{
+	return x * x;
+}
+
 double getAngle(int ix, int iy, int tx, int ty)
 {
 	int dx = tx - ix;
 	int dy = ty - iy;
 	double itan = (double)(dy) / (double)(dx);
 	return atan(itan) * 180 / PI;
+}
+
+double getDistance(int ix, int iy, int tx, int ty)
+{
+	int xLength = square(tx - ix);
+	int yLength = square(ty - iy);
+	return sqrt(xLength + yLength);
 }
