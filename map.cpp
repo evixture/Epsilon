@@ -199,6 +199,10 @@ int World::getOffset(int playerx, int mapw, int renderw)
 	{
 		return mapw - renderw;
 	}
+	else
+	{
+		return 0;
+	}
 }
 
 bool  World::getWalkability(int x, int y, int level) const
@@ -213,24 +217,15 @@ bool  World::getWalkability(int x, int y, int level) const
 
 bool  World::getTransparency(int x, int y, int level, int height) const
 {
-	//BUG HERE
-	//if (debugmap->levelList[level][x + y * debugmap->mapWidth])
-	//{
-		if (height <= debugmap->levelList[level][x + y * debugmap->mapWidth]->height)
+	if (height <= debugmap->levelList[level][x + y * debugmap->mapWidth]->height)
+	{
+		if (debugmap->levelList[level][x + y * debugmap->mapWidth]->tag == "destructible" && debugmap->levelList[level][x + y * debugmap->mapWidth]->getDestroyed())
 		{
-			if (debugmap->levelList[level][x + y * debugmap->mapWidth]->tag == "destructible" && debugmap->levelList[level][x + y * debugmap->mapWidth]->getDestroyed())
-			{
-				return true;
-			}
-
-			return false;
-		}
-		//else if (height > debugmap->levelList[level][x + y * debugmap->mapWidth]->height)
-		//{
 			return true;
-		//}
-	//}
-	//return false;
+		}
+		return false;
+	}
+	return true;
 }
 
 //check limits

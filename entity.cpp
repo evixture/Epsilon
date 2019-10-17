@@ -22,7 +22,7 @@ void Entity::render(const std::shared_ptr<Pane>& pane) const
 }
 
 Creature::Creature(Position pos, int symbol, const char* name, TCODColor color, int health, int armor)
-	:Entity(Position(pos), symbol, name, color), health(health), armor(armor), angle(0)
+	:Entity(Position(pos), symbol, name, color), health(health), armor(armor), angle(0), inventoryIndex(0)
 {
 }
 
@@ -38,14 +38,14 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 }
 
 Player::Player(Position pos)
-	:Creature(Position(pos), '@', "player", TCODColor::azure, 100, 0), weaponSelection(0)
+	:Creature(Position(pos), '@', "player", TCODColor::azure, 100, 0)
 {
-	//inventory->push_back(hands = std::make_shared<Tool>("tempName", TCODColor::peach));
-	//inventory->push_back(std::make_shared<Tool>(TCODColor::peach));
+	inventory.push_back(std::make_shared<Tool>("Hands", TCODColor::peach));
+	inventory.push_back(std::make_shared<Weapon>("AR Rifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f));
 
-	toolList.push_back(hands = std::make_shared<Tool>("hands", TCODColor::peach));
-	toolList.push_back(testWeapon = std::make_shared<Weapon>("tempName", TCODColor::darkestGrey, 30, 10, .09f, 2.0f));
-	currentTool = toolList[0];
+	//toolList.push_back(hands = std::make_shared<Tool>("hands", TCODColor::peach));
+	//toolList.push_back(testWeapon = std::make_shared<Weapon>("tempName", TCODColor::darkestGrey, 30, 10, .09f, 2.0f));
+	currentContainer = inventory[inventoryIndex];
 }
 
 void Player::update()
@@ -58,24 +58,24 @@ void Player::update()
 	{
 		if (engine->settings->input->mouse.wheel_down)
 		{
-			if (weaponSelection < toolList.size() - 1)
+			if (inventoryIndex < inventory.size() - 1)
 			{
-				weaponSelection++;
+				inventoryIndex++;
 			}
 		}
 		if (engine->settings->input->mouse.wheel_up)
 		{
-			if (weaponSelection > 0)
+			if (inventoryIndex > 0)
 			{
-				weaponSelection--;
+				inventoryIndex--;
 			}
 		}
-		currentTool = toolList[weaponSelection];
+		currentContainer = inventory[inventoryIndex];
 	}
 
 	angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
 
-	currentTool->update(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, angle);
+	currentContainer->update(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, angle);
 
 	if (engine->settings->input->changeFloor == true)
 	{
@@ -90,5 +90,5 @@ void Player::render(const std::shared_ptr<Pane>& pane) const
 {
 	pane->console->setChar(renderPosition.x, renderPosition.y, symbol);
 	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
-	currentTool->render(pane);
+	currentContainer->render(pane);
 }

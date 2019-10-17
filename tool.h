@@ -7,8 +7,8 @@ struct Container
 
 	Container(const char* name);
 
-	virtual void update();
-	virtual void render();
+	virtual void update(int x, int y, int mx, int my, double angle);
+	virtual void render(const std::shared_ptr<Pane>& pane) const;
 };
 
 struct Tool : public Container
@@ -87,5 +87,5 @@ struct Item : public Container
 	Item(const char* name, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool);
 
 	void update();
-	void render();
+	void render() const;
 };

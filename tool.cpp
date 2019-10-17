@@ -2,16 +2,16 @@
 
 //Container struct
 Container::Container(const char* name)
-	:name(name)
+	:name(name), active(false)
 {
 }
 
-void Container::update()
+void Container::update(int x, int y, int mx, int my, double angle)
 {
 	return;
 }
 
-void Container::render()
+void Container::render(const std::shared_ptr<Pane>& pane) const
 {
 	return;
 }
@@ -19,10 +19,9 @@ void Container::render()
 //Tool Struct
 Tool::Tool(const char* name, TCODColor color)
 	:color(color), toolx(0), tooly(0), ch(NULL), dx(0), dy(0), Container(name)
-{
-}
+{}
 
-void Tool ::update(int x, int y, int mx, int my, double angle)
+void Tool::update(int x, int y, int mx, int my, double angle)
 {
 	ch = 249;
 	dx = mx - x;
@@ -102,7 +101,7 @@ void Tool ::update(int x, int y, int mx, int my, double angle)
 	}
 }
 
-void Tool ::render(const std::shared_ptr<Pane>& pane) const
+void Tool::render(const std::shared_ptr<Pane>& pane) const
 {
 	pane->console->setChar(toolx, tooly, ch);
 	pane->console->setCharForeground(toolx, tooly, color);
@@ -172,6 +171,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 		pane->console->setChar(travel.x, travel.y, 248);
 	}
 }
+
 //Weapon Struct
 Weapon::Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed)
 	: Tool(name, color), baseFireCap(fireRate), fireWait(0), fireCap(60), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), reloadTimer(60), reloadWait(0), baseReloadTimer(reloadSpeed)
@@ -331,7 +331,6 @@ void Weapon::render(const std::shared_ptr<Pane>& pane) const
 	}
 }
 
-
 Item::Item(const char* name, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool)
 	:tile(tile), tool(tool), Container(name)
 {
@@ -341,6 +340,6 @@ void Item::update()
 {
 }
 
-void Item::render()
+void Item::render() const
 {
 }
