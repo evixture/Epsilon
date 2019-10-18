@@ -1,5 +1,6 @@
 #include "main.hpp"
 
+//BLine Class
 BLine::BLine(int ix, int iy, int tx, int ty)
 	:origx(ix), origy(iy), destx(tx), desty(ty), x(ix), y(iy)
 {
@@ -121,5 +122,6 @@ double getDistance(int ix, int iy, int tx, int ty)
 {
 	int xLength = square(tx - ix);
 	int yLength = square(ty - iy);
-	return sqrt(xLength + yLength);
+	double hypo = sqrt(xLength + yLength);
+	return hypo;
 }

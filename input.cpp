@@ -14,11 +14,9 @@ void Input::getMouseInput()
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			leftMouseClick = true;
-			//engine->gui->mapPane->world->player->testWeapon->weaponFire(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, engine->gui->mapPane->drawWindow);
 		}
 		else
 		{
-			//TCODLine::init(player->testWeapon->weaponx, player->testWeapon->weapony, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
 			leftMouseClick = false;
 		}
 	}
@@ -146,7 +144,6 @@ void Input::getKeyDown()
 	}
 }
 
-//multiply speed by height for slower movement at lower heights
 void Input::getKeyInput(std::shared_ptr<Player> player)
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &keyboard, &mouse);
@@ -201,7 +198,6 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 		}
 	}
 }
-
 
 void Input::update(std::shared_ptr<Player> player)
 {

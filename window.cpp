@@ -1,6 +1,6 @@
 #include "main.hpp"
 
-//Window Struct
+//Pane Struct
 Pane::Pane(int consoleW, int consoleH, TCODColor bgColor, TCODColor fgColor)
 	:consoleW(consoleW), consoleH(consoleH), bgColor(bgColor), fgColor(fgColor)
 {
@@ -26,19 +26,13 @@ Ribon::Ribon(const char* windowName, int windowW)
 	ribonWindow = std::make_shared<Pane>(windowW, 1, RIBONBGCOLOR, RIBONFGCOLOR);
 }
 
-//void Ribon::updateRibonName(const char* ribonName)
-//{
-//	windowName = ribonName;
-//}
-
-//Ribon Render
 void Ribon::render() const
 {
 	ribonWindow->render();
 	ribonWindow->console->printf(0, 0, "|%s|", windowName);
 }
 
-//GuiWindow Struct
+//Window Struct
 Window::Window(int windowW, int windowH, const char* panelName, int rx, int ry)
 	: windowW(windowW), windowH(windowH), panelName(panelName), renderpos(Position(rx, ry, NULL))
 {
@@ -57,14 +51,12 @@ void Window::setRibonName(const char* ribonName)
 	ribon->windowName = ribonName;
 }
 
-//GuiWindow clears window
 void Window::clearWindow() const
 {
 	ribon->render();
 	drawWindow->render();
 }
 
-//GuiWindow blits the consoles together and pushes to root
 void Window::pushWindow() const
 {
 	ribon->ribonWindow->console->blit(ribon->ribonWindow->console, 0, 0, ribon->ribonWindow->consoleW, ribon->ribonWindow->consoleH, mainWindow->console, 0, 0, 1, 1);

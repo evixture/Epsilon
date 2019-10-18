@@ -5,7 +5,7 @@ Position::Position(int x, int y, int level)
 	:x(x), y(y), level(level)
 {}
 
-//Default Entity Class
+//Entity Class
 Entity::Entity(Position pos, int symbol, const char* name, TCODColor color)
 	: mapPosition(pos), renderPosition(pos), symbol(symbol), name(name), color(color), height(3)
 {}
@@ -21,6 +21,7 @@ void Entity::render(const std::shared_ptr<Pane>& pane) const
 	pane->console->setCharForeground(mapPosition.x, mapPosition.y, color);
 }
 
+//Creature Class
 Creature::Creature(Position pos, int symbol, const char* name, TCODColor color, int health, int armor)
 	:Entity(Position(pos), symbol, name, color), health(health), armor(armor), angle(0), inventoryIndex(0)
 {
@@ -37,6 +38,7 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 	pane->console->setCharForeground(mapPosition.x, mapPosition.y, color);
 }
 
+//Player Class
 Player::Player(Position pos)
 	:Creature(Position(pos), '@', "player", TCODColor::azure, 100, 0)
 {

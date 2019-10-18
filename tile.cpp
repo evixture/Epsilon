@@ -40,6 +40,7 @@ void Tile::render(int x, int y, const std::shared_ptr<Pane>& pane) const
 	}
 }
 
+//Destructible Struct
 Destructible::Destructible(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable, int strength)
 	: Tile(ch, foregroundColor, backgroundColor, height, walkable, "destructible"), strength(strength), destroyed(false)
 {
@@ -67,6 +68,7 @@ void Destructible::interact()
 
 }
 
+//Stair Struct
 Stair::Stair(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable, int moveDist)
 	: Tile(ch, foregroundColor, backgroundColor, height, true, "stair"), moveDist(moveDist)
 {

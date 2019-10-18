@@ -135,8 +135,6 @@ World::World()
 	//currentMap = mapList[player->level]; 
 }
 
-//Returns to tiles
-
 std::shared_ptr<Tile> World::getTile(int x, int y, int level) const
 {
 	if (inMapBounds(x, y, level))
@@ -161,21 +159,6 @@ TCODColor World::getBgColor(int x, int y, int level) const
 {
 	return debugmap->levelList[level][x + y * debugmap->mapWidth]->backgroundColor;
 }
-
-//TCODColor World::getFgColor(int x, int y, int level) const
-//{
-//	return debugmap->levelList[level][x + y * debugmap->mapWidth]->foregroundColor;
-//}
-
-//int World::getCh(int x, int y, int level) const
-//{
-//	return debugmap->levelList[level][x + y * debugmap->mapWidth]->ch;
-//}
-
-//int World::getHeight(int tx, int ty, int level) const
-//{
-//	return debugmap->levelList[level][tx + ty * debugmap->mapWidth]->height;
-//}
 
 bool World::inMapBounds(int x, int y, int level) const
 {
@@ -228,7 +211,6 @@ bool  World::getTransparency(int x, int y, int level, int height) const
 	return true;
 }
 
-//check limits
 void World::updateProperties()
 {
 	for (int y = 0; y < debugmap->mapHeight; y++)
@@ -245,7 +227,6 @@ void World::computeFov()
 	fovMap->computeFov(player->mapPosition.x, player->mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
 }
 
-//check tcodmap fov
 bool World::isInFov(int x, int y, int level) const
 {
 	x += xOffset;
@@ -263,7 +244,6 @@ bool World::isInFov(int x, int y, int level) const
 	return false;
 }
 
-//World update
 void World::update()
 {
 	xOffset = getOffset(player->mapPosition.x, debugmap->mapWidth, engine->gui->mapPane->drawWindow->consoleW);
@@ -278,7 +258,6 @@ void World::update()
 	}
 }
 
-//World Render
 void World::render(const std::shared_ptr<Pane>& pane) const
 {
 	for (int y = yOffset; y < pane->consoleH + yOffset; y++)

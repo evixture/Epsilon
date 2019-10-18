@@ -331,6 +331,7 @@ void Weapon::render(const std::shared_ptr<Pane>& pane) const
 	}
 }
 
+//Item struct
 Item::Item(const char* name, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool)
 	:tile(tile), tool(tool), Container(name)
 {

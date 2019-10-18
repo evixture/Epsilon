@@ -1,6 +1,6 @@
 #include "main.hpp"
 
-//GuiMap Struct
+//MapPane Struct
 MapPane::MapPane(int windowW, int windowH, int rx, int ry)
 	:Window(windowW, windowH, "World", rx, ry)
 {
@@ -16,7 +16,6 @@ void MapPane::update()
 	//setRibonName(world->debugmap->mapName);
 }
 
-//GuiMap Render
 void MapPane::render() const
 {
 	clearWindow();
@@ -35,12 +34,6 @@ StatusPane::StatusPane(int windowW, int windowH, int rx, int ry)
 
 }
 
-//void StatusPane::drawBar(std::shared_ptr<Pane> window, int x, int y, const char* barTitle, int barValue, int barMax)
-//{
-//	window->console->printf(x, y, "%s : [", barTitle);
-//
-//}
-
 void StatusPane::update()
 {
 	displayHealth = engine->gui->mapPane->world->player->health;
@@ -53,27 +46,10 @@ void StatusPane::render() const
 
 	drawWindow->console->printf(0, 0, "Health : [%i/100]", engine->gui->mapPane->world->player->health);
 	drawWindow->console->printf(0, 1, "Armor  : [%i/100]", engine->gui->mapPane->world->player->armor);
-
-	//for (int healthPrint = 0; healthPrint < displayHealth; healthPrint++)
-	//{
-	//	if (healthPrint < (engine->gui->mapPane->world->player->health * 5))
-	//	{
-	//	drawWindow->console->printf(healthPrint, 0, "=");
-	//	}
-	//}
-	//
-	//
-	//for (int armorPrint = 0; armorPrint < displayArmor; armorPrint++)
-	//{
-	//	if (armorPrint < (engine->gui->mapPane->world->player->armor * 5))
-	//	{
-	//		drawWindow->console->printf(armorPrint, 1, "=");
-	//	}
-	//}
-
 	pushWindow();
 }
 
+//PlayerPane Struct
 PlayerPane::PlayerPane(int windowW, int windowH, int rx, int ry)
 	:Window(windowW, windowH, "Player", rx, ry), playerSpeed("still"), playerStance("Standing")
 {
@@ -81,8 +57,6 @@ PlayerPane::PlayerPane(int windowW, int windowH, int rx, int ry)
 
 void PlayerPane::update()
 {
-	//playerWindow is 10x9
-
 	if (engine->gui->mapPane->world->player->height == 1)
 	{
 		playerStance = "Prone";
