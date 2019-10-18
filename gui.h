@@ -20,6 +20,5 @@ public:
 	void render() const;
 
 private:
-
 	std::vector<std::shared_ptr<Window>> windowList;
 };

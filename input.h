@@ -22,7 +22,6 @@ struct Input
 
 	//TODO : Move key checks to funcs with buttton params for config support
 
-	//not sure if ent param is needed
 	void update(std::shared_ptr<Player> player);
 
 	void getKeyDown();
@@ -31,7 +30,6 @@ struct Input
 	void getMouseInput();
 
 private:
-
 	int moveXSpeed;
 	int moveYSpeed;
 

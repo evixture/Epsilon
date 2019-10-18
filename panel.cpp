@@ -1,8 +1,8 @@
 #include "main.hpp"
 
 //GuiMap Struct
-MapPane::MapPane(int w, int h, int rx, int ry)
-	:Window(w, h, "World", rx, ry)
+MapPane::MapPane(int windowW, int windowH, int rx, int ry)
+	:Window(windowW, windowH, "World", rx, ry)
 {
 	mapSidePanel = std::make_shared<Pane>(1, 61, RIBONBGCOLOR, RIBONFGCOLOR);
 
@@ -29,8 +29,8 @@ void MapPane::render() const
 }
 
 //StatusPane Struct
-StatusPane::StatusPane(int w, int h, int rx, int ry)
-	:Window(w, h, "Status", rx, ry), displayHealth(0), displayArmor(0)
+StatusPane::StatusPane(int windowW, int windowH, int rx, int ry)
+	:Window(windowW, windowH, "Status", rx, ry), displayHealth(0), displayArmor(0)
 {
 
 }
@@ -74,8 +74,8 @@ void StatusPane::render() const
 	pushWindow();
 }
 
-PlayerPane::PlayerPane(int w, int h, int rx, int ry)
-	:Window(w, h, "Player", rx, ry), playerSpeed("still"), playerStance("Standing")
+PlayerPane::PlayerPane(int windowW, int windowH, int rx, int ry)
+	:Window(windowW, windowH, "Player", rx, ry), playerSpeed("still"), playerStance("Standing")
 {
 }
 

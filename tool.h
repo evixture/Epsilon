@@ -70,8 +70,6 @@ struct Weapon : public Tool
 
 	Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed);
 
-	//void weaponFire(int endx, int endy, std::shared_ptr<Pane> pane, int xbound, int ybound);
-
 	void update(int x, int y, int mx, int my, double angle);
 	void render(const std::shared_ptr<Pane>& pane) const;
 };

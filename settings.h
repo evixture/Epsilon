@@ -31,7 +31,6 @@ public:
 	std::shared_ptr<Font> terminal16x16;
 	std::vector<std::shared_ptr<Font>> fontList;
 
-	//main init
 	Settings(int screenCharWidth, int screenCharHeight);
 
 	void setFullscreen();
@@ -40,7 +39,6 @@ public:
 	void render();
 
 private:
-
 	int maxFps;
 	TCOD_renderer_t renderer;
 	const char* windowTitle;

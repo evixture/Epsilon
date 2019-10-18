@@ -36,14 +36,14 @@ struct Window
 {
 public:
 
-	int w;
-	int h;
+	int windowW;
+	int windowH;
 	const char* panelName;
 	Position renderpos;
 
 	std::shared_ptr<Pane> drawWindow;
 
-	Window(int w, int h, const char* panelName, int rx, int ry);
+	Window(int windowW, int windowH, const char* panelName, int rx, int ry);
 
 	virtual void update();
 	virtual void render() const;

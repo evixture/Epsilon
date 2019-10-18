@@ -12,15 +12,9 @@ struct BLine
 	bool end();
 
 private:
-	int stepx;
-	int stepy;
-	int e;
-	int deltax;
-	int deltay;
-	int origx;
-	int origy;
-	int destx;
-	int desty;
+	int stepx,  stepy,  e,
+		deltax, deltay, origx,
+		origy,  destx,  desty;
 };
 
 int square(int x);

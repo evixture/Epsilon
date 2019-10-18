@@ -10,9 +10,10 @@ struct Position
 	Position(int x, int y, int level);
 };
 
-//Default Entity Class
-struct Entity
+//Entity Class
+class Entity
 {
+public:
 	Position mapPosition;
 	Position renderPosition;
 	int symbol;
@@ -27,8 +28,10 @@ struct Entity
 	virtual void render(const std::shared_ptr<Pane> &pane) const;
 };
 
-struct Creature : public Entity
+//Creature Class
+class Creature : public Entity
 {
+public:
 	double angle;
 
 	int health;
@@ -44,6 +47,7 @@ struct Creature : public Entity
 	void virtual render(const std::shared_ptr<Pane>& pane) const;
 };
 
+//Player Class
 class Player : public Creature
 {
 public:

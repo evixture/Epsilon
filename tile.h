@@ -26,8 +26,6 @@ struct Tile
 	void render(int x, int y, const std::shared_ptr<Pane>& pane) const;
 };
 
-//, const char * tag
-
 struct Destructible : public Tile
 {
 	bool destroyed;

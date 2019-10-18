@@ -7,7 +7,7 @@ public:
 	std::shared_ptr<Settings> settings;
 	std::shared_ptr<Gui> gui;
 
-	enum Gamestate { INIT, MAIN, MENU, GAMEOVER, EXIT } gamestate;
+	enum Gamestate { INIT, STARTUP, MAIN, MENU, GAMEOVER, EXIT } gamestate;
 
 	Engine(int screenCharWidth, int screenCharHeight);
 
