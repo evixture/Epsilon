@@ -1,40 +1,4 @@
-﻿  engine.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(15,1): warning C4099: 'Entity': type name first seen using 'struct' now seen using 'class'
-  entity.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(14): message : see declaration of 'Entity'
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(15,1): warning C4099: 'Entity': type name first seen using 'struct' now seen using 'class'
-  gui.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(14): message : see declaration of 'Entity'
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(15,1): warning C4099: 'Entity': type name first seen using 'struct' now seen using 'class'
-  input.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(14): message : see declaration of 'Entity'
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(15,1): warning C4099: 'Entity': type name first seen using 'struct' now seen using 'class'
-  main.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(14): message : see declaration of 'Entity'
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(15,1): warning C4099: 'Entity': type name first seen using 'struct' now seen using 'class'
-  map.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(14): message : see declaration of 'Entity'
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(15,1): warning C4099: 'Entity': type name first seen using 'struct' now seen using 'class'
-  panel.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(14): message : see declaration of 'Entity'
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(15,1): warning C4099: 'Entity': type name first seen using 'struct' now seen using 'class'
-  settings.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(14): message : see declaration of 'Entity'
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(15,1): warning C4099: 'Entity': type name first seen using 'struct' now seen using 'class'
-  tile.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(14): message : see declaration of 'Entity'
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(15,1): warning C4099: 'Entity': type name first seen using 'struct' now seen using 'class'
-  tool.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(14): message : see declaration of 'Entity'
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(15,1): warning C4099: 'Entity': type name first seen using 'struct' now seen using 'class'
-  utility.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(14): message : see declaration of 'Entity'
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(15,1): warning C4099: 'Entity': type name first seen using 'struct' now seen using 'class'
-  window.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(14): message : see declaration of 'Entity'
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(15,1): warning C4099: 'Entity': type name first seen using 'struct' now seen using 'class'
-  Generating Code...
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.h(14): message : see declaration of 'Entity'
+﻿  entity.cpp
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
 engine.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:REF' specification
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

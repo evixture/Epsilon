@@ -75,6 +75,12 @@ void Player::update()
 		currentContainer = inventory[inventoryIndex];
 	}
 
+	for (auto& container : inventory)
+	{
+		container->active = false;
+	}
+	currentContainer->active = true;
+
 	angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
 
 	currentContainer->update(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, angle);

@@ -25,7 +25,7 @@
 //WALL
 #define TILE_BasicDoor     std::make_shared<Tile>		 ('#', TCODColor::darkSepia,     TCODColor::darkestSepia,  4, true, "static")
 #define TILE_BasicWall     std::make_shared<Destructible>('=', TCODColor::lightSepia,    TCODColor::lighterSepia,  4, false, 4 )
-#define TILE_BasicWindow   std::make_shared<Destructible>('_', TCODColor::lightCyan,     TCODColor::darkerSky,     0, false, 1 )
+#define TILE_BasicWindow   std::make_shared<Destructible>('_', TCODColor::lighterSepia,     TCODColor::darkerSky,     0, false, 1 )
 
 //PART HEIGHT
 #define TILE_BasicTable    std::make_shared<Destructible>('n', TCODColor::lighterSepia,  TCODColor::darkerSepia,   2, false, 2 )
@@ -66,7 +66,7 @@ constexpr auto PI = 3.14159265;
 #include <SFML/Window.hpp>
 
 struct Pane;
-struct Entity;
+class Entity;
 
 //Class File Imports
 #include "utility.h"

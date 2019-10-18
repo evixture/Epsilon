@@ -110,18 +110,18 @@ int square(int x)
 	return x * x;
 }
 
-double getAngle(int ix, int iy, int tx, int ty)
+float getAngle(int ix, int iy, int tx, int ty)
 {
 	int dx = tx - ix;
 	int dy = ty - iy;
-	double itan = (double)(dy) / (double)(dx);
-	return atan(itan) * 180 / PI;
+	float itan = (double)(dy) / (double)(dx);
+	return (float)(atan(itan) * 180 / PI);
 }
 
-double getDistance(int ix, int iy, int tx, int ty)
+float getDistance(int ix, int iy, int tx, int ty)
 {
 	int xLength = square(tx - ix);
 	int yLength = square(ty - iy);
-	double hypo = sqrt(xLength + yLength);
+	float hypo = sqrt(xLength + yLength);
 	return hypo;
 }

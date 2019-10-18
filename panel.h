@@ -36,3 +36,13 @@ struct PlayerPane : public Window
 
 	void render() const;
 };
+
+struct InventoryPane : public Window
+{
+	std::vector<const char*> itemNameList;
+
+	InventoryPane(int windowW, int windowH, int rx, int ry);
+
+	void update();
+	void render() const;
+};

@@ -19,6 +19,6 @@ private:
 
 int square(int x);
 
-double getAngle(int ix, int iy, int tx, int ty);
+float getAngle(int ix, int iy, int tx, int ty);
 
-double getDistance(int ix, int iy, int tx, int ty);
+float getDistance(int ix, int iy, int tx, int ty);

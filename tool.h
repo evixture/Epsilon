@@ -78,6 +78,7 @@ struct Weapon : public Tool
 struct Item : public Container
 {
 	bool onMap;
+	float distToCreature();
 
 	std::shared_ptr<Tile> tile;
 	std::shared_ptr<Tool> tool;

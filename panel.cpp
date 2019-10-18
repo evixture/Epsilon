@@ -93,3 +93,43 @@ void PlayerPane::render() const
 
 	pushWindow();
 }
+
+InventoryPane::InventoryPane(int windowW, int windowH, int rx, int ry)
+	:Window(windowW, windowH, "Inventory", rx, ry)
+{
+}
+
+void InventoryPane::update()
+{
+	for (int i = 0; i < engine->gui->mapPane->world->player->inventory.size() - 1; i++)
+	{
+		//itemNameList[i] = engine->gui->mapPane->world->player->inventory[i]->name;
+		//if (i < engine->gui->mapPane->world->player->inventory.size())
+		//{
+			itemNameList.push_back(engine->gui->mapPane->world->player->inventory[i]->name);
+		//}
+	}
+}
+
+void InventoryPane::render() const
+{
+	clearWindow();
+
+	for (int i = 0; i < drawWindow->consoleH; i++)
+	{
+		//drawWindow->console->printf(0, i, itemNameList[i]);
+		if (i < engine->gui->mapPane->world->player->inventory.size())
+		{
+			if (engine->gui->mapPane->world->player->inventory[i]->active)
+			{
+				drawWindow->console->printf(0, i, "|>%s", engine->gui->mapPane->world->player->inventory[i]->name);
+			}
+			else
+			{
+				drawWindow->console->printf(0, i, "| %s", engine->gui->mapPane->world->player->inventory[i]->name);
+			}
+		}
+	}
+
+	pushWindow();
+}

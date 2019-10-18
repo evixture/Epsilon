@@ -2,7 +2,8 @@
 
 //Input Struct
 Input::Input()
-	:keyboard(), mouse(), moveUp(false), moveDown(false), moveLeft(false), moveRight(false), moveTimer(0), moveWait(10), f11Toggle(false), baseMoveWait(0.0f), leftMouseClick(false), reload(false), changeFloor(false)
+	:keyboard(), mouse(), moveUp(false), moveDown(false), moveLeft(false), moveRight(false), moveTimer(0), moveWait(10), f11Toggle(false), baseMoveWait(0.0f), leftMouseClick(false), reload(false), changeFloor(false),
+	changeFloorToggle(false), moveXSpeed(0), moveYSpeed(0), reloadToggle(false)
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &keyboard, &mouse);
 }
