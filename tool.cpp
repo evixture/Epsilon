@@ -332,15 +332,59 @@ void Weapon::render(const std::shared_ptr<Pane>& pane) const
 }
 
 //Item struct
-Item::Item(const char* name, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool)
-	:tile(tile), tool(tool), Container(name), onMap(false)
+Item::Item(const char* name, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, bool renderMap, bool renderTool, Position pos)
+	: Container(name), tile(tile), tool(tool), renderTile(renderMap), renderTool(renderTool), mapPosition(pos), renderPosition(pos), tileBackgoundColor(TCODColor::pink), distToCreature(0)
 {
 }
 
-void Item::update()
+void Item::update(int x, int y, int mx, int my, double angle)
 {
+	renderPosition.x = mapPosition.x - WORLD->xOffset;
+	renderPosition.y = mapPosition.y - WORLD->yOffset;
+	renderPosition.level = mapPosition.level;
+
+	if (renderTile)
+	{
+		distToCreature = getDistance(x, y, mapPosition.x, mapPosition.y);
+
+		if (distToCreature < 5)
+		{
+			tileBackgoundColor = tile->backgroundColor;
+		}
+		else
+		{
+			tileBackgoundColor = TCODColor::pink;
+		}
+	}
+	else if (renderTool)
+	{
+		tool->update(x, y, mx, my, angle);
+	}
 }
 
-void Item::render() const
+void Item::render(const std::shared_ptr<Pane>& pane) const
 {
+	if (renderTile)
+	{
+		if (WORLD->isInFov(renderPosition.x, renderPosition.y, WORLD->player->mapPosition.level))
+		{
+			pane->console->setCharBackground(renderPosition.x, renderPosition.y, tileBackgoundColor);
+			pane->console->setCharForeground(renderPosition.x, renderPosition.y, tile->foregroundColor);
+			pane->console->setChar(renderPosition.x, renderPosition.y, tile->ch);
+		}
+		else if (WORLD->isExplored(renderPosition.x, renderPosition.y, WORLD->player->mapPosition.level))
+		{
+			pane->console->setCharBackground(renderPosition.x, renderPosition.y, TCODColor::black);
+			pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
+			pane->console->setChar(renderPosition.x, renderPosition.y, tile->ch);
+		}
+		else
+		{
+			pane->console->setCharBackground(renderPosition.x, renderPosition.y, TCODColor::black);
+		}
+	}
+	else if(renderTool)
+	{
+		tool->render(pane);
+	}
 }

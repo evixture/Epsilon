@@ -105,6 +105,11 @@ bool BLine::end()
 	return false;
 }
 
+//Position Struct
+Position::Position(int x, int y, int level)
+	:x(x), y(y), level(level)
+{}
+
 int square(int x)
 {
 	return x * x;

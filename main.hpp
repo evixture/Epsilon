@@ -14,7 +14,7 @@
 */
 
 //	DEFINES
-//============TILES===============================CH===FOREGROUND=COLOR==========BACKGROUND=COLOR==========H==WALK===DEST |
+//============TILES===============================CH=====FOREGROUND=COLOR================BACKGROUND=COLOR==========H==WALK===DEST |
 //GROUND
 #define TILE_BasicGrass    std::make_shared<Tile>		 ('.', TCODColor(119, 161, 63),  TCODColor(32, 70, 19)  ,  0, true, "static")
 #define TILE_BasicFlower   std::make_shared<Tile>		 ('*', TCODColor::darkChartreuse,TCODColor::darkestSepia,  2, true, "static")
@@ -56,9 +56,6 @@ constexpr auto PI = 3.14159265;
 //#include <iostream>
 #include <string>
 #include <math.h>
-#include <thread>
-#include <mutex>
-#include <atomic>
 //#include <stdexcept>
 
 //Libraries

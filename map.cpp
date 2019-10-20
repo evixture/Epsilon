@@ -133,6 +133,8 @@ World::World()
 
 	fovMap = std::make_shared<TCODMap>(debugmap->mapWidth, debugmap->mapHeight);
 	//currentMap = mapList[player->level]; 
+
+	itemList.push_back(std::make_shared<Item>("item", std::make_shared<Tile>('#', TCODColor::darkSepia, TCODColor::darkestSepia, 4, true, "static"), std::make_shared<Weapon>("AR Rifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f), true, false, Position(5, 5, 0)));
 }
 
 std::shared_ptr<Tile> World::getTile(int x, int y, int level) const
@@ -256,6 +258,10 @@ void World::update()
 	{
 		entity->update();
 	}
+	for (auto& item : itemList)
+	{
+		item->update(player->mapPosition.x, player->mapPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, player->angle);
+	}
 }
 
 void World::render(const std::shared_ptr<Pane>& pane) const
@@ -264,26 +270,14 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 	{
 		for (int x = xOffset; x < pane->consoleW + xOffset; x++)
 		{
-			//82 FPS, increase
 			debugmap->levelList[player->mapPosition.level][x + y * debugmap->mapWidth]->render(x - xOffset, y - yOffset, pane);
-
-			//72 fps
-			//getTile(x, y, player->mapPosition.level)->render(x - xOffset, y - yOffset, pane);
-
-			//82 fps
-			//if (x + 1 - xOffset == engine->settings->input->mouse.cx && y + 3 - yOffset == engine->settings->input->mouse.cy)
-			//{
-			//	pane->console->setCharBackground(x - xOffset, y - yOffset, getTile(x , y , player->mapPosition.level)->backgroundColor - TCODColor::darkestGrey);
-			//	pane->console->setChar(x - xOffset, y - yOffset, '+');
-			//}
 		}
 	}
 
-	pane->console->setCharBackground(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3,
-		getTile(engine->settings->input->mouse.cx - 1 + xOffset, engine->settings->input->mouse.cy - 3 + yOffset, player->mapPosition.level)->backgroundColor - TCODColor::darkestGrey);
-	pane->console->setCharForeground(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3,
-		getTile(engine->settings->input->mouse.cx - 1 + xOffset, engine->settings->input->mouse.cy - 3 + yOffset, player->mapPosition.level)->backgroundColor + TCODColor::grey);
-	pane->console->setChar(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, '+');
+	for (auto& item : itemList)
+	{
+		item->render(pane);
+	}
 
 	for (auto& entity : entityList)
 	{
@@ -296,4 +290,10 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 			entity->render(pane);
 		}
 	}
+
+	pane->console->setCharBackground(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3,
+		getTile(engine->settings->input->mouse.cx - 1 + xOffset, engine->settings->input->mouse.cy - 3 + yOffset, player->mapPosition.level)->backgroundColor - TCODColor::darkestGrey);
+	pane->console->setCharForeground(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3,
+		getTile(engine->settings->input->mouse.cx - 1 + xOffset, engine->settings->input->mouse.cy - 3 + yOffset, player->mapPosition.level)->backgroundColor + TCODColor::grey);
+	pane->console->setChar(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, '+');
 }

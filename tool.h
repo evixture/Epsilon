@@ -74,17 +74,21 @@ struct Weapon : public Tool
 	void render(const std::shared_ptr<Pane>& pane) const;
 };
 
-
 struct Item : public Container
 {
-	bool onMap;
-	float distToCreature();
+	Position mapPosition;
+	Position renderPosition;
+
+	TCODColor tileBackgoundColor;
+	bool renderTile;
+	bool renderTool;
+	float distToCreature;
 
 	std::shared_ptr<Tile> tile;
 	std::shared_ptr<Tool> tool;
 
-	Item(const char* name, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool);
+	Item(const char* name, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, bool renderMap, bool renderTool, Position pos);
 
-	void update();
-	void render() const;
+	void update(int x, int y, int mx, int my, double angle);
+	void render(const std::shared_ptr<Pane>& pane) const;
 };

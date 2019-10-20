@@ -1,15 +1,5 @@
 #include "main.hpp"
 
-//Position Struct
-struct Position
-{
-	int x;
-	int y;
-	int level;
-
-	Position(int x, int y, int level);
-};
-
 //Entity Class
 class Entity
 {
