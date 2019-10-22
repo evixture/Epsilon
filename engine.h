@@ -4,10 +4,10 @@
 class Engine
 {
 public:
+	enum Gamestate { INIT, STARTUP, MAIN, MENU, GAMEOVER, EXIT } gamestate;
+
 	std::shared_ptr<Settings> settings;
 	std::shared_ptr<Gui> gui;
-
-	enum Gamestate { INIT, STARTUP, MAIN, MENU, GAMEOVER, EXIT } gamestate;
 
 	Engine(int screenCharWidth, int screenCharHeight);
 
