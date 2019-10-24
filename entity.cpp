@@ -2,7 +2,7 @@
 
 //Entity Class
 Entity::Entity(Position pos, int symbol, const char* name, TCODColor color)
-	: mapPosition(pos), renderPosition(pos), symbol(symbol), name(name), color(color), height(3)
+	: mapPosition(pos), renderPosition(pos), symbol(symbol), color(color), name(name), height(3)
 {}
 
 void Entity::update()
@@ -18,7 +18,7 @@ void Entity::render(const std::shared_ptr<Pane>& pane) const
 
 //Creature Class
 Creature::Creature(Position pos, int symbol, const char* name, TCODColor color, int health, int armor)
-	:Entity(Position(pos), symbol, name, color), health(health), armor(armor), angle(0), inventoryIndex(0)
+	:Entity(Position(pos), symbol, name, color), angle(0), health(health), armor(armor), inventoryIndex(0)
 {
 }
 

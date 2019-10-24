@@ -345,7 +345,7 @@ void Item::update(int x, int y, int mx, int my, double angle)
 
 	if (renderTile)
 	{
-		distToCreature = getDistance(x, y, mapPosition.x, mapPosition.y);
+		distToCreature = (float)getDistance(x, y, mapPosition.x, mapPosition.y);
 
 		if (distToCreature < 5)
 		{

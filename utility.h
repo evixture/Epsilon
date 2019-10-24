@@ -29,6 +29,5 @@ struct Position
 
 int square(int x);
 
-float getAngle(int ix, int iy, int tx, int ty);
-
-float getDistance(int ix, int iy, int tx, int ty);
+double getAngle(int ix, int iy, int tx, int ty);
+double getDistance(int ix, int iy, int tx, int ty);
