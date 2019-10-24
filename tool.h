@@ -40,6 +40,9 @@ struct Bullet
 	int xbound;
 	int ybound;
 
+	int moveWait;
+	int moveCap;
+
 	bool hitWall;
 
 	BLine travel;

@@ -3,7 +3,6 @@
   gui.cpp
   input.cpp
   main.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.cpp(18,44): error C3867: 'Engine::update': non-standard syntax; use '&' to create a pointer to member
   map.cpp
   panel.cpp
   settings.cpp
@@ -12,4 +11,34 @@ E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.cpp(18,44): error C38
   utility.cpp
   window.cpp
   Compiling...
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.cpp(19,44): error C3867: 'Engine::render': non-standard syntax; use '&' to create a pointer to member
+  Generating code
+  344 of 1194 functions (28.8%) were compiled, the rest were copied from previous compilation.
+    231 functions were new in current compilation
+    133 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Release\Epsilon.exe
+E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\console\console.h(122): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
+E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\console\console.h(126): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
+E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\tileset\tileset.h(52): warning C26495: Variable 'tcod::tileset::Tileset::tiles_last_known_capacity' is uninitialized. Always initialize a member variable (type.6).
+E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\tileset\tileset.h(78): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\tileset\observer.h(63): warning C26439: This kind of function may not throw. Declare it 'noexcept' (f.6).
+E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\tileset\observer.h(66): warning C26439: This kind of function may not throw. Declare it 'noexcept' (f.6).
+E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\mersenne.hpp(222): warning C26812: The enum type 'TCOD_distribution_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
+E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\bsp.hpp(77): warning C26495: Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6).
+E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include\libtcod\bsp.hpp(78): warning C26495: Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\engine.cpp(5): warning C26812: The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(8): warning C26812: The enum type 'TCOD_event_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(144): warning C26812: The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(26): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(3): warning C26495: Variable 'Map::mapHeight' is uninitialized. Always initialize a member variable (type.6).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(144): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(157): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(162): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(200): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(205): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(207): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(207): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(243): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(273): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\settings.cpp(10): warning C26812: The enum type 'TCOD_fov_algorithm_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\settings.cpp(10): warning C26812: The enum type 'TCOD_renderer_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).

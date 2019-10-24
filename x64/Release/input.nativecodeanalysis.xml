@@ -241,7 +241,7 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.cpp</FILENAME>
-      <LINE>7</LINE>
+      <LINE>8</LINE>
       <COLUMN>10</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
@@ -255,82 +255,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.cpp</FILENAME>
-      <LINE>4</LINE>
-      <COLUMN>7</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Input::changeFloorToggle' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Input::{ctor}</FUNCTION>
-    <DECORATED>??0Input@@QEAA@XZ</DECORATED>
-    <FUNCLINE>4</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>Input::changeFloorToggle</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>input.cpp</FILENAME>
-      <LINE>4</LINE>
-      <COLUMN>7</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Input::reloadToggle' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Input::{ctor}</FUNCTION>
-    <DECORATED>??0Input@@QEAA@XZ</DECORATED>
-    <FUNCLINE>4</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>Input::reloadToggle</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>input.cpp</FILENAME>
-      <LINE>4</LINE>
-      <COLUMN>7</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Input::moveYSpeed' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Input::{ctor}</FUNCTION>
-    <DECORATED>??0Input@@QEAA@XZ</DECORATED>
-    <FUNCLINE>4</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>Input::moveYSpeed</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>input.cpp</FILENAME>
-      <LINE>4</LINE>
-      <COLUMN>7</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Input::moveXSpeed' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Input::{ctor}</FUNCTION>
-    <DECORATED>??0Input@@QEAA@XZ</DECORATED>
-    <FUNCLINE>4</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>Input::moveXSpeed</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>input.cpp</FILENAME>
-      <LINE>145</LINE>
+      <LINE>144</LINE>
       <COLUMN>20</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
     <DESCRIPTION>The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
     <FUNCTION>Input::getKeyDown</FUNCTION>
     <DECORATED>?getKeyDown@Input@@QEAAXXZ</DECORATED>
-    <FUNCLINE>27</FUNCLINE>
+    <FUNCLINE>26</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

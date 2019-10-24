@@ -9,7 +9,7 @@ Pane::Pane(int consoleW, int consoleH, TCODColor bgColor, TCODColor fgColor)
 
 Pane::~Pane()
 {
-	//delete this->console;
+	//delete console; GIVES ERROR
 }
 
 void Pane::render() const
