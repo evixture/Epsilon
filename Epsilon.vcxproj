@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="CLANG TEST|Win32">
-      <Configuration>CLANG TEST</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="CLANG TEST|x64">
-      <Configuration>CLANG TEST</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
@@ -98,12 +90,6 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='CLANG TEST|Win32'">
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='CLANG TEST|x64'">
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -143,7 +129,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
+      <Optimization>Full</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -152,6 +138,9 @@
       <LanguageStandard>Default</LanguageStandard>
       <EnablePREfast>false</EnablePREfast>
       <AdditionalOptions>/Zo %(AdditionalOptions)</AdditionalOptions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -159,13 +148,14 @@
       <AdditionalLibraryDirectories>E:\SFML\SFML-2.5.1\lib;E:\Libtcod\custom-libtcod-master\build\msvs\libtcod\x64\Release</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-window.lib;libtcod.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
+      <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
+      <Optimization>Full</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -174,6 +164,9 @@
       <LanguageStandard>Default</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
       <AdditionalOptions>/Zo %(AdditionalOptions)</AdditionalOptions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -181,6 +174,8 @@
       <AdditionalLibraryDirectories>E:\SFML\SFML-2.5.1\lib;E:\Libtcod\custom-libtcod-master\build\msvs\libtcod\x64\Release</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-window.lib;libtcod.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
+      <OptimizeReferences>true</OptimizeReferences>
+      <TargetMachine>MachineX64</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -193,10 +188,11 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include;E:\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Libtcod\custom-libtcod-master\src;E:\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>precomp.hpp</PrecompiledHeaderFile>
       <LanguageStandard>Default</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -206,6 +202,7 @@
       <AdditionalLibraryDirectories>E:\SFML\SFML-2.5.1\lib;E:\Libtcod\libtcod-1.12.3-x86_64-msvc</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-window.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libtcod.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
+      <TargetMachine>MachineX64</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -218,10 +215,11 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Libtcod\libtcod-1.12.3-x86_64-msvc\include;E:\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Libtcod\custom-libtcod-master\src;E:\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>precomp.hpp</PrecompiledHeaderFile>
       <LanguageStandard>Default</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

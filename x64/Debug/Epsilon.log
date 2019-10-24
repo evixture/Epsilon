@@ -1,4 +1,16 @@
-﻿  tool.cpp
+﻿  engine.cpp
+  entity.cpp
+  gui.cpp
+  input.cpp
+  main.cpp
+  map.cpp
+  panel.cpp
+  settings.cpp
+  tile.cpp
+  tool.cpp
+  utility.cpp
+  window.cpp
+  Generating Code...
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
 engine.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:REF' specification
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe
