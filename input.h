@@ -24,7 +24,11 @@ struct Input
 
 	void update(std::shared_ptr<Player> player);
 
-	void getKeyDown();
+	bool getKeyDown(sf::Keyboard::Key key);
+	bool getKeyToggle(sf::Keyboard::Key key);
+	bool getKeyPressed(sf::Keyboard::Key key);
+
+	void getKeyActivity();
 	void getKeyInput(std::shared_ptr<Player> player);
 
 	void getMouseInput();
@@ -39,4 +43,5 @@ private:
 	bool reloadToggle;
 	bool changeFloorToggle;
 	bool f11Toggle;
+	bool toggle;
 };
