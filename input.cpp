@@ -3,7 +3,7 @@
 //Input Struct
 Input::Input()
 	:keyboard(), mouse(), moveUp(false), moveDown(false), moveLeft(false), moveRight(false), moveTimer(0), moveWait(10), f11Toggle(false), baseMoveWait(0.0f), leftMouseClick(false), reload(false), changeFloor(false),
-	changeFloorToggle(false), moveXSpeed(0), moveYSpeed(0), reloadToggle(false), toggle(false)
+	changeFloorToggle(false), moveXSpeed(0), moveYSpeed(0), reloadToggle(false)
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &keyboard, &mouse);
 }
@@ -23,50 +23,37 @@ void Input::getMouseInput()
 	}
 }
 
-bool Input::getKeyDown(sf::Keyboard::Key key)
-{
-	if (sf::Keyboard::isKeyPressed(key))
-	{
-		return true;
-	}
-	return false;
-}
-
-bool Input::getKeyToggle(sf::Keyboard::Key key)
-{
-	return false;
-}
-
-bool Input::getKeyPressed(sf::Keyboard::Key key)
-{
-	if (getKeyDown(key))
-	{
-		if (!toggle)
-		{
-			toggle = true;
-			return true;
-		}
-		else if (toggle)
-		{
-			return false;
-		}
-	}
-	else
-	{
-		toggle = false;
-		return false;
-	}
-}
-
-void Input::getKeyActivity()
+void Input::getKeyDown()
 {
 	/*---------- PLAYER AND MENU MOVEMENT KEYS ----------*/
 
-	//MOVEMENT
-	moveUp = getKeyDown(sf::Keyboard::W);
-	moveDown = getKeyDown(sf::Keyboard::S);
-	moveLeft = getKeyDown(sf::Keyboard::A);
-	moveRight = getKeyDown(sf::Keyboard::D);
+	//	W & UP
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		moveUp = true;
+	}
+	else moveUp = false;
+
+	//	S & DOWN
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		moveDown = true;
+	}
+	else moveDown = false;
+
+	//	A & DOWN
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		moveLeft = true;
+	}
+	else moveLeft = false;
+
+	//	D & RIGHT
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		moveRight = true;
+	}
+	else moveRight = false;
 
 	//CHANGE FLOOR
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -88,11 +75,11 @@ void Input::getKeyActivity()
 	}
 
 	//	SPEED
-	if (getKeyDown(sf::Keyboard::LShift))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
 	{
 		baseMoveWait = .25f;
 	}
-	else if (getKeyDown(sf::Keyboard::LControl))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
 	{
 		baseMoveWait = 1.0f;
 	}
@@ -102,15 +89,15 @@ void Input::getKeyActivity()
 	}
 
 	//HEIGHT
-	if (getKeyDown(sf::Keyboard::Z))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
 	{
 		engine->gui->mapPane->world->player->height = 1;
 	}
-	if (getKeyDown(sf::Keyboard::X))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
 	{
 		engine->gui->mapPane->world->player->height = 2;
 	}
-	if (getKeyDown(sf::Keyboard::C))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::C))
 	{
 		engine->gui->mapPane->world->player->height = 3;
 	}
@@ -152,7 +139,7 @@ void Input::getKeyActivity()
 	}
 
 		//CLOSES APPLICATION
-	if (getKeyDown(sf::Keyboard::Escape))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
 		engine->gamestate = Engine::EXIT;
 	}
@@ -164,7 +151,7 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 
 	if (engine->gamestate == Engine::MAIN)
 	{
-		getKeyActivity();
+		getKeyDown();
 
 		moveXSpeed = 0;
 		moveYSpeed = 0;
@@ -218,4 +205,3 @@ void Input::update(std::shared_ptr<Player> player)
 	getKeyInput(player);
 	getMouseInput();
 }
-
