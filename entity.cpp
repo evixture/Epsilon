@@ -1,5 +1,10 @@
 #include "main.hpp"
 
+//Position Struct
+Position::Position(int x, int y, int level)
+	:x(x), y(y), level(level)
+{}
+
 //Entity Class
 Entity::Entity(Position pos, int symbol, const char* name, TCODColor color)
 	: mapPosition(pos), renderPosition(pos), symbol(symbol), color(color), name(name), height(3)
