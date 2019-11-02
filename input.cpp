@@ -1,5 +1,16 @@
 #include "main.hpp"
 
+//Key Struct
+Key::Key(sf::Keyboard::Key sfKey)
+	:sfKey(sfKey), isDown(false), isPressed(false), isSwitched(false), keySwitch(false)
+{
+}
+
+void Key::update()
+{
+	isDown = sf::Keyboard::isKeyPressed(sfKey);
+}
+
 //Input Struct
 Input::Input()
 	:keyboard(), mouse(), moveUp(false), moveDown(false), moveLeft(false), moveRight(false), moveTimer(0), moveWait(10), f11Toggle(false), baseMoveWait(0.0f), leftMouseClick(false), reload(false), changeFloor(false),
@@ -121,7 +132,6 @@ void Input::getKeyDown()
 		reloadToggle = false;
 	}
 
-
 	/*---------- FUNCTION KEYS ----------*/
 
 	//	F11
@@ -149,14 +159,15 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &keyboard, &mouse);
 
+	getKeyDown();
+
 	if (engine->gamestate == Engine::MAIN)
 	{
-		getKeyDown();
 
 		moveXSpeed = 0;
 		moveYSpeed = 0;
 		
-		moveWait = (int)((baseMoveWait / engine->gui->mapPane->world->player->height) * TCODSystem::getFps());
+		moveWait = (int)((baseMoveWait / engine->gui->mapPane->world->player->height) * engine->settings->fpsCount);
 
 		if (moveUp)
 		{
@@ -198,6 +209,13 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 			}
 		}
 	}
+	if (engine->gamestate == Engine::STARTUPSPLASH)
+	{
+		if (changeFloor)
+		{
+			engine->gamestate = Engine::MAIN;
+		}
+	}
 }
 
 void Input::update(std::shared_ptr<Player> player)
@@ -205,3 +223,4 @@ void Input::update(std::shared_ptr<Player> player)
 	getKeyInput(player);
 	getMouseInput();
 }
+

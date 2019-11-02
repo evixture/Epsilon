@@ -7,20 +7,19 @@ Font::Font(const char* fontName, const char* xdim, const char* ydim, const char*
 
 //Settings Class
 Settings::Settings(int screenCharWidth, int screenCharHeight)
-	: screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 5"), fullscreen(false), maxFps(99), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_GLSL), 
-	fovRad(0), lightWalls(true)
+	: screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 6"), fullscreen(false), maxFps(10), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_OPENGL2), 
+	fovRad(0), lightWalls(true), frameCount(0), fpsCount(60)
 {
 	//fontList.push_back(terminal16x16 = std::make_shared<Font>("Terminal", "16", "16", "data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16));
 	//setfont(terminal16x16);
-	
+
 	TCODConsole::setCustomFont("data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16);
 
 	input = std::make_shared<Input>();
-
+	
 	TCODConsole::initRoot(screenCharWidth, screenCharHeight, windowTitle, fullscreen, renderer);
 	TCODConsole::root->setDefaultBackground(TCODColor::black);
 	TCODSystem::setFps(maxFps);
-	TCODMouse::showCursor(false);
 }
 
 void Settings::setFullscreen()
@@ -51,23 +50,33 @@ void Settings::printDebugStats()
 {
 	if (engine->gamestate == engine->MAIN)
 	{
-		TCODConsole::root->printf(10, 0, "FPS>%i mx>%i my>%i px>%i py>%i  ph>%i, ",
-			TCODSystem::getFps(),
+		TCODConsole::root->printf(10, 0, "FPS>%i mx>%i my>%i px>%i py>%i  ph>%i fc>%i",
+			fpsCount,
 			engine->settings->input->mouse.cx - 1,
 			engine->settings->input->mouse.cy - 3,
 			engine->gui->mapPane->world->player->mapPosition.x,
 			engine->gui->mapPane->world->player->mapPosition.y,
-			engine->gui->mapPane->world->player->mapPosition.level);
+			engine->gui->mapPane->world->player->mapPosition.level,
+			frameCount);
 	}
 }
 
 void Settings::update(std::shared_ptr<Player> player)
 {
+	fpsCount = TCODSystem::getFps();
 	input->update(player);
+	//listens to this
+	//will go over sometimes but evens out at 60
+	//fps increases if not in focus
+	TCODSystem::setFps(100);
+	frameCount++;
 }
 
 void Settings::render()
 {
-	printLogo();
+	if (engine->gamestate == Engine::MAIN)
+	{
+		printLogo();
+	}
 	printDebugStats();
 }

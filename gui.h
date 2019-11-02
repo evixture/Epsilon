@@ -14,6 +14,8 @@ public:
 	std::shared_ptr<Window> eventLogPane;
 	std::shared_ptr<MapPane> mapPane;
 
+	std::shared_ptr<Window> startupSplash;
+
 	Gui(int windowX, int windowY);
 
 	void update();

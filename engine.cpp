@@ -5,7 +5,7 @@ Engine::Engine(int screenCharWidth, int screenCharHeight)
 	:gamestate(INIT), settings(std::make_shared<Settings>(screenCharWidth, screenCharHeight)), gui(std::make_shared<Gui>(screenCharWidth, screenCharHeight))
 {
 	TCODConsole::root->setDefaultBackground(TCODColor::black);
-	gamestate = MAIN;
+	gamestate = STARTUPSPLASH;
 }
 
 void Engine::update()

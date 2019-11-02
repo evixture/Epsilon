@@ -1,5 +1,20 @@
 #include "main.hpp"
 
+struct Key
+{
+	sf::Keyboard::Key sfKey;
+	bool isDown;
+	bool isPressed;
+	bool isSwitched;
+
+	Key(sf::Keyboard::Key sfKey);
+
+	void update();
+
+private:
+	bool keySwitch;
+};
+
 //Input Struct
 struct Input
 {

@@ -188,7 +188,7 @@ int World::getOffset(int playerx, int mapw, int renderw)
 	}
 }
 
-bool  World::getWalkability(int x, int y, int level) const
+bool World::getWalkability(int x, int y, int level) const
 {
 	if (x < 0) return false;
 	if (y < 0) return false;
@@ -198,17 +198,26 @@ bool  World::getWalkability(int x, int y, int level) const
 	return debugmap->levelList[level][x + y * debugmap->mapWidth]->walkable;
 }
 
-bool  World::getTransparency(int x, int y, int level, int height) const
+bool World::getTransparency(int x, int y, int level, int height) const
 {
-	if (height <= debugmap->levelList[level][x + y * debugmap->mapWidth]->height)
+	//BUG HERE
+	if (debugmap->levelList[level][x + y * debugmap->mapWidth])
 	{
-		if (debugmap->levelList[level][x + y * debugmap->mapWidth]->tag == "destructible" && debugmap->levelList[level][x + y * debugmap->mapWidth]->getDestroyed())
+		if (height <= debugmap->levelList[level][x + y * debugmap->mapWidth]->height)
+		{
+			if (debugmap->levelList[level][x + y * debugmap->mapWidth]->tag == "destructible" && debugmap->levelList[level][x + y * debugmap->mapWidth]->getDestroyed())
+			{
+				return true;
+			}
+
+			return false;
+		}
+		else if (height > debugmap->levelList[level][x + y * debugmap->mapWidth]->height)
 		{
 			return true;
 		}
-		return false;
 	}
-	return true;
+	else return false;
 }
 
 void World::updateProperties()
@@ -264,26 +273,15 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 	{
 		for (int x = xOffset; x < pane->consoleW + xOffset; x++)
 		{
-			//82 FPS, increase
-			debugmap->levelList[player->mapPosition.level][x + y * debugmap->mapWidth]->render(x - xOffset, y - yOffset, pane);
+			getTile(x, y, player->mapPosition.level)->render(x - xOffset, y - yOffset, pane);
 
-			//72 fps
-			//getTile(x, y, player->mapPosition.level)->render(x - xOffset, y - yOffset, pane);
-
-			//82 fps
-			//if (x + 1 - xOffset == engine->settings->input->mouse.cx && y + 3 - yOffset == engine->settings->input->mouse.cy)
-			//{
-			//	pane->console->setCharBackground(x - xOffset, y - yOffset, getTile(x , y , player->mapPosition.level)->backgroundColor - TCODColor::darkestGrey);
-			//	pane->console->setChar(x - xOffset, y - yOffset, '+');
-			//}
+			if (x + 1 - xOffset == engine->settings->input->mouse.cx && y + 3 - yOffset == engine->settings->input->mouse.cy)
+			{
+				pane->console->setCharBackground(x - xOffset, y - yOffset, getTile(x , y , player->mapPosition.level)->backgroundColor - TCODColor::darkestGrey);
+				pane->console->setChar(x - xOffset, y - yOffset, '+');
+			}
 		}
 	}
-
-	pane->console->setCharBackground(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3,
-		getTile(engine->settings->input->mouse.cx - 1 + xOffset, engine->settings->input->mouse.cy - 3 + yOffset, player->mapPosition.level)->backgroundColor - TCODColor::darkestGrey);
-	pane->console->setCharForeground(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3,
-		getTile(engine->settings->input->mouse.cx - 1 + xOffset, engine->settings->input->mouse.cy - 3 + yOffset, player->mapPosition.level)->backgroundColor + TCODColor::grey);
-	pane->console->setChar(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, '+');
 
 	for (auto& entity : entityList)
 	{

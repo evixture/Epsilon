@@ -10,20 +10,36 @@ Gui::Gui(int windowX, int windowY)
 	windowList.push_back(actionsPane = std::make_shared<Window>(14, 25, "Actions", 105, 13));
 	windowList.push_back(eventLogPane = std::make_shared<Window>(55, 24, "Event Log", 64, 39));
 	windowList.push_back(mapPane = std::make_shared<MapPane>(61, 61, 1, 2));
+
+	startupSplash = std::make_shared<Window>(118, 62, "EPSILON", 1, 1);
 }
 
 void Gui::update()
 {
-	for (auto& window : windowList)
+	if (engine->gamestate == Engine::MAIN)
 	{
-		window->update();
+		for (auto& window : windowList)
+		{
+			window->update();
+		}
+	}
+	else if (engine->gamestate == Engine::STARTUPSPLASH)
+	{
+		startupSplash->update();
 	}
 }
 
 void Gui::render() const
 {
-	for (auto& window : windowList)
+	if (engine->gamestate == Engine::MAIN)
 	{
-		window->render();
+		for (auto& window : windowList)
+		{
+			window->render();
+		}
+	}
+	else if (engine->gamestate == Engine::STARTUPSPLASH)
+	{
+		startupSplash->render();
 	}
 }

@@ -22,6 +22,8 @@ public:
 	int screenCharWidth;
 	int screenCharHeight;
 
+	int fpsCount;
+
 	TCOD_fov_algorithm_t fovtype;
 	int fovRad;
 	bool lightWalls;
@@ -39,6 +41,7 @@ public:
 	void render();
 
 private:
+	int frameCount;
 	int maxFps;
 	TCOD_renderer_t renderer;
 	const char* windowTitle;

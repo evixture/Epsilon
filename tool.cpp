@@ -131,7 +131,7 @@ Bullet::Bullet(int startx, int starty, int dx, int dy, int xbound, int ybound)
 
 void Bullet::update()
 {
-	moveCap = (int)(TCODSystem::getFps() * .005f);
+	moveCap = (int)(engine->settings->fpsCount * .005f);
 	if (moveWait < 0)
 	{
 		moveWait = moveCap;
@@ -192,8 +192,8 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	dx = mx - x;
 	dy = my - y;
 
-	fireCap = (int)(baseFireCap * TCODSystem::getFps());
-	reloadTimer = (int)(baseReloadTimer * TCODSystem::getFps());
+	fireCap = (int)(baseFireCap * engine->settings->fpsCount);
+	reloadTimer = (int)(baseReloadTimer * engine->settings->fpsCount);
 
 	if (dx >= 0 && dy >= 0)
 	{
