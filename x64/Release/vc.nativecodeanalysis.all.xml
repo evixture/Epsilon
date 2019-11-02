@@ -141,27 +141,56 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.cpp</FILENAME>
-      <LINE>8</LINE>
-      <COLUMN>10</COLUMN>
+      <LINE>4</LINE>
+      <COLUMN>5</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
-    <DESCRIPTION>The enum type 'TCOD_event_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
-    <FUNCTION>Input::{ctor}</FUNCTION>
-    <DECORATED>??0Input@@QEAA@XZ</DECORATED>
+    <DESCRIPTION>The enum type 'sf::Keyboard::Key' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>Key::{ctor}</FUNCTION>
+    <DECORATED>??0Key@@QEAA@W40Keyboard@sf@@@Z</DECORATED>
     <FUNCLINE>4</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.cpp</FILENAME>
-      <LINE>144</LINE>
-      <COLUMN>20</COLUMN>
+      <LINE>8</LINE>
+      <COLUMN>5</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Key::keySwitch' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Key::{ctor}</FUNCTION>
+    <DECORATED>??0Key@@QEAA@XZ</DECORATED>
+    <FUNCLINE>8</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Key::keySwitch</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>input.cpp</FILENAME>
+      <LINE>39</LINE>
+      <COLUMN>10</COLUMN>
+    </SFA>
+    <DEFECTCODE>26812</DEFECTCODE>
+    <DESCRIPTION>The enum type 'TCOD_event_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>Input::{ctor}</FUNCTION>
+    <DECORATED>??0Input@@QEAA@XZ</DECORATED>
+    <FUNCLINE>36</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>input.cpp</FILENAME>
+      <LINE>269</LINE>
+      <COLUMN>21</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
     <DESCRIPTION>The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
-    <FUNCTION>Input::getKeyDown</FUNCTION>
-    <DECORATED>?getKeyDown@Input@@QEAAXXZ</DECORATED>
-    <FUNCLINE>26</FUNCLINE>
+    <FUNCTION>Input::getKeyInput</FUNCTION>
+    <DECORATED>?getKeyInput@Input@@QEAAXV?$shared_ptr@VPlayer@@@std@@@Z</DECORATED>
+    <FUNCLINE>211</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>

@@ -306,7 +306,7 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	//ON RELOAD
 	if (reloadWait == 0)
 	{
-		if (engine->settings->input->reload)
+		if (engine->settings->input->r->isSwitched)
 		{
 			if (numberMags != 0 && ammoAmount != ammoCap)
 			{

@@ -1,20 +1,8 @@
-﻿  engine.cpp
-  entity.cpp
-  gui.cpp
-  input.cpp
-  main.cpp
-  map.cpp
-  panel.cpp
-  settings.cpp
-  tile.cpp
-  tool.cpp
-  utility.cpp
-  window.cpp
-  Compiling...
+﻿  input.cpp
   Generating code
-  21 of 1154 functions ( 1.8%) were compiled, the rest were copied from previous compilation.
+  6 of 1232 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+    3 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Release\Epsilon.exe
 E:\Libtcod\custom-libtcod-master\src\libtcod\console\console.h(122): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
@@ -27,8 +15,10 @@ E:\Libtcod\custom-libtcod-master\src\libtcod\mersenne.hpp(222): warning C26812: 
 E:\Libtcod\custom-libtcod-master\src\libtcod\bsp.hpp(77): warning C26495: Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6).
 E:\Libtcod\custom-libtcod-master\src\libtcod\bsp.hpp(78): warning C26495: Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\engine.cpp(5): warning C26812: The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(8): warning C26812: The enum type 'TCOD_event_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(144): warning C26812: The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(4): warning C26812: The enum type 'sf::Keyboard::Key' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(8): warning C26495: Variable 'Key::keySwitch' is uninitialized. Always initialize a member variable (type.6).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(39): warning C26812: The enum type 'TCOD_event_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(269): warning C26812: The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(26): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(3): warning C26495: Variable 'Map::mapHeight' is uninitialized. Always initialize a member variable (type.6).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(142): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).

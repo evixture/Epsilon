@@ -275,13 +275,16 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 		{
 			getTile(x, y, player->mapPosition.level)->render(x - xOffset, y - yOffset, pane);
 
-			if (x + 1 - xOffset == engine->settings->input->mouse.cx && y + 3 - yOffset == engine->settings->input->mouse.cy)
-			{
-				pane->console->setCharBackground(x - xOffset, y - yOffset, getTile(x , y , player->mapPosition.level)->backgroundColor - TCODColor::darkestGrey);
-				pane->console->setChar(x - xOffset, y - yOffset, '+');
-			}
+			//if (x + 1 - xOffset == engine->settings->input->mouse.cx && y + 3 - yOffset == engine->settings->input->mouse.cy)
+			//{
+			//	pane->console->setCharBackground(x - xOffset, y - yOffset, getTile(x , y , player->mapPosition.level)->backgroundColor - TCODColor::darkestGrey);
+			//	pane->console->setChar(x - xOffset, y - yOffset, '+');
+			//}
 		}
 	}
+
+	pane->console->setCharBackground(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, getTile(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, player->mapPosition.level)->backgroundColor - TCODColor::darkestGrey);
+	pane->console->setChar(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, '+');
 
 	for (auto& entity : entityList)
 	{

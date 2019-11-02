@@ -85,7 +85,7 @@ void Player::update()
 
 	currentContainer->update(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, angle);
 
-	if (engine->settings->input->changeFloor == true)
+	if (engine->settings->input->space->isSwitched == true)
 	{
 		if (WORLD->getTile(mapPosition.x, mapPosition.y, mapPosition.level)->tag == "stair")
 		{

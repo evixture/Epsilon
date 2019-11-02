@@ -8,6 +8,7 @@ struct Key
 	bool isSwitched;
 
 	Key(sf::Keyboard::Key sfKey);
+	Key();
 
 	void update();
 
@@ -22,15 +23,34 @@ struct Input
 	TCOD_key_t keyboard;
 	TCOD_mouse_t mouse;
 
+	std::shared_ptr<Key> w;
+	std::shared_ptr<Key> a;
+	std::shared_ptr<Key> s;
+	std::shared_ptr<Key> d;
+
+	std::shared_ptr<Key> lctrl;
+	std::shared_ptr<Key> lshift;
+
+	std::shared_ptr<Key> z;
+	std::shared_ptr<Key> x;
+	std::shared_ptr<Key> c;
+
+	std::shared_ptr<Key> e;
+	std::shared_ptr<Key> r;
+
+	std::shared_ptr<Key> space;
+	std::shared_ptr<Key> f11;
+	std::vector<std::shared_ptr<Key>> keyList;
+
 	float baseMoveWait;
 
-	bool moveUp;
-	bool moveDown;
-	bool moveLeft;
-	bool moveRight;
-
-	bool reload;
-	bool changeFloor;
+	//bool moveUp;
+	//bool moveDown;
+	//bool moveLeft;
+	//bool moveRight;
+	//
+	//bool reload;
+	//bool changeFloor;
 	bool leftMouseClick;
 
 	Input();
@@ -51,7 +71,7 @@ private:
 	int moveTimer;
 	int moveWait;
 
-	bool reloadToggle;
-	bool changeFloorToggle;
-	bool f11Toggle;
+	//bool reloadToggle;
+	//bool changeFloorToggle;
+	//bool f11Toggle;
 };
