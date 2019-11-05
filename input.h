@@ -40,6 +40,7 @@ struct Input
 
 	std::shared_ptr<Key> space;
 	std::shared_ptr<Key> f11;
+	std::shared_ptr<Key> escape;
 	std::vector<std::shared_ptr<Key>> keyList;
 
 	float baseMoveWait;

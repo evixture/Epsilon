@@ -1,8 +1,8 @@
-﻿  input.cpp
+﻿  settings.cpp
   Generating code
-  6 of 1232 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+  1 of 1232 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Release\Epsilon.exe
 E:\Libtcod\custom-libtcod-master\src\libtcod\console\console.h(122): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
@@ -18,7 +18,7 @@ E:\Projects\Visual Studio\Libtcod Development\Epsilon\engine.cpp(5): warning C26
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(4): warning C26812: The enum type 'sf::Keyboard::Key' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(8): warning C26495: Variable 'Key::keySwitch' is uninitialized. Always initialize a member variable (type.6).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(39): warning C26812: The enum type 'TCOD_event_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(269): warning C26812: The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(270): warning C26812: The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(26): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(3): warning C26495: Variable 'Map::mapHeight' is uninitialized. Always initialize a member variable (type.6).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(142): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).

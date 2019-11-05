@@ -6,8 +6,10 @@ Font::Font(const char* fontName, const char* xdim, const char* ydim, const char*
 {}
 
 //Settings Class
+
+//USE SDL2 TO RENDER, OTHERS WILL LOCK OR LOWER FPS
 Settings::Settings(int screenCharWidth, int screenCharHeight)
-	: screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 6"), fullscreen(false), maxFps(10), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_OPENGL2), 
+	: screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 6"), fullscreen(false), maxFps(10), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_SDL2), 
 	fovRad(0), lightWalls(true), frameCount(0), fpsCount(60)
 {
 	//fontList.push_back(terminal16x16 = std::make_shared<Font>("Terminal", "16", "16", "data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16));
@@ -19,7 +21,7 @@ Settings::Settings(int screenCharWidth, int screenCharHeight)
 	
 	TCODConsole::initRoot(screenCharWidth, screenCharHeight, windowTitle, fullscreen, renderer);
 	TCODConsole::root->setDefaultBackground(TCODColor::black);
-	TCODSystem::setFps(maxFps);
+	//TCODSystem::setFps(maxFps);
 }
 
 void Settings::setFullscreen()
@@ -68,7 +70,7 @@ void Settings::update(std::shared_ptr<Player> player)
 	//listens to this
 	//will go over sometimes but evens out at 60
 	//fps increases if not in focus
-	TCODSystem::setFps(100);
+	//TCODSystem::setFps(0);
 	frameCount++;
 }
 
