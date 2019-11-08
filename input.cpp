@@ -263,13 +263,7 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 			}
 		}
 	}
-	if (engine->gamestate == Engine::STARTUPSPLASH)
-	{
-		if (space->isSwitched)
-		{
-			engine->gamestate = Engine::MAIN;
-		}
-	}
+	
 	if (escape->isSwitched)
 	{
 		engine->gamestate = Engine::EXIT;

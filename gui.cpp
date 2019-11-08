@@ -11,7 +11,7 @@ Gui::Gui(int windowX, int windowY)
 	windowList.push_back(eventLogPane = std::make_shared<Window>(55, 24, "Event Log", 64, 39));
 	windowList.push_back(mapPane = std::make_shared<MapPane>(61, 61, 1, 2));
 
-	startupSplash = std::make_shared<Window>(118, 62, "EPSILON", 1, 1);
+	startupSplash = std::make_shared<SplashPanel>(118, 62, 1, 1);
 }
 
 void Gui::update()

@@ -46,3 +46,15 @@ struct InventoryPane : public Window
 	void update();
 	void render() const;
 };
+
+struct SplashPanel : public Window
+{
+	int menuIndex;
+	const char* menuSelection;
+	std::vector<const char*> menuItemList;
+
+	SplashPanel(int windowW, int windowH, int rx, int ry);
+
+	void update();
+	void render() const;
+};

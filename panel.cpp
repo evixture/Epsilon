@@ -133,3 +133,85 @@ void InventoryPane::render() const
 
 	pushWindow();
 }
+
+SplashPanel::SplashPanel(int windowW, int windowH, int rx, int ry)
+	:Window(windowW, windowH, "EPSILON", rx, ry), menuIndex(0)
+{
+	menuItemList.push_back("Start");
+	menuItemList.push_back("Exit");
+
+	menuSelection = menuItemList[menuIndex];
+}
+
+void SplashPanel::update()
+{
+	menuSelection = menuItemList[menuIndex];
+
+	if (engine->settings->input->w->isSwitched)
+	{
+		if (menuIndex > 0)
+		{
+			menuIndex--;
+		}
+	}
+	if (engine->settings->input->s->isSwitched)
+	{
+		if (menuIndex < menuItemList.size() - 1)
+		{
+			menuIndex++;
+		}
+	}
+
+	if (engine->settings->input->space->isSwitched)
+	{
+		if (menuItemList[menuIndex] == "Start")
+		{
+			engine->gamestate = Engine::MAIN;
+		}
+		else if (menuItemList[menuIndex] == "Exit")
+		{
+			engine->gamestate = Engine::EXIT;
+		}
+	}
+}
+
+void SplashPanel::render() const
+{
+	clearWindow();
+
+	/*
+	|           |
+	| |       | |
+	| | |   | | |
+	| | | | | | |         
+	E P S I L O N
+	| | | | | | |
+	| | |   | | |
+	| |       | |
+	|           |
+	*/
+
+	drawWindow->console->printf(48, 20, "|           |");
+	drawWindow->console->printf(48, 21, "| |       | |");
+	drawWindow->console->printf(48, 22, "| | |   | | |");
+	drawWindow->console->printf(48, 23, "| | | | | | |");
+	drawWindow->console->printf(48, 24, "E P S I L O N");
+	drawWindow->console->printf(48, 25, "| | | | | | |");
+	drawWindow->console->printf(48, 26, "| | |   | | |");
+	drawWindow->console->printf(48, 27, "| |       | |");
+	drawWindow->console->printf(48, 28, "|           |");
+
+	for (int i = 0; i < menuItemList.size(); i++)
+	{
+		if (i == menuIndex)
+		{
+			drawWindow->console->printf(50, 50 + i, "|> %s", menuItemList[i]);
+		}
+		else
+		{
+			drawWindow->console->printf(50, 50 + i, "|  %s", menuItemList[i]);
+		}
+	}
+
+	pushWindow();
+}

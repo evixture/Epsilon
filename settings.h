@@ -38,7 +38,7 @@ public:
 	void setFullscreen();
 
 	void update(std::shared_ptr<Player> player);
-	void render();
+	void render() const;
 
 private:
 	int frameCount;
@@ -48,6 +48,6 @@ private:
 	bool fullscreen;
 
 	void setfont(std::shared_ptr<Font> font);
-	void printLogo();
-	void printDebugStats();
+	void printLogo() const;
+	void printDebugStats() const;
 };

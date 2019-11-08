@@ -125,6 +125,7 @@ Map::Map(const char* filePath)
 
 //World Class
 World::World()
+	:xOffset(0), yOffset(0)
 {
 	debugmap = std::make_shared<Map>("data/maps/debugmap.txt");
 	//mapList.push_back(debugmap);
