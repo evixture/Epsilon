@@ -260,13 +260,13 @@ void World::update()
 	updateProperties();
 	computeFov();
 
-	for (auto& container : mapContainerList)
-	{
-		if (!container->active)
-		{
-			container->active = true;
-		}
-	}
+	//for (auto& container : mapContainerList)
+	//{
+	//	if (!container->active)
+	//	{
+	//		container->active = true;
+	//	}
+	//}
 
 	for (auto& entity : entityList)
 	{

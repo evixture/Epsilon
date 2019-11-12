@@ -27,7 +27,7 @@ public:
 	std::shared_ptr<Player> player;
 	std::vector<std::shared_ptr<Entity>> entityList;
 
-	std::vector<std::shared_ptr<Container>> mapContainerList;
+	//std::vector<std::shared_ptr<Container>> mapContainerList;
 
 	World();
 

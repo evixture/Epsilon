@@ -1,24 +1,24 @@
 #include "main.hpp"
 
-//Container struct
-Container::Container(const char* name)
-	:name(name), active(false), useTile(false)
-{
-}
-
-void Container::update(int x, int y, int mx, int my, double angle)
-{
-	return;
-}
-
-void Container::render(const std::shared_ptr<Pane>& pane) const
-{
-	return;
-}
+////Container struct
+//Container::Container(const char* name)
+//	:name(name), active(false), useTile(false)
+//{
+//}
+//
+//void Container::update(int x, int y, int mx, int my, double angle)
+//{
+//	return;
+//}
+//
+//void Container::render(const std::shared_ptr<Pane>& pane) const
+//{
+//	return;
+//}
 
 //Tool Struct
 Tool::Tool(const char* name, TCODColor color)
-	:color(color), toolx(0), tooly(0), ch(NULL), dx(0), dy(0), Container(name)
+	:color(color), toolx(0), tooly(0), ch(NULL), dx(0), dy(0)//, Container(name)
 {}
 
 void Tool::update(int x, int y, int mx, int my, double angle)
@@ -340,50 +340,51 @@ void Weapon::render(const std::shared_ptr<Pane>& pane) const
 }
 
 //Item struct
-Item::Item(const char* name, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, bool useTile)
-	:tile(tile), tool(tool), Container(name)//, useTile(useTile)
-{
-}
-
-void Item::update(int x, int y, int mx, int my, double angle)
-{
-	//if (active)
-	//{
-	//	renderPosition.x = mapPosition.x - WORLD->xOffset;
-	//	renderPosition.y = mapPosition.y - WORLD->yOffset;
-	//	renderPosition.level = mapPosition.level;
-	//
-	//	if (useTile)
-	//	{
-	//		distToCreature = (float)getDistance(mapPosition.x, mapPosition.y, mapPosition.x, mapPosition.y);
-	//
-	//		if (distToCreature < 5)
-	//		{
-	//			tileBackgoundColor = tile->backgroundColor;
-	//		}
-	//		else
-	//		{
-	//			tileBackgoundColor = TCODColor::pink;
-	//		}
-	//	}
-	//	else
-	//	{
-	//		tool->update(x, y, mx, my, angle);
-	//	}
-	//}
-}
-
-void Item::render(const std::shared_ptr<Pane>& pane) const
-{
-	if (active)
-	{
-		if (useTile)
-		{
-			//tile->render(renderPosition.x, renderPosition.y, pane);
-		}
-		else
-		{
-			tool->render(pane);
-		}
-	}
-}
+//Item::Item(const char* name, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, bool useTile)
+//	:tile(tile), tool(tool), Container(name)//, useTile(useTile)
+//{
+//}
+//
+//void Item::update(int x, int y, int mx, int my, double angle)
+//{
+//	//if (active)
+//	//{
+//	//	renderPosition.x = mapPosition.x - WORLD->xOffset;
+//	//	renderPosition.y = mapPosition.y - WORLD->yOffset;
+//	//	renderPosition.level = mapPosition.level;
+//	//
+//	//	if (useTile)
+//	//	{
+//	//		distToCreature = (float)getDistance(mapPosition.x, mapPosition.y, mapPosition.x, mapPosition.y);
+//	//
+//	//		if (distToCreature < 5)
+//	//		{
+//	//			tileBackgoundColor = tile->backgroundColor;
+//	//		}
+//	//		else
+//	//		{
+//	//			tileBackgoundColor = TCODColor::pink;
+//	//		}
+//	//	}
+//	//	else
+//	//	{
+//	//		tool->update(x, y, mx, my, angle);
+//	//	}
+//	//}
+//}
+//
+//void Item::render(const std::shared_ptr<Pane>& pane) const
+//{
+//	if (active)
+//	{
+//		if (useTile)
+//		{
+//			//tile->render(renderPosition.x, renderPosition.y, pane);
+//		}
+//		else
+//		{
+//			tool->render(pane);
+//		}
+//	}
+//}
+//

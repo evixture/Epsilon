@@ -38,8 +38,8 @@ public:
 	int armor;
 
 	int inventoryIndex;
-	std::vector<std::shared_ptr<Container>> inventory;
-	std::shared_ptr<Container> currentContainer;
+	//std::vector<std::shared_ptr<Container>> inventory;
+	//std::shared_ptr<Container> currentContainer;
 
 	Creature(Position pos, int symbol, const char* name, TCODColor color, int health, int armor);
 
