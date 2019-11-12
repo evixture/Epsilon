@@ -27,6 +27,8 @@ public:
 	std::shared_ptr<Player> player;
 	std::vector<std::shared_ptr<Entity>> entityList;
 
+	std::vector<std::shared_ptr<Container>> mapContainerList;
+
 	World();
 
 	std::shared_ptr<Tile> getTile	(int x, int y, int level) const;

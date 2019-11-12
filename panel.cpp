@@ -166,7 +166,7 @@ void SplashPanel::update()
 	{
 		if (menuItemList[menuIndex] == "Start")
 		{
-			engine->gamestate = Engine::MAIN;
+			engine->gui->activeWindow = Gui::NONE;
 		}
 		else if (menuItemList[menuIndex] == "Exit")
 		{

@@ -128,12 +128,10 @@ World::World()
 	:xOffset(0), yOffset(0)
 {
 	debugmap = std::make_shared<Map>("data/maps/debugmap.txt");
-	//mapList.push_back(debugmap);
 
 	entityList.push_back(player = std::make_shared<Player>(Position(2, 2, 0)));
 
 	fovMap = std::make_shared<TCODMap>(debugmap->mapWidth, debugmap->mapHeight);
-	//currentMap = mapList[player->level]; 
 }
 
 std::shared_ptr<Tile> World::getTile(int x, int y, int level) const
@@ -262,6 +260,14 @@ void World::update()
 	updateProperties();
 	computeFov();
 
+	for (auto& container : mapContainerList)
+	{
+		if (!container->active)
+		{
+			container->active = true;
+		}
+	}
+
 	for (auto& entity : entityList)
 	{
 		entity->update();
@@ -275,12 +281,6 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 		for (int x = xOffset; x < pane->consoleW + xOffset; x++)
 		{
 			getTile(x, y, player->mapPosition.level)->render(x - xOffset, y - yOffset, pane);
-
-			//if (x + 1 - xOffset == engine->settings->input->mouse.cx && y + 3 - yOffset == engine->settings->input->mouse.cy)
-			//{
-			//	pane->console->setCharBackground(x - xOffset, y - yOffset, getTile(x , y , player->mapPosition.level)->backgroundColor - TCODColor::darkestGrey);
-			//	pane->console->setChar(x - xOffset, y - yOffset, '+');
-			//}
 		}
 	}
 

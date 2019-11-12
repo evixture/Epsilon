@@ -78,6 +78,11 @@ void Player::update()
 	for (auto& container : inventory)
 	{
 		container->active = false;
+
+		if (container->useTile)
+		{
+			container->useTile = false;
+		}
 	}
 	currentContainer->active = true;
 

@@ -3,6 +3,7 @@
 struct Container
 {
 	bool active;
+	bool useTile;
 	const char* name;
 
 	Container(const char* name);
@@ -31,6 +32,8 @@ struct Tool : public Container
 
 struct Bullet
 {
+	int ch;
+
 	int bulletx;
 	int bullety;
 
@@ -47,7 +50,7 @@ struct Bullet
 
 	BLine travel;
 
-	Bullet(int startx, int starty, int dx, int dy, int xbound, int ybound);
+	Bullet(int ch, int startx, int starty, int dx, int dy, int xbound, int ybound);
 
 	void update();
 	void render(const std::shared_ptr<Pane>& pane) const;
@@ -80,14 +83,19 @@ struct Weapon : public Tool
 
 struct Item : public Container
 {
-	bool onMap;
-	float distToCreature();
+	//bool useTile;
+	float distToCreature;
+
+	TCODColor tileBackgoundColor;
+
+	//Position mapPosition;
+	//Position renderPosition;
 
 	std::shared_ptr<Tile> tile;
 	std::shared_ptr<Tool> tool;
 
-	Item(const char* name, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool);
+	Item(const char* name, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, bool useTile);
 
-	void update();
-	void render() const;
+	void update(int x, int y, int mx, int my, double angle);
+	void render(const std::shared_ptr<Pane>& pane) const;
 };

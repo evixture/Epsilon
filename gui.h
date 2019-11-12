@@ -5,6 +5,8 @@ class Gui
 {
 public:
 
+	enum ActiveWindow { NONE, STARTUPSPLASH} activeWindow;
+
 	//Main Windows
 	std::shared_ptr<PlayerPane> playerPane;
 	std::shared_ptr<StatusPane> statusPane;

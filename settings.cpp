@@ -50,18 +50,15 @@ void Settings::printLogo() const
 
 void Settings::printDebugStats() const
 {
-	if (engine->gamestate == engine->MAIN)
-	{
-		TCODConsole::root->printf(10, 0, "FPS>%i mx>%i my>%i px>%i py>%i  ph>%i fc>%i, gs>%i",
-			fpsCount,
-			engine->settings->input->mouse.cx - 1,
-			engine->settings->input->mouse.cy - 3,
-			engine->gui->mapPane->world->player->mapPosition.x,
-			engine->gui->mapPane->world->player->mapPosition.y,
-			engine->gui->mapPane->world->player->mapPosition.level,
-			frameCount,
-			engine->gamestate);
-	}
+	TCODConsole::root->printf(10, 0, "FPS>%i mx>%i my>%i px>%i py>%i  ph>%i fc>%i, gs>%i",
+		fpsCount,
+		engine->settings->input->mouse.cx - 1,
+		engine->settings->input->mouse.cy - 3,
+		engine->gui->mapPane->world->player->mapPosition.x,
+		engine->gui->mapPane->world->player->mapPosition.y,
+		engine->gui->mapPane->world->player->mapPosition.level,
+		frameCount,
+		engine->gamestate);
 }
 
 void Settings::update(std::shared_ptr<Player> player)
@@ -77,7 +74,7 @@ void Settings::update(std::shared_ptr<Player> player)
 
 void Settings::render() const
 {
-	if (engine->gamestate == Engine::MAIN)
+	if (engine->gui->activeWindow != Gui::STARTUPSPLASH)
 	{
 		printLogo();
 	}

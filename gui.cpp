@@ -2,6 +2,7 @@
 
 //Gui Class
 Gui::Gui(int windowX, int windowY)
+	:activeWindow(Gui::STARTUPSPLASH)
 {
 	windowList.push_back(playerPane = std::make_shared<PlayerPane>(10, 10, 64, 2));
 	windowList.push_back(statusPane = std::make_shared<StatusPane>(44, 10, 75, 2));
@@ -16,14 +17,14 @@ Gui::Gui(int windowX, int windowY)
 
 void Gui::update()
 {
-	if (engine->gamestate == Engine::MAIN)
+	if (activeWindow == Gui::NONE)
 	{
 		for (auto& window : windowList)
 		{
 			window->update();
 		}
 	}
-	else if (engine->gamestate == Engine::STARTUPSPLASH)
+	else if (activeWindow == Gui::STARTUPSPLASH)
 	{
 		startupSplash->update();
 	}
@@ -31,14 +32,14 @@ void Gui::update()
 
 void Gui::render() const
 {
-	if (engine->gamestate == Engine::MAIN)
+	if (activeWindow == Gui::NONE)
 	{
 		for (auto& window : windowList)
 		{
 			window->render();
 		}
 	}
-	else if (engine->gamestate == Engine::STARTUPSPLASH)
+	else if (activeWindow == Gui::STARTUPSPLASH)
 	{
 		startupSplash->render();
 	}

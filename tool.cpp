@@ -2,7 +2,7 @@
 
 //Container struct
 Container::Container(const char* name)
-	:name(name), active(false)
+	:name(name), active(false), useTile(false)
 {
 }
 
@@ -108,8 +108,8 @@ void Tool::render(const std::shared_ptr<Pane>& pane) const
 }
 
 //Bullet Struct
-Bullet::Bullet(int startx, int starty, int dx, int dy, int xbound, int ybound)
-	:bulletx(startx), bullety(starty), xbound(xbound), ybound(ybound), hitWall(false), tox(dx), toy(dy), travel(BLine(bulletx, bullety, tox, toy)), moveWait(0), moveCap(0)
+Bullet::Bullet(int ch, int startx, int starty, int dx, int dy, int xbound, int ybound)
+	:bulletx(startx), bullety(starty), xbound(xbound), ybound(ybound), hitWall(false), tox(dx), toy(dy), travel(BLine(bulletx, bullety, tox, toy)), moveWait(0), moveCap(0), ch(ch)
 {
 	do
 	{
@@ -178,7 +178,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 	if (!hitWall)
 	{
 		pane->console->setCharForeground(travel.x, travel.y, TCODColor::brass);
-		pane->console->setChar(travel.x, travel.y, 248);
+		pane->console->setChar(travel.x, travel.y, ch);
 	}
 }
 
@@ -286,7 +286,7 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 		if (!(toolx == dx + toolx && tooly == dy + tooly))
 		{
 			fireWait = fireCap;
-			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(toolx, tooly, dx, dy, engine->gui->mapPane->world->debugmap->mapWidth, engine->gui->mapPane->world->debugmap->mapHeight));
+			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, toolx, tooly, dx, dy, engine->gui->mapPane->world->debugmap->mapWidth, engine->gui->mapPane->world->debugmap->mapHeight));
 			ammoAmount--;
 		}
 	}
@@ -302,8 +302,6 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 		bulletList.pop_back();
 	}
 
-	//TODO : FIND A WAY TO SOMEHOW LIMIT RELOAD SPAMMING
-	//ON RELOAD
 	if (reloadWait == 0)
 	{
 		if (engine->settings->input->r->isSwitched)
@@ -342,36 +340,50 @@ void Weapon::render(const std::shared_ptr<Pane>& pane) const
 }
 
 //Item struct
-//Item::Item(const char* name, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool)
-//	:tile(tile), tool(tool), Container(name), onMap(false)
-//{
-//}
+Item::Item(const char* name, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, bool useTile)
+	:tile(tile), tool(tool), Container(name)//, useTile(useTile)
+{
+}
 
-//void Item::update()
-//{
-//	//renderPosition.x = mapPosition.x - WORLD->xOffset;
-//	//renderPosition.y = mapPosition.y - WORLD->yOffset;
-//	//renderPosition.level = mapPosition.level;
-//	//
-//	//if (renderTile)
-//	//{
-//	//	distToCreature = (float)getDistance(x, y, mapPosition.x, mapPosition.y);
-//	//
-//	//	if (distToCreature < 5)
-//	//	{
-//	//		tileBackgoundColor = tile->backgroundColor;
-//	//	}
-//	//	else
-//	//	{
-//	//		tileBackgoundColor = TCODColor::pink;
-//	//	}
-//	//}
-//	//else if (renderTool)
-//	//{
-//	//	tool->update(x, y, mx, my, angle);
-//	//}
-//}
+void Item::update(int x, int y, int mx, int my, double angle)
+{
+	//if (active)
+	//{
+	//	renderPosition.x = mapPosition.x - WORLD->xOffset;
+	//	renderPosition.y = mapPosition.y - WORLD->yOffset;
+	//	renderPosition.level = mapPosition.level;
+	//
+	//	if (useTile)
+	//	{
+	//		distToCreature = (float)getDistance(mapPosition.x, mapPosition.y, mapPosition.x, mapPosition.y);
+	//
+	//		if (distToCreature < 5)
+	//		{
+	//			tileBackgoundColor = tile->backgroundColor;
+	//		}
+	//		else
+	//		{
+	//			tileBackgoundColor = TCODColor::pink;
+	//		}
+	//	}
+	//	else
+	//	{
+	//		tool->update(x, y, mx, my, angle);
+	//	}
+	//}
+}
 
-//void Item::render() const
-//{
-//}
+void Item::render(const std::shared_ptr<Pane>& pane) const
+{
+	if (active)
+	{
+		if (useTile)
+		{
+			//tile->render(renderPosition.x, renderPosition.y, pane);
+		}
+		else
+		{
+			tool->render(pane);
+		}
+	}
+}

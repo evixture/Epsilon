@@ -215,7 +215,7 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 
 	getKeyDown();
 
-	if (engine->gamestate == Engine::MAIN)
+	if (engine->gui->activeWindow != Gui::STARTUPSPLASH)
 	{
 
 		moveXSpeed = 0;
