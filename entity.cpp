@@ -1,10 +1,5 @@
 #include "main.hpp"
 
-//Position Struct
-Position::Position(int x, int y, int level)
-	:x(x), y(y), level(level)
-{}
-
 //Entity Class
 Entity::Entity(Position pos, int symbol, const char* name, TCODColor color)
 	: mapPosition(pos), renderPosition(pos), symbol(symbol), color(color), name(name), height(3)
@@ -25,6 +20,8 @@ void Entity::render(const std::shared_ptr<Pane>& pane) const
 Creature::Creature(Position pos, int symbol, const char* name, TCODColor color, int health, int armor)
 	:Entity(Position(pos), symbol, name, color), angle(0), health(health), armor(armor), inventoryIndex(0)
 {
+	inventory.push_back(std::make_shared<Container>("TEST", 5));
+	inventory[0]->addItem(std::make_shared<Item>(2, std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, "static"), std::make_shared<Weapon>("TEST", TCODColor::darkestGrey, 30, 10, 5, 120), 5, 5, 0));
 }
 
 void Creature::update()

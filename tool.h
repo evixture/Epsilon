@@ -1,11 +1,6 @@
 #include "main.hpp"
 
-//struct Item
-//{
-//
-//};
-
-struct Tool// : public Container
+struct Tool
 {
 	TCODColor color;
 	int ch;
@@ -73,6 +68,25 @@ struct Weapon : public Tool
 	void render(const std::shared_ptr<Pane>& pane) const;
 };
 
+struct Item
+{
+	int size;
+
+	Position mapPosition;
+	Position renderPosition;
+
+	std::shared_ptr<Tile> tile;
+	std::shared_ptr<Tool> tool;
+
+	Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, int x, int y, int level);
+
+	void updateTool(int x, int y, int mx, int my, double angle);
+	void renderTool(const std::shared_ptr<Pane>& pane) const;
+
+	void updateTool();
+	void renderTile(const std::shared_ptr<Pane>& pane) const;
+};
+
 
 //struct Item// : public Container
 //{
@@ -93,9 +107,15 @@ struct Weapon : public Tool
 //	void render(const std::shared_ptr<Pane>& pane) const;
 //};
 
-//struct Container
-//{
-//	std::vector<>
-//
-//	Container();
-//};
+struct Container
+{
+	int capacity;
+	int currentSize;
+	const char* name;
+
+	std::vector<std::shared_ptr<Item>> itemList;
+
+	Container(const char* name, int capacity);
+
+	bool addItem(std::shared_ptr<Item> item);
+};

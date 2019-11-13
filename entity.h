@@ -1,14 +1,6 @@
 #include "main.hpp"
 
-//Position Struct
-struct Position
-{
-	int x;
-	int y;
-	int level;
 
-	Position(int x, int y, int level);
-};
 
 //Entity Class
 class Entity
@@ -40,6 +32,8 @@ public:
 	int inventoryIndex;
 	//std::vector<std::shared_ptr<Container>> inventory;
 	//std::shared_ptr<Container> currentContainer;
+
+	std::vector<std::shared_ptr<Container>> inventory;
 
 	Creature(Position pos, int symbol, const char* name, TCODColor color, int health, int armor);
 

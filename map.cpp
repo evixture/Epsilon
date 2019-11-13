@@ -15,6 +15,7 @@ Map::Map(const char* filePath)
 		fileIn >> s_mapName >> totalFloors >> mapWidth >> mapHeight;
 		mapName = s_mapName.c_str();
 
+		//reserve vec size beforehand to inc perf
 		levelList = std::vector < std::vector < std::shared_ptr < Tile >>> (totalFloors);
 		
 		while (!fileIn.eof())

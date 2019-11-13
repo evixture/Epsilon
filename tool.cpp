@@ -386,3 +386,46 @@ void Weapon::render(const std::shared_ptr<Pane>& pane) const
 //	}
 //}
 //
+
+//ITEM STRUCT
+Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, int x, int y, int level)
+	: tile(tile), tool(tool), mapPosition(Position(x, y, level)), renderPosition(Position(x, y, level)), size(size)
+{
+}
+
+void Item::updateTool(int x, int y, int mx, int my, double angle)
+{
+	tool->update(x, y, mx, my, angle);
+}
+
+void Item::renderTool(const std::shared_ptr<Pane>& pane) const
+{
+	tool->render(pane);
+}
+
+void Item::updateTool()
+{
+	renderPosition.x = mapPosition.x - WORLD->xOffset;
+	renderPosition.y = mapPosition.y - WORLD->yOffset;
+	renderPosition.level = mapPosition.level;
+}
+
+void Item::renderTile(const std::shared_ptr<Pane>& pane) const
+{
+	tile->render(renderPosition.x, renderPosition.y, pane);
+}
+
+Container::Container(const char* name, int capacity)
+	: name(name), capacity(capacity), currentSize(0)
+{
+}
+
+bool Container::addItem(std::shared_ptr<Item> item)
+{
+	if (currentSize + item->size <= capacity)
+	{
+		itemList.push_back(item);
+		return true;
+	}
+	else return false;
+}

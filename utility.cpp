@@ -1,5 +1,10 @@
 #include "main.hpp"
 
+//Position Struct
+Position::Position(int x, int y, int level)
+	:x(x), y(y), level(level)
+{}
+
 //BLine Class
 BLine::BLine(int ix, int iy, int tx, int ty)
 	:origx(ix), origy(iy), destx(tx), desty(ty), x(ix), y(iy)

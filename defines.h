@@ -55,3 +55,9 @@ constexpr auto PI = 3.14159265;
 //GUI
 	#define RIBONBGCOLOR TCODColor::darkBlue
 	#define RIBONFGCOLOR TCODColor::lightestGrey
+
+
+//TEST ITEM
+	#define TESTITEM std::make_shared<Item>(2, std::shared_ptr<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, "static"), WEAPON_Test, 5, 5, 0)
+
+//work on map container and updating inventory update render
