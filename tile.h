@@ -1,7 +1,5 @@
 #include "main.hpp"
 
-#define WORLD engine->gui->mapPane->world
-
 struct Tile
 {
 	const char* tag;

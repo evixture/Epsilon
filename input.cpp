@@ -215,13 +215,13 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 
 	getKeyDown();
 
-	if (engine->gui->activeWindow != Gui::STARTUPSPLASH)
+	if (GUI->activeWindow != Gui::STARTUPSPLASH)
 	{
 
 		moveXSpeed = 0;
 		moveYSpeed = 0;
 		
-		moveWait = (int)((baseMoveWait / engine->gui->mapPane->world->player->height) * engine->settings->fpsCount);
+		moveWait = (int)((baseMoveWait / GUI->mapPane->world->player->height) * SETTINGS->fpsCount);
 
 		if (w->isDown)
 		{
@@ -244,13 +244,13 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 		{
 			if (moveTimer == 0)
 			{
-				if (engine->gui->mapPane->world->getWalkability(player->mapPosition.x + moveXSpeed, player->mapPosition.y, player->mapPosition.level))
+				if (GUI->mapPane->world->getWalkability(player->mapPosition.x + moveXSpeed, player->mapPosition.y, player->mapPosition.level))
 				{
 					player->mapPosition.x += moveXSpeed;
 					moveXSpeed = 0;
 					moveTimer = moveWait;
 				}
-				if (engine->gui->mapPane->world->getWalkability(player->mapPosition.x, player->mapPosition.y + moveYSpeed, player->mapPosition.level))
+				if (GUI->mapPane->world->getWalkability(player->mapPosition.x, player->mapPosition.y + moveYSpeed, player->mapPosition.level))
 				{
 					player->mapPosition.y += moveYSpeed;
 					moveYSpeed = 0;

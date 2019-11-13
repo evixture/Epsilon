@@ -1,20 +1,18 @@
 #include "main.hpp"
 
-////Container struct
-//Container::Container(const char* name)
-//	:name(name), active(false), useTile(false)
-//{
-//}
-//
-//void Container::update(int x, int y, int mx, int my, double angle)
-//{
-//	return;
-//}
-//
-//void Container::render(const std::shared_ptr<Pane>& pane) const
-//{
-//	return;
-//}
+/*
+
+INVENTORY
+	vector of containers
+		CONTAINER
+			vector of items
+
+current item = inventory[index 1][index 2]
+
+update current item
+render current item
+
+*/
 
 //Tool Struct
 Tool::Tool(const char* name, TCODColor color)
@@ -144,18 +142,18 @@ void Bullet::update()
 		{
 			if (bulletx < xbound && bullety < ybound)
 			{
-				if (engine->gui->mapPane->world->inMapBounds(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, engine->gui->mapPane->world->player->mapPosition.level)
-					&& engine->gui->mapPane->world->getWalkability(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, engine->gui->mapPane->world->player->mapPosition.level) != false)
+				if (WORLD->inMapBounds(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level)
+					&& WORLD->getWalkability(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level) != false)
 				{
 					travel.step();
 				}
 				else
 				{
-					if (engine->gui->mapPane->world->inMapBounds(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, engine->gui->mapPane->world->player->mapPosition.level))
+					if (WORLD->inMapBounds(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level))
 					{
-						if (engine->gui->mapPane->world->getTile(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, engine->gui->mapPane->world->player->mapPosition.level)->tag == "destructible")
+						if (WORLD->getTile(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level)->tag == "destructible")
 						{
-							engine->gui->mapPane->world->getTile(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, engine->gui->mapPane->world->player->mapPosition.level)->interact();
+							WORLD->getTile(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level)->interact();
 						}
 						hitWall = true;
 					}
@@ -286,7 +284,7 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 		if (!(toolx == dx + toolx && tooly == dy + tooly))
 		{
 			fireWait = fireCap;
-			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, toolx, tooly, dx, dy, engine->gui->mapPane->world->debugmap->mapWidth, engine->gui->mapPane->world->debugmap->mapHeight));
+			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, toolx, tooly, dx, dy, WORLD->debugmap->mapWidth, WORLD->debugmap->mapHeight));
 			ammoAmount--;
 		}
 	}

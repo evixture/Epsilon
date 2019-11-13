@@ -1,15 +1,8 @@
 #include "main.hpp"
 
-//struct Container
+//struct Item
 //{
-//	bool active;
-//	bool useTile;
-//	const char* name;
 //
-//	Container(const char* name);
-//
-//	virtual void update(int x, int y, int mx, int my, double angle);
-//	virtual void render(const std::shared_ptr<Pane>& pane) const;
 //};
 
 struct Tool// : public Container
@@ -98,4 +91,11 @@ struct Weapon : public Tool
 //
 //	void update(int x, int y, int mx, int my, double angle);
 //	void render(const std::shared_ptr<Pane>& pane) const;
+//};
+
+//struct Container
+//{
+//	std::vector<>
+//
+//	Container();
 //};

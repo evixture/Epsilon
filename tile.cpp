@@ -76,5 +76,5 @@ Stair::Stair(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int h
 
 void Stair::interact()
 {
-	engine->gui->mapPane->world->player->mapPosition.level += moveDist;
+	WORLD->player->mapPosition.level += moveDist;
 }

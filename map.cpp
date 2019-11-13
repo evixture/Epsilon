@@ -254,8 +254,8 @@ bool World::isInFov(int x, int y, int level) const
 
 void World::update()
 {
-	xOffset = getOffset(player->mapPosition.x, debugmap->mapWidth, engine->gui->mapPane->drawWindow->consoleW);
-	yOffset = getOffset(player->mapPosition.y, debugmap->mapHeight, engine->gui->mapPane->drawWindow->consoleH);
+	xOffset = getOffset(player->mapPosition.x, debugmap->mapWidth, MAPPANE->drawWindow->consoleW);
+	yOffset = getOffset(player->mapPosition.y, debugmap->mapHeight, MAPPANE->drawWindow->consoleH);
 
 	updateProperties();
 	computeFov();

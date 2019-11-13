@@ -36,16 +36,16 @@ StatusPane::StatusPane(int windowW, int windowH, int rx, int ry)
 
 void StatusPane::update()
 {
-	displayHealth = engine->gui->mapPane->world->player->health;
-	displayArmor = engine->gui->mapPane->world->player->armor;
+	displayHealth = WORLD->player->health;
+	displayArmor = WORLD->player->armor;
 }
 
 void StatusPane::render() const
 {
 	clearWindow();
 
-	drawWindow->console->printf(0, 0, "Health : [%i/100]", engine->gui->mapPane->world->player->health);
-	drawWindow->console->printf(0, 1, "Armor  : [%i/100]", engine->gui->mapPane->world->player->armor);
+	drawWindow->console->printf(0, 0, "Health : [%i/100]", WORLD->player->health);
+	drawWindow->console->printf(0, 1, "Armor  : [%i/100]", WORLD->player->armor);
 	pushWindow();
 }
 
@@ -57,28 +57,28 @@ PlayerPane::PlayerPane(int windowW, int windowH, int rx, int ry)
 
 void PlayerPane::update()
 {
-	if (engine->gui->mapPane->world->player->height == 1)
+	if (WORLD->player->height == 1)
 	{
 		playerStance = "Prone";
 	}
-	else if (engine->gui->mapPane->world->player->height == 2)
+	else if (WORLD->player->height == 2)
 	{
 		playerStance = "Crouching";
 	}
-	else if (engine->gui->mapPane->world->player->height == 3)
+	else if (WORLD->player->height == 3)
 	{
 		playerStance = "Standing";
 	}
 
-	if (engine->settings->input->baseMoveWait == 30)
+	if (INPUT->baseMoveWait == 30)
 	{
 		playerSpeed = "Walking";
 	}
-	else if (engine->settings->input->baseMoveWait == 15)
+	else if (INPUT->baseMoveWait == 15)
 	{
 		playerSpeed = "Running";
 	}
-	else if (engine->settings->input->baseMoveWait == 60)
+	else if (INPUT->baseMoveWait == 60)
 	{
 		playerSpeed = "Creeping";
 	}
@@ -147,14 +147,14 @@ void SplashPanel::update()
 {
 	menuSelection = menuItemList[menuIndex];
 
-	if (engine->settings->input->w->isSwitched)
+	if (INPUT->w->isSwitched)
 	{
 		if (menuIndex > 0)
 		{
 			menuIndex--;
 		}
 	}
-	if (engine->settings->input->s->isSwitched)
+	if (INPUT->s->isSwitched)
 	{
 		if (menuIndex < menuItemList.size() - 1)
 		{
@@ -162,11 +162,11 @@ void SplashPanel::update()
 		}
 	}
 
-	if (engine->settings->input->space->isSwitched)
+	if (INPUT->space->isSwitched)
 	{
 		if (menuItemList[menuIndex] == "Start")
 		{
-			engine->gui->activeWindow = Gui::NONE;
+			GUI->activeWindow = Gui::NONE;
 		}
 		else if (menuItemList[menuIndex] == "Exit")
 		{
