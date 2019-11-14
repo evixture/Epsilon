@@ -39,7 +39,7 @@ struct PlayerPane : public Window
 
 struct InventoryPane : public Window
 {
-	std::vector<std::shared_ptr<Container>> itemNameList;
+	std::vector<std::shared_ptr<Container>> inventoryItemList;
 
 	InventoryPane(int windowW, int windowH, int rx, int ry);
 

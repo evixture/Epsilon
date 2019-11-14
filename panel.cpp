@@ -103,14 +103,14 @@ void InventoryPane::update()
 {
 	//for (int i = 0; i < engine->gui->mapPane->world->player->inventory.size() - 1; i++)
 	//{
-	//	//itemNameList[i] = engine->gui->mapPane->world->player->inventory[i]->name;
+	//	//inventoryItemList[i] = engine->gui->mapPane->world->player->inventory[i]->name;
 	//	//if (i < engine->gui->mapPane->world->player->inventory.size())
 	//	//{
-	//		itemNameList.push_back(engine->gui->mapPane->world->player->inventory[i]->name);
+	//		inventoryItemList.push_back(engine->gui->mapPane->world->player->inventory[i]->name);
 	//	//}
 	//}
 
-	itemNameList = WORLD->player->inventory;
+	inventoryItemList = WORLD->player->inventory;
 }
 
 void InventoryPane::render() const
@@ -119,7 +119,7 @@ void InventoryPane::render() const
 
 	//for (int i = 0; i < drawWindow->consoleH; i++)
 	//{
-	//	//drawWindow->console->printf(0, i, itemNameList[i]);
+	//	//drawWindow->console->printf(0, i, inventoryItemList[i]);
 	//	if (i < engine->gui->mapPane->world->player->inventory.size())
 	//	{
 	//		if (engine->gui->mapPane->world->player->inventory[i]->active)
@@ -132,36 +132,79 @@ void InventoryPane::render() const
 	//		}
 	//	}
 	//}
+	/*
+	
+	1 1 	| Container1, size 6
+	  2 1 1	|   Item1, size2
+	  3   2	|   =
+	  4 2 1	|   Item2, size3
+	  5   2	|   =
+	  6   3	|   =
+	  7  	| -
+	2 1  	| Container2, size 1
+	  2  	| -
+	*/
 
-	for (int i = 0; i < itemNameList.size(); i++)
+	int drawLine = 0;
+
+	for (int i = 0; i < inventoryItemList.size(); i++)
 	{
-		int step = 0;
+		drawWindow->console->printf(0, drawLine, "| %s", inventoryItemList[i]->name);
+		drawLine++;
 
-		drawWindow->console->printf(0, i,"| %s", itemNameList[i]->name);
-		//step++;
-
-		for (int j = 0; j < itemNameList[i]->itemList.size(); j++)
+		for (int j = 0; j < inventoryItemList[i]->itemCapacity; j++)
 		{
-			drawWindow->console->printf(0, i + j + 1, "|  %s", itemNameList[i]->itemList[j]->tool->name);
-			//step++;
-
-			for (int size = 1; size < itemNameList[i]->itemList[j]->size; size++)
+			for (int k = 0; k < inventoryItemList[i]->itemList.size(); k++)
 			{
-				drawWindow->console->printf(0, i + j + size + 1, "|  =");
-				step++;
-			}
-		}
+				drawWindow->console->printf(0, drawLine, "|  %s", inventoryItemList[i]->itemList[k]->tool->name);
+				drawLine++;
 
-		for (int cap = 0; cap < itemNameList[i]->capacity; cap++)
-		{
-			//needs to be > 3 to render
-			if (cap - step > 0)
-			{
-				drawWindow->console->printf(0, i + cap + 1, "| -");
+				for (int l = 1; l < inventoryItemList[i]->itemList[k]->size; l++)
+				{
+					drawWindow->console->printf(0, drawLine, "|  =");
+					drawLine++;
+				}
 			}
-			//step++;
+			//drawWindow->console->printf(0, i + j, "|  %s", inventoryItemList[i]->inventoryItemList[j])
+			//drawWindow->console->printf(0, i + j, "|  =");
+
 		}
 	}
+
+	//for (int i = 0; i < inventoryItemList.size(); i++)
+	//{
+	//	int step = 0;
+	//
+	//	drawWindow->console->printf(0, i,"| %s", inventoryItemList[i]->name);
+	//	//step++;
+	//
+	//	for (int j = 0; j < inventoryItemList[i]->inventoryItemList.size(); j++)
+	//	{
+	//		//drawWindow->console->printf(0, i + j + 1, "|  %s", inventoryItemList[i]->inventoryItemList[j]->tool->name);
+	//		////step++;
+	//
+	//		//for (int size = 1; size < inventoryItemList[i]->inventoryItemList[j]->size; size++)
+	//		//{
+	//		//	drawWindow->console->printf(0, i + j + size + 1, "|  =");
+	//		//	step++;
+	//		//}
+	//		if (j == 0)
+	//		{
+	//			drawWindow->console->printf(0, i + 1, "|  %s", inventoryItemList[i]->inventoryItemList[j]->tool->name);
+	//		}
+	//		else drawWindow->console->printf(0, i + j + step + 1, "|  =");
+	//	}
+	//
+	//	for (int cap = 0; cap < inventoryItemList[i]->itemCapacity; cap++)
+	//	{
+	//		//needs to be > 3 to render
+	//		if (cap - step > 0)
+	//		{
+	//			drawWindow->console->printf(0, i + cap + 1, "| -");
+	//		}
+	//		//step++;
+	//	}
+	//}
 
 	pushWindow();
 }

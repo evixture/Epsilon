@@ -415,17 +415,17 @@ void Item::renderTile(const std::shared_ptr<Pane>& pane) const
 	tile->render(renderPosition.x, renderPosition.y, pane);
 }
 
-Container::Container(const char* name, int capacity)
-	: name(name), capacity(capacity), currentSize(0)
+Container::Container(const char* name, int itemCapacity)
+	: name(name), itemCapacity(itemCapacity), currentSize(0)
 {
 }
 
 bool Container::addItem(std::shared_ptr<Item> item)
 {
-	if (currentSize + item->size <= capacity)
+	if (currentSize + item->size <= itemCapacity)
 	{
 		itemList.push_back(item);
-		//currentSize = capacity - item->size;
+		//currentSize = itemCapacity - item->size;
 		return true;
 	}
 	else return false;
