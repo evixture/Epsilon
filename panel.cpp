@@ -146,29 +146,44 @@ void InventoryPane::render() const
 	*/
 
 	int drawLine = 0;
+	int drawLineStart = 0;
 
-	for (int i = 0; i < inventoryItemList.size(); i++)
+	for (auto& container : inventoryItemList)
 	{
-		drawWindow->console->printf(0, drawLine, "| %s", inventoryItemList[i]->name);
-		drawLine++;
-
-		for (int j = 0; j < inventoryItemList[i]->itemCapacity; j++)
+		for (int i = 0; i <= container->itemCapacity; i++)
 		{
-			for (int k = 0; k < inventoryItemList[i]->itemList.size(); k++)
+			if (i == 0)
 			{
-				drawWindow->console->printf(0, drawLine, "|  %s", inventoryItemList[i]->itemList[k]->tool->name);
+				drawWindow->console->printf(0, drawLineStart, "| %s", container->name);
 				drawLine++;
+			}
 
-				for (int l = 1; l < inventoryItemList[i]->itemList[k]->size; l++)
+			else
+			{
+				drawWindow->console->printf(0, drawLine + i - 1, "|   -");
+				//drawLine++;
+			}
+		}
+
+		for (auto& item : container->itemList)
+		{
+			for (int j = 0; j < item->size; j++)
+			{
+				if (j == 0)
 				{
-					drawWindow->console->printf(0, drawLine, "|  =");
+					drawWindow->console->printf(0, drawLine, "|   %s", item->tool->name);
+					drawLine++;
+				}
+				else
+				{
+					drawWindow->console->printf(0, drawLine, "|     =");
 					drawLine++;
 				}
 			}
-			//drawWindow->console->printf(0, i + j, "|  %s", inventoryItemList[i]->inventoryItemList[j])
-			//drawWindow->console->printf(0, i + j, "|  =");
-
 		}
+
+		drawLineStart += container->itemCapacity + 1;
+		drawLine = drawLineStart;
 	}
 
 	//for (int i = 0; i < inventoryItemList.size(); i++)

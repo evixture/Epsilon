@@ -422,11 +422,26 @@ Container::Container(const char* name, int itemCapacity)
 
 bool Container::addItem(std::shared_ptr<Item> item)
 {
-	if (currentSize + item->size <= itemCapacity)
+	int spaceUsed = 0;
+
+	for (auto& i : itemList)
+	{
+		spaceUsed = i->size;
+	}
+
+	if (spaceUsed + item->size <= itemCapacity)
 	{
 		itemList.push_back(item);
-		//currentSize = itemCapacity - item->size;
 		return true;
 	}
-	else return false;
+
+	return false;
+
+	//if (currentSize + item->size <= itemCapacity)
+	//{
+	//	itemList.push_back(item);
+	//	//currentSize = itemCapacity - item->size;
+	//	return true;
+	//}
+	//else return false;
 }

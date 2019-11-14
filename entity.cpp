@@ -41,8 +41,8 @@ Player::Player(Position pos)
 	:Creature(Position(pos), '@', "player", TCODColor::azure, 100, 0)
 {
 
-	inventory.push_back(std::make_shared<Container>("Test Container", 5));
-	inventory[0]->addItem(std::make_shared<Item>(2, std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, "static"), std::make_shared<Weapon>("Test Weapon", TCODColor::darkestGrey, 30, 10, .09f, 2.0f), 5, 5, 0));
+	inventory.push_back(std::make_shared<Container>("Test Container Cap 5", 5));
+	inventory[0]->addItem(std::make_shared<Item>(2, std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, "static"), std::make_shared<Weapon>("Test Weapon Size 2", TCODColor::darkestGrey, 30, 10, .09f, 2.0f), 5, 5, 0));
 
 	//inventory.push_back(std::make_shared<Tool>("Hands", TCODColor::peach));
 	//inventory.push_back(std::make_shared<Weapon>("AR Rifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f));
@@ -62,7 +62,8 @@ void Player::update()
 
 	if (INPUT->num0->isSwitched)
 	{
-		inventory[0]->addItem(std::make_shared<Item>(3, std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, "static"), std::make_shared<Weapon>("Test Weapon 2", TCODColor::darkestGrey, 30, 10, .09f, 2.0f), 5, 5, 0));
+		//inventory[0]->addItem(std::make_shared<Item>(1, std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, "static"), std::make_shared<Weapon>("Test Weapon Size 1", TCODColor::darkestGrey, 30, 10, .09f, 2.0f), 5, 5, 0));
+		inventory.push_back(std::make_shared<Container>("Test Container Cap 7", 7));
 	}
 
 	//if (engine->settings->input->mouse.wheel_up || engine->settings->input->mouse.wheel_down)
