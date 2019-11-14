@@ -39,7 +39,7 @@ struct PlayerPane : public Window
 
 struct InventoryPane : public Window
 {
-	std::vector<const char*> itemNameList;
+	std::vector<std::shared_ptr<Container>> itemNameList;
 
 	InventoryPane(int windowW, int windowH, int rx, int ry);
 
@@ -47,14 +47,16 @@ struct InventoryPane : public Window
 	void render() const;
 };
 
-struct SplashPanel : public Window
+struct SplashPane : public Window
 {
 	int menuIndex;
 	const char* menuSelection;
 	std::vector<const char*> menuItemList;
 
-	SplashPanel(int windowW, int windowH, int rx, int ry);
+	SplashPane(int windowW, int windowH, int rx, int ry);
 
 	void update();
 	void render() const;
 };
+
+//struct InventoryPanel

@@ -11,6 +11,8 @@ struct Tool
 	int dx;
 	int dy;
 
+	const char* name;
+
 	Tool(const char* name, TCODColor color);
 
 	virtual void update(int x, int y, int mx, int my, double angle);

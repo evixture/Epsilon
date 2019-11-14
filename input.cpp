@@ -54,6 +54,8 @@ Input::Input()
 	keyList.push_back(e = std::make_shared<Key>(sf::Keyboard::E));
 	keyList.push_back(r = std::make_shared<Key>(sf::Keyboard::R));
 
+	keyList.push_back(num0 = std::make_shared<Key>(sf::Keyboard::Num0));
+
 	keyList.push_back(space = std::make_shared<Key>(sf::Keyboard::Space));
 	keyList.push_back(f11 = std::make_shared<Key>(sf::Keyboard::F11));
 	keyList.push_back(escape = std::make_shared<Key>(sf::Keyboard::Escape));

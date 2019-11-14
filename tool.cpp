@@ -16,7 +16,7 @@ render current item
 
 //Tool Struct
 Tool::Tool(const char* name, TCODColor color)
-	:color(color), toolx(0), tooly(0), ch(NULL), dx(0), dy(0)//, Container(name)
+	:color(color), toolx(0), tooly(0), ch(NULL), dx(0), dy(0), name(name)//, Container(name)
 {}
 
 void Tool::update(int x, int y, int mx, int my, double angle)
@@ -425,6 +425,7 @@ bool Container::addItem(std::shared_ptr<Item> item)
 	if (currentSize + item->size <= capacity)
 	{
 		itemList.push_back(item);
+		//currentSize = capacity - item->size;
 		return true;
 	}
 	else return false;

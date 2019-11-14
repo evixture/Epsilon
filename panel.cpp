@@ -109,6 +109,8 @@ void InventoryPane::update()
 	//		itemNameList.push_back(engine->gui->mapPane->world->player->inventory[i]->name);
 	//	//}
 	//}
+
+	itemNameList = WORLD->player->inventory;
 }
 
 void InventoryPane::render() const
@@ -131,10 +133,40 @@ void InventoryPane::render() const
 	//	}
 	//}
 
+	for (int i = 0; i < itemNameList.size(); i++)
+	{
+		int step = 0;
+
+		drawWindow->console->printf(0, i,"| %s", itemNameList[i]->name);
+		//step++;
+
+		for (int j = 0; j < itemNameList[i]->itemList.size(); j++)
+		{
+			drawWindow->console->printf(0, i + j + 1, "|  %s", itemNameList[i]->itemList[j]->tool->name);
+			//step++;
+
+			for (int size = 1; size < itemNameList[i]->itemList[j]->size; size++)
+			{
+				drawWindow->console->printf(0, i + j + size + 1, "|  =");
+				step++;
+			}
+		}
+
+		for (int cap = 0; cap < itemNameList[i]->capacity; cap++)
+		{
+			//needs to be > 3 to render
+			if (cap - step > 0)
+			{
+				drawWindow->console->printf(0, i + cap + 1, "| -");
+			}
+			//step++;
+		}
+	}
+
 	pushWindow();
 }
 
-SplashPanel::SplashPanel(int windowW, int windowH, int rx, int ry)
+SplashPane::SplashPane(int windowW, int windowH, int rx, int ry)
 	:Window(windowW, windowH, "EPSILON", rx, ry), menuIndex(0)
 {
 	menuItemList.push_back("Start");
@@ -143,7 +175,7 @@ SplashPanel::SplashPanel(int windowW, int windowH, int rx, int ry)
 	menuSelection = menuItemList[menuIndex];
 }
 
-void SplashPanel::update()
+void SplashPane::update()
 {
 	menuSelection = menuItemList[menuIndex];
 
@@ -175,7 +207,7 @@ void SplashPanel::update()
 	}
 }
 
-void SplashPanel::render() const
+void SplashPane::render() const
 {
 	clearWindow();
 

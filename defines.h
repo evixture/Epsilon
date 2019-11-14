@@ -50,6 +50,7 @@ constexpr auto PI = 3.14159265;
 	#define TILE_error			std::make_shared<Tile>			('%',	TCODColor::black,			TCODColor::pink,			4,	true ,	"static")
 
 //TOOLS
+	//Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed);
 	#define WEAPON_Test		std::shared_ptr<Weapon>	(TCODColor::darkestGrey,	30,		10,		5,	120)
 
 //GUI
