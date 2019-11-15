@@ -1,22 +1,8 @@
 #include "main.hpp"
 
-/*
-
-INVENTORY
-	vector of containers
-		CONTAINER
-			vector of items
-
-current item = inventory[index 1][index 2]
-
-update current item
-render current item
-
-*/
-
 //Tool Struct
 Tool::Tool(const char* name, TCODColor color)
-	:color(color), toolx(0), tooly(0), ch(NULL), dx(0), dy(0), name(name)//, Container(name)
+	:color(color), toolx(0), tooly(0), ch(NULL), dx(0), dy(0), name(name)
 {}
 
 void Tool::update(int x, int y, int mx, int my, double angle)
@@ -337,59 +323,9 @@ void Weapon::render(const std::shared_ptr<Pane>& pane) const
 	}
 }
 
-//Item struct
-//Item::Item(const char* name, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, bool useTile)
-//	:tile(tile), tool(tool), Container(name)//, useTile(useTile)
-//{
-//}
-//
-//void Item::update(int x, int y, int mx, int my, double angle)
-//{
-//	//if (active)
-//	//{
-//	//	renderPosition.x = mapPosition.x - WORLD->xOffset;
-//	//	renderPosition.y = mapPosition.y - WORLD->yOffset;
-//	//	renderPosition.level = mapPosition.level;
-//	//
-//	//	if (useTile)
-//	//	{
-//	//		distToCreature = (float)getDistance(mapPosition.x, mapPosition.y, mapPosition.x, mapPosition.y);
-//	//
-//	//		if (distToCreature < 5)
-//	//		{
-//	//			tileBackgoundColor = tile->backgroundColor;
-//	//		}
-//	//		else
-//	//		{
-//	//			tileBackgoundColor = TCODColor::pink;
-//	//		}
-//	//	}
-//	//	else
-//	//	{
-//	//		tool->update(x, y, mx, my, angle);
-//	//	}
-//	//}
-//}
-//
-//void Item::render(const std::shared_ptr<Pane>& pane) const
-//{
-//	if (active)
-//	{
-//		if (useTile)
-//		{
-//			//tile->render(renderPosition.x, renderPosition.y, pane);
-//		}
-//		else
-//		{
-//			tool->render(pane);
-//		}
-//	}
-//}
-//
-
 //ITEM STRUCT
-Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, int x, int y, int level)
-	: tile(tile), tool(tool), mapPosition(Position(x, y, level)), renderPosition(Position(x, y, level)), size(size)
+Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position)
+	: tile(tile), tool(tool), mapPosition(position), renderPosition(position), size(size)
 {
 }
 
@@ -416,7 +352,7 @@ void Item::renderTile(const std::shared_ptr<Pane>& pane) const
 }
 
 Container::Container(const char* name, int itemCapacity)
-	: name(name), itemCapacity(itemCapacity), currentSize(0)
+	:name(name), itemCapacity(itemCapacity), currentSize(0)
 {
 }
 

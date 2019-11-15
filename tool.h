@@ -80,7 +80,7 @@ struct Item
 	std::shared_ptr<Tile> tile;
 	std::shared_ptr<Tool> tool;
 
-	Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, int x, int y, int level);
+	Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position);
 
 	void updateTool(int x, int y, int mx, int my, double angle);
 	void renderTool(const std::shared_ptr<Pane>& pane) const;

@@ -40,9 +40,8 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 Player::Player(Position pos)
 	:Creature(Position(pos), '@', "player", TCODColor::azure, 100, 0)
 {
-
 	inventory.push_back(std::make_shared<Container>("Test Container Cap 5", 5));
-	inventory[0]->addItem(std::make_shared<Item>(2, std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, "static"), std::make_shared<Weapon>("Test Weapon Size 2", TCODColor::darkestGrey, 30, 10, .09f, 2.0f), 5, 5, 0));
+	inventory[0]->addItem(TESTITEM);
 
 	//inventory.push_back(std::make_shared<Tool>("Hands", TCODColor::peach));
 	//inventory.push_back(std::make_shared<Weapon>("AR Rifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f));

@@ -1,7 +1,5 @@
 #include "main.hpp"
 
-
-
 //Entity Class
 class Entity
 {

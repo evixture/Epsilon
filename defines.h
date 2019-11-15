@@ -25,7 +25,12 @@ constexpr auto PI = 3.14159265;
 
 //TILES
 	//GROUND
-	#define TILE_BasicGrass		std::make_shared<Tile>			('.',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	"static")
+		//GRASS PATTERNS
+			#define TILE_BasicGrass0		std::make_shared<Tile>			('.',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	"static")
+			#define TILE_BasicGrass1		std::make_shared<Tile>			('"',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	"static")
+			#define TILE_BasicGrass2		std::make_shared<Tile>			('`',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	"static")
+			#define TILE_BasicGrass3		std::make_shared<Tile>			(',',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	"static")
+
 	#define TILE_BasicFlower	std::make_shared<Tile>			('*',	TCODColor::darkChartreuse,	TCODColor::darkestSepia,	2,	true,	"static")
 	#define TILE_BasicFloor		std::make_shared<Tile>			(' ',	TCODColor::darkSepia,		TCODColor::darkerSepia,		0,	true,	"static")
 	#define TILE_BasicConcrete	std::make_shared<Tile>			('`',	TCODColor::darkGrey,		TCODColor::grey,			0,	true,	"static")
@@ -49,9 +54,12 @@ constexpr auto PI = 3.14159265;
 	//ERROR
 	#define TILE_error			std::make_shared<Tile>			('%',	TCODColor::black,			TCODColor::pink,			4,	true ,	"static")
 
+	//ITEM TILES
+	#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, "static")
+
 //TOOLS
 	//Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed);
-	#define WEAPON_Test		std::shared_ptr<Weapon>	(TCODColor::darkestGrey,	30,		10,		5,	120)
+	#define DEFAULT_RIFLE std::make_shared<Weapon>("DEFAULT_RIFLE(2)", TCODColor::darkestGrey, 30, 10, .09f, 2.0f)
 
 //GUI
 	#define RIBONBGCOLOR TCODColor::darkBlue
@@ -59,6 +67,6 @@ constexpr auto PI = 3.14159265;
 
 
 //TEST ITEM
-	#define TESTITEM std::make_shared<Item>(2, std::shared_ptr<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, "static"), WEAPON_Test, 5, 5, 0)
+	#define TESTITEM std::make_shared<Item>(2, DEFAULT_ITEM_TILE, DEFAULT_RIFLE, Position(5, 5, 0))
 
 //work on map container and updating inventory update render

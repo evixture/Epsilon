@@ -57,6 +57,10 @@ struct SplashPane : public Window
 
 	void update();
 	void render() const;
+
+private:
+	void renderLargeLogo() const;
+	void renderMenuOptions() const;
 };
 
 //struct InventoryPanel

@@ -117,34 +117,6 @@ void InventoryPane::render() const
 {
 	clearWindow();
 
-	//for (int i = 0; i < drawWindow->consoleH; i++)
-	//{
-	//	//drawWindow->console->printf(0, i, inventoryItemList[i]);
-	//	if (i < engine->gui->mapPane->world->player->inventory.size())
-	//	{
-	//		if (engine->gui->mapPane->world->player->inventory[i]->active)
-	//		{
-	//			drawWindow->console->printf(0, i, "|>%s", engine->gui->mapPane->world->player->inventory[i]->name);
-	//		}
-	//		else
-	//		{
-	//			drawWindow->console->printf(0, i, "| %s", engine->gui->mapPane->world->player->inventory[i]->name);
-	//		}
-	//	}
-	//}
-	/*
-	
-	1 1 	| Container1, size 6
-	  2 1 1	|   Item1, size2
-	  3   2	|   =
-	  4 2 1	|   Item2, size3
-	  5   2	|   =
-	  6   3	|   =
-	  7  	| -
-	2 1  	| Container2, size 1
-	  2  	| -
-	*/
-
 	int drawLine = 0;
 	int drawLineStart = 0;
 
@@ -161,7 +133,6 @@ void InventoryPane::render() const
 			else
 			{
 				drawWindow->console->printf(0, drawLine + i - 1, "|   -");
-				//drawLine++;
 			}
 		}
 
@@ -185,41 +156,6 @@ void InventoryPane::render() const
 		drawLineStart += container->itemCapacity + 1;
 		drawLine = drawLineStart;
 	}
-
-	//for (int i = 0; i < inventoryItemList.size(); i++)
-	//{
-	//	int step = 0;
-	//
-	//	drawWindow->console->printf(0, i,"| %s", inventoryItemList[i]->name);
-	//	//step++;
-	//
-	//	for (int j = 0; j < inventoryItemList[i]->inventoryItemList.size(); j++)
-	//	{
-	//		//drawWindow->console->printf(0, i + j + 1, "|  %s", inventoryItemList[i]->inventoryItemList[j]->tool->name);
-	//		////step++;
-	//
-	//		//for (int size = 1; size < inventoryItemList[i]->inventoryItemList[j]->size; size++)
-	//		//{
-	//		//	drawWindow->console->printf(0, i + j + size + 1, "|  =");
-	//		//	step++;
-	//		//}
-	//		if (j == 0)
-	//		{
-	//			drawWindow->console->printf(0, i + 1, "|  %s", inventoryItemList[i]->inventoryItemList[j]->tool->name);
-	//		}
-	//		else drawWindow->console->printf(0, i + j + step + 1, "|  =");
-	//	}
-	//
-	//	for (int cap = 0; cap < inventoryItemList[i]->itemCapacity; cap++)
-	//	{
-	//		//needs to be > 3 to render
-	//		if (cap - step > 0)
-	//		{
-	//			drawWindow->console->printf(0, i + cap + 1, "| -");
-	//		}
-	//		//step++;
-	//	}
-	//}
 
 	pushWindow();
 }
@@ -265,32 +201,21 @@ void SplashPane::update()
 	}
 }
 
-void SplashPane::render() const
+//--------------------------------------------------------------------------------------------
+
+void SplashPane::renderLargeLogo() const
 {
-	clearWindow();
-
-	/*
-	|           |
-	| |       | |
-	| | |   | | |
-	| | | | | | |         
-	E P S I L O N
-	| | | | | | |
-	| | |   | | |
-	| |       | |
-	|           |
-	*/
-
 	drawWindow->console->printf(48, 20, "|           |");
 	drawWindow->console->printf(48, 21, "| |       | |");
 	drawWindow->console->printf(48, 22, "| | |   | | |");
-	drawWindow->console->printf(48, 23, "| | | | | | |");
 	drawWindow->console->printf(48, 24, "E P S I L O N");
-	drawWindow->console->printf(48, 25, "| | | | | | |");
 	drawWindow->console->printf(48, 26, "| | |   | | |");
 	drawWindow->console->printf(48, 27, "| |       | |");
 	drawWindow->console->printf(48, 28, "|           |");
+}
 
+void SplashPane::renderMenuOptions() const
+{
 	for (int i = 0; i < menuItemList.size(); i++)
 	{
 		if (i == menuIndex)
@@ -302,6 +227,15 @@ void SplashPane::render() const
 			drawWindow->console->printf(50, 50 + i, "|  %s", menuItemList[i]);
 		}
 	}
+}
+
+void SplashPane::render() const
+{
+	clearWindow();
+
+	renderLargeLogo();
+	renderMenuOptions();
 
 	pushWindow();
 }
+
