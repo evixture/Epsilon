@@ -132,7 +132,7 @@ void InventoryPane::render() const
 
 			else
 			{
-				drawWindow->console->printf(0, drawLine + i - 1, "|   -");
+				drawWindow->console->printf(0, drawLine + i - 1, "|   .");
 			}
 		}
 
@@ -142,12 +142,19 @@ void InventoryPane::render() const
 			{
 				if (j == 0)
 				{
-					drawWindow->console->printf(0, drawLine, "|   %s", item->tool->name);
+					if (item == WORLD->player->selectedItem)
+					{
+						drawWindow->console->printf(0, drawLine, "|>  %s", item->tool->name);
+					}
+					else
+					{
+						drawWindow->console->printf(0, drawLine, "|   %s", item->tool->name);
+					}
 					drawLine++;
 				}
 				else
 				{
-					drawWindow->console->printf(0, drawLine, "|     =");
+					drawWindow->console->printf(0, drawLine, "|     |");
 					drawLine++;
 				}
 			}
@@ -168,6 +175,8 @@ SplashPane::SplashPane(int windowW, int windowH, int rx, int ry)
 
 	menuSelection = menuItemList[menuIndex];
 }
+
+//--------------------------------------------------------------------------------------------
 
 void SplashPane::update()
 {

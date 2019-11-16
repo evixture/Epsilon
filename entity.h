@@ -27,9 +27,9 @@ public:
 	int health;
 	int armor;
 
-	int inventoryIndex;
-	//std::vector<std::shared_ptr<Container>> inventory;
-	//std::shared_ptr<Container> currentContainer;
+	int containerIndex;
+	int itemIndex;
+	std::shared_ptr<Item> selectedItem;
 
 	std::vector<std::shared_ptr<Container>> inventory;
 
