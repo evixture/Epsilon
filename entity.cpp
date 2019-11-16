@@ -119,6 +119,20 @@ void Player::update()
 			WORLD->getTile(mapPosition.x, mapPosition.y, mapPosition.level)->interact();
 		}
 	}
+
+	if (INPUT->e->isSwitched)
+	{
+		for (auto& item : WORLD->mapItemList)
+		{
+			if (item->mapPosition.x == mapPosition.x && item->mapPosition.y == mapPosition.y)
+			{
+				if (inventory[containerIndex]->addItem(item))
+				{
+					WORLD->mapItemList.erase(std::remove(WORLD->mapItemList.begin(), WORLD->mapItemList.end(), item), WORLD->mapItemList.end());
+				}
+			}
+		}
+	}
 }
 
 void Player::render(const std::shared_ptr<Pane>& pane) const
