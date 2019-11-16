@@ -362,7 +362,7 @@ bool Container::addItem(std::shared_ptr<Item> item)
 
 	for (auto& i : itemList)
 	{
-		spaceUsed = i->size;
+		spaceUsed += i->size;
 	}
 
 	if (spaceUsed + item->size <= itemCapacity)

@@ -38,7 +38,7 @@ Player::Player(Position pos)
 	:Creature(Position(pos), '@', "player", TCODColor::azure, 100, 0)
 {
 	inventory.push_back(std::make_shared<Container>("Test Container Cap 5", 5));
-	inventory[0]->addItem(ITEM_Test_Size2);
+	inventory[0]->addItem(ITEM_Test_Size2(0, 0, 0));
 
 	if (inventory.size() > 0)
 	{
@@ -61,12 +61,12 @@ void Player::update()
 
 	if (INPUT->num0->isSwitched)
 	{
-		inventory[containerIndex]->addItem(ITEM_Test2_Size2);
+		inventory[containerIndex]->addItem(ITEM_Test2_Size2(0, 0, 0));
 	}
 	if (INPUT->num9->isSwitched)
 	{
 		inventory.push_back(std::make_shared<Container>("Test Container Cap 7", 7));
-		inventory[1]->addItem(ITEM_Test_Size2);
+		inventory[1]->addItem(ITEM_Test_Size2(0, 0, 0));
 	}
 
 
