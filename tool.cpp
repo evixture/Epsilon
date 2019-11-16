@@ -372,12 +372,4 @@ bool Container::addItem(std::shared_ptr<Item> item)
 	}
 
 	return false;
-
-	//if (currentSize + item->size <= itemCapacity)
-	//{
-	//	itemList.push_back(item);
-	//	//currentSize = itemCapacity - item->size;
-	//	return true;
-	//}
-	//else return false;
 }

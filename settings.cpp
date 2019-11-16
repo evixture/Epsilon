@@ -9,13 +9,11 @@ Font::Font(const char* fontName, const char* xdim, const char* ydim, const char*
 
 //USE SDL2 TO RENDER, OTHERS WILL LOCK OR LOWER FPS
 Settings::Settings(int screenCharWidth, int screenCharHeight)
-	: screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 6"), fullscreen(false), maxFps(10), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_SDL2), 
+	: screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 6"), fullscreen(false), maxFps(0), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_SDL2), 
 	fovRad(0), lightWalls(true), frameCount(0), fpsCount(60)//, RandNumGen(TCODRandom::getInstance())
 {
 	//fontList.push_back(terminal16x16 = std::make_shared<Font>("Terminal", "16", "16", "data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16));
 	//setfont(terminal16x16);
-
-	//RandNumGen->setDistribution(TCOD_DISTRIBUTION_LINEAR);
 
 	TCODConsole::setCustomFont("data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16);
 
@@ -23,7 +21,7 @@ Settings::Settings(int screenCharWidth, int screenCharHeight)
 	
 	TCODConsole::initRoot(screenCharWidth, screenCharHeight, windowTitle, fullscreen, renderer);
 	TCODConsole::root->setDefaultBackground(TCODColor::black);
-	//TCODSystem::setFps(maxFps);
+	TCODSystem::setFps(maxFps);
 }
 
 void Settings::setFullscreen()

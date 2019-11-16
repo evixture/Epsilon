@@ -7,7 +7,7 @@ public:
 
 	enum ActiveWindow { NONE, STARTUPSPLASH} activeWindow;
 
-	//Main Windows
+	//Part-screen Windows
 	std::shared_ptr<PlayerPane> playerPane;
 	std::shared_ptr<StatusPane> statusPane;
 	std::shared_ptr<InventoryPane> inventoryPane;
@@ -16,6 +16,7 @@ public:
 	std::shared_ptr<Window> eventLogPane;
 	std::shared_ptr<MapPane> mapPane;
 
+	//Full-screen Windows
 	std::shared_ptr<SplashPane> startupSplash;
 
 	Gui(int windowX, int windowY);

@@ -7,13 +7,11 @@ MapPane::MapPane(int windowW, int windowH, int rx, int ry)
 	mapSidePanel = std::make_shared<Pane>(1, 61, RIBONBGCOLOR, RIBONFGCOLOR);
 
 	world = std::make_shared<World>();
-	//map->createMap(map->debugmap);
 }
 
 void MapPane::update()
 {
 	world->update();
-	//setRibonName(world->debugmap->mapName);
 }
 
 void MapPane::render() const
@@ -31,7 +29,6 @@ void MapPane::render() const
 StatusPane::StatusPane(int windowW, int windowH, int rx, int ry)
 	:Window(windowW, windowH, "Status", rx, ry), displayHealth(0), displayArmor(0)
 {
-
 }
 
 void StatusPane::update()
@@ -101,15 +98,6 @@ InventoryPane::InventoryPane(int windowW, int windowH, int rx, int ry)
 
 void InventoryPane::update()
 {
-	//for (int i = 0; i < engine->gui->mapPane->world->player->inventory.size() - 1; i++)
-	//{
-	//	//inventoryItemList[i] = engine->gui->mapPane->world->player->inventory[i]->name;
-	//	//if (i < engine->gui->mapPane->world->player->inventory.size())
-	//	//{
-	//		inventoryItemList.push_back(engine->gui->mapPane->world->player->inventory[i]->name);
-	//	//}
-	//}
-
 	inventoryItemList = WORLD->player->inventory;
 }
 
