@@ -1,7 +1,2 @@
-﻿  entity.cpp
-  gui.cpp
-  window.cpp
-  Generating Code...
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(87,64): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  LINK : E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe not found or not built by the last incremental link; performing full link
+﻿  panel.cpp
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

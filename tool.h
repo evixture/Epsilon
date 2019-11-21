@@ -8,6 +8,9 @@ struct Tool
 	int toolx;
 	int tooly;
 
+	int sourcex;
+	int sourcey;
+
 	int dx;
 	int dy;
 
@@ -73,6 +76,7 @@ struct Weapon : public Tool
 struct Item
 {
 	int size;
+	double distToEnt;
 
 	Position mapPosition;
 	Position renderPosition;
@@ -85,7 +89,7 @@ struct Item
 	void updateTool(int x, int y, int mx, int my, double angle);
 	void renderTool(const std::shared_ptr<Pane>& pane) const;
 
-	void updateTool();
+	void updateTile();
 	void renderTile(const std::shared_ptr<Pane>& pane) const;
 };
 

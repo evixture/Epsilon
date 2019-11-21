@@ -2,7 +2,7 @@
 
 //Tool Struct
 Tool::Tool(const char* name, TCODColor color)
-	:color(color), toolx(0), tooly(0), ch(NULL), dx(0), dy(0), name(name)
+	:color(color), toolx(0), tooly(0), ch(NULL), dx(0), dy(0), name(name), sourcex(0), sourcey(0)
 {}
 
 void Tool::update(int x, int y, int mx, int my, double angle)
@@ -10,6 +10,9 @@ void Tool::update(int x, int y, int mx, int my, double angle)
 	ch = 249;
 	dx = mx - x;
 	dy = my - y;
+
+	sourcex = x;
+	sourcey = y;
 
 	if (dx >= 0 && dy >= 0)
 	{
@@ -176,6 +179,9 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	dx = mx - x;
 	dy = my - y;
 
+	sourcex = x;
+	sourcey = y;
+
 	fireCap = (int)(baseFireCap * engine->settings->fpsCount);
 	reloadTimer = (int)(baseReloadTimer * engine->settings->fpsCount);
 
@@ -325,13 +331,17 @@ void Weapon::render(const std::shared_ptr<Pane>& pane) const
 
 //ITEM STRUCT
 Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position)
-	: tile(tile), tool(tool), mapPosition(position), renderPosition(position), size(size)
+	: tile(tile), tool(tool), mapPosition(position), renderPosition(position), size(size), distToEnt(0)
 {
 }
 
 void Item::updateTool(int x, int y, int mx, int my, double angle)
 {
 	tool->update(x, y, mx, my, angle);
+
+	mapPosition = Position(tool->sourcex + WORLD->xOffset, tool->sourcey + WORLD->yOffset, 0);
+
+	renderPosition = offSetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
 void Item::renderTool(const std::shared_ptr<Pane>& pane) const
@@ -339,16 +349,22 @@ void Item::renderTool(const std::shared_ptr<Pane>& pane) const
 	tool->render(pane);
 }
 
-void Item::updateTool()
+void Item::updateTile()
 {
-	renderPosition.x = mapPosition.x - WORLD->xOffset;
-	renderPosition.y = mapPosition.y - WORLD->yOffset;
-	renderPosition.level = mapPosition.level;
+	distToEnt = getDistance(WORLD->player->mapPosition.x, WORLD->player->mapPosition.y, mapPosition.x, mapPosition.y);
+	//mapPosition = Position(tool->toolx, tool->tooly, 0);
+
+	renderPosition = offSetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
 void Item::renderTile(const std::shared_ptr<Pane>& pane) const
 {
 	tile->render(renderPosition.x, renderPosition.y, pane);
+
+	if (distToEnt < 5)
+	{
+		pane->console->setCharBackground(renderPosition.x, renderPosition.y, tile->backgroundColor + TCODColor::darkGrey);
+	}
 }
 
 Container::Container(const char* name, int itemCapacity)

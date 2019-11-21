@@ -5,7 +5,6 @@ class Entity
 {
 public:
 	Position mapPosition;
-	Position renderPosition;
 	int symbol;
 	const TCODColor color;
 	const char* name;
@@ -16,6 +15,9 @@ public:
 
 	virtual void update();
 	virtual void render(const std::shared_ptr<Pane> &pane) const;
+
+protected:
+	Position renderPosition;
 };
 
 //Creature Class

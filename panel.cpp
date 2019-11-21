@@ -114,7 +114,15 @@ void InventoryPane::render() const
 		{
 			if (i == 0)
 			{
-				drawWindow->console->printf(0, drawLineStart, "| %s", container->name);
+				if (container == WORLD->player->inventory[WORLD->player->containerIndex])
+				{
+					drawWindow->console->printf(0, drawLineStart, "|>%s", container->name);
+				}
+				else
+				{
+					drawWindow->console->printf(0, drawLineStart, "| %s", container->name);
+
+				}
 				drawLine++;
 			}
 

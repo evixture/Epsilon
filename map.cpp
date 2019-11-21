@@ -296,7 +296,7 @@ void World::update()
 
 	for (auto& item : mapItemList)
 	{
-		//item->updateTile();
+		item->updateTile();
 	}
 }
 

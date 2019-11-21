@@ -55,9 +55,7 @@ Player::Player(Position pos)
 
 void Player::update()
 {
-	renderPosition.x = mapPosition.x - WORLD->xOffset;
-	renderPosition.y = mapPosition.y - WORLD->yOffset;
-	renderPosition.level = mapPosition.level;
+	renderPosition = offSetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
 	if (INPUT->num0->isSwitched)
 	{
@@ -69,7 +67,7 @@ void Player::update()
 		inventory[1]->addItem(ITEM_Test_Size2(0, 0, 0));
 	}
 
-
+	//MOUSE WHEEL ITEM SELECTION
 	if (INPUT->mouse.wheel_up || INPUT->mouse.wheel_down)
 	{
 		if (INPUT->mouse.wheel_up)
@@ -79,12 +77,20 @@ void Player::update()
 				itemIndex--;
 			}
 			
-			else if (itemIndex <= 0)
+			else if (itemIndex == 0)
 			{
 				if (containerIndex > 0)
 				{
 					containerIndex--;
 					itemIndex = inventory[containerIndex]->itemList.size() - 1;
+				}				
+			}
+
+			else if (itemIndex == -1)
+			{
+				if (itemIndex + 2 <= itemIndex < inventory[containerIndex]->itemList.size())
+				{
+					itemIndex++;
 				}
 			}
 		}
@@ -102,15 +108,52 @@ void Player::update()
 					containerIndex++;
 					itemIndex = 0;
 				}
+
+				else if (itemIndex == -1)
+				{
+					if (itemIndex + 2 <= itemIndex < inventory[containerIndex]->itemList.size())
+					{
+						itemIndex++;
+					}
+				}
 			}
 		}
 	}
 
-	selectedItem = inventory[containerIndex]->itemList[itemIndex];
+	//INDEX FILTERING
+	if (containerIndex > (inventory.size() - 1))
+	{
+		containerIndex = inventory.size() - 1;
+	}
+
+	if (containerIndex != -1)
+	{
+		//int temp = inventory[containerIndex]->itemList.size() - 1;
+		if (itemIndex + 1 > inventory[containerIndex]->itemList.size())
+		{
+			//not going through after item delete
+			//fixed
+			itemIndex = inventory[containerIndex]->itemList.size() - 1;
+		}
+
+		if (itemIndex != -1)
+		{
+			//error when fail to filter index
+			//fixed
+			selectedItem = inventory[containerIndex]->itemList[itemIndex];
+		}
+		else
+		{
+			selectedItem = ITEM_Hands(0, 0, 0);
+		}
+	}
 
 	angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
 
-	selectedItem->updateTool(renderPosition.x, renderPosition.y, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle);
+	if (itemIndex != -1)
+	{
+		selectedItem->updateTool(renderPosition.x, renderPosition.y, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle);
+	}
 
 	if (engine->settings->input->space->isSwitched == true)
 	{
@@ -126,11 +169,22 @@ void Player::update()
 		{
 			if (item->mapPosition.x == mapPosition.x && item->mapPosition.y == mapPosition.y)
 			{
+				//error if picking up 2 items with same coords
 				if (inventory[containerIndex]->addItem(item))
 				{
 					WORLD->mapItemList.erase(std::remove(WORLD->mapItemList.begin(), WORLD->mapItemList.end(), item), WORLD->mapItemList.end());
 				}
 			}
+		}
+	}
+
+	if (INPUT->q->isSwitched)
+	{	
+		if (containerIndex != -1 && itemIndex != -1)
+		{
+			WORLD->mapItemList.push_back(selectedItem);
+		
+			inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
 		}
 	}
 }
