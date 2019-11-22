@@ -10,7 +10,7 @@ struct Position
 	Position(int x, int y, int level);
 };
 
-Position offSetPosition(Position& mapPosition, int xOffset, int yOffset);
+Position offsetPosition(Position& mapPosition, int xOffset, int yOffset);
 
 struct BLine
 {

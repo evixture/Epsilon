@@ -110,7 +110,7 @@ bool BLine::end()
 	return false;
 }
 
-Position offSetPosition(Position& mapPosition, int xOffset, int yOffset)
+Position offsetPosition(Position& mapPosition, int xOffset, int yOffset)
 {
 	return Position(mapPosition.x - xOffset, mapPosition.y - yOffset, mapPosition.level);
 }

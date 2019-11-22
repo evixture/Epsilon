@@ -98,11 +98,12 @@ struct Container
 {
 	int itemCapacity;
 	int currentSize;
-	const char* name;
+
+	std::shared_ptr<Item> containerItem;
 
 	std::vector<std::shared_ptr<Item>> itemList;
 
-	Container(const char* name, int itemCapacity);
+	Container(int itemCapacity, std::shared_ptr<Item> containerItem);
 
 	bool addItem(std::shared_ptr<Item> item);
 };

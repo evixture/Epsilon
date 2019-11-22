@@ -298,6 +298,11 @@ void World::update()
 	{
 		item->updateTile();
 	}
+
+	for (auto& container : mapContainerList)
+	{
+		container->containerItem->updateTile();
+	}
 }
 
 //--------------------------------------------------------------------------------------------
@@ -341,6 +346,11 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 	for (auto& item : mapItemList)
 	{
 		item->renderTile(pane);
+	}
+
+	for (auto& container : mapContainerList)
+	{
+		container->containerItem->renderTile(pane);
 	}
 
 	renderMouse(pane);

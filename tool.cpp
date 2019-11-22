@@ -341,7 +341,7 @@ void Item::updateTool(int x, int y, int mx, int my, double angle)
 
 	mapPosition = Position(tool->sourcex + WORLD->xOffset, tool->sourcey + WORLD->yOffset, 0);
 
-	renderPosition = offSetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
 void Item::renderTool(const std::shared_ptr<Pane>& pane) const
@@ -354,7 +354,7 @@ void Item::updateTile()
 	distToEnt = getDistance(WORLD->player->mapPosition.x, WORLD->player->mapPosition.y, mapPosition.x, mapPosition.y);
 	//mapPosition = Position(tool->toolx, tool->tooly, 0);
 
-	renderPosition = offSetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
 void Item::renderTile(const std::shared_ptr<Pane>& pane) const
@@ -367,8 +367,8 @@ void Item::renderTile(const std::shared_ptr<Pane>& pane) const
 	}
 }
 
-Container::Container(const char* name, int itemCapacity)
-	:name(name), itemCapacity(itemCapacity), currentSize(0)
+Container::Container(int itemCapacity, std::shared_ptr<Item> containerItem)
+	:itemCapacity(itemCapacity), currentSize(0), containerItem(containerItem)
 {
 }
 

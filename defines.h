@@ -56,10 +56,11 @@ constexpr auto PI = 3.14159265;
 
 	//ITEM TILES
 	#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::lightGrey, TCODColor::darkGrey, 1, true, "static")
-	//#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, "static")
+	#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, "static")
 
 //TOOLS
 	#define TOOL_Hands std::make_shared<Tool>("Hands", TCODColor::lightSepia)
+	#define TOOL_Default_Container std::make_shared<Tool>("Test Container", TCODColor::pink)
 
 	//Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed);
 	#define WEAPON_DefaultRifle std::make_shared<Weapon>("WEAPON_DefaultRifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f)
@@ -69,10 +70,14 @@ constexpr auto PI = 3.14159265;
 	#define RIBONBGCOLOR TCODColor::darkBlue
 	#define RIBONFGCOLOR TCODColor::lightestGrey
 
-
 //TEST ITEM
 	#define ITEM_Hands(x, y, level) std::make_shared<Item>(1, DEFAULT_ITEM_TILE, TOOL_Hands, Position(x, y, level))
 	#define ITEM_Test_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultRifle, Position(x, y, level))
 	#define ITEM_Test2_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultRifle2, Position(x, y, level))
+	#define ITEM_Default_Container(x, y, level) std::make_shared<Item>(5, DEFAULT_ITEM_TILE2, TOOL_Default_Container, Position(x, y, level))
+
+//CONTAINERS
+	#define CONTAINER_Default_Container(x, y, level, capacity) std::make_shared<Container>(capacity, ITEM_Default_Container(x, y, level))
+
 
 //work on map container and updating inventory update render

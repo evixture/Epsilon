@@ -28,6 +28,7 @@ public:
 	std::vector<std::shared_ptr<Entity>> entityList;
 
 	std::vector<std::shared_ptr<Item>> mapItemList;
+	std::vector<std::shared_ptr<Container>> mapContainerList;
 
 	World();
 
