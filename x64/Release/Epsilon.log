@@ -1,27 +1,8 @@
-﻿  engine.cpp
-  entity.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(85,64): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(91,80): warning C4804: '<': unsafe use of type 'bool' in operation
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(115,81): warning C4804: '<': unsafe use of type 'bool' in operation
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(135,16): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(157,16): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(191,40): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  gui.cpp
-  input.cpp
-  main.cpp
-  map.cpp
-  panel.cpp
-  settings.cpp
-  tile.cpp
-  tool.cpp
-  utility.cpp
-  window.cpp
-  Compiling...
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(207,63): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+﻿  entity.cpp
   Generating code
-  208 of 1480 functions (14.1%) were compiled, the rest were copied from previous compilation.
-    80 functions were new in current compilation
-    128 functions had inline decision re-evaluated but remain unchanged
+  1 of 1480 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Release\Epsilon.exe
 E:\Libtcod\custom-libtcod-master\src\libtcod\console\console.h(122): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
@@ -34,8 +15,10 @@ E:\Libtcod\custom-libtcod-master\src\libtcod\mersenne.hpp(222): warning C26812: 
 E:\Libtcod\custom-libtcod-master\src\libtcod\bsp.hpp(77): warning C26495: Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6).
 E:\Libtcod\custom-libtcod-master\src\libtcod\bsp.hpp(78): warning C26495: Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\engine.cpp(5): warning C26812: The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(189): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(203): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(91): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(115): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(188): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(201): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\gui.cpp(5): warning C26812: The enum type 'Gui::ActiveWindow' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(4): warning C26812: The enum type 'sf::Keyboard::Key' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(8): warning C26495: Variable 'Key::keySwitch' is uninitialized. Always initialize a member variable (type.6).
