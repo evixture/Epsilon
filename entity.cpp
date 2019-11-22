@@ -125,23 +125,38 @@ void Player::update()
 	{
 		for (auto& item : WORLD->mapItemList)
 		{
-			if (item->mapPosition.x == mapPosition.x && item->mapPosition.y == mapPosition.y)
+			if (item != nullptr && item->mapPosition.x == mapPosition.x && item->mapPosition.y == mapPosition.y)
 			{
 				//error if picking up 2 items with same coords
-				if (inventory[containerIndex]->addItem(item))
+				std::vector<std::shared_ptr<Item>>::iterator itr = std::find(WORLD->mapItemList.begin(), WORLD->mapItemList.end(), item);
+
+				if (itr != WORLD->mapItemList.cend())
 				{
-					WORLD->mapItemList.erase(std::remove(WORLD->mapItemList.begin(), WORLD->mapItemList.end(), item), WORLD->mapItemList.end());
+					int index = std::distance(WORLD->mapItemList.begin(), itr);
+
+					if (containerIndex != -1)
+					{
+						inventory[containerIndex]->addItem(item);
+						WORLD->mapItemList.erase(WORLD->mapItemList.begin() + index);
+					}
+
 				}
 			}
 		}
 		for (auto& container : WORLD->mapContainerList)
 		{
-			if (container->containerItem->mapPosition.x == mapPosition.x && container->containerItem->mapPosition.y == mapPosition.y)
+			if (container != nullptr && container->containerItem->mapPosition.x == mapPosition.x && container->containerItem->mapPosition.y == mapPosition.y)
 			{
 				//error if picking up 2 items with same coords
 				inventory.push_back(container);
 
-				WORLD->mapContainerList.erase(std::remove(WORLD->mapContainerList.begin(), WORLD->mapContainerList.end(), container), WORLD->mapContainerList.end());
+				std::vector<std::shared_ptr<Container>>::iterator itr = std::find(WORLD->mapContainerList.begin(), WORLD->mapContainerList.end(), container);
+
+				if (itr != WORLD->mapContainerList.cend())
+				{
+					int index = std::distance(WORLD->mapContainerList.begin(), itr);
+					WORLD->mapContainerList.erase(WORLD->mapContainerList.begin() + index);
+				}
 			}
 		}
 	}
