@@ -82,13 +82,13 @@ void Player::update()
 				if (containerIndex > 0)
 				{
 					containerIndex--;
-					itemIndex = inventory[containerIndex]->itemList.size() - 1;
+					itemIndex = (int)(inventory[containerIndex]->itemList.size() - 1);
 				}				
 			}
 
 			else if (itemIndex == -2)
 			{
-				if (itemIndex + 3 <= itemIndex < inventory[containerIndex]->itemList.size())
+				if (itemIndex + 3 <= inventory[containerIndex]->itemList.size())
 				{
 					itemIndex++;
 				}
@@ -112,7 +112,7 @@ void Player::update()
 
 				else if (itemIndex == -1)
 				{
-					if (itemIndex + 2 <= itemIndex < inventory[containerIndex]->itemList.size())
+					if (itemIndex + 2 <= inventory[containerIndex]->itemList.size())
 					{
 						itemIndex++;
 					}
@@ -132,7 +132,7 @@ void Player::update()
 
 				if (itr != WORLD->mapItemList.cend())
 				{
-					int index = std::distance(WORLD->mapItemList.begin(), itr);
+					__int64 index = std::distance(WORLD->mapItemList.begin(), itr);
 
 					if (containerIndex != -1)
 					{
@@ -147,14 +147,13 @@ void Player::update()
 		{
 			if (container != nullptr && container->containerItem->mapPosition.x == mapPosition.x && container->containerItem->mapPosition.y == mapPosition.y)
 			{
-				//error if picking up 2 items with same coords
 				inventory.push_back(container);
 
 				std::vector<std::shared_ptr<Container>>::iterator itr = std::find(WORLD->mapContainerList.begin(), WORLD->mapContainerList.end(), container);
 
 				if (itr != WORLD->mapContainerList.cend())
 				{
-					int index = std::distance(WORLD->mapContainerList.begin(), itr);
+					__int64 index = std::distance(WORLD->mapContainerList.begin(), itr);
 					WORLD->mapContainerList.erase(WORLD->mapContainerList.begin() + index);
 				}
 			}
@@ -188,7 +187,7 @@ void Player::update()
 	//before
 	if (containerIndex + 1 > (inventory.size()))
 	{
-		containerIndex = inventory.size() - 1;
+		containerIndex = (int)(inventory.size() - 1);
 	}
 	else if (containerIndex == -1 && inventory.size() > 0)
 	{
@@ -199,18 +198,13 @@ void Player::update()
 	{
 		if (itemIndex != -2)
 		{
-			//int temp = inventory[containerIndex]->itemList.size() - 1;
 			if (itemIndex + 1 > inventory[containerIndex]->itemList.size())
 			{
-				//not going through after item delete
-				//fixed
-				itemIndex = inventory[containerIndex]->itemList.size() - 1;
+				itemIndex = (int)(inventory[containerIndex]->itemList.size() - 1);
 			}
 
 			if (itemIndex != -1)
 			{
-				//error when fail to filter index
-				//fixed
 				selectedItem = inventory[containerIndex]->itemList[itemIndex];
 			}
 			else if (itemIndex == -1)

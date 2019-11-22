@@ -1,9 +1,2 @@
 ﻿  entity.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(85,64): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(91,80): warning C4804: '<': unsafe use of type 'bool' in operation
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(115,81): warning C4804: '<': unsafe use of type 'bool' in operation
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(135,16): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(157,16): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(191,40): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(207,63): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe
