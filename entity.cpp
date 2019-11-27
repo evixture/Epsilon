@@ -35,7 +35,7 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 
 //Player Class
 Player::Player(Position pos)
-	:Creature(Position(pos), '@', "player", TCODColor::azure, 100, 0)
+	:Creature(Position(pos), '@', "player", COLOR_Player_Color, 100, 0)
 {
 	inventory.push_back(CONTAINER_Default_Container(0, 0, 0, 5));
 	inventory[0]->addItem(ITEM_Test_Size2(0, 0, 0));

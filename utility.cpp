@@ -134,3 +134,33 @@ double getDistance(int ix, int iy, int tx, int ty)
 	int yLength = square(ty - iy);
 	return sqrt(xLength + yLength);
 }
+
+Clock::Clock(int capacity)
+	:capacity(capacity), step(capacity)
+{
+}
+
+void Clock::tickDown()
+{
+	if (step > 0)
+	{
+		step--;
+	}
+}
+
+void Clock::tickDownWithReset()
+{
+	if (step > 0)
+	{
+		step--;
+	}
+	else
+	{
+		step = capacity;
+	}
+}
+
+void Clock::reset()
+{
+	step = capacity;
+}

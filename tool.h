@@ -36,8 +36,7 @@ struct Bullet
 	int xbound;
 	int ybound;
 
-	int moveWait;
-	int moveCap;
+	Clock moveClock;
 
 	bool hitWall;
 
@@ -57,13 +56,11 @@ struct Weapon : public Tool
 	int ammoCap;
 	int ammoAmount;
 
-	int fireWait;
 	float baseFireCap;
-	int fireCap;
+	Clock fireClock;
 
-	int reloadTimer;
 	float baseReloadTimer;
-	int reloadWait;
+	Clock reloadClock;
 
 	std::vector<std::shared_ptr<Bullet>> bulletList;
 

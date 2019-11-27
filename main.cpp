@@ -8,6 +8,7 @@ int WinMain()
 	{
 		engine->update();
 		engine->render();
+		//Gui::Color::Panel_Draw_BG = TCODColor(0, 0, 0);
 	}
 
 	TCOD_quit();

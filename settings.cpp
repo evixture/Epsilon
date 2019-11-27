@@ -20,7 +20,7 @@ Settings::Settings(int screenCharWidth, int screenCharHeight)
 	input = std::make_shared<Input>();
 	
 	TCODConsole::initRoot(screenCharWidth, screenCharHeight, windowTitle, fullscreen, renderer);
-	TCODConsole::root->setDefaultBackground(TCODColor::black);
+	TCODConsole::root->setDefaultBackground(COLOR_Root_BG);
 	TCODSystem::setFps(maxFps);
 }
 

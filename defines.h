@@ -20,6 +20,17 @@ constexpr auto PI = 3.14159265;
 	if player height > floor height , visibility is true, else set to default vis
 	stand can see over crouch
 */
+//NEED TO EVENTUALLY MOVE TO A CLASS
+#define COLOR_Panel_Ribbon_BG TCODColor(45, 45, 206)
+#define COLOR_Panel_Ribbon_FG TCODColor(220, 220, 220)
+#define COLOR_Panel_Draw_BG TCODColor(30, 30, 30)
+#define COLOR_Panel_Draw_FG TCODColor(220, 220, 220)
+#define COLOR_Player_Color TCODColor(0, 127, 255)
+#define COLOR_Root_BG TCODColor(0, 0, 0)
+#define COLOR_Root_FG TCODColor(220, 220, 220)
+#define COLOR_OutFOV_BG TCODColor(0, 0, 0)
+#define COLOR_OutFOV_FG TCODColor(30, 30, 30)
+#define COLOR_Selector TCODColor(168, 13, 224)
 
 //============TILES===============================CH===FOREGROUND=COLOR==========BACKGROUND=COLOR==========H==WALK===DEST |
 
@@ -55,7 +66,8 @@ constexpr auto PI = 3.14159265;
 	#define TILE_error			std::make_shared<Tile>			('%',	TCODColor::black,			TCODColor::pink,			4,	true ,	"static")
 
 	//ITEM TILES
-	#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::lightGrey, TCODColor::darkGrey, 1, true, "static")
+		//edit tile set to custom sprites
+	#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true, "static")
 	#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, "static")
 
 //TOOLS

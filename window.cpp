@@ -22,7 +22,7 @@ void Pane::render() const
 Ribon::Ribon(const char* windowName, int windowW)
 	: windowName(windowName), windowW(windowW)
 {
-	ribonWindow = std::make_shared<Pane>(windowW, 1, RIBONBGCOLOR, RIBONFGCOLOR);
+	ribonWindow = std::make_shared<Pane>(windowW, 1, COLOR_Panel_Ribbon_BG, COLOR_Panel_Ribbon_FG);
 }
 
 void Ribon::render() const
@@ -35,9 +35,9 @@ void Ribon::render() const
 Window::Window(int windowW, int windowH, const char* panelName, int rx, int ry)
 	: windowW(windowW), windowH(windowH), panelName(panelName), renderpos(Position(rx, ry, NULL))
 {
-	mainWindow = std::make_shared<Pane>(windowW, windowH, TCODColor::black, TCODColor::white);
+	mainWindow = std::make_shared<Pane>(windowW, windowH, COLOR_Root_BG, COLOR_Root_FG);
 	ribon = std::make_shared<Ribon>(panelName, windowW);
-	drawWindow = std::make_shared<Pane>(windowW, windowH - 1, TCODColor::darkestGrey, TCODColor::white);
+	drawWindow = std::make_shared<Pane>(windowW, windowH - 1, COLOR_Panel_Draw_BG, COLOR_Panel_Draw_FG);
 }
 
 void Window::update()

@@ -4,7 +4,6 @@
 class Gui
 {
 public:
-
 	enum ActiveWindow { NONE, STARTUPSPLASH} activeWindow;
 
 	//Part-screen Windows
@@ -18,6 +17,7 @@ public:
 
 	//Full-screen Windows
 	std::shared_ptr<SplashPane> startupSplash;
+
 
 	Gui(int windowX, int windowY);
 

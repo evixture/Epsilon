@@ -4,7 +4,7 @@
 MapPane::MapPane(int windowW, int windowH, int rx, int ry)
 	:Window(windowW, windowH, "World", rx, ry)
 {
-	mapSidePanel = std::make_shared<Pane>(1, 61, RIBONBGCOLOR, RIBONFGCOLOR);
+	mapSidePanel = std::make_shared<Pane>(1, 61, COLOR_Panel_Ribbon_BG, COLOR_Panel_Ribbon_FG);
 
 	world = std::make_shared<World>();
 }
@@ -67,15 +67,15 @@ void PlayerPane::update()
 		playerStance = "Standing";
 	}
 
-	if (INPUT->baseMoveWait == 30)
+	if (INPUT->baseMoveWait == .5f)
 	{
 		playerSpeed = "Walking";
 	}
-	else if (INPUT->baseMoveWait == 15)
+	else if (INPUT->baseMoveWait == 1.0f)
 	{
 		playerSpeed = "Running";
 	}
-	else if (INPUT->baseMoveWait == 60)
+	else if (INPUT->baseMoveWait == .25f)
 	{
 		playerSpeed = "Creeping";
 	}
@@ -118,6 +118,7 @@ void InventoryPane::render() const
 				if (container == WORLD->player->inventory[WORLD->player->containerIndex] && WORLD->player->itemIndex == -1)
 				{
 					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name);
+					drawWindow->console->setCharForeground(1, drawLineStart, COLOR_Selector);
 				}
 				else
 				{
@@ -142,6 +143,7 @@ void InventoryPane::render() const
 					if (item == WORLD->player->selectedItem)
 					{
 						drawWindow->console->printf(0, drawLine, "|>  %s", item->tool->name);
+						drawWindow->console->setCharForeground(1, drawLine, COLOR_Selector);
 					}
 					else
 					{
@@ -227,6 +229,7 @@ void SplashPane::renderMenuOptions() const
 		if (i == menuIndex)
 		{
 			drawWindow->console->printf(50, 50 + i, "|> %s", menuItemList[i]);
+			drawWindow->console->setCharForeground(51, 50 + i, COLOR_Selector);
 		}
 		else
 		{

@@ -70,13 +70,8 @@ struct Input
 	void getMouseInput();
 
 private:
+	Clock movementClock;
+	
 	int moveXSpeed;
 	int moveYSpeed;
-
-	int moveTimer;
-	int moveWait;
-
-	//bool reloadToggle;
-	//bool changeFloorToggle;
-	//bool f11Toggle;
 };

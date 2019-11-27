@@ -34,7 +34,7 @@ void Key::update()
 
 //Input Struct
 Input::Input()
-	:keyboard(), mouse(), moveTimer(0), moveWait(10), baseMoveWait(0.0f), leftMouseClick(false), moveXSpeed(0), moveYSpeed(0)
+	:keyboard(), mouse(), baseMoveWait(0.0f), leftMouseClick(false), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(0))
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &mouse);
 	TCODMouse::showCursor(false);
@@ -80,123 +80,6 @@ void Input::getMouseInput()
 
 void Input::getKeyDown()
 {
-	/*---------- PLAYER AND MENU MOVEMENT KEYS ----------*/
-
-	////	W & UP
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-	//{
-	//	moveUp = true;
-	//}
-	//else moveUp = false;
-
-	////	S & DOWN
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-	//{
-	//	moveDown = true;
-	//}
-	//else moveDown = false;
-
-	////	A & DOWN
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-	//{
-	//	moveLeft = true;
-	//}
-	//else moveLeft = false;
-
-	////	D & RIGHT
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-	//{
-	//	moveRight = true;
-	//}
-	//else moveRight = false;
-
-	////CHANGE FLOOR
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-	//{
-	//	if (!changeFloorToggle)
-	//	{
-	//		changeFloor = true;
-	//		changeFloorToggle = true;
-	//	}
-	//	else if (changeFloorToggle)
-	//	{
-	//		changeFloor = false;
-	//	}
-	//}
-	//else
-	//{
-	//	changeFloor = false;
-	//	changeFloorToggle = false;
-	//}
-
-	////	SPEED
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
-	//{
-	//	baseMoveWait = .25f;
-	//}
-	//else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
-	//{
-	//	baseMoveWait = 1.0f;
-	//}
-	//else
-	//{
-	//	baseMoveWait = .5f;
-	//}
-
-	////HEIGHT
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-	//{
-	//	engine->gui->mapPane->world->player->height = 1;
-	//}
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
-	//{
-	//	engine->gui->mapPane->world->player->height = 2;
-	//}
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::C))
-	//{
-	//	engine->gui->mapPane->world->player->height = 3;
-	//}
-
-	////WEAPONS
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
-	//{
-	//	if (!reloadToggle)
-	//	{
-	//		reloadToggle = true;
-	//		reload = true;
-	//	}
-	//	else if (reloadToggle)
-	//	{
-	//		reload = false;
-	//	}
-	//}
-	//else
-	//{
-	//	reload = false;
-	//	reloadToggle = false;
-	//}
-
-	///*---------- FUNCTION KEYS ----------*/
-
-	////	F11
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::F11))
-	//{
-	//	if (f11Toggle)
-	//	{
-	//		engine->settings->setFullscreen();
-	//		f11Toggle = false;
-	//	}
-	//}
-	//else
-	//{
-	//	f11Toggle = true;
-	//}
-
-	//	//CLOSES APPLICATION
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-	//{
-	//	engine->gamestate = Engine::EXIT;
-	//}
 	for (auto& key : keyList)
 	{
 		key->update();
@@ -224,47 +107,66 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 
 		moveXSpeed = 0;
 		moveYSpeed = 0;
-		
-		moveWait = (int)((baseMoveWait / GUI->mapPane->world->player->height) * SETTINGS->fpsCount);
 
-		if (w->isDown)
+		if (INPUT->z->isSwitched)
+		{
+			WORLD->player->height = 1;
+		}
+		if (INPUT->x->isSwitched)
+		{
+			WORLD->player->height = 2;
+		}
+		if (INPUT->c->isSwitched)
+		{
+			WORLD->player->height = 3;
+		}
+		
+		movementClock.capacity = (int)((baseMoveWait / WORLD->player->height) * SETTINGS->fpsCount);
+
+		//change so keys not favored
+
+		if (w->isDown && s->isDown)
+		{
+			moveYSpeed = 0;
+		}
+		else if (w->isDown && !s->isDown)
 		{
 			moveYSpeed = -1;
 		}
-		if (s->isDown)
+		else if (s->isDown && !w->isDown)
 		{
 			moveYSpeed = 1;
 		}
-		if (a->isDown)
+
+		if (a->isDown && d->isDown)
+		{
+			moveXSpeed = 0;
+		}
+		else if (a->isDown && !d->isDown)
 		{
 			moveXSpeed = -1;
 		}
-		if (d->isDown)
+		else if (d->isDown && !a->isDown)
 		{
 			moveXSpeed = 1;
 		}
 
 		if (moveXSpeed != 0 || moveYSpeed != 0)
 		{
-			if (moveTimer == 0)
+			if (movementClock.step == 0)
 			{
 				if (GUI->mapPane->world->getWalkability(player->mapPosition.x + moveXSpeed, player->mapPosition.y, player->mapPosition.level))
 				{
 					player->mapPosition.x += moveXSpeed;
 					moveXSpeed = 0;
-					moveTimer = moveWait;
 				}
 				if (GUI->mapPane->world->getWalkability(player->mapPosition.x, player->mapPosition.y + moveYSpeed, player->mapPosition.level))
 				{
 					player->mapPosition.y += moveYSpeed;
 					moveYSpeed = 0;
-					moveTimer = moveWait;
 				}
 			}
-			else
-			{
-				moveTimer--;
-			}
+			movementClock.tickDownWithReset();
 		}
 	}
 	

@@ -96,7 +96,7 @@ void Tool::render(const std::shared_ptr<Pane>& pane) const
 
 //Bullet Struct
 Bullet::Bullet(int ch, int startx, int starty, int dx, int dy, int xbound, int ybound)
-	:bulletx(startx), bullety(starty), xbound(xbound), ybound(ybound), hitWall(false), tox(dx), toy(dy), travel(BLine(bulletx, bullety, tox, toy)), moveWait(0), moveCap(0), ch(ch)
+	:bulletx(startx), bullety(starty), xbound(xbound), ybound(ybound), hitWall(false), tox(dx), toy(dy), travel(BLine(bulletx, bullety, tox, toy)), moveClock(Clock(0)), ch(ch)
 {
 	do
 	{
@@ -118,14 +118,10 @@ Bullet::Bullet(int ch, int startx, int starty, int dx, int dy, int xbound, int y
 
 void Bullet::update()
 {
-	moveCap = (int)(engine->settings->fpsCount * .005f);
-	if (moveWait < 0)
-	{
-		moveWait = moveCap;
-	}
-	else moveWait--;
+	moveClock.capacity = (int)(engine->settings->fpsCount * .005f);
+	moveClock.tickDownWithReset();
 
-	if (moveWait == 0)
+	if (moveClock.step == 0)
 	{
 		if (!hitWall)
 		{
@@ -171,7 +167,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 
 //Weapon Struct
 Weapon::Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed)
-	: Tool(name, color), baseFireCap(fireRate), fireWait(0), fireCap(60), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), reloadTimer(60), reloadWait(0), baseReloadTimer(reloadSpeed)
+	: Tool(name, color), baseFireCap(fireRate), fireClock(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), reloadClock(0), baseReloadTimer(reloadSpeed)
 {}
 
 void Weapon::update(int x, int y, int mx, int my, double angle)
@@ -182,8 +178,8 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	sourcex = x;
 	sourcey = y;
 
-	fireCap = (int)(baseFireCap * engine->settings->fpsCount);
-	reloadTimer = (int)(baseReloadTimer * engine->settings->fpsCount);
+	fireClock.capacity = (int)(baseFireCap * SETTINGS->fpsCount);
+	reloadClock.capacity = (int)(baseReloadTimer * SETTINGS->fpsCount);
 
 	if (dx >= 0 && dy >= 0)
 	{
@@ -271,20 +267,16 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	}
 
 	//Fire bullet
-	if (engine->settings->input->leftMouseClick && fireWait == 0 && ammoAmount != 0 && reloadWait == 0)
+	if (INPUT->leftMouseClick && fireClock.step == 0 && ammoAmount != 0 && reloadClock.step == 0)
 	{
 		if (!(toolx == dx + toolx && tooly == dy + tooly))
 		{
-			fireWait = fireCap;
+			fireClock.reset();
 			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, toolx, tooly, dx, dy, WORLD->debugmap->mapWidth, WORLD->debugmap->mapHeight));
 			ammoAmount--;
 		}
 	}
-
-	else if (fireWait != 0)
-	{
-		fireWait--;
-	}
+	fireClock.tickDown();
 
 	//CLEAR BULLETS
 	if (bulletList.size() > ammoCap)
@@ -292,7 +284,7 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 		bulletList.pop_back();
 	}
 
-	if (reloadWait == 0)
+	if (reloadClock.step == 0)
 	{
 		if (engine->settings->input->r->isSwitched)
 		{
@@ -300,14 +292,11 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 			{
 				ammoAmount = ammoCap;
 				numberMags--;
-				reloadWait = reloadTimer;
+				reloadClock.reset();
 			}
 		}
 	}
-	else
-	{
-		reloadWait--;
-	}
+	reloadClock.tickDown();
 
 	for (auto& bullet : bulletList)
 	{
@@ -317,7 +306,7 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 
 void Weapon::render(const std::shared_ptr<Pane>& pane) const
 {
-	if (reloadWait == 0)
+	if (reloadClock.step == 0)
 	{
 		pane->console->setChar(toolx, tooly, ch);
 		pane->console->setCharForeground(toolx, tooly, color);

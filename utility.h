@@ -29,6 +29,18 @@ private:
 		origy,  destx,  desty;
 };
 
+struct Clock
+{
+	int capacity;
+	int step;
+
+	Clock(int capacity);
+
+	void tickDown();
+	void tickDownWithReset();
+	void reset();
+};
+
 int square(int x);
 
 double getAngle(int ix, int iy, int tx, int ty);
