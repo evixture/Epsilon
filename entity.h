@@ -47,6 +47,12 @@ class Player : public Creature
 public:
 	Player(Position pos);
 
+	void moveSelectorUp();
+	void moveSelectorDown();
+	void pickUpItem();
+	void dropItem();
+	void filterIndexes();
 	void update();
+
 	void render(const std::shared_ptr<Pane>& pane) const;
 };

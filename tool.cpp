@@ -1,91 +1,96 @@
 #include "main.hpp"
 
 //Tool Struct
-Tool::Tool(const char* name, TCODColor color)
-	:color(color), toolx(0), tooly(0), ch(NULL), dx(0), dy(0), name(name), sourcex(0), sourcey(0)
+Tool::Tool(const char* name, TCODColor color, int ch)
+	:color(color), toolx(0), tooly(0), ch(ch), dx(0), dy(0), name(name), sourcex(0), sourcey(0)
 {}
 
-void Tool::update(int x, int y, int mx, int my, double angle)
+void Tool::updateToolPosition(double angle)
 {
-	ch = 249;
-	dx = mx - x;
-	dy = my - y;
-
-	sourcex = x;
-	sourcey = y;
-
 	if (dx >= 0 && dy >= 0)
 	{
 		if (angle <= 22.5)
 		{
-			toolx = x + 1;
-			tooly = y;
+			toolx = sourcex + 1;
+			tooly = sourcey;
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
-			toolx = x + 1;
-			tooly = y + 1;
+			toolx = sourcex + 1;
+			tooly = sourcey + 1;
 		}
 		else if (angle >= 67.5)
 		{
-			toolx = x;
-			tooly = y + 1;
+			toolx = sourcex;
+			tooly = sourcey + 1;
 		}
 	}
 	else if (dx >= 0 && dy <= 0)
 	{
 		if (angle >= -22.5)
 		{
-			toolx = x + 1;
-			tooly = y;
+			toolx = sourcex + 1;
+			tooly = sourcey;
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
-			toolx = x + 1;
-			tooly = y - 1;
+			toolx = sourcex + 1;
+			tooly = sourcey - 1;
 		}
 		else if (angle <= -67.5)
 		{
-			toolx = x;
-			tooly = y - 1;
+			toolx = sourcex;
+			tooly = sourcey - 1;
 		}
 	}
 	else if (dx <= 0 && dy >= 0)
 	{
 		if (angle >= -22.5)
 		{
-			toolx = x - 1;
-			tooly = y;
+			toolx = sourcex - 1;
+			tooly = sourcey;
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
-			toolx = x - 1;
-			tooly = y + 1;
+			toolx = sourcex - 1;
+			tooly = sourcey + 1;
 		}
 		else if (angle <= -67.5)
 		{
-			toolx = x;
-			tooly = y + 1;
+			toolx = sourcex;
+			tooly = sourcey + 1;
 		}
 	}
 	else if (dx <= 0 && dy <= 0)
 	{
 		if (angle <= 22.5)
 		{
-			toolx = x - 1;
-			tooly = y;
+			toolx = sourcex - 1;
+			tooly = sourcey;
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
-			toolx = x - 1;
-			tooly = y - 1;
+			toolx = sourcex - 1;
+			tooly = sourcey - 1;
 		}
 		else if (angle >= 67.5)
 		{
-			toolx = x;
-			tooly = y - 1;
+			toolx = sourcex;
+			tooly = sourcey - 1;
 		}
 	}
+}
+
+void Tool::update(int x, int y, int mx, int my, double angle)
+{
+	//ch = 249;
+	dx = mx - x;
+	dy = my - y;
+
+	sourcex = x;
+	sourcey = y;
+
+	updateToolPosition(angle);
 }
 
 void Tool::render(const std::shared_ptr<Pane>& pane) const
@@ -167,7 +172,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 
 //Weapon Struct
 Weapon::Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed)
-	: Tool(name, color), baseFireCap(fireRate), fireClock(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), reloadClock(0), baseReloadTimer(reloadSpeed)
+	: Tool(name, color, NULL), baseFireCap(fireRate), fireClock(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), reloadClock(0), baseReloadTimer(reloadSpeed)
 {}
 
 void Weapon::update(int x, int y, int mx, int my, double angle)
@@ -185,20 +190,20 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	{
 		if (angle <= 22.5)
 		{
-			toolx = x + 1;
-			tooly = y;
+			toolx = sourcex + 1;
+			tooly = sourcey;
 			ch = TCOD_CHAR_HLINE;
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
-			toolx = x + 1;
-			tooly = y + 1;
+			toolx = sourcex + 1;
+			tooly = sourcey + 1;
 			ch = '\\';
 		}
 		else if (angle >= 67.5)
 		{
-			toolx = x;
-			tooly = y + 1;
+			toolx = sourcex;
+			tooly = sourcey + 1;
 			ch = TCOD_CHAR_VLINE;
 		}
 	}
@@ -206,20 +211,20 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	{
 		if (angle >= -22.5)
 		{
-			toolx = x + 1;
-			tooly = y;
+			toolx = sourcex + 1;
+			tooly = sourcey;
 			ch = TCOD_CHAR_HLINE;
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
-			toolx = x + 1;
-			tooly = y - 1;
+			toolx = sourcex + 1;
+			tooly = sourcey - 1;
 			ch = '/';
 		}
 		else if (angle <= -67.5)
 		{
-			toolx = x;
-			tooly = y - 1;
+			toolx = sourcex;
+			tooly = sourcey - 1;
 			ch = TCOD_CHAR_VLINE;
 		}
 	}
@@ -227,20 +232,20 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	{
 		if (angle >= -22.5)
 		{
-			toolx = x - 1;
-			tooly = y;
+			toolx = sourcex - 1;
+			tooly = sourcey;
 			ch = TCOD_CHAR_HLINE;
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
-			toolx = x - 1;
-			tooly = y + 1;
+			toolx = sourcex - 1;
+			tooly = sourcey + 1;
 			ch = '/';
 		}
 		else if (angle <= -67.5)
 		{
-			toolx = x;
-			tooly = y + 1;
+			toolx = sourcex;
+			tooly = sourcey + 1;
 			ch = TCOD_CHAR_VLINE;
 		}
 	}
@@ -248,20 +253,20 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	{
 		if (angle <= 22.5)
 		{
-			toolx = x - 1;
-			tooly = y;
+			toolx = sourcex - 1;
+			tooly = sourcey;
 			ch = TCOD_CHAR_HLINE;
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
-			toolx = x - 1;
-			tooly = y - 1;
+			toolx = sourcex - 1;
+			tooly = sourcey - 1;
 			ch = '\\';
 		}
 		else if (angle >= 67.5)
 		{
-			toolx = x;
-			tooly = y - 1;
+			toolx = sourcex;
+			tooly = sourcey - 1;
 			ch = TCOD_CHAR_VLINE;
 		}
 	}

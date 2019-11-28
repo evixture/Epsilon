@@ -53,114 +53,96 @@ Player::Player(Position pos)
 	}
 }
 
-void Player::update()
+void Player::moveSelectorUp()
 {
-	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
-
-	if (INPUT->num0->isSwitched)
+	if (itemIndex > -1)
 	{
-		inventory[containerIndex]->addItem(ITEM_Test2_Size2(0, 0, 0));
-	}
-	if (INPUT->num9->isSwitched)
-	{
-		inventory.push_back(CONTAINER_Default_Container(0, 0, 0, 7));
-		inventory[containerIndex]->addItem(ITEM_Test_Size2(0, 0, 0));
+		itemIndex--;
 	}
 
-	//MOUSE WHEEL ITEM SELECTION
-	if (INPUT->mouse.wheel_up || INPUT->mouse.wheel_down)
+	else if (itemIndex == -1)
 	{
-		if (INPUT->mouse.wheel_up)
+		if (containerIndex > 0)
 		{
-			if (itemIndex > -1)
-			{
-				itemIndex--;
-			}
-			
-			else if (itemIndex == -1)
-			{
-				if (containerIndex > 0)
-				{
-					containerIndex--;
-					itemIndex = (int)(inventory[containerIndex]->itemList.size() - 1);
-				}				
-			}
+			containerIndex--;
+			itemIndex = (int)(inventory[containerIndex]->itemList.size() - 1);
+		}
+	}
 
-			else if (itemIndex == -2)
-			{
-				if (itemIndex + 3 <= inventory[containerIndex]->itemList.size())
-				{
-					itemIndex++;
-				}
-			}
+	else if (itemIndex == -2)
+	{
+		if (itemIndex + 3 <= inventory[containerIndex]->itemList.size())
+		{
+			itemIndex++;
+		}
+	}
+}
+
+void Player::moveSelectorDown()
+{
+	if (itemIndex < inventory[containerIndex]->itemList.size() - 1)
+	{
+		itemIndex++;
+	}
+
+	else if (itemIndex >= inventory[containerIndex]->itemList.size() - 1)
+	{
+		if (containerIndex < inventory.size() - 1)
+		{
+			containerIndex++;
+			itemIndex = 0;
 		}
 
-		else if (INPUT->mouse.wheel_down)
+		else if (itemIndex == -1)
 		{
-			if (itemIndex < inventory[containerIndex]->itemList.size() - 1)
+			if (itemIndex + 2 <= inventory[containerIndex]->itemList.size())
 			{
 				itemIndex++;
 			}
-
-			else if (itemIndex >= inventory[containerIndex]->itemList.size() - 1)
-			{
-				if (containerIndex < inventory.size() - 1)
-				{
-					containerIndex++;
-					itemIndex = 0;
-				}
-
-				else if (itemIndex == -1)
-				{
-					if (itemIndex + 2 <= inventory[containerIndex]->itemList.size())
-					{
-						itemIndex++;
-					}
-				}
-			}
 		}
 	}
+}
 
-	if (INPUT->e->isSwitched)
+void Player::pickUpItem()
+{
+	for (auto& item : WORLD->mapItemList)
 	{
-		for (auto& item : WORLD->mapItemList)
+		if (item != nullptr && item->mapPosition.x == mapPosition.x && item->mapPosition.y == mapPosition.y)
 		{
-			if (item != nullptr && item->mapPosition.x == mapPosition.x && item->mapPosition.y == mapPosition.y)
+			std::vector<std::shared_ptr<Item>>::iterator itr = std::find(WORLD->mapItemList.begin(), WORLD->mapItemList.end(), item);
+
+			if (itr != WORLD->mapItemList.cend())
 			{
-				//error if picking up 2 items with same coords
-				std::vector<std::shared_ptr<Item>>::iterator itr = std::find(WORLD->mapItemList.begin(), WORLD->mapItemList.end(), item);
+				__int64 index = std::distance(WORLD->mapItemList.begin(), itr);
 
-				if (itr != WORLD->mapItemList.cend())
+				if (containerIndex != -1)
 				{
-					__int64 index = std::distance(WORLD->mapItemList.begin(), itr);
-
-					if (containerIndex != -1)
-					{
-						inventory[containerIndex]->addItem(item);
-						WORLD->mapItemList.erase(WORLD->mapItemList.begin() + index);
-					}
-
-				}
-			}
-		}
-		for (auto& container : WORLD->mapContainerList)
-		{
-			if (container != nullptr && container->containerItem->mapPosition.x == mapPosition.x && container->containerItem->mapPosition.y == mapPosition.y)
-			{
-				inventory.push_back(container);
-
-				std::vector<std::shared_ptr<Container>>::iterator itr = std::find(WORLD->mapContainerList.begin(), WORLD->mapContainerList.end(), container);
-
-				if (itr != WORLD->mapContainerList.cend())
-				{
-					__int64 index = std::distance(WORLD->mapContainerList.begin(), itr);
-					WORLD->mapContainerList.erase(WORLD->mapContainerList.begin() + index);
+					inventory[containerIndex]->addItem(item);
+					WORLD->mapItemList.erase(WORLD->mapItemList.begin() + index);
 				}
 			}
 		}
 	}
+	for (auto& container : WORLD->mapContainerList)
+	{
+		if (container != nullptr && container->containerItem->mapPosition.x == mapPosition.x && container->containerItem->mapPosition.y == mapPosition.y)
+		{
+			inventory.push_back(container);
 
-	if (INPUT->q->isSwitched)
+			std::vector<std::shared_ptr<Container>>::iterator itr = std::find(WORLD->mapContainerList.begin(), WORLD->mapContainerList.end(), container);
+
+			if (itr != WORLD->mapContainerList.cend())
+			{
+				__int64 index = std::distance(WORLD->mapContainerList.begin(), itr);
+				WORLD->mapContainerList.erase(WORLD->mapContainerList.begin() + index);
+			}
+		}
+	}
+}
+
+void Player::dropItem()
+{
+	if (containerIndex != -1)
 	{
 		if (itemIndex >= 0)
 		{
@@ -176,15 +158,10 @@ void Player::update()
 			inventory.erase(inventory.begin() + containerIndex);
 		}
 	}
+}
 
-	//INDEX FILTERING
-	//
-	//ITEM INDEXES
-	//	-2 : no item selected
-	//	-1 : container selected
-	//	0+ : item in vector
-	
-	//before
+void Player::filterIndexes()
+{
 	if (containerIndex + 1 > (inventory.size()))
 	{
 		containerIndex = (int)(inventory.size() - 1);
@@ -223,6 +200,54 @@ void Player::update()
 	{
 		selectedItem = ITEM_Hands(0, 0, 0);
 	}
+}
+
+void Player::update()
+{
+	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+
+	if (INPUT->num0->isSwitched)
+	{
+		inventory[containerIndex]->addItem(ITEM_Test2_Size2(0, 0, 0));
+	}
+	if (INPUT->num9->isSwitched)
+	{
+		inventory.push_back(CONTAINER_Default_Container(0, 0, 0, 7));
+		inventory[containerIndex]->addItem(ITEM_Test_Size2(0, 0, 0));
+	}
+
+	//MOUSE WHEEL ITEM SELECTION
+	if (INPUT->mouse.wheel_up || INPUT->mouse.wheel_down)
+	{
+		if (INPUT->mouse.wheel_up)
+		{
+			moveSelectorUp();
+		}
+
+		else if (INPUT->mouse.wheel_down)
+		{
+			moveSelectorDown();
+		}
+	}
+
+	if (INPUT->e->isSwitched)
+	{
+		pickUpItem();
+	}
+
+	if (INPUT->q->isSwitched)
+	{
+		dropItem();
+	}
+
+	//INDEX FILTERING
+	//
+	//ITEM INDEXES
+	//	-2 : no item selected
+	//	-1 : container selected
+	//	0+ : item in vector
+	
+	filterIndexes();
 
 	angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
 
@@ -235,8 +260,6 @@ void Player::update()
 			WORLD->getTile(mapPosition.x, mapPosition.y, mapPosition.level)->interact();
 		}
 	}
-
-	
 }
 
 void Player::render(const std::shared_ptr<Pane>& pane) const

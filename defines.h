@@ -21,16 +21,17 @@ constexpr auto PI = 3.14159265;
 	stand can see over crouch
 */
 //NEED TO EVENTUALLY MOVE TO A CLASS
-#define COLOR_Panel_Ribbon_BG TCODColor(45, 45, 206)
-#define COLOR_Panel_Ribbon_FG TCODColor(220, 220, 220)
-#define COLOR_Panel_Draw_BG TCODColor(30, 30, 30)
-#define COLOR_Panel_Draw_FG TCODColor(220, 220, 220)
-#define COLOR_Player_Color TCODColor(0, 127, 255)
-#define COLOR_Root_BG TCODColor(0, 0, 0)
-#define COLOR_Root_FG TCODColor(220, 220, 220)
-#define COLOR_OutFOV_BG TCODColor(0, 0, 0)
-#define COLOR_OutFOV_FG TCODColor(30, 30, 30)
-#define COLOR_Selector TCODColor(168, 13, 224)
+//COLORS
+#define COLOR_Panel_Ribbon_BG TCODColor	(45, 45, 206)
+#define COLOR_Panel_Ribbon_FG TCODColor	(220, 220, 220)
+#define COLOR_Panel_Draw_BG TCODColor	(30, 30, 30)
+#define COLOR_Panel_Draw_FG TCODColor	(220, 220, 220)
+#define COLOR_Player_Color TCODColor	(0, 127, 255)
+#define COLOR_Root_BG TCODColor			(0, 0, 0)
+#define COLOR_Root_FG TCODColor			(220, 220, 220)
+#define COLOR_OutFOV_BG TCODColor		(0, 0, 0)
+#define COLOR_OutFOV_FG TCODColor		(30, 30, 30)
+#define COLOR_Selector TCODColor		(168, 13, 224)
 
 //============TILES===============================CH===FOREGROUND=COLOR==========BACKGROUND=COLOR==========H==WALK===DEST |
 
@@ -70,26 +71,59 @@ constexpr auto PI = 3.14159265;
 	#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true, "static")
 	#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, "static")
 
+//----------------------------------------------------------------------------------------------------
+
 //TOOLS
-	#define TOOL_Hands std::make_shared<Tool>("Hands", TCODColor::lightSepia)
-	#define TOOL_Default_Container std::make_shared<Tool>("Test Container", TCODColor::pink)
+	//DEFAULT
+		#define TOOL_Default_Container std::make_shared<Tool>("Test Container", TCODColor::pink, 254)
+	//CUSTOM
+		#define TOOL_Hands std::make_shared<Tool>("Hands", TCODColor::lightSepia, 249)
 
-	//Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed);
-	#define WEAPON_DefaultRifle std::make_shared<Weapon>("WEAPON_DefaultRifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f)
-	#define WEAPON_DefaultRifle2 std::make_shared<Weapon>("WEAPON_DefaultRifle2", TCODColor::white, 30, 10, .09f, 2.0f)
+	//WEAPONS
+		//DEFAULT
+			//Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed);
+			#define WEAPON_DefaultRifle std::make_shared<Weapon>("WEAPON_DefaultRifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f)
+			#define WEAPON_DefaultRifle2 std::make_shared<Weapon>("WEAPON_DefaultRifle2", TCODColor::white, 30, 10, .09f, 2.0f)
+		//CUSTOM
+			//
 
-//GUI
-	#define RIBONBGCOLOR TCODColor::darkBlue
-	#define RIBONFGCOLOR TCODColor::lightestGrey
+//----------------------------------------------------------------------------------------------------
 
-//TEST ITEM
-	#define ITEM_Hands(x, y, level) std::make_shared<Item>(1, DEFAULT_ITEM_TILE, TOOL_Hands, Position(x, y, level))
-	#define ITEM_Test_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultRifle, Position(x, y, level))
-	#define ITEM_Test2_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultRifle2, Position(x, y, level))
-	#define ITEM_Default_Container(x, y, level) std::make_shared<Item>(5, DEFAULT_ITEM_TILE2, TOOL_Default_Container, Position(x, y, level))
+/*
+ITEM SIZES
+	1 UNIT
+		PISTOLS
+	2 UNITS
+		COMPACT SMGS
+		LARGE PISTOLS
+	3 UNITS
+		STANDARD RIFLES
+		LARGE SMGS
+	4 UNITS
+		MACHINE GUNS
+		LARGE RIFLES
+	5 UNITS
+		SNIPER RIFLES
+*/
+
+//----------------------------------------------------------------------------------------------------
+
+//ITEMS
+	//DEFAULT
+		#define ITEM_Test_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultRifle, Position(x, y, level))
+		#define ITEM_Test2_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultRifle2, Position(x, y, level))
+		#define ITEM_Default_Container(x, y, level) std::make_shared<Item>(5, DEFAULT_ITEM_TILE2, TOOL_Default_Container, Position(x, y, level))
+	//CUSTOM
+		#define ITEM_Hands(x, y, level) std::make_shared<Item>(1, DEFAULT_ITEM_TILE, TOOL_Hands, Position(x, y, level))
+
+//----------------------------------------------------------------------------------------------------
 
 //CONTAINERS
-	#define CONTAINER_Default_Container(x, y, level, capacity) std::make_shared<Container>(capacity, ITEM_Default_Container(x, y, level))
+	//DEFAULT
+		#define CONTAINER_Default_Container(x, y, level, capacity) std::make_shared<Container>(capacity, ITEM_Default_Container(x, y, level))
+	//CUSTOM
+
+
 
 
 //work on map container and updating inventory update render

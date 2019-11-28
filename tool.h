@@ -16,9 +16,11 @@ struct Tool
 
 	const char* name;
 
-	Tool(const char* name, TCODColor color);
+	Tool(const char* name, TCODColor color, int ch);
 
+	virtual void updateToolPosition(double angle);
 	virtual void update(int x, int y, int mx, int my, double angle);
+
 	virtual void render(const std::shared_ptr<Pane>& pane) const;
 
 };

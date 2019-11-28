@@ -43,8 +43,10 @@ public:
 	void render() const;
 
 private:
-	int frameCount;
+	//DEBUG VALUES
 	int maxFps;
+
+	//TCOD PROPERTIES
 	TCOD_renderer_t renderer;
 	const char* windowTitle;
 	bool fullscreen;

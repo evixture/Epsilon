@@ -10,7 +10,7 @@ Font::Font(const char* fontName, const char* xdim, const char* ydim, const char*
 //USE SDL2 TO RENDER, OTHERS WILL LOCK OR LOWER FPS
 Settings::Settings(int screenCharWidth, int screenCharHeight)
 	: screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 6"), fullscreen(false), maxFps(0), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_SDL2), 
-	fovRad(0), lightWalls(true), frameCount(0), fpsCount(60)//, RandNumGen(TCODRandom::getInstance())
+	fovRad(0), lightWalls(true), fpsCount(60)//, RandNumGen(TCODRandom::getInstance())
 {
 	//fontList.push_back(terminal16x16 = std::make_shared<Font>("Terminal", "16", "16", "data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16));
 	//setfont(terminal16x16);
@@ -50,14 +50,13 @@ void Settings::printLogo() const
 
 void Settings::printDebugStats() const
 {
-	TCODConsole::root->printf(10, 0, "FPS>%i mx>%i my>%i px>%i py>%i  ph>%i fc>%i, gs>%i",
+	TCODConsole::root->printf(10, 0, "FPS>%i mx>%i my>%i px>%i py>%i  ph>%i, gs>%i",
 		fpsCount,
 		SETTINGS->input->mouse.cx - 1,
 		SETTINGS->input->mouse.cy - 3,
 		WORLD->player->mapPosition.x,
 		WORLD->player->mapPosition.y,
 		WORLD->player->mapPosition.level,
-		frameCount,
 		engine->gamestate);
 }
 
@@ -65,7 +64,6 @@ void Settings::update(std::shared_ptr<Player> player)
 {
 	fpsCount = TCODSystem::getFps();
 	input->update(player);
-	frameCount++;
 }
 
 void Settings::render() const
