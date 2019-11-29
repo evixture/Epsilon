@@ -2,7 +2,7 @@
 
 struct Tile
 {
-	const char* tag;
+	enum Tag {STATIC, DESTRUCTIBLE, STAIR} tag;
 
 	int ch;
 	int height;
@@ -15,7 +15,7 @@ struct Tile
 
 	Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable);
 
-	Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable, const char* tag);
+	Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable, Tag tag);
 
 	virtual bool getDestroyed();
 

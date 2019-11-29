@@ -18,6 +18,8 @@ void Pane::render() const
 	console->clear();
 }
 
+//----------------------------------------------------------------------------------------------------
+
 //Ribon Struct
 Ribon::Ribon(const char* windowName, int windowW)
 	: windowName(windowName), windowW(windowW)
@@ -30,6 +32,8 @@ void Ribon::render() const
 	ribonWindow->render();
 	ribonWindow->console->printf(0, 0, "|%s|", windowName);
 }
+
+//----------------------------------------------------------------------------------------------------
 
 //Window Struct
 Window::Window(int windowW, int windowH, const char* panelName, int rx, int ry)

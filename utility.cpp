@@ -5,6 +5,13 @@ Position::Position(int x, int y, int level)
 	:x(x), y(y), level(level)
 {}
 
+Position offsetPosition(Position mapPosition, int xOffset, int yOffset)
+{
+	return Position(mapPosition.x - xOffset, mapPosition.y - yOffset, mapPosition.level);
+}
+
+//----------------------------------------------------------------------------------------------------
+
 //BLine Class
 BLine::BLine(int ix, int iy, int tx, int ty)
 	:origx(ix), origy(iy), destx(tx), desty(ty), x(ix), y(iy)
@@ -110,10 +117,7 @@ bool BLine::end()
 	return false;
 }
 
-Position offsetPosition(Position& mapPosition, int xOffset, int yOffset)
-{
-	return Position(mapPosition.x - xOffset, mapPosition.y - yOffset, mapPosition.level);
-}
+//----------------------------------------------------------------------------------------------------
 
 int square(int x)
 {
@@ -135,6 +139,9 @@ double getDistance(int ix, int iy, int tx, int ty)
 	return sqrt(xLength + yLength);
 }
 
+//----------------------------------------------------------------------------------------------------
+
+//Clock Struct
 Clock::Clock(int capacity)
 	:capacity(capacity), step(capacity)
 {

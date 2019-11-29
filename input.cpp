@@ -32,6 +32,8 @@ void Key::update()
 	}
 }
 
+//----------------------------------------------------------------------------------------------------
+
 //Input Struct
 Input::Input()
 	:keyboard(), mouse(), baseMoveWait(0.0f), leftMouseClick(false), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(0))

@@ -16,6 +16,8 @@ void Entity::render(const std::shared_ptr<Pane>& pane) const
 	pane->console->setCharForeground(mapPosition.x, mapPosition.y, color);
 }
 
+//----------------------------------------------------------------------------------------------------
+
 //Creature Class
 Creature::Creature(Position pos, int symbol, const char* name, TCODColor color, int health, int armor)
 	:Entity(Position(pos), symbol, name, color), angle(0), health(health), armor(armor), containerIndex(0), itemIndex(0)
@@ -32,6 +34,8 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 	pane->console->setChar(mapPosition.x, mapPosition.y, symbol);
 	pane->console->setCharForeground(mapPosition.x, mapPosition.y, color);
 }
+
+//----------------------------------------------------------------------------------------------------
 
 //Player Class
 Player::Player(Position pos)
@@ -52,6 +56,8 @@ Player::Player(Position pos)
 		selectedItem = nullptr;
 	}
 }
+
+//----------------------------------------------------------------------------------------------------
 
 void Player::moveSelectorUp()
 {
@@ -107,7 +113,7 @@ void Player::pickUpItem()
 {
 	for (auto& item : WORLD->mapItemList)
 	{
-		if (item != nullptr && item->mapPosition.x == mapPosition.x && item->mapPosition.y == mapPosition.y)
+		if (item != nullptr && item->mapPosition.x == mapPosition.x && item->mapPosition.y == mapPosition.y && item->mapPosition.level == mapPosition.level)
 		{
 			std::vector<std::shared_ptr<Item>>::iterator itr = std::find(WORLD->mapItemList.begin(), WORLD->mapItemList.end(), item);
 
@@ -125,7 +131,7 @@ void Player::pickUpItem()
 	}
 	for (auto& container : WORLD->mapContainerList)
 	{
-		if (container != nullptr && container->containerItem->mapPosition.x == mapPosition.x && container->containerItem->mapPosition.y == mapPosition.y)
+		if (container != nullptr && container->containerItem->mapPosition.x == mapPosition.x && container->containerItem->mapPosition.y == mapPosition.y && container->containerItem->mapPosition.level == mapPosition.level)
 		{
 			inventory.push_back(container);
 
@@ -251,16 +257,18 @@ void Player::update()
 
 	angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
 
-	selectedItem->updateTool(renderPosition.x, renderPosition.y, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle);
+	selectedItem->updateTool(renderPosition.x, renderPosition.y, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, mapPosition.level);
 	
 	if (engine->settings->input->space->isSwitched == true)
 	{
-		if (WORLD->getTile(mapPosition.x, mapPosition.y, mapPosition.level)->tag == "stair")
+		if (WORLD->getTile(mapPosition.x, mapPosition.y, mapPosition.level)->tag == Tile::Tag::STAIR)
 		{
 			WORLD->getTile(mapPosition.x, mapPosition.y, mapPosition.level)->interact();
 		}
 	}
 }
+
+//----------------------------------------------------------------------------------------------------
 
 void Player::render(const std::shared_ptr<Pane>& pane) const
 {

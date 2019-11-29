@@ -83,7 +83,6 @@ void Tool::updateToolPosition(double angle)
 
 void Tool::update(int x, int y, int mx, int my, double angle)
 {
-	//ch = 249;
 	dx = mx - x;
 	dy = my - y;
 
@@ -99,9 +98,11 @@ void Tool::render(const std::shared_ptr<Pane>& pane) const
 	pane->console->setCharForeground(toolx, tooly, color);
 }
 
+//----------------------------------------------------------------------------------------------------
+
 //Bullet Struct
 Bullet::Bullet(int ch, int startx, int starty, int dx, int dy, int xbound, int ybound)
-	:bulletx(startx), bullety(starty), xbound(xbound), ybound(ybound), hitWall(false), tox(dx), toy(dy), travel(BLine(bulletx, bullety, tox, toy)), moveClock(Clock(0)), ch(ch)
+	:bulletx(startx), bullety(starty), xbound(xbound), ybound(ybound), hitWall(false), tox(dx), toy(dy), travel(BLine(bulletx, bullety, tox, toy)), moveClock(Clock(0)), ch(ch)//, renderPosition(Position(startx, starty, WORLD->player->mapPosition.level))
 {
 	do
 	{
@@ -141,7 +142,7 @@ void Bullet::update()
 				{
 					if (WORLD->inMapBounds(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level))
 					{
-						if (WORLD->getTile(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level)->tag == "destructible")
+						if (WORLD->getTile(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level)->tag == Tile::DESTRUCTIBLE)
 						{
 							WORLD->getTile(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level)->interact();
 						}
@@ -159,6 +160,8 @@ void Bullet::update()
 			}
 		}
 	}
+
+	//renderPosition = offsetPosition(Position(travel.x, travel.y, WORLD->player->mapPosition.level), WORLD->xOffset, WORLD->yOffset);
 }
 
 void Bullet::render(const std::shared_ptr<Pane>& pane) const
@@ -170,10 +173,76 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 	}
 }
 
+//----------------------------------------------------------------------------------------------------
+
 //Weapon Struct
 Weapon::Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed)
 	: Tool(name, color, NULL), baseFireCap(fireRate), fireClock(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), reloadClock(0), baseReloadTimer(reloadSpeed)
 {}
+
+void Weapon::updateWeaponChar(double angle)
+{
+	if (dx >= 0 && dy >= 0)
+	{
+		if (angle <= 22.5)
+		{
+			ch = TCOD_CHAR_HLINE;
+		}
+		else if (angle >= 22.5 && angle <= 67.5)
+		{
+			ch = '\\';
+		}
+		else if (angle >= 67.5)
+		{
+			ch = TCOD_CHAR_VLINE;
+		}
+	}
+	else if (dx >= 0 && dy <= 0)
+	{
+		if (angle >= -22.5)
+		{
+			ch = TCOD_CHAR_HLINE;
+		}
+		else if (angle <= -22.5 && angle >= -67.5)
+		{
+			ch = '/';
+		}
+		else if (angle <= -67.5)
+		{
+			ch = TCOD_CHAR_VLINE;
+		}
+	}
+	else if (dx <= 0 && dy >= 0)
+	{
+		if (angle >= -22.5)
+		{
+			ch = TCOD_CHAR_HLINE;
+		}
+		else if (angle <= -22.5 && angle >= -67.5)
+		{
+			ch = '/';
+		}
+		else if (angle <= -67.5)
+		{
+			ch = TCOD_CHAR_VLINE;
+		}
+	}
+	else if (dx <= 0 && dy <= 0)
+	{
+		if (angle <= 22.5)
+		{
+			ch = TCOD_CHAR_HLINE;
+		}
+		else if (angle >= 22.5 && angle <= 67.5)
+		{
+			ch = '\\';
+		}
+		else if (angle >= 67.5)
+		{
+			ch = TCOD_CHAR_VLINE;
+		}
+	}
+}
 
 void Weapon::update(int x, int y, int mx, int my, double angle)
 {
@@ -186,90 +255,9 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	fireClock.capacity = (int)(baseFireCap * SETTINGS->fpsCount);
 	reloadClock.capacity = (int)(baseReloadTimer * SETTINGS->fpsCount);
 
-	if (dx >= 0 && dy >= 0)
-	{
-		if (angle <= 22.5)
-		{
-			toolx = sourcex + 1;
-			tooly = sourcey;
-			ch = TCOD_CHAR_HLINE;
-		}
-		else if (angle >= 22.5 && angle <= 67.5)
-		{
-			toolx = sourcex + 1;
-			tooly = sourcey + 1;
-			ch = '\\';
-		}
-		else if (angle >= 67.5)
-		{
-			toolx = sourcex;
-			tooly = sourcey + 1;
-			ch = TCOD_CHAR_VLINE;
-		}
-	}
-	else if (dx >= 0 && dy <= 0)
-	{
-		if (angle >= -22.5)
-		{
-			toolx = sourcex + 1;
-			tooly = sourcey;
-			ch = TCOD_CHAR_HLINE;
-		}
-		else if (angle <= -22.5 && angle >= -67.5)
-		{
-			toolx = sourcex + 1;
-			tooly = sourcey - 1;
-			ch = '/';
-		}
-		else if (angle <= -67.5)
-		{
-			toolx = sourcex;
-			tooly = sourcey - 1;
-			ch = TCOD_CHAR_VLINE;
-		}
-	}
-	else if (dx <= 0 && dy >= 0)
-	{
-		if (angle >= -22.5)
-		{
-			toolx = sourcex - 1;
-			tooly = sourcey;
-			ch = TCOD_CHAR_HLINE;
-		}
-		else if (angle <= -22.5 && angle >= -67.5)
-		{
-			toolx = sourcex - 1;
-			tooly = sourcey + 1;
-			ch = '/';
-		}
-		else if (angle <= -67.5)
-		{
-			toolx = sourcex;
-			tooly = sourcey + 1;
-			ch = TCOD_CHAR_VLINE;
-		}
-	}
-	else if (dx <= 0 && dy <= 0)
-	{
-		if (angle <= 22.5)
-		{
-			toolx = sourcex - 1;
-			tooly = sourcey;
-			ch = TCOD_CHAR_HLINE;
-		}
-		else if (angle >= 22.5 && angle <= 67.5)
-		{
-			toolx = sourcex - 1;
-			tooly = sourcey - 1;
-			ch = '\\';
-		}
-		else if (angle >= 67.5)
-		{
-			toolx = sourcex;
-			tooly = sourcey - 1;
-			ch = TCOD_CHAR_VLINE;
-		}
-	}
+	updateToolPosition(angle);
+	updateWeaponChar(angle);
+	
 
 	//Fire bullet
 	if (INPUT->leftMouseClick && fireClock.step == 0 && ammoAmount != 0 && reloadClock.step == 0)
@@ -323,17 +311,19 @@ void Weapon::render(const std::shared_ptr<Pane>& pane) const
 	}
 }
 
+//----------------------------------------------------------------------------------------------------
+
 //ITEM STRUCT
 Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position)
 	: tile(tile), tool(tool), mapPosition(position), renderPosition(position), size(size), distToEnt(0)
 {
 }
 
-void Item::updateTool(int x, int y, int mx, int my, double angle)
+void Item::updateTool(int x, int y, int mx, int my, double angle, int level)
 {
 	tool->update(x, y, mx, my, angle);
 
-	mapPosition = Position(tool->sourcex + WORLD->xOffset, tool->sourcey + WORLD->yOffset, 0);
+	mapPosition = Position(tool->sourcex + WORLD->xOffset, tool->sourcey + WORLD->yOffset, level);
 
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
@@ -361,6 +351,9 @@ void Item::renderTile(const std::shared_ptr<Pane>& pane) const
 	}
 }
 
+//----------------------------------------------------------------------------------------------------
+
+//Container Struct
 Container::Container(int itemCapacity, std::shared_ptr<Item> containerItem)
 	:itemCapacity(itemCapacity), currentSize(0), containerItem(containerItem)
 {

@@ -25,6 +25,8 @@ void MapPane::render() const
 	pushWindow();
 }
 
+//----------------------------------------------------------------------------------------------------
+
 //StatusPane Struct
 StatusPane::StatusPane(int windowW, int windowH, int rx, int ry)
 	:Window(windowW, windowH, "Status", rx, ry), displayHealth(0), displayArmor(0)
@@ -45,6 +47,8 @@ void StatusPane::render() const
 	drawWindow->console->printf(0, 1, "Armor  : [%i/100]", WORLD->player->armor);
 	pushWindow();
 }
+
+//----------------------------------------------------------------------------------------------------
 
 //PlayerPane Struct
 PlayerPane::PlayerPane(int windowW, int windowH, int rx, int ry)
@@ -90,6 +94,8 @@ void PlayerPane::render() const
 
 	pushWindow();
 }
+
+//----------------------------------------------------------------------------------------------------
 
 InventoryPane::InventoryPane(int windowW, int windowH, int rx, int ry)
 	:Window(windowW, windowH, "Inventory", rx, ry)
@@ -165,6 +171,8 @@ void InventoryPane::render() const
 
 	pushWindow();
 }
+
+//----------------------------------------------------------------------------------------------------
 
 SplashPane::SplashPane(int windowW, int windowH, int rx, int ry)
 	:Window(windowW, windowH, "EPSILON", rx, ry), menuIndex(0)

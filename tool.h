@@ -44,11 +44,15 @@ struct Bullet
 
 	BLine travel;
 
+	//Position renderPosition;
+
 	Bullet(int ch, int startx, int starty, int dx, int dy, int xbound, int ybound);
 
 	void update();
 	void render(const std::shared_ptr<Pane>& pane) const;
 };
+
+
 
 //change name
 struct Weapon : public Tool
@@ -68,7 +72,9 @@ struct Weapon : public Tool
 
 	Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed);
 
+	void updateWeaponChar(double angle);
 	void update(int x, int y, int mx, int my, double angle);
+
 	void render(const std::shared_ptr<Pane>& pane) const;
 };
 
@@ -85,13 +91,22 @@ struct Item
 
 	Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position);
 
-	void updateTool(int x, int y, int mx, int my, double angle);
+	void updateTool(int x, int y, int mx, int my, double angle, int level);
 	void renderTool(const std::shared_ptr<Pane>& pane) const;
 
 	void updateTile();
 	void renderTile(const std::shared_ptr<Pane>& pane) const;
 };
 
+//struct Magazine : public Item
+//{
+//	enum AmmoType { NINEMILLIMETER, FIVEPOINTFIVESIX } ammoType;
+//
+//	int ammoCapacity;
+//	int currentAmmo;
+//
+//	Magazine()
+//};
 
 struct Container
 {

@@ -146,6 +146,8 @@ Map::Map(const char* filePath)
 	}
 }
 
+//----------------------------------------------------------------------------------------------------
+
 //World Class
 World::World()
 	:xOffset(0), yOffset(0)
@@ -228,7 +230,7 @@ bool World::getTransparency(int x, int y, int level, int height) const
 	{
 		if (height <= debugmap->levelList[level][x + y * debugmap->mapWidth]->height)
 		{
-			if (debugmap->levelList[level][x + y * debugmap->mapWidth]->tag == "destructible" && debugmap->levelList[level][x + y * debugmap->mapWidth]->getDestroyed())
+			if (debugmap->levelList[level][x + y * debugmap->mapWidth]->tag == Tile::Tag::DESTRUCTIBLE && debugmap->levelList[level][x + y * debugmap->mapWidth]->getDestroyed())
 			{
 				return true;
 			}
@@ -345,12 +347,18 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 
 	for (auto& item : mapItemList)
 	{
-		item->renderTile(pane);
+		if (item->mapPosition.level == player->mapPosition.level)
+		{
+			item->renderTile(pane);
+		}
 	}
 
 	for (auto& container : mapContainerList)
 	{
-		container->containerItem->renderTile(pane);
+		if (container->containerItem->mapPosition.level == player->mapPosition.level)
+		{
+			container->containerItem->renderTile(pane);
+		}
 	}
 
 	renderMouse(pane);

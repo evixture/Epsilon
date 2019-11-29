@@ -38,18 +38,18 @@ constexpr auto PI = 3.14159265;
 //TILES
 	//GROUND
 		//GRASS PATTERNS
-			#define TILE_BasicGrass0		std::make_shared<Tile>			('.',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	"static")
-			#define TILE_BasicGrass1		std::make_shared<Tile>			('"',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	"static")
-			#define TILE_BasicGrass2		std::make_shared<Tile>			('`',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	"static")
-			#define TILE_BasicGrass3		std::make_shared<Tile>			(',',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	"static")
+			#define TILE_BasicGrass0		std::make_shared<Tile>			('.',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::STATIC)
+			#define TILE_BasicGrass1		std::make_shared<Tile>			('"',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::STATIC)
+			#define TILE_BasicGrass2		std::make_shared<Tile>			('`',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::STATIC)
+			#define TILE_BasicGrass3		std::make_shared<Tile>			(',',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::STATIC)
 
-	#define TILE_BasicFlower	std::make_shared<Tile>			('*',	TCODColor::darkChartreuse,	TCODColor::darkestSepia,	2,	true,	"static")
-	#define TILE_BasicFloor		std::make_shared<Tile>			(' ',	TCODColor::darkSepia,		TCODColor::darkerSepia,		0,	true,	"static")
-	#define TILE_BasicConcrete	std::make_shared<Tile>			('`',	TCODColor::darkGrey,		TCODColor::grey,			0,	true,	"static")
-	#define TILE_BasicShingle	std::make_shared<Tile>			(240,	TCODColor::grey,			TCODColor::darkGrey,		0,	true,	"static")
+	#define TILE_BasicFlower	std::make_shared<Tile>			('*',	TCODColor::darkChartreuse,	TCODColor::darkestSepia,	2,	true,	Tile::STATIC)
+	#define TILE_BasicFloor		std::make_shared<Tile>			(' ',	TCODColor::darkSepia,		TCODColor::darkerSepia,		0,	true,	Tile::STATIC)
+	#define TILE_BasicConcrete	std::make_shared<Tile>			('`',	TCODColor::darkGrey,		TCODColor::grey,			0,	true,	Tile::STATIC)
+	#define TILE_BasicShingle	std::make_shared<Tile>			(240,	TCODColor::grey,			TCODColor::darkGrey,		0,	true,	Tile::STATIC)
 
 	//WALL
-	#define TILE_BasicDoor		std::make_shared<Tile>			('#',	TCODColor::darkSepia,		TCODColor::darkestSepia,	4,	true,	"static")
+	#define TILE_BasicDoor		std::make_shared<Tile>			('#',	TCODColor::darkSepia,		TCODColor::darkestSepia,	4,	true,	Tile::STATIC)
 	#define TILE_BasicWall		std::make_shared<Destructible>	('=',	TCODColor::lightSepia,		TCODColor::lighterSepia,	4,	false,	4)
 	#define TILE_BasicWindow	std::make_shared<Destructible>	('_',	TCODColor::lighterSepia,	TCODColor::darkerSky,		0,	false,	1)
 
@@ -61,23 +61,23 @@ constexpr auto PI = 3.14159265;
 	#define TILE_DownStair		std::make_shared<Stair>			('\\',	TCODColor::lightSepia,		TCODColor::darkerSepia,		2,	true,	-1)
 
 	//SKY
-	#define TILE_BasicSky		std::make_shared<Tile>			(' ',	TCODColor::lightestCyan,	TCODColor::sky,				0,	false,	"static")
+	#define TILE_BasicSky		std::make_shared<Tile>			(' ',	TCODColor::lightestCyan,	TCODColor::sky,				0,	false,	Tile::STATIC)
 
 	//ERROR
-	#define TILE_error			std::make_shared<Tile>			('%',	TCODColor::black,			TCODColor::pink,			4,	true ,	"static")
+	#define TILE_error			std::make_shared<Tile>			('%',	TCODColor::black,			TCODColor::pink,			4,	true ,	Tile::STATIC)
 
 	//ITEM TILES
 		//edit tile set to custom sprites
-	#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true, "static")
-	#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, "static")
+	#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true, Tile::STATIC)
+	#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, Tile::STATIC)
 
 //----------------------------------------------------------------------------------------------------
 
 //TOOLS
 	//DEFAULT
-		#define TOOL_Default_Container std::make_shared<Tool>("Test Container", TCODColor::pink, 254)
+		#define TOOL_Default_Container std::make_shared<Tool>("Test Container", TCODColor::pink, TCOD_CHAR_RADIO_UNSET)
 	//CUSTOM
-		#define TOOL_Hands std::make_shared<Tool>("Hands", TCODColor::lightSepia, 249)
+		#define TOOL_Hands std::make_shared<Tool>("Hands", TCODColor::lightSepia, TCOD_CHAR_UMLAUT)
 
 	//WEAPONS
 		//DEFAULT
@@ -124,6 +124,6 @@ ITEM SIZES
 	//CUSTOM
 
 
-
+//ITEM TILES ARE RENDERING ON CURRENT FLOOR
 
 //work on map container and updating inventory update render
