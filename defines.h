@@ -68,8 +68,13 @@ constexpr auto PI = 3.14159265;
 
 	//ITEM TILES
 		//edit tile set to custom sprites
-	#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true, Tile::STATIC)
-	#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, Tile::STATIC)
+		//DEFAULT
+			#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true, Tile::STATIC)
+			#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, Tile::STATIC)
+		//CUSTOM
+			#define TILE_M4A1 std::make_shared<Tile>(214, TCODColor::darkestGrey, TCODColor::darkGrey, 1, true, Tile::STATIC)
+			#define TILE_M1911 std::make_shared<Tile>(169, TCODColor::copper, TCODColor::darkerGrey, 1, true, Tile::STATIC)
+			#define TILE_SmallBackpack std::make_shared<Tile>(233, TCODColor::sepia, TCODColor::darkSepia, 1, true, Tile::STATIC)
 
 //----------------------------------------------------------------------------------------------------
 
@@ -78,24 +83,25 @@ constexpr auto PI = 3.14159265;
 		#define TOOL_Default_Container std::make_shared<Tool>("Test Container", TCODColor::pink, TCOD_CHAR_RADIO_UNSET)
 	//CUSTOM
 		#define TOOL_Hands std::make_shared<Tool>("Hands", TCODColor::lightSepia, TCOD_CHAR_UMLAUT)
-
+		#define TOOL_SmallBackpack std::make_shared<Tool>("Small Backpack", TCODColor::sepia, 233)
 	//WEAPONS
 		//DEFAULT
 			//Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed);
 			#define WEAPON_DefaultRifle std::make_shared<Weapon>("WEAPON_DefaultRifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f, Weapon::FULL)
 			#define WEAPON_DefaultSemiRifle std::make_shared<Weapon>("WEAPON_DefaultSemiRifle", TCODColor::white, 30, 10, .09f, 2.0f, Weapon::SEMI)
 		//CUSTOM
-			//
+			#define WEAPON_M4A1 std::make_shared<Weapon>("M4A1", TCODColor::darkestGrey, 30, 10, .09f, 2.0f, Weapon::FULL)
+			#define WEAPON_M1911 std::make_shared<Weapon>("M1911", TCODColor::grey, 7, 10, .15f, 1.0f, Weapon::SEMI)
 
 //----------------------------------------------------------------------------------------------------
 
 /*
 ITEM SIZES
 	1 UNIT
-		PISTOLS
+		COMPACT PISTOLS
 	2 UNITS
 		COMPACT SMGS
-		LARGE PISTOLS
+		PISTOLS
 	3 UNITS
 		STANDARD RIFLES
 		LARGE SMGS
@@ -115,6 +121,9 @@ ITEM SIZES
 		#define ITEM_Default_Container(x, y, level) std::make_shared<Item>(5, DEFAULT_ITEM_TILE2, TOOL_Default_Container, Position(x, y, level))
 	//CUSTOM
 		#define ITEM_Hands(x, y, level) std::make_shared<Item>(1, DEFAULT_ITEM_TILE, TOOL_Hands, Position(x, y, level))
+		#define ITEM_M4A1(x, y, level) std::make_shared<Item>(3, TILE_M4A1 , WEAPON_M4A1, Position(x, y, level))
+		#define ITEM_M1911(x, y, level) std::make_shared<Item>(2, TILE_M1911 , WEAPON_M1911, Position(x, y, level))
+		#define ITEM_SmallBackpack(x, y, level) std::make_shared<Item>(2, TILE_SmallBackpack , TOOL_SmallBackpack, Position(x, y, level))
 
 //----------------------------------------------------------------------------------------------------
 
@@ -122,7 +131,7 @@ ITEM SIZES
 	//DEFAULT
 		#define CONTAINER_Default_Container(x, y, level, capacity) std::make_shared<Container>(capacity, ITEM_Default_Container(x, y, level))
 	//CUSTOM
-
+		#define CONTAINER_SmallBackpack(x, y, level) std::make_shared<Container>(5, ITEM_SmallBackpack(x, y, level))
 
 //ITEM TILES ARE RENDERING ON CURRENT FLOOR
 

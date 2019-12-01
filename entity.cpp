@@ -41,8 +41,8 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 Player::Player(Position pos)
 	:Creature(Position(pos), '@', "player", COLOR_Player_Color, 100, 0)
 {
-	inventory.push_back(CONTAINER_Default_Container(0, 0, 0, 5));
-	inventory[0]->addItem(ITEM_Test_Size2(0, 0, 0));
+	inventory.push_back(CONTAINER_SmallBackpack(0, 0, 0));
+	inventory[0]->addItem(ITEM_M4A1(0, 0, 0));
 
 	if (inventory.size() > 0)
 	{
@@ -195,7 +195,6 @@ void Player::filterIndexes()
 				selectedItem = inventory[containerIndex]->containerItem;
 			}
 		}
-
 		else
 		{
 			selectedItem = ITEM_Hands(0, 0, 0);
@@ -212,15 +211,15 @@ void Player::update()
 {
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
-	if (INPUT->num0->isSwitched)
-	{
-		inventory[containerIndex]->addItem(ITEM_Test2_Size2(0, 0, 0));
-	}
-	if (INPUT->num9->isSwitched)
-	{
-		inventory.push_back(CONTAINER_Default_Container(0, 0, 0, 7));
-		inventory[containerIndex]->addItem(ITEM_Test_Size2(0, 0, 0));
-	}
+	//if (INPUT->num0->isSwitched)
+	//{
+	//	inventory[containerIndex]->addItem(ITEM_Test2_Size2(0, 0, 0));
+	//}
+	//if (INPUT->num9->isSwitched)
+	//{
+	//	inventory.push_back(CONTAINER_Default_Container(0, 0, 0, 7));
+	//	inventory[containerIndex]->addItem(ITEM_Test_Size2(0, 0, 0));
+	//}
 
 	//MOUSE WHEEL ITEM SELECTION
 	if (INPUT->mouse.wheel_up || INPUT->mouse.wheel_down)
