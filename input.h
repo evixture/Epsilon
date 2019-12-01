@@ -4,7 +4,7 @@ struct Key
 {
 	sf::Keyboard::Key sfKey;
 	bool isDown;
-	bool isPressed;
+	//bool isPressed;
 	bool isSwitched;
 
 	Key(sf::Keyboard::Key sfKey);
@@ -14,6 +14,21 @@ struct Key
 
 private:
 	bool keySwitch;
+};
+
+struct MouseButton
+{
+	sf::Mouse::Button sfMButton;
+	bool isDown;
+	bool isSwitched;
+
+	MouseButton(sf::Mouse::Button MButton);
+	MouseButton();
+
+	void update();
+
+private:
+	bool buttonSwitch;
 };
 
 //Input Struct
@@ -47,16 +62,12 @@ struct Input
 	std::shared_ptr<Key> escape;
 	std::vector<std::shared_ptr<Key>> keyList;
 
+	std::shared_ptr<MouseButton> leftMouseButton;
+	std::vector<std::shared_ptr<MouseButton>> mouseList;
+
 	float baseMoveWait;
 
-	//bool moveUp;
-	//bool moveDown;
-	//bool moveLeft;
-	//bool moveRight;
-	//
-	//bool reload;
-	//bool changeFloor;
-	bool leftMouseClick;
+	//bool leftMouseClick;
 
 	Input();
 

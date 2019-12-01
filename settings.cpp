@@ -14,6 +14,7 @@ Settings::Settings(int screenCharWidth, int screenCharHeight)
 {
 	//fontList.push_back(terminal16x16 = std::make_shared<Font>("Terminal", "16", "16", "data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16));
 	//setfont(terminal16x16);
+	TCODSystem::setFps(0);
 
 	TCODConsole::setCustomFont("data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16);
 
@@ -21,7 +22,6 @@ Settings::Settings(int screenCharWidth, int screenCharHeight)
 	
 	TCODConsole::initRoot(screenCharWidth, screenCharHeight, windowTitle, fullscreen, renderer);
 	TCODConsole::root->setDefaultBackground(COLOR_Root_BG);
-	TCODSystem::setFps(maxFps);
 }
 
 void Settings::setFullscreen()

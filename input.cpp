@@ -2,7 +2,7 @@
 
 //Key Struct
 Key::Key(sf::Keyboard::Key sfKey)
-	:sfKey(sfKey), isDown(false), isPressed(false), isSwitched(false), keySwitch(false)
+	:sfKey(sfKey), isDown(false), isSwitched(false), keySwitch(false)
 {
 }
 Key::Key()
@@ -34,9 +34,43 @@ void Key::update()
 
 //----------------------------------------------------------------------------------------------------
 
+MouseButton::MouseButton(sf::Mouse::Button MButton)
+	:sfMButton(MButton), isDown(false), isSwitched(false), buttonSwitch(false)
+{
+}
+
+MouseButton::MouseButton()
+{
+}
+
+void MouseButton::update()
+{
+	isDown = sf::Mouse::isButtonPressed(sfMButton);
+
+	if (sf::Mouse::isButtonPressed(sfMButton))
+	{
+		if (!buttonSwitch)
+		{
+			isSwitched = true;
+			buttonSwitch = true;
+		}
+		else if (buttonSwitch)
+		{
+			isSwitched = false;
+		}
+	}
+	else
+	{
+		isSwitched = false;
+		buttonSwitch = false;
+	}
+}
+
+//----------------------------------------------------------------------------------------------------
+
 //Input Struct
 Input::Input()
-	:keyboard(), mouse(), baseMoveWait(0.0f), leftMouseClick(false), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(0))
+	:keyboard(), mouse(), baseMoveWait(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(0))
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &mouse);
 	TCODMouse::showCursor(false);
@@ -63,19 +97,17 @@ Input::Input()
 	keyList.push_back(space = std::make_shared<Key>(sf::Keyboard::Space));
 	keyList.push_back(f11 = std::make_shared<Key>(sf::Keyboard::F11));
 	keyList.push_back(escape = std::make_shared<Key>(sf::Keyboard::Escape));
+
+	mouseList.push_back(leftMouseButton = std::make_shared<MouseButton>(sf::Mouse::Left));
 }
 
 void Input::getMouseInput()
 {
 	if (TCODConsole::hasMouseFocus())
 	{
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		for (auto& button : mouseList)
 		{
-			leftMouseClick = true;
-		}
-		else
-		{
-			leftMouseClick = false;
+			button->update();
 		}
 	}
 }
@@ -183,4 +215,3 @@ void Input::update(std::shared_ptr<Player> player)
 	getKeyInput(player);
 	getMouseInput();
 }
-

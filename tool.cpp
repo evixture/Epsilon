@@ -176,8 +176,8 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 //Weapon Struct
-Weapon::Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed)
-	: Tool(name, color, NULL), baseFireCap(fireRate), fireClock(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), reloadClock(0), baseReloadTimer(reloadSpeed)
+Weapon::Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed, FireType fireType)
+	: Tool(name, color, NULL), baseFireCap(fireRate), fireClock(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), reloadClock(0), baseReloadTimer(reloadSpeed), fireType(fireType)
 {}
 
 void Weapon::updateWeaponChar(double angle)
@@ -244,6 +244,26 @@ void Weapon::updateWeaponChar(double angle)
 	}
 }
 
+void Weapon::fireBullet()
+{
+	if (!(toolx == dx + toolx && tooly == dy + tooly))
+	{
+		fireClock.reset();
+		bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, toolx, tooly, dx, dy, WORLD->debugmap->mapWidth, WORLD->debugmap->mapHeight));
+		ammoAmount--;
+	}
+}
+
+void Weapon::reload()
+{
+	if (numberMags != 0 && ammoAmount != ammoCap)
+	{
+		ammoAmount = ammoCap;
+		numberMags--;
+		reloadClock.reset();
+	}
+}
+
 void Weapon::update(int x, int y, int mx, int my, double angle)
 {
 	dx = mx - x;
@@ -260,19 +280,25 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	
 
 	//Fire bullet
-	if (INPUT->leftMouseClick && fireClock.step == 0 && ammoAmount != 0 && reloadClock.step == 0)
+	if (fireClock.step == 0 && ammoAmount != 0 && reloadClock.step == 0)
 	{
-		if (!(toolx == dx + toolx && tooly == dy + tooly))
+		if (fireType == Weapon::FULL && INPUT->leftMouseButton->isDown)
 		{
-			fireClock.reset();
-			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, toolx, tooly, dx, dy, WORLD->debugmap->mapWidth, WORLD->debugmap->mapHeight));
-			ammoAmount--;
+			fireBullet();
+		}
+		else if (fireType == Weapon::SEMI && INPUT->leftMouseButton->isSwitched)
+		{
+			fireBullet();
+		}
+		else if (fireType == Weapon::SAFE)
+		{
+
 		}
 	}
 	fireClock.tickDown();
 
 	//CLEAR BULLETS
-	if (bulletList.size() > ammoCap)
+	if (bulletList.size() > ammoCap * 2)
 	{
 		bulletList.pop_back();
 	}
@@ -281,12 +307,7 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	{
 		if (engine->settings->input->r->isSwitched)
 		{
-			if (numberMags != 0 && ammoAmount != ammoCap)
-			{
-				ammoAmount = ammoCap;
-				numberMags--;
-				reloadClock.reset();
-			}
+			reload();
 		}
 	}
 	reloadClock.tickDown();
