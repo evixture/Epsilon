@@ -75,6 +75,7 @@ constexpr auto PI = 3.14159265;
 			#define TILE_M4A1 std::make_shared<Tile>(214, TCODColor::darkestGrey, TCODColor::darkGrey, 1, true, Tile::STATIC)
 			#define TILE_M1911 std::make_shared<Tile>(169, TCODColor::copper, TCODColor::darkerGrey, 1, true, Tile::STATIC)
 			#define TILE_SmallBackpack std::make_shared<Tile>(233, TCODColor::sepia, TCODColor::darkSepia, 1, true, Tile::STATIC)
+			#define TILE_9mmMagazine12 std::make_shared<Tile>('/', TCODColor::darkerGrey, TCODColor::darkGrey, 1, true, Tile::STATIC)
 
 //----------------------------------------------------------------------------------------------------
 
@@ -84,6 +85,8 @@ constexpr auto PI = 3.14159265;
 	//CUSTOM
 		#define TOOL_Hands std::make_shared<Tool>("Hands", TCODColor::lightSepia, TCOD_CHAR_UMLAUT)
 		#define TOOL_SmallBackpack std::make_shared<Tool>("Small Backpack", TCODColor::sepia, 233)
+		#define TOOL_9mmMagazine12 std::make_shared<Tool>("9mm Magazine (12)", TCODColor::darkGrey, '/')
+
 	//WEAPONS
 		//DEFAULT
 			//Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed);
@@ -92,6 +95,7 @@ constexpr auto PI = 3.14159265;
 		//CUSTOM
 			#define WEAPON_M4A1 std::make_shared<Weapon>("M4A1", TCODColor::darkestGrey, 30, 10, .09f, 2.0f, Weapon::FULL)
 			#define WEAPON_M1911 std::make_shared<Weapon>("M1911", TCODColor::grey, 7, 10, .15f, 1.0f, Weapon::SEMI)
+
 
 //----------------------------------------------------------------------------------------------------
 
@@ -123,7 +127,17 @@ ITEM SIZES
 		#define ITEM_Hands(x, y, level) std::make_shared<Item>(1, DEFAULT_ITEM_TILE, TOOL_Hands, Position(x, y, level))
 		#define ITEM_M4A1(x, y, level) std::make_shared<Item>(3, TILE_M4A1 , WEAPON_M4A1, Position(x, y, level))
 		#define ITEM_M1911(x, y, level) std::make_shared<Item>(2, TILE_M1911 , WEAPON_M1911, Position(x, y, level))
+
 		#define ITEM_SmallBackpack(x, y, level) std::make_shared<Item>(2, TILE_SmallBackpack , TOOL_SmallBackpack, Position(x, y, level))
+
+			//cannot use shared ptr because of inheritance
+		#define ITEM_9mmMagazine12(x, y, level) Item(1, TILE_9mmMagazine12 , TOOL_9mmMagazine12, Position(x, y, level))
+
+		
+//MAGAZINES
+	//DEFAULT
+	//CUSTOM
+		#define MAGAZINE_9mm12Round(x, y, level) std::make_shared<MagazineItem>(ITEM_9mmMagazine12(x, y, level), std::make_shared<MagazineData>(MagazineData::NINEMILLIMETER, 12, 12))
 
 //----------------------------------------------------------------------------------------------------
 
@@ -132,7 +146,3 @@ ITEM SIZES
 		#define CONTAINER_Default_Container(x, y, level, capacity) std::make_shared<Container>(capacity, ITEM_Default_Container(x, y, level))
 	//CUSTOM
 		#define CONTAINER_SmallBackpack(x, y, level) std::make_shared<Container>(5, ITEM_SmallBackpack(x, y, level))
-
-//ITEM TILES ARE RENDERING ON CURRENT FLOOR
-
-//work on map container and updating inventory update render

@@ -23,6 +23,7 @@
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="gui.cpp" />
     <ClCompile Include="input.cpp" />
+    <ClCompile Include="item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="panel.cpp" />
@@ -38,6 +39,7 @@
     <ClInclude Include="entity.h" />
     <ClInclude Include="gui.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="item.h" />
     <ClInclude Include="main.hpp" />
     <ClInclude Include="map.h" />
     <ClInclude Include="panel.h" />

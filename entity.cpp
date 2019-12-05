@@ -43,6 +43,8 @@ Player::Player(Position pos)
 {
 	inventory.push_back(CONTAINER_SmallBackpack(0, 0, 0));
 	inventory[0]->addItem(ITEM_M4A1(0, 0, 0));
+	inventory[0]->addItem(MAGAZINE_9mm12Round(0, 0, 0));
+	inventory.push_back(CONTAINER_SmallBackpack(0, 0, 0));
 
 	if (inventory.size() > 0)
 	{
@@ -111,37 +113,25 @@ void Player::moveSelectorDown()
 
 void Player::pickUpItem()
 {
-	for (auto& item : WORLD->mapItemList)
+	for (int i = 0; i < WORLD->mapItemList.size(); i++)
 	{
-		if (item != nullptr && item->mapPosition.x == mapPosition.x && item->mapPosition.y == mapPosition.y && item->mapPosition.level == mapPosition.level)
+		if (WORLD->mapItemList[i] != nullptr && WORLD->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->mapItemList[i]->mapPosition.level == mapPosition.level)
 		{
-			std::vector<std::shared_ptr<Item>>::iterator itr = std::find(WORLD->mapItemList.begin(), WORLD->mapItemList.end(), item);
-
-			if (itr != WORLD->mapItemList.cend())
+			if (containerIndex != -1)
 			{
-				__int64 index = std::distance(WORLD->mapItemList.begin(), itr);
-
-				if (containerIndex != -1)
+				if (inventory[containerIndex]->addItem(WORLD->mapItemList[i]))
 				{
-					inventory[containerIndex]->addItem(item);
-					WORLD->mapItemList.erase(WORLD->mapItemList.begin() + index);
+					WORLD->mapItemList.erase(WORLD->mapItemList.begin() + i);
 				}
 			}
 		}
 	}
-	for (auto& container : WORLD->mapContainerList)
+	for (int i = 0; i < WORLD->mapContainerList.size(); i++)
 	{
-		if (container != nullptr && container->containerItem->mapPosition.x == mapPosition.x && container->containerItem->mapPosition.y == mapPosition.y && container->containerItem->mapPosition.level == mapPosition.level)
+		if (WORLD->mapContainerList[i] != nullptr && WORLD->mapContainerList[i]->containerItem->mapPosition.x == mapPosition.x && WORLD->mapContainerList[i]->containerItem->mapPosition.y == mapPosition.y && WORLD->mapContainerList[i]->containerItem->mapPosition.level == mapPosition.level)
 		{
-			inventory.push_back(container);
-
-			std::vector<std::shared_ptr<Container>>::iterator itr = std::find(WORLD->mapContainerList.begin(), WORLD->mapContainerList.end(), container);
-
-			if (itr != WORLD->mapContainerList.cend())
-			{
-				__int64 index = std::distance(WORLD->mapContainerList.begin(), itr);
-				WORLD->mapContainerList.erase(WORLD->mapContainerList.begin() + index);
-			}
+			inventory.push_back(WORLD->mapContainerList[i]);
+			WORLD->mapContainerList.erase(WORLD->mapContainerList.begin() + i);
 		}
 	}
 }

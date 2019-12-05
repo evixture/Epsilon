@@ -46,6 +46,9 @@
     <Filter Include="Source\Defines">
       <UniqueIdentifier>{90a19523-78ba-4885-9e57-63d9d0a07c8c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Item">
+      <UniqueIdentifier>{acdd10c5-2cab-4e45-adbe-3093f9d74ede}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h">
@@ -90,6 +93,9 @@
     <ClInclude Include="defines.h">
       <Filter>Source\Defines</Filter>
     </ClInclude>
+    <ClInclude Include="item.h">
+      <Filter>Source\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -127,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="tool.cpp">
       <Filter>Source\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="item.cpp">
+      <Filter>Source\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

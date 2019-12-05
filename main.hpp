@@ -26,6 +26,7 @@ class Entity;
 #include "utility.h"
 #include "tile.h"
 #include "tool.h"
+#include "item.h"
 #include "entity.h"
 #include "map.h"
 #include "input.h"
