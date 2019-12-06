@@ -142,7 +142,7 @@ void Bullet::update()
 				{
 					if (WORLD->inMapBounds(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level))
 					{
-						if (WORLD->getTile(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level)->tag == Tile::DESTRUCTIBLE)
+						if (WORLD->getTile(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level)->tag == Tile::Tag::DESTRUCTIBLE)
 						{
 							WORLD->getTile(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level)->interact();
 						}
@@ -176,8 +176,8 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 //Weapon Struct
-Weapon::Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed, FireType fireType)
-	: Tool(name, color, NULL), baseFireCap(fireRate), fireClock(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), reloadClock(0), baseReloadTimer(reloadSpeed), fireType(fireType)
+Weapon::Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed, AmmoType ammoType, FireType fireType)
+	: Tool(name, color, NULL), baseFireCap(fireRate), fireClock(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), reloadClock(0), baseReloadTimer(reloadSpeed), ammoType(ammoType), fireType(fireType)
 {}
 
 void Weapon::updateWeaponChar(double angle)
@@ -278,19 +278,32 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	updateToolPosition(angle);
 	updateWeaponChar(angle);
 	
+	//for (int i = 0; i < WORLD->player->inventory.size(); i++)
+	//{
+	//	for (int j = 0; j < WORLD->player->inventory[i]->itemList.size(); j++)
+	//	{
+	//		if (WORLD->player->inventory[i]->itemList[j]->getMagazineData()->isValid == true)
+	//		{
+	//			if (WORLD->player->inventory[i]->itemList[j]->getMagazineData()->currentAmmo != 0)
+	//			{
+	//				currentMagazine = std::make_shared<MagazineItem>(WORLD->player->inventory[i]->itemList[j], WORLD->player->inventory[i]->itemList[j]->getMagazineData());
+	//			}
+	//		}
+	//	}
+	//}
 
 	//Fire bullet
 	if (fireClock.step == 0 && ammoAmount != 0 && reloadClock.step == 0)
 	{
-		if (fireType == Weapon::FULL && INPUT->leftMouseButton->isDown)
+		if (fireType == FireType::FULL && INPUT->leftMouseButton->isDown)
 		{
 			fireBullet();
 		}
-		else if (fireType == Weapon::SEMI && INPUT->leftMouseButton->isSwitched)
+		else if (fireType == FireType::SEMI && INPUT->leftMouseButton->isSwitched)
 		{
 			fireBullet();
 		}
-		else if (fireType == Weapon::SAFE)
+		else if (fireType == FireType::SAFE)
 		{
 
 		}
@@ -333,5 +346,3 @@ void Weapon::render(const std::shared_ptr<Pane>& pane) const
 }
 
 //----------------------------------------------------------------------------------------------------
-
-

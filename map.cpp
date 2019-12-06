@@ -87,10 +87,10 @@ Map::Map(const char* filePath)
 					switch (s_tempTile[1])
 					{
 					case '=':
-						levelList[currentFloor].push_back(TILE_BasicWall);
+						levelList[currentFloor].push_back(DESTRUCTIBLE_BasicWall);
 						break;
 					case 'O':
-						levelList[currentFloor].push_back(TILE_BasicWindow);
+						levelList[currentFloor].push_back(DESTRUCTIBLE_BasicWindow);
 						break;
 					}
 					break;
@@ -128,10 +128,10 @@ Map::Map(const char* filePath)
 					switch (s_tempTile[1])
 					{
 					case '/':
-						levelList[currentFloor].push_back(TILE_UpStair);
+						levelList[currentFloor].push_back(STAIR_UpStair);
 						break;
 					case '\\':
-						levelList[currentFloor].push_back(TILE_DownStair);
+						levelList[currentFloor].push_back(STAIR_DownStair);
 						break;
 					}
 					break;

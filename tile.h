@@ -2,7 +2,7 @@
 
 struct Tile
 {
-	enum Tag {STATIC, DESTRUCTIBLE, STAIR} tag;
+	enum class Tag {STATIC, DESTRUCTIBLE, STAIR} tag;
 
 	int ch;
 	int height;

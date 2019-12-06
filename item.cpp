@@ -1,6 +1,6 @@
 #include "main.hpp"
 
-MagazineData::MagazineData(AmmoType ammoType, int ammoCapacity, int currentAmmo, bool isValid)
+MagazineData::MagazineData(Weapon::AmmoType ammoType, int ammoCapacity, int currentAmmo, bool isValid)
 	:isValid(isValid), ammoType(ammoType), ammoCapacity(ammoCapacity), currentAmmo(currentAmmo)
 {
 }
@@ -13,7 +13,7 @@ Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Pos
 
 std::shared_ptr<MagazineData> Item::getMagazineData()
 {
-	return std::make_shared<MagazineData>(MagazineData::NONE, 0, 0, false);
+	return std::make_shared<MagazineData>(Weapon::AmmoType::NONE, 0, 0, false);
 }
 
 void Item::updateTool(int x, int y, int mx, int my, double angle, int level)

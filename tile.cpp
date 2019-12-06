@@ -2,7 +2,7 @@
 
 //Tile struct
 Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable)
-	:ch(ch), foregroundColor(foregroundColor), backgroundColor(backgroundColor), height(height), walkable(walkable), explored(false), tag(Tile::STATIC)
+	:ch(ch), foregroundColor(foregroundColor), backgroundColor(backgroundColor), height(height), walkable(walkable), explored(false), tag(Tile::Tag::STATIC)
 {}
 
 Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable, Tag tag)
@@ -44,7 +44,7 @@ void Tile::render(int x, int y, const std::shared_ptr<Pane>& pane) const
 
 //Destructible Struct
 Destructible::Destructible(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable, int strength)
-	: Tile(ch, foregroundColor, backgroundColor, height, walkable, Tile::DESTRUCTIBLE), strength(strength), destroyed(false)
+	: Tile(ch, foregroundColor, backgroundColor, height, walkable, Tile::Tag::DESTRUCTIBLE), strength(strength), destroyed(false)
 {
 }
 
@@ -74,7 +74,7 @@ void Destructible::interact()
 
 //Stair Struct
 Stair::Stair(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable, int moveDist)
-	: Tile(ch, foregroundColor, backgroundColor, height, true, Tile::STAIR), moveDist(moveDist)
+	: Tile(ch, foregroundColor, backgroundColor, height, true, Tile::Tag::STAIR), moveDist(moveDist)
 {
 }
 

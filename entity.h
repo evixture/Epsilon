@@ -34,6 +34,7 @@ public:
 	std::shared_ptr<Item> selectedItem;
 
 	std::vector<std::shared_ptr<Container>> inventory;
+	std::shared_ptr<MagazineItem> currentMagazine;
 
 	Creature(Position pos, int symbol, const char* name, TCODColor color, int health, int armor);
 

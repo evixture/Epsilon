@@ -38,44 +38,44 @@ constexpr auto PI = 3.14159265;
 //TILES
 	//GROUND
 		//GRASS PATTERNS
-			#define TILE_BasicGrass0		std::make_shared<Tile>			('.',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::STATIC)
-			#define TILE_BasicGrass1		std::make_shared<Tile>			('"',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::STATIC)
-			#define TILE_BasicGrass2		std::make_shared<Tile>			('`',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::STATIC)
-			#define TILE_BasicGrass3		std::make_shared<Tile>			(',',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::STATIC)
+			#define TILE_BasicGrass0		std::make_shared<Tile>			('.',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::Tag::STATIC)
+			#define TILE_BasicGrass1		std::make_shared<Tile>			('"',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::Tag::STATIC)
+			#define TILE_BasicGrass2		std::make_shared<Tile>			('`',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::Tag::STATIC)
+			#define TILE_BasicGrass3		std::make_shared<Tile>			(',',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::Tag::STATIC)
 
-	#define TILE_BasicFlower	std::make_shared<Tile>			('*',	TCODColor::darkChartreuse,	TCODColor::darkestSepia,	2,	true,	Tile::STATIC)
-	#define TILE_BasicFloor		std::make_shared<Tile>			(' ',	TCODColor::darkSepia,		TCODColor::darkerSepia,		0,	true,	Tile::STATIC)
-	#define TILE_BasicConcrete	std::make_shared<Tile>			('`',	TCODColor::darkGrey,		TCODColor::grey,			0,	true,	Tile::STATIC)
-	#define TILE_BasicShingle	std::make_shared<Tile>			(240,	TCODColor::grey,			TCODColor::darkGrey,		0,	true,	Tile::STATIC)
+	#define TILE_BasicFlower				std::make_shared<Tile>			('*',	TCODColor::darkChartreuse,	TCODColor::darkestSepia,	2,	true,	Tile::Tag::STATIC)
+	#define TILE_BasicFloor					std::make_shared<Tile>			(' ',	TCODColor::darkSepia,		TCODColor::darkerSepia,		0,	true,	Tile::Tag::STATIC)
+	#define TILE_BasicConcrete				std::make_shared<Tile>			('`',	TCODColor::darkGrey,		TCODColor::grey,			0,	true,	Tile::Tag::STATIC)
+	#define TILE_BasicShingle				std::make_shared<Tile>			(240,	TCODColor::grey,			TCODColor::darkGrey,		0,	true,	Tile::Tag::STATIC)
 
 	//WALL
-	#define TILE_BasicDoor		std::make_shared<Tile>			('#',	TCODColor::darkSepia,		TCODColor::darkestSepia,	4,	true,	Tile::STATIC)
-	#define TILE_BasicWall		std::make_shared<Destructible>	('=',	TCODColor::lightSepia,		TCODColor::lighterSepia,	4,	false,	4)
-	#define TILE_BasicWindow	std::make_shared<Destructible>	('_',	TCODColor::lighterSepia,	TCODColor::darkerSky,		0,	false,	1)
+	#define TILE_BasicDoor					std::make_shared<Tile>			('#',	TCODColor::darkSepia,		TCODColor::darkestSepia,	4,	true,	Tile::Tag::STATIC)
+	#define DESTRUCTIBLE_BasicWall			std::make_shared<Destructible>	('=',	TCODColor::lightSepia,		TCODColor::lighterSepia,	4,	false,	4)
+	#define DESTRUCTIBLE_BasicWindow		std::make_shared<Destructible>	('_',	TCODColor::lighterSepia,	TCODColor::darkerSky,		0,	false,	1)
 
 	//PART HEIGHT
-	#define TILE_BasicTable		std::make_shared<Destructible>	('n',	TCODColor::lighterSepia,	TCODColor::darkerSepia,		2,	false,	2)
+	#define TILE_BasicTable					std::make_shared<Destructible>	('n',	TCODColor::lighterSepia,	TCODColor::darkerSepia,		2,	false,	2)
 
 	//STAIR
-	#define TILE_UpStair		std::make_shared<Stair>			('/',	TCODColor::lightSepia,		TCODColor::darkerSepia,		2,	true,	1)
-	#define TILE_DownStair		std::make_shared<Stair>			('\\',	TCODColor::lightSepia,		TCODColor::darkerSepia,		2,	true,	-1)
+	#define STAIR_UpStair					std::make_shared<Stair>			('/',	TCODColor::lightSepia,		TCODColor::darkerSepia,		2,	true,	1)
+	#define STAIR_DownStair					std::make_shared<Stair>			('\\',	TCODColor::lightSepia,		TCODColor::darkerSepia,		2,	true,	-1)
 
 	//SKY
-	#define TILE_BasicSky		std::make_shared<Tile>			(' ',	TCODColor::lightestCyan,	TCODColor::sky,				0,	false,	Tile::STATIC)
+	#define TILE_BasicSky					std::make_shared<Tile>			(' ',	TCODColor::lightestCyan,	TCODColor::sky,				0,	false,	Tile::Tag::STATIC)
 
 	//ERROR
-	#define TILE_error			std::make_shared<Tile>			('%',	TCODColor::black,			TCODColor::pink,			4,	true ,	Tile::STATIC)
+	#define TILE_error						std::make_shared<Tile>			('%',	TCODColor::black,			TCODColor::pink,			4,	true ,	Tile::Tag::STATIC)
 
 	//ITEM TILES
 		//edit tile set to custom sprites
 		//DEFAULT
-			#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true, Tile::STATIC)
-			#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, Tile::STATIC)
+			#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true, Tile::Tag::STATIC)
+			#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, Tile::Tag::STATIC)
 		//CUSTOM
-			#define TILE_M4A1 std::make_shared<Tile>(214, TCODColor::darkestGrey, TCODColor::darkGrey, 1, true, Tile::STATIC)
-			#define TILE_M1911 std::make_shared<Tile>(169, TCODColor::copper, TCODColor::darkerGrey, 1, true, Tile::STATIC)
-			#define TILE_SmallBackpack std::make_shared<Tile>(233, TCODColor::sepia, TCODColor::darkSepia, 1, true, Tile::STATIC)
-			#define TILE_9mmMagazine12 std::make_shared<Tile>('/', TCODColor::darkerGrey, TCODColor::darkGrey, 1, true, Tile::STATIC)
+			#define TILE_M4A1 std::make_shared<Tile>(214, TCODColor::darkestGrey, TCODColor::darkGrey, 1, true, Tile::Tag::STATIC)
+			#define TILE_M1911 std::make_shared<Tile>(169, TCODColor::copper, TCODColor::darkerGrey, 1, true, Tile::Tag::STATIC)
+			#define TILE_SmallBackpack std::make_shared<Tile>(233, TCODColor::sepia, TCODColor::darkSepia, 1, true, Tile::Tag::STATIC)
+			#define TILE_9mmMagazine12 std::make_shared<Tile>('/', TCODColor::darkerGrey, TCODColor::darkGrey, 1, true, Tile::Tag::STATIC)
 
 //----------------------------------------------------------------------------------------------------
 
@@ -90,11 +90,11 @@ constexpr auto PI = 3.14159265;
 	//WEAPONS
 		//DEFAULT
 			//Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed);
-			#define WEAPON_DefaultRifle std::make_shared<Weapon>("WEAPON_DefaultRifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f, Weapon::FULL)
-			#define WEAPON_DefaultSemiRifle std::make_shared<Weapon>("WEAPON_DefaultSemiRifle", TCODColor::white, 30, 10, .09f, 2.0f, Weapon::SEMI)
+			#define WEAPON_DefaultRifle std::make_shared<Weapon>("WEAPON_DefaultRifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f, Weapon::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::FULL)
+			#define WEAPON_DefaultSemiRifle std::make_shared<Weapon>("WEAPON_DefaultSemiRifle", TCODColor::white, 30, 10, .09f, 2.0f, Weapon::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::SEMI)
 		//CUSTOM
-			#define WEAPON_M4A1 std::make_shared<Weapon>("M4A1", TCODColor::darkestGrey, 30, 10, .09f, 2.0f, Weapon::FULL)
-			#define WEAPON_M1911 std::make_shared<Weapon>("M1911", TCODColor::grey, 7, 10, .15f, 1.0f, Weapon::SEMI)
+			#define WEAPON_M4A1 std::make_shared<Weapon>("M4A1", TCODColor::darkestGrey, 30, 10, .09f, 2.0f, Weapon::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::FULL)
+			#define WEAPON_M1911 std::make_shared<Weapon>("M1911", TCODColor::grey, 7, 10, .15f, 1.0f, Weapon::AmmoType::NINEMILLIMETER, Weapon::FireType::SEMI)
 
 
 //----------------------------------------------------------------------------------------------------
@@ -137,7 +137,7 @@ ITEM SIZES
 //MAGAZINES
 	//DEFAULT
 	//CUSTOM
-		#define MAGAZINE_9mm12Round(x, y, level) std::make_shared<MagazineItem>(ITEM_9mmMagazine12(x, y, level), std::make_shared<MagazineData>(MagazineData::NINEMILLIMETER, 12, 12))
+		#define MAGAZINE_9mm12Round(x, y, level) std::make_shared<MagazineItem>(ITEM_9mmMagazine12(x, y, level), std::make_shared<MagazineData>(Weapon::AmmoType::NINEMILLIMETER, 12, 12))
 
 //----------------------------------------------------------------------------------------------------
 

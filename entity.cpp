@@ -247,6 +247,20 @@ void Player::update()
 	angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
 
 	selectedItem->updateTool(renderPosition.x, renderPosition.y, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, mapPosition.level);
+
+	for (int i = 0; i <inventory.size(); i++)
+	{
+		for (int j = 0; j < inventory[i]->itemList.size(); j++)
+		{
+			if (inventory[i]->itemList[j]->getMagazineData()->isValid == true)
+			{
+				if (inventory[i]->itemList[j]->getMagazineData()->currentAmmo != 0)
+				{
+					currentMagazine = std::make_shared<MagazineItem>(Item(inventory[i]->itemList[j]->size, inventory[i]->itemList[j]->tile, inventory[i]->itemList[j]->tool, inventory[i]->itemList[j]->mapPosition), inventory[i]->itemList[j]->getMagazineData());
+				}
+			}
+		}
+	}
 	
 	if (engine->settings->input->space->isSwitched == true)
 	{

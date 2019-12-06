@@ -57,12 +57,16 @@ struct Bullet
 //change name
 struct Weapon : public Tool
 {
-	enum FireType {FULL, SEMI, SAFE} fireType;
+	enum class FireType {FULL, SEMI, SAFE} fireType;
+
+	enum class AmmoType { NONE, NINEMILLIMETER, FIVEPOINTFIVESIX } ammoType;
 
 	int numberMags;
 
 	int ammoCap;
 	int ammoAmount;
+
+	//std::shared_ptr<MagazineItem> currentMagazine;
 
 	float baseFireCap;
 	Clock fireClock;
@@ -72,7 +76,7 @@ struct Weapon : public Tool
 
 	std::vector<std::shared_ptr<Bullet>> bulletList;
 
-	Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed, FireType fireType);
+	Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed, AmmoType ammoType, FireType fireType);
 
 	void updateWeaponChar(double angle);
 

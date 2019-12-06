@@ -2,14 +2,15 @@
 
 struct MagazineData
 {
-	enum AmmoType { NONE, NINEMILLIMETER, FIVEPOINTFIVESIX } ammoType;
+	//enum AmmoType { NONE, NINEMILLIMETER, FIVEPOINTFIVESIX } ammoType;
+	Weapon::AmmoType ammoType;
 
 	int ammoCapacity;
 	int currentAmmo;
 
 	bool isValid;
 
-	MagazineData(AmmoType ammoType, int ammoCapacity, int currentAmmo, bool isValid = true);
+	MagazineData(Weapon::AmmoType ammoType, int ammoCapacity, int currentAmmo, bool isValid = true);
 };
 
 struct Item
