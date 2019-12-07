@@ -1,17 +1,17 @@
 #include "main.hpp"
 
-struct MagazineData
-{
-	//enum AmmoType { NONE, NINEMILLIMETER, FIVEPOINTFIVESIX } ammoType;
-	Weapon::AmmoType ammoType;
-
-	int ammoCapacity;
-	int currentAmmo;
-
-	bool isValid;
-
-	MagazineData(Weapon::AmmoType ammoType, int ammoCapacity, int currentAmmo, bool isValid = true);
-};
+//struct MagazineData
+//{
+//	//enum AmmoType { NONE, FOURTYFIVEACP, FIVEPOINTFIVESIX } ammoType;
+//	Weapon::AmmoType ammoType;
+//
+//	int ammoCapacity;
+//	int availableAmmo;
+//
+//	bool isValid;
+//
+//	MagazineData(Weapon::AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid = true);
+//};
 
 struct Item
 {
@@ -28,7 +28,7 @@ struct Item
 
 	virtual std::shared_ptr<MagazineData> getMagazineData();
 
-	void updateTool(int x, int y, int mx, int my, double angle, int level);
+	void updateTool(int x, int y, int mx, int my, double angle, int level, std::shared_ptr<MagazineData> magData);
 	void renderTool(const std::shared_ptr<Pane>& pane) const;
 
 	void updateTile();

@@ -171,3 +171,8 @@ void Clock::reset()
 {
 	step = capacity;
 }
+
+MagazineData::MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid)
+	:isValid(isValid), ammoType(ammoType), ammoCapacity(ammoCapacity), availableAmmo(availableAmmo)
+{
+}

@@ -1,9 +1,9 @@
 #include "main.hpp"
 
-MagazineData::MagazineData(Weapon::AmmoType ammoType, int ammoCapacity, int currentAmmo, bool isValid)
-	:isValid(isValid), ammoType(ammoType), ammoCapacity(ammoCapacity), currentAmmo(currentAmmo)
-{
-}
+//MagazineData::MagazineData(Weapon::AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid)
+//	:isValid(isValid), ammoType(ammoType), ammoCapacity(ammoCapacity), availableAmmo(availableAmmo)
+//{
+//}
 
 //ITEM STRUCT
 Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position)
@@ -13,12 +13,12 @@ Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Pos
 
 std::shared_ptr<MagazineData> Item::getMagazineData()
 {
-	return std::make_shared<MagazineData>(Weapon::AmmoType::NONE, 0, 0, false);
+	return std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 }
 
-void Item::updateTool(int x, int y, int mx, int my, double angle, int level)
+void Item::updateTool(int x, int y, int mx, int my, double angle, int level, std::shared_ptr<MagazineData> magData)
 {
-	tool->update(x, y, mx, my, angle);
+	tool->update(x, y, mx, my, angle, magData);
 
 	mapPosition = Position(tool->sourcex + WORLD->xOffset, tool->sourcey + WORLD->yOffset, level);
 

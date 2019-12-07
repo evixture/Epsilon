@@ -44,6 +44,7 @@ Player::Player(Position pos)
 	inventory.push_back(CONTAINER_SmallBackpack(0, 0, 0));
 	inventory[0]->addItem(ITEM_M4A1(0, 0, 0));
 	inventory[0]->addItem(MAGAZINE_9mm12Round(0, 0, 0));
+	inventory[0]->addItem(MAGAZINE_9mm12Round(0, 0, 0));
 	inventory.push_back(CONTAINER_SmallBackpack(0, 0, 0));
 
 	if (inventory.size() > 0)
@@ -57,6 +58,8 @@ Player::Player(Position pos)
 	{
 		selectedItem = nullptr;
 	}
+
+	currentMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -88,7 +91,7 @@ void Player::moveSelectorUp()
 
 void Player::moveSelectorDown()
 {
-	if (itemIndex < inventory[containerIndex]->itemList.size() - 1)
+	if (itemIndex + 1 < inventory[containerIndex]->itemList.size())
 	{
 		itemIndex++;
 	}
@@ -246,21 +249,36 @@ void Player::update()
 
 	angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
 
-	selectedItem->updateTool(renderPosition.x, renderPosition.y, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, mapPosition.level);
-
-	for (int i = 0; i <inventory.size(); i++)
+	if (INPUT->r->isSwitched)
 	{
-		for (int j = 0; j < inventory[i]->itemList.size(); j++)
+		for (int i = 0; i <inventory.size(); i++)
 		{
-			if (inventory[i]->itemList[j]->getMagazineData()->isValid == true)
+			for (int j = 0; j < inventory[i]->itemList.size(); j++)
 			{
-				if (inventory[i]->itemList[j]->getMagazineData()->currentAmmo != 0)
+				if (inventory[i]->itemList[j]->getMagazineData()->isValid == true)
 				{
-					currentMagazine = std::make_shared<MagazineItem>(Item(inventory[i]->itemList[j]->size, inventory[i]->itemList[j]->tile, inventory[i]->itemList[j]->tool, inventory[i]->itemList[j]->mapPosition), inventory[i]->itemList[j]->getMagazineData());
+					if (inventory[i]->itemList[j]->getMagazineData()->ammoType == selectedItem->tool->ammoType)
+					{
+						if (inventory[i]->itemList[j]->getMagazineData()->availableAmmo != 0)
+						{
+							if (inventory[i]->itemList[j]->getMagazineData()->availableAmmo >= currentMagazine->availableAmmo)
+							{
+								currentMagazine = inventory[i]->itemList[j]->getMagazineData();
+								selectedItem->tool->reload();
+							}
+							//think of other cases where you want to reload a mag with less ammo
+						}
+					}
+				}
+				else if (currentMagazine->isValid == false)
+				{
+					currentMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 				}
 			}
 		}
+
 	}
+	selectedItem->updateTool(renderPosition.x, renderPosition.y, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, mapPosition.level, currentMagazine);
 	
 	if (engine->settings->input->space->isSwitched == true)
 	{

@@ -2,8 +2,16 @@
 
 //Tool Struct
 Tool::Tool(const char* name, TCODColor color, int ch)
-	:color(color), toolx(0), tooly(0), ch(ch), dx(0), dy(0), name(name), sourcex(0), sourcey(0)
+	:color(color), toolx(0), tooly(0), ch(ch), dx(0), dy(0), name(name), sourcex(0), sourcey(0), ammoType(MagazineData::AmmoType::NONE)
 {}
+
+Tool::Tool(const char* name, TCODColor color, int ch, MagazineData::AmmoType ammoType)
+	: color(color), toolx(0), tooly(0), ch(ch), dx(0), dy(0), name(name), sourcex(0), sourcey(0), ammoType(ammoType)
+{}
+
+void Tool::reload()
+{
+}
 
 void Tool::updateToolPosition(double angle)
 {
@@ -81,7 +89,7 @@ void Tool::updateToolPosition(double angle)
 	}
 }
 
-void Tool::update(int x, int y, int mx, int my, double angle)
+void Tool::update(int x, int y, int mx, int my, double angle, std::shared_ptr<MagazineData> magData)
 {
 	dx = mx - x;
 	dy = my - y;
@@ -176,8 +184,8 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 //Weapon Struct
-Weapon::Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed, AmmoType ammoType, FireType fireType)
-	: Tool(name, color, NULL), baseFireCap(fireRate), fireClock(0), ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), reloadClock(0), baseReloadTimer(reloadSpeed), ammoType(ammoType), fireType(fireType)
+Weapon::Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireType)
+	: Tool(name, color, NULL, ammoType), baseFireCap(fireRate), fireClock(0), reloadClock(0), baseReloadTimer(reloadSpeed), fireType(fireType)//, ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), ammoType(ammoType),
 {}
 
 void Weapon::updateWeaponChar(double angle)
@@ -250,21 +258,23 @@ void Weapon::fireBullet()
 	{
 		fireClock.reset();
 		bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, toolx, tooly, dx, dy, WORLD->debugmap->mapWidth, WORLD->debugmap->mapHeight));
-		ammoAmount--;
+		currentMagazine->availableAmmo--;
 	}
 }
 
 void Weapon::reload()
 {
-	if (numberMags != 0 && ammoAmount != ammoCap)
-	{
-		ammoAmount = ammoCap;
-		numberMags--;
-		reloadClock.reset();
-	}
+	//if (numberMags != 0 && currentMagazine->availableAmmo != ammoCap)
+	//{
+	//	ammoAmount = ammoCap;
+	//	numberMags--;
+	//	reloadClock.reset();
+	//}
+
+	reloadClock.reset();
 }
 
-void Weapon::update(int x, int y, int mx, int my, double angle)
+void Weapon::update(int x, int y, int mx, int my, double angle, std::shared_ptr<MagazineData> magData)
 {
 	dx = mx - x;
 	dy = my - y;
@@ -275,6 +285,8 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	fireClock.capacity = (int)(baseFireCap * SETTINGS->fpsCount);
 	reloadClock.capacity = (int)(baseReloadTimer * SETTINGS->fpsCount);
 
+	currentMagazine = magData;
+
 	updateToolPosition(angle);
 	updateWeaponChar(angle);
 	
@@ -284,7 +296,7 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	//	{
 	//		if (WORLD->player->inventory[i]->itemList[j]->getMagazineData()->isValid == true)
 	//		{
-	//			if (WORLD->player->inventory[i]->itemList[j]->getMagazineData()->currentAmmo != 0)
+	//			if (WORLD->player->inventory[i]->itemList[j]->getMagazineData()->availableAmmo != 0)
 	//			{
 	//				currentMagazine = std::make_shared<MagazineItem>(WORLD->player->inventory[i]->itemList[j], WORLD->player->inventory[i]->itemList[j]->getMagazineData());
 	//			}
@@ -293,7 +305,7 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	//}
 
 	//Fire bullet
-	if (fireClock.step == 0 && ammoAmount != 0 && reloadClock.step == 0)
+	if (fireClock.step == 0 && currentMagazine->availableAmmo != 0 && reloadClock.step == 0)
 	{
 		if (fireType == FireType::FULL && INPUT->leftMouseButton->isDown)
 		{
@@ -311,18 +323,18 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	fireClock.tickDown();
 
 	//CLEAR BULLETS
-	if (bulletList.size() > ammoCap * 2)
+	if (bulletList.size() > currentMagazine->ammoCapacity * 2)
 	{
 		bulletList.pop_back();
 	}
 
-	if (reloadClock.step == 0)
-	{
-		if (engine->settings->input->r->isSwitched)
-		{
-			reload();
-		}
-	}
+	//if (reloadClock.step == 0)
+	//{
+	//	if (engine->settings->input->r->isSwitched)
+	//	{
+	//		reload();
+	//	}
+	//}
 	reloadClock.tickDown();
 
 	for (auto& bullet : bulletList)

@@ -159,6 +159,8 @@ World::World()
 	fovMap = std::make_shared<TCODMap>(debugmap->mapWidth, debugmap->mapHeight);
 
 	mapItemList.push_back(ITEM_M1911(4, 7, 0));
+
+	mapItemList.push_back(MAGAZINE_556Magazine30(5, 10, 0));
 }
 
 std::shared_ptr<Tile> World::getTile(int x, int y, int level) const

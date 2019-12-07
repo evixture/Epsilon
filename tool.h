@@ -4,6 +4,8 @@ struct Tool
 {
 	TCODColor color;
 	int ch;
+
+	MagazineData::AmmoType ammoType;
 	
 	int toolx;
 	int tooly;
@@ -17,9 +19,11 @@ struct Tool
 	const char* name;
 
 	Tool(const char* name, TCODColor color, int ch);
+	Tool(const char* name, TCODColor color, int ch, MagazineData::AmmoType ammoType);
 
+	virtual void reload();
 	virtual void updateToolPosition(double angle);
-	virtual void update(int x, int y, int mx, int my, double angle);
+	virtual void update(int x, int y, int mx, int my, double angle, std::shared_ptr<MagazineData> magData);
 
 	virtual void render(const std::shared_ptr<Pane>& pane) const;
 
@@ -59,14 +63,15 @@ struct Weapon : public Tool
 {
 	enum class FireType {FULL, SEMI, SAFE} fireType;
 
-	enum class AmmoType { NONE, NINEMILLIMETER, FIVEPOINTFIVESIX } ammoType;
+	/*enum class AmmoType { NONE, FOURTYFIVEACP, FIVEPOINTFIVESIX } ammoType;*/
+	//MagazineData::AmmoType ammoType;
 
-	int numberMags;
+	//int numberMags;
+	//
+	//int ammoCap;
+	//int ammoAmount;
 
-	int ammoCap;
-	int ammoAmount;
-
-	//std::shared_ptr<MagazineItem> currentMagazine;
+	std::shared_ptr<MagazineData> currentMagazine;
 
 	float baseFireCap;
 	Clock fireClock;
@@ -76,14 +81,14 @@ struct Weapon : public Tool
 
 	std::vector<std::shared_ptr<Bullet>> bulletList;
 
-	Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed, AmmoType ammoType, FireType fireType);
+	Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireType);
 
 	void updateWeaponChar(double angle);
 
 	//WEAPON BEHAVIOR
 	void fireBullet();
 	void reload();
-	void update(int x, int y, int mx, int my, double angle);
+	void update(int x, int y, int mx, int my, double angle, std::shared_ptr<MagazineData> magData);
 
 	void render(const std::shared_ptr<Pane>& pane) const;
 };
