@@ -21,9 +21,9 @@ struct Tool
 	Tool(const char* name, TCODColor color, int ch);
 	Tool(const char* name, TCODColor color, int ch, MagazineData::AmmoType ammoType);
 
-	virtual void reload();
+	virtual void reload(std::shared_ptr<MagazineData>& magazine);
 	virtual void updateToolPosition(double angle);
-	virtual void update(int x, int y, int mx, int my, double angle, std::shared_ptr<MagazineData> magData);
+	virtual void update(int x, int y, int mx, int my, double angle);
 
 	virtual void render(const std::shared_ptr<Pane>& pane) const;
 
@@ -71,7 +71,7 @@ struct Weapon : public Tool
 	//int ammoCap;
 	//int ammoAmount;
 
-	std::shared_ptr<MagazineData> currentMagazine;
+	std::shared_ptr<MagazineData> selectedMagazine;
 
 	float baseFireCap;
 	Clock fireClock;
@@ -87,8 +87,8 @@ struct Weapon : public Tool
 
 	//WEAPON BEHAVIOR
 	void fireBullet();
-	void reload();
-	void update(int x, int y, int mx, int my, double angle, std::shared_ptr<MagazineData> magData);
+	void reload(std::shared_ptr<MagazineData>& magazine);
+	void update(int x, int y, int mx, int my, double angle);
 
 	void render(const std::shared_ptr<Pane>& pane) const;
 };

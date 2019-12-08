@@ -16,9 +16,9 @@ std::shared_ptr<MagazineData> Item::getMagazineData()
 	return std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 }
 
-void Item::updateTool(int x, int y, int mx, int my, double angle, int level, std::shared_ptr<MagazineData> magData)
+void Item::updateTool(int x, int y, int mx, int my, double angle, int level)
 {
-	tool->update(x, y, mx, my, angle, magData);
+	tool->update(x, y, mx, my, angle);
 
 	mapPosition = Position(tool->sourcex + WORLD->xOffset, tool->sourcey + WORLD->yOffset, level);
 

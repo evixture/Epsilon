@@ -43,8 +43,8 @@ Player::Player(Position pos)
 {
 	inventory.push_back(CONTAINER_SmallBackpack(0, 0, 0));
 	inventory[0]->addItem(ITEM_M4A1(0, 0, 0));
-	inventory[0]->addItem(MAGAZINE_9mm12Round(0, 0, 0));
-	inventory[0]->addItem(MAGAZINE_9mm12Round(0, 0, 0));
+	inventory[0]->addItem(MAGAZINE_45ACPMagazine7(0, 0, 0));
+	inventory[0]->addItem(MAGAZINE_45ACPMagazine7(0, 0, 0));
 	inventory.push_back(CONTAINER_SmallBackpack(0, 0, 0));
 
 	if (inventory.size() > 0)
@@ -59,7 +59,7 @@ Player::Player(Position pos)
 		selectedItem = nullptr;
 	}
 
-	currentMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
+	selectedMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -91,17 +91,19 @@ void Player::moveSelectorUp()
 
 void Player::moveSelectorDown()
 {
+	//need to fix indexes
+
 	if (itemIndex + 1 < inventory[containerIndex]->itemList.size())
 	{
 		itemIndex++;
 	}
 
-	else if (itemIndex >= inventory[containerIndex]->itemList.size() - 1)
+	else if (itemIndex + 1 >= inventory[containerIndex]->itemList.size())
 	{
 		if (containerIndex < inventory.size() - 1)
 		{
 			containerIndex++;
-			itemIndex = 0;
+			itemIndex = -1;
 		}
 
 		else if (itemIndex == -1)
@@ -116,6 +118,8 @@ void Player::moveSelectorDown()
 
 void Player::pickUpItem()
 {
+	//will pick up multiple items on single press
+
 	for (int i = 0; i < WORLD->mapItemList.size(); i++)
 	{
 		if (WORLD->mapItemList[i] != nullptr && WORLD->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->mapItemList[i]->mapPosition.level == mapPosition.level)
@@ -125,6 +129,7 @@ void Player::pickUpItem()
 				if (inventory[containerIndex]->addItem(WORLD->mapItemList[i]))
 				{
 					WORLD->mapItemList.erase(WORLD->mapItemList.begin() + i);
+					return;
 				}
 			}
 		}
@@ -135,6 +140,7 @@ void Player::pickUpItem()
 		{
 			inventory.push_back(WORLD->mapContainerList[i]);
 			WORLD->mapContainerList.erase(WORLD->mapContainerList.begin() + i);
+			return;
 		}
 	}
 }
@@ -200,6 +206,41 @@ void Player::filterIndexes()
 	}
 }
 
+void Player::reload()
+{
+	for (int i = 0; i < inventory.size(); i++)
+	{
+		for (int j = 0; j < inventory[i]->itemList.size(); j++)
+		{
+			if (inventory[i]->itemList[j]->getMagazineData()->isValid == true) // if it is actually a magazine
+			{
+				if (inventory[i]->itemList[j]->getMagazineData()->ammoType == selectedItem->tool->ammoType) // if it has the same type of ammo as the current weapon
+				{
+					if (inventory[i]->itemList[j]->getMagazineData()->availableAmmo != 0) // if the magazine is not empty
+					{
+						
+						//change to check if position is the same between getdata and currentmag
+
+						//NEED TO CHECK IF MAGAZINE IS IN GUN WHEN FIRING
+
+						if (inventory[i]->itemList[j]->getMagazineData()->availableAmmo > selectedMagazine->availableAmmo)
+						{
+							selectedMagazine = inventory[i]->itemList[j]->getMagazineData();
+							selectedItem->tool->reload(selectedMagazine);
+							return;
+						}
+						//need to be able to reload mag with less ammo if mags with more ammo do not exist
+					}
+				}
+			}
+			else if (selectedMagazine->isValid == false)
+			{
+				selectedMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
+			}
+		}
+	}
+}
+
 void Player::update()
 {
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
@@ -251,34 +292,9 @@ void Player::update()
 
 	if (INPUT->r->isSwitched)
 	{
-		for (int i = 0; i <inventory.size(); i++)
-		{
-			for (int j = 0; j < inventory[i]->itemList.size(); j++)
-			{
-				if (inventory[i]->itemList[j]->getMagazineData()->isValid == true)
-				{
-					if (inventory[i]->itemList[j]->getMagazineData()->ammoType == selectedItem->tool->ammoType)
-					{
-						if (inventory[i]->itemList[j]->getMagazineData()->availableAmmo != 0)
-						{
-							if (inventory[i]->itemList[j]->getMagazineData()->availableAmmo >= currentMagazine->availableAmmo)
-							{
-								currentMagazine = inventory[i]->itemList[j]->getMagazineData();
-								selectedItem->tool->reload();
-							}
-							//think of other cases where you want to reload a mag with less ammo
-						}
-					}
-				}
-				else if (currentMagazine->isValid == false)
-				{
-					currentMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
-				}
-			}
-		}
-
+		reload();
 	}
-	selectedItem->updateTool(renderPosition.x, renderPosition.y, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, mapPosition.level, currentMagazine);
+	selectedItem->updateTool(renderPosition.x, renderPosition.y, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, mapPosition.level);
 	
 	if (engine->settings->input->space->isSwitched == true)
 	{

@@ -28,7 +28,7 @@ struct Item
 
 	virtual std::shared_ptr<MagazineData> getMagazineData();
 
-	void updateTool(int x, int y, int mx, int my, double angle, int level, std::shared_ptr<MagazineData> magData);
+	void updateTool(int x, int y, int mx, int my, double angle, int level);
 	void renderTool(const std::shared_ptr<Pane>& pane) const;
 
 	void updateTile();

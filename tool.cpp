@@ -9,7 +9,7 @@ Tool::Tool(const char* name, TCODColor color, int ch, MagazineData::AmmoType amm
 	: color(color), toolx(0), tooly(0), ch(ch), dx(0), dy(0), name(name), sourcex(0), sourcey(0), ammoType(ammoType)
 {}
 
-void Tool::reload()
+void Tool::reload(std::shared_ptr<MagazineData>& magazine)
 {
 }
 
@@ -89,7 +89,7 @@ void Tool::updateToolPosition(double angle)
 	}
 }
 
-void Tool::update(int x, int y, int mx, int my, double angle, std::shared_ptr<MagazineData> magData)
+void Tool::update(int x, int y, int mx, int my, double angle)
 {
 	dx = mx - x;
 	dy = my - y;
@@ -185,7 +185,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 
 //Weapon Struct
 Weapon::Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireType)
-	: Tool(name, color, NULL, ammoType), baseFireCap(fireRate), fireClock(0), reloadClock(0), baseReloadTimer(reloadSpeed), fireType(fireType)//, ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), ammoType(ammoType),
+	: Tool(name, color, NULL, ammoType), baseFireCap(fireRate), fireClock(0), reloadClock(0), baseReloadTimer(reloadSpeed), fireType(fireType), selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))//, ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), ammoType(ammoType),
 {}
 
 void Weapon::updateWeaponChar(double angle)
@@ -258,23 +258,25 @@ void Weapon::fireBullet()
 	{
 		fireClock.reset();
 		bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, toolx, tooly, dx, dy, WORLD->debugmap->mapWidth, WORLD->debugmap->mapHeight));
-		currentMagazine->availableAmmo--;
+		selectedMagazine->availableAmmo--;
 	}
 }
 
-void Weapon::reload()
+void Weapon::reload(std::shared_ptr<MagazineData>& magazine)
 {
-	//if (numberMags != 0 && currentMagazine->availableAmmo != ammoCap)
+	//if (numberMags != 0 && selectedMagazine->availableAmmo != ammoCap)
 	//{
 	//	ammoAmount = ammoCap;
 	//	numberMags--;
 	//	reloadClock.reset();
 	//}
 
+	selectedMagazine = magazine;
+
 	reloadClock.reset();
 }
 
-void Weapon::update(int x, int y, int mx, int my, double angle, std::shared_ptr<MagazineData> magData)
+void Weapon::update(int x, int y, int mx, int my, double angle)
 {
 	dx = mx - x;
 	dy = my - y;
@@ -285,7 +287,7 @@ void Weapon::update(int x, int y, int mx, int my, double angle, std::shared_ptr<
 	fireClock.capacity = (int)(baseFireCap * SETTINGS->fpsCount);
 	reloadClock.capacity = (int)(baseReloadTimer * SETTINGS->fpsCount);
 
-	currentMagazine = magData;
+	//selectedMagazine = magData;
 
 	updateToolPosition(angle);
 	updateWeaponChar(angle);
@@ -298,14 +300,14 @@ void Weapon::update(int x, int y, int mx, int my, double angle, std::shared_ptr<
 	//		{
 	//			if (WORLD->player->inventory[i]->itemList[j]->getMagazineData()->availableAmmo != 0)
 	//			{
-	//				currentMagazine = std::make_shared<MagazineItem>(WORLD->player->inventory[i]->itemList[j], WORLD->player->inventory[i]->itemList[j]->getMagazineData());
+	//				selectedMagazine = std::make_shared<MagazineItem>(WORLD->player->inventory[i]->itemList[j], WORLD->player->inventory[i]->itemList[j]->getMagazineData());
 	//			}
 	//		}
 	//	}
 	//}
 
 	//Fire bullet
-	if (fireClock.step == 0 && currentMagazine->availableAmmo != 0 && reloadClock.step == 0)
+	if (fireClock.step == 0 && selectedMagazine->availableAmmo != 0 && reloadClock.step == 0)
 	{
 		if (fireType == FireType::FULL && INPUT->leftMouseButton->isDown)
 		{
@@ -323,7 +325,7 @@ void Weapon::update(int x, int y, int mx, int my, double angle, std::shared_ptr<
 	fireClock.tickDown();
 
 	//CLEAR BULLETS
-	if (bulletList.size() > currentMagazine->ammoCapacity * 2)
+	if (bulletList.size() > selectedMagazine->ammoCapacity * 2)
 	{
 		bulletList.pop_back();
 	}
