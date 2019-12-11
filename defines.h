@@ -43,8 +43,12 @@ constexpr auto PI = 3.14159265;
 	|240 | 241| 242| 243| 244| 245| 246| 247| 248| 249| 250| 251| 252| 253| 254| 255|
 */
 
+#define CHAR_UpStair 16
+#define CHAR_DownStair 17
+#define CHAR_Flower 19
+#define CHAR_Table 20
 
-
+#define CHAR_Pistol 128
 
 /*
 	FLOOR HEIGHTS
@@ -81,7 +85,7 @@ constexpr auto PI = 3.14159265;
 			#define TILE_BasicGrass2		std::make_shared<Tile>			('`',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::Tag::STATIC)
 			#define TILE_BasicGrass3		std::make_shared<Tile>			(',',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::Tag::STATIC)
 
-	#define TILE_BasicFlower				std::make_shared<Tile>			(19,	TCODColor::darkChartreuse,	TCODColor::darkestSepia,	2,	true,	Tile::Tag::STATIC)
+	#define TILE_BasicFlower				std::make_shared<Tile>			(CHAR_Flower,	TCODColor::darkChartreuse,	TCODColor::darkestSepia,	2,	true,	Tile::Tag::STATIC)
 	#define TILE_BasicFloor					std::make_shared<Tile>			(' ',	TCODColor::darkSepia,		TCODColor::darkerSepia,		0,	true,	Tile::Tag::STATIC)
 	#define TILE_BasicConcrete				std::make_shared<Tile>			('`',	TCODColor::darkGrey,		TCODColor::grey,			0,	true,	Tile::Tag::STATIC)
 	#define TILE_BasicShingle				std::make_shared<Tile>			(240,	TCODColor::grey,			TCODColor::darkGrey,		0,	true,	Tile::Tag::STATIC)
@@ -92,11 +96,11 @@ constexpr auto PI = 3.14159265;
 	#define DESTRUCTIBLE_BasicWindow		std::make_shared<Destructible>	('_',	TCODColor::lighterSepia,	TCODColor::darkerSky,		0,	false,	1)
 
 	//PART HEIGHT
-	#define TILE_BasicTable					std::make_shared<Destructible>	('n',	TCODColor::lighterSepia,	TCODColor::darkerSepia,		2,	false,	2)
+	#define TILE_BasicTable					std::make_shared<Destructible>	(CHAR_Table,	TCODColor::lighterSepia,	TCODColor::darkerSepia,		2,	false,	2)
 
 	//STAIR
-	#define STAIR_UpStair					std::make_shared<Stair>			(16,	TCODColor::lightSepia,		TCODColor::darkerSepia,		2,	true,	1)
-	#define STAIR_DownStair					std::make_shared<Stair>			(17,	TCODColor::lightSepia,		TCODColor::darkerSepia,		2,	true,	-1)
+	#define STAIR_UpStair					std::make_shared<Stair>			(CHAR_UpStair,	TCODColor::lightSepia,		TCODColor::darkerSepia,		2,	true,	1)
+	#define STAIR_DownStair					std::make_shared<Stair>			(CHAR_DownStair,	TCODColor::lightSepia,		TCODColor::darkerSepia,		2,	true,	-1)
 
 	//SKY
 	#define TILE_BasicSky					std::make_shared<Tile>			(' ',	TCODColor::lightestCyan,	TCODColor::sky,				0,	false,	Tile::Tag::STATIC)
@@ -179,7 +183,7 @@ ITEM SIZES
 //PISTOLS
 	//M1911
 		//WEAPON
-				#define TILE_M1911 std::make_shared<Tile>(169, TCODColor::copper, TCODColor::darkerGrey, 1, true, Tile::Tag::STATIC)
+				#define TILE_M1911 std::make_shared<Tile>(CHAR_Pistol, TCODColor::copper, TCODColor::darkerGrey, 1, true, Tile::Tag::STATIC)
 				#define WEAPON_M1911 std::make_shared<Weapon>("M1911", TCODColor::grey, 7, 10, .15f, 1.0f, MagazineData::AmmoType::FOURTYFIVEACP, Weapon::FireType::SEMI)
 			#define ITEM_M1911(x, y, level) std::make_shared<Item>(2, TILE_M1911 , WEAPON_M1911, Position(x, y, level))
 		//MAGAZINE
