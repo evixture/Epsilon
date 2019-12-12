@@ -91,6 +91,8 @@ Input::Input()
 	keyList.push_back(q = std::make_shared<Key>(sf::Keyboard::Q));
 	keyList.push_back(r = std::make_shared<Key>(sf::Keyboard::R));
 
+	keyList.push_back(i = std::make_shared<Key>(sf::Keyboard::I));
+
 	keyList.push_back(num0 = std::make_shared<Key>(sf::Keyboard::Num0));
 	keyList.push_back(num9 = std::make_shared<Key>(sf::Keyboard::Num9));
 

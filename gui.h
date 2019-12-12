@@ -4,7 +4,7 @@
 class Gui
 {
 public:
-	enum ActiveWindow { NONE, STARTUPSPLASH} activeWindow;
+	enum ActiveWindow { NONE, STARTUPSPLASH, INVENTORYFULL} activeWindow;
 
 	//Part-screen Windows
 	std::shared_ptr<PlayerPane> playerPane;
@@ -18,6 +18,8 @@ public:
 	//Full-screen Windows
 	std::shared_ptr<SplashPane> startupSplash;
 
+	//Half Screen Windows
+	std::shared_ptr<InventoryFullPane> inventoryFullPane;
 
 	Gui(int windowX, int windowY);
 

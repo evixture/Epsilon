@@ -54,6 +54,8 @@ struct Input
 	std::shared_ptr<Key> q;
 	std::shared_ptr<Key> r;
 
+	std::shared_ptr<Key> i;
+
 	std::shared_ptr<Key> num0;
 	std::shared_ptr<Key> num9;
 

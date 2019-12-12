@@ -256,3 +256,77 @@ void SplashPane::render() const
 	pushWindow();
 }
 
+InventoryFullPane::InventoryFullPane(int windowW, int windowH, int rx, int ry)
+	:Window(windowW, windowH, "Inventory", rx, ry)
+{
+}
+
+void InventoryFullPane::update()
+{
+	inventoryItemList = WORLD->player->inventory;
+}
+
+void InventoryFullPane::render() const
+{
+	clearWindow();
+
+	int drawLine = 0;
+	int drawLineStart = 0;
+
+	for (auto& container : inventoryItemList)
+	{
+		for (int i = 0; i <= container->itemCapacity; i++)
+		{
+			if (i == 0)
+			{
+				//error here
+				if (container == WORLD->player->inventory[WORLD->player->containerIndex] && WORLD->player->itemIndex == -1)
+				{
+					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name);
+					drawWindow->console->setCharForeground(1, drawLineStart, COLOR_Selector);
+				}
+				else
+				{
+					drawWindow->console->printf(0, drawLineStart, "| %s", container->containerItem->tool->name);
+
+				}
+				drawLine++;
+			}
+
+			else
+			{
+				drawWindow->console->printf(0, drawLine + i - 1, "|   .");
+			}
+		}
+
+		for (auto& item : container->itemList)
+		{
+			for (int j = 0; j < item->size; j++)
+			{
+				if (j == 0)
+				{
+					if (item == WORLD->player->selectedItem)
+					{
+						drawWindow->console->printf(0, drawLine, "|>  %s", item->tool->name);
+						drawWindow->console->setCharForeground(1, drawLine, COLOR_Selector);
+					}
+					else
+					{
+						drawWindow->console->printf(0, drawLine, "|   %s", item->tool->name);
+					}
+					drawLine++;
+				}
+				else
+				{
+					drawWindow->console->printf(0, drawLine, "|     |");
+					drawLine++;
+				}
+			}
+		}
+
+		drawLineStart += container->itemCapacity + 1;
+		drawLine = drawLineStart;
+	}
+
+	pushWindow();
+}

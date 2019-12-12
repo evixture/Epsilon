@@ -63,4 +63,12 @@ private:
 	void renderMenuOptions() const;
 };
 
-//struct InventoryPanel
+struct InventoryFullPane : public Window
+{
+	std::vector<std::shared_ptr<Container>> inventoryItemList;
+
+	InventoryFullPane(int windowW, int windowH, int rx, int ry);
+
+	void update();
+	void render() const;
+};

@@ -13,10 +13,24 @@ Gui::Gui(int windowX, int windowY)
 	windowList.push_back(eventLogPane = std::make_shared<Window>(55, 24, "Event Log", 64, 39));
 
 	startupSplash = std::make_shared<SplashPane>(118, 62, 1, 1);
+	inventoryFullPane = std::make_shared<InventoryFullPane>(55, 61, 64, 2);
 }
 
 void Gui::update()
 {
+	if (INPUT->i->isSwitched)
+	{
+		if (activeWindow == Gui::INVENTORYFULL)
+		{
+			activeWindow = Gui::NONE;
+		}
+		else if (activeWindow != Gui::INVENTORYFULL && activeWindow != Gui::STARTUPSPLASH)
+		{
+			activeWindow = Gui::INVENTORYFULL;
+		}
+	}
+
+
 	if (activeWindow == Gui::NONE)
 	{
 		for (auto& window : windowList)
@@ -27,6 +41,11 @@ void Gui::update()
 	else if (activeWindow == Gui::STARTUPSPLASH)
 	{
 		startupSplash->update();
+	}
+	else if (activeWindow == Gui::INVENTORYFULL)
+	{
+		mapPane->update();
+		inventoryFullPane->update();
 	}
 }
 
@@ -42,5 +61,10 @@ void Gui::render() const
 	else if (activeWindow == Gui::STARTUPSPLASH)
 	{
 		startupSplash->render();
+	}
+	else if (activeWindow == Gui::INVENTORYFULL)
+	{
+		mapPane->render();
+		inventoryFullPane->render();
 	}
 }
