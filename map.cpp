@@ -48,19 +48,19 @@ Map::Map(const char* filePath)
 
 						if (grassRand == 0)
 						{
-							levelList[currentFloor].push_back(TILE_BasicGrass0);
+							levelList[currentFloor].push_back(TILE_Grass0);
 						}
 						else if (grassRand == 1)
 						{
-							levelList[currentFloor].push_back(TILE_BasicGrass1);
+							levelList[currentFloor].push_back(TILE_Grass1);
 						}
 						else if (grassRand == 2)
 						{
-							levelList[currentFloor].push_back(TILE_BasicGrass2);
+							levelList[currentFloor].push_back(TILE_Grass2);
 						}
 						else if (grassRand == 3)
 						{
-							levelList[currentFloor].push_back(TILE_BasicGrass3);
+							levelList[currentFloor].push_back(TILE_Grass3);
 						}
 					}
 						break;

@@ -39,7 +39,7 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 
 //Player Class
 Player::Player(Position pos)
-	:Creature(Position(pos), '@', "player", COLOR_Player_Color, 100, 0)
+	:Creature(Position(pos), '@', "player", UICOLOR_Player_Color, 100, 0)
 {
 	inventory.push_back(CONTAINER_SmallBackpack(0, 0, 0));
 	inventory[0]->addItem(ITEM_M4A1(0, 0, 0));

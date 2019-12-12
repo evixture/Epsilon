@@ -45,14 +45,17 @@ constexpr auto PI = 3.14159265;
 
 #define CHAR_UpStair 16
 #define CHAR_DownStair 17
+#define CHAR_Door 18
 #define CHAR_Flower 19
 #define CHAR_Table 20
+#define CHAR_Window 21
 
 #define CHAR_Pistol 128
 #define CHAR_SMG 129
 #define CHAR_Rifle 130
 #define CHAR_DMR 131
 #define CHAR_Sniper 132
+#define CHAR_Backpack 133
 
 #define CHAR_PistolMagazine 144
 #define CHAR_SMGMagazine 145
@@ -75,46 +78,87 @@ constexpr auto PI = 3.14159265;
 */
 //NEED TO EVENTUALLY MOVE TO A CLASS
 //COLORS
-#define COLOR_Panel_Ribbon_BG TCODColor	(45, 45, 206)
-#define COLOR_Panel_Ribbon_FG TCODColor	(220, 220, 220)
-#define COLOR_Panel_Draw_BG TCODColor	(30, 30, 30)
-#define COLOR_Panel_Draw_FG TCODColor	(220, 220, 220)
-#define COLOR_Player_Color TCODColor	(0, 127, 255)
-#define COLOR_Root_BG TCODColor			(0, 0, 0)
-#define COLOR_Root_FG TCODColor			(220, 220, 220)
-#define COLOR_OutFOV_BG TCODColor		(0, 0, 0)
-#define COLOR_OutFOV_FG TCODColor		(30, 30, 30)
-#define COLOR_Selector TCODColor		(168, 13, 224)
+#define UICOLOR_Panel_Ribbon_BG TCODColor	(45, 45, 206)
+#define UICOLOR_Panel_Ribbon_FG TCODColor	(220, 220, 220)
+#define UICOLOR_Panel_Draw_BG TCODColor		(30, 30, 30)
+#define UICOLOR_Panel_Draw_FG TCODColor		(220, 220, 220)
+#define UICOLOR_Player_Color TCODColor		(0, 127, 255)
+#define UICOLOR_Root_BG TCODColor			(0, 0, 0)
+#define UICOLOR_Root_FG TCODColor			(220, 220, 220)
+#define UICOLOR_OutFOV_BG TCODColor			(0, 0, 0)
+#define UICOLOR_OutFOV_FG TCODColor			(30, 30, 30)
+#define UICOLOR_Selector TCODColor			(168, 13, 224)
 
-//============TILES===============================CH===FOREGROUND=COLOR==========BACKGROUND=COLOR==========H==WALK===DEST |
+//----------------------------------------------------------------------------------------------------
+
+#define WORLDCOLOR_GrassBG TCODColor(32, 70, 19)
+#define WORLDCOLOR_GrassFG TCODColor(119, 161, 63)
+
+#define WORLDCOLOR_FlowerBG TCODColor(45, 39, 39)
+#define WORLDCOLOR_FlowerFG TCODColor(254, 212, 16)
+
+#define WORLDCOLOR_FloorBG TCODColor(98, 72, 49)
+#define WORLDCOLOR_FloorFG TCODColor(98, 72, 49)
+
+#define WORLDCOLOR_ShingleBG TCODColor(33, 35, 32)
+#define WORLDCOLOR_ShingleFG TCODColor(105, 111, 109)
+
+#define WORLDCOLOR_ConcreteBG TCODColor(114, 115, 119)
+#define WORLDCOLOR_ConcreteFG TCODColor(150, 151, 153)
+
+//#define WORLDCOLOR_DoorBG TCODColor(145, 128, 118)
+#define WORLDCOLOR_DoorFG TCODColor(63, 50, 31)
+
+#define WORLDCOLOR_WallBG TCODColor(145, 128, 118)
+#define WORLDCOLOR_WallFG TCODColor(112, 96, 83)
+
+#define WORLDCOLOR_WindowBG TCODColor(68, 180, 246)
+#define WORLDCOLOR_WindowFG TCODColor(237, 237, 237)
+
+//#define WORLDCOLOR_TableBG TCODColor(68, 180, 246)
+#define WORLDCOLOR_TableFG TCODColor(150, 123, 104)
+
+//----------------------------------------------------------------------------------------------------
+
+#define ITEMCOLOR_ITEMBG TCODColor(254, 77, 0)
+
+#define ITEMCOLOR_HANDFG TCODColor(243, 198, 165)
+
+#define ITEMCOLOR_SMALLBACKPACKFG TCODColor(182, 34, 46)
+
+#define ITEMCOLOR_RIFLEFG TCODColor(79, 83, 84)
+
+#define ITEMCOLOR_PISTOLFG TCODColor(94, 93, 91)
+
+//============TILES==================================================CH===FOREGROUND=COLOR==========BACKGROUND=COLOR==========H==WALK===DEST |
 
 //TILES
 	//GROUND
 		//GRASS PATTERNS
-			#define TILE_BasicGrass0		std::make_shared<Tile>			('.',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::Tag::STATIC)
-			#define TILE_BasicGrass1		std::make_shared<Tile>			('"',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::Tag::STATIC)
-			#define TILE_BasicGrass2		std::make_shared<Tile>			('`',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::Tag::STATIC)
-			#define TILE_BasicGrass3		std::make_shared<Tile>			(',',	TCODColor(119, 161, 63),	TCODColor(32, 70, 19),		0,	true,	Tile::Tag::STATIC)
+			#define TILE_Grass0		std::make_shared<Tile>					('.',				WORLDCOLOR_GrassFG,		WORLDCOLOR_GrassBG,		0,	true,	Tile::Tag::STATIC)
+			#define TILE_Grass1		std::make_shared<Tile>					('"',				WORLDCOLOR_GrassFG,		WORLDCOLOR_GrassBG,		0,	true,	Tile::Tag::STATIC)
+			#define TILE_Grass2		std::make_shared<Tile>					('`',				WORLDCOLOR_GrassFG,		WORLDCOLOR_GrassBG,		0,	true,	Tile::Tag::STATIC)
+			#define TILE_Grass3		std::make_shared<Tile>					(',',				WORLDCOLOR_GrassFG,		WORLDCOLOR_GrassBG,		0,	true,	Tile::Tag::STATIC)
 
-	#define TILE_BasicFlower				std::make_shared<Tile>			(CHAR_Flower,	TCODColor::darkChartreuse,	TCODColor::darkestSepia,	2,	true,	Tile::Tag::STATIC)
-	#define TILE_BasicFloor					std::make_shared<Tile>			(' ',	TCODColor::darkSepia,		TCODColor::darkerSepia,		0,	true,	Tile::Tag::STATIC)
-	#define TILE_BasicConcrete				std::make_shared<Tile>			('`',	TCODColor::darkGrey,		TCODColor::grey,			0,	true,	Tile::Tag::STATIC)
-	#define TILE_BasicShingle				std::make_shared<Tile>			(240,	TCODColor::grey,			TCODColor::darkGrey,		0,	true,	Tile::Tag::STATIC)
+	#define TILE_BasicFlower				std::make_shared<Tile>			(CHAR_Flower,		WORLDCOLOR_FlowerFG,	WORLDCOLOR_FlowerBG,	2,	true,	Tile::Tag::STATIC)
+	#define TILE_BasicFloor					std::make_shared<Tile>			(' ',				WORLDCOLOR_FloorFG,		WORLDCOLOR_FloorBG,		0,	true,	Tile::Tag::STATIC)
+	#define TILE_BasicConcrete				std::make_shared<Tile>			('`',				WORLDCOLOR_ConcreteFG,	WORLDCOLOR_ConcreteBG,	0,	true,	Tile::Tag::STATIC)
+	#define TILE_BasicShingle				std::make_shared<Tile>			(240,				WORLDCOLOR_ShingleFG,	WORLDCOLOR_ShingleBG,	0,	true,	Tile::Tag::STATIC)
 
 	//WALL
-	#define TILE_BasicDoor					std::make_shared<Tile>			(18,	TCODColor::darkSepia,		TCODColor::darkestSepia,	4,	true,	Tile::Tag::STATIC)
-	#define DESTRUCTIBLE_BasicWall			std::make_shared<Destructible>	('=',	TCODColor::lightSepia,		TCODColor::lighterSepia,	4,	false,	4)
-	#define DESTRUCTIBLE_BasicWindow		std::make_shared<Destructible>	('_',	TCODColor::lighterSepia,	TCODColor::darkerSky,		0,	false,	1)
+	#define TILE_BasicDoor					std::make_shared<Tile>			(CHAR_Door,			WORLDCOLOR_DoorFG,		WORLDCOLOR_WallBG,		4,	true,	Tile::Tag::STATIC)
+	#define DESTRUCTIBLE_BasicWall			std::make_shared<Destructible>	('#',				WORLDCOLOR_WallFG,		WORLDCOLOR_WallBG,		4,	false,	4)
+	#define DESTRUCTIBLE_BasicWindow		std::make_shared<Destructible>	(CHAR_Window,		WORLDCOLOR_WindowFG,	WORLDCOLOR_WindowBG,	0,	false,	1)
 
 	//PART HEIGHT
-	#define TILE_BasicTable					std::make_shared<Destructible>	(CHAR_Table,	TCODColor::lighterSepia,	TCODColor::darkerSepia,		2,	false,	2)
+	#define TILE_BasicTable					std::make_shared<Destructible>	(CHAR_Table,		WORLDCOLOR_TableFG,		WORLDCOLOR_FloorBG,		2,	false,	2)
 
 	//STAIR
-	#define STAIR_UpStair					std::make_shared<Stair>			(CHAR_UpStair,	TCODColor::lightSepia,		TCODColor::darkerSepia,		2,	true,	1)
-	#define STAIR_DownStair					std::make_shared<Stair>			(CHAR_DownStair,	TCODColor::lightSepia,		TCODColor::darkerSepia,		2,	true,	-1)
+	#define STAIR_UpStair					std::make_shared<Stair>			(CHAR_UpStair,		WORLDCOLOR_DoorFG,		WORLDCOLOR_FloorBG,		2,	true,	1)
+	#define STAIR_DownStair					std::make_shared<Stair>			(CHAR_DownStair,	WORLDCOLOR_DoorFG,		WORLDCOLOR_FloorBG,		2,	true,	-1)
 
 	//SKY
-	#define TILE_BasicSky					std::make_shared<Tile>			(' ',	TCODColor::lightestCyan,	TCODColor::sky,				0,	false,	Tile::Tag::STATIC)
+	#define TILE_BasicSky					std::make_shared<Tile>			(' ',				WORLDCOLOR_WindowBG,	WORLDCOLOR_WindowBG,	0,	false,	Tile::Tag::STATIC)
 
 	//ERROR
 	#define TILE_error						std::make_shared<Tile>			('%',	TCODColor::black,			TCODColor::pink,			4,	true ,	Tile::Tag::STATIC)
@@ -125,7 +169,6 @@ constexpr auto PI = 3.14159265;
 			#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true, Tile::Tag::STATIC)
 			#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true, Tile::Tag::STATIC)
 		//CUSTOM
-			#define TILE_SmallBackpack std::make_shared<Tile>(233, TCODColor::sepia, TCODColor::darkSepia, 1, true, Tile::Tag::STATIC)
 
 //----------------------------------------------------------------------------------------------------
 
@@ -133,8 +176,6 @@ constexpr auto PI = 3.14159265;
 	//DEFAULT
 		#define TOOL_Default_Container std::make_shared<Tool>("Test Container", TCODColor::pink, TCOD_CHAR_RADIO_UNSET)
 	//CUSTOM
-		#define TOOL_Hands std::make_shared<Tool>("Hands", TCODColor::lightSepia, TCOD_CHAR_UMLAUT)
-		#define TOOL_SmallBackpack std::make_shared<Tool>("Small Backpack", TCODColor::sepia, 233)
 
 	//WEAPONS
 		//DEFAULT
@@ -143,6 +184,28 @@ constexpr auto PI = 3.14159265;
 			#define WEAPON_DefaultSemiRifle std::make_shared<Weapon>("WEAPON_DefaultSemiRifle", TCODColor::white, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::SEMI)
 		//CUSTOM
 
+
+//----------------------------------------------------------------------------------------------------
+
+
+//----------------------------------------------------------------------------------------------------
+
+//ITEMS
+	//DEFAULT
+		#define ITEM_Test_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultRifle, Position(x, y, level))
+		#define ITEM_Test2_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultSemiRifle, Position(x, y, level))
+		#define ITEM_Default_Container(x, y, level) std::make_shared<Item>(5, DEFAULT_ITEM_TILE2, TOOL_Default_Container, Position(x, y, level))
+	//CUSTOM
+
+
+			//cannot use shared ptr because of inheritance
+
+//CONTAINERS
+	//DEFAULT
+		#define CONTAINER_Default_Container(x, y, level, capacity) std::make_shared<Container>(capacity, ITEM_Default_Container(x, y, level))
+	//CUSTOM
+
+//----------------------------------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------------------------
 
@@ -163,54 +226,38 @@ ITEM SIZES
 		SNIPER RIFLES
 */
 
-//----------------------------------------------------------------------------------------------------
-
-//ITEMS
-	//DEFAULT
-		#define ITEM_Test_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultRifle, Position(x, y, level))
-		#define ITEM_Test2_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultSemiRifle, Position(x, y, level))
-		#define ITEM_Default_Container(x, y, level) std::make_shared<Item>(5, DEFAULT_ITEM_TILE2, TOOL_Default_Container, Position(x, y, level))
-	//CUSTOM
-		#define ITEM_Hands(x, y, level) std::make_shared<Item>(1, DEFAULT_ITEM_TILE, TOOL_Hands, Position(x, y, level))
-
-		#define ITEM_SmallBackpack(x, y, level) std::make_shared<Item>(2, TILE_SmallBackpack , TOOL_SmallBackpack, Position(x, y, level))
-
-			//cannot use shared ptr because of inheritance
-
-		
-//MAGAZINES
-	//DEFAULT
-	//CUSTOM
-
-//----------------------------------------------------------------------------------------------------
-
 //CONTAINERS
-	//DEFAULT
-		#define CONTAINER_Default_Container(x, y, level, capacity) std::make_shared<Container>(capacity, ITEM_Default_Container(x, y, level))
-	//CUSTOM
+	//SMALL BACKPACK
+				#define TILE_SmallBackpack std::make_shared<Tile>(CHAR_Backpack, ITEMCOLOR_SMALLBACKPACKFG, ITEMCOLOR_ITEMBG, 1, true, Tile::Tag::STATIC)
+				#define TOOL_SmallBackpack std::make_shared<Tool>("Small Backpack", ITEMCOLOR_SMALLBACKPACKFG, CHAR_Backpack)
+			#define ITEM_SmallBackpack(x, y, level) std::make_shared<Item>(2, TILE_SmallBackpack , TOOL_SmallBackpack, Position(x, y, level))
 		#define CONTAINER_SmallBackpack(x, y, level) std::make_shared<Container>(5, ITEM_SmallBackpack(x, y, level))
+
+//HANDS
+		#define TOOL_Hands std::make_shared<Tool>("Hands", ITEMCOLOR_HANDFG, TCOD_CHAR_UMLAUT)
+	#define ITEM_Hands(x, y, level) std::make_shared<Item>(1, DEFAULT_ITEM_TILE, TOOL_Hands, Position(x, y, level))
 
 
 //PISTOLS
 	//M1911
 		//WEAPON
-				#define TILE_M1911 std::make_shared<Tile>(CHAR_Pistol, TCODColor::darkerGrey, TCODColor::copper, 1, true, Tile::Tag::STATIC)
-				#define WEAPON_M1911 std::make_shared<Weapon>("M1911", TCODColor::black, 7, 10, .15f, 1.0f, MagazineData::AmmoType::FOURTYFIVEACP, Weapon::FireType::SEMI)
+				#define TILE_M1911 std::make_shared<Tile>(CHAR_Pistol, ITEMCOLOR_PISTOLFG, ITEMCOLOR_ITEMBG, 1, true, Tile::Tag::STATIC)
+				#define WEAPON_M1911 std::make_shared<Weapon>("M1911", ITEMCOLOR_PISTOLFG, 7, 10, .15f, 1.0f, MagazineData::AmmoType::FOURTYFIVEACP, Weapon::FireType::SEMI)
 			#define ITEM_M1911(x, y, level) std::make_shared<Item>(2, TILE_M1911 , WEAPON_M1911, Position(x, y, level))
 		//MAGAZINE
-					#define TILE_45ACPMagazine7 std::make_shared<Tile>(CHAR_PistolMagazine, TCODColor::darkerGrey, TCODColor::copper, 1, true, Tile::Tag::STATIC)
-					#define TOOL_45ACPMagazine7 std::make_shared<Tool>("45 ACP Magazine -7-", TCODColor::darkerGrey, CHAR_PistolMagazine)
+					#define TILE_45ACPMagazine7 std::make_shared<Tile>(CHAR_PistolMagazine, ITEMCOLOR_PISTOLFG, ITEMCOLOR_ITEMBG, 1, true, Tile::Tag::STATIC)
+					#define TOOL_45ACPMagazine7 std::make_shared<Tool>("45 ACP Magazine -7-", ITEMCOLOR_PISTOLFG, CHAR_PistolMagazine)
 				#define ITEM_45ACPMagazine7(x, y, level) Item(1, TILE_45ACPMagazine7 , TOOL_45ACPMagazine7, Position(x, y, level))
 			#define MAGAZINE_45ACPMagazine7(x, y, level) std::make_shared<MagazineItem>(ITEM_45ACPMagazine7(x, y, level), std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP, 7 , 7))
 
 //RIFLES
 	//M4A1
 		//WEAPON
-				#define TILE_M4A1 std::make_shared<Tile>(CHAR_Rifle, TCODColor::darkerGrey, TCODColor::copper, 1, true, Tile::Tag::STATIC)
-				#define WEAPON_M4A1 std::make_shared<Weapon>("M4A1", TCODColor::black, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::FULL)
+				#define TILE_M4A1 std::make_shared<Tile>(CHAR_Rifle, ITEMCOLOR_RIFLEFG, ITEMCOLOR_ITEMBG, 1, true, Tile::Tag::STATIC)
+				#define WEAPON_M4A1 std::make_shared<Weapon>("M4A1", ITEMCOLOR_RIFLEFG, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::FULL)
 			#define ITEM_M4A1(x, y, level) std::make_shared<Item>(3, TILE_M4A1 , WEAPON_M4A1, Position(x, y, level))
 		//MAGAZINE
-					#define TILE_556Magazine30 std::make_shared<Tile>(CHAR_RifleMagazine, TCODColor::darkerGrey, TCODColor::copper, 1, true, Tile::Tag::STATIC)
-					#define TOOL_556Magazine30 std::make_shared<Tool>("5.56 Magazine -30-", TCODColor::darkerGrey, CHAR_RifleMagazine)
+					#define TILE_556Magazine30 std::make_shared<Tile>(CHAR_RifleMagazine, ITEMCOLOR_RIFLEFG, ITEMCOLOR_ITEMBG, 1, true, Tile::Tag::STATIC)
+					#define TOOL_556Magazine30 std::make_shared<Tool>("5.56 Magazine -30-", ITEMCOLOR_RIFLEFG, CHAR_RifleMagazine)
 				#define ITEM_556Magazine30(x, y, level) Item(1, TILE_556Magazine30 , TOOL_556Magazine30, Position(x, y, level))
 			#define MAGAZINE_556Magazine30(x, y, level) std::make_shared<MagazineItem>(ITEM_556Magazine30(x, y, level), std::make_shared<MagazineData>(MagazineData::AmmoType::FIVEPOINTFIVESIX, 30 , 30))

@@ -4,7 +4,7 @@
 MapPane::MapPane(int windowW, int windowH, int rx, int ry)
 	:Window(windowW, windowH, "World", rx, ry)
 {
-	mapSidePanel = std::make_shared<Pane>(1, 61, COLOR_Panel_Ribbon_BG, COLOR_Panel_Ribbon_FG);
+	mapSidePanel = std::make_shared<Pane>(1, 61, UICOLOR_Panel_Ribbon_BG, UICOLOR_Panel_Ribbon_FG);
 
 	world = std::make_shared<World>();
 }
@@ -124,7 +124,7 @@ void InventoryPane::render() const
 				if (container == WORLD->player->inventory[WORLD->player->containerIndex] && WORLD->player->itemIndex == -1)
 				{
 					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name);
-					drawWindow->console->setCharForeground(1, drawLineStart, COLOR_Selector);
+					drawWindow->console->setCharForeground(1, drawLineStart, UICOLOR_Selector);
 				}
 				else
 				{
@@ -149,7 +149,7 @@ void InventoryPane::render() const
 					if (item == WORLD->player->selectedItem)
 					{
 						drawWindow->console->printf(0, drawLine, "|>  %s", item->tool->name);
-						drawWindow->console->setCharForeground(1, drawLine, COLOR_Selector);
+						drawWindow->console->setCharForeground(1, drawLine, UICOLOR_Selector);
 					}
 					else
 					{
@@ -237,7 +237,7 @@ void SplashPane::renderMenuOptions() const
 		if (i == menuIndex)
 		{
 			drawWindow->console->printf(50, 50 + i, "|> %s", menuItemList[i]);
-			drawWindow->console->setCharForeground(51, 50 + i, COLOR_Selector);
+			drawWindow->console->setCharForeground(51, 50 + i, UICOLOR_Selector);
 		}
 		else
 		{
@@ -283,7 +283,7 @@ void InventoryFullPane::render() const
 				if (container == WORLD->player->inventory[WORLD->player->containerIndex] && WORLD->player->itemIndex == -1)
 				{
 					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name);
-					drawWindow->console->setCharForeground(1, drawLineStart, COLOR_Selector);
+					drawWindow->console->setCharForeground(1, drawLineStart, UICOLOR_Selector);
 				}
 				else
 				{
@@ -308,7 +308,7 @@ void InventoryFullPane::render() const
 					if (item == WORLD->player->selectedItem)
 					{
 						drawWindow->console->printf(0, drawLine, "|>  %s", item->tool->name);
-						drawWindow->console->setCharForeground(1, drawLine, COLOR_Selector);
+						drawWindow->console->setCharForeground(1, drawLine, UICOLOR_Selector);
 					}
 					else
 					{
