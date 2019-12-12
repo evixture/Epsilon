@@ -17,6 +17,8 @@ Settings::Settings(int screenCharWidth, int screenCharHeight)
 	TCODSystem::setFps(0);
 
 	TCODConsole::setCustomFont("data/fonts/Epsilon16x16.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16);
+	//TCODConsole::setCustomFont("data/fonts/terminal18x8_aa_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 8, 8);
+	//TCODConsole::setCustomFont("data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16);
 
 	input = std::make_shared<Input>();
 	

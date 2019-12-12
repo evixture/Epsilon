@@ -195,7 +195,7 @@ ITEM SIZES
 	//M1911
 		//WEAPON
 				#define TILE_M1911 std::make_shared<Tile>(CHAR_Pistol, TCODColor::darkerGrey, TCODColor::copper, 1, true, Tile::Tag::STATIC)
-				#define WEAPON_M1911 std::make_shared<Weapon>("M1911", TCODColor::darkerGrey, 7, 10, .15f, 1.0f, MagazineData::AmmoType::FOURTYFIVEACP, Weapon::FireType::SEMI)
+				#define WEAPON_M1911 std::make_shared<Weapon>("M1911", TCODColor::black, 7, 10, .15f, 1.0f, MagazineData::AmmoType::FOURTYFIVEACP, Weapon::FireType::SEMI)
 			#define ITEM_M1911(x, y, level) std::make_shared<Item>(2, TILE_M1911 , WEAPON_M1911, Position(x, y, level))
 		//MAGAZINE
 					#define TILE_45ACPMagazine7 std::make_shared<Tile>(CHAR_PistolMagazine, TCODColor::darkerGrey, TCODColor::copper, 1, true, Tile::Tag::STATIC)
@@ -207,7 +207,7 @@ ITEM SIZES
 	//M4A1
 		//WEAPON
 				#define TILE_M4A1 std::make_shared<Tile>(CHAR_Rifle, TCODColor::darkerGrey, TCODColor::copper, 1, true, Tile::Tag::STATIC)
-				#define WEAPON_M4A1 std::make_shared<Weapon>("M4A1", TCODColor::darkerGrey, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::FULL)
+				#define WEAPON_M4A1 std::make_shared<Weapon>("M4A1", TCODColor::black, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::FULL)
 			#define ITEM_M4A1(x, y, level) std::make_shared<Item>(3, TILE_M4A1 , WEAPON_M4A1, Position(x, y, level))
 		//MAGAZINE
 					#define TILE_556Magazine30 std::make_shared<Tile>(CHAR_RifleMagazine, TCODColor::darkerGrey, TCODColor::copper, 1, true, Tile::Tag::STATIC)
