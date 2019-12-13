@@ -147,24 +147,6 @@ void Player::pickUpItem()
 
 void Player::dropItem()
 {
-	//for (auto& container : inventory)
-	//{
-	//	for (auto& item : container->itemList)
-	//	{
-	//		for (auto& container2 : inventory)
-	//		{
-	//			for (auto& item2 : container2->itemList)
-	//			{
-	//				//if a weapon's mag is the same as the item being dropped, replace with invalid mag
-	//
-	//				if (item->tool->)
-	//			}
-	//		}
-	//	}
-	//}
-
-
-
 	if (containerIndex != -1)
 	{
 		if (itemIndex >= 0)
@@ -199,6 +181,13 @@ void Player::dropItem()
 
 void Player::filterIndexes()
 {
+	//INDEX FILTERING
+	//
+	//ITEM INDEXES
+	//	-2 : no item selected
+	//	-1 : container selected
+	//	0+ : item in vector
+
 	if (containerIndex + 1 > (inventory.size()))
 	{
 		containerIndex = (int)(inventory.size() - 1);
@@ -250,11 +239,6 @@ void Player::reload()
 				{
 					if (inventory[i]->itemList[j]->getMagazineData()->availableAmmo != 0) // if the magazine is not empty
 					{
-						
-						//change to check if position is the same between getdata and currentmag
-
-						//NEED TO CHECK IF MAGAZINE IS IN GUN WHEN FIRING
-
 						if (inventory[i]->itemList[j]->getMagazineData()->availableAmmo > selectedMagazine->availableAmmo)
 						{
 							selectedMagazine = inventory[i]->itemList[j]->getMagazineData();
@@ -311,13 +295,6 @@ void Player::update()
 		dropItem();
 	}
 
-	//INDEX FILTERING
-	//
-	//ITEM INDEXES
-	//	-2 : no item selected
-	//	-1 : container selected
-	//	0+ : item in vector
-	
 	filterIndexes();
 
 	angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
