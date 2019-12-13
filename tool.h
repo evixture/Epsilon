@@ -21,6 +21,8 @@ struct Tool
 	Tool(const char* name, TCODColor color, int ch);
 	Tool(const char* name, TCODColor color, int ch, MagazineData::AmmoType ammoType);
 
+	virtual std::shared_ptr<MagazineData> getMagData();
+
 	virtual void reload(std::shared_ptr<MagazineData>& magazine);
 	virtual void updateToolPosition(double angle);
 	virtual void update(int x, int y, int mx, int my, double angle);
@@ -86,6 +88,8 @@ struct Weapon : public Tool
 	void updateWeaponChar(double angle);
 
 	//WEAPON BEHAVIOR
+	std::shared_ptr<MagazineData> getMagData();
+
 	void fireBullet();
 	void reload(std::shared_ptr<MagazineData>& magazine);
 	void update(int x, int y, int mx, int my, double angle);

@@ -9,6 +9,11 @@ Tool::Tool(const char* name, TCODColor color, int ch, MagazineData::AmmoType amm
 	: color(color), toolx(0), tooly(0), ch(ch), dx(0), dy(0), name(name), sourcex(0), sourcey(0), ammoType(ammoType)
 {}
 
+std::shared_ptr<MagazineData> Tool::getMagData()
+{
+	return std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
+}
+
 void Tool::reload(std::shared_ptr<MagazineData>& magazine)
 {
 }
@@ -252,6 +257,11 @@ void Weapon::updateWeaponChar(double angle)
 	}
 }
 
+std::shared_ptr<MagazineData> Weapon::getMagData()
+{
+	return selectedMagazine;
+}
+
 void Weapon::fireBullet()
 {
 	if (!(toolx == dx + toolx && tooly == dy + tooly))
@@ -270,10 +280,13 @@ void Weapon::reload(std::shared_ptr<MagazineData>& magazine)
 	//	numberMags--;
 	//	reloadClock.reset();
 	//}
+	if (magazine->isValid != false)
+	{
+		selectedMagazine = magazine;
 
-	selectedMagazine = magazine;
-
-	reloadClock.reset();
+		reloadClock.reset();
+	}
+	else selectedMagazine = magazine;
 }
 
 void Weapon::update(int x, int y, int mx, int my, double angle)

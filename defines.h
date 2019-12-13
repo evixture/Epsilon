@@ -106,7 +106,6 @@ constexpr auto PI = 3.14159265;
 #define WORLDCOLOR_ConcreteBG TCODColor(114, 115, 119)
 #define WORLDCOLOR_ConcreteFG TCODColor(150, 151, 153)
 
-//#define WORLDCOLOR_DoorBG TCODColor(145, 128, 118)
 #define WORLDCOLOR_DoorFG TCODColor(63, 50, 31)
 
 #define WORLDCOLOR_WallBG TCODColor(145, 128, 118)
@@ -115,7 +114,6 @@ constexpr auto PI = 3.14159265;
 #define WORLDCOLOR_WindowBG TCODColor(68, 180, 246)
 #define WORLDCOLOR_WindowFG TCODColor(237, 237, 237)
 
-//#define WORLDCOLOR_TableBG TCODColor(68, 180, 246)
 #define WORLDCOLOR_TableFG TCODColor(150, 123, 104)
 
 //----------------------------------------------------------------------------------------------------
@@ -184,10 +182,6 @@ constexpr auto PI = 3.14159265;
 			#define WEAPON_DefaultSemiRifle std::make_shared<Weapon>("WEAPON_DefaultSemiRifle", TCODColor::white, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::SEMI)
 		//CUSTOM
 
-
-//----------------------------------------------------------------------------------------------------
-
-
 //----------------------------------------------------------------------------------------------------
 
 //ITEMS
@@ -196,8 +190,6 @@ constexpr auto PI = 3.14159265;
 		#define ITEM_Test2_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultSemiRifle, Position(x, y, level))
 		#define ITEM_Default_Container(x, y, level) std::make_shared<Item>(5, DEFAULT_ITEM_TILE2, TOOL_Default_Container, Position(x, y, level))
 	//CUSTOM
-
-
 			//cannot use shared ptr because of inheritance
 
 //CONTAINERS

@@ -36,6 +36,7 @@ public:
 	std::vector<std::shared_ptr<Container>> inventory;
 	//if not working, chnage back to magazine item
 	std::shared_ptr<MagazineData> selectedMagazine;
+	std::shared_ptr<MagazineData> nullMagazine;
 
 	Creature(Position pos, int symbol, const char* name, TCODColor color, int health, int armor);
 

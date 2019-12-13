@@ -20,7 +20,7 @@ void Entity::render(const std::shared_ptr<Pane>& pane) const
 
 //Creature Class
 Creature::Creature(Position pos, int symbol, const char* name, TCODColor color, int health, int armor)
-	:Entity(Position(pos), symbol, name, color), angle(0), health(health), armor(armor), containerIndex(0), itemIndex(0)
+	:Entity(Position(pos), symbol, name, color), angle(0), health(health), armor(armor), containerIndex(0), itemIndex(0), nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
 {
 }
 
@@ -147,10 +147,42 @@ void Player::pickUpItem()
 
 void Player::dropItem()
 {
+	//for (auto& container : inventory)
+	//{
+	//	for (auto& item : container->itemList)
+	//	{
+	//		for (auto& container2 : inventory)
+	//		{
+	//			for (auto& item2 : container2->itemList)
+	//			{
+	//				//if a weapon's mag is the same as the item being dropped, replace with invalid mag
+	//
+	//				if (item->tool->)
+	//			}
+	//		}
+	//	}
+	//}
+
+
+
 	if (containerIndex != -1)
 	{
 		if (itemIndex >= 0)
 		{
+			if (inventory[containerIndex]->itemList[itemIndex]->getMagazineData()->isValid)
+			{
+				for (auto& container : inventory)
+				{
+					for (auto& item : container->itemList)
+					{
+						if (item->tool->getMagData() == inventory[containerIndex]->itemList[itemIndex]->getMagazineData())
+						{
+							item->tool->reload(nullMagazine);
+						}
+					}
+				}
+			}
+
 			WORLD->mapItemList.push_back(selectedItem);
 
 			inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
@@ -296,7 +328,7 @@ void Player::update()
 	}
 	selectedItem->updateTool(renderPosition.x, renderPosition.y, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, mapPosition.level);
 	
-	if (engine->settings->input->space->isSwitched == true)
+	if (INPUT->space->isSwitched)
 	{
 		if (WORLD->getTile(mapPosition.x, mapPosition.y, mapPosition.level)->tag == Tile::Tag::STAIR)
 		{
