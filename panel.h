@@ -72,3 +72,15 @@ struct InventoryFullPane : public Window
 	void update();
 	void render() const;
 };
+
+struct LogPane : public Window
+{
+	std::vector<const char*> messageList;
+
+	LogPane(int windowW, int windowH, int rx, int ry);
+
+	void pushMessage(const char* message);
+
+	void update();
+	void render() const;
+};

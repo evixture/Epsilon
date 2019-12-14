@@ -62,8 +62,6 @@ Player::Player(Position pos)
 	selectedMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 }
 
-//----------------------------------------------------------------------------------------------------
-
 void Player::moveSelectorUp()
 {
 	if (itemIndex > -1)
@@ -128,6 +126,8 @@ void Player::pickUpItem()
 			{
 				if (inventory[containerIndex]->addItem(WORLD->mapItemList[i]))
 				{
+					GUI->eventLogPane->pushMessage("picked up item");
+
 					WORLD->mapItemList.erase(WORLD->mapItemList.begin() + i);
 					return;
 				}
@@ -138,6 +138,8 @@ void Player::pickUpItem()
 	{
 		if (WORLD->mapContainerList[i] != nullptr && WORLD->mapContainerList[i]->containerItem->mapPosition.x == mapPosition.x && WORLD->mapContainerList[i]->containerItem->mapPosition.y == mapPosition.y && WORLD->mapContainerList[i]->containerItem->mapPosition.level == mapPosition.level)
 		{
+			GUI->eventLogPane->pushMessage("picked up container");
+
 			inventory.push_back(WORLD->mapContainerList[i]);
 			WORLD->mapContainerList.erase(WORLD->mapContainerList.begin() + i);
 			return;

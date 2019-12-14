@@ -330,3 +330,31 @@ void InventoryFullPane::render() const
 
 	pushWindow();
 }
+
+//----------------------------------------------------------------------------------------------------
+
+LogPane::LogPane(int windowW, int windowH, int rx, int ry)
+	: Window(windowW, windowH, "Log", rx, ry)
+{
+}
+
+void LogPane::pushMessage(const char* message)
+{
+	messageList.push_back(message);
+}
+
+void LogPane::update()
+{
+}
+
+void LogPane::render() const
+{
+	clearWindow();
+
+	for (int i = 0; i < messageList.size(); i++)
+	{
+		drawWindow->console->printf(0, i, messageList[i]);
+	}
+
+	pushWindow();
+}
