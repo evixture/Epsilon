@@ -43,8 +43,33 @@ void StatusPane::render() const
 {
 	clearWindow();
 
-	drawWindow->console->printf(0, 0, "Health : [%i/100]", WORLD->player->health);
-	drawWindow->console->printf(0, 1, "Armor  : [%i/100]", WORLD->player->armor);
+	//render health bar
+	drawWindow->console->printf(0, 0, "Health : [");
+	for (int i = 0; i < 20; i++)
+	{
+		if (i * 5 < WORLD->player->health)
+		{
+			drawWindow->console->printf(i + 10, 0, "=");
+			drawWindow->console->setCharForeground(i + 10, 0, TCODColor::red);
+		}
+	}
+	drawWindow->console->printf(30, 0, "]");
+
+	//render armor bar
+	drawWindow->console->printf(0, 1, "Armor  : [");
+	for (int i = 0; i < 20; i++)
+	{
+		if (i * 5 < WORLD->player->armor)
+		{
+			drawWindow->console->printf(i + 10, 1, "=");
+			drawWindow->console->setCharForeground(i + 10, 0, TCODColor::blue);
+		}
+	}
+	drawWindow->console->printf(30, 1, "]");
+
+
+	//drawWindow->console->printf(0, 0, "Health : [%i/100]", WORLD->player->health);
+	//drawWindow->console->printf(0, 1, "Armor  : [%i/100]", WORLD->player->armor);
 	pushWindow();
 }
 
@@ -52,7 +77,7 @@ void StatusPane::render() const
 
 //PlayerPane Struct
 PlayerPane::PlayerPane(int windowW, int windowH, int rx, int ry)
-	:Window(windowW, windowH, "Player", rx, ry), playerSpeed("still"), playerStance("Standing")
+	:Window(windowW, windowH, "Player", rx, ry), playerSpeed("Still"), playerStance("Standing")
 {
 }
 
