@@ -97,11 +97,11 @@ void PlayerPane::update()
 	{
 		playerSpeed = "Walking";
 	}
-	else if (INPUT->baseMoveWait == 1.0f)
+	else if (INPUT->baseMoveWait == .25f)
 	{
 		playerSpeed = "Running";
 	}
-	else if (INPUT->baseMoveWait == .25f)
+	else if (INPUT->baseMoveWait == 1.0f)
 	{
 		playerSpeed = "Creeping";
 	}
