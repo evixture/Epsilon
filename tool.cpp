@@ -195,64 +195,154 @@ Weapon::Weapon(std::string name, TCODColor color, int ammoCap, int numberMags, f
 
 void Weapon::updateWeaponChar(double angle)
 {
-	if (dx >= 0 && dy >= 0)
+	/*
+	02|01
+	--|--
+	03|04
+	*/
+	
+	if (dx >= 0 && dy >= 0) //04
 	{
 		if (angle <= 22.5)
 		{
-			ch = TCOD_CHAR_HLINE;
+			if (reloadClock.step != 0)
+			{
+				ch = '/';
+			}
+			else
+			{
+				ch = TCOD_CHAR_HLINE;
+			}
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
-			ch = '\\';
+			if (reloadClock.step != 0)
+			{
+				ch = TCOD_CHAR_HLINE;
+			}
+			else
+			{
+				ch = '\\';
+			}
 		}
 		else if (angle >= 67.5)
 		{
-			ch = TCOD_CHAR_VLINE;
+			if (reloadClock.step != 0)
+			{
+				ch = '\\';
+			}
+			else
+			{
+				ch = TCOD_CHAR_VLINE;
+			}
 		}
 	}
-	else if (dx >= 0 && dy <= 0)
+	else if (dx >= 0 && dy <= 0) //01
 	{
 		if (angle >= -22.5)
 		{
-			ch = TCOD_CHAR_HLINE;
+			if (reloadClock.step != 0)
+			{
+				ch = '/';
+			}
+			else
+			{
+				ch = TCOD_CHAR_HLINE;
+			}
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
-			ch = '/';
+			if (reloadClock.step != 0)
+			{
+				ch = TCOD_CHAR_VLINE;
+			}
+			else
+			{
+				ch = '/';
+			}
 		}
 		else if (angle <= -67.5)
 		{
-			ch = TCOD_CHAR_VLINE;
+			if (reloadClock.step != 0)
+			{
+				ch = '\\';
+			}
+			else
+			{
+				ch = TCOD_CHAR_VLINE;
+			}
 		}
 	}
-	else if (dx <= 0 && dy >= 0)
+	else if (dx <= 0 && dy >= 0) //02
 	{
 		if (angle >= -22.5)
 		{
-			ch = TCOD_CHAR_HLINE;
+			if (reloadClock.step != 0)
+			{
+				ch = '/';
+			}
+			else
+			{
+				ch = TCOD_CHAR_HLINE;
+			}
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
-			ch = '/';
+			if (reloadClock.step != 0)
+			{
+				ch = TCOD_CHAR_VLINE;
+			}
+			else
+			{
+				ch = '/';
+			}
 		}
 		else if (angle <= -67.5)
 		{
-			ch = TCOD_CHAR_VLINE;
+			if (reloadClock.step != 0)
+			{
+				ch = '\\';
+			}
+			else
+			{
+				ch = TCOD_CHAR_VLINE;
+			}
 		}
 	}
-	else if (dx <= 0 && dy <= 0)
+	else if (dx <= 0 && dy <= 0) //03
 	{
 		if (angle <= 22.5)
 		{
-			ch = TCOD_CHAR_HLINE;
+			if (reloadClock.step != 0)
+			{
+				ch = '/';
+			}
+			else
+			{
+				ch = TCOD_CHAR_HLINE;
+			}
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
-			ch = '\\';
+			if (reloadClock.step != 0)
+			{
+				ch = TCOD_CHAR_HLINE;
+			}
+			else
+			{
+				ch = '\\';
+			}
 		}
 		else if (angle >= 67.5)
 		{
-			ch = TCOD_CHAR_VLINE;
+			if (reloadClock.step != 0)
+			{
+				ch = '\\';
+			}
+			else
+			{
+				ch = TCOD_CHAR_VLINE;
+			}
 		}
 	}
 }
@@ -274,12 +364,6 @@ void Weapon::fireBullet()
 
 void Weapon::reload(std::shared_ptr<MagazineData>& magazine)
 {
-	//if (numberMags != 0 && selectedMagazine->availableAmmo != ammoCap)
-	//{
-	//	ammoAmount = ammoCap;
-	//	numberMags--;
-	//	reloadClock.reset();
-	//}
 	if (magazine->isValid != false)
 	{
 		selectedMagazine = magazine;
@@ -300,25 +384,9 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	fireClock.capacity = (int)(baseFireCap * SETTINGS->fpsCount);
 	reloadClock.capacity = (int)(baseReloadTimer * SETTINGS->fpsCount);
 
-	//selectedMagazine = magData;
-
 	updateToolPosition(angle);
 	updateWeaponChar(angle);
 	
-	//for (int i = 0; i < WORLD->player->inventory.size(); i++)
-	//{
-	//	for (int j = 0; j < WORLD->player->inventory[i]->itemList.size(); j++)
-	//	{
-	//		if (WORLD->player->inventory[i]->itemList[j]->getMagazineData()->isValid == true)
-	//		{
-	//			if (WORLD->player->inventory[i]->itemList[j]->getMagazineData()->availableAmmo != 0)
-	//			{
-	//				selectedMagazine = std::make_shared<MagazineItem>(WORLD->player->inventory[i]->itemList[j], WORLD->player->inventory[i]->itemList[j]->getMagazineData());
-	//			}
-	//		}
-	//	}
-	//}
-
 	//Fire bullet
 	if (fireClock.step == 0 && selectedMagazine->availableAmmo != 0 && reloadClock.step == 0)
 	{
@@ -343,13 +411,6 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 		bulletList.pop_back();
 	}
 
-	//if (reloadClock.step == 0)
-	//{
-	//	if (engine->settings->input->r->isSwitched)
-	//	{
-	//		reload();
-	//	}
-	//}
 	reloadClock.tickDown();
 
 	for (auto& bullet : bulletList)
@@ -360,11 +421,8 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 
 void Weapon::render(const std::shared_ptr<Pane>& pane) const
 {
-	if (reloadClock.step == 0)
-	{
-		pane->console->setChar(toolx, tooly, ch);
-		pane->console->setCharForeground(toolx, tooly, color);
-	}
+	pane->console->setChar(toolx, tooly, ch);
+	pane->console->setCharForeground(toolx, tooly, color);
 
 	for (auto& bullet : bulletList)
 	{

@@ -416,13 +416,13 @@ void ProximityPane::render() const
 	{
 		for (auto& container : proximityContainerList)
 		{
-			drawWindow->console->printf(0, line, container->containerItem->tool->name.c_str());
+			drawWindow->console->printf(0, line, "|%s", container->containerItem->tool->name.c_str());
 			line++;
 		}
 
 		for (auto& item : proximityItemList)
 		{
-			drawWindow->console->printf(0, line, item->tool->name.c_str());
+			drawWindow->console->printf(0, line, "|%s", item->tool->name.c_str());
 			line++;
 		}
 	}
