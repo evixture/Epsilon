@@ -2,16 +2,16 @@
 
 struct Map
 {
-	const char* filePath;
+	std::string filePath;
 
-	const char* mapName;
+	std::string mapName;
 	int totalFloors;
 	int mapWidth;
 	int mapHeight;
 
 	std::vector<std::vector< std::shared_ptr<Tile >>> levelList;
 
-	Map(const char* filePath);
+	Map(std::string filePath);
 };
 
 //World Class  LEVELS AND ENTS

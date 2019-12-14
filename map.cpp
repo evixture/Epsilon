@@ -1,6 +1,6 @@
 #include "main.hpp"
 
-Map::Map(const char* filePath)
+Map::Map(std::string filePath)
 	:filePath(filePath)
 {
 	TCODRandom* RNG = TCODRandom::getInstance();

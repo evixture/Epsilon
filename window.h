@@ -19,14 +19,14 @@ struct Pane
 //Ribon Struct
 struct Ribon
 {
-	const char* windowName;
+	std::string windowName;
 	int windowW;
 
 	std::shared_ptr<Pane> ribonWindow;
 
-	Ribon(const char* windowName, int windowW);
+	Ribon(std::string windowName, int windowW);
 
-	void updateRibonName(const char* ribonName);
+	void updateRibonName(std::string ribonName);
 
 	void render() const;
 };
@@ -38,17 +38,17 @@ public:
 
 	int windowW;
 	int windowH;
-	const char* panelName;
+	std::string panelName;
 	Position renderpos;
 
 	std::shared_ptr<Pane> drawWindow;
 
-	Window(int windowW, int windowH, const char* panelName, int rx, int ry);
+	Window(int windowW, int windowH, std::string panelName, int rx, int ry);
 
 	virtual void update();
 	virtual void render() const;
 
-	void setRibonName(const char* ribonName);
+	void setRibonName(std::string ribonName);
 	void clearWindow() const;
 	void pushWindow() const;
 

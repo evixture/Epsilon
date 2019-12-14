@@ -21,7 +21,7 @@ void Pane::render() const
 //----------------------------------------------------------------------------------------------------
 
 //Ribon Struct
-Ribon::Ribon(const char* windowName, int windowW)
+Ribon::Ribon(std::string windowName, int windowW)
 	: windowName(windowName), windowW(windowW)
 {
 	ribonWindow = std::make_shared<Pane>(windowW, 1, UICOLOR_Panel_Ribbon_BG, UICOLOR_Panel_Ribbon_FG);
@@ -30,13 +30,13 @@ Ribon::Ribon(const char* windowName, int windowW)
 void Ribon::render() const
 {
 	ribonWindow->render();
-	ribonWindow->console->printf(0, 0, "|%s|", windowName);
+	ribonWindow->console->printf(0, 0, "|%s|", windowName.c_str());
 }
 
 //----------------------------------------------------------------------------------------------------
 
 //Window Struct
-Window::Window(int windowW, int windowH, const char* panelName, int rx, int ry)
+Window::Window(int windowW, int windowH, std::string panelName, int rx, int ry)
 	: windowW(windowW), windowH(windowH), panelName(panelName), renderpos(Position(rx, ry, NULL))
 {
 	mainWindow = std::make_shared<Pane>(windowW, windowH, UICOLOR_Root_BG, UICOLOR_Root_FG);
@@ -49,7 +49,7 @@ void Window::update()
 	return;
 }
 
-void Window::setRibonName(const char* ribonName)
+void Window::setRibonName(std::string ribonName)
 {
 	ribon->windowName = ribonName;
 }

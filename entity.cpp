@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 //Entity Class
-Entity::Entity(Position pos, int symbol, const char* name, TCODColor color)
+Entity::Entity(Position pos, int symbol, std::string name, TCODColor color)
 	: mapPosition(pos), renderPosition(pos), symbol(symbol), color(color), name(name), height(3)
 {}
 
@@ -19,7 +19,7 @@ void Entity::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 //Creature Class
-Creature::Creature(Position pos, int symbol, const char* name, TCODColor color, int health, int armor)
+Creature::Creature(Position pos, int symbol, std::string name, TCODColor color, int health, int armor)
 	:Entity(Position(pos), symbol, name, color), angle(0), health(health), armor(armor), containerIndex(0), itemIndex(0), nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
 {
 }
@@ -126,7 +126,7 @@ void Player::pickUpItem()
 			{
 				if (inventory[containerIndex]->addItem(WORLD->mapItemList[i]))
 				{
-					GUI->eventLogPane->pushMessage("picked up item");
+					GUI->eventLogPane->pushMessage("Picked up " + WORLD->mapItemList[i]->tool->name);
 
 					WORLD->mapItemList.erase(WORLD->mapItemList.begin() + i);
 					return;
@@ -138,7 +138,7 @@ void Player::pickUpItem()
 	{
 		if (WORLD->mapContainerList[i] != nullptr && WORLD->mapContainerList[i]->containerItem->mapPosition.x == mapPosition.x && WORLD->mapContainerList[i]->containerItem->mapPosition.y == mapPosition.y && WORLD->mapContainerList[i]->containerItem->mapPosition.level == mapPosition.level)
 		{
-			GUI->eventLogPane->pushMessage("picked up container");
+			GUI->eventLogPane->pushMessage("Picked up " + WORLD->mapItemList[i]->tool->name);
 
 			inventory.push_back(WORLD->mapContainerList[i]);
 			WORLD->mapContainerList.erase(WORLD->mapContainerList.begin() + i);
@@ -166,6 +166,7 @@ void Player::dropItem()
 					}
 				}
 			}
+			GUI->eventLogPane->pushMessage("Dropped " + inventory[containerIndex]->itemList[itemIndex]->tool->name);
 
 			WORLD->mapItemList.push_back(selectedItem);
 
@@ -173,9 +174,10 @@ void Player::dropItem()
 		}
 		else if (itemIndex <= -1)
 		{
+			GUI->eventLogPane->pushMessage("Dropped " + inventory[containerIndex]->containerItem->tool->name);
+			
 			WORLD->mapContainerList.push_back(inventory[containerIndex]);
 
-			//inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
 			inventory.erase(inventory.begin() + containerIndex);
 		}
 	}

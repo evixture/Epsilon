@@ -89,8 +89,8 @@ void PlayerPane::render() const
 {
 	clearWindow();
 
-	drawWindow->console->printf(0, 0, playerStance);
-	drawWindow->console->printf(0, 1, playerSpeed);
+	drawWindow->console->printf(0, 0, playerStance.c_str());
+	drawWindow->console->printf(0, 1, playerSpeed.c_str());
 
 	pushWindow();
 }
@@ -123,12 +123,12 @@ void InventoryPane::render() const
 				//error here
 				if (container == WORLD->player->inventory[WORLD->player->containerIndex] && WORLD->player->itemIndex == -1)
 				{
-					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name);
+					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name.c_str());
 					drawWindow->console->setCharForeground(1, drawLineStart, UICOLOR_Selector);
 				}
 				else
 				{
-					drawWindow->console->printf(0, drawLineStart, "| %s", container->containerItem->tool->name);
+					drawWindow->console->printf(0, drawLineStart, "| %s", container->containerItem->tool->name.c_str());
 
 				}
 				drawLine++;
@@ -148,12 +148,12 @@ void InventoryPane::render() const
 				{
 					if (item == WORLD->player->selectedItem)
 					{
-						drawWindow->console->printf(0, drawLine, "|>  %s", item->tool->name);
+						drawWindow->console->printf(0, drawLine, "|>  %s", item->tool->name.c_str());
 						drawWindow->console->setCharForeground(1, drawLine, UICOLOR_Selector);
 					}
 					else
 					{
-						drawWindow->console->printf(0, drawLine, "|   %s", item->tool->name);
+						drawWindow->console->printf(0, drawLine, "|   %s", item->tool->name.c_str());
 					}
 					drawLine++;
 				}
@@ -236,12 +236,12 @@ void SplashPane::renderMenuOptions() const
 	{
 		if (i == menuIndex)
 		{
-			drawWindow->console->printf(50, 50 + i, "|> %s", menuItemList[i]);
+			drawWindow->console->printf(50, 50 + i, "|> %s", menuItemList[i].c_str());
 			drawWindow->console->setCharForeground(51, 50 + i, UICOLOR_Selector);
 		}
 		else
 		{
-			drawWindow->console->printf(50, 50 + i, "|  %s", menuItemList[i]);
+			drawWindow->console->printf(50, 50 + i, "|  %s", menuItemList[i].c_str());
 		}
 	}
 }
@@ -282,12 +282,12 @@ void InventoryFullPane::render() const
 				//error here
 				if (container == WORLD->player->inventory[WORLD->player->containerIndex] && WORLD->player->itemIndex == -1)
 				{
-					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name);
+					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name.c_str());
 					drawWindow->console->setCharForeground(1, drawLineStart, UICOLOR_Selector);
 				}
 				else
 				{
-					drawWindow->console->printf(0, drawLineStart, "| %s", container->containerItem->tool->name);
+					drawWindow->console->printf(0, drawLineStart, "| %s", container->containerItem->tool->name.c_str());
 
 				}
 				drawLine++;
@@ -307,12 +307,12 @@ void InventoryFullPane::render() const
 				{
 					if (item == WORLD->player->selectedItem)
 					{
-						drawWindow->console->printf(0, drawLine, "|>  %s", item->tool->name);
+						drawWindow->console->printf(0, drawLine, "|>  %s", item->tool->name.c_str());
 						drawWindow->console->setCharForeground(1, drawLine, UICOLOR_Selector);
 					}
 					else
 					{
-						drawWindow->console->printf(0, drawLine, "|   %s", item->tool->name);
+						drawWindow->console->printf(0, drawLine, "|   %s", item->tool->name.c_str());
 					}
 					drawLine++;
 				}
@@ -338,7 +338,7 @@ LogPane::LogPane(int windowW, int windowH, int rx, int ry)
 {
 }
 
-void LogPane::pushMessage(const char* message)
+void LogPane::pushMessage(std::string message)
 {
 	messageList.push_back(message);
 }
@@ -353,7 +353,7 @@ void LogPane::render() const
 
 	for (int i = 0; i < messageList.size(); i++)
 	{
-		drawWindow->console->printf(0, i, messageList[i]);
+		drawWindow->console->printf(0, i, messageList[i].c_str());
 	}
 
 	pushWindow();

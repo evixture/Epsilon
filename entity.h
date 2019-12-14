@@ -7,11 +7,11 @@ public:
 	Position mapPosition;
 	int symbol;
 	const TCODColor color;
-	const char* name;
+	std::string name;
 
 	int height;
 
-	Entity(Position pos, int symbol, const char* name, TCODColor color);
+	Entity(Position pos, int symbol, std::string name, TCODColor color);
 
 	virtual void update();
 	virtual void render(const std::shared_ptr<Pane> &pane) const;
@@ -38,7 +38,7 @@ public:
 	std::shared_ptr<MagazineData> selectedMagazine;
 	std::shared_ptr<MagazineData> nullMagazine;
 
-	Creature(Position pos, int symbol, const char* name, TCODColor color, int health, int armor);
+	Creature(Position pos, int symbol, std::string name, TCODColor color, int health, int armor);
 
 	virtual void update();
 	void virtual render(const std::shared_ptr<Pane>& pane) const;

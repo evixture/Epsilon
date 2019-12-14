@@ -3,16 +3,16 @@
 //Font Struct
 struct Font
 {
-	const char* filePath;
+	std::string filePath;
 	int format;
 	int charH;
 	int charW;
 
-	const char* fontName;
-	const char* xDim;
-	const char* yDim;
+	std::string fontName;
+	std::string xDim;
+	std::string yDim;
 
-	Font(const char* fontName, const char* xdim, const char* ydim, const char* filePath, int format, int charW, int charH);
+	Font(std::string fontName, std::string xdim, std::string ydim, std::string filePath, int format, int charW, int charH);
 };
 
 //Settings Class
@@ -48,7 +48,7 @@ private:
 
 	//TCOD PROPERTIES
 	TCOD_renderer_t renderer;
-	const char* windowTitle;
+	std::string windowTitle;
 	bool fullscreen;
 
 	void setfont(std::shared_ptr<Font> font);

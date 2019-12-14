@@ -27,8 +27,8 @@ struct MapPane : public Window
 
 struct PlayerPane : public Window
 {
-	const char* playerSpeed;
-	const char* playerStance;
+	std::string playerSpeed;
+	std::string playerStance;
 
 	PlayerPane(int windowW, int windowH, int rx, int ry);
 
@@ -50,8 +50,8 @@ struct InventoryPane : public Window
 struct SplashPane : public Window
 {
 	int menuIndex;
-	const char* menuSelection;
-	std::vector<const char*> menuItemList;
+	std::string menuSelection;
+	std::vector<std::string> menuItemList;
 
 	SplashPane(int windowW, int windowH, int rx, int ry);
 
@@ -75,11 +75,11 @@ struct InventoryFullPane : public Window
 
 struct LogPane : public Window
 {
-	std::vector<const char*> messageList;
+	std::vector<std::string> messageList;
 
 	LogPane(int windowW, int windowH, int rx, int ry);
 
-	void pushMessage(const char* message);
+	void pushMessage(std::string message);
 
 	void update();
 	void render() const;

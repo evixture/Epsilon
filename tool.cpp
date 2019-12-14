@@ -1,11 +1,11 @@
 #include "main.hpp"
 
 //Tool Struct
-Tool::Tool(const char* name, TCODColor color, int ch)
+Tool::Tool(std::string name, TCODColor color, int ch)
 	:color(color), toolx(0), tooly(0), ch(ch), dx(0), dy(0), name(name), sourcex(0), sourcey(0), ammoType(MagazineData::AmmoType::NONE)
 {}
 
-Tool::Tool(const char* name, TCODColor color, int ch, MagazineData::AmmoType ammoType)
+Tool::Tool(std::string name, TCODColor color, int ch, MagazineData::AmmoType ammoType)
 	: color(color), toolx(0), tooly(0), ch(ch), dx(0), dy(0), name(name), sourcex(0), sourcey(0), ammoType(ammoType)
 {}
 
@@ -189,7 +189,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 //Weapon Struct
-Weapon::Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireType)
+Weapon::Weapon(std::string name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireType)
 	: Tool(name, color, NULL, ammoType), baseFireCap(fireRate), fireClock(0), reloadClock(0), baseReloadTimer(reloadSpeed), fireType(fireType), selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))//, ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), ammoType(ammoType),
 {}
 

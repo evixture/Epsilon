@@ -177,7 +177,7 @@ constexpr auto PI = 3.14159265;
 
 	//WEAPONS
 		//DEFAULT
-			//Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed);
+			//Weapon(std::string name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed);
 			#define WEAPON_DefaultRifle std::make_shared<Weapon>("WEAPON_DefaultRifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::FULL)
 			#define WEAPON_DefaultSemiRifle std::make_shared<Weapon>("WEAPON_DefaultSemiRifle", TCODColor::white, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::SEMI)
 		//CUSTOM

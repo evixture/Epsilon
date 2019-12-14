@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 //Font Struct
-Font::Font(const char* fontName, const char* xdim, const char* ydim, const char* filePath, int format, int charW, int charH)
+Font::Font(std::string fontName, std::string xdim, std::string ydim, std::string filePath, int format, int charW, int charH)
 	: fontName(fontName), xDim(xdim), yDim(ydim), filePath(filePath), format(format), charW(charW), charH(charH)
 {}
 
@@ -22,7 +22,7 @@ Settings::Settings(int screenCharWidth, int screenCharHeight)
 
 	input = std::make_shared<Input>();
 	
-	TCODConsole::initRoot(screenCharWidth, screenCharHeight, windowTitle, fullscreen, renderer);
+	TCODConsole::initRoot(screenCharWidth, screenCharHeight, windowTitle.c_str(), fullscreen, renderer);
 	TCODConsole::root->setDefaultBackground(UICOLOR_Root_BG);
 }
 
@@ -42,7 +42,7 @@ void Settings::setFullscreen()
 
 void Settings::setfont(std::shared_ptr<Font> font)
 {
-	TCODConsole::setCustomFont(font->filePath, font->format, (font->charW) ? font->charW : NULL, (font->charH) ? font->charH : NULL);
+	TCODConsole::setCustomFont(font->filePath.c_str(), font->format, (font->charW) ? font->charW : NULL, (font->charH) ? font->charH : NULL);
 }
 
 void Settings::printLogo() const

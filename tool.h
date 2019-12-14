@@ -16,10 +16,10 @@ struct Tool
 	int dx;
 	int dy;
 
-	const char* name;
+	std::string name;
 
-	Tool(const char* name, TCODColor color, int ch);
-	Tool(const char* name, TCODColor color, int ch, MagazineData::AmmoType ammoType);
+	Tool(std::string name, TCODColor color, int ch);
+	Tool(std::string name, TCODColor color, int ch, MagazineData::AmmoType ammoType);
 
 	virtual std::shared_ptr<MagazineData> getMagData();
 
@@ -83,7 +83,7 @@ struct Weapon : public Tool
 
 	std::vector<std::shared_ptr<Bullet>> bulletList;
 
-	Weapon(const char* name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireType);
+	Weapon(std::string name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireType);
 
 	void updateWeaponChar(double angle);
 
