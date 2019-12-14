@@ -67,9 +67,6 @@ void StatusPane::render() const
 	}
 	drawWindow->console->printf(30, 1, "]");
 
-
-	//drawWindow->console->printf(0, 0, "Health : [%i/100]", WORLD->player->health);
-	//drawWindow->console->printf(0, 1, "Armor  : [%i/100]", WORLD->player->armor);
 	pushWindow();
 }
 
@@ -379,6 +376,55 @@ void LogPane::render() const
 	for (int i = 0; i < messageList.size(); i++)
 	{
 		drawWindow->console->printf(0, i, messageList[i].c_str());
+	}
+
+	pushWindow();
+}
+
+ProximityPane::ProximityPane(int windowW, int windowH, int rx, int ry)
+	:Window(windowW, windowH, "Proximity", rx, ry)
+{
+}
+
+void ProximityPane::update()
+{
+	proximityContainerList.clear();
+	proximityItemList.clear();
+
+	for (auto& container : WORLD->mapContainerList)
+	{
+		if (container->containerItem->distToEnt < 5)
+		{
+			proximityContainerList.push_back(container);
+		}
+	}
+
+	for (auto& item : WORLD->mapItemList)
+	{
+		if (item->distToEnt < 5)
+		{
+			proximityItemList.push_back(item);
+		}
+	}
+}
+
+void ProximityPane::render() const
+{
+	clearWindow();
+
+	for (int line = 0; line < proximityContainerList.size() + proximityItemList.size();)
+	{
+		for (auto& container : proximityContainerList)
+		{
+			drawWindow->console->printf(0, line, container->containerItem->tool->name.c_str());
+			line++;
+		}
+
+		for (auto& item : proximityItemList)
+		{
+			drawWindow->console->printf(0, line, item->tool->name.c_str());
+			line++;
+		}
 	}
 
 	pushWindow();

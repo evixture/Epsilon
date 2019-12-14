@@ -11,7 +11,7 @@ public:
 	std::shared_ptr<StatusPane> statusPane;
 	std::shared_ptr<InventoryPane> inventoryPane;
 	std::shared_ptr<LogPane> eventLogPane;
-	std::shared_ptr<Window> proximityPane;
+	std::shared_ptr<ProximityPane> proximityPane;
 	std::shared_ptr<Window> actionsPane;
 	std::shared_ptr<MapPane> mapPane;
 

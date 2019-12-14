@@ -84,3 +84,14 @@ struct LogPane : public Window
 	void update();
 	void render() const;
 };
+
+struct ProximityPane : public Window
+{
+	std::vector<std::shared_ptr<Container>> proximityContainerList;
+	std::vector<std::shared_ptr<Item>> proximityItemList;
+
+	ProximityPane(int windowW, int windowH, int rx, int ry);
+
+	void update();
+	void render() const;
+};
