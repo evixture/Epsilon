@@ -1,18 +1,5 @@
 #include "main.hpp"
 
-//struct MagazineData
-//{
-//	//enum AmmoType { NONE, FOURTYFIVEACP, FIVEPOINTFIVESIX } ammoType;
-//	Weapon::AmmoType ammoType;
-//
-//	int ammoCapacity;
-//	int availableAmmo;
-//
-//	bool isValid;
-//
-//	MagazineData(Weapon::AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid = true);
-//};
-
 struct Item
 {
 	int size;

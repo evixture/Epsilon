@@ -158,7 +158,7 @@ World::World()
 
 	fovMap = std::make_shared<TCODMap>(debugmap->mapWidth, debugmap->mapHeight);
 
-	mapItemList.push_back(ITEM_M1911(4, 7, 0));
+	mapItemList.push_back(ITEM_M4A1(4, 7, 0));
 
 	mapItemList.push_back(MAGAZINE_556Magazine30(5, 10, 0));
 
@@ -326,7 +326,7 @@ void World::renderTiles(const std::shared_ptr<Pane>& pane) const
 
 void World::renderMouse(const std::shared_ptr<Pane>& pane) const
 {
-	pane->console->setCharBackground(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, getTile(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, player->mapPosition.level)->backgroundColor - TCODColor::darkestGrey);
+	pane->console->setCharBackground(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, getTile(engine->settings->input->mouse.cx - 1 + xOffset, engine->settings->input->mouse.cy - 3 + yOffset, player->mapPosition.level)->backgroundColor - TCODColor::darkestGrey);
 	pane->console->setChar(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, '+');
 }
 

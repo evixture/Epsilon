@@ -38,6 +38,7 @@ public:
 	bool    getWalkability		(int x, int y, int level) const;
 	bool	inMapBounds			(int x, int y, int level) const;
 	bool	isInFov				(int x, int y, int level) const;
+	bool	isExplored			(int x, int y, int level) const;
 
 	void update();
 
@@ -48,7 +49,6 @@ private:
 
 	int getOffset		(int playerx, int mapw, int renderw);
 
-	bool isExplored		(int x, int y, int level) const;
 	void computeFov();
 	void updateProperties();
 
