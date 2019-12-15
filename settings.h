@@ -28,8 +28,6 @@ public:
 	int fovRad;
 	bool lightWalls;
 
-	//std::shared_ptr<TCODRandom> RandNumGen;
-
 	std::shared_ptr<Input> input;
 
 	std::shared_ptr<Font> terminal16x16;

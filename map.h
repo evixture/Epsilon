@@ -14,7 +14,7 @@ struct Map
 	Map(std::string filePath);
 };
 
-//World Class  LEVELS AND ENTS
+//World Class
 class World
 {
 public:
@@ -25,7 +25,6 @@ public:
 	std::shared_ptr<TCODMap> fovMap;
 
 	std::shared_ptr<Player> player;
-	std::vector<std::shared_ptr<Entity>> entityList;
 
 	std::vector<std::shared_ptr<Item>> mapItemList;
 	std::vector<std::shared_ptr<Container>> mapContainerList;
@@ -35,22 +34,24 @@ public:
 	std::shared_ptr<Tile> getTile	(int x, int y, int level) const;
 	TCODColor getBgColor			(int x, int y, int level) const;
 
-	bool      getTransparency		(int x, int y, int level, int height) const;
-	bool      getWalkability		(int x, int y, int level) const;
-
-	bool inMapBounds	(int x, int y, int level) const;
-	int getOffset		(int playerx, int mapw, int renderw);
-
-	bool isInFov		(int x, int y, int level) const;
-	bool isExplored		(int x, int y, int level) const;
-	void computeFov();
-	void updateProperties();
+	bool    getTransparency		(int x, int y, int level, int height) const;
+	bool    getWalkability		(int x, int y, int level) const;
+	bool	inMapBounds			(int x, int y, int level) const;
+	bool	isInFov				(int x, int y, int level) const;
 
 	void update();
 
 	void render(const std::shared_ptr<Pane> &pane) const;
 
 private:
+	std::vector<std::shared_ptr<Entity>> entityList;
+
+	int getOffset		(int playerx, int mapw, int renderw);
+
+	bool isExplored		(int x, int y, int level) const;
+	void computeFov();
+	void updateProperties();
+
 	void updateEntities();
 
 	void renderTiles(const std::shared_ptr<Pane>& pane) const;

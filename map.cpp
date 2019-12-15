@@ -162,20 +162,7 @@ World::World()
 
 	mapItemList.push_back(MAGAZINE_556Magazine30(5, 10, 0));
 
-	mapItemList.push_back(MAGAZINE_556Magazine30(5, 10, 0));
-
-	mapItemList.push_back(MAGAZINE_556Magazine30(5, 10, 0));
-
-	mapItemList.push_back(MAGAZINE_556Magazine30(5, 10, 0));
-
-	mapItemList.push_back(MAGAZINE_45ACPMagazine7(10, 10, 0));
-												  
-	mapItemList.push_back(MAGAZINE_45ACPMagazine7(10, 10, 0));
-												  
-	mapItemList.push_back(MAGAZINE_45ACPMagazine7(10, 10, 0));
-												  
-	mapItemList.push_back(MAGAZINE_45ACPMagazine7(10, 10, 0));
-
+	mapItemList.push_back(MAGAZINE_45ACPMagazine7(10, 10, 0));								  
 }
 
 std::shared_ptr<Tile> World::getTile(int x, int y, int level) const
