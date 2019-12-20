@@ -95,3 +95,13 @@ struct ProximityPane : public Window
 	void update();
 	void render() const;
 };
+
+struct ActionPane : public Window
+{
+	std::shared_ptr<ActionManager> actionManager;
+
+	ActionPane(int windowW, int windowH, int rx, int ry);
+
+	void update();
+	void render() const;
+};

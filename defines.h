@@ -161,45 +161,7 @@ constexpr auto PI = 3.14159265;
 	//ERROR
 	#define TILE_error						std::make_shared<Tile>			('%',	TCODColor::black,			TCODColor::pink,			4,	true)
 
-	//ITEM TILES
-		//edit tile set to custom sprites
-		//DEFAULT
-			#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true)
-			#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true)
-		//CUSTOM
-
-//----------------------------------------------------------------------------------------------------
-
-//TOOLS
-	//DEFAULT
-		#define TOOL_Default_Container std::make_shared<Tool>("Test Container", TCODColor::pink, TCOD_CHAR_RADIO_UNSET)
-	//CUSTOM
-
-	//WEAPONS
-		//DEFAULT
-			//Weapon(std::string name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed);
-			#define WEAPON_DefaultRifle std::make_shared<Weapon>("WEAPON_DefaultRifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::FULL)
-			#define WEAPON_DefaultSemiRifle std::make_shared<Weapon>("WEAPON_DefaultSemiRifle", TCODColor::white, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::SEMI)
-		//CUSTOM
-
-//----------------------------------------------------------------------------------------------------
-
-//ITEMS
-	//DEFAULT
-		#define ITEM_Test_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultRifle, Position(x, y, level))
-		#define ITEM_Test2_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultSemiRifle, Position(x, y, level))
-		#define ITEM_Default_Container(x, y, level) std::make_shared<Item>(5, DEFAULT_ITEM_TILE2, TOOL_Default_Container, Position(x, y, level))
-	//CUSTOM
-			//cannot use shared ptr because of inheritance
-
-//CONTAINERS
-	//DEFAULT
-		#define CONTAINER_Default_Container(x, y, level, capacity) std::make_shared<Container>(capacity, ITEM_Default_Container(x, y, level))
-	//CUSTOM
-
-//----------------------------------------------------------------------------------------------------
-
-//----------------------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------------------
 
 /*
 ITEM SIZES
@@ -217,6 +179,21 @@ ITEM SIZES
 	5 UNITS
 		SNIPER RIFLES
 */
+
+//DEFAULTS
+			#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true)
+			#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true)
+			#define WEAPON_DefaultRifle std::make_shared<Weapon>("WEAPON_DefaultRifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::FULL)
+			#define WEAPON_DefaultSemiRifle std::make_shared<Weapon>("WEAPON_DefaultSemiRifle", TCODColor::white, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::SEMI)
+		#define ITEM_Test_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultRifle, Position(x, y, level))
+		#define ITEM_Test2_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultSemiRifle, Position(x, y, level))
+		#define ITEM_Default_Container(x, y, level) std::make_shared<Item>(5, DEFAULT_ITEM_TILE2, TOOL_Default_Container, Position(x, y, level))
+	#define TOOL_Default_Container std::make_shared<Tool>("Test Container", TCODColor::pink, TCOD_CHAR_RADIO_UNSET)
+#define CONTAINER_Default_Container(x, y, level, capacity) std::make_shared<Container>(capacity, ITEM_Default_Container(x, y, level))
+
+//ACTIONS
+	//TOOL
+//#define ACTIONMANAGER_ToolDefault std::vector<std::shared_ptr<Action>{std::make_shared<Action>("name", WORLD->player->reload(), Action::Type::DROP)}
 
 //CONTAINERS
 	//SMALL BACKPACK

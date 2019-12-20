@@ -57,3 +57,8 @@ struct MagazineData
 
 	MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid = true);
 };
+
+struct Test
+{
+	void testFunction() {}
+};

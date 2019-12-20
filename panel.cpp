@@ -429,3 +429,26 @@ void ProximityPane::render() const
 
 	pushWindow();
 }
+
+ActionPane::ActionPane(int windowW, int windowH, int rx, int ry)
+	:Window(windowW, windowH, "Actions", rx, ry)
+{
+}
+
+void ActionPane::update()
+{
+	actionManager = WORLD->player->selectedItem->actionManager;
+}
+
+void ActionPane::render() const
+{
+	for (int line = 0; line < actionManager->actionList.size();)
+	{
+		for (auto& action : actionManager->actionList)
+		{
+			drawWindow->console->printf(0, line, "|%s", action->name.c_str());
+			line++;
+		}
+	}
+
+}

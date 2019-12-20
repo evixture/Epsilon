@@ -1,5 +1,30 @@
 #include "main.hpp"
 
+struct Action
+{
+	enum class Type {DROP, RELOAD} type;
+
+	std::string name;
+	void (Test::*action)();
+
+	Action(std::string name, void (Test::* action)(), Type actionType);
+};
+
+struct ActionManager
+{
+	std::vector<std::shared_ptr<Action>> actionList;
+	int actionIndex;
+	std::shared_ptr<Action> selectedAction;
+
+
+	ActionManager(std::vector<std::shared_ptr<Action>> actionList);
+
+	void moveSelectorUp();
+	void moveSelectorDown();
+
+	void doAction();
+};
+
 struct Item
 {
 	int size;
@@ -10,6 +35,11 @@ struct Item
 
 	std::shared_ptr<Tile> tile;
 	std::shared_ptr<Tool> tool;
+
+	std::shared_ptr<ActionManager> actionManager;
+
+	Test test;
+
 
 	Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position);
 

@@ -5,10 +5,45 @@
 //{
 //}
 
+Action::Action(std::string name, void (Test::*action)(), Type actionType)
+	:name(name), action(action), type(actionType)
+{
+}
+
+ActionManager::ActionManager(std::vector<std::shared_ptr<Action>> actionList)
+	:actionList(actionList), actionIndex(0), selectedAction(this->actionList[actionIndex])
+{
+}
+
+void ActionManager::moveSelectorUp()
+{
+	if (actionIndex > 0)
+	{
+		actionIndex--;
+		selectedAction = actionList[actionIndex];
+	}
+}
+
+void ActionManager::moveSelectorDown()
+{
+	if (actionIndex - 1 < actionList.size())
+	{
+		actionIndex++;
+		selectedAction = actionList[actionIndex];
+	}
+}
+
+void ActionManager::doAction()
+{
+	selectedAction->action;
+}
+
 //ITEM STRUCT
 Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position)
 	: tile(tile), tool(tool), mapPosition(position), renderPosition(position), size(size), distToEnt(0)
 {
+	//cant access player stats
+	actionManager->actionList.push_back(std::make_shared<Action>("reload", &Test::testFunction, Action::Type::RELOAD));
 }
 
 std::shared_ptr<MagazineData> Item::getMagazineData()
@@ -83,3 +118,4 @@ std::shared_ptr<MagazineData> MagazineItem::getMagazineData()
 {
 	return magazineData;
 }
+
