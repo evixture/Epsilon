@@ -41,6 +41,7 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 Player::Player(Position pos)
 	:Creature(Position(pos), '@', "player", UICOLOR_Player_Color, 100, 0)
 {
+	//here
 	inventory.push_back(CONTAINER_SmallBackpack(0, 0, 0));
 	inventory[0]->addItem(ITEM_M1911(0, 0, 0));
 	inventory[0]->addItem(MAGAZINE_45ACPMagazine7(0, 0, 0));

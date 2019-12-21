@@ -13,6 +13,7 @@
 #include <thread>
 #include <mutex>
 #include <atomic>
+#include <functional>
 //#include <stdexcept>
 
 //Libraries
@@ -21,6 +22,8 @@
 
 struct Pane;
 class Entity;
+class Creature;
+class Player;
 
 //Class File Imports
 #include "utility.h"

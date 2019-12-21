@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 //Entity Class
-class Entity
+class Entity : public Test
 {
 public:
 	Position mapPosition;

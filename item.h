@@ -5,9 +5,9 @@ struct Action
 	enum class Type {DROP, RELOAD} type;
 
 	std::string name;
-	void (Test::*action)();
+	std::function<void()> action;
 
-	Action(std::string name, void (Test::* action)(), Type actionType);
+	Action(std::string name, std::function<void()> action, Type actionType);
 };
 
 struct ActionManager

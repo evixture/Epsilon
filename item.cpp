@@ -5,7 +5,7 @@
 //{
 //}
 
-Action::Action(std::string name, void (Test::*action)(), Type actionType)
+Action::Action(std::string name, std::function<void()> action, Type actionType)
 	:name(name), action(action), type(actionType)
 {
 }
@@ -42,8 +42,13 @@ void ActionManager::doAction()
 Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position)
 	: tile(tile), tool(tool), mapPosition(position), renderPosition(position), size(size), distToEnt(0)
 {
+	test = Test();
+
 	//cant access player stats
-	actionManager->actionList.push_back(std::make_shared<Action>("reload", &Test::testFunction, Action::Type::RELOAD));
+	//err here
+
+	//std::function<void()> func = std::bind(&Test::testFunction);
+	actionManager->actionList.push_back(std::make_shared<Action>("reload", [&]() {test.testFunction(); }, Action::Type::RELOAD));
 }
 
 std::shared_ptr<MagazineData> Item::getMagazineData()
