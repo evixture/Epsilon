@@ -181,15 +181,15 @@ ITEM SIZES
 */
 
 //DEFAULTS
-			#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true)
-			#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true)
-			#define WEAPON_DefaultRifle std::make_shared<Weapon>("WEAPON_DefaultRifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::FULL)
-			#define WEAPON_DefaultSemiRifle std::make_shared<Weapon>("WEAPON_DefaultSemiRifle", TCODColor::white, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::SEMI)
-		#define ITEM_Test_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultRifle, Position(x, y, level))
-		#define ITEM_Test2_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultSemiRifle, Position(x, y, level))
-		#define ITEM_Default_Container(x, y, level) std::make_shared<Item>(5, DEFAULT_ITEM_TILE2, TOOL_Default_Container, Position(x, y, level))
-	#define TOOL_Default_Container std::make_shared<Tool>("Test Container", TCODColor::pink, TCOD_CHAR_RADIO_UNSET)
-#define CONTAINER_Default_Container(x, y, level, capacity) std::make_shared<Container>(capacity, ITEM_Default_Container(x, y, level))
+//			#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true)
+//			#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true)
+//			#define WEAPON_DefaultRifle std::make_shared<Weapon>("WEAPON_DefaultRifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::FULL)
+//			#define WEAPON_DefaultSemiRifle std::make_shared<Weapon>("WEAPON_DefaultSemiRifle", TCODColor::white, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::SEMI)
+//		#define ITEM_Test_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultRifle, Position(x, y, level))
+//		#define ITEM_Test2_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultSemiRifle, Position(x, y, level))
+//		#define ITEM_Default_Container(x, y, level) std::make_shared<Item>(5, DEFAULT_ITEM_TILE2, TOOL_Default_Container, Position(x, y, level))
+//	#define TOOL_Default_Container std::make_shared<Tool>("Test Container", TCODColor::pink, TCOD_CHAR_RADIO_UNSET)
+//#define CONTAINER_Default_Container(x, y, level, capacity) std::make_shared<Container>(capacity, ITEM_Default_Container(x, y, level))
 
 //ACTIONS
 	//TOOL
@@ -199,12 +199,12 @@ ITEM SIZES
 	//SMALL BACKPACK
 				#define TILE_SmallBackpack std::make_shared<Tile>(CHAR_Backpack, ITEMCOLOR_SMALLBACKPACKFG, ITEMCOLOR_ITEMBG, 1, true)
 				#define TOOL_SmallBackpack std::make_shared<Tool>("Small Backpack", ITEMCOLOR_SMALLBACKPACKFG, CHAR_Backpack)
-			#define ITEM_SmallBackpack(x, y, level) std::make_shared<Item>(2, TILE_SmallBackpack , TOOL_SmallBackpack, Position(x, y, level))
-		#define CONTAINER_SmallBackpack(x, y, level) std::make_shared<Container>(5, ITEM_SmallBackpack(x, y, level))
+			#define ITEM_SmallBackpack(x, y, level, owner) std::make_shared<Item>(2, TILE_SmallBackpack , TOOL_SmallBackpack, Position(x, y, level), owner)
+		#define CONTAINER_SmallBackpack(x, y, level, owner) std::make_shared<Container>(5, ITEM_SmallBackpack(x, y, level, owner))
 
 //HANDS
 		#define TOOL_Hands std::make_shared<Tool>("Hands", ITEMCOLOR_HANDFG, TCOD_CHAR_UMLAUT)
-	#define ITEM_Hands(x, y, level) std::make_shared<Item>(1, DEFAULT_ITEM_TILE, TOOL_Hands, Position(x, y, level))
+	#define ITEM_Hands(x, y, level, owner) std::make_shared<Item>(1, DEFAULT_ITEM_TILE, TOOL_Hands, Position(x, y, level), owner)
 
 
 //PISTOLS
@@ -212,21 +212,21 @@ ITEM SIZES
 		//WEAPON
 				#define TILE_M1911 std::make_shared<Tile>(CHAR_Pistol, ITEMCOLOR_PISTOLFG, ITEMCOLOR_ITEMBG, 1, true)
 				#define WEAPON_M1911 std::make_shared<Weapon>("M1911", ITEMCOLOR_PISTOLFG, 7, 10, .15f, 1.0f, MagazineData::AmmoType::FOURTYFIVEACP, Weapon::FireType::SEMI)
-			#define ITEM_M1911(x, y, level) std::make_shared<Item>(2, TILE_M1911 , WEAPON_M1911, Position(x, y, level))
+			#define ITEM_M1911(x, y, level, owner) std::make_shared<Item>(2, TILE_M1911 , WEAPON_M1911, Position(x, y, level), owner)
 		//MAGAZINE
 					#define TILE_45ACPMagazine7 std::make_shared<Tile>(CHAR_PistolMagazine, ITEMCOLOR_PISTOLFG, ITEMCOLOR_ITEMBG, 1, true)
 					#define TOOL_45ACPMagazine7 std::make_shared<Tool>("45 ACP Magazine -7-", ITEMCOLOR_PISTOLFG, CHAR_PistolMagazine)
-				#define ITEM_45ACPMagazine7(x, y, level) Item(1, TILE_45ACPMagazine7 , TOOL_45ACPMagazine7, Position(x, y, level))
-			#define MAGAZINE_45ACPMagazine7(x, y, level) std::make_shared<MagazineItem>(ITEM_45ACPMagazine7(x, y, level), std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP, 7 , 7))
+				#define ITEM_45ACPMagazine7(x, y, level, owner) Item(1, TILE_45ACPMagazine7 , TOOL_45ACPMagazine7, Position(x, y, level), owner)
+			#define MAGAZINE_45ACPMagazine7(x, y, level, owner) std::make_shared<MagazineItem>(ITEM_45ACPMagazine7(x, y, level, owner), std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP, 7 , 7))
 
 //RIFLES
 	//M4A1
 		//WEAPON
 				#define TILE_M4A1 std::make_shared<Tile>(CHAR_Rifle, ITEMCOLOR_RIFLEFG, ITEMCOLOR_ITEMBG, 1, true)
 				#define WEAPON_M4A1 std::make_shared<Weapon>("M4A1", ITEMCOLOR_RIFLEFG, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::FULL)
-			#define ITEM_M4A1(x, y, level) std::make_shared<Item>(3, TILE_M4A1 , WEAPON_M4A1, Position(x, y, level))
+			#define ITEM_M4A1(x, y, level, owner) std::make_shared<Item>(3, TILE_M4A1 , WEAPON_M4A1, Position(x, y, level), owner)
 		//MAGAZINE
 					#define TILE_556Magazine30 std::make_shared<Tile>(CHAR_RifleMagazine, ITEMCOLOR_RIFLEFG, ITEMCOLOR_ITEMBG, 1, true)
 					#define TOOL_556Magazine30 std::make_shared<Tool>("5.56 Magazine -30-", ITEMCOLOR_RIFLEFG, CHAR_RifleMagazine)
-				#define ITEM_556Magazine30(x, y, level) Item(1, TILE_556Magazine30 , TOOL_556Magazine30, Position(x, y, level))
-			#define MAGAZINE_556Magazine30(x, y, level) std::make_shared<MagazineItem>(ITEM_556Magazine30(x, y, level), std::make_shared<MagazineData>(MagazineData::AmmoType::FIVEPOINTFIVESIX, 30 , 30))
+				#define ITEM_556Magazine30(x, y, level, owner) Item(1, TILE_556Magazine30 , TOOL_556Magazine30, Position(x, y, level), owner)
+			#define MAGAZINE_556Magazine30(x, y, level, owner) std::make_shared<MagazineItem>(ITEM_556Magazine30(x, y, level, onwer), std::make_shared<MagazineData>(MagazineData::AmmoType::FIVEPOINTFIVESIX, 30 , 30))

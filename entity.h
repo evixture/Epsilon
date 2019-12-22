@@ -40,6 +40,13 @@ public:
 
 	Creature(Position pos, int symbol, std::string name, TCODColor color, int health, int armor);
 
+	virtual void moveSelectorUp() {};
+	virtual void moveSelectorDown() {};
+	virtual void pickUpItem() {};
+	virtual void dropItem() {};
+	virtual void filterIndexes() {};
+	virtual void reload() {};
+
 	virtual void update();
 	void virtual render(const std::shared_ptr<Pane>& pane) const;
 };

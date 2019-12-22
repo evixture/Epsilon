@@ -24,6 +24,7 @@ public:
 	std::shared_ptr<Map> debugmap;
 	std::shared_ptr<TCODMap> fovMap;
 
+	std::vector<std::shared_ptr<Entity>> entityList;
 	std::shared_ptr<Player> player;
 
 	std::vector<std::shared_ptr<Item>> mapItemList;
@@ -45,7 +46,6 @@ public:
 	void render(const std::shared_ptr<Pane> &pane) const;
 
 private:
-	std::vector<std::shared_ptr<Entity>> entityList;
 
 	int getOffset		(int playerx, int mapw, int renderw);
 

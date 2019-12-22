@@ -42,7 +42,7 @@ struct Item
 	Test test;
 
 
-	Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position);
+	Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position, Player* owner);
 
 	virtual std::shared_ptr<MagazineData> getMagazineData();
 
