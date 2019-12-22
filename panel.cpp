@@ -437,18 +437,27 @@ ActionPane::ActionPane(int windowW, int windowH, int rx, int ry)
 
 void ActionPane::update()
 {
-	actionManager = WORLD->player->selectedItem->actionManager;
+	if (WORLD->player->selectedItem->actionManager)
+	{
+		actionManager = WORLD->player->selectedItem->actionManager;
+	}
 }
 
 void ActionPane::render() const
 {
-	for (int line = 0; line < actionManager->actionList.size();)
+	clearWindow();
+
+	if (actionManager) //needed because will throw mydata no data error
 	{
-		for (auto& action : actionManager->actionList)
+		for (int line = 0; line < actionManager->actionList.size();)
 		{
-			drawWindow->console->printf(0, line, "|%s", action->name.c_str());
-			line++;
+			for (auto& action : actionManager->actionList)
+			{
+				drawWindow->console->printf(0, line, "|%s", action->name.c_str());
+				line++;
+			}
 		}
 	}
 
+	pushWindow();
 }

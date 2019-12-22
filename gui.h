@@ -7,13 +7,13 @@ public:
 	enum ActiveWindow { NONE, STARTUPSPLASH, INVENTORYFULL} activeWindow;
 
 	//Part-screen Windows
+	std::shared_ptr<MapPane> mapPane;
 	std::shared_ptr<PlayerPane> playerPane;
 	std::shared_ptr<StatusPane> statusPane;
 	std::shared_ptr<InventoryPane> inventoryPane;
 	std::shared_ptr<LogPane> eventLogPane;
 	std::shared_ptr<ProximityPane> proximityPane;
-	std::shared_ptr<Window> actionsPane;
-	std::shared_ptr<MapPane> mapPane;
+	std::shared_ptr<ActionPane> actionsPane;
 
 	//Full-screen Windows
 	std::shared_ptr<SplashPane> startupSplash;

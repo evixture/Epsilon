@@ -62,3 +62,5 @@ struct Test
 {
 	void testFunction() {}
 };
+
+typedef void(Test::*TestFunctionType)();

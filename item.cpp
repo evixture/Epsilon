@@ -5,9 +5,11 @@
 //{
 //}
 
-Action::Action(std::string name, std::function<void()> action, Type actionType)
-	:name(name), action(action), type(actionType)
+Action::Action(std::string name, std::function<void()> action, Type actionType) // function, Action::Type::RELOAD
+	:name(name), type(actionType), action(action)
 {
+	//action();
+	//this->action = action;
 }
 
 ActionManager::ActionManager(std::vector<std::shared_ptr<Action>> actionList)
@@ -35,7 +37,7 @@ void ActionManager::moveSelectorDown()
 
 void ActionManager::doAction()
 {
-	selectedAction->action;
+	selectedAction->action();
 }
 
 //ITEM STRUCT
@@ -48,7 +50,14 @@ Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Pos
 	//err here
 
 	//std::function<void()> func = std::bind(&Test::testFunction);
-	actionManager->actionList.push_back(std::make_shared<Action>("reload", [&]() {test.testFunction(); }, Action::Type::RELOAD));
+
+	std::function<void()> function = std::bind(&Test::testFunction, test);
+	std::shared_ptr<Action> testAction = std::make_shared<Action>("reload", function, Action::Type::RELOAD);
+
+	//std::vector<std::shared_ptr<Action>> testActionManager; //std::vector<std::shared_ptr<Action>>{ testAction };
+	//testActionManager.push_back(testAction);
+
+	actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {std::shared_ptr<Action>(testAction)});
 }
 
 std::shared_ptr<MagazineData> Item::getMagazineData()
