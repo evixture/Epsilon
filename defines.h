@@ -181,7 +181,7 @@ ITEM SIZES
 */
 
 //DEFAULTS
-//			#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true)
+			#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true)
 //			#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true)
 //			#define WEAPON_DefaultRifle std::make_shared<Weapon>("WEAPON_DefaultRifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::FULL)
 //			#define WEAPON_DefaultSemiRifle std::make_shared<Weapon>("WEAPON_DefaultSemiRifle", TCODColor::white, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::SEMI)
@@ -229,4 +229,4 @@ ITEM SIZES
 					#define TILE_556Magazine30 std::make_shared<Tile>(CHAR_RifleMagazine, ITEMCOLOR_RIFLEFG, ITEMCOLOR_ITEMBG, 1, true)
 					#define TOOL_556Magazine30 std::make_shared<Tool>("5.56 Magazine -30-", ITEMCOLOR_RIFLEFG, CHAR_RifleMagazine)
 				#define ITEM_556Magazine30(x, y, level, owner) Item(1, TILE_556Magazine30 , TOOL_556Magazine30, Position(x, y, level), owner)
-			#define MAGAZINE_556Magazine30(x, y, level, owner) std::make_shared<MagazineItem>(ITEM_556Magazine30(x, y, level, onwer), std::make_shared<MagazineData>(MagazineData::AmmoType::FIVEPOINTFIVESIX, 30 , 30))
+			#define MAGAZINE_556Magazine30(x, y, level, owner) std::make_shared<MagazineItem>(ITEM_556Magazine30(x, y, level, owner), std::make_shared<MagazineData>(MagazineData::AmmoType::FIVEPOINTFIVESIX, 30 , 30))

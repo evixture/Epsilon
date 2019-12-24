@@ -109,40 +109,6 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
-    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
-    <FUNCLINE>77</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>TCODBsp::y</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
-      <FILENAME>bsp.hpp</FILENAME>
-      <LINE>77</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
-    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
-    <FUNCLINE>77</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>TCODBsp::w</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
-      <FILENAME>bsp.hpp</FILENAME>
-      <LINE>77</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>TCODBsp::{ctor}</FUNCTION>
     <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
@@ -207,6 +173,40 @@
     <SFA>
       <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
       <FILENAME>bsp.hpp</FILENAME>
+      <LINE>77</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
+    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
+    <FUNCLINE>77</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>TCODBsp::y</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
+      <FILENAME>bsp.hpp</FILENAME>
+      <LINE>77</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
+    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
+    <FUNCLINE>77</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>TCODBsp::w</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
+      <FILENAME>bsp.hpp</FILENAME>
       <LINE>78</LINE>
       <COLUMN>1</COLUMN>
     </SFA>
@@ -241,28 +241,28 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>panel.cpp</FILENAME>
-      <LINE>201</LINE>
+      <LINE>233</LINE>
       <COLUMN>21</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
     <DESCRIPTION>The enum type 'Gui::ActiveWindow' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
     <FUNCTION>SplashPane::update</FUNCTION>
     <DECORATED>?update@SplashPane@@UEAAXXZ</DECORATED>
-    <FUNCLINE>178</FUNCLINE>
+    <FUNCLINE>210</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>panel.cpp</FILENAME>
-      <LINE>205</LINE>
+      <LINE>237</LINE>
       <COLUMN>21</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
     <DESCRIPTION>The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
     <FUNCTION>SplashPane::update</FUNCTION>
     <DECORATED>?update@SplashPane@@UEAAXXZ</DECORATED>
-    <FUNCLINE>178</FUNCLINE>
+    <FUNCLINE>210</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

@@ -453,7 +453,15 @@ void ActionPane::render() const
 		{
 			for (auto& action : actionManager->actionList)
 			{
-				drawWindow->console->printf(0, line, "|%s", action->name.c_str());
+				if (action == actionManager->selectedAction)
+				{
+					drawWindow->console->printf(0, line, "|>%s", action->name.c_str());
+				}
+				else
+				{
+					drawWindow->console->printf(0, line, "| %s", action->name.c_str());
+				}
+
 				line++;
 			}
 		}

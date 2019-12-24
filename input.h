@@ -45,6 +45,7 @@ struct Input
 
 	std::shared_ptr<Key> lctrl;
 	std::shared_ptr<Key> lshift;
+	std::shared_ptr<Key> lalt;
 
 	std::shared_ptr<Key> z;
 	std::shared_ptr<Key> x;
@@ -65,6 +66,8 @@ struct Input
 	std::vector<std::shared_ptr<Key>> keyList;
 
 	std::shared_ptr<MouseButton> leftMouseButton;
+	std::shared_ptr<MouseButton> rightMouseButton;
+
 	std::vector<std::shared_ptr<MouseButton>> mouseList;
 
 	float baseMoveWait;

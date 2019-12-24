@@ -100,12 +100,12 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <DESCRIPTION>Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>TCODBsp::{ctor}</FUNCTION>
     <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
     <FUNCLINE>77</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>TCODBsp::y</targetSymbol>
+      <targetSymbol>TCODBsp::w</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT><DEFECT>
@@ -141,53 +141,92 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>91</LINE>
-      <COLUMN>18</COLUMN>
+      <LINE>84</LINE>
+      <COLUMN>16</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>Player::update</FUNCTION>
-    <DECORATED>?update@Player@@UEAAXXZ</DECORATED>
-    <FUNCLINE>56</FUNCLINE>
+    <FUNCTION>Player::moveSelectorUp</FUNCTION>
+    <DECORATED>?moveSelectorUp@Player@@UEAAXXZ</DECORATED>
+    <FUNCLINE>66</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>115</LINE>
-      <COLUMN>19</COLUMN>
+      <LINE>95</LINE>
+      <COLUMN>15</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>Player::update</FUNCTION>
-    <DECORATED>?update@Player@@UEAAXXZ</DECORATED>
-    <FUNCLINE>56</FUNCLINE>
+    <FUNCTION>Player::moveSelectorDown</FUNCTION>
+    <DECORATED>?moveSelectorDown@Player@@UEAAXXZ</DECORATED>
+    <FUNCLINE>91</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>188</LINE>
+      <LINE>100</LINE>
       <COLUMN>20</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>Player::update</FUNCTION>
-    <DECORATED>?update@Player@@UEAAXXZ</DECORATED>
-    <FUNCLINE>56</FUNCLINE>
+    <FUNCTION>Player::moveSelectorDown</FUNCTION>
+    <DECORATED>?moveSelectorDown@Player@@UEAAXXZ</DECORATED>
+    <FUNCLINE>91</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>201</LINE>
+      <LINE>110</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>Player::update</FUNCTION>
-    <DECORATED>?update@Player@@UEAAXXZ</DECORATED>
-    <FUNCLINE>56</FUNCLINE>
+    <FUNCTION>Player::moveSelectorDown</FUNCTION>
+    <DECORATED>?moveSelectorDown@Player@@UEAAXXZ</DECORATED>
+    <FUNCLINE>91</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>entity.cpp</FILENAME>
+      <LINE>197</LINE>
+      <COLUMN>20</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>Player::filterIndexes</FUNCTION>
+    <DECORATED>?filterIndexes@Player@@UEAAXXZ</DECORATED>
+    <FUNCLINE>188</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>entity.cpp</FILENAME>
+      <LINE>210</LINE>
+      <COLUMN>17</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>Player::filterIndexes</FUNCTION>
+    <DECORATED>?filterIndexes@Player@@UEAAXXZ</DECORATED>
+    <FUNCLINE>188</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>entity.cpp</FILENAME>
+      <LINE>226</LINE>
+      <COLUMN>18</COLUMN>
+    </SFA>
+    <DEFECTCODE>26812</DEFECTCODE>
+    <DESCRIPTION>The enum type 'TCOD_chars_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>Player::filterIndexes</FUNCTION>
+    <DECORATED>?filterIndexes@Player@@UEAAXXZ</DECORATED>
+    <FUNCLINE>188</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
@@ -235,39 +274,94 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.cpp</FILENAME>
-      <LINE>39</LINE>
+      <LINE>37</LINE>
+      <COLUMN>13</COLUMN>
+    </SFA>
+    <DEFECTCODE>26812</DEFECTCODE>
+    <DESCRIPTION>The enum type 'sf::Mouse::Button' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>MouseButton::{ctor}</FUNCTION>
+    <DECORATED>??0MouseButton@@QEAA@W4Button@Mouse@sf@@@Z</DECORATED>
+    <FUNCLINE>37</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>input.cpp</FILENAME>
+      <LINE>42</LINE>
+      <COLUMN>13</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'MouseButton::buttonSwitch' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>MouseButton::{ctor}</FUNCTION>
+    <DECORATED>??0MouseButton@@QEAA@XZ</DECORATED>
+    <FUNCLINE>42</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>MouseButton::buttonSwitch</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>input.cpp</FILENAME>
+      <LINE>75</LINE>
       <COLUMN>10</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
     <DESCRIPTION>The enum type 'TCOD_event_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
     <FUNCTION>Input::{ctor}</FUNCTION>
     <DECORATED>??0Input@@QEAA@XZ</DECORATED>
-    <FUNCLINE>36</FUNCLINE>
+    <FUNCLINE>72</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.cpp</FILENAME>
-      <LINE>273</LINE>
+      <LINE>213</LINE>
       <COLUMN>20</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
     <DESCRIPTION>The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
     <FUNCTION>Input::getKeyInput</FUNCTION>
     <DECORATED>?getKeyInput@Input@@QEAAXV?$shared_ptr@VPlayer@@@std@@@Z</DECORATED>
-    <FUNCLINE>216</FUNCLINE>
+    <FUNCLINE>137</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>item.cpp</FILENAME>
+      <LINE>31</LINE>
+      <COLUMN>17</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>ActionManager::moveSelectorDown</FUNCTION>
+    <DECORATED>?moveSelectorDown@ActionManager@@QEAAXXZ</DECORATED>
+    <FUNCLINE>29</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>30</LINE>
+      <LINE>26</LINE>
+      <COLUMN>26</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>Map::{ctor}</FUNCTION>
+    <DECORATED>??0Map@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z</DECORATED>
+    <FUNCLINE>3</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>map.cpp</FILENAME>
+      <LINE>35</LINE>
       <COLUMN>51</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Map::{ctor}</FUNCTION>
-    <DECORATED>??0Map@@QEAA@PEBD@Z</DECORATED>
+    <DECORATED>??0Map@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z</DECORATED>
     <FUNCLINE>3</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
@@ -278,169 +372,169 @@
       <COLUMN>5</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Map::mapHeight' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <DESCRIPTION>Variable 'Map::totalFloors' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>Map::{ctor}</FUNCTION>
-    <DECORATED>??0Map@@QEAA@PEBD@Z</DECORATED>
+    <DECORATED>??0Map@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z</DECORATED>
     <FUNCLINE>3</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>Map::mapHeight</targetSymbol>
+      <targetSymbol>Map::totalFloors</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>166</LINE>
+      <LINE>179</LINE>
       <COLUMN>38</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getTile</FUNCTION>
     <DECORATED>?getTile@World@@QEBA?AV?$shared_ptr@UTile@@@std@@HHH@Z</DECORATED>
-    <FUNCLINE>162</FUNCLINE>
+    <FUNCLINE>175</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>179</LINE>
+      <LINE>192</LINE>
       <COLUMN>37</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::isExplored</FUNCTION>
     <DECORATED>?isExplored@World@@QEBA_NHHH@Z</DECORATED>
-    <FUNCLINE>174</FUNCLINE>
+    <FUNCLINE>187</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>184</LINE>
+      <LINE>197</LINE>
       <COLUMN>37</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getBgColor</FUNCTION>
     <DECORATED>?getBgColor@World@@QEBA?AVTCODColor@@HHH@Z</DECORATED>
-    <FUNCLINE>182</FUNCLINE>
+    <FUNCLINE>195</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>222</LINE>
+      <LINE>235</LINE>
       <COLUMN>37</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getWalkability</FUNCTION>
     <DECORATED>?getWalkability@World@@QEBA_NHHH@Z</DECORATED>
-    <FUNCLINE>215</FUNCLINE>
+    <FUNCLINE>228</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>227</LINE>
+      <LINE>240</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getTransparency</FUNCTION>
     <DECORATED>?getTransparency@World@@QEBA_NHHHH@Z</DECORATED>
-    <FUNCLINE>225</FUNCLINE>
+    <FUNCLINE>238</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>229</LINE>
+      <LINE>242</LINE>
       <COLUMN>45</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getTransparency</FUNCTION>
     <DECORATED>?getTransparency@World@@QEBA_NHHHH@Z</DECORATED>
-    <FUNCLINE>225</FUNCLINE>
+    <FUNCLINE>238</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>231</LINE>
+      <LINE>244</LINE>
       <COLUMN>36</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getTransparency</FUNCTION>
     <DECORATED>?getTransparency@World@@QEBA_NHHHH@Z</DECORATED>
-    <FUNCLINE>225</FUNCLINE>
+    <FUNCLINE>238</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>231</LINE>
-      <COLUMN>117</COLUMN>
+      <LINE>244</LINE>
+      <COLUMN>126</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getTransparency</FUNCTION>
     <DECORATED>?getTransparency@World@@QEBA_NHHHH@Z</DECORATED>
-    <FUNCLINE>225</FUNCLINE>
+    <FUNCLINE>238</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>237</LINE>
+      <LINE>250</LINE>
       <COLUMN>49</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getTransparency</FUNCTION>
     <DECORATED>?getTransparency@World@@QEBA_NHHHH@Z</DECORATED>
-    <FUNCLINE>225</FUNCLINE>
+    <FUNCLINE>238</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>272</LINE>
+      <LINE>285</LINE>
       <COLUMN>31</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::isInFov</FUNCTION>
     <DECORATED>?isInFov@World@@QEBA_NHHH@Z</DECORATED>
-    <FUNCLINE>261</FUNCLINE>
+    <FUNCLINE>274</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>panel.cpp</FILENAME>
-      <LINE>201</LINE>
+      <LINE>233</LINE>
       <COLUMN>21</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
     <DESCRIPTION>The enum type 'Gui::ActiveWindow' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
     <FUNCTION>SplashPane::update</FUNCTION>
     <DECORATED>?update@SplashPane@@UEAAXXZ</DECORATED>
-    <FUNCLINE>178</FUNCLINE>
+    <FUNCLINE>210</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>panel.cpp</FILENAME>
-      <LINE>205</LINE>
+      <LINE>237</LINE>
       <COLUMN>21</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
     <DESCRIPTION>The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
     <FUNCTION>SplashPane::update</FUNCTION>
     <DECORATED>?update@SplashPane@@UEAAXXZ</DECORATED>
-    <FUNCLINE>178</FUNCLINE>
+    <FUNCLINE>210</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
@@ -467,5 +561,18 @@
     <FUNCTION>Settings::{ctor}</FUNCTION>
     <DECORATED>??0Settings@@QEAA@HH@Z</DECORATED>
     <FUNCLINE>11</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>tool.cpp</FILENAME>
+      <LINE>409</LINE>
+      <COLUMN>56</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>Weapon::update</FUNCTION>
+    <DECORATED>?update@Weapon@@UEAAXHHHHN@Z</DECORATED>
+    <FUNCLINE>376</FUNCLINE>
     <PATH></PATH>
   </DEFECT></DEFECTS>

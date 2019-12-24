@@ -20,6 +20,11 @@ Map::Map(std::string filePath)
 
 		//reserve vec size beforehand to inc perf
 		levelList = std::vector < std::vector < std::shared_ptr < Tile >>> (totalFloors);
+
+		for (auto& level : levelList)
+		{
+			level.reserve(mapWidth * mapHeight);
+		}
 		
 		while (!fileIn.eof())
 		{
@@ -155,15 +160,14 @@ World::World()
 	debugmap = std::make_shared<Map>("data/maps/debugmap.txt");
 
 	entityList.push_back(player = std::make_shared<Player>(Position(2, 2, 0)));
-	//player = std::make_shared<Player>(Position(2, 2, 0));
 
 	fovMap = std::make_shared<TCODMap>(debugmap->mapWidth, debugmap->mapHeight);
 
-	//mapItemList.push_back(ITEM_M4A1(4, 7, 0, player));
+	mapItemList.push_back(ITEM_M4A1(4, 7, 0, player.get()));
 
-	//mapItemList.push_back(MAGAZINE_556Magazine30(5, 10, 0, player));
+	mapItemList.push_back(MAGAZINE_556Magazine30(5, 10, 0, player.get()));
 
-	//mapItemList.push_back(MAGAZINE_45ACPMagazine7(10, 10, 0, player));								  
+	mapItemList.push_back(MAGAZINE_45ACPMagazine7(10, 10, 0, player.get()));								  
 }
 
 std::shared_ptr<Tile> World::getTile(int x, int y, int level) const

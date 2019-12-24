@@ -44,8 +44,8 @@ Player::Player(Position pos)
 	//here
 	inventory.push_back(CONTAINER_SmallBackpack(0, 0, 0, this));
 	inventory[0]->addItem(ITEM_M1911(0, 0, 0, this));
-	//inventory[0]->addItem(MAGAZINE_45ACPMagazine7(0, 0, 0, this));
-	//inventory[0]->addItem(MAGAZINE_45ACPMagazine7(0, 0, 0, this));
+	inventory[0]->addItem(MAGAZINE_45ACPMagazine7(0, 0, 0, this));
+	inventory[0]->addItem(MAGAZINE_45ACPMagazine7(0, 0, 0, this));
 	inventory.push_back(CONTAINER_SmallBackpack(0, 0, 0, this));
 
 	if (inventory.size() > 0)
@@ -139,7 +139,8 @@ void Player::pickUpItem()
 	{
 		if (WORLD->mapContainerList[i] != nullptr && WORLD->mapContainerList[i]->containerItem->mapPosition.x == mapPosition.x && WORLD->mapContainerList[i]->containerItem->mapPosition.y == mapPosition.y && WORLD->mapContainerList[i]->containerItem->mapPosition.level == mapPosition.level)
 		{
-			GUI->eventLogPane->pushMessage("Picked up " + WORLD->mapItemList[i]->tool->name);
+			//err here
+			GUI->eventLogPane->pushMessage("Picked up " + WORLD->mapContainerList[i]->containerItem->tool->name);
 
 			inventory.push_back(WORLD->mapContainerList[i]);
 			WORLD->mapContainerList.erase(WORLD->mapContainerList.begin() + i);
@@ -222,13 +223,13 @@ void Player::filterIndexes()
 		}
 		else
 		{
-			//selectedItem = ITEM_Hands(0, 0, 0, this);
+			selectedItem = ITEM_Hands(0, 0, 0, this);
 		}
 	}
 
 	else
 	{
-		//selectedItem = ITEM_Hands(0, 0, 0, this);
+		selectedItem = ITEM_Hands(0, 0, 0, this);
 	}
 }
 
@@ -274,14 +275,29 @@ void Player::update()
 	//MOUSE WHEEL ITEM SELECTION
 	if (INPUT->mouse.wheel_up || INPUT->mouse.wheel_down)
 	{
-		if (INPUT->mouse.wheel_up)
+		if (!INPUT->lalt->isDown)
 		{
-			moveSelectorUp();
-		}
+			if (INPUT->mouse.wheel_up)
+			{
+				moveSelectorUp();
+			}
 
-		else if (INPUT->mouse.wheel_down)
+			else if (INPUT->mouse.wheel_down)
+			{
+				moveSelectorDown();
+			}
+		}
+		else if (INPUT->lalt->isDown)
 		{
-			moveSelectorDown();
+			if (INPUT->mouse.wheel_up)
+			{
+				selectedItem->actionManager->moveSelectorUp();
+			}
+
+			else if (INPUT->mouse.wheel_down)
+			{
+				selectedItem->actionManager->moveSelectorDown();
+			}
 		}
 	}
 
@@ -293,6 +309,11 @@ void Player::update()
 	if (INPUT->q->isSwitched)
 	{
 		dropItem();
+	}
+
+	if (INPUT->rightMouseButton->isSwitched)
+	{
+		selectedItem->actionManager->doAction();
 	}
 
 	filterIndexes();

@@ -109,40 +109,6 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
-    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
-    <FUNCLINE>77</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>TCODBsp::y</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
-      <FILENAME>bsp.hpp</FILENAME>
-      <LINE>77</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
-    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
-    <FUNCLINE>77</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>TCODBsp::w</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
-      <FILENAME>bsp.hpp</FILENAME>
-      <LINE>77</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>TCODBsp::{ctor}</FUNCTION>
     <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
@@ -200,6 +166,40 @@
     <FUNCLINE>77</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>TCODBsp::h</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
+      <FILENAME>bsp.hpp</FILENAME>
+      <LINE>77</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
+    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
+    <FUNCLINE>77</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>TCODBsp::y</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
+      <FILENAME>bsp.hpp</FILENAME>
+      <LINE>77</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
+    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
+    <FUNCLINE>77</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>TCODBsp::w</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -310,23 +310,6 @@
       <COLUMN>5</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Key::isPressed' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Key::{ctor}</FUNCTION>
-    <DECORATED>??0Key@@QEAA@XZ</DECORATED>
-    <FUNCLINE>8</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>Key::isPressed</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>input.cpp</FILENAME>
-      <LINE>8</LINE>
-      <COLUMN>5</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'Key::sfKey' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>Key::{ctor}</FUNCTION>
     <DECORATED>??0Key@@QEAA@XZ</DECORATED>
@@ -340,28 +323,110 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.cpp</FILENAME>
-      <LINE>39</LINE>
-      <COLUMN>10</COLUMN>
+      <LINE>37</LINE>
+      <COLUMN>13</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
-    <DESCRIPTION>The enum type 'TCOD_event_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
-    <FUNCTION>Input::{ctor}</FUNCTION>
-    <DECORATED>??0Input@@QEAA@XZ</DECORATED>
-    <FUNCLINE>36</FUNCLINE>
+    <DESCRIPTION>The enum type 'sf::Mouse::Button' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>MouseButton::{ctor}</FUNCTION>
+    <DECORATED>??0MouseButton@@QEAA@W4Button@Mouse@sf@@@Z</DECORATED>
+    <FUNCLINE>37</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.cpp</FILENAME>
-      <LINE>273</LINE>
+      <LINE>42</LINE>
+      <COLUMN>13</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'MouseButton::buttonSwitch' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>MouseButton::{ctor}</FUNCTION>
+    <DECORATED>??0MouseButton@@QEAA@XZ</DECORATED>
+    <FUNCLINE>42</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>MouseButton::buttonSwitch</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>input.cpp</FILENAME>
+      <LINE>42</LINE>
+      <COLUMN>13</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'MouseButton::isDown' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>MouseButton::{ctor}</FUNCTION>
+    <DECORATED>??0MouseButton@@QEAA@XZ</DECORATED>
+    <FUNCLINE>42</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>MouseButton::isDown</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>input.cpp</FILENAME>
+      <LINE>42</LINE>
+      <COLUMN>13</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'MouseButton::isSwitched' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>MouseButton::{ctor}</FUNCTION>
+    <DECORATED>??0MouseButton@@QEAA@XZ</DECORATED>
+    <FUNCLINE>42</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>MouseButton::isSwitched</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>input.cpp</FILENAME>
+      <LINE>42</LINE>
+      <COLUMN>13</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'MouseButton::sfMButton' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>MouseButton::{ctor}</FUNCTION>
+    <DECORATED>??0MouseButton@@QEAA@XZ</DECORATED>
+    <FUNCLINE>42</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>MouseButton::sfMButton</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>input.cpp</FILENAME>
+      <LINE>75</LINE>
+      <COLUMN>10</COLUMN>
+    </SFA>
+    <DEFECTCODE>26812</DEFECTCODE>
+    <DESCRIPTION>The enum type 'TCOD_event_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>Input::{ctor}</FUNCTION>
+    <DECORATED>??0Input@@QEAA@XZ</DECORATED>
+    <FUNCLINE>72</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>input.cpp</FILENAME>
+      <LINE>213</LINE>
       <COLUMN>20</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
     <DESCRIPTION>The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
     <FUNCTION>Input::getKeyInput</FUNCTION>
     <DECORATED>?getKeyInput@Input@@QEAAXV?$shared_ptr@VPlayer@@@std@@@Z</DECORATED>
-    <FUNCLINE>216</FUNCLINE>
+    <FUNCLINE>137</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

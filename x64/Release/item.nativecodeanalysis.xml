@@ -240,29 +240,15 @@
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>settings.cpp</FILENAME>
-      <LINE>12</LINE>
-      <COLUMN>145</COLUMN>
+      <FILENAME>item.cpp</FILENAME>
+      <LINE>31</LINE>
+      <COLUMN>17</COLUMN>
     </SFA>
-    <DEFECTCODE>26812</DEFECTCODE>
-    <DESCRIPTION>The enum type 'TCOD_fov_algorithm_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
-    <FUNCTION>Settings::{ctor}</FUNCTION>
-    <DECORATED>??0Settings@@QEAA@HH@Z</DECORATED>
-    <FUNCLINE>11</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>settings.cpp</FILENAME>
-      <LINE>12</LINE>
-      <COLUMN>172</COLUMN>
-    </SFA>
-    <DEFECTCODE>26812</DEFECTCODE>
-    <DESCRIPTION>The enum type 'TCOD_renderer_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
-    <FUNCTION>Settings::{ctor}</FUNCTION>
-    <DECORATED>??0Settings@@QEAA@HH@Z</DECORATED>
-    <FUNCLINE>11</FUNCLINE>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>ActionManager::moveSelectorDown</FUNCTION>
+    <DECORATED>?moveSelectorDown@ActionManager@@QEAAXXZ</DECORATED>
+    <FUNCLINE>29</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

@@ -82,6 +82,7 @@ Input::Input()
 
 	keyList.push_back(lctrl = std::make_shared<Key>(sf::Keyboard::LControl));
 	keyList.push_back(lshift = std::make_shared<Key>(sf::Keyboard::LShift));
+	keyList.push_back(lalt = std::make_shared<Key>(sf::Keyboard::LAlt));
 
 	keyList.push_back(z = std::make_shared<Key>(sf::Keyboard::Z));
 	keyList.push_back(x = std::make_shared<Key>(sf::Keyboard::X));
@@ -101,6 +102,7 @@ Input::Input()
 	keyList.push_back(escape = std::make_shared<Key>(sf::Keyboard::Escape));
 
 	mouseList.push_back(leftMouseButton = std::make_shared<MouseButton>(sf::Mouse::Left));
+	mouseList.push_back(rightMouseButton = std::make_shared<MouseButton>(sf::Mouse::Right));
 }
 
 void Input::getMouseInput()

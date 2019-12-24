@@ -164,56 +164,6 @@
         {
           "ruleId": "26495",
           "message": {
-            "text": "Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
-                },
-                "region": {
-                  "startLine": 77,
-                  "startColumn": 2,
-                  "endLine": 77,
-                  "endColumn": 2
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl TCODBsp::TCODBsp(void)"
-            }
-          ],
-          "properties": {
-            "targetSymbol": "TCODBsp::y"
-          }
-        },
-        {
-          "ruleId": "26495",
-          "message": {
-            "text": "Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
-                },
-                "region": {
-                  "startLine": 77,
-                  "startColumn": 2,
-                  "endLine": 77,
-                  "endColumn": 2
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl TCODBsp::TCODBsp(void)"
-            }
-          ],
-          "properties": {
-            "targetSymbol": "TCODBsp::w"
-          }
-        },
-        {
-          "ruleId": "26495",
-          "message": {
             "text": "Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
@@ -314,6 +264,56 @@
         {
           "ruleId": "26495",
           "message": {
+            "text": "Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
+                },
+                "region": {
+                  "startLine": 77,
+                  "startColumn": 2,
+                  "endLine": 77,
+                  "endColumn": 2
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl TCODBsp::TCODBsp(void)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "TCODBsp::y"
+          }
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
+                },
+                "region": {
+                  "startLine": 77,
+                  "startColumn": 2,
+                  "endLine": 77,
+                  "endColumn": 2
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl TCODBsp::TCODBsp(void)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "TCODBsp::w"
+          }
+        },
+        {
+          "ruleId": "26495",
+          "message": {
             "text": "Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
@@ -373,20 +373,42 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
                 },
                 "region": {
-                  "startLine": 30,
+                  "startLine": 26,
+                  "startColumn": 18,
+                  "endLine": 26,
+                  "endColumn": 29
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl Map::Map(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
+                },
+                "region": {
+                  "startLine": 35,
                   "startColumn": 43,
-                  "endLine": 30,
+                  "endLine": 35,
                   "endColumn": 54
                 }
               },
-              "fullyQualifiedLogicalName": "public: __cdecl Map::Map(char const *)"
+              "fullyQualifiedLogicalName": "public: __cdecl Map::Map(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)"
             }
           ]
         },
         {
           "ruleId": "26495",
           "message": {
-            "text": "Variable 'Map::mapHeight' is uninitialized. Always initialize a member variable (type.6)."
+            "text": "Variable 'Map::totalFloors' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
             {
@@ -401,11 +423,11 @@
                   "endColumn": 6
                 }
               },
-              "fullyQualifiedLogicalName": "public: __cdecl Map::Map(char const *)"
+              "fullyQualifiedLogicalName": "public: __cdecl Map::Map(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)"
             }
           ],
           "properties": {
-            "targetSymbol": "Map::mapHeight"
+            "targetSymbol": "Map::totalFloors"
           }
         },
         {
@@ -426,7 +448,7 @@
                   "endColumn": 6
                 }
               },
-              "fullyQualifiedLogicalName": "public: __cdecl Map::Map(char const *)"
+              "fullyQualifiedLogicalName": "public: __cdecl Map::Map(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)"
             }
           ],
           "properties": {
@@ -436,7 +458,7 @@
         {
           "ruleId": "26495",
           "message": {
-            "text": "Variable 'Map::mapName' is uninitialized. Always initialize a member variable (type.6)."
+            "text": "Variable 'Map::mapHeight' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
             {
@@ -451,36 +473,11 @@
                   "endColumn": 6
                 }
               },
-              "fullyQualifiedLogicalName": "public: __cdecl Map::Map(char const *)"
+              "fullyQualifiedLogicalName": "public: __cdecl Map::Map(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)"
             }
           ],
           "properties": {
-            "targetSymbol": "Map::mapName"
-          }
-        },
-        {
-          "ruleId": "26495",
-          "message": {
-            "text": "Variable 'Map::totalFloors' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
-                },
-                "region": {
-                  "startLine": 3,
-                  "startColumn": 6,
-                  "endLine": 3,
-                  "endColumn": 6
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl Map::Map(char const *)"
-            }
-          ],
-          "properties": {
-            "targetSymbol": "Map::totalFloors"
+            "targetSymbol": "Map::mapHeight"
           }
         },
         {
@@ -495,9 +492,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
                 },
                 "region": {
-                  "startLine": 166,
+                  "startLine": 179,
                   "startColumn": 37,
-                  "endLine": 166,
+                  "endLine": 179,
                   "endColumn": 53
                 }
               },
@@ -517,9 +514,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
                 },
                 "region": {
-                  "startLine": 179,
+                  "startLine": 192,
                   "startColumn": 36,
-                  "endLine": 179,
+                  "endLine": 192,
                   "endColumn": 52
                 }
               },
@@ -539,9 +536,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
                 },
                 "region": {
-                  "startLine": 184,
+                  "startLine": 197,
                   "startColumn": 36,
-                  "endLine": 184,
+                  "endLine": 197,
                   "endColumn": 52
                 }
               },
@@ -561,9 +558,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
                 },
                 "region": {
-                  "startLine": 222,
+                  "startLine": 235,
                   "startColumn": 36,
-                  "endLine": 222,
+                  "endLine": 235,
                   "endColumn": 52
                 }
               },
@@ -583,9 +580,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
                 },
                 "region": {
-                  "startLine": 227,
+                  "startLine": 240,
                   "startColumn": 33,
-                  "endLine": 227,
+                  "endLine": 240,
                   "endColumn": 49
                 }
               },
@@ -605,9 +602,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
                 },
                 "region": {
-                  "startLine": 229,
+                  "startLine": 242,
                   "startColumn": 44,
-                  "endLine": 229,
+                  "endLine": 242,
                   "endColumn": 60
                 }
               },
@@ -627,9 +624,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
                 },
                 "region": {
-                  "startLine": 231,
+                  "startLine": 244,
                   "startColumn": 35,
-                  "endLine": 231,
+                  "endLine": 244,
                   "endColumn": 51
                 }
               },
@@ -649,10 +646,10 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
                 },
                 "region": {
-                  "startLine": 231,
-                  "startColumn": 116,
-                  "endLine": 231,
-                  "endColumn": 132
+                  "startLine": 244,
+                  "startColumn": 125,
+                  "endLine": 244,
+                  "endColumn": 141
                 }
               },
               "fullyQualifiedLogicalName": "public: bool __cdecl World::getTransparency(int,int,int,int)const "
@@ -671,9 +668,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
                 },
                 "region": {
-                  "startLine": 237,
+                  "startLine": 250,
                   "startColumn": 48,
-                  "endLine": 237,
+                  "endLine": 250,
                   "endColumn": 64
                 }
               },
@@ -693,9 +690,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/map.cpp"
                 },
                 "region": {
-                  "startLine": 272,
+                  "startLine": 285,
                   "startColumn": 30,
-                  "endLine": 272,
+                  "endLine": 285,
                   "endColumn": 46
                 }
               },
@@ -707,12 +704,12 @@
       "tool": {
         "name": "PREfast",
         "fullName": "PREfast Code Analysis",
-        "version": "14.23.28107.0",
-        "fileVersion": "14.00.28107.00"
+        "version": "14.24.28314.0",
+        "fileVersion": "14.00.28314.00"
       },
       "invocations": [
         {
-          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.23.28105\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x008C3170 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_954b5ab3ast -typedil -f map.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -ZB64 -D_INTEGRAL_MAX_BITS=64 -pc \\:/ -D_MSC_VER=1923 -D_MSC_FULL_VER=192328107 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -GF -Og -Ot -Oy -Oi -ltcg -DCODE_ANALYSIS -DNDEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Release\\map.obj -Fdx64\\Release\\vc142.pdb -Gd -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.23.28105\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.23.28105\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.23.28105\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
+          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x009F3170 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_f242bc34ast -typedil -f map.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1924 -D_MSC_FULL_VER=192428314 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -GF -Og -Ot -Oy -Oi -ltcg -DCODE_ANALYSIS -DNDEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Release\\map.obj -Fdx64\\Release\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
         }
       ],
       "files": {
@@ -1305,6 +1302,11 @@
           ]
         },
         "file:///e:/projects/visual studio/libtcod development/epsilon/tool.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/item.h": {
           "roles": [
             "resultFile"
           ]

@@ -1,9 +1,81 @@
 ﻿  engine.cpp
   entity.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\xmemory(204,12): error C2664: 'MagazineItem::MagazineItem(MagazineItem &&)': cannot convert argument 1 from '_Ty' to 'Item'
+          with
+          [
+              _Ty=std::shared_ptr<Item>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\xmemory(204,33): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\item.h(60,2): message : see declaration of 'MagazineItem::MagazineItem'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\memory(1490): message : see reference to function template instantiation 'void std::_Construct_in_place<_Ty,std::shared_ptr<Item>,std::shared_ptr<MagazineData>>(_Ty &,std::shared_ptr<Item> &&,std::shared_ptr<MagazineData> &&) noexcept(false)' being compiled
+          with
+          [
+              _Ty=MagazineItem
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\memory(1590): message : see reference to function template instantiation 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<std::shared_ptr<Item>,std::shared_ptr<MagazineData>>(std::shared_ptr<Item> &&,std::shared_ptr<MagazineData> &&)' being compiled
+          with
+          [
+              _Ty=MagazineItem
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\memory(1591): message : see reference to function template instantiation 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<std::shared_ptr<Item>,std::shared_ptr<MagazineData>>(std::shared_ptr<Item> &&,std::shared_ptr<MagazineData> &&)' being compiled
+          with
+          [
+              _Ty=MagazineItem
+          ]
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(47): message : see reference to function template instantiation 'std::shared_ptr<MagazineItem> std::make_shared<MagazineItem,std::shared_ptr<Item>,std::shared_ptr<MagazineData>>(std::shared_ptr<Item> &&,std::shared_ptr<MagazineData> &&)' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\chrono(632): message : see reference to class template instantiation 'std::chrono::duration<double,std::ratio<1,1>>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\chrono(178): message : see reference to class template instantiation 'std::chrono::duration<__int64,std::nano>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\chrono(610): message : see reference to class template instantiation 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds>' being compiled
   gui.cpp
   input.cpp
+  item.cpp
   main.cpp
   map.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\xmemory(204,12): error C2664: 'Item::Item(Item &&)': cannot convert argument 5 from 'std::shared_ptr<Player>' to 'Player *'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\xmemory(204,33): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\item.h(45,2): message : see declaration of 'Item::Item'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\memory(1490): message : see reference to function template instantiation 'void std::_Construct_in_place<_Ty,int,std::shared_ptr<Tile>,std::shared_ptr<Weapon>,Position,std::shared_ptr<Player>&>(_Ty &,int &&,std::shared_ptr<Tile> &&,std::shared_ptr<Weapon> &&,Position &&,std::shared_ptr<Player> &) noexcept(false)' being compiled
+          with
+          [
+              _Ty=Item
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\memory(1590): message : see reference to function template instantiation 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<int,std::shared_ptr<Tile>,std::shared_ptr<Weapon>,Position,std::shared_ptr<Player>&>(int &&,std::shared_ptr<Tile> &&,std::shared_ptr<Weapon> &&,Position &&,std::shared_ptr<Player> &)' being compiled
+          with
+          [
+              _Ty=Item
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\memory(1591): message : see reference to function template instantiation 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<int,std::shared_ptr<Tile>,std::shared_ptr<Weapon>,Position,std::shared_ptr<Player>&>(int &&,std::shared_ptr<Tile> &&,std::shared_ptr<Weapon> &&,Position &&,std::shared_ptr<Player> &)' being compiled
+          with
+          [
+              _Ty=Item
+          ]
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(168): message : see reference to function template instantiation 'std::shared_ptr<Item> std::make_shared<Item,int,std::shared_ptr<Tile>,std::shared_ptr<Weapon>,Position,std::shared_ptr<Player>&>(int &&,std::shared_ptr<Tile> &&,std::shared_ptr<Weapon> &&,Position &&,std::shared_ptr<Player> &)' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\chrono(632): message : see reference to class template instantiation 'std::chrono::duration<double,std::ratio<1,1>>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\chrono(178): message : see reference to class template instantiation 'std::chrono::duration<__int64,std::nano>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\chrono(610): message : see reference to class template instantiation 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\xmemory(204,12): error C2664: 'MagazineItem::MagazineItem(MagazineItem &&)': cannot convert argument 1 from '_Ty' to 'Item'
+          with
+          [
+              _Ty=std::shared_ptr<Item>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\xmemory(204,33): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\item.h(60,2): message : see declaration of 'MagazineItem::MagazineItem'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\memory(1490): message : see reference to function template instantiation 'void std::_Construct_in_place<_Ty,std::shared_ptr<Item>,std::shared_ptr<MagazineData>>(_Ty &,std::shared_ptr<Item> &&,std::shared_ptr<MagazineData> &&) noexcept(false)' being compiled
+          with
+          [
+              _Ty=MagazineItem
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\memory(1590): message : see reference to function template instantiation 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<std::shared_ptr<Item>,std::shared_ptr<MagazineData>>(std::shared_ptr<Item> &&,std::shared_ptr<MagazineData> &&)' being compiled
+          with
+          [
+              _Ty=MagazineItem
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\memory(1591): message : see reference to function template instantiation 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<std::shared_ptr<Item>,std::shared_ptr<MagazineData>>(std::shared_ptr<Item> &&,std::shared_ptr<MagazineData> &&)' being compiled
+          with
+          [
+              _Ty=MagazineItem
+          ]
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(170): message : see reference to function template instantiation 'std::shared_ptr<MagazineItem> std::make_shared<MagazineItem,std::shared_ptr<Item>,std::shared_ptr<MagazineData>>(std::shared_ptr<Item> &&,std::shared_ptr<MagazineData> &&)' being compiled
   panel.cpp
   settings.cpp
   tile.cpp
@@ -11,44 +83,3 @@
   utility.cpp
   window.cpp
   Compiling...
-  Generating code
-  56 of 1483 functions ( 3.8%) were compiled, the rest were copied from previous compilation.
-    9 functions were new in current compilation
-    43 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Release\Epsilon.exe
-E:\Libtcod\custom-libtcod-master\src\libtcod\console\console.h(122): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
-E:\Libtcod\custom-libtcod-master\src\libtcod\console\console.h(126): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
-E:\Libtcod\custom-libtcod-master\src\libtcod\tileset\tileset.h(52): warning C26495: Variable 'tcod::tileset::Tileset::tiles_last_known_capacity' is uninitialized. Always initialize a member variable (type.6).
-E:\Libtcod\custom-libtcod-master\src\libtcod\tileset\tileset.h(78): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Libtcod\custom-libtcod-master\src\libtcod\tileset\observer.h(62): warning C26439: This kind of function may not throw. Declare it 'noexcept' (f.6).
-E:\Libtcod\custom-libtcod-master\src\libtcod\tileset\observer.h(65): warning C26439: This kind of function may not throw. Declare it 'noexcept' (f.6).
-E:\Libtcod\custom-libtcod-master\src\libtcod\mersenne.hpp(222): warning C26812: The enum type 'TCOD_distribution_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Libtcod\custom-libtcod-master\src\libtcod\bsp.hpp(77): warning C26495: Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6).
-E:\Libtcod\custom-libtcod-master\src\libtcod\bsp.hpp(78): warning C26495: Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\engine.cpp(5): warning C26812: The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(91): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(115): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(188): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(201): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\gui.cpp(5): warning C26812: The enum type 'Gui::ActiveWindow' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(4): warning C26812: The enum type 'sf::Keyboard::Key' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(8): warning C26495: Variable 'Key::keySwitch' is uninitialized. Always initialize a member variable (type.6).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(39): warning C26812: The enum type 'TCOD_event_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(273): warning C26812: The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(30): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(3): warning C26495: Variable 'Map::mapHeight' is uninitialized. Always initialize a member variable (type.6).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(166): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(179): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(184): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(222): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(227): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(229): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(231): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(231): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(237): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(272): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(201): warning C26812: The enum type 'Gui::ActiveWindow' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(205): warning C26812: The enum type 'Engine::Gamestate' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\settings.cpp(12): warning C26812: The enum type 'TCOD_fov_algorithm_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\settings.cpp(12): warning C26812: The enum type 'TCOD_renderer_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).

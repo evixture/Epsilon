@@ -28,7 +28,7 @@ void ActionManager::moveSelectorUp()
 
 void ActionManager::moveSelectorDown()
 {
-	if (actionIndex - 1 < actionList.size())
+	if (actionIndex + 1 < actionList.size())
 	{
 		actionIndex++;
 		selectedAction = actionList[actionIndex];
@@ -44,10 +44,10 @@ void ActionManager::doAction()
 Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position, Player* owner)
 	: tile(tile), tool(tool), mapPosition(position), renderPosition(position), size(size), distToEnt(0)
 {
-	test = Test();
+	//test = Test();
 
 	//local allows build
-	std::shared_ptr<Player> player;
+	//std::shared_ptr<Player> player;
 
 	//gives error : 
 	//WORLD->entityList[0];
@@ -64,8 +64,8 @@ Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Pos
 	//std::vector<std::shared_ptr<Action>> testActionManager; //std::vector<std::shared_ptr<Action>>{ testAction };
 	//testActionManager.push_back(testAction);
 
-	actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {std::shared_ptr<Action>(std::make_shared<Action>("reload", std::bind(&Player::reload, owner), Action::Type::RELOAD)),
-		std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Test::testFunction, test), Action::Type::DROP))});
+	actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {std::shared_ptr<Action>(std::make_shared<Action>("Reload", std::bind(&Player::reload, owner), Action::Type::RELOAD)),
+		std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP))});
 }
 
 std::shared_ptr<MagazineData> Item::getMagazineData()
