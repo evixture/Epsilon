@@ -298,8 +298,8 @@ void World::updateEntities()
 
 void World::update()
 {
-	xOffset = getOffset(player->mapPosition.x, debugmap->mapWidth, MAPPANE->drawWindow->consoleW);
-	yOffset = getOffset(player->mapPosition.y, debugmap->mapHeight, MAPPANE->drawWindow->consoleH);
+	xOffset = getOffset(player->mapPosition.x, debugmap->mapWidth, MAPPANE->drawWindow->consoleWidth);
+	yOffset = getOffset(player->mapPosition.y, debugmap->mapHeight, MAPPANE->drawWindow->consoleHeight);
 
 	updateProperties();
 	computeFov();
@@ -320,9 +320,9 @@ void World::update()
 
 void World::renderTiles(const std::shared_ptr<Pane>& pane) const
 {
-	for (int y = yOffset; y < pane->consoleH + yOffset; y++)
+	for (int y = yOffset; y < pane->consoleHeight + yOffset; y++)
 	{
-		for (int x = xOffset; x < pane->consoleW + xOffset; x++)
+		for (int x = xOffset; x < pane->consoleWidth + xOffset; x++)
 		{
 			getTile(x, y, player->mapPosition.level)->render(x - xOffset, y - yOffset, pane);
 		}

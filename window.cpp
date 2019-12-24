@@ -1,10 +1,10 @@
 #include "main.hpp"
 
 //Pane Struct
-Pane::Pane(int consoleW, int consoleH, TCODColor bgColor, TCODColor fgColor)
-	:consoleW(consoleW), consoleH(consoleH), bgColor(bgColor), fgColor(fgColor)
+Pane::Pane(int consoleWidth, int consoleHeight, TCODColor backgroundColor, TCODColor foregroundColor)
+	:consoleWidth(consoleWidth), consoleHeight(consoleHeight), backgroundColor(backgroundColor), foregroundColor(foregroundColor)
 {
-	console = new TCODConsole(consoleW, consoleH);
+	console = new TCODConsole(consoleWidth, consoleHeight);
 }
 
 Pane::~Pane()
@@ -13,18 +13,18 @@ Pane::~Pane()
 
 void Pane::render() const
 {
-	console->setDefaultBackground(bgColor);
-	console->setDefaultForeground(fgColor);
+	console->setDefaultBackground(backgroundColor);
+	console->setDefaultForeground(foregroundColor);
 	console->clear();
 }
 
 //----------------------------------------------------------------------------------------------------
 
 //Ribon Struct
-Ribon::Ribon(std::string windowName, int windowW)
-	: windowName(windowName), windowW(windowW)
+Ribon::Ribon(std::string windowName, int consoleWidth)
+	: windowName(windowName), consoleWidth(consoleWidth)
 {
-	ribonWindow = std::make_shared<Pane>(windowW, 1, UICOLOR_Panel_Ribbon_BG, UICOLOR_Panel_Ribbon_FG);
+	ribonWindow = std::make_shared<Pane>(consoleWidth, 1, UICOLOR_Panel_Ribbon_BG, UICOLOR_Panel_Ribbon_FG);
 }
 
 void Ribon::render() const
@@ -36,22 +36,17 @@ void Ribon::render() const
 //----------------------------------------------------------------------------------------------------
 
 //Window Struct
-Window::Window(int windowW, int windowH, std::string panelName, int rx, int ry)
-	: windowW(windowW), windowH(windowH), panelName(panelName), renderpos(Position(rx, ry, NULL))
+Window::Window(int consoleWidth, int windowH, std::string panelName, int rx, int ry)
+	: consoleWidth(consoleWidth), windowH(windowH), panelName(panelName), renderpos(Position(rx, ry, NULL))
 {
-	mainWindow = std::make_shared<Pane>(windowW, windowH, UICOLOR_Root_BG, UICOLOR_Root_FG);
-	ribon = std::make_shared<Ribon>(panelName, windowW);
-	drawWindow = std::make_shared<Pane>(windowW, windowH - 1, UICOLOR_Panel_Draw_BG, UICOLOR_Panel_Draw_FG);
+	mainWindow = std::make_shared<Pane>(consoleWidth, windowH, UICOLOR_Root_BG, UICOLOR_Root_FG);
+	ribon = std::make_shared<Ribon>(panelName, consoleWidth);
+	drawWindow = std::make_shared<Pane>(consoleWidth, windowH - 1, UICOLOR_Panel_Draw_BG, UICOLOR_Panel_Draw_FG);
 }
 
 void Window::update()
 {
 	return;
-}
-
-void Window::setRibonName(std::string ribonName)
-{
-	ribon->windowName = ribonName;
 }
 
 void Window::clearWindow() const
@@ -62,9 +57,9 @@ void Window::clearWindow() const
 
 void Window::pushWindow() const
 {
-	ribon->ribonWindow->console->blit(ribon->ribonWindow->console, 0, 0, ribon->ribonWindow->consoleW, ribon->ribonWindow->consoleH, mainWindow->console, 0, 0, 1, 1);
-	drawWindow->console->blit(drawWindow->console, 0, 0, drawWindow->consoleW, drawWindow->consoleH, mainWindow->console, 0, 1, 1, 1);
-	mainWindow->console->blit(mainWindow->console, 0, 0, windowW, windowH, TCODConsole::root, renderpos.x, renderpos.y, 1, 1);
+	ribon->ribonWindow->console->blit(ribon->ribonWindow->console, 0, 0, ribon->ribonWindow->consoleWidth, ribon->ribonWindow->consoleHeight, mainWindow->console, 0, 0, 1, 1);
+	drawWindow->console->blit(drawWindow->console, 0, 0, drawWindow->consoleWidth, drawWindow->consoleHeight, mainWindow->console, 0, 1, 1, 1);
+	mainWindow->console->blit(mainWindow->console, 0, 0, consoleWidth, windowH, TCODConsole::root, renderpos.x, renderpos.y, 1, 1);
 }
 
 void Window::render() const

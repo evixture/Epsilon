@@ -10,13 +10,13 @@ constexpr auto PI = 3.14159265;
 
 /*
 	CHAR MAPPINGS
-	<	| 00 |  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 | 11 | 12 | 13 | 14 | 15 |
+	~	| 00 |  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 | 11 | 12 | 13 | 14 | 15 |
 	|TILES
 	|	| 16 | 17 | 18 | 19 | 20 | 21 | ?? | ?? | 24 | 26 | 26 | 27 | ?? | 29 | 30 | 31 |
 	|
-	<	| 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 |
+	~	| 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 |
 	
-	<	| 48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59 | 60 | 61 | 62 | 63 |
+	~	| 48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59 | 60 | 61 | 62 | 63 |
 	|ALPHA
 	|	| 64 | 65 | 66 | 67 | 68 | 69 | 70 | 71 | 72 | 73 | 74 | 75 | 76 | 77 | 78 | 79 |
 	|NUMBER
@@ -24,15 +24,15 @@ constexpr auto PI = 3.14159265;
 	|SYMBOLS
 	|	| 96 | 97 | 98 | 99 | 100| 101| 102| 103| 104| 105| 106| 107| 108| 109| 110| 111|
 	|ETC
-	<	| 112| 113| 114| 115| 116| 117| 118| 119| 120| 121| 122| 123| 124| 125| 126| 127|
+	~	| 112| 113| 114| 115| 116| 117| 118| 119| 120| 121| 122| 123| 124| 125| 126| 127|
 	
-	<	| 128| 129| 130| 131| 132| 133| 134| 135| 136| 137| 138| 139| 140| 141| 142| 143|
+	~	| 128| 129| 130| 131| 132| 133| 134| 135| 136| 137| 138| 139| 140| 141| 142| 143|
 	|TOOLS
 	|	| 144| 145| 146| 147| 148| 149| 150| 151| 152| 153| 154| 155| 156| 157| 158| 159|
 	|ITEMS
-	<	| 160| 161| 162| 163| 164| 165| 166| 167| 168| 169| 170| 171| 172| 173| 174| 175|
+	~	| 160| 161| 162| 163| 164| 165| 166| 167| 168| 169| 170| 171| 172| 173| 174| 175|
 	
-	<	| 176| 177| 178| 179| 180| 181| 182| 183| 184| 185| 186| 187| 188| 189| 190| 191|
+	~	| 176| 177| 178| 179| 180| 181| 182| 183| 184| 185| 186| 187| 188| 189| 190| 191|
 	|OTHER CHARS
 	|	| 192| 193| 194| 195| 196| 197| 198| 199| 200| 201| 202| 203| 204| 205| 206| 207|
 	|
@@ -40,7 +40,7 @@ constexpr auto PI = 3.14159265;
 	|
 	|	| 224| 225| 226| 227| 228| 229| 230| 231| 232| 233| 234| 235| 236| 237| 238| 239|
 	|
-	<	| 240| 241| 242| 243| 244| 245| 246| 247| 248| 249| 250| 251| 252| 253| 254| 255|
+	~	| 240| 241| 242| 243| 244| 245| 246| 247| 248| 249| 250| 251| 252| 253| 254| 255|
 */
 
 #define CHAR_UpStair 16
@@ -183,8 +183,8 @@ ITEM SIZES
 //DEFAULTS
 			#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true)
 //			#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true)
-//			#define WEAPON_DefaultRifle std::make_shared<Weapon>("WEAPON_DefaultRifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::FULL)
-//			#define WEAPON_DefaultSemiRifle std::make_shared<Weapon>("WEAPON_DefaultSemiRifle", TCODColor::white, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::SEMI)
+//			#define WEAPON_DefaultRifle std::make_shared<Firearm>("WEAPON_DefaultRifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Firearm::FireType::FULL)
+//			#define WEAPON_DefaultSemiRifle std::make_shared<Firearm>("WEAPON_DefaultSemiRifle", TCODColor::white, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Firearm::FireType::SEMI)
 //		#define ITEM_Test_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultRifle, Position(x, y, level))
 //		#define ITEM_Test2_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultSemiRifle, Position(x, y, level))
 //		#define ITEM_Default_Container(x, y, level) std::make_shared<Item>(5, DEFAULT_ITEM_TILE2, TOOL_Default_Container, Position(x, y, level))
@@ -211,7 +211,7 @@ ITEM SIZES
 	//M1911
 		//WEAPON
 				#define TILE_M1911 std::make_shared<Tile>(CHAR_Pistol, ITEMCOLOR_PISTOLFG, ITEMCOLOR_ITEMBG, 1, true)
-				#define WEAPON_M1911 std::make_shared<Weapon>("M1911", ITEMCOLOR_PISTOLFG, 7, 10, .15f, 1.0f, MagazineData::AmmoType::FOURTYFIVEACP, Weapon::FireType::SEMI)
+				#define WEAPON_M1911 std::make_shared<Firearm>("M1911", ITEMCOLOR_PISTOLFG, .15f, 1.0f, MagazineData::AmmoType::FOURTYFIVEACP, Firearm::FireType::SEMI)
 			#define ITEM_M1911(x, y, level, owner) std::make_shared<Item>(2, TILE_M1911 , WEAPON_M1911, Position(x, y, level), owner)
 		//MAGAZINE
 					#define TILE_45ACPMagazine7 std::make_shared<Tile>(CHAR_PistolMagazine, ITEMCOLOR_PISTOLFG, ITEMCOLOR_ITEMBG, 1, true)
@@ -223,7 +223,7 @@ ITEM SIZES
 	//M4A1
 		//WEAPON
 				#define TILE_M4A1 std::make_shared<Tile>(CHAR_Rifle, ITEMCOLOR_RIFLEFG, ITEMCOLOR_ITEMBG, 1, true)
-				#define WEAPON_M4A1 std::make_shared<Weapon>("M4A1", ITEMCOLOR_RIFLEFG, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Weapon::FireType::FULL)
+				#define WEAPON_M4A1 std::make_shared<Firearm>("M4A1", ITEMCOLOR_RIFLEFG, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Firearm::FireType::FULL)
 			#define ITEM_M4A1(x, y, level, owner) std::make_shared<Item>(3, TILE_M4A1 , WEAPON_M4A1, Position(x, y, level), owner)
 		//MAGAZINE
 					#define TILE_556Magazine30 std::make_shared<Tile>(CHAR_RifleMagazine, ITEMCOLOR_RIFLEFG, ITEMCOLOR_ITEMBG, 1, true)

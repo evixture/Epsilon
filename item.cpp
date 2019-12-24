@@ -1,6 +1,6 @@
 #include "main.hpp"
 
-//MagazineData::MagazineData(Weapon::AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid)
+//MagazineData::MagazineData(Firearm::AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid)
 //	:isValid(isValid), ammoType(ammoType), ammoCapacity(ammoCapacity), availableAmmo(availableAmmo)
 //{
 //}

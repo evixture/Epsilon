@@ -5,7 +5,7 @@ struct StatusPane : public Window
 	int displayHealth;
 	int displayArmor;
 
-	StatusPane(int windowW, int windowH, int rx, int ry);
+	StatusPane(int consoleWidth, int windowH, int rx, int ry);
 
 	void update();
 
@@ -18,7 +18,7 @@ struct MapPane : public Window
 
 	std::shared_ptr<World> world;
 
-	MapPane(int windowW, int windowH, int rx, int ry);
+	MapPane(int consoleWidth, int windowH, int rx, int ry);
 
 	void update();
 
@@ -30,7 +30,7 @@ struct PlayerPane : public Window
 	std::string playerSpeed;
 	std::string playerStance;
 
-	PlayerPane(int windowW, int windowH, int rx, int ry);
+	PlayerPane(int consoleWidth, int windowH, int rx, int ry);
 
 	void update();
 
@@ -41,7 +41,7 @@ struct InventoryPane : public Window
 {
 	std::vector<std::shared_ptr<Container>> inventoryItemList;
 
-	InventoryPane(int windowW, int windowH, int rx, int ry);
+	InventoryPane(int consoleWidth, int windowH, int rx, int ry);
 
 	void update();
 	void render() const;
@@ -53,7 +53,7 @@ struct SplashPane : public Window
 	std::string menuSelection;
 	std::vector<std::string> menuItemList;
 
-	SplashPane(int windowW, int windowH, int rx, int ry);
+	SplashPane(int consoleWidth, int windowH, int rx, int ry);
 
 	void update();
 	void render() const;
@@ -67,7 +67,7 @@ struct InventoryFullPane : public Window
 {
 	std::vector<std::shared_ptr<Container>> inventoryItemList;
 
-	InventoryFullPane(int windowW, int windowH, int rx, int ry);
+	InventoryFullPane(int consoleWidth, int windowH, int rx, int ry);
 
 	void update();
 	void render() const;
@@ -77,7 +77,7 @@ struct LogPane : public Window
 {
 	std::vector<std::string> messageList;
 
-	LogPane(int windowW, int windowH, int rx, int ry);
+	LogPane(int consoleWidth, int windowH, int rx, int ry);
 
 	void pushMessage(std::string message);
 
@@ -90,7 +90,7 @@ struct ProximityPane : public Window
 	std::vector<std::shared_ptr<Container>> proximityContainerList;
 	std::vector<std::shared_ptr<Item>> proximityItemList;
 
-	ProximityPane(int windowW, int windowH, int rx, int ry);
+	ProximityPane(int consoleWidth, int windowH, int rx, int ry);
 
 	void update();
 	void render() const;
@@ -100,7 +100,7 @@ struct ActionPane : public Window
 {
 	std::shared_ptr<ActionManager> actionManager;
 
-	ActionPane(int windowW, int windowH, int rx, int ry);
+	ActionPane(int consoleWidth, int windowH, int rx, int ry);
 
 	void update();
 	void render() const;

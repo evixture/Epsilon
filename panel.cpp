@@ -1,8 +1,8 @@
 #include "main.hpp"
 
 //MapPane Struct
-MapPane::MapPane(int windowW, int windowH, int rx, int ry)
-	:Window(windowW, windowH, "World", rx, ry)
+MapPane::MapPane(int consoleWidth, int windowH, int rx, int ry)
+	:Window(consoleWidth, windowH, "World", rx, ry)
 {
 	mapSidePanel = std::make_shared<Pane>(1, 61, UICOLOR_Panel_Ribbon_BG, UICOLOR_Panel_Ribbon_FG);
 
@@ -28,8 +28,8 @@ void MapPane::render() const
 //----------------------------------------------------------------------------------------------------
 
 //StatusPane Struct
-StatusPane::StatusPane(int windowW, int windowH, int rx, int ry)
-	:Window(windowW, windowH, "Status", rx, ry), displayHealth(0), displayArmor(0)
+StatusPane::StatusPane(int consoleWidth, int windowH, int rx, int ry)
+	:Window(consoleWidth, windowH, "Status", rx, ry), displayHealth(0), displayArmor(0)
 {
 }
 
@@ -73,8 +73,8 @@ void StatusPane::render() const
 //----------------------------------------------------------------------------------------------------
 
 //PlayerPane Struct
-PlayerPane::PlayerPane(int windowW, int windowH, int rx, int ry)
-	:Window(windowW, windowH, "Player", rx, ry), playerSpeed("Still"), playerStance("Standing")
+PlayerPane::PlayerPane(int consoleWidth, int windowH, int rx, int ry)
+	:Window(consoleWidth, windowH, "Player", rx, ry), playerSpeed("Still"), playerStance("Standing")
 {
 }
 
@@ -119,8 +119,8 @@ void PlayerPane::render() const
 
 //----------------------------------------------------------------------------------------------------
 
-InventoryPane::InventoryPane(int windowW, int windowH, int rx, int ry)
-	:Window(windowW, windowH, "Inventory", rx, ry)
+InventoryPane::InventoryPane(int consoleWidth, int windowH, int rx, int ry)
+	:Window(consoleWidth, windowH, "Inventory", rx, ry)
 {
 }
 
@@ -196,8 +196,8 @@ void InventoryPane::render() const
 
 //----------------------------------------------------------------------------------------------------
 
-SplashPane::SplashPane(int windowW, int windowH, int rx, int ry)
-	:Window(windowW, windowH, "EPSILON", rx, ry), menuIndex(0)
+SplashPane::SplashPane(int consoleWidth, int windowH, int rx, int ry)
+	:Window(consoleWidth, windowH, "EPSILON", rx, ry), menuIndex(0)
 {
 	menuItemList.push_back("Start");
 	menuItemList.push_back("Exit");
@@ -278,8 +278,8 @@ void SplashPane::render() const
 	pushWindow();
 }
 
-InventoryFullPane::InventoryFullPane(int windowW, int windowH, int rx, int ry)
-	:Window(windowW, windowH, "Inventory", rx, ry)
+InventoryFullPane::InventoryFullPane(int consoleWidth, int windowH, int rx, int ry)
+	:Window(consoleWidth, windowH, "Inventory", rx, ry)
 {
 }
 
@@ -355,8 +355,8 @@ void InventoryFullPane::render() const
 
 //----------------------------------------------------------------------------------------------------
 
-LogPane::LogPane(int windowW, int windowH, int rx, int ry)
-	: Window(windowW, windowH, "Log", rx, ry)
+LogPane::LogPane(int consoleWidth, int windowH, int rx, int ry)
+	: Window(consoleWidth, windowH, "Log", rx, ry)
 {
 }
 
@@ -381,8 +381,8 @@ void LogPane::render() const
 	pushWindow();
 }
 
-ProximityPane::ProximityPane(int windowW, int windowH, int rx, int ry)
-	:Window(windowW, windowH, "Proximity", rx, ry)
+ProximityPane::ProximityPane(int consoleWidth, int windowH, int rx, int ry)
+	:Window(consoleWidth, windowH, "Proximity", rx, ry)
 {
 }
 
@@ -430,8 +430,8 @@ void ProximityPane::render() const
 	pushWindow();
 }
 
-ActionPane::ActionPane(int windowW, int windowH, int rx, int ry)
-	:Window(windowW, windowH, "Actions", rx, ry)
+ActionPane::ActionPane(int consoleWidth, int windowH, int rx, int ry)
+	:Window(consoleWidth, windowH, "Actions", rx, ry)
 {
 }
 

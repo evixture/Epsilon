@@ -188,12 +188,12 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-//Weapon Struct
-Weapon::Weapon(std::string name, TCODColor color, int ammoCap, int numberMags, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireType)
-	: Tool(name, color, NULL, ammoType), baseFireCap(fireRate), fireClock(0), reloadClock(0), baseReloadTimer(reloadSpeed), fireType(fireType), selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))//, ammoCap(ammoCap), ammoAmount(ammoCap), numberMags(numberMags), ammoType(ammoType),
+//Firearm Struct
+Firearm::Firearm(std::string name, TCODColor color, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireType)
+	: Tool(name, color, NULL, ammoType), maxFireTime(fireRate), fireClock(0), reloadClock(0), maxReloadTime(reloadSpeed), fireType(fireType), selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
 {}
 
-void Weapon::updateWeaponChar(double angle)
+void Firearm::updateWeaponChar(double angle)
 {
 	/*
 	02|01
@@ -347,12 +347,12 @@ void Weapon::updateWeaponChar(double angle)
 	}
 }
 
-std::shared_ptr<MagazineData> Weapon::getMagData()
+std::shared_ptr<MagazineData> Firearm::getMagData()
 {
 	return selectedMagazine;
 }
 
-void Weapon::fireBullet()
+void Firearm::fireBullet()
 {
 	if (!(toolx == dx + toolx && tooly == dy + tooly))
 	{
@@ -362,7 +362,7 @@ void Weapon::fireBullet()
 	}
 }
 
-void Weapon::reload(std::shared_ptr<MagazineData>& magazine)
+void Firearm::reload(std::shared_ptr<MagazineData>& magazine)
 {
 	if (magazine->isValid != false)
 	{
@@ -373,7 +373,7 @@ void Weapon::reload(std::shared_ptr<MagazineData>& magazine)
 	else selectedMagazine = magazine;
 }
 
-void Weapon::update(int x, int y, int mx, int my, double angle)
+void Firearm::update(int x, int y, int mx, int my, double angle)
 {
 	dx = mx - x;
 	dy = my - y;
@@ -381,8 +381,8 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	sourcex = x;
 	sourcey = y;
 
-	fireClock.capacity = (int)(baseFireCap * SETTINGS->fpsCount);
-	reloadClock.capacity = (int)(baseReloadTimer * SETTINGS->fpsCount);
+	fireClock.capacity = (int)(maxFireTime * SETTINGS->fpsCount);
+	reloadClock.capacity = (int)(maxReloadTime * SETTINGS->fpsCount);
 
 	updateToolPosition(angle);
 	updateWeaponChar(angle);
@@ -419,7 +419,7 @@ void Weapon::update(int x, int y, int mx, int my, double angle)
 	}
 }
 
-void Weapon::render(const std::shared_ptr<Pane>& pane) const
+void Firearm::render(const std::shared_ptr<Pane>& pane) const
 {
 	pane->console->setChar(toolx, tooly, ch);
 	pane->console->setCharForeground(toolx, tooly, color);
