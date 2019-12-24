@@ -73,12 +73,12 @@ void Destructible::interact()
 //----------------------------------------------------------------------------------------------------
 
 //Stair Struct
-Stair::Stair(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable, int moveDist)
-	: Tile(ch, foregroundColor, backgroundColor, height, true, Tile::Tag::STAIR), moveDist(moveDist)
+Stair::Stair(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable, int moveDistance)
+	: Tile(ch, foregroundColor, backgroundColor, height, true, Tile::Tag::STAIR), moveDistance(moveDistance)
 {
 }
 
 void Stair::interact()
 {
-	WORLD->player->mapPosition.level += moveDist;
+	WORLD->player->mapPosition.level += moveDistance;
 }
