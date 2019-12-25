@@ -22,8 +22,8 @@
 
 struct Pane;
 //class Entity;
-class Creature;
-class Player;
+struct Creature;
+struct Player;
 
 //Class File Imports
 #include "utility.h"

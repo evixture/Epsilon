@@ -1,69 +1,64 @@
 #include "main.hpp"
 
-//Entity Class
-class Entity : public Test
+struct Entity //generic entity base for use on map
 {
-public:
-	Position mapPosition;
-	int symbol;
-	const TCODColor color;
-	std::string name;
+	Position mapPosition; //the position of the entity on the map
+	int ch; //character representation of the character
+	const TCODColor color; //foreground color of the entity
+	std::string name; //string name of entity
 
-	int height;
+	int height; //height of the entity
 
-	Entity(Position pos, int symbol, std::string name, TCODColor color);
+	Entity(Position pos, int ch, std::string name, TCODColor color); //entity constructor that takes position, character, string name, and color
 
-	virtual void update();
-	virtual void render(const std::shared_ptr<Pane> &pane) const;
+	virtual void update(); //virtual update entity
+	virtual void render(const std::shared_ptr<Pane> &pane) const; //virtual render entity
 
 protected:
-	Position renderPosition;
+	Position renderPosition; //position of the entity on the map pane
 };
 
-//Creature Class
-class Creature : public Entity
+struct Creature : public Entity //creature base used for player and other beings
 {
-public:
-	double angle;
+	double angle; //angle that the creature us facing
 
-	int health;
-	int armor;
+	int health; //the health of the creature
+	int armor; //the armor of the creature
 
-	int containerIndex;
-	int itemIndex;
-	std::shared_ptr<Item> selectedItem;
+	int containerIndex; //the index of the selected item's container in the inventory
+	int itemIndex; //the index of the selected item in the inventory
 
-	std::vector<std::shared_ptr<Container>> inventory;
-	//if not working, chnage back to magazine item
-	std::shared_ptr<MagazineData> selectedMagazine;
-	std::shared_ptr<MagazineData> nullMagazine;
+	std::vector<std::shared_ptr<Container>> inventory; //contains all of the items and containers of the creature
 
-	Creature(Position pos, int symbol, std::string name, TCODColor color, int health, int armor);
+	std::shared_ptr<Item> selectedItem; //the item that is currently selected
+	std::shared_ptr<MagazineData> selectedMagazine; //the selected magazine of the selected item
 
-	virtual void moveSelectorUp() {};
-	virtual void moveSelectorDown() {};
-	virtual void pickUpItem() {};
-	virtual void dropItem() {};
-	virtual void filterIndexes() {};
-	virtual void reload() {};
+	std::shared_ptr<MagazineData> nullMagazine; //a generic magazine that is used then a firearm has no actual magazine
 
-	virtual void update();
-	void virtual render(const std::shared_ptr<Pane>& pane) const;
+	Creature(Position pos, int ch, std::string name, TCODColor color, int health, int armor); //creature constructor that takes a position, character, string name, color, health, and armor
+
+	virtual void moveSelectorUp() {}; //moves the selector up on the inventory
+	virtual void moveSelectorDown() {}; //moves the selector down on the inventory
+	virtual void pickUpItem() {}; //picks up the item on the ground
+	virtual void dropItem() {}; //drops the selected item
+	virtual void filterIndexes() {}; //filters the container and item indexes to make sure they are in range
+	virtual void reload() {}; //reloads the selected item
+
+	virtual void update(); //virtual updates the creature
+	void virtual render(const std::shared_ptr<Pane>& pane) const; // virtual renders the creature
 };
 
-//Player Class
-class Player : public Creature
+struct Player : public Creature //player derived creature that the player interacts through
 {
-public:
-	Player(Position pos);
+	Player(Position pos); //player constructor that takes a position
 
-	void moveSelectorUp();
-	void moveSelectorDown();
-	void pickUpItem();
-	void dropItem();
-	void filterIndexes();
-	void reload();
-	void update();
+	void moveSelectorUp(); //moves the selector up on the inventory
+	void moveSelectorDown(); //moves the selector down on the inventory
+	void pickUpItem(); //picks up the item on the ground
+	void dropItem(); //drops the selected item
+	void filterIndexes(); //filters the container and item indexes to make sure they are in range
+	void reload(); //reloads the selected item
 
-	void render(const std::shared_ptr<Pane>& pane) const;
+	void update(); //updates the player
+	void render(const std::shared_ptr<Pane>& pane) const; //renders the player
 };

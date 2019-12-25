@@ -1,78 +1,75 @@
 #include "main.hpp"
 
-struct Action
+struct Action //handles item actions
 {
-	enum class Type {DROP, RELOAD} type;
+	enum class Type {DROP, RELOAD} type; //main type of action, enum for easy comparison
 
-	std::string name;
-	//TestFunctionType action;
-	std::function<void()> action;
+	std::string name; //the string name of the action so it can be rendered in action pane
+	std::function<void()> action; //the function that is called when activated
 
-	Action(std::string name, std::function<void()> action, Type actionType); //, std::function<void()> action
+	Action(std::string name, std::function<void()> action, Type actionType); //action constructor that takes string name, function, and action type
 };
 
-struct ActionManager
+struct ActionManager //manages all of the actions of an item
 {
-	std::vector<std::shared_ptr<Action>> actionList;
-	int actionIndex;
-	std::shared_ptr<Action> selectedAction;
+	std::vector<std::shared_ptr<Action>> actionList; //list of actions for an item
+	int actionIndex; //the index of the selected item in the action list
+	std::shared_ptr<Action> selectedAction; //the selected action of the item
 
+	ActionManager(std::vector<std::shared_ptr<Action>> actionList); //constructor of action manager that takes a list of actions
 
-	ActionManager(std::vector<std::shared_ptr<Action>> actionList);
+	void moveSelectorUp(); //moves the action index down in value
+	void moveSelectorDown(); //moves the action index up in value
 
-	void moveSelectorUp();
-	void moveSelectorDown();
-
-	void doAction();
+	void doAction(); //calls the action of the selected action
 };
 
-struct Item
+struct Item //an item that a creature can hold and interact with
 {
-	int size;
-	double distToEnt;
+	int size; //size that the item tekes up in the inventory
+	double distToEnt; //the distance from the player to the item, used to highlight the item when the player is in proximity
 
-	Position mapPosition;
-	Position renderPosition;
+	Position mapPosition; //the position of the item on the map
 
-	std::shared_ptr<Tile> tile;
-	std::shared_ptr<Tool> tool;
+	std::shared_ptr<Tile> tile; //the tile component used when the item is on the map
+	std::shared_ptr<Tool> tool; //the tool component used when the item is in the player's inventory
 
-	std::shared_ptr<ActionManager> actionManager;
+	std::shared_ptr<ActionManager> actionManager; //used to activate more advanced interactions with the item
 
-	Test test;
+	Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position, Player* owner); //item constructor that takes a size, tile, too, position, and a player used for action manager
 
+	virtual std::shared_ptr<MagazineData> getMagazineData(); //used to get the important data of the magazine, returns generic magazine when called from item
 
-	Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position, Player* owner);
+	void updateTool(int x, int y, int mx, int my, double angle, int level); //updates tool, used when in player inventory
+	void renderTool(const std::shared_ptr<Pane>& pane) const; //renders tool, used then in player inventory
 
-	virtual std::shared_ptr<MagazineData> getMagazineData();
+	void updateTile(); //used to update tile, used when on the map
+	void renderTile(const std::shared_ptr<Pane>& pane) const; //renders the tile, used when on the map
 
-	void updateTool(int x, int y, int mx, int my, double angle, int level);
-	void renderTool(const std::shared_ptr<Pane>& pane) const;
-
-	void updateTile();
-	void renderTile(const std::shared_ptr<Pane>& pane) const;
+private:
+	Position renderPosition; //the position of the item on the map window
 };
 
-struct MagazineItem : public Item
+struct MagazineItem : public Item //magazine derived class of base item
 {
-	std::shared_ptr<MagazineData> magazineData;
+	std::shared_ptr<MagazineData> magazineData; //contains all of the important data of the magazine
 
-	MagazineItem(Item item, std::shared_ptr<MagazineData> magazineData);
+	MagazineItem(Item item, std::shared_ptr<MagazineData> magazineData); //magazine item constructor that takes an item and magazine data
 
-	std::shared_ptr<MagazineData> getMagazineData();
+	std::shared_ptr<MagazineData> getMagazineData(); //returns the magazine data of this class
 };
 
-struct Container
+struct Container //container, used to hold items in the inventory
 {
-	int itemCapacity;
-	int currentSize;
+	int itemCapacity; //the maximum units of items the container can hold 
+	int currentSize; //the current size used up of all of the items in the container
 
-	std::shared_ptr<Item> containerItem;
+	std::shared_ptr<Item> containerItem; //item representation of the container
 
-	std::vector<std::shared_ptr<Item>> itemList;
+	std::vector<std::shared_ptr<Item>> itemList; //the list of all of the items in the container
 
-	Container(int itemCapacity, std::shared_ptr<Item> containerItem);
+	Container(int itemCapacity, std::shared_ptr<Item> containerItem); //container constructor that takes a capacity and a container item
 
-	bool addItem(std::shared_ptr<Item> item);
+	bool addItem(std::shared_ptr<Item> item); //adds an item to the container
 };
 

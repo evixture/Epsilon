@@ -1,8 +1,8 @@
 #include "main.hpp"
 
 //Entity Class
-Entity::Entity(Position pos, int symbol, std::string name, TCODColor color)
-	: mapPosition(pos), renderPosition(pos), symbol(symbol), color(color), name(name), height(3)
+Entity::Entity(Position pos, int ch, std::string name, TCODColor color)
+	: mapPosition(pos), renderPosition(pos), ch(ch), color(color), name(name), height(3)
 {}
 
 void Entity::update()
@@ -12,15 +12,15 @@ void Entity::update()
 
 void Entity::render(const std::shared_ptr<Pane>& pane) const
 {
-	pane->console->setChar(mapPosition.x, mapPosition.y, symbol);
+	pane->console->setChar(mapPosition.x, mapPosition.y, ch);
 	pane->console->setCharForeground(mapPosition.x, mapPosition.y, color);
 }
 
 //----------------------------------------------------------------------------------------------------
 
 //Creature Class
-Creature::Creature(Position pos, int symbol, std::string name, TCODColor color, int health, int armor)
-	:Entity(Position(pos), symbol, name, color), angle(0), health(health), armor(armor), containerIndex(0), itemIndex(0), nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
+Creature::Creature(Position pos, int ch, std::string name, TCODColor color, int health, int armor)
+	:Entity(Position(pos), ch, name, color), angle(0), health(health), armor(armor), containerIndex(0), itemIndex(0), nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
 {
 }
 
@@ -31,7 +31,7 @@ void Creature::update()
 
 void Creature::render(const std::shared_ptr<Pane>& pane) const
 {
-	pane->console->setChar(mapPosition.x, mapPosition.y, symbol);
+	pane->console->setChar(mapPosition.x, mapPosition.y, ch);
 	pane->console->setCharForeground(mapPosition.x, mapPosition.y, color);
 }
 
@@ -339,7 +339,7 @@ void Player::update()
 
 void Player::render(const std::shared_ptr<Pane>& pane) const
 {
-	pane->console->setChar(renderPosition.x, renderPosition.y, symbol);
+	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
 	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
 
 	selectedItem->renderTool(pane);
