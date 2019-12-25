@@ -1,18 +1,16 @@
 #include "main.hpp"
 
-//Engine Class
-class Engine
+struct Engine //engine class that contains everything
 {
-public:
-	enum Gamestate { MAIN, EXIT } gamestate;
+	enum Gamestate { MAIN, EXIT } gamestate; //the main state tht the game is in
 
-	std::shared_ptr<Settings> settings;
-	std::shared_ptr<Gui> gui;
+	std::shared_ptr<Settings> settings; //contains all of the settings and mainly non-graphical things
+	std::shared_ptr<Gui> gui; //contains nearly all of the things that need to be rendered to the screen
 
-	Engine(int screenCharWidth, int screenCharHeight);
+	Engine(int screenCharWidth, int screenCharHeight); //engine constructor that takes screen width in characters and screen height in characters
 
-	void update();
-	void render() const;
+	void update(); //runs all of the other update functions of the things in this class
+	void render() const; //runs all of the other render functions for the things in this class
 };
 
-extern std::shared_ptr<Engine> engine;
+extern std::shared_ptr<Engine> engine; //states that this is used initially in main

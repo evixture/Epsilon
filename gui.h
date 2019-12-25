@@ -1,25 +1,23 @@
 #include "main.hpp"
 
-//Gui Class
-class Gui
+struct Gui //contains all of the window panels used for rendering everything that is important to the screen
 {
-public:
-	enum ActiveWindow { NONE, STARTUPSPLASH, INVENTORYFULL} activeWindow;
+	enum ActiveWindow { NONE, STARTUPSPLASH, INVENTORYFULL} activeWindow; //the large windows that are active like the startup splash and big inventory
 
 	//Part-screen Windows
-	std::shared_ptr<MapPane> mapPane;
-	std::shared_ptr<PlayerPane> playerPane;
-	std::shared_ptr<StatusPane> statusPane;
-	std::shared_ptr<InventoryPane> inventoryPane;
-	std::shared_ptr<LogPane> eventLogPane;
-	std::shared_ptr<ProximityPane> proximityPane;
-	std::shared_ptr<ActionPane> actionsPane;
-
-	//Full-screen Windows
-	std::shared_ptr<SplashPane> startupSplash;
+	std::shared_ptr<PlayerPane> playerPane; //displays the character's health, armor, etc
+	std::shared_ptr<StatusPane> statusPane; //displays the player's stance and movement speed
+	std::shared_ptr<InventoryPane> inventoryPane; //shows what is in the player's inventory
+	std::shared_ptr<LogPane> eventLogPane; //shows the recent events pushed to the event log
+	std::shared_ptr<ProximityPane> proximityPane; //shows what items are in the player's proximity
+	std::shared_ptr<ActionPane> actionsPane; //shows the availible actions for the player's selected item
 
 	//Half Screen Windows
-	std::shared_ptr<InventoryFullPane> inventoryFullPane;
+	std::shared_ptr<MapPane> mapPane; //the pane used for everything regarding the map
+	std::shared_ptr<InventoryFullPane> inventoryFullPane; //shows what is in the player's inventory in a larger view
+
+	//Full-screen Windows
+	std::shared_ptr<SplashPane> startupSplash; //the startup main menu that shows initial menu options and the large logo
 
 	Gui(int windowX, int windowY);
 
@@ -27,5 +25,5 @@ public:
 	void render() const;
 
 private:
-	std::vector<std::shared_ptr<Window>> windowList;
+	std::vector<std::shared_ptr<Window>> windowList; //private list for easy itteration over all of the panes
 };

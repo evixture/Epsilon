@@ -1,93 +1,89 @@
 #include "main.hpp"
 
-struct Key
+struct Key //used to get the input of a single key on the keyboard
 {
-	sf::Keyboard::Key sfKey;
-	bool isDown;
-	//bool isPressed;
-	bool isSwitched;
+	sf::Keyboard::Key sfKey; //sfml representation of a key
+	bool isDown; //if the key is currently down, stays true while the key is down
+	bool isSwitched; //if the key has been switched, active for one frame when pressed
 
-	Key(sf::Keyboard::Key sfKey);
-	Key();
+	Key(sf::Keyboard::Key sfKey); //constructor for key that takes an sfml key
+	Key(); //default constructor
 
-	void update();
+	void update(); //checks for the status for the key
 
 private:
-	bool keySwitch;
+	bool keySwitch; //used for calculating key switch
 };
 
-struct MouseButton
+struct MouseButton //used to get the input of a button on the mouse
 {
-	sf::Mouse::Button sfMButton;
-	bool isDown;
-	bool isSwitched;
+	sf::Mouse::Button sfMButton; //sfml representation of a mouse button
+	bool isDown; //if the button is currently held down
+	bool isSwitched; //if the key has been switched
 
-	MouseButton(sf::Mouse::Button MButton);
-	MouseButton();
+	MouseButton(sf::Mouse::Button MButton); //mouse constructor that takes an sfml mouse button
+	MouseButton(); //default constructor
 
-	void update();
+	void update(); //checks for the status of the key
 
 private:
-	bool buttonSwitch;
+	bool buttonSwitch; //used for calculating the mouse button switch
 };
 
-//Input Struct
-struct Input
+struct Input //handles all of the mouse and keyboard input
 {
-	TCOD_event_t keyEvent;
-	TCOD_key_t keyboard;
-	TCOD_mouse_t mouse;
+	TCOD_event_t keyEvent; //handles tcod events
+	TCOD_key_t keyboard; //handles tcod key events
+	TCOD_mouse_t mouse; //handles tcod mouse events
 
-	std::shared_ptr<Key> w;
-	std::shared_ptr<Key> a;
-	std::shared_ptr<Key> s;
-	std::shared_ptr<Key> d;
+	//player movement cluster
+	std::shared_ptr<Key> w; //w key on keyboard
+	std::shared_ptr<Key> a; //a key on keyboard
+	std::shared_ptr<Key> s; //s key on keyboard
+	std::shared_ptr<Key> d; //d key on keyboard
+	std::shared_ptr<Key> lctrl; //left control key on keyboard
+	std::shared_ptr<Key> lshift; //left shift key on keyboard
+	std::shared_ptr<Key> z; //z key on keyboard
+	std::shared_ptr<Key> x; //x key on keyboard
+	std::shared_ptr<Key> c; //c key on keyboard
 
-	std::shared_ptr<Key> lctrl;
-	std::shared_ptr<Key> lshift;
-	std::shared_ptr<Key> lalt;
+	//item and world interaction cluster
+	std::shared_ptr<Key> e; //e key on keyboard
+	std::shared_ptr<Key> q; //q key on keyboard
+	std::shared_ptr<Key> r; //r key on keyboard
+	std::shared_ptr<Key> lalt; //left alt key on keyboard
+	std::shared_ptr<Key> space; //space key on keyboard
 
-	std::shared_ptr<Key> z;
-	std::shared_ptr<Key> x;
-	std::shared_ptr<Key> c;
+	//menu and window cluster
+	std::shared_ptr<Key> i; //i key on keyboard
+	std::shared_ptr<Key> f11; //f11 key on keyboard
+	std::shared_ptr<Key> escape; //escape key on keyboard
 
-	std::shared_ptr<Key> e;
-	std::shared_ptr<Key> q;
-	std::shared_ptr<Key> r;
+	//debug cluster
+	std::shared_ptr<Key> num0; //0 key on keyboard 
+	std::shared_ptr<Key> num9; //9 key on keyboard
 
-	std::shared_ptr<Key> i;
+	//mouse buttons
+	std::shared_ptr<MouseButton> leftMouseButton; //left mouse button on the mouse
+	std::shared_ptr<MouseButton> rightMouseButton; //right mouse button on the mouse
 
-	std::shared_ptr<Key> num0;
-	std::shared_ptr<Key> num9;
+	float baseMoveTime; //time before the player moves a unit
 
-	std::shared_ptr<Key> space;
-	std::shared_ptr<Key> f11;
-	std::shared_ptr<Key> escape;
-	std::vector<std::shared_ptr<Key>> keyList;
+	Input(); //input constructor that takes no arguments
 
-	std::shared_ptr<MouseButton> leftMouseButton;
-	std::shared_ptr<MouseButton> rightMouseButton;
+	void update(std::shared_ptr<Player> player); //updates all of the buttons and events that takes player
 
-	std::vector<std::shared_ptr<MouseButton>> mouseList;
-
-	float baseMoveWait;
-
-	//bool leftMouseClick;
-
-	Input();
-
-	//TODO : Move key checks to funcs with buttton params for config support
-
-	void update(std::shared_ptr<Player> player);
-
-	void getKeyDown();
-	void getKeyInput(std::shared_ptr<Player> player);
-
-	void getMouseInput();
 
 private:
-	Clock movementClock;
+	std::vector<std::shared_ptr<Key>> keyList; //list of all keys availible for input
+	std::vector<std::shared_ptr<MouseButton>> mouseList; //list of all availible mouse buttons for input
+
+	Clock movementClock; //clock for player input
 	
-	int moveXSpeed;
-	int moveYSpeed;
+	int moveXSpeed; //the amount that the player moves in the x dimension
+	int moveYSpeed; //the amount that the player moves in the y dimension
+
+	void updateMouseInput(); //checks for mouse events
+	void updateKeyInput(); //checks for key events
+	void updateInput(std::shared_ptr<Player> player); //checks for all inputs
 };

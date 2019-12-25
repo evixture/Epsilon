@@ -93,15 +93,15 @@ void PlayerPane::update()
 		playerStance = "Standing";
 	}
 
-	if (INPUT->baseMoveWait == .5f)
+	if (INPUT->baseMoveTime == .5f)
 	{
 		playerSpeed = "Walking";
 	}
-	else if (INPUT->baseMoveWait == .25f)
+	else if (INPUT->baseMoveTime == .25f)
 	{
 		playerSpeed = "Running";
 	}
-	else if (INPUT->baseMoveWait == 1.0f)
+	else if (INPUT->baseMoveTime == 1.0f)
 	{
 		playerSpeed = "Creeping";
 	}

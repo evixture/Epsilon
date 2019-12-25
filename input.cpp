@@ -70,7 +70,7 @@ void MouseButton::update()
 
 //Input Struct
 Input::Input()
-	:keyboard(), mouse(), baseMoveWait(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(0))
+	:keyboard(), mouse(), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(0))
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &mouse);
 	TCODMouse::showCursor(false);
@@ -105,7 +105,7 @@ Input::Input()
 	mouseList.push_back(rightMouseButton = std::make_shared<MouseButton>(sf::Mouse::Right));
 }
 
-void Input::getMouseInput()
+void Input::updateMouseInput()
 {
 	if (TCODConsole::hasMouseFocus())
 	{
@@ -116,7 +116,7 @@ void Input::getMouseInput()
 	}
 }
 
-void Input::getKeyDown()
+void Input::updateKeyInput()
 {
 	for (auto& key : keyList)
 	{
@@ -125,20 +125,20 @@ void Input::getKeyDown()
 
 	if (lshift->isDown)
 	{
-		baseMoveWait = .25f;
+		baseMoveTime = .25f;
 	}
 	else if (lctrl->isDown)
 	{
-		baseMoveWait = 1.0f;
+		baseMoveTime = 1.0f;
 	}
-	else baseMoveWait = .5f;
+	else baseMoveTime = .5f;
 }
 
-void Input::getKeyInput(std::shared_ptr<Player> player)
+void Input::updateInput(std::shared_ptr<Player> player)
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &mouse);
 
-	getKeyDown();
+	updateKeyInput();
 
 	if (GUI->activeWindow != Gui::STARTUPSPLASH)
 	{
@@ -159,7 +159,7 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 			WORLD->player->height = 3;
 		}
 		
-		movementClock.capacity = (int)((baseMoveWait / WORLD->player->height) * SETTINGS->fpsCount);
+		movementClock.capacity = (int)((baseMoveTime / WORLD->player->height) * SETTINGS->fpsCount);
 
 		//change so keys not favored
 
@@ -216,6 +216,6 @@ void Input::getKeyInput(std::shared_ptr<Player> player)
 
 void Input::update(std::shared_ptr<Player> player)
 {
-	getKeyInput(player);
-	getMouseInput();
+	updateInput(player);
+	updateMouseInput();
 }
