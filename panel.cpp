@@ -1,7 +1,7 @@
 #include "main.hpp"
 
-//MapPane Struct
-MapPane::MapPane(int consoleWidth, int windowH, int rx, int ry)
+//MapWindow Struct
+MapWindow::MapWindow(int consoleWidth, int windowH, int rx, int ry)
 	:Window(consoleWidth, windowH, "World", rx, ry)
 {
 	mapSidePanel = std::make_shared<Pane>(1, 61, UICOLOR_Panel_Ribbon_BG, UICOLOR_Panel_Ribbon_FG);
@@ -9,12 +9,12 @@ MapPane::MapPane(int consoleWidth, int windowH, int rx, int ry)
 	world = std::make_shared<World>();
 }
 
-void MapPane::update()
+void MapWindow::update()
 {
 	world->update();
 }
 
-void MapPane::render() const
+void MapWindow::render() const
 {
 	clearWindow();
 	world->render(drawWindow);
@@ -27,19 +27,19 @@ void MapPane::render() const
 
 //----------------------------------------------------------------------------------------------------
 
-//StatusPane Struct
-StatusPane::StatusPane(int consoleWidth, int windowH, int rx, int ry)
+//StatusWindow Struct
+StatusWindow::StatusWindow(int consoleWidth, int windowH, int rx, int ry)
 	:Window(consoleWidth, windowH, "Status", rx, ry), displayHealth(0), displayArmor(0)
 {
 }
 
-void StatusPane::update()
+void StatusWindow::update()
 {
 	displayHealth = WORLD->player->health;
 	displayArmor = WORLD->player->armor;
 }
 
-void StatusPane::render() const
+void StatusWindow::render() const
 {
 	clearWindow();
 
@@ -72,13 +72,13 @@ void StatusPane::render() const
 
 //----------------------------------------------------------------------------------------------------
 
-//PlayerPane Struct
-PlayerPane::PlayerPane(int consoleWidth, int windowH, int rx, int ry)
+//PlayerWindow Struct
+PlayerWindow::PlayerWindow(int consoleWidth, int windowH, int rx, int ry)
 	:Window(consoleWidth, windowH, "Player", rx, ry), playerSpeed("Still"), playerStance("Standing")
 {
 }
 
-void PlayerPane::update()
+void PlayerWindow::update()
 {
 	if (WORLD->player->height == 1)
 	{
@@ -107,7 +107,7 @@ void PlayerPane::update()
 	}
 }
 
-void PlayerPane::render() const
+void PlayerWindow::render() const
 {
 	clearWindow();
 
@@ -119,17 +119,17 @@ void PlayerPane::render() const
 
 //----------------------------------------------------------------------------------------------------
 
-InventoryPane::InventoryPane(int consoleWidth, int windowH, int rx, int ry)
+InventoryWindow::InventoryWindow(int consoleWidth, int windowH, int rx, int ry)
 	:Window(consoleWidth, windowH, "Inventory", rx, ry)
 {
 }
 
-void InventoryPane::update()
+void InventoryWindow::update()
 {
 	inventoryItemList = WORLD->player->inventory;
 }
 
-void InventoryPane::render() const
+void InventoryWindow::render() const
 {
 	clearWindow();
 
@@ -196,7 +196,7 @@ void InventoryPane::render() const
 
 //----------------------------------------------------------------------------------------------------
 
-SplashPane::SplashPane(int consoleWidth, int windowH, int rx, int ry)
+SplashWindow::SplashWindow(int consoleWidth, int windowH, int rx, int ry)
 	:Window(consoleWidth, windowH, "EPSILON", rx, ry), menuIndex(0)
 {
 	menuItemList.push_back("Start");
@@ -207,7 +207,7 @@ SplashPane::SplashPane(int consoleWidth, int windowH, int rx, int ry)
 
 //--------------------------------------------------------------------------------------------
 
-void SplashPane::update()
+void SplashWindow::update()
 {
 	menuSelection = menuItemList[menuIndex];
 
@@ -241,7 +241,7 @@ void SplashPane::update()
 
 //--------------------------------------------------------------------------------------------
 
-void SplashPane::renderLargeLogo() const
+void SplashWindow::renderLargeLogo() const
 {
 	drawWindow->console->printf(48, 20, "|           |");
 	drawWindow->console->printf(48, 21, "| |       | |");
@@ -252,7 +252,7 @@ void SplashPane::renderLargeLogo() const
 	drawWindow->console->printf(48, 28, "|           |");
 }
 
-void SplashPane::renderMenuOptions() const
+void SplashWindow::renderMenuOptions() const
 {
 	for (int i = 0; i < menuItemList.size(); i++)
 	{
@@ -268,7 +268,7 @@ void SplashPane::renderMenuOptions() const
 	}
 }
 
-void SplashPane::render() const
+void SplashWindow::render() const
 {
 	clearWindow();
 
@@ -278,17 +278,17 @@ void SplashPane::render() const
 	pushWindow();
 }
 
-InventoryFullPane::InventoryFullPane(int consoleWidth, int windowH, int rx, int ry)
+InventoryFullWindow::InventoryFullWindow(int consoleWidth, int windowH, int rx, int ry)
 	:Window(consoleWidth, windowH, "Inventory", rx, ry)
 {
 }
 
-void InventoryFullPane::update()
+void InventoryFullWindow::update()
 {
 	inventoryItemList = WORLD->player->inventory;
 }
 
-void InventoryFullPane::render() const
+void InventoryFullWindow::render() const
 {
 	clearWindow();
 
@@ -355,21 +355,21 @@ void InventoryFullPane::render() const
 
 //----------------------------------------------------------------------------------------------------
 
-LogPane::LogPane(int consoleWidth, int windowH, int rx, int ry)
+LogWindow::LogWindow(int consoleWidth, int windowH, int rx, int ry)
 	: Window(consoleWidth, windowH, "Log", rx, ry)
 {
 }
 
-void LogPane::pushMessage(std::string message)
+void LogWindow::pushMessage(std::string message)
 {
 	messageList.push_back(message);
 }
 
-void LogPane::update()
+void LogWindow::update()
 {
 }
 
-void LogPane::render() const
+void LogWindow::render() const
 {
 	clearWindow();
 
@@ -381,12 +381,12 @@ void LogPane::render() const
 	pushWindow();
 }
 
-ProximityPane::ProximityPane(int consoleWidth, int windowH, int rx, int ry)
+ProximityWindow::ProximityWindow(int consoleWidth, int windowH, int rx, int ry)
 	:Window(consoleWidth, windowH, "Proximity", rx, ry)
 {
 }
 
-void ProximityPane::update()
+void ProximityWindow::update()
 {
 	proximityContainerList.clear();
 	proximityItemList.clear();
@@ -408,7 +408,7 @@ void ProximityPane::update()
 	}
 }
 
-void ProximityPane::render() const
+void ProximityWindow::render() const
 {
 	clearWindow();
 
@@ -430,12 +430,12 @@ void ProximityPane::render() const
 	pushWindow();
 }
 
-ActionPane::ActionPane(int consoleWidth, int windowH, int rx, int ry)
+ActionWindow::ActionWindow(int consoleWidth, int windowH, int rx, int ry)
 	:Window(consoleWidth, windowH, "Actions", rx, ry)
 {
 }
 
-void ActionPane::update()
+void ActionWindow::update()
 {
 	if (WORLD->player->selectedItem->actionManager)
 	{
@@ -443,7 +443,7 @@ void ActionPane::update()
 	}
 }
 
-void ActionPane::render() const
+void ActionWindow::render() const
 {
 	clearWindow();
 

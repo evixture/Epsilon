@@ -21,7 +21,6 @@
 #include <SFML/Window.hpp>
 
 struct Pane;
-//class Entity;
 struct Creature;
 struct Player;
 

@@ -193,12 +193,12 @@ void Input::updateInput(std::shared_ptr<Player> player)
 		{
 			if (movementClock.step == 0)
 			{
-				if (GUI->mapPane->world->getWalkability(player->mapPosition.x + moveXSpeed, player->mapPosition.y, player->mapPosition.level))
+				if (GUI->worldWindow->world->getWalkability(player->mapPosition.x + moveXSpeed, player->mapPosition.y, player->mapPosition.level))
 				{
 					player->mapPosition.x += moveXSpeed;
 					moveXSpeed = 0;
 				}
-				if (GUI->mapPane->world->getWalkability(player->mapPosition.x, player->mapPosition.y + moveYSpeed, player->mapPosition.level))
+				if (GUI->worldWindow->world->getWalkability(player->mapPosition.x, player->mapPosition.y + moveYSpeed, player->mapPosition.level))
 				{
 					player->mapPosition.y += moveYSpeed;
 					moveYSpeed = 0;

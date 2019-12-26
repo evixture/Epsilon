@@ -9,7 +9,7 @@ Engine::Engine(int screenCharWidth, int screenCharHeight)
 
 void Engine::update()
 {
-	settings->update(gui->mapPane->world->player);
+	settings->update(gui->worldWindow->world->player);
 	gui->update();
 }
 
@@ -17,8 +17,11 @@ void Engine::render() const
 {
 	TCODConsole::root->clear();
 
-	settings->render();
-	gui->render();
+	if (SETTINGS->fpsCount >= 60) //automatic frame skip
+	{
+		settings->render();
+		gui->render();
+	}
 
 	TCODConsole::flush();	
 }

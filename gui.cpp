@@ -4,16 +4,16 @@
 Gui::Gui(int windowX, int windowY)
 	:activeWindow(Gui::STARTUPSPLASH)
 {
-	windowList.push_back(mapPane = std::make_shared<MapPane>(61, 61, 1, 2));
-	windowList.push_back(playerPane = std::make_shared<PlayerPane>(10, 10, 64, 2));
-	windowList.push_back(statusPane = std::make_shared<StatusPane>(44, 10, 75, 2));
-	windowList.push_back(inventoryPane = std::make_shared<InventoryPane>(25, 25, 64, 13));
-	windowList.push_back(eventLogPane = std::make_shared<LogPane>(55, 24, 64, 39));
-	windowList.push_back(proximityPane = std::make_shared<ProximityPane>(14, 25, 105, 13));
-	windowList.push_back(actionsPane = std::make_shared<ActionPane>(14, 25, 90, 13));
+	windowList.push_back(worldWindow = std::make_shared<MapWindow>(61, 61, 1, 2));
+	windowList.push_back(playerWindow = std::make_shared<PlayerWindow>(10, 10, 64, 2));
+	windowList.push_back(statusWindow = std::make_shared<StatusWindow>(44, 10, 75, 2));
+	windowList.push_back(inventoryWindow = std::make_shared<InventoryWindow>(25, 25, 64, 13));
+	windowList.push_back(logWindow = std::make_shared<LogWindow>(55, 24, 64, 39));
+	windowList.push_back(proximityWindow = std::make_shared<ProximityWindow>(14, 25, 105, 13));
+	windowList.push_back(actionWindow = std::make_shared<ActionWindow>(14, 25, 90, 13));
 
-	startupSplash = std::make_shared<SplashPane>(118, 62, 1, 1);
-	inventoryFullPane = std::make_shared<InventoryFullPane>(55, 61, 64, 2);
+	startupSplashWindow = std::make_shared<SplashWindow>(118, 62, 1, 1);
+	inventoryFullWindow = std::make_shared<InventoryFullWindow>(55, 61, 64, 2);
 }
 
 void Gui::update()
@@ -40,12 +40,12 @@ void Gui::update()
 	}
 	else if (activeWindow == Gui::STARTUPSPLASH)
 	{
-		startupSplash->update();
+		startupSplashWindow->update();
 	}
 	else if (activeWindow == Gui::INVENTORYFULL)
 	{
-		mapPane->update();
-		inventoryFullPane->update();
+		worldWindow->update();
+		inventoryFullWindow->update();
 	}
 }
 
@@ -60,11 +60,11 @@ void Gui::render() const
 	}
 	else if (activeWindow == Gui::STARTUPSPLASH)
 	{
-		startupSplash->render();
+		startupSplashWindow->render();
 	}
 	else if (activeWindow == Gui::INVENTORYFULL)
 	{
-		mapPane->render();
-		inventoryFullPane->render();
+		worldWindow->render();
+		inventoryFullWindow->render();
 	}
 }

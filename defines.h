@@ -5,8 +5,10 @@ constexpr auto PI = 3.14159265;
 #define SETTINGS	engine->settings
 #define GUI			engine->gui
 #define INPUT		engine->settings->input
-#define MAPPANE		engine->gui->mapPane
-#define WORLD		engine->gui->mapPane->world
+#define MAPPANE		engine->gui->worldWindow
+#define WORLD		engine->gui->worldWindow->world
+
+//----------------------------------------------------------------------------------------------------
 
 /*
 	CHAR MAPPINGS
@@ -63,7 +65,6 @@ constexpr auto PI = 3.14159265;
 #define CHAR_DMRMagazine 147
 #define CHAR_SniperMagazine 148
 
-
 /*
 	FLOOR HEIGHTS
 
@@ -76,7 +77,9 @@ constexpr auto PI = 3.14159265;
 	if player height > floor height , visibility is true, else set to default vis
 	stand can see over crouch
 */
-//NEED TO EVENTUALLY MOVE TO A CLASS
+
+//----------------------------------------------------------------------------------------------------
+
 //COLORS
 #define UICOLOR_Panel_Ribbon_BG TCODColor	(45, 45, 206)
 #define UICOLOR_Panel_Ribbon_FG TCODColor	(220, 220, 220)
@@ -89,7 +92,6 @@ constexpr auto PI = 3.14159265;
 #define UICOLOR_OutFOV_FG TCODColor			(30, 30, 30)
 #define UICOLOR_Selector TCODColor			(168, 13, 224)
 
-//----------------------------------------------------------------------------------------------------
 
 #define WORLDCOLOR_GrassBG TCODColor(32, 70, 19)
 #define WORLDCOLOR_GrassFG TCODColor(119, 161, 63)
@@ -116,7 +118,6 @@ constexpr auto PI = 3.14159265;
 
 #define WORLDCOLOR_TableFG TCODColor(150, 123, 104)
 
-//----------------------------------------------------------------------------------------------------
 
 #define ITEMCOLOR_ITEMBG TCODColor(254, 77, 0)
 
@@ -127,6 +128,8 @@ constexpr auto PI = 3.14159265;
 #define ITEMCOLOR_RIFLEFG TCODColor(79, 83, 84)
 
 #define ITEMCOLOR_PISTOLFG TCODColor(94, 93, 91)
+
+//----------------------------------------------------------------------------------------------------
 
 //============TILES==================================================CH===FOREGROUND=COLOR==========BACKGROUND=COLOR==========H==WALK===DEST |
 
@@ -182,18 +185,6 @@ ITEM SIZES
 
 //DEFAULTS
 			#define DEFAULT_ITEM_TILE	std::make_shared<Tile>('L', TCODColor::darkestGrey, TCODColor::darkGrey, 1, true)
-//			#define DEFAULT_ITEM_TILE2	std::make_shared<Tile>('!', TCODColor::cyan, TCODColor::pink, 1, true)
-//			#define WEAPON_DefaultRifle std::make_shared<Firearm>("WEAPON_DefaultRifle", TCODColor::darkestGrey, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Firearm::FireType::FULL)
-//			#define WEAPON_DefaultSemiRifle std::make_shared<Firearm>("WEAPON_DefaultSemiRifle", TCODColor::white, 30, 10, .09f, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Firearm::FireType::SEMI)
-//		#define ITEM_Test_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultRifle, Position(x, y, level))
-//		#define ITEM_Test2_Size2(x, y, level) std::make_shared<Item>(2, DEFAULT_ITEM_TILE, WEAPON_DefaultSemiRifle, Position(x, y, level))
-//		#define ITEM_Default_Container(x, y, level) std::make_shared<Item>(5, DEFAULT_ITEM_TILE2, TOOL_Default_Container, Position(x, y, level))
-//	#define TOOL_Default_Container std::make_shared<Tool>("Test Container", TCODColor::pink, TCOD_CHAR_RADIO_UNSET)
-//#define CONTAINER_Default_Container(x, y, level, capacity) std::make_shared<Container>(capacity, ITEM_Default_Container(x, y, level))
-
-//ACTIONS
-	//TOOL
-//#define ACTIONMANAGER_ToolDefault std::vector<std::shared_ptr<Action>{std::make_shared<Action>("name", WORLD->player->reload(), Action::Type::DROP)}
 
 //CONTAINERS
 	//SMALL BACKPACK
@@ -205,7 +196,6 @@ ITEM SIZES
 //HANDS
 		#define TOOL_Hands std::make_shared<Tool>("Hands", ITEMCOLOR_HANDFG, TCOD_CHAR_UMLAUT)
 	#define ITEM_Hands(x, y, level, owner) std::make_shared<Item>(1, DEFAULT_ITEM_TILE, TOOL_Hands, Position(x, y, level), owner)
-
 
 //PISTOLS
 	//M1911
