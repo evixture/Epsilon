@@ -115,7 +115,7 @@ void Player::pickUpItem()
 			{
 				if (inventory[containerIndex]->addItem(WORLD->mapItemList[i]))
 				{
-					GUI->logWindow->pushMessage("Picked up " + WORLD->mapItemList[i]->tool->name);
+					GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->mapItemList[i]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 
 					WORLD->mapItemList.erase(WORLD->mapItemList.begin() + i);
 					return;
@@ -129,7 +129,7 @@ void Player::pickUpItem()
 		if (WORLD->mapContainerList[i] != nullptr && WORLD->mapContainerList[i]->containerItem->mapPosition.x == mapPosition.x && WORLD->mapContainerList[i]->containerItem->mapPosition.y == mapPosition.y && WORLD->mapContainerList[i]->containerItem->mapPosition.level == mapPosition.level)
 		{
 			//err here
-			GUI->logWindow->pushMessage("Picked up " + WORLD->mapContainerList[i]->containerItem->tool->name);
+			GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->mapContainerList[i]->containerItem->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 
 			inventory.push_back(WORLD->mapContainerList[i]);
 			WORLD->mapContainerList.erase(WORLD->mapContainerList.begin() + i);
@@ -157,7 +157,7 @@ void Player::dropItem()
 					}
 				}
 			}
-			GUI->logWindow->pushMessage("Dropped " + inventory[containerIndex]->itemList[itemIndex]->tool->name);
+			GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->itemList[itemIndex]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 
 			WORLD->mapItemList.push_back(selectedItem);
 
@@ -165,7 +165,7 @@ void Player::dropItem()
 		}
 		else if (itemIndex <= -1)
 		{
-			GUI->logWindow->pushMessage("Dropped " + inventory[containerIndex]->containerItem->tool->name);
+			GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->containerItem->tool->name, LogWindow::Message::MessageLevel::LOW));
 			
 			WORLD->mapContainerList.push_back(inventory[containerIndex]);
 

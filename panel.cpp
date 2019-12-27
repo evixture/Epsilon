@@ -324,11 +324,19 @@ void InventoryFullWindow::render() const
 
 //----------------------------------------------------------------------------------------------------
 
+LogWindow::Message::Message(std::string message, MessageLevel messageLevel)
+	:message(message), messageLevel(messageLevel)
+{
+	if (messageLevel == Message::MessageLevel::HIGH) color = UICOLOR_MessageHigh;
+	else if (messageLevel == Message::MessageLevel::MEDIUM) color = UICOLOR_MessageMedium;
+	else color = UICOLOR_MessageLow;
+}
+
 LogWindow::LogWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 	:Window(consoleWidth, consoleHeight, "Log", rx, ry)
 {}
 
-void LogWindow::pushMessage(std::string message)
+void LogWindow::pushMessage(Message message)
 {
 	messageList.push_back(message);
 }
@@ -342,7 +350,11 @@ void LogWindow::render() const
 
 	for (int i = 0; i < messageList.size(); i++)
 	{
-		drawWindow->console->printf(0, i, messageList[i].c_str());
+		drawWindow->console->printf(0, i, messageList[i].message.c_str());
+		for (int j = 0; j < drawWindow->consoleWidth; j++)
+		{
+			drawWindow->console->setCharForeground(j, i, messageList[i].color);
+		}
 	}
 
 	pushWindow();
@@ -425,6 +437,7 @@ void ActionWindow::render() const
 				if (action == actionManager->selectedAction)
 				{
 					drawWindow->console->printf(0, line, "|>%s", action->name.c_str());
+					drawWindow->console->setCharForeground(1, line, UICOLOR_Selector);
 				}
 				else
 				{

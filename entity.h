@@ -37,12 +37,12 @@ struct Creature : public Entity //creature base used for player and other beings
 
 	Creature(Position pos, int ch, std::string name, TCODColor color, int health, int armor); //creature constructor that takes a position, character, string name, color, health, and armor
 
-	virtual void moveSelectorUp() {}; //moves the selector up on the inventory
-	virtual void moveSelectorDown() {}; //moves the selector down on the inventory
-	virtual void pickUpItem() {}; //picks up the item on the ground
-	virtual void dropItem() {}; //drops the selected item
-	virtual void filterIndexes() {}; //filters the container and item indexes to make sure they are in range
-	virtual void reload() {}; //reloads the selected item
+	//virtual void moveSelectorUp() = 0; //moves the selector up on the inventory
+	//virtual void moveSelectorDown() = 0; //moves the selector down on the inventory
+	//virtual void pickUpItem() = 0; //picks up the item on the ground
+	//virtual void dropItem() = 0; //drops the selected item
+	//virtual void filterIndexes() = 0; //filters the container and item indexes to make sure they are in range
+	//virtual void reload() = 0; //reloads the selected item
 
 	virtual void update(); //virtual updates the creature
 	void virtual render(const std::shared_ptr<Pane>& pane) const; // virtual renders the creature

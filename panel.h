@@ -71,11 +71,20 @@ struct InventoryFullWindow : public Window //full size inventory window
 
 struct LogWindow : public Window //log event window
 {
-	std::vector<std::string> messageList; //list of string messages to be displayed
+	struct Message
+	{
+		enum class MessageLevel {LOW, MEDIUM, HIGH} messageLevel;
+		TCODColor color;
+		std::string message;
+
+		Message(std::string message, MessageLevel messageLevel);
+	};
+
+	std::vector<Message> messageList; //list of string messages to be displayed
 
 	LogWindow(int consoleWidth, int consoleHeight, int rx, int ry); //window constructor that takes console width and heightm and render coordinates
 
-	void pushMessage(std::string message); //pushes a string message to the log window
+	void pushMessage(Message message); //pushes a string message to the log window
 
 	void update(); //updates the window
 	void render() const; //renders the window

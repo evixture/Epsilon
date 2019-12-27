@@ -92,6 +92,11 @@ constexpr auto PI = 3.14159265;
 #define UICOLOR_OutFOV_FG TCODColor			(30, 30, 30)
 #define UICOLOR_Selector TCODColor			(168, 13, 224)
 
+#define UICOLOR_MessageLow TCODColor		(220, 220, 220)
+#define UICOLOR_MessageMedium TCODColor		(178, 179, 236)
+#define UICOLOR_MessageHigh TCODColor		(223, 166, 243)
+
+
 
 #define WORLDCOLOR_GrassBG TCODColor(32, 70, 19)
 #define WORLDCOLOR_GrassFG TCODColor(119, 161, 63)
