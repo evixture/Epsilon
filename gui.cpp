@@ -8,8 +8,8 @@ Gui::Gui(int windowX, int windowY)
 	windowList.push_back(statusWindow		= std::make_shared<StatusWindow>	(44, 10, 75, 2));
 	windowList.push_back(inventoryWindow	= std::make_shared<InventoryWindow>	(25, 25, 64, 13));
 	windowList.push_back(logWindow			= std::make_shared<LogWindow>		(55, 24, 64, 39));
-	windowList.push_back(proximityWindow	= std::make_shared<ProximityWindow>	(14, 25, 105, 13));
-	windowList.push_back(actionWindow		= std::make_shared<ActionWindow>	(14, 25, 90, 13));
+	windowList.push_back(proximityWindow	= std::make_shared<ProximityWindow>	(29, 12, 90, 26));
+	windowList.push_back(actionWindow		= std::make_shared<ActionWindow>	(29, 12, 90, 13));
 
 	startupSplashWindow = std::make_shared<SplashWindow>		(118, 62, 1, 1);
 	inventoryFullWindow = std::make_shared<InventoryFullWindow>	(55, 61, 64, 2);
