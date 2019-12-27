@@ -332,6 +332,8 @@ LogWindow::Message::Message(std::string message, MessageLevel messageLevel)
 	else color = UICOLOR_MessageLow;
 }
 
+//----------------------------------------------------------------------------------------------------
+
 LogWindow::LogWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 	:Window(consoleWidth, consoleHeight, "Log", rx, ry)
 {}
@@ -348,13 +350,15 @@ void LogWindow::render() const
 {
 	clearWindow();
 
-	for (int i = 0; i < messageList.size(); i++)
+	int line = 0;
+	for (int i = messageList.size(); i > 0; i--)
 	{
-		drawWindow->console->printf(0, i, messageList[i].message.c_str());
+		drawWindow->console->printf(0, line, "| %s",  messageList[i - 1].message.c_str());
 		for (int j = 0; j < drawWindow->consoleWidth; j++)
 		{
-			drawWindow->console->setCharForeground(j, i, messageList[i].color);
+			drawWindow->console->setCharForeground(j, line, messageList[i - 1].color);
 		}
+		line++;
 	}
 
 	pushWindow();
