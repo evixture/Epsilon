@@ -1,6 +1,5 @@
 #include "main.hpp"
 
-//Entity Class
 Entity::Entity(Position pos, int ch, std::string name, TCODColor color)
 	: mapPosition(pos), renderPosition(pos), ch(ch), color(color), name(name), height(3)
 {}
@@ -18,9 +17,8 @@ void Entity::render(const std::shared_ptr<Pane>& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-//Creature Class
 Creature::Creature(Position pos, int ch, std::string name, TCODColor color, int health, int armor)
-	:Entity(Position(pos), ch, name, color), angle(0), health(health), armor(armor), containerIndex(0), itemIndex(0), nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
+	:Entity(Position(pos), ch, name, color), health(health), armor(armor), angle(0), containerIndex(0), itemIndex(0), nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
 {
 }
 
@@ -37,16 +35,14 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-//Player Class
 Player::Player(Position pos)
 	:Creature(Position(pos), '@', "player", UICOLOR_Player_Color, 100, 0)
 {
-	//here
-	inventory.push_back(CONTAINER_SmallBackpack(0, 0, 0, this));
-	inventory[0]->addItem(ITEM_M1911(0, 0, 0, this));
-	inventory[0]->addItem(MAGAZINE_45ACPMagazine7(0, 0, 0, this));
-	inventory[0]->addItem(MAGAZINE_45ACPMagazine7(0, 0, 0, this));
-	inventory.push_back(CONTAINER_SmallBackpack(0, 0, 0, this));
+	inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
+	inventory[0]->addItem(	ITEM_M1911(0, 0, 0, this));
+	inventory[0]->addItem(	MAGAZINE_45ACPMagazine7(0, 0, 0, this));
+	inventory[0]->addItem(	MAGAZINE_45ACPMagazine7(0, 0, 0, this));
+	inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
 
 	if (inventory.size() > 0)
 	{
@@ -69,7 +65,6 @@ void Player::moveSelectorUp()
 	{
 		itemIndex--;
 	}
-
 	else if (itemIndex == -1)
 	{
 		if (containerIndex > 0)
@@ -78,7 +73,6 @@ void Player::moveSelectorUp()
 			itemIndex = (int)(inventory[containerIndex]->itemList.size() - 1);
 		}
 	}
-
 	else if (itemIndex == -2)
 	{
 		if (itemIndex + 3 <= inventory[containerIndex]->itemList.size())
@@ -90,13 +84,10 @@ void Player::moveSelectorUp()
 
 void Player::moveSelectorDown()
 {
-	//need to fix indexes
-
 	if (itemIndex + 1 < inventory[containerIndex]->itemList.size())
 	{
 		itemIndex++;
 	}
-
 	else if (itemIndex + 1 >= inventory[containerIndex]->itemList.size())
 	{
 		if (containerIndex < inventory.size() - 1)
@@ -104,7 +95,6 @@ void Player::moveSelectorDown()
 			containerIndex++;
 			itemIndex = -1;
 		}
-
 		else if (itemIndex == -1)
 		{
 			if (itemIndex + 2 <= inventory[containerIndex]->itemList.size())
@@ -117,8 +107,6 @@ void Player::moveSelectorDown()
 
 void Player::pickUpItem()
 {
-	//will pick up multiple items on single press
-
 	for (int i = 0; i < WORLD->mapItemList.size(); i++)
 	{
 		if (WORLD->mapItemList[i] != nullptr && WORLD->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->mapItemList[i]->mapPosition.level == mapPosition.level)
@@ -135,6 +123,7 @@ void Player::pickUpItem()
 			}
 		}
 	}
+
 	for (int i = 0; i < WORLD->mapContainerList.size(); i++)
 	{
 		if (WORLD->mapContainerList[i] != nullptr && WORLD->mapContainerList[i]->containerItem->mapPosition.x == mapPosition.x && WORLD->mapContainerList[i]->containerItem->mapPosition.y == mapPosition.y && WORLD->mapContainerList[i]->containerItem->mapPosition.level == mapPosition.level)
@@ -226,7 +215,6 @@ void Player::filterIndexes()
 			selectedItem = ITEM_Hands(0, 0, 0, this);
 		}
 	}
-
 	else
 	{
 		selectedItem = ITEM_Hands(0, 0, 0, this);
@@ -256,7 +244,6 @@ void Player::reload()
 							selectedMagazine = inventory[i]->itemList[j]->getMagazineData();
 							selectedItem->tool->reload(selectedMagazine);
 						}
-						//need to be able to reload mag with less ammo if mags with more ammo do not exist
 					}
 				}
 			}
@@ -272,7 +259,6 @@ void Player::update()
 {
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
-	//MOUSE WHEEL ITEM SELECTION
 	if (INPUT->mouse.wheel_up || INPUT->mouse.wheel_down)
 	{
 		if (!INPUT->lalt->isDown)
@@ -281,7 +267,6 @@ void Player::update()
 			{
 				moveSelectorUp();
 			}
-
 			else if (INPUT->mouse.wheel_down)
 			{
 				moveSelectorDown();
@@ -293,7 +278,6 @@ void Player::update()
 			{
 				selectedItem->actionManager->moveSelectorUp();
 			}
-
 			else if (INPUT->mouse.wheel_down)
 			{
 				selectedItem->actionManager->moveSelectorDown();
@@ -324,6 +308,7 @@ void Player::update()
 	{
 		reload();
 	}
+
 	selectedItem->updateTool(renderPosition.x, renderPosition.y, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, mapPosition.level);
 	
 	if (INPUT->space->isSwitched)
@@ -334,8 +319,6 @@ void Player::update()
 		}
 	}
 }
-
-//----------------------------------------------------------------------------------------------------
 
 void Player::render(const std::shared_ptr<Pane>& pane) const
 {

@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 Map::Map(std::string filePath)
-	:filePath(filePath)
+	:filePath(filePath), mapHeight(NULL), mapWidth(NULL), totalFloors(NULL)
 {
 	TCODRandom* RNG = TCODRandom::getInstance();
 	RNG->setDistribution(TCOD_DISTRIBUTION_LINEAR);
@@ -18,7 +18,7 @@ Map::Map(std::string filePath)
 		fileIn >> s_mapName >> totalFloors >> mapWidth >> mapHeight;
 		mapName = s_mapName.c_str();
 
-		//reserve vec size beforehand to inc perf
+		//reserve vec size beforehand to inc perf?
 		levelList = std::vector < std::vector < std::shared_ptr < Tile >>> (totalFloors);
 
 		for (auto& level : levelList)
@@ -153,7 +153,6 @@ Map::Map(std::string filePath)
 
 //----------------------------------------------------------------------------------------------------
 
-//World Class
 World::World()
 	:xOffset(0), yOffset(0)
 {
@@ -373,4 +372,3 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 	renderMouse(pane);
 	renderEntities(pane);
 }
-

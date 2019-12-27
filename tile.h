@@ -38,7 +38,7 @@ struct Stair : public Tile //stair type of tile that allows travel between floor
 {
 	int moveDistance; //number of floors that the stair moves up or down
 	
-	Stair(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable, int moveDistance); //constructor for stair that takes character, colors, height, walkability, and move distance
+	Stair(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, int moveDistance); //constructor for stair that takes character, colors, height, walkability, and move distance
 
 	void interact(); //moves player the move distance
 };

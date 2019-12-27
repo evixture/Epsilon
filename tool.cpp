@@ -1,12 +1,11 @@
 #include "main.hpp"
 
-//Tool Struct
 Tool::Tool(std::string name, TCODColor color, int ch)
-	:color(color), toolx(0), tooly(0), ch(ch), dx(0), dy(0), name(name), sourcex(0), sourcey(0), ammoType(MagazineData::AmmoType::NONE)
+	:name(name), color(color), ch(ch), toolx(0), tooly(0), dx(0), dy(0), sourcex(0), sourcey(0), ammoType(MagazineData::AmmoType::NONE)
 {}
 
 Tool::Tool(std::string name, TCODColor color, int ch, MagazineData::AmmoType ammoType)
-	: color(color), toolx(0), tooly(0), ch(ch), dx(0), dy(0), name(name), sourcex(0), sourcey(0), ammoType(ammoType)
+	:name(name), color(color), ch(ch), toolx(0), tooly(0), dx(0), dy(0), sourcex(0), sourcey(0), ammoType(ammoType)
 {}
 
 std::shared_ptr<MagazineData> Tool::getMagData()
@@ -15,8 +14,7 @@ std::shared_ptr<MagazineData> Tool::getMagData()
 }
 
 void Tool::reload(std::shared_ptr<MagazineData>& magazine)
-{
-}
+{}
 
 void Tool::updateToolPosition(double angle)
 {
@@ -113,9 +111,8 @@ void Tool::render(const std::shared_ptr<Pane>& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-//Bullet Struct
 Bullet::Bullet(int ch, int startx, int starty, int dx, int dy, int xbound, int ybound)
-	:bulletx(startx), bullety(starty), xbound(xbound), ybound(ybound), hitWall(false), tox(dx), toy(dy), travel(BLine(bulletx, bullety, tox, toy)), moveClock(Clock(0)), ch(ch)//, renderPosition(Position(startx, starty, WORLD->player->mapPosition.level))
+	:ch(ch), bulletx(startx), bullety(starty), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(bulletx, bullety, tox, toy)), moveClock(Clock(0))
 {
 	do
 	{
@@ -173,8 +170,6 @@ void Bullet::update()
 			}
 		}
 	}
-
-	//renderPosition = offsetPosition(Position(travel.x, travel.y, WORLD->player->mapPosition.level), WORLD->xOffset, WORLD->yOffset);
 }
 
 void Bullet::render(const std::shared_ptr<Pane>& pane) const
@@ -188,9 +183,8 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-//Firearm Struct
 Firearm::Firearm(std::string name, TCODColor color, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireType)
-	: Tool(name, color, NULL, ammoType), maxFireTime(fireRate), fireClock(0), reloadClock(0), maxReloadTime(reloadSpeed), fireType(fireType), selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
+	:Tool(name, color, NULL, ammoType), maxFireTime(fireRate), maxReloadTime(reloadSpeed), fireType(fireType), fireClock(0), reloadClock(0), selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
 {}
 
 void Firearm::updateWeaponChar(double angle)
@@ -367,7 +361,6 @@ void Firearm::reload(std::shared_ptr<MagazineData>& magazine)
 	if (magazine->isValid != false)
 	{
 		selectedMagazine = magazine;
-
 		reloadClock.reset();
 	}
 	else selectedMagazine = magazine;
@@ -387,8 +380,7 @@ void Firearm::update(int x, int y, int mx, int my, double angle)
 	updateToolPosition(angle);
 	updateWeaponChar(angle);
 	
-	//Fire bullet
-	if (fireClock.step == 0 && selectedMagazine->availableAmmo != 0 && reloadClock.step == 0)
+	if (fireClock.step == 0 && selectedMagazine->availableAmmo != 0 && reloadClock.step == 0) //fires bullet
 	{
 		if (fireType == FireType::FULL && INPUT->leftMouseButton->isDown)
 		{
@@ -405,18 +397,17 @@ void Firearm::update(int x, int y, int mx, int my, double angle)
 	}
 	fireClock.tickDown();
 
-	//CLEAR BULLETS
-	if (bulletList.size() > selectedMagazine->ammoCapacity * 2)
+	if (bulletList.size() > selectedMagazine->ammoCapacity * 2) //clean up extra bullets
 	{
 		bulletList.pop_back();
 	}
 
-	reloadClock.tickDown();
-
-	for (auto& bullet : bulletList)
+	for (auto& bullet : bulletList) //update bullets
 	{
 		bullet->update();
 	}
+
+	reloadClock.tickDown();
 }
 
 void Firearm::render(const std::shared_ptr<Pane>& pane) const
@@ -429,5 +420,3 @@ void Firearm::render(const std::shared_ptr<Pane>& pane) const
 		bullet->render(pane);
 	}
 }
-
-//----------------------------------------------------------------------------------------------------

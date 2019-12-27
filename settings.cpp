@@ -1,24 +1,17 @@
 #include "main.hpp"
 
-//Font Struct
 Font::Font(std::string fontName, std::string xdim, std::string ydim, std::string filePath, int format, int charW, int charH)
-	: fontName(fontName), xDim(xdim), yDim(ydim), filePath(filePath), format(format), charW(charW), charH(charH)
+	:fontName(fontName), xDim(xdim), yDim(ydim), filePath(filePath), format(format), charW(charW), charH(charH)
 {}
 
-//Settings Class
+//----------------------------------------------------------------------------------------------------
 
-//USE SDL2 TO RENDER, OTHERS WILL LOCK OR LOWER FPS
 Settings::Settings(int screenCharWidth, int screenCharHeight)
-	: screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 6"), fullscreen(false), maxFps(0), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_SDL2), 
+	:screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 6"), fullscreen(false), maxFps(0), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_SDL2), //USE SDL2 TO RENDER, OTHERS WILL LOCK OR LOWER FPS
 	fovRad(0), lightWalls(true), fpsCount(60)//, RandNumGen(TCODRandom::getInstance())
 {
-	//fontList.push_back(terminal16x16 = std::make_shared<Font>("Terminal", "16", "16", "data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16));
-	//setfont(terminal16x16);
 	TCODSystem::setFps(0);
-
 	TCODConsole::setCustomFont("data/fonts/Epsilon16x16.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16);
-	//TCODConsole::setCustomFont("data/fonts/terminal18x8_aa_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 8, 8);
-	//TCODConsole::setCustomFont("data/fonts/terminal16x16_gs_ro.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16);
 
 	input = std::make_shared<Input>();
 	
@@ -76,7 +69,7 @@ void Settings::update(std::shared_ptr<Player> player)
 
 void Settings::render() const
 {
-	if (GUI->activeWindow != Gui::STARTUPSPLASH)
+	if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
 	{
 		printLogo();
 	}

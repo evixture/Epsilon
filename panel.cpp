@@ -1,11 +1,9 @@
 #include "main.hpp"
 
-//MapWindow Struct
-MapWindow::MapWindow(int consoleWidth, int windowH, int rx, int ry)
-	:Window(consoleWidth, windowH, "World", rx, ry)
+MapWindow::MapWindow(int consoleWidth, int consoleHeight, int rx, int ry)
+	:Window(consoleWidth, consoleHeight, "World", rx, ry)
 {
 	mapSidePanel = std::make_shared<Pane>(1, 61, UICOLOR_Panel_Ribbon_BG, UICOLOR_Panel_Ribbon_FG);
-
 	world = std::make_shared<World>();
 }
 
@@ -17,8 +15,8 @@ void MapWindow::update()
 void MapWindow::render() const
 {
 	clearWindow();
-	world->render(drawWindow);
 
+	world->render(drawWindow);
 	mapSidePanel->render();
 	mapSidePanel->console->blit(mapSidePanel->console, 0, 0, 1, 61, TCODConsole::root, 62, 2, 1, 1);
 
@@ -27,11 +25,9 @@ void MapWindow::render() const
 
 //----------------------------------------------------------------------------------------------------
 
-//StatusWindow Struct
-StatusWindow::StatusWindow(int consoleWidth, int windowH, int rx, int ry)
-	:Window(consoleWidth, windowH, "Status", rx, ry), displayHealth(0), displayArmor(0)
-{
-}
+StatusWindow::StatusWindow(int consoleWidth, int consoleHeight, int rx, int ry)
+	:Window(consoleWidth, consoleHeight, "Status", rx, ry), displayHealth(0), displayArmor(0)
+{}
 
 void StatusWindow::update()
 {
@@ -43,7 +39,6 @@ void StatusWindow::render() const
 {
 	clearWindow();
 
-	//render health bar
 	drawWindow->console->printf(0, 0, "Health : [");
 	for (int i = 0; i < 20; i++)
 	{
@@ -55,7 +50,6 @@ void StatusWindow::render() const
 	}
 	drawWindow->console->printf(30, 0, "]");
 
-	//render armor bar
 	drawWindow->console->printf(0, 1, "Armor  : [");
 	for (int i = 0; i < 20; i++)
 	{
@@ -72,39 +66,19 @@ void StatusWindow::render() const
 
 //----------------------------------------------------------------------------------------------------
 
-//PlayerWindow Struct
-PlayerWindow::PlayerWindow(int consoleWidth, int windowH, int rx, int ry)
-	:Window(consoleWidth, windowH, "Player", rx, ry), playerSpeed("Still"), playerStance("Standing")
-{
-}
+PlayerWindow::PlayerWindow(int consoleWidth, int consoleHeight, int rx, int ry)
+	:Window(consoleWidth, consoleHeight, "Player", rx, ry), playerSpeed("Still"), playerStance("Standing")
+{}
 
 void PlayerWindow::update()
 {
-	if (WORLD->player->height == 1)
-	{
-		playerStance = "Prone";
-	}
-	else if (WORLD->player->height == 2)
-	{
-		playerStance = "Crouching";
-	}
-	else if (WORLD->player->height == 3)
-	{
-		playerStance = "Standing";
-	}
+	if (WORLD->player->height == 1) playerStance = "Prone";
+	else if (WORLD->player->height == 2) playerStance = "Crouching";
+	else if (WORLD->player->height == 3) playerStance = "Standing";
 
-	if (INPUT->baseMoveTime == .5f)
-	{
-		playerSpeed = "Walking";
-	}
-	else if (INPUT->baseMoveTime == .25f)
-	{
-		playerSpeed = "Running";
-	}
-	else if (INPUT->baseMoveTime == 1.0f)
-	{
-		playerSpeed = "Creeping";
-	}
+	if (INPUT->baseMoveTime == .5f) playerSpeed = "Walking";
+	else if (INPUT->baseMoveTime == .25f) playerSpeed = "Running";
+	else if (INPUT->baseMoveTime == 1.0f) playerSpeed = "Creeping";
 }
 
 void PlayerWindow::render() const
@@ -119,10 +93,9 @@ void PlayerWindow::render() const
 
 //----------------------------------------------------------------------------------------------------
 
-InventoryWindow::InventoryWindow(int consoleWidth, int windowH, int rx, int ry)
-	:Window(consoleWidth, windowH, "Inventory", rx, ry)
-{
-}
+InventoryWindow::InventoryWindow(int consoleWidth, int consoleHeight, int rx, int ry)
+	:Window(consoleWidth, consoleHeight, "Inventory", rx, ry)
+{}
 
 void InventoryWindow::update()
 {
@@ -142,7 +115,6 @@ void InventoryWindow::render() const
 		{
 			if (i == 0)
 			{
-				//error here
 				if (container == WORLD->player->inventory[WORLD->player->containerIndex] && WORLD->player->itemIndex == -1)
 				{
 					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name.c_str());
@@ -155,7 +127,6 @@ void InventoryWindow::render() const
 				}
 				drawLine++;
 			}
-
 			else
 			{
 				drawWindow->console->printf(0, drawLine + i - 1, "|   .");
@@ -196,16 +167,14 @@ void InventoryWindow::render() const
 
 //----------------------------------------------------------------------------------------------------
 
-SplashWindow::SplashWindow(int consoleWidth, int windowH, int rx, int ry)
-	:Window(consoleWidth, windowH, "EPSILON", rx, ry), menuIndex(0)
+SplashWindow::SplashWindow(int consoleWidth, int consoleHeight, int rx, int ry)
+	:Window(consoleWidth, consoleHeight, "EPSILON", rx, ry), menuIndex(0)
 {
 	menuItemList.push_back("Start");
 	menuItemList.push_back("Exit");
 
 	menuSelection = menuItemList[menuIndex];
 }
-
-//--------------------------------------------------------------------------------------------
 
 void SplashWindow::update()
 {
@@ -218,6 +187,7 @@ void SplashWindow::update()
 			menuIndex--;
 		}
 	}
+
 	if (INPUT->s->isSwitched)
 	{
 		if (menuIndex < menuItemList.size() - 1)
@@ -230,23 +200,23 @@ void SplashWindow::update()
 	{
 		if (menuItemList[menuIndex] == "Start")
 		{
-			GUI->activeWindow = Gui::NONE;
+			GUI->activeWindow = Gui::ActiveWindow::NONE;
 		}
 		else if (menuItemList[menuIndex] == "Exit")
 		{
-			engine->gamestate = Engine::EXIT;
+			engine->gamestate = Engine::Gamestate::EXIT;
 		}
 	}
 }
-
-//--------------------------------------------------------------------------------------------
 
 void SplashWindow::renderLargeLogo() const
 {
 	drawWindow->console->printf(48, 20, "|           |");
 	drawWindow->console->printf(48, 21, "| |       | |");
 	drawWindow->console->printf(48, 22, "| | |   | | |");
+
 	drawWindow->console->printf(48, 24, "E P S I L O N");
+
 	drawWindow->console->printf(48, 26, "| | |   | | |");
 	drawWindow->console->printf(48, 27, "| |       | |");
 	drawWindow->console->printf(48, 28, "|           |");
@@ -278,10 +248,11 @@ void SplashWindow::render() const
 	pushWindow();
 }
 
-InventoryFullWindow::InventoryFullWindow(int consoleWidth, int windowH, int rx, int ry)
-	:Window(consoleWidth, windowH, "Inventory", rx, ry)
-{
-}
+//----------------------------------------------------------------------------------------------------
+
+InventoryFullWindow::InventoryFullWindow(int consoleWidth, int consoleHeight, int rx, int ry)
+	:Window(consoleWidth, consoleHeight, "Inventory", rx, ry)
+{}
 
 void InventoryFullWindow::update()
 {
@@ -301,7 +272,6 @@ void InventoryFullWindow::render() const
 		{
 			if (i == 0)
 			{
-				//error here
 				if (container == WORLD->player->inventory[WORLD->player->containerIndex] && WORLD->player->itemIndex == -1)
 				{
 					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name.c_str());
@@ -314,7 +284,6 @@ void InventoryFullWindow::render() const
 				}
 				drawLine++;
 			}
-
 			else
 			{
 				drawWindow->console->printf(0, drawLine + i - 1, "|   .");
@@ -355,10 +324,9 @@ void InventoryFullWindow::render() const
 
 //----------------------------------------------------------------------------------------------------
 
-LogWindow::LogWindow(int consoleWidth, int windowH, int rx, int ry)
-	: Window(consoleWidth, windowH, "Log", rx, ry)
-{
-}
+LogWindow::LogWindow(int consoleWidth, int consoleHeight, int rx, int ry)
+	:Window(consoleWidth, consoleHeight, "Log", rx, ry)
+{}
 
 void LogWindow::pushMessage(std::string message)
 {
@@ -366,8 +334,7 @@ void LogWindow::pushMessage(std::string message)
 }
 
 void LogWindow::update()
-{
-}
+{}
 
 void LogWindow::render() const
 {
@@ -381,10 +348,11 @@ void LogWindow::render() const
 	pushWindow();
 }
 
-ProximityWindow::ProximityWindow(int consoleWidth, int windowH, int rx, int ry)
-	:Window(consoleWidth, windowH, "Proximity", rx, ry)
-{
-}
+//----------------------------------------------------------------------------------------------------
+
+ProximityWindow::ProximityWindow(int consoleWidth, int consoleHeight, int rx, int ry)
+	:Window(consoleWidth, consoleHeight, "Proximity", rx, ry)
+{}
 
 void ProximityWindow::update()
 {
@@ -430,10 +398,11 @@ void ProximityWindow::render() const
 	pushWindow();
 }
 
-ActionWindow::ActionWindow(int consoleWidth, int windowH, int rx, int ry)
-	:Window(consoleWidth, windowH, "Actions", rx, ry)
-{
-}
+//----------------------------------------------------------------------------------------------------
+
+ActionWindow::ActionWindow(int consoleWidth, int consoleHeight, int rx, int ry)
+	:Window(consoleWidth, consoleHeight, "Actions", rx, ry)
+{}
 
 void ActionWindow::update()
 {

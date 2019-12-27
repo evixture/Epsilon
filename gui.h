@@ -2,7 +2,7 @@
 
 struct Gui //contains all of the window panels used for rendering everything that is important to the screen
 {
-	enum ActiveWindow { NONE, STARTUPSPLASH, INVENTORYFULL} activeWindow; //the large windows that are active like the startup splash and big inventory
+	enum class ActiveWindow { NONE, STARTUPSPLASH, INVENTORYFULL} activeWindow; //the large windows that are active like the startup splash and big inventory
 
 	//Part-screen Windows
 	std::shared_ptr<PlayerWindow> playerWindow; //displays the character's health, armor, etc

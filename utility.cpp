@@ -1,6 +1,5 @@
 #include "main.hpp"
 
-//Position Struct
 Position::Position(int x, int y, int level)
 	:x(x), y(y), level(level)
 {}
@@ -12,7 +11,6 @@ Position offsetPosition(Position mapPosition, int xOffset, int yOffset)
 
 //----------------------------------------------------------------------------------------------------
 
-//BLine Class
 BLine::BLine(int ix, int iy, int tx, int ty)
 	:origx(ix), origy(iy), destx(tx), desty(ty), x(ix), y(iy)
 {
@@ -92,28 +90,11 @@ bool BLine::end()
 	if (stepx * deltax > stepy * deltay)
 	{
 		if (origx == destx) return true;
-		/*origx += stepx;
-		e -= stepy * deltay;
-		if (e < 0)
-		{
-			origy += stepy;
-			e += stepx * deltax;
-		}*/
 	}
 	else
 	{
 		if (origy == desty) return true;
-		/*origy += stepy;
-		e -= stepx * deltax;
-		if (e < 0)
-		{
-			origx += stepx;
-			e += stepy * deltay;
-		}*/
 	}
-	/*x = origx;
-	y = origy;
-*/
 	return false;
 }
 
@@ -144,8 +125,7 @@ double getDistance(int ix, int iy, int tx, int ty)
 //Clock Struct
 Clock::Clock(int capacity)
 	:capacity(capacity), step(capacity)
-{
-}
+{}
 
 void Clock::tickDown()
 {
@@ -174,5 +154,4 @@ void Clock::reset()
 
 MagazineData::MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid)
 	:isValid(isValid), ammoType(ammoType), ammoCapacity(ammoCapacity), availableAmmo(availableAmmo)
-{
-}
+{}

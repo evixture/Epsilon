@@ -32,6 +32,7 @@ struct Player;
 #include "item.h"
 
 	#include "entity.h"
+	#include "aicreature.h"
 #include "map.h"
 
 	#include "input.h"

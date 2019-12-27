@@ -32,13 +32,13 @@ private:
 struct Window //group of panes and consoles that is the base for gui panels
 {
 	int consoleWidth; //width of the window in tiles
-	int windowH; //height of the window in tiles
+	int consoleHeight; //height of the window in tiles
 	std::string panelName; //string name of the window for use with ribon
 	Position renderpos; //tile coordinates to render window on root console
 
 	std::shared_ptr<Pane> drawWindow; //window that is availible to render to by other classes
 
-	Window(int consoleWidth, int windowH, std::string panelName, int rx, int ry); //constructor that takes width, height, string name, and render coords
+	Window(int consoleWidth, int consoleHeight, std::string panelName, int rx, int ry); //constructor that takes width, height, string name, and render coords
 
 	virtual void update(); //virtual updates window
 	virtual void render() const; //virtual renders window

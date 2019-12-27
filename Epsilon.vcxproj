@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="aicreature.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="gui.cpp" />
@@ -34,6 +35,7 @@
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="aicreature.h" />
     <ClInclude Include="defines.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="entity.h" />

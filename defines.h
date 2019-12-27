@@ -155,8 +155,8 @@ constexpr auto PI = 3.14159265;
 	#define TILE_BasicTable					std::make_shared<Destructible>	(CHAR_Table,		WORLDCOLOR_TableFG,		WORLDCOLOR_FloorBG,		2,	false,	2)
 
 	//STAIR
-	#define STAIR_UpStair					std::make_shared<Stair>			(CHAR_UpStair,		WORLDCOLOR_DoorFG,		WORLDCOLOR_FloorBG,		2,	true,	1)
-	#define STAIR_DownStair					std::make_shared<Stair>			(CHAR_DownStair,	WORLDCOLOR_DoorFG,		WORLDCOLOR_FloorBG,		2,	true,	-1)
+	#define STAIR_UpStair					std::make_shared<Stair>			(CHAR_UpStair,		WORLDCOLOR_DoorFG,		WORLDCOLOR_FloorBG,		2,	1)
+	#define STAIR_DownStair					std::make_shared<Stair>			(CHAR_DownStair,	WORLDCOLOR_DoorFG,		WORLDCOLOR_FloorBG,		2,	-1)
 
 	//SKY
 	#define TILE_BasicSky					std::make_shared<Tile>			(' ',				WORLDCOLOR_WindowBG,	WORLDCOLOR_WindowBG,	0,	false)

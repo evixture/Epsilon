@@ -2,7 +2,7 @@
 
 struct Engine //engine class that contains everything
 {
-	enum Gamestate { MAIN, EXIT } gamestate; //the main state tht the game is in
+	enum class Gamestate { MAIN, EXIT } gamestate; //the main state tht the game is in
 
 	std::shared_ptr<Settings> settings; //contains all of the settings and mainly non-graphical things
 	std::shared_ptr<Gui> gui; //contains nearly all of the things that need to be rendered to the screen

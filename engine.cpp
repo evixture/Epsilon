@@ -1,8 +1,7 @@
 #include "main.hpp"
 
-//Engine Class
 Engine::Engine(int screenCharWidth, int screenCharHeight)
-	:gamestate(MAIN), settings(std::make_shared<Settings>(screenCharWidth, screenCharHeight)), gui(std::make_shared<Gui>(screenCharWidth, screenCharHeight))
+	:gamestate(Gamestate::MAIN), settings(std::make_shared<Settings>(screenCharWidth, screenCharHeight)), gui(std::make_shared<Gui>(screenCharWidth, screenCharHeight))
 {
 	TCODConsole::root->setDefaultBackground(UICOLOR_Root_BG);
 }

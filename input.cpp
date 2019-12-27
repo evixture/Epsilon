@@ -1,13 +1,10 @@
 #include "main.hpp"
 
-//Key Struct
 Key::Key(sf::Keyboard::Key sfKey)
 	:sfKey(sfKey), isDown(false), isSwitched(false), keySwitch(false)
-{
-}
+{}
 Key::Key()
-{
-}
+{}
 
 void Key::update()
 {
@@ -36,12 +33,10 @@ void Key::update()
 
 MouseButton::MouseButton(sf::Mouse::Button MButton)
 	:sfMButton(MButton), isDown(false), isSwitched(false), buttonSwitch(false)
-{
-}
+{}
 
 MouseButton::MouseButton()
-{
-}
+{}
 
 void MouseButton::update()
 {
@@ -68,7 +63,6 @@ void MouseButton::update()
 
 //----------------------------------------------------------------------------------------------------
 
-//Input Struct
 Input::Input()
 	:keyboard(), mouse(), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(0))
 {
@@ -80,9 +74,9 @@ Input::Input()
 	keyList.push_back(s = std::make_shared<Key>(sf::Keyboard::S));
 	keyList.push_back(d = std::make_shared<Key>(sf::Keyboard::D));
 
-	keyList.push_back(lctrl = std::make_shared<Key>(sf::Keyboard::LControl));
-	keyList.push_back(lshift = std::make_shared<Key>(sf::Keyboard::LShift));
-	keyList.push_back(lalt = std::make_shared<Key>(sf::Keyboard::LAlt));
+	keyList.push_back(lctrl		= std::make_shared<Key>(sf::Keyboard::LControl));
+	keyList.push_back(lshift	= std::make_shared<Key>(sf::Keyboard::LShift));
+	keyList.push_back(lalt		= std::make_shared<Key>(sf::Keyboard::LAlt));
 
 	keyList.push_back(z = std::make_shared<Key>(sf::Keyboard::Z));
 	keyList.push_back(x = std::make_shared<Key>(sf::Keyboard::X));
@@ -97,12 +91,12 @@ Input::Input()
 	keyList.push_back(num0 = std::make_shared<Key>(sf::Keyboard::Num0));
 	keyList.push_back(num9 = std::make_shared<Key>(sf::Keyboard::Num9));
 
-	keyList.push_back(space = std::make_shared<Key>(sf::Keyboard::Space));
-	keyList.push_back(f11 = std::make_shared<Key>(sf::Keyboard::F11));
-	keyList.push_back(escape = std::make_shared<Key>(sf::Keyboard::Escape));
+	keyList.push_back(space		= std::make_shared<Key>(sf::Keyboard::Space));
+	keyList.push_back(f11		= std::make_shared<Key>(sf::Keyboard::F11));
+	keyList.push_back(escape	= std::make_shared<Key>(sf::Keyboard::Escape));
 
-	mouseList.push_back(leftMouseButton = std::make_shared<MouseButton>(sf::Mouse::Left));
-	mouseList.push_back(rightMouseButton = std::make_shared<MouseButton>(sf::Mouse::Right));
+	mouseList.push_back(leftMouseButton		= std::make_shared<MouseButton>(sf::Mouse::Left));
+	mouseList.push_back(rightMouseButton	= std::make_shared<MouseButton>(sf::Mouse::Right));
 }
 
 void Input::updateMouseInput()
@@ -113,6 +107,7 @@ void Input::updateMouseInput()
 		{
 			button->update();
 		}
+		TCODMouse::showCursor(false);
 	}
 }
 
@@ -123,14 +118,8 @@ void Input::updateKeyInput()
 		key->update();
 	}
 
-	if (lshift->isDown)
-	{
-		baseMoveTime = .25f;
-	}
-	else if (lctrl->isDown)
-	{
-		baseMoveTime = 1.0f;
-	}
+	if (lshift->isDown) baseMoveTime = .25f;
+	else if (lctrl->isDown)	baseMoveTime = 1.0f;
 	else baseMoveTime = .5f;
 }
 
@@ -140,9 +129,8 @@ void Input::updateInput(std::shared_ptr<Player> player)
 
 	updateKeyInput();
 
-	if (GUI->activeWindow != Gui::STARTUPSPLASH)
+	if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
 	{
-
 		moveXSpeed = 0;
 		moveYSpeed = 0;
 
@@ -161,33 +149,13 @@ void Input::updateInput(std::shared_ptr<Player> player)
 		
 		movementClock.capacity = (int)((baseMoveTime / WORLD->player->height) * SETTINGS->fpsCount);
 
-		//change so keys not favored
+		if (w->isDown && s->isDown) moveYSpeed = 0;
+		else if (w->isDown && !s->isDown) moveYSpeed = -1;
+		else if (s->isDown && !w->isDown) moveYSpeed = 1;
 
-		if (w->isDown && s->isDown)
-		{
-			moveYSpeed = 0;
-		}
-		else if (w->isDown && !s->isDown)
-		{
-			moveYSpeed = -1;
-		}
-		else if (s->isDown && !w->isDown)
-		{
-			moveYSpeed = 1;
-		}
-
-		if (a->isDown && d->isDown)
-		{
-			moveXSpeed = 0;
-		}
-		else if (a->isDown && !d->isDown)
-		{
-			moveXSpeed = -1;
-		}
-		else if (d->isDown && !a->isDown)
-		{
-			moveXSpeed = 1;
-		}
+		if (a->isDown && d->isDown) moveXSpeed = 0;
+		else if (a->isDown && !d->isDown) moveXSpeed = -1;
+		else if (d->isDown && !a->isDown) moveXSpeed = 1;
 
 		if (moveXSpeed != 0 || moveYSpeed != 0)
 		{
@@ -210,7 +178,7 @@ void Input::updateInput(std::shared_ptr<Player> player)
 	
 	if (escape->isSwitched)
 	{
-		engine->gamestate = Engine::EXIT;
+		engine->gamestate = Engine::Gamestate::EXIT;
 	}
 }
 
