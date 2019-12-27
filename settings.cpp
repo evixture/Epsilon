@@ -7,8 +7,8 @@ Font::Font(std::string fontName, std::string xdim, std::string ydim, std::string
 //----------------------------------------------------------------------------------------------------
 
 Settings::Settings(int screenCharWidth, int screenCharHeight)
-	:screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 6"), fullscreen(false), maxFps(0), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_SDL2), //USE SDL2 TO RENDER, OTHERS WILL LOCK OR LOWER FPS
-	fovRad(0), lightWalls(true), fpsCount(60)//, RandNumGen(TCODRandom::getInstance())
+	:screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 7"), fullscreen(false), maxFps(0), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_SDL2), //USE SDL2 TO RENDER, OTHERS WILL LOCK OR LOWER FPS
+	fovRad(0), lightWalls(true), fpsCount(60)
 {
 	TCODSystem::setFps(0);
 	TCODConsole::setCustomFont("data/fonts/Epsilon16x16.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16);

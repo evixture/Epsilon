@@ -16,6 +16,9 @@ std::shared_ptr<MagazineData> Tool::getMagData()
 void Tool::reload(std::shared_ptr<MagazineData>& magazine)
 {}
 
+void Tool::changeFireMode()
+{}
+
 void Tool::updateToolPosition(double angle)
 {
 	if (dx >= 0 && dy >= 0)
@@ -183,8 +186,8 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Firearm::Firearm(std::string name, TCODColor color, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireType)
-	:Tool(name, color, NULL, ammoType), maxFireTime(fireRate), maxReloadTime(reloadSpeed), fireType(fireType), fireClock(0), reloadClock(0), selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
+Firearm::Firearm(std::string name, TCODColor color, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode,char availibleFireModeFlag)
+	:Tool(name, color, NULL, ammoType), maxFireTime(fireRate), maxReloadTime(reloadSpeed), fireMode(fireMode), availibleFireMode(availibleFireModeFlag), fireClock(0), reloadClock(0), selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
 {}
 
 void Firearm::updateWeaponChar(double angle)
@@ -366,6 +369,44 @@ void Firearm::reload(std::shared_ptr<MagazineData>& magazine)
 	else selectedMagazine = magazine;
 }
 
+void Firearm::changeFireMode()
+{
+	//full->semi->safe->full
+	if (fireMode == FireType::SAFE)
+	{
+		if (availibleFireMode & FireType::FULL)
+		{
+			fireMode = FireType::FULL;
+		}
+		else if (availibleFireMode & FireType::SEMI)
+		{
+			fireMode = FireType::SEMI;
+		}
+	}
+	else if (fireMode == FireType::SEMI)
+	{
+		if (availibleFireMode & FireType::SAFE)
+		{
+			fireMode = FireType::SAFE;
+		}
+		else if (availibleFireMode & FireType::FULL)
+		{
+			fireMode = FireType::FULL;
+		}
+	}
+	else if (fireMode == FireType::FULL)
+	{
+		if (availibleFireMode & FireType::SEMI)
+		{
+			fireMode = FireType::SEMI;
+		}
+		else if (availibleFireMode & FireType::SAFE)
+		{
+			fireMode = FireType::SAFE;
+		}
+	}
+}
+
 void Firearm::update(int x, int y, int mx, int my, double angle)
 {
 	dx = mx - x;
@@ -382,15 +423,15 @@ void Firearm::update(int x, int y, int mx, int my, double angle)
 	
 	if (fireClock.step == 0 && selectedMagazine->availableAmmo != 0 && reloadClock.step == 0) //fires bullet
 	{
-		if (fireType == FireType::FULL && INPUT->leftMouseButton->isDown)
+		if (fireMode == FireType::FULL && INPUT->leftMouseButton->isDown)
 		{
 			fireBullet();
 		}
-		else if (fireType == FireType::SEMI && INPUT->leftMouseButton->isSwitched)
+		else if (fireMode == FireType::SEMI && INPUT->leftMouseButton->isSwitched)
 		{
 			fireBullet();
 		}
-		else if (fireType == FireType::SAFE)
+		else if (fireMode == FireType::SAFE)
 		{
 
 		}

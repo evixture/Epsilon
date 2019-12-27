@@ -39,7 +39,7 @@ struct Settings //settings class that hold most of the settings for the game and
 	void render() const; //renders settings to root
 
 private:
-	int maxFps; //fps cap fo tcod
+	int maxFps; //fps cap for tcod
 
 	TCOD_renderer_t renderer; //type of library used to render the window
 	std::string windowTitle; //string title of the main window

@@ -24,6 +24,7 @@ struct Tool //base class for the holdable component to items
 	virtual std::shared_ptr<MagazineData> getMagData(); //returns the magazine component, only useful for magazines
 
 	virtual void reload(std::shared_ptr<MagazineData>& magazine); //does nothing in tool
+	virtual void changeFireMode();
 	virtual void updateToolPosition(double angle); //takes angle and updates tool position
 
 	virtual void update(int x, int y, int mx, int my, double angle); //virtual updates tool
@@ -57,18 +58,20 @@ private:
 
 struct Firearm : public Tool //firearm that fires bullets that interact with the world
 {
-	enum class FireType {FULL, SEMI, SAFE} fireType; //fire mode for the firearm
+	enum FireType {SAFE = 0x01, SEMI = 0x02, FULL = 0x04} fireMode; //fire mode for the firearm
+	unsigned char availibleFireMode;
 
 	std::shared_ptr<MagazineData> selectedMagazine; //the magazine that is currently in the firearm, is a generic mag if no mag is in firearm
 
 	float maxFireTime; //maximum time in seconds that it takes for the next bullet to fire
 	float maxReloadTime; //maximum time in seconds it takes to reload the magazine
 
-	Firearm(std::string name, TCODColor color, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireType); //constructor of firearm that takes string name, foreground color, fire rate, reload speed, ammo type, and fire type
+	Firearm(std::string name, TCODColor color, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag); //constructor of firearm that takes string name, foreground color, fire rate, reload speed, ammo type, and fire type
 
 	std::shared_ptr<MagazineData> getMagData(); //returns the important data of the selected magazine
 
-	void reload(std::shared_ptr<MagazineData>& magazine); //reloads firearm
+	void reload(std::shared_ptr<MagazineData>& magazine); //reloads firearm, use from player
+	void changeFireMode();
 
 	void update(int x, int y, int mx, int my, double angle); //updates firearm
 	void render(const std::shared_ptr<Pane>& pane) const; //renders firearm

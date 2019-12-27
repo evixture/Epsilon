@@ -255,6 +255,11 @@ void Player::reload()
 	}
 }
 
+void Player::changeFireMode()
+{
+	selectedItem->tool->changeFireMode();
+}
+
 void Player::update()
 {
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);

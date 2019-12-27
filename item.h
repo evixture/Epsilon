@@ -2,7 +2,7 @@
 
 struct Action //handles item actions
 {
-	enum class Type {DROP, RELOAD} type; //main type of action, enum for easy comparison
+	enum class Type {DROP, RELOAD, CHANGEFIREMODE} type; //main type of action, enum for easy comparison
 
 	std::string name; //the string name of the action so it can be rendered in action pane
 	std::function<void()> action; //the function that is called when activated
@@ -39,7 +39,7 @@ struct Item //an item that a creature can hold and interact with
 	Player* owner;
 	std::shared_ptr<ActionManager> actionManager; //used to activate more advanced interactions with the item
 
-	void createActionManager(Player* owner);
+	void createActionManager(Player* owner); //makes an action manager action list based on the item type
 
 	Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position, Player* owner, ItemType itemType); //item constructor that takes a size, tile, too, position, and a player used for action manager
 
@@ -58,8 +58,6 @@ private:
 struct MagazineItem : public Item //magazine derived class of base item
 {
 	std::shared_ptr<MagazineData> magazineData; //contains all of the important data of the magazine
-
-	//void createActionManager(Player* owner);
 
 	MagazineItem(Item item, std::shared_ptr<MagazineData> magazineData); //magazine item constructor that takes an item and magazine data
 

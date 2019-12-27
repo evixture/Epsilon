@@ -57,7 +57,8 @@ void Item::createActionManager(Player* owner)
 	{
 		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
 			std::shared_ptr<Action>(std::make_shared<Action>("Reload", std::bind(&Player::reload, owner), Action::Type::RELOAD)),
-			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP))
+			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP)),
+			std::shared_ptr<Action>(std::make_shared<Action>("Change Fire Mode", std::bind(&Player::changeFireMode, owner), Action::Type::CHANGEFIREMODE))
 		});
 	}
 
@@ -130,14 +131,6 @@ bool Container::addItem(std::shared_ptr<Item> item)
 
 	return false;
 }
-
-//void MagazineItem::createActionManager(Player* owner)
-//{
-//	actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
-//		std::shared_ptr<Action>(std::make_shared<Action>("Reload", std::bind(&Player::reload, owner), Action::Type::RELOAD)),
-//		std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP))
-//	});
-//}
 
 MagazineItem::MagazineItem(Item item, std::shared_ptr<MagazineData> magazineData)
 	:Item(item), magazineData(magazineData)

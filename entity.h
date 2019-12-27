@@ -54,10 +54,12 @@ struct Player : public Creature //player derived creature that the player intera
 
 	void moveSelectorUp(); //moves the selector up on the inventory
 	void moveSelectorDown(); //moves the selector down on the inventory
+	void filterIndexes(); //filters the container and item indexes to make sure they are in range
+
 	void pickUpItem(); //picks up the item on the ground
 	void dropItem(); //drops the selected item
-	void filterIndexes(); //filters the container and item indexes to make sure they are in range
 	void reload(); //reloads the selected item
+	void changeFireMode();
 
 	void update(); //updates the player
 	void render(const std::shared_ptr<Pane>& pane) const; //renders the player
