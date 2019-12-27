@@ -1,6 +1,6 @@
 #include "main.hpp"
 
-Action::Action(std::string name, std::function<void()> action, Type actionType) // function, Action::Type::RELOAD
+Action::Action(std::string name, std::function<void()> action, Type actionType)
 	:name(name), action(action), type(actionType)
 {}
 
@@ -35,11 +35,41 @@ void ActionManager::doAction()
 
 //----------------------------------------------------------------------------------------------------
 
-Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position, Player* owner)
-	:size(size), tile(tile), tool(tool), mapPosition(position), renderPosition(position),  distToEnt(0)
+void Item::createActionManager(Player* owner)
 {
-	actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {std::shared_ptr<Action>(std::make_shared<Action>("Reload", std::bind(&Player::reload, owner), Action::Type::RELOAD)),
-		std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP))});
+	if (itemType == ItemType::NODROP)
+	{
+
+	}
+	else if (itemType == ItemType::NORMAL)
+	{
+		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
+			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP))
+		});
+	}
+	else if (itemType == ItemType::MAGAZINE)
+	{
+		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
+			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP))
+		});
+	}
+	else if (itemType == ItemType::FIREARM)
+	{
+		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
+			std::shared_ptr<Action>(std::make_shared<Action>("Reload", std::bind(&Player::reload, owner), Action::Type::RELOAD)),
+			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP))
+		});
+	}
+
+	//actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
+	//	std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP))
+	//});
+}
+
+Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position, Player* owner, ItemType itemType)
+	:size(size), tile(tile), tool(tool), mapPosition(position), renderPosition(position), distToEnt(0), owner(owner), itemType(itemType)
+{
+	createActionManager(owner);
 }
 
 std::shared_ptr<MagazineData> Item::getMagazineData()
@@ -101,9 +131,19 @@ bool Container::addItem(std::shared_ptr<Item> item)
 	return false;
 }
 
+//void MagazineItem::createActionManager(Player* owner)
+//{
+//	actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
+//		std::shared_ptr<Action>(std::make_shared<Action>("Reload", std::bind(&Player::reload, owner), Action::Type::RELOAD)),
+//		std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP))
+//	});
+//}
+
 MagazineItem::MagazineItem(Item item, std::shared_ptr<MagazineData> magazineData)
 	:Item(item), magazineData(magazineData)
-{}
+{
+	createActionManager(item.owner);
+}
 
 std::shared_ptr<MagazineData> MagazineItem::getMagazineData()
 {
