@@ -3,13 +3,13 @@
 Gui::Gui(int windowX, int windowY)
 	:activeWindow(Gui::ActiveWindow::STARTUPSPLASH)
 {
-	windowList.push_back(worldWindow		= std::make_shared<MapWindow>		(61, 61, 1, 2));
-	windowList.push_back(playerWindow		= std::make_shared<PlayerWindow>	(10, 10, 64, 2));
-	windowList.push_back(statusWindow		= std::make_shared<StatusWindow>	(44, 10, 75, 2));
-	windowList.push_back(inventoryWindow	= std::make_shared<InventoryWindow>	(25, 25, 64, 13));
-	windowList.push_back(logWindow			= std::make_shared<LogWindow>		(55, 24, 64, 39));
-	windowList.push_back(proximityWindow	= std::make_shared<ProximityWindow>	(29, 12, 90, 26));
-	windowList.push_back(actionWindow		= std::make_shared<ActionWindow>	(29, 12, 90, 13));
+	windowList.push_back(worldWindow		= std::make_shared<MapWindow>		(60, 61, 1, 2));
+	windowList.push_back(playerWindow		= std::make_shared<PlayerWindow>	(10, 10, 63, 2));
+	windowList.push_back(statusWindow		= std::make_shared<StatusWindow>	(45, 10, 74, 2));
+	windowList.push_back(inventoryWindow	= std::make_shared<InventoryWindow>	(25, 25, 63, 13));
+	windowList.push_back(logWindow			= std::make_shared<LogWindow>		(56, 24, 63, 39));
+	windowList.push_back(proximityWindow	= std::make_shared<ProximityWindow>	(30, 12, 89, 26));
+	windowList.push_back(actionWindow		= std::make_shared<ActionWindow>	(30, 12, 89, 13));
 
 	startupSplashWindow = std::make_shared<SplashWindow>		(118, 62, 1, 1);
 	inventoryFullWindow = std::make_shared<InventoryFullWindow>	(55, 61, 64, 2);

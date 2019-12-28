@@ -3,6 +3,7 @@
 MapWindow::MapWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 	:Window(consoleWidth, consoleHeight, "World", rx, ry)
 {
+	//actual map dims should be 60x60
 	mapSidePanel = std::make_shared<Pane>(1, 61, UICOLOR_Panel_Ribbon_BG, UICOLOR_Panel_Ribbon_FG);
 	world = std::make_shared<World>();
 }
@@ -18,7 +19,7 @@ void MapWindow::render() const
 
 	world->render(drawWindow);
 	mapSidePanel->render();
-	mapSidePanel->console->blit(mapSidePanel->console, 0, 0, 1, 61, TCODConsole::root, 62, 2, 1, 1);
+	mapSidePanel->console->blit(mapSidePanel->console, 0, 0, 1, 61, TCODConsole::root, 61, 2, 1, 1);
 
 	pushWindow();
 }

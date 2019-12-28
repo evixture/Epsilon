@@ -1,3 +1,3 @@
 ﻿  panel.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(352,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(355,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

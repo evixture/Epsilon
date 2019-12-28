@@ -362,9 +362,9 @@
           }
         },
         {
-          "ruleId": "26451",
+          "ruleId": "26812",
           "message": {
-            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
+            "text": "The enum type 'Firearm::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
           },
           "locations": [
             {
@@ -373,13 +373,13 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/entity.cpp"
                 },
                 "region": {
-                  "startLine": 84,
-                  "startColumn": 7,
-                  "endLine": 84,
-                  "endColumn": 19
+                  "startLine": 42,
+                  "startColumn": 25,
+                  "endLine": 42,
+                  "endColumn": 25
                 }
               },
-              "fullyQualifiedLogicalName": "public: virtual void __cdecl Player::moveSelectorUp(void)"
+              "fullyQualifiedLogicalName": "public: __cdecl Player::Player(struct Position)"
             }
           ]
         },
@@ -395,13 +395,57 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/entity.cpp"
                 },
                 "region": {
-                  "startLine": 95,
+                  "startLine": 78,
+                  "startColumn": 7,
+                  "endLine": 78,
+                  "endColumn": 19
+                }
+              },
+              "fullyQualifiedLogicalName": "public: void __cdecl Player::moveSelectorUp(void)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/entity.cpp"
+                },
+                "region": {
+                  "startLine": 87,
                   "startColumn": 6,
-                  "endLine": 95,
+                  "endLine": 87,
                   "endColumn": 18
                 }
               },
-              "fullyQualifiedLogicalName": "public: virtual void __cdecl Player::moveSelectorDown(void)"
+              "fullyQualifiedLogicalName": "public: void __cdecl Player::moveSelectorDown(void)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/entity.cpp"
+                },
+                "region": {
+                  "startLine": 91,
+                  "startColumn": 11,
+                  "endLine": 91,
+                  "endColumn": 23
+                }
+              },
+              "fullyQualifiedLogicalName": "public: void __cdecl Player::moveSelectorDown(void)"
             }
           ]
         },
@@ -418,34 +462,12 @@
                 },
                 "region": {
                   "startLine": 100,
-                  "startColumn": 11,
+                  "startColumn": 8,
                   "endLine": 100,
-                  "endColumn": 23
-                }
-              },
-              "fullyQualifiedLogicalName": "public: virtual void __cdecl Player::moveSelectorDown(void)"
-            }
-          ]
-        },
-        {
-          "ruleId": "26451",
-          "message": {
-            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/entity.cpp"
-                },
-                "region": {
-                  "startLine": 110,
-                  "startColumn": 8,
-                  "endLine": 110,
                   "endColumn": 20
                 }
               },
-              "fullyQualifiedLogicalName": "public: virtual void __cdecl Player::moveSelectorDown(void)"
+              "fullyQualifiedLogicalName": "public: void __cdecl Player::moveSelectorDown(void)"
             }
           ]
         },
@@ -461,13 +483,13 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/entity.cpp"
                 },
                 "region": {
-                  "startLine": 197,
+                  "startLine": 186,
                   "startColumn": 6,
-                  "endLine": 197,
+                  "endLine": 186,
                   "endColumn": 23
                 }
               },
-              "fullyQualifiedLogicalName": "public: virtual void __cdecl Player::filterIndexes(void)"
+              "fullyQualifiedLogicalName": "public: void __cdecl Player::filterIndexes(void)"
             }
           ]
         },
@@ -483,13 +505,13 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/entity.cpp"
                 },
                 "region": {
-                  "startLine": 210,
+                  "startLine": 199,
                   "startColumn": 8,
-                  "endLine": 210,
+                  "endLine": 199,
                   "endColumn": 20
                 }
               },
-              "fullyQualifiedLogicalName": "public: virtual void __cdecl Player::filterIndexes(void)"
+              "fullyQualifiedLogicalName": "public: void __cdecl Player::filterIndexes(void)"
             }
           ]
         },
@@ -505,13 +527,13 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/entity.cpp"
                 },
                 "region": {
-                  "startLine": 226,
+                  "startLine": 215,
                   "startColumn": 19,
-                  "endLine": 226,
+                  "endLine": 215,
                   "endColumn": 19
                 }
               },
-              "fullyQualifiedLogicalName": "public: virtual void __cdecl Player::filterIndexes(void)"
+              "fullyQualifiedLogicalName": "public: void __cdecl Player::filterIndexes(void)"
             }
           ]
         }
@@ -524,7 +546,7 @@
       },
       "invocations": [
         {
-          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x009F3170 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_9c8861edast -typedil -f entity.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1924 -D_MSC_FULL_VER=192428314 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -GF -Og -Ot -Oy -Oi -ltcg -DCODE_ANALYSIS -DNDEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Release\\entity.obj -Fdx64\\Release\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
+          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x00333170 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_32fe03c7ast -typedil -f entity.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1924 -D_MSC_FULL_VER=192428314 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -GF -Og -Ot -Oy -Oi -ltcg -DCODE_ANALYSIS -DNDEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Release\\entity.obj -Fdx64\\Release\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
         }
       ],
       "files": {
@@ -1131,6 +1153,16 @@
             "resultFile"
           ]
         },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/aicreature.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/gui.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
         "file:///e:/projects/visual studio/libtcod development/epsilon/map.h": {
           "roles": [
             "resultFile"
@@ -1147,11 +1179,6 @@
           ]
         },
         "file:///e:/projects/visual studio/libtcod development/epsilon/panel.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/projects/visual studio/libtcod development/epsilon/gui.h": {
           "roles": [
             "resultFile"
           ]
