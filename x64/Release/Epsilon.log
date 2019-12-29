@@ -1,6 +1,9 @@
-﻿  settings.cpp
+﻿  gui.cpp
+  panel.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(355,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Compiling...
   Generating code
-  1 of 2009 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  12 of 2009 functions ( 0.6%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
@@ -41,8 +44,8 @@ E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(241): warning C264
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(241): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(247): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(282): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(356): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(359): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(357): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(360): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\settings.cpp(10): warning C26812: The enum type 'TCOD_fov_algorithm_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\settings.cpp(10): warning C26812: The enum type 'TCOD_renderer_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(189): warning C26812: The enum type 'Firearm::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
