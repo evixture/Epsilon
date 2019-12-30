@@ -45,15 +45,13 @@ void Settings::printLogo() const
 
 void Settings::printDebugStats() const
 {
-	TCODConsole::root->printf(10, 0, "FPS>%i mx>%i my>%i px>%i py>%i  ph>%i, gs>%i, ammo>%i",
+	TCODConsole::root->printf(10, 0, "FPS>%i mx>%i my>%i px>%i py>%i  ph>%i",
 		fpsCount,
 		SETTINGS->input->mouse.cx - 1,
 		SETTINGS->input->mouse.cy - 3,
 		WORLD->player->mapPosition.x,
 		WORLD->player->mapPosition.y,
-		WORLD->player->mapPosition.level,
-		engine->gamestate,
-		WORLD->player->selectedMagazine->availableAmmo);
+		WORLD->player->mapPosition.level);
 }
 
 void Settings::update(std::shared_ptr<Player> player)

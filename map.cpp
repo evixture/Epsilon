@@ -328,12 +328,6 @@ void World::renderTiles(const std::shared_ptr<Pane>& pane) const
 	}
 }
 
-void World::renderMouse(const std::shared_ptr<Pane>& pane) const
-{
-	pane->console->setCharBackground(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, getTile(engine->settings->input->mouse.cx - 1 + xOffset, engine->settings->input->mouse.cy - 3 + yOffset, player->mapPosition.level)->backgroundColor - TCODColor::darkestGrey);
-	pane->console->setChar(engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3, '+');
-}
-
 void World::renderEntities(const std::shared_ptr<Pane>& pane) const
 {
 	for (auto& entity : entityList)
@@ -369,6 +363,5 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 		}
 	}
 
-	renderMouse(pane);
 	renderEntities(pane);
 }

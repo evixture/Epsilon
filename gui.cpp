@@ -15,6 +15,7 @@ Gui::Gui(int windowX, int windowY)
 	inventoryFullWindow = std::make_shared<InventoryFullWindow>	(55, 61, 64, 2);
 }
 
+
 void Gui::update()
 {
 	if (INPUT->i->isSwitched)
@@ -47,6 +48,20 @@ void Gui::update()
 	}
 }
 
+void Gui::renderMouse() const
+{
+	if (activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
+	{
+		if (INPUT->mouse.cx >= 1 && INPUT->mouse.cx <= 60)
+		{
+			if (INPUT->mouse.cy >= 3 && INPUT->mouse.cy <= 60)
+			TCODConsole::root->setCharBackground(INPUT->mouse.cx, INPUT->mouse.cy, worldWindow->world->getTile(INPUT->mouse.cx - 1 + worldWindow->world->xOffset, INPUT->mouse.cy - 3 + worldWindow->world->yOffset, worldWindow->world->player->mapPosition.level)->backgroundColor - TCODColor::darkestGrey);
+		}
+	}
+
+	TCODConsole::root->setChar(INPUT->mouse.cx, INPUT->mouse.cy, '+');
+}
+
 void Gui::render() const
 {
 	if (activeWindow == Gui::ActiveWindow::NONE)
@@ -65,4 +80,6 @@ void Gui::render() const
 		worldWindow->render();
 		inventoryFullWindow->render();
 	}
+
+	renderMouse();
 }

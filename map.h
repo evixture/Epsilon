@@ -53,6 +53,5 @@ private:
 	void updateEntities(); //updates all entities
 
 	void renderTiles(const std::shared_ptr<Pane>& pane) const; //renderes all of the tiles
-	void renderMouse(const std::shared_ptr<Pane>& pane) const; //renders the mouse pointer
 	void renderEntities(const std::shared_ptr<Pane>& pane) const; //renders all of the entities
 };

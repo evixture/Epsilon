@@ -21,6 +21,8 @@ struct Gui //contains all of the window panels used for rendering everything tha
 
 	Gui(int windowX, int windowY);
 
+	void renderMouse() const;
+
 	void update();
 	void render() const;
 
