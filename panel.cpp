@@ -397,15 +397,20 @@ void ProximityWindow::render() const
 {
 	clearWindow();
 
-	for (int line = 0; line < proximityContainerList.size() + proximityItemList.size();)
+	int line = 0;
+
+	for (auto& container : proximityContainerList)
 	{
-		for (auto& container : proximityContainerList)
+		if (container->containerItem->mapPosition.level == WORLD->player->mapPosition.level)
 		{
 			drawWindow->console->printf(0, line, "|%s", container->containerItem->tool->name.c_str());
 			line++;
 		}
+	}
 
-		for (auto& item : proximityItemList)
+	for (auto& item : proximityItemList)
+	{
+		if (item->mapPosition.level == WORLD->player->mapPosition.level)
 		{
 			drawWindow->console->printf(0, line, "|%s", item->tool->name.c_str());
 			line++;
