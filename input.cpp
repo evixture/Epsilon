@@ -115,7 +115,11 @@ void Input::updateKeyInput()
 {
 	for (auto& key : keyList)
 	{
-		key->update();
+		if (TCODConsole::hasMouseFocus())
+		{
+			key->update();
+		}
+		else key->isDown = false;
 	}
 
 	if (lshift->isDown) baseMoveTime = .25f;

@@ -1,6 +1,5 @@
-﻿  map.cpp
-  panel.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(355,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+﻿  settings.cpp
+  tile.cpp
   window.cpp
   Generating Code...
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe
