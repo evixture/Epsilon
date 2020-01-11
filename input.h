@@ -67,8 +67,6 @@ struct Input //handles all of the mouse and keyboard input
 	std::shared_ptr<MouseButton> leftMouseButton; //left mouse button on the mouse
 	std::shared_ptr<MouseButton> rightMouseButton; //right mouse button on the mouse
 
-	//float baseMoveTime; //time before the player moves a unit
-
 	Input(); //input constructor that takes no arguments
 
 	void update(std::shared_ptr<Player> player); //updates all of the buttons and events that takes player
@@ -77,11 +75,6 @@ struct Input //handles all of the mouse and keyboard input
 private:
 	std::vector<std::shared_ptr<Key>> keyList; //list of all keys availible for input
 	std::vector<std::shared_ptr<MouseButton>> mouseList; //list of all availible mouse buttons for input
-
-	//Clock movementClock; //clock for player input
-	//
-	//int moveXSpeed; //the amount that the player moves in the x dimension
-	//int moveYSpeed; //the amount that the player moves in the y dimension
 
 	void updateMouseInput(); //checks for mouse events
 	void updateKeyInput(); //checks for key events

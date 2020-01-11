@@ -102,9 +102,6 @@ void Tool::update(Position sourcePosition, int mx, int my, double angle)
 
 	this->sourcePosition = sourcePosition;
 
-	//sourcePosition.x = sourcePosition.x; //check passed param
-	//sourcePosition.y = sourcePosition.y;
-
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
 	updateToolPosition(angle);
@@ -188,7 +185,9 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 		if (WORLD->player->mapPosition.level == startPosition.level)
 		{
 			pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::brass);
-			pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+
+			if (startPosition.x == travel.x && startPosition.y == travel.y) pane->console->setChar(renderPosition.x, renderPosition.y, '*'); //muzzle flash ??
+			else pane->console->setChar(renderPosition.x, renderPosition.y, ch);
 		}
 	}
 }
@@ -422,9 +421,6 @@ void Firearm::update(Position sourcePosition, int mx, int my, double angle)
 	dy = my - sourcePosition.y + WORLD->yOffset;
 
 	this->sourcePosition = sourcePosition;
-
-	//sourcePosition.x = x; //check passed param
-	//sourcePosition.y = y;
 
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 

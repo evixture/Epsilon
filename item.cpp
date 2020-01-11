@@ -61,10 +61,6 @@ void Item::createActionManager(Player* owner)
 			std::shared_ptr<Action>(std::make_shared<Action>("Change Fire Mode", std::bind(&Player::changeFireMode, owner), Action::Type::CHANGEFIREMODE))
 		});
 	}
-
-	//actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
-	//	std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP))
-	//});
 }
 
 Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position, Player* owner, ItemType type)

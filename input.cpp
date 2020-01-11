@@ -64,7 +64,7 @@ void MouseButton::update()
 //----------------------------------------------------------------------------------------------------
 
 Input::Input()
-	:keyboard(), mouse()//, baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(0))
+	:keyboard(), mouse()
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &mouse);
 	TCODMouse::showCursor(false);
@@ -121,10 +121,6 @@ void Input::updateKeyInput()
 		}
 		else key->isDown = false;
 	}
-
-	/*if (lshift->isDown) baseMoveTime = .25f;
-	else if (lctrl->isDown)	baseMoveTime = 1.0f;
-	else baseMoveTime = .5f;*/
 }
 
 void Input::updateInput(std::shared_ptr<Player> player)
@@ -133,53 +129,6 @@ void Input::updateInput(std::shared_ptr<Player> player)
 
 	updateKeyInput();
 
-	/*if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
-	{
-		moveXSpeed = 0;
-		moveYSpeed = 0;
-
-		if (INPUT->z->isSwitched)
-		{
-			WORLD->player->height = 1;
-		}
-		if (INPUT->x->isSwitched)
-		{
-			WORLD->player->height = 2;
-		}
-		if (INPUT->c->isSwitched)
-		{
-			WORLD->player->height = 3;
-		}
-		
-		movementClock.capacity = (int)((baseMoveTime / WORLD->player->height) * SETTINGS->fpsCount);
-
-		if (w->isDown && s->isDown) moveYSpeed = 0;
-		else if (w->isDown && !s->isDown) moveYSpeed = -1;
-		else if (s->isDown && !w->isDown) moveYSpeed = 1;
-
-		if (a->isDown && d->isDown) moveXSpeed = 0;
-		else if (a->isDown && !d->isDown) moveXSpeed = -1;
-		else if (d->isDown && !a->isDown) moveXSpeed = 1;
-
-		if (moveXSpeed != 0 || moveYSpeed != 0)
-		{
-			if (movementClock.step == 0)
-			{
-				if (GUI->worldWindow->world->getWalkability(player->mapPosition.x + moveXSpeed, player->mapPosition.y, player->mapPosition.level))
-				{
-					player->mapPosition.x += moveXSpeed;
-					moveXSpeed = 0;
-				}
-				if (GUI->worldWindow->world->getWalkability(player->mapPosition.x, player->mapPosition.y + moveYSpeed, player->mapPosition.level))
-				{
-					player->mapPosition.y += moveYSpeed;
-					moveYSpeed = 0;
-				}
-			}
-			movementClock.tickDownWithReset();
-		}
-	}*/
-	
 	if (escape->isSwitched)
 	{
 		engine->gamestate = Engine::Gamestate::EXIT;
