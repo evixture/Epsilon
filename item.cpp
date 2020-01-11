@@ -37,23 +37,23 @@ void ActionManager::doAction()
 
 void Item::createActionManager(Player* owner)
 {
-	if (itemType == ItemType::NODROP)
+	if (type == ItemType::NODROP)
 	{
 
 	}
-	else if (itemType == ItemType::NORMAL)
+	else if (type == ItemType::NORMAL)
 	{
 		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
 			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP))
 		});
 	}
-	else if (itemType == ItemType::MAGAZINE)
+	else if (type == ItemType::MAGAZINE)
 	{
 		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
 			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP))
 		});
 	}
-	else if (itemType == ItemType::FIREARM)
+	else if (type == ItemType::FIREARM)
 	{
 		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
 			std::shared_ptr<Action>(std::make_shared<Action>("Reload", std::bind(&Player::reload, owner), Action::Type::RELOAD)),
@@ -67,8 +67,8 @@ void Item::createActionManager(Player* owner)
 	//});
 }
 
-Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position, Player* owner, ItemType itemType)
-	:size(size), tile(tile), tool(tool), mapPosition(position), renderPosition(position), distToEnt(0), owner(owner), itemType(itemType)
+Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position, Player* owner, ItemType type)
+	:size(size), tile(tile), tool(tool), mapPosition(position), renderPosition(position), distToEnt(0), owner(owner), type(type)
 {
 	createActionManager(owner);
 }

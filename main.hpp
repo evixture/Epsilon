@@ -7,7 +7,6 @@
 #include <memory>
 #include <vector>
 #include <algorithm>
-//#include <iostream>
 #include <string>
 #include <math.h>
 #include <thread>
@@ -21,7 +20,6 @@
 #include <SFML/Window.hpp>
 
 struct Pane;
-//struct Creature;
 struct Player;
 
 //Class File Imports
@@ -46,6 +44,5 @@ struct Player;
 
 //TODO : NEED TO HAVE A VIRTUAL DESTRUCTOR FOR VIRTUAL CLASSES
 
-//TODO : add more defs for colors in window
 //TODO : optimize and test access modifiers
 //TODO : fov is computed every update, try to optimize later

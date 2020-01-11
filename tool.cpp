@@ -115,7 +115,7 @@ void Tool::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Bullet::Bullet(int ch, int startx, int starty, int dx, int dy, int xbound, int ybound)
-	:ch(ch), bulletx(startx), bullety(starty), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(bulletx, bullety, tox, toy)), moveClock(Clock(0))
+	:ch(ch), x(startx), y(starty), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(x, y, tox, toy)), moveClock(Clock(0))
 {
 	do
 	{
@@ -127,12 +127,12 @@ Bullet::Bullet(int ch, int startx, int starty, int dx, int dy, int xbound, int y
 		{
 			toy *= 2;
 		}
-	} while (((tox + bulletx < xbound && tox + bulletx > 0) && tox != 0) || ((toy + bullety < ybound && toy + bullety > 0) && toy != 0));
+	} while (((tox + x < xbound && tox + x > 0) && tox != 0) || ((toy + y < ybound && toy + y > 0) && toy != 0));
 
-	tox += bulletx;
-	toy += bullety;
+	tox += x;
+	toy += y;
 
-	travel = BLine(bulletx, bullety, tox, toy);
+	travel = BLine(x, y, tox, toy);
 }
 
 void Bullet::update()
@@ -144,7 +144,7 @@ void Bullet::update()
 	{
 		if (!hitWall)
 		{
-			if (bulletx < xbound && bullety < ybound)
+			if (x < xbound && y < ybound)
 			{
 				if (WORLD->inMapBounds(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level)
 					&& WORLD->getWalkability(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level) != false)
@@ -354,7 +354,7 @@ void Firearm::fireBullet()
 	if (!(toolx == dx + toolx && tooly == dy + tooly))
 	{
 		fireClock.reset();
-		bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, toolx, tooly, dx, dy, WORLD->debugmap->mapWidth, WORLD->debugmap->mapHeight));
+		bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, toolx, tooly, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height));
 		selectedMagazine->availableAmmo--;
 	}
 }

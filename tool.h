@@ -35,8 +35,8 @@ struct Bullet //bullet that is fired from firearm
 {
 	int ch; //character represetation of the bulley
 
-	int bulletx; //x coordinate of the bullet
-	int bullety; //y coordinate of the bullet
+	int x; //x coordinate of the bullet
+	int y; //y coordinate of the bullet
 
 	bool hitWall; //if the bullet has made contact with the wall yet
 

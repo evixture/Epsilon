@@ -26,7 +26,7 @@ struct ActionManager //manages all of the actions of an item
 
 struct Item //an item that a creature can hold and interact with
 {
-	enum class ItemType {NODROP, NORMAL, FIREARM, MAGAZINE} itemType;
+	enum class ItemType {NODROP, NORMAL, FIREARM, MAGAZINE} type;
 
 	int size; //size that the item tekes up in the inventory
 	double distToEnt; //the distance from the player to the item, used to highlight the item when the player is in proximity
@@ -41,7 +41,7 @@ struct Item //an item that a creature can hold and interact with
 
 	void createActionManager(Player* owner); //makes an action manager action list based on the item type
 
-	Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position, Player* owner, ItemType itemType); //item constructor that takes a size, tile, too, position, and a player used for action manager
+	Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position, Player* owner, ItemType type); //item constructor that takes a size, tile, too, position, and a player used for action manager
 
 	virtual std::shared_ptr<MagazineData> getMagazineData(); //used to get the important data of the magazine, returns generic magazine when called from item
 

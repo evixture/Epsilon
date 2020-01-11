@@ -1,7 +1,7 @@
 #include "main.hpp"
 
-Font::Font(std::string fontName, std::string xdim, std::string ydim, std::string filePath, int format, int charW, int charH)
-	:fontName(fontName), xDim(xdim), yDim(ydim), filePath(filePath), format(format), charW(charW), charH(charH)
+Font::Font(std::string name, std::string xdim, std::string ydim, std::string filePath, int format, int charW, int charH)
+	:name(name), xDim(xdim), yDim(ydim), filePath(filePath), format(format), charW(charW), charH(charH)
 {}
 
 //----------------------------------------------------------------------------------------------------

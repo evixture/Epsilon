@@ -3,7 +3,7 @@
 struct Font //font class that holds the needed data to set the tcod font
 {
 	std::string filePath; //string file path to the font
-	std::string fontName; //name of the font
+	std::string name; //name of the font
 
 	int format; //bit mask format of the font
 
@@ -12,7 +12,7 @@ struct Font //font class that holds the needed data to set the tcod font
 	std::string xDim; //x dimension of font
 	std::string yDim; //y dimension of font
 
-	Font(std::string fontName, std::string xdim, std::string ydim, std::string filePath, int format, int charW, int charH); //font constructor that takes string name, x and y dimension, file path, bitmask format, and char width and height
+	Font(std::string name, std::string xdim, std::string ydim, std::string filePath, int format, int charW, int charH); //font constructor that takes string name, x and y dimension, file path, bitmask format, and char width and height
 };
 
 struct Settings //settings class that hold most of the settings for the game and tcod

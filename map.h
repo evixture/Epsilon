@@ -4,10 +4,10 @@ struct Map //map class that takes a text file and converts it to a vector of til
 {
 	std::string filePath; //string path to the text file
 
-	std::string mapName; //string name of the map
+	std::string name; //string name of the map
 	int totalFloors; //the total number of floors of the map
-	int mapWidth; //the width of the map
-	int mapHeight; //the height of the map
+	int width; //the width of the map
+	int height; //the height of the map
 
 	std::vector<std::vector< std::shared_ptr<Tile >>> levelList; //list of list of tiles, list of floors->list of tiles
 
@@ -31,6 +31,10 @@ struct World
 
 	std::shared_ptr<Tile> getTile	(int x, int y, int level) const; //returns the tile at specific coordinates
 	TCODColor getBgColor			(int x, int y, int level) const; //gets the background color of the tile at specific coordinates
+
+	void addCreature(std::shared_ptr<Creature> creature);
+	void addItem(std::shared_ptr<Item> item);
+	void addContainer(std::shared_ptr<Container> container);
 
 	bool    getTransparency		(int x, int y, int level, int height) const; //gets the transparency of a tile
 	bool    getWalkability		(int x, int y, int level) const; //gets the walkability of a tile
