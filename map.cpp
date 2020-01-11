@@ -158,7 +158,7 @@ World::World()
 {
 	debugmap = std::make_shared<Map>("data/maps/debugmap.txt");
 
-	entityList.push_back(player = std::make_shared<Player>(Position(2, 2, 0)));
+	creatureList.push_back(player = std::make_shared<Player>(Position(2, 2, 0)));
 
 	fovMap = std::make_shared<TCODMap>(debugmap->width, debugmap->height);
 
@@ -194,7 +194,7 @@ TCODColor World::getBgColor(int x, int y, int level) const
 
 void World::addCreature(std::shared_ptr<Creature> creature)
 {
-	entityList.push_back(creature);
+	creatureList.push_back(creature);
 }
 
 void World::addItem(std::shared_ptr<Item> item)
@@ -302,7 +302,7 @@ bool World::isInFov(int x, int y, int level) const
 
 void World::updateEntities()
 {
-	for (auto& entity : entityList)
+	for (auto& entity : creatureList)
 	{
 		entity->update();
 	}
@@ -343,15 +343,15 @@ void World::renderTiles(const std::shared_ptr<Pane>& pane) const
 
 void World::renderEntities(const std::shared_ptr<Pane>& pane) const
 {
-	for (auto& entity : entityList)
+	for (auto& creature : creatureList)
 	{
-		if (entity->name == "Player")
+		if (creature->name == "Player")
 		{
 			player->render(pane);
 		}
 		else
 		{
-			entity->render(pane);
+			creature->render(pane);
 		}
 	}
 }
