@@ -28,7 +28,7 @@ void Creature::update()
 
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
-	if (!health > 0) //if not "alive"
+	if (!(health > 0)) //if not "alive"
 	{
 		health = 0; //prevent from taking further damage
 		ch = '$'; //set char to dead symbol
@@ -47,9 +47,9 @@ Player::Player(Position pos)
 	:Creature(Position(pos), '@', "player", UICOLOR_Player_Color, 100, 0), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(0))
 {
 	inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
-	inventory[0]->addItem(	ITEM_M1911(0, 0, 0, this));
-	inventory[0]->addItem(	MAGAZINE_45ACPMagazine7(0, 0, 0, this));
-	inventory[0]->addItem(	MAGAZINE_45ACPMagazine7(0, 0, 0, this));
+	inventory[0]->addItem(	ITEM_SIP45(0, 0, 0, this));
+	inventory[0]->addItem(	MAGAZINE_45Magazine7(0, 0, 0, this));
+	inventory[0]->addItem(	MAGAZINE_45Magazine7(0, 0, 0, this));
 	inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
 
 	if (inventory.size() > 0)
@@ -395,7 +395,7 @@ void Player::update()
 		health -= 25;
 	}
 
-	if (!health > 0) //if not "alive"
+	if (!(health > 0)) //if not "alive"
 	{
 		health = 0; //prevent from taking further damage
 		ch = '$'; //set char to dead symbol

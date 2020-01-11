@@ -203,23 +203,23 @@ ITEM SIZES
 	#define ITEM_Hands(x, y, level, owner)							std::make_shared<Item>			(1,											DEFAULT_ITEM_TILE,															TOOL_Hands,				Position(x, y, level),	owner,										Item::ItemType::NODROP)
 
 //PISTOLS
-	//M1911
+	//SIP45 (standard issie pistol .45 cal)
 		//WEAPON
-				#define TILE_M1911									std::make_shared<Tile>			(CHAR_Pistol,								ITEMCOLOR_PISTOLFG,															ITEMCOLOR_ITEMBG,		1,						true)
-				#define WEAPON_M1911								std::make_shared<Firearm>		("M1911",									ITEMCOLOR_PISTOLFG,															.15f,					1.0f,					MagazineData::AmmoType::FOURTYFIVEACP,		Firearm::FireType::SEMI,	Firearm::FireType::SEMI | Firearm::FireType::SAFE)
-			#define ITEM_M1911(x, y, level, owner)					std::make_shared<Item>			(2,											TILE_M1911,																	WEAPON_M1911,			Position(x, y, level),	owner,										Item::ItemType::FIREARM)
+				#define TILE_SIP45									std::make_shared<Tile>			(CHAR_Pistol,								ITEMCOLOR_PISTOLFG,															ITEMCOLOR_ITEMBG,		1,						true)
+				#define WEAPON_SIP45								std::make_shared<Firearm>		("SIP45",									ITEMCOLOR_PISTOLFG,															.15f,					1.0f,					MagazineData::AmmoType::FOURTYFIVEACP,		Firearm::FireType::SEMI,	Firearm::FireType::SEMI | Firearm::FireType::SAFE)
+			#define ITEM_SIP45(x, y, level, owner)					std::make_shared<Item>			(2,											TILE_SIP45,																	WEAPON_SIP45,			Position(x, y, level),	owner,										Item::ItemType::FIREARM)
 		//MAGAZINE
-					#define TILE_45ACPMagazine7						std::make_shared<Tile>			(CHAR_PistolMagazine,						ITEMCOLOR_PISTOLFG,															ITEMCOLOR_ITEMBG,		1,						true)
-					#define TOOL_45ACPMagazine7						std::make_shared<Tool>			("45 ACP Magazine -7-",						ITEMCOLOR_PISTOLFG,															CHAR_PistolMagazine)
-				#define ITEM_45ACPMagazine7(x, y, level, owner)		Item							(1, TILE_45ACPMagazine7,					TOOL_45ACPMagazine7,														Position(x, y, level),	owner,					Item::ItemType::NORMAL)
-			#define MAGAZINE_45ACPMagazine7(x, y, level, owner)		std::make_shared<MagazineItem>	(ITEM_45ACPMagazine7(x, y, level, owner),	std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP,		7,						7))
+					#define TILE_45Magazine7						std::make_shared<Tile>			(CHAR_PistolMagazine,						ITEMCOLOR_PISTOLFG,															ITEMCOLOR_ITEMBG,		1,						true)
+					#define TOOL_45Magazine7						std::make_shared<Tool>			("45 Magazine -7-",						ITEMCOLOR_PISTOLFG,															CHAR_PistolMagazine)
+				#define ITEM_45Magazine7(x, y, level, owner)		Item							(1, TILE_45Magazine7,						TOOL_45Magazine7,															Position(x, y, level),	owner,					Item::ItemType::NORMAL)
+			#define MAGAZINE_45Magazine7(x, y, level, owner)		std::make_shared<MagazineItem>	(ITEM_45Magazine7(x, y, level, owner),		std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP,		7,						7))
 
 //RIFLES
-	//M4A1
+	//SIR556 (standard issue rifle 5.56 cal)
 		//WEAPON
-				#define TILE_M4A1									std::make_shared<Tile>			(CHAR_Rifle,								ITEMCOLOR_RIFLEFG,															ITEMCOLOR_ITEMBG,		1,						true)
-				#define WEAPON_M4A1									std::make_shared<Firearm>		("M4A1",									ITEMCOLOR_RIFLEFG,															.09f,					2.0f,					MagazineData::AmmoType::FIVEPOINTFIVESIX,	Firearm::FireType::FULL,	Firearm::FireType::FULL | Firearm::FireType::SEMI | Firearm::FireType::SAFE)
-			#define ITEM_M4A1(x, y, level, owner)					std::make_shared<Item>			(3,											TILE_M4A1,																	WEAPON_M4A1,			Position(x, y, level),	owner,										Item::ItemType::FIREARM)
+				#define TILE_SIR556									std::make_shared<Tile>			(CHAR_Rifle,								ITEMCOLOR_RIFLEFG,															ITEMCOLOR_ITEMBG,		1,						true)
+				#define WEAPON_SIR556									std::make_shared<Firearm>	("SIR556",									ITEMCOLOR_RIFLEFG,															.09f,					2.0f,					MagazineData::AmmoType::FIVEPOINTFIVESIX,	Firearm::FireType::FULL,	Firearm::FireType::FULL | Firearm::FireType::SEMI | Firearm::FireType::SAFE)
+			#define ITEM_SIR556(x, y, level, owner)					std::make_shared<Item>			(3,											TILE_SIR556,																WEAPON_SIR556,			Position(x, y, level),	owner,										Item::ItemType::FIREARM)
 		//MAGAZINE
 					#define TILE_556Magazine30						std::make_shared<Tile>			(CHAR_RifleMagazine,						ITEMCOLOR_RIFLEFG,															ITEMCOLOR_ITEMBG,		1,						true)
 					#define TOOL_556Magazine30						std::make_shared<Tool>			("5.56 Magazine -30-",						ITEMCOLOR_RIFLEFG,															CHAR_RifleMagazine)
