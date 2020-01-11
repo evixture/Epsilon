@@ -95,13 +95,15 @@ void Tool::updateToolPosition(double angle)
 	}
 }
 
-void Tool::update(int x, int y, int mx, int my, double angle)
+void Tool::update(Position sourcePosition, int mx, int my, double angle)
 {
-	dx = mx - x;
-	dy = my - y;
+	dx = mx - sourcePosition.x;
+	dy = my - sourcePosition.y;
 
-	sourcePosition.x = x; //check passed param
-	sourcePosition.y = y;
+	this->sourcePosition = sourcePosition;
+
+	//sourcePosition.x = sourcePosition.x; //check passed param
+	//sourcePosition.y = sourcePosition.y;
 
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
@@ -116,8 +118,8 @@ void Tool::render(const std::shared_ptr<Pane>& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Bullet::Bullet(int ch, int startx, int starty, int dx, int dy, int xbound, int ybound)
-	:ch(ch), startPosition(Position(startx, starty, 0)), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(startPosition.x, startPosition.y, tox, toy)), moveClock(Clock(0))
+Bullet::Bullet(int ch, Position startPosition, int dx, int dy, int xbound, int ybound)
+	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(startPosition.x, startPosition.y, tox, toy)), moveClock(Clock(0))
 {
 	do
 	{
@@ -148,18 +150,18 @@ void Bullet::update()
 		{
 			if (startPosition.x < xbound && startPosition.y < ybound)
 			{
-				if (WORLD->inMapBounds(travel.x, travel.y, WORLD->player->mapPosition.level)
-					&& WORLD->getWalkability(travel.x, travel.y, WORLD->player->mapPosition.level) != false)
+				if (WORLD->inMapBounds(travel.x, travel.y, startPosition.level)
+					&& WORLD->getWalkability(travel.x, travel.y, startPosition.level) != false)
 				{
 					travel.step();
 				}
 				else
 				{
-					if (WORLD->inMapBounds(travel.x, travel.y, WORLD->player->mapPosition.level))
-					{
-						if (WORLD->getTile(travel.x, travel.y, WORLD->player->mapPosition.level)->tag == Tile::Tag::DESTRUCTIBLE)
-						{
-							WORLD->getTile(travel.x, travel.y, WORLD->player->mapPosition.level)->interact();
+					if (WORLD->inMapBounds(travel.x, travel.y, startPosition.level))
+					{										  
+						if (WORLD->getTile(travel.x, travel.y, startPosition.level)->tag == Tile::Tag::DESTRUCTIBLE)
+						{									  
+							WORLD->getTile(travel.x, travel.y, startPosition.level)->interact();
 						}
 						hitWall = true;
 					}
@@ -176,21 +178,24 @@ void Bullet::update()
 		}
 	}
 
-	renderPosition = offsetPosition(Position(travel.x, travel.y, 0), WORLD->xOffset, WORLD->yOffset);
+	renderPosition = offsetPosition(Position(travel.x, travel.y, startPosition.level), WORLD->xOffset, WORLD->yOffset);
 }
 
 void Bullet::render(const std::shared_ptr<Pane>& pane) const
 {
 	if (!hitWall)
 	{
-		pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::brass);
-		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+		if (WORLD->player->mapPosition.level == startPosition.level)
+		{
+			pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::brass);
+			pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+		}
 	}
 }
 
 //----------------------------------------------------------------------------------------------------
 
-Firearm::Firearm(std::string name, TCODColor color, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode,char availibleFireModeFlag)
+Firearm::Firearm(std::string name, TCODColor color, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
 	:Tool(name, color, NULL, ammoType), maxFireTime(fireRate), maxReloadTime(reloadSpeed), fireMode(fireMode), availibleFireMode(availibleFireModeFlag), fireClock(0), reloadClock(0), selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
 {}
 
@@ -358,7 +363,7 @@ void Firearm::fireBullet()
 	if (!(mapPosition.x == dx + mapPosition.x && mapPosition.y == dy + mapPosition.y))
 	{
 		fireClock.reset();
-		bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition.x, mapPosition.y, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height));
+		bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height));
 		selectedMagazine->availableAmmo--;
 	}
 }
@@ -411,13 +416,15 @@ void Firearm::changeFireMode()
 	}
 }
 
-void Firearm::update(int x, int y, int mx, int my, double angle)
+void Firearm::update(Position sourcePosition, int mx, int my, double angle)
 {
-	dx = mx - x + WORLD->xOffset;
-	dy = my - y + WORLD->yOffset;
+	dx = mx - sourcePosition.x + WORLD->xOffset;
+	dy = my - sourcePosition.y + WORLD->yOffset;
 
-	sourcePosition.x = x; //check passed param
-	sourcePosition.y = y;
+	this->sourcePosition = sourcePosition;
+
+	//sourcePosition.x = x; //check passed param
+	//sourcePosition.y = y;
 
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
@@ -425,6 +432,9 @@ void Firearm::update(int x, int y, int mx, int my, double angle)
 	reloadClock.capacity = (int)(maxReloadTime * SETTINGS->fpsCount);
 
 	updateToolPosition(angle);
+
+	mapPosition.level = sourcePosition.level;
+
 	updateWeaponChar(angle);
 	
 	if (fireClock.step == 0 && selectedMagazine->availableAmmo != 0 && reloadClock.step == 0) //fires bullet

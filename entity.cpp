@@ -369,7 +369,7 @@ void Player::update()
 		reload();
 	}
 
-	selectedItem->updateTool(mapPosition.x, mapPosition.y, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, mapPosition.level);
+	selectedItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle);
 	
 	if (INPUT->space->isSwitched)
 	{

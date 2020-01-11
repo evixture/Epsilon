@@ -78,11 +78,11 @@ std::shared_ptr<MagazineData> Item::getMagazineData()
 	return std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 }
 
-void Item::updateTool(int x, int y, int mx, int my, double angle, int level)
+void Item::updateTool(Position mapPosition, int mx, int my, double angle)
 {
-	tool->update(x, y, mx, my, angle);
+	tool->update(mapPosition, mx, my, angle);
 
-	mapPosition = Position(tool->sourcePosition.x + WORLD->xOffset, tool->sourcePosition.y + WORLD->yOffset, level);
+	mapPosition = Position(tool->sourcePosition.x + WORLD->xOffset, tool->sourcePosition.y + WORLD->yOffset, mapPosition.level);
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
