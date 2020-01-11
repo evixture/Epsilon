@@ -16,11 +16,19 @@ void Engine::render() const
 {
 	TCODConsole::root->clear();
 
-	if (SETTINGS->fpsCount >= 60) //automatic frame skip
+	if (SETTINGS->fpsCount >= 250) //automatic frame skip
 	{
 		settings->render();
 		gui->render();
+
+		if (WORLD->player->health < 75)
+		{
+			TCODConsole::flush();
+		}
 	}
 
-	TCODConsole::flush();	
+	if (WORLD->player->health >= 75)
+	{
+		TCODConsole::flush();	
+	}
 }
