@@ -36,6 +36,7 @@ struct Bullet //bullet that is fired from firearm
 	int ch; //character represetation of the bulley
 
 	Position startPosition;
+	Position mapPosition;
 
 	bool hitWall; //if the bullet has made contact with the wall yet
 

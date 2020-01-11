@@ -24,6 +24,7 @@ struct World
 
 	std::shared_ptr<Player> player; //the player
 
+	std::vector<std::shared_ptr<Creature>> creatureList; //list of all entities on the map
 	std::vector<std::shared_ptr<Item>> mapItemList; //list of all items on the map
 	std::vector<std::shared_ptr<Container>> mapContainerList; //list of all containers on the map
 
@@ -47,8 +48,6 @@ struct World
 	void render(const std::shared_ptr<Pane> &pane) const; //renders the map
 
 private:
-	std::vector<std::shared_ptr<Creature>> creatureList; //list of all entities on the map
-
 	int getOffset		(int playerx, int mapw, int renderw); //returns the map offset
 
 	void computeFov();  //computes the fov map

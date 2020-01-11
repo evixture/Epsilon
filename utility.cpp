@@ -4,6 +4,15 @@ Position::Position(int x, int y, int level)
 	:x(x), y(y), level(level)
 {}
 
+bool Position::operator==(const Position & compPosition)
+{
+	if (this->x == compPosition.x && this->y == compPosition.y && this->level == compPosition.level)
+	{
+		return true;
+	}
+	return false;
+}
+
 Position offsetPosition(Position mapPosition, int xOffset, int yOffset)
 {
 	return Position(mapPosition.x - xOffset, mapPosition.y - yOffset, mapPosition.level);

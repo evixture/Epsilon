@@ -25,12 +25,20 @@ Creature::Creature(Position pos, int ch, std::string name, TCODColor color, int 
 void Creature::update()
 {
 	angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx, engine->settings->input->mouse.cy);
+
+	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+
+	if (!health > 0) //if not "alive"
+	{
+		health = 0; //prevent from taking further damage
+		ch = '$'; //set char to dead symbol
+	}
 }
 
 void Creature::render(const std::shared_ptr<Pane>& pane) const
 {
-	pane->console->setChar(mapPosition.x, mapPosition.y, ch);
-	pane->console->setCharForeground(mapPosition.x, mapPosition.y, color);
+	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -315,68 +323,82 @@ void Player::changeFireMode()
 
 void Player::update()
 {
-	move();
+	if (health > 0) //if player is alive
+	{
+		move();
+		
+		if (INPUT->mouse.wheel_up || INPUT->mouse.wheel_down)
+		{
+			if (!INPUT->lalt->isDown)
+			{
+				if (INPUT->mouse.wheel_up)
+				{
+					moveSelectorUp();
+				}
+				else if (INPUT->mouse.wheel_down)
+				{
+					moveSelectorDown();
+				}
+			}
+			else if (INPUT->lalt->isDown)
+			{
+				if (INPUT->mouse.wheel_up)
+				{
+					selectedItem->actionManager->moveSelectorUp();
+				}
+				else if (INPUT->mouse.wheel_down)
+				{
+					selectedItem->actionManager->moveSelectorDown();
+				}
+			}
+		}
+		
+		if (INPUT->e->isSwitched)
+		{
+			pickUpItem();
+		}
+		
+		if (INPUT->q->isSwitched)
+		{
+			dropItem();
+		}
+		
+		if (INPUT->rightMouseButton->isSwitched)
+		{
+			selectedItem->actionManager->doAction();
+		}
+		
+		filterIndexes();
+		
+		angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
+		
+		selectedItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle);
+		
+		if (INPUT->r->isSwitched)
+		{
+			reload();
+		}
+		
+		if (INPUT->space->isSwitched)
+		{
+			if (WORLD->getTile(mapPosition.x, mapPosition.y, mapPosition.level)->tag == Tile::Tag::STAIR)
+			{
+				WORLD->getTile(mapPosition.x, mapPosition.y, mapPosition.level)->interact();
+			}
+		}
+	}
 
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
-	if (INPUT->mouse.wheel_up || INPUT->mouse.wheel_down)
+	if (INPUT->num0->isSwitched)
 	{
-		if (!INPUT->lalt->isDown)
-		{
-			if (INPUT->mouse.wheel_up)
-			{
-				moveSelectorUp();
-			}
-			else if (INPUT->mouse.wheel_down)
-			{
-				moveSelectorDown();
-			}
-		}
-		else if (INPUT->lalt->isDown)
-		{
-			if (INPUT->mouse.wheel_up)
-			{
-				selectedItem->actionManager->moveSelectorUp();
-			}
-			else if (INPUT->mouse.wheel_down)
-			{
-				selectedItem->actionManager->moveSelectorDown();
-			}
-		}
+		health -= 25;
 	}
 
-	if (INPUT->e->isSwitched)
+	if (!health > 0) //if not "alive"
 	{
-		pickUpItem();
-	}
-
-	if (INPUT->q->isSwitched)
-	{
-		dropItem();
-	}
-
-	if (INPUT->rightMouseButton->isSwitched)
-	{
-		selectedItem->actionManager->doAction();
-	}
-
-	filterIndexes();
-
-	angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
-
-	if (INPUT->r->isSwitched)
-	{
-		reload();
-	}
-
-	selectedItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle);
-	
-	if (INPUT->space->isSwitched)
-	{
-		if (WORLD->getTile(mapPosition.x, mapPosition.y, mapPosition.level)->tag == Tile::Tag::STAIR)
-		{
-			WORLD->getTile(mapPosition.x, mapPosition.y, mapPosition.level)->interact();
-		}
+		health = 0; //prevent from taking further damage
+		ch = '$'; //set char to dead symbol
 	}
 }
 
@@ -385,5 +407,5 @@ void Player::render(const std::shared_ptr<Pane>& pane) const
 	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
 	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
 
-	selectedItem->renderTool(pane);
+	selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
 }

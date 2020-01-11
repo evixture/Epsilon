@@ -8,6 +8,8 @@ struct Position //position struct with x, y, and z dimensions
 
 	Position() {}
 	Position(int x, int y, int level); //position constructor that takes x, y, and level ints
+
+	bool operator == (const Position& compPosition);
 };
 
 Position offsetPosition(Position mapPosition, int xOffset, int yOffset); //used to calculate render position from map offsets

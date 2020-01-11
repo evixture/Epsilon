@@ -313,6 +313,11 @@ void World::update()
 	xOffset = getOffset(player->mapPosition.x, debugmap->width, MAPPANE->drawWindow->consoleWidth);
 	yOffset = getOffset(player->mapPosition.y, debugmap->height, MAPPANE->drawWindow->consoleHeight);
 
+	if (INPUT->num9->isSwitched)
+	{
+		addCreature(std::make_shared<Creature>(Position(30, 8, 0), 'E', "Creature", TCODColor::white, 100, 0));
+	}
+
 	updateProperties();
 	computeFov();
 	updateEntities();
@@ -345,14 +350,7 @@ void World::renderEntities(const std::shared_ptr<Pane>& pane) const
 {
 	for (auto& creature : creatureList)
 	{
-		if (creature->name == "Player")
-		{
-			player->render(pane);
-		}
-		else
-		{
-			creature->render(pane);
-		}
+		creature->render(pane);
 	}
 }
 

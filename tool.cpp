@@ -5,7 +5,7 @@ Tool::Tool(std::string name, TCODColor color, int ch)
 {}
 
 Tool::Tool(std::string name, TCODColor color, int ch, MagazineData::AmmoType ammoType)
-	:name(name), color(color), ch(ch), mapPosition(Position(0, 0, 0)), dy(0), sourcePosition(Position(0, 0, 0)), ammoType(ammoType)
+	:name(name), color(color), ch(ch), mapPosition(Position(0, 0, 0)), dx(0), dy(0), sourcePosition(Position(0, 0, 0)), ammoType(ammoType)
 {}
 
 std::shared_ptr<MagazineData> Tool::getMagData()
@@ -116,7 +116,7 @@ void Tool::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Bullet::Bullet(int ch, Position startPosition, int dx, int dy, int xbound, int ybound)
-	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(startPosition.x, startPosition.y, tox, toy)), moveClock(Clock(0))
+	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(startPosition.x, startPosition.y, tox, toy)), moveClock(Clock(0)), mapPosition(startPosition)
 {
 	do
 	{
@@ -143,16 +143,25 @@ void Bullet::update()
 
 	if (moveClock.step == 0)
 	{
-		if (!hitWall)
+		if (!hitWall) // if it has not hit a solid wall yet
 		{
 			if (startPosition.x < xbound && startPosition.y < ybound)
 			{
 				if (WORLD->inMapBounds(travel.x, travel.y, startPosition.level)
-					&& WORLD->getWalkability(travel.x, travel.y, startPosition.level) != false)
+					&& WORLD->getWalkability(travel.x, travel.y, startPosition.level) != false) // if in map bounds and travel position is walkable
 				{
+					for (auto& creature : WORLD->creatureList)
+					{
+						if (mapPosition == creature->mapPosition)
+						{
+							creature->health -= 50;
+							GUI->logWindow->pushMessage(LogWindow::Message("you hit a creature", LogWindow::Message::MessageLevel::HIGH));
+						}
+					}
+
 					travel.step();
 				}
-				else
+				else //else if bullet has hit something that is not walkable
 				{
 					if (WORLD->inMapBounds(travel.x, travel.y, startPosition.level))
 					{										  
@@ -175,7 +184,8 @@ void Bullet::update()
 		}
 	}
 
-	renderPosition = offsetPosition(Position(travel.x, travel.y, startPosition.level), WORLD->xOffset, WORLD->yOffset);
+	mapPosition = Position(travel.x, travel.y, startPosition.level);
+	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
 void Bullet::render(const std::shared_ptr<Pane>& pane) const
