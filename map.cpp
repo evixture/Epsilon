@@ -162,11 +162,9 @@ World::World()
 
 	fovMap = std::make_shared<TCODMap>(debugmap->width, debugmap->height);
 
-	mapItemList.push_back(ITEM_M4A1(4, 7, 0, player.get()));
-
-	mapItemList.push_back(MAGAZINE_556Magazine30(5, 10, 0, player.get()));
-
-	mapItemList.push_back(MAGAZINE_45ACPMagazine7(10, 10, 0, player.get()));								  
+	addItem(ITEM_M4A1(4, 7, 0, player.get()));
+	addItem(MAGAZINE_556Magazine30(5, 10, 0, player.get()));
+	addItem(MAGAZINE_45ACPMagazine7(10, 10, 0, player.get()));
 }
 
 std::shared_ptr<Tile> World::getTile(int x, int y, int level) const
@@ -192,6 +190,21 @@ bool World::isExplored(int x, int y, int level) const
 TCODColor World::getBgColor(int x, int y, int level) const
 {
 	return debugmap->levelList[level][x + y * debugmap->width]->backgroundColor;
+}
+
+void World::addCreature(std::shared_ptr<Creature> creature)
+{
+	entityList.push_back(creature);
+}
+
+void World::addItem(std::shared_ptr<Item> item)
+{
+	mapItemList.push_back(item);
+}
+
+void World::addContainer(std::shared_ptr<Container> container)
+{
+	mapContainerList.push_back(container);
 }
 
 bool World::inMapBounds(int x, int y, int level) const

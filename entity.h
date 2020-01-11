@@ -50,7 +50,11 @@ struct Creature : public Entity //creature base used for player and other beings
 
 struct Player : public Creature //player derived creature that the player interacts through
 {
+	float baseMoveTime; //time before the player moves a unit
+
 	Player(Position pos); //player constructor that takes a position
+
+	void move();
 
 	void moveSelectorUp(); //moves the selector up on the inventory
 	void moveSelectorDown(); //moves the selector down on the inventory
@@ -63,4 +67,10 @@ struct Player : public Creature //player derived creature that the player intera
 
 	void update(); //updates the player
 	void render(const std::shared_ptr<Pane>& pane) const; //renders the player
+
+private:
+	Clock movementClock; //clock for player input
+
+	int moveXSpeed; //the amount that the player moves in the x dimension
+	int moveYSpeed; //the amount that the player moves in the y dimension
 };

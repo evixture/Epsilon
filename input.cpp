@@ -64,7 +64,7 @@ void MouseButton::update()
 //----------------------------------------------------------------------------------------------------
 
 Input::Input()
-	:keyboard(), mouse(), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(0))
+	:keyboard(), mouse()//, baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(0))
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &mouse);
 	TCODMouse::showCursor(false);
@@ -122,9 +122,9 @@ void Input::updateKeyInput()
 		else key->isDown = false;
 	}
 
-	if (lshift->isDown) baseMoveTime = .25f;
+	/*if (lshift->isDown) baseMoveTime = .25f;
 	else if (lctrl->isDown)	baseMoveTime = 1.0f;
-	else baseMoveTime = .5f;
+	else baseMoveTime = .5f;*/
 }
 
 void Input::updateInput(std::shared_ptr<Player> player)
@@ -133,7 +133,7 @@ void Input::updateInput(std::shared_ptr<Player> player)
 
 	updateKeyInput();
 
-	if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
+	/*if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
 	{
 		moveXSpeed = 0;
 		moveYSpeed = 0;
@@ -178,7 +178,7 @@ void Input::updateInput(std::shared_ptr<Player> player)
 			}
 			movementClock.tickDownWithReset();
 		}
-	}
+	}*/
 	
 	if (escape->isSwitched)
 	{

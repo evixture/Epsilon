@@ -77,9 +77,9 @@ void PlayerWindow::update()
 	else if (WORLD->player->height == 2) playerStance = "Crouching";
 	else if (WORLD->player->height == 3) playerStance = "Standing";
 
-	if (INPUT->baseMoveTime == .5f) playerSpeed = "Walking";
-	else if (INPUT->baseMoveTime == .25f) playerSpeed = "Running";
-	else if (INPUT->baseMoveTime == 1.0f) playerSpeed = "Creeping";
+	if (WORLD->player->baseMoveTime == .5f) playerSpeed = "Walking";
+	else if (WORLD->player->baseMoveTime == .25f) playerSpeed = "Running";
+	else if (WORLD->player->baseMoveTime == 1.0f) playerSpeed = "Creeping";
 }
 
 void PlayerWindow::render() const
@@ -341,7 +341,7 @@ LogWindow::LogWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 
 void LogWindow::pushMessage(Message message)
 {
-	messageList.push_back(message);
+	messageList.insert(messageList.begin(), message);
 }
 
 void LogWindow::update()
@@ -352,9 +352,9 @@ void LogWindow::render() const
 	clearWindow();
 
 	int line = 0;
-	for (int i = messageList.size(); i > 0; i--)
+	for (int i = 0; i < messageList.size(); i++) //renders last message first
 	{
-		drawWindow->console->printf(0, line, "| %s",  messageList[i - 1].message.c_str());
+		drawWindow->console->printf(0, line, "| %s",  messageList[i].message.c_str());
 		for (int j = 0; j < drawWindow->consoleWidth; j++)
 		{
 			drawWindow->console->setCharForeground(j, line, messageList[i - 1].color);

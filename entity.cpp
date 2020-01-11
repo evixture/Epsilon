@@ -36,7 +36,7 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Player::Player(Position pos)
-	:Creature(Position(pos), '@', "player", UICOLOR_Player_Color, 100, 0)
+	:Creature(Position(pos), '@', "player", UICOLOR_Player_Color, 100, 0), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(0))
 {
 	inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
 	inventory[0]->addItem(	ITEM_M1911(0, 0, 0, this));
@@ -57,6 +57,60 @@ Player::Player(Position pos)
 	}
 
 	selectedMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
+}
+
+void Player::move()
+{
+	if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
+	{
+		if (INPUT->lshift->isDown) baseMoveTime = .25f;
+		else if (INPUT->lctrl->isDown)	baseMoveTime = 1.0f;
+		else baseMoveTime = .5f;
+
+		moveXSpeed = 0;
+		moveYSpeed = 0;
+
+		if (INPUT->z->isSwitched)
+		{
+			height = 1;
+		}
+		if (INPUT->x->isSwitched)
+		{
+			height = 2;
+		}
+		if (INPUT->c->isSwitched)
+		{
+			height = 3;
+		}
+
+		movementClock.capacity = (int)((baseMoveTime / height) * SETTINGS->fpsCount);
+
+		if (INPUT->w->isDown && INPUT->s->isDown) moveYSpeed = 0;
+		else if (INPUT->w->isDown && !INPUT->s->isDown) moveYSpeed = -1;
+		else if (INPUT->s->isDown && !INPUT->w->isDown) moveYSpeed = 1;
+
+		if (INPUT->a->isDown && INPUT->d->isDown) moveXSpeed = 0;
+		else if (INPUT->a->isDown && !INPUT->d->isDown) moveXSpeed = -1;
+		else if (INPUT->d->isDown && !INPUT->a->isDown) moveXSpeed = 1;
+
+		if (moveXSpeed != 0 || moveYSpeed != 0)
+		{
+			if (movementClock.step == 0)
+			{
+				if (GUI->worldWindow->world->getWalkability(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.level))
+				{
+					mapPosition.x += moveXSpeed;
+					moveXSpeed = 0;
+				}
+				if (GUI->worldWindow->world->getWalkability(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.level))
+				{
+					mapPosition.y += moveYSpeed;
+					moveYSpeed = 0;
+				}
+			}
+			movementClock.tickDownWithReset();
+		}
+	}
 }
 
 void Player::moveSelectorUp()
@@ -128,7 +182,6 @@ void Player::pickUpItem()
 	{
 		if (WORLD->mapContainerList[i] != nullptr && WORLD->mapContainerList[i]->containerItem->mapPosition.x == mapPosition.x && WORLD->mapContainerList[i]->containerItem->mapPosition.y == mapPosition.y && WORLD->mapContainerList[i]->containerItem->mapPosition.level == mapPosition.level)
 		{
-			//err here
 			GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->mapContainerList[i]->containerItem->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 
 			inventory.push_back(WORLD->mapContainerList[i]);
@@ -262,6 +315,8 @@ void Player::changeFireMode()
 
 void Player::update()
 {
+	move();
+
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
 	if (INPUT->mouse.wheel_up || INPUT->mouse.wheel_down)

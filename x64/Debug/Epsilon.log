@@ -1,17 +1,2 @@
-﻿  aicreature.cpp
-  engine.cpp
-  entity.cpp
-  gui.cpp
-  input.cpp
-  item.cpp
-  main.cpp
-  map.cpp
-  panel.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(355,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  settings.cpp
-  tile.cpp
-  tool.cpp
-  utility.cpp
-  window.cpp
-  Generating Code...
+﻿  panel.cpp
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe
