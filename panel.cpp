@@ -357,7 +357,7 @@ void LogWindow::render() const
 		drawWindow->console->printf(0, line, "| %s",  messageList[i].message.c_str());
 		for (int j = 0; j < drawWindow->consoleWidth; j++)
 		{
-			drawWindow->console->setCharForeground(j, line, messageList[i - 1].color);
+			drawWindow->console->setCharForeground(j, line, messageList[i].color);
 		}
 		line++;
 	}
