@@ -7,11 +7,13 @@ struct Tool //base class for the holdable component to items
 
 	MagazineData::AmmoType ammoType; //type of ammo used for weapons
 	
-	int toolx; //x coordinate of tool on the map
-	int tooly; //y coordinate of tool on the map
+	//int toolx; //x coordinate of tool on the map
+	//int tooly; //y coordinate of tool on the map
+	Position mapPosition;
 
-	int sourcex; //player x position
-	int sourcey; //player y position
+	//int sourcex; //player x position
+	//int sourcey; //player y position
+	Position sourcePosition;
 
 	int dx; //the delta x of the player and the mouse
 	int dy; //the delta y of the player and the mouse
@@ -29,14 +31,18 @@ struct Tool //base class for the holdable component to items
 
 	virtual void update(int x, int y, int mx, int my, double angle); //virtual updates tool
 	virtual void render(const std::shared_ptr<Pane>& pane) const; //virtual renders tool
+
+protected:
+	Position renderPosition;
 };
 
 struct Bullet //bullet that is fired from firearm
 {
 	int ch; //character represetation of the bulley
 
-	int x; //x coordinate of the bullet
-	int y; //y coordinate of the bullet
+	//int x; //x coordinate of the bullet
+	//int y; //y coordinate of the bullet
+	Position startPosition;
 
 	bool hitWall; //if the bullet has made contact with the wall yet
 
@@ -54,6 +60,8 @@ private:
 
 	BLine travel; //bresanham line that the bullet travels along
 	Clock moveClock; //clock that determines when bullet moves
+
+	Position renderPosition;
 };
 
 struct Firearm : public Tool //firearm that fires bullets that interact with the world

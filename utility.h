@@ -6,6 +6,7 @@ struct Position //position struct with x, y, and z dimensions
 	int y; //y coordinate
 	int level; //z / height coordinate
 
+	Position() {}
 	Position(int x, int y, int level); //position constructor that takes x, y, and level ints
 };
 

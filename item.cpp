@@ -82,7 +82,7 @@ void Item::updateTool(int x, int y, int mx, int my, double angle, int level)
 {
 	tool->update(x, y, mx, my, angle);
 
-	mapPosition = Position(tool->sourcex + WORLD->xOffset, tool->sourcey + WORLD->yOffset, level);
+	mapPosition = Position(tool->sourcePosition.x + WORLD->xOffset, tool->sourcePosition.y + WORLD->yOffset, level);
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 

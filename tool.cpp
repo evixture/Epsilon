@@ -1,11 +1,11 @@
 #include "main.hpp"
 
 Tool::Tool(std::string name, TCODColor color, int ch)
-	:name(name), color(color), ch(ch), toolx(0), tooly(0), dx(0), dy(0), sourcex(0), sourcey(0), ammoType(MagazineData::AmmoType::NONE)
+	:name(name), color(color), ch(ch), mapPosition(Position(0, 0, 0)), dx(0), dy(0), sourcePosition(Position(0, 0, 0)), ammoType(MagazineData::AmmoType::NONE)
 {}
 
 Tool::Tool(std::string name, TCODColor color, int ch, MagazineData::AmmoType ammoType)
-	:name(name), color(color), ch(ch), toolx(0), tooly(0), dx(0), dy(0), sourcex(0), sourcey(0), ammoType(ammoType)
+	:name(name), color(color), ch(ch), mapPosition(Position(0, 0, 0)), dy(0), sourcePosition(Position(0, 0, 0)), ammoType(ammoType)
 {}
 
 std::shared_ptr<MagazineData> Tool::getMagData()
@@ -25,72 +25,72 @@ void Tool::updateToolPosition(double angle)
 	{
 		if (angle <= 22.5)
 		{
-			toolx = sourcex + 1;
-			tooly = sourcey;
+			mapPosition.x = sourcePosition.x + 1;
+			mapPosition.y = sourcePosition.y;
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
-			toolx = sourcex + 1;
-			tooly = sourcey + 1;
+			mapPosition.x = sourcePosition.x + 1;
+			mapPosition.y = sourcePosition.y + 1;
 		}
 		else if (angle >= 67.5)
 		{
-			toolx = sourcex;
-			tooly = sourcey + 1;
+			mapPosition.x = sourcePosition.x;
+			mapPosition.y = sourcePosition.y + 1;
 		}
 	}
 	else if (dx >= 0 && dy <= 0)
 	{
 		if (angle >= -22.5)
 		{
-			toolx = sourcex + 1;
-			tooly = sourcey;
+			mapPosition.x = sourcePosition.x + 1;
+			mapPosition.y = sourcePosition.y;
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
-			toolx = sourcex + 1;
-			tooly = sourcey - 1;
+			mapPosition.x = sourcePosition.x + 1;
+			mapPosition.y = sourcePosition.y - 1;
 		}
 		else if (angle <= -67.5)
 		{
-			toolx = sourcex;
-			tooly = sourcey - 1;
+			mapPosition.x = sourcePosition.x;
+			mapPosition.y = sourcePosition.y - 1;
 		}
 	}
 	else if (dx <= 0 && dy >= 0)
 	{
 		if (angle >= -22.5)
 		{
-			toolx = sourcex - 1;
-			tooly = sourcey;
+			mapPosition.x = sourcePosition.x - 1;
+			mapPosition.y = sourcePosition.y;
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
-			toolx = sourcex - 1;
-			tooly = sourcey + 1;
+			mapPosition.x = sourcePosition.x - 1;
+			mapPosition.y = sourcePosition.y + 1;
 		}
 		else if (angle <= -67.5)
 		{
-			toolx = sourcex;
-			tooly = sourcey + 1;
+			mapPosition.x = sourcePosition.x;
+			mapPosition.y = sourcePosition.y + 1;
 		}
 	}
 	else if (dx <= 0 && dy <= 0)
 	{
 		if (angle <= 22.5)
 		{
-			toolx = sourcex - 1;
-			tooly = sourcey;
+			mapPosition.x = sourcePosition.x - 1;
+			mapPosition.y = sourcePosition.y;
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
-			toolx = sourcex - 1;
-			tooly = sourcey - 1;
+			mapPosition.x = sourcePosition.x - 1;
+			mapPosition.y = sourcePosition.y - 1;
 		}
 		else if (angle >= 67.5)
 		{
-			toolx = sourcex;
-			tooly = sourcey - 1;
+			mapPosition.x = sourcePosition.x;
+			mapPosition.y = sourcePosition.y - 1;
 		}
 	}
 }
@@ -100,22 +100,24 @@ void Tool::update(int x, int y, int mx, int my, double angle)
 	dx = mx - x;
 	dy = my - y;
 
-	sourcex = x;
-	sourcey = y;
+	sourcePosition.x = x; //check passed param
+	sourcePosition.y = y;
+
+	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
 	updateToolPosition(angle);
 }
 
 void Tool::render(const std::shared_ptr<Pane>& pane) const
 {
-	pane->console->setChar(toolx, tooly, ch);
-	pane->console->setCharForeground(toolx, tooly, color);
+	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
 }
 
 //----------------------------------------------------------------------------------------------------
 
 Bullet::Bullet(int ch, int startx, int starty, int dx, int dy, int xbound, int ybound)
-	:ch(ch), x(startx), y(starty), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(x, y, tox, toy)), moveClock(Clock(0))
+	:ch(ch), startPosition(Position(startx, starty, 0)), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(startPosition.x, startPosition.y, tox, toy)), moveClock(Clock(0))
 {
 	do
 	{
@@ -127,12 +129,12 @@ Bullet::Bullet(int ch, int startx, int starty, int dx, int dy, int xbound, int y
 		{
 			toy *= 2;
 		}
-	} while (((tox + x < xbound && tox + x > 0) && tox != 0) || ((toy + y < ybound && toy + y > 0) && toy != 0));
+	} while (((tox + startPosition.x < xbound && tox + startPosition.x > 0) && tox != 0) || ((toy + startPosition.y < ybound && toy + startPosition.y > 0) && toy != 0));
 
-	tox += x;
-	toy += y;
+	tox += startPosition.x;
+	toy += startPosition.y;
 
-	travel = BLine(x, y, tox, toy);
+	travel = BLine(startPosition.x, startPosition.y, tox, toy);
 }
 
 void Bullet::update()
@@ -144,20 +146,20 @@ void Bullet::update()
 	{
 		if (!hitWall)
 		{
-			if (x < xbound && y < ybound)
+			if (startPosition.x < xbound && startPosition.y < ybound)
 			{
-				if (WORLD->inMapBounds(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level)
-					&& WORLD->getWalkability(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level) != false)
+				if (WORLD->inMapBounds(travel.x, travel.y, WORLD->player->mapPosition.level)
+					&& WORLD->getWalkability(travel.x, travel.y, WORLD->player->mapPosition.level) != false)
 				{
 					travel.step();
 				}
 				else
 				{
-					if (WORLD->inMapBounds(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level))
+					if (WORLD->inMapBounds(travel.x, travel.y, WORLD->player->mapPosition.level))
 					{
-						if (WORLD->getTile(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level)->tag == Tile::Tag::DESTRUCTIBLE)
+						if (WORLD->getTile(travel.x, travel.y, WORLD->player->mapPosition.level)->tag == Tile::Tag::DESTRUCTIBLE)
 						{
-							WORLD->getTile(travel.x + WORLD->xOffset, travel.y + WORLD->yOffset, WORLD->player->mapPosition.level)->interact();
+							WORLD->getTile(travel.x, travel.y, WORLD->player->mapPosition.level)->interact();
 						}
 						hitWall = true;
 					}
@@ -173,14 +175,16 @@ void Bullet::update()
 			}
 		}
 	}
+
+	renderPosition = offsetPosition(Position(travel.x, travel.y, 0), WORLD->xOffset, WORLD->yOffset);
 }
 
 void Bullet::render(const std::shared_ptr<Pane>& pane) const
 {
 	if (!hitWall)
 	{
-		pane->console->setCharForeground(travel.x, travel.y, TCODColor::brass);
-		pane->console->setChar(travel.x, travel.y, ch);
+		pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::brass);
+		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
 	}
 }
 
@@ -351,10 +355,10 @@ std::shared_ptr<MagazineData> Firearm::getMagData()
 
 void Firearm::fireBullet()
 {
-	if (!(toolx == dx + toolx && tooly == dy + tooly))
+	if (!(mapPosition.x == dx + mapPosition.x && mapPosition.y == dy + mapPosition.y))
 	{
 		fireClock.reset();
-		bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, toolx, tooly, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height));
+		bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition.x, mapPosition.y, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height));
 		selectedMagazine->availableAmmo--;
 	}
 }
@@ -409,11 +413,13 @@ void Firearm::changeFireMode()
 
 void Firearm::update(int x, int y, int mx, int my, double angle)
 {
-	dx = mx - x;
-	dy = my - y;
+	dx = mx - x + WORLD->xOffset;
+	dy = my - y + WORLD->yOffset;
 
-	sourcex = x;
-	sourcey = y;
+	sourcePosition.x = x; //check passed param
+	sourcePosition.y = y;
+
+	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
 	fireClock.capacity = (int)(maxFireTime * SETTINGS->fpsCount);
 	reloadClock.capacity = (int)(maxReloadTime * SETTINGS->fpsCount);
@@ -453,8 +459,8 @@ void Firearm::update(int x, int y, int mx, int my, double angle)
 
 void Firearm::render(const std::shared_ptr<Pane>& pane) const
 {
-	pane->console->setChar(toolx, tooly, ch);
-	pane->console->setCharForeground(toolx, tooly, color);
+	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
 
 	for (auto& bullet : bulletList)
 	{
