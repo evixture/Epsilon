@@ -323,6 +323,8 @@ void Player::changeFireMode()
 
 void Player::update()
 {
+	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+
 	if (health > 0) //if player is alive
 	{
 		move();
@@ -387,8 +389,6 @@ void Player::update()
 			}
 		}
 	}
-
-	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
 	if (INPUT->num0->isSwitched)
 	{
