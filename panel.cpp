@@ -388,8 +388,8 @@ ProximityWindow::ProximityWindow(int consoleWidth, int consoleHeight, int rx, in
 
 void ProximityWindow::update()
 {
-	proximityItemList = WORLD->mapItemList; //can be optimized later
-	proximityContainerList = WORLD->mapContainerList;
+	//proximityItemList = WORLD->mapItemList; //can be optimized later
+	//proximityContainerList = WORLD->mapContainerList;
 }
 
 void ProximityWindow::render() const
@@ -398,7 +398,7 @@ void ProximityWindow::render() const
 
 	int line = 0;
 
-	for (auto& container : proximityContainerList)
+	for (auto& container : WORLD->mapContainerList)
 	{
 		if (container->containerItem->mapPosition.level == WORLD->player->mapPosition.level)
 		{
@@ -410,7 +410,7 @@ void ProximityWindow::render() const
 		}
 	}
 
-	for (auto& item : proximityItemList)
+	for (auto& item : WORLD->mapItemList)
 	{
 		if (item->mapPosition.level == WORLD->player->mapPosition.level)
 		{

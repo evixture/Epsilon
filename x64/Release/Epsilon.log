@@ -1,8 +1,8 @@
 ﻿  panel.cpp
   Generating code
-  1 of 2064 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  10 of 2046 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+    58 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Release\Epsilon.exe
 E:\Libtcod\custom-libtcod-master\src\libtcod\console\console.h(122): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
