@@ -4,7 +4,7 @@ struct Entity //generic entity base for use on map
 {
 	Position mapPosition; //the position of the entity on the map
 	int ch; //character representation of the character
-	const TCODColor color; //foreground color of the entity
+	TCODColor color; //foreground color of the entity
 	std::string name; //string name of entity
 
 	int height; //height of the entity

@@ -141,21 +141,23 @@ void Bullet::update()
 	moveClock.capacity = (int)(engine->settings->fpsCount * .005f);
 	moveClock.tickDownWithReset();
 
+	mapPosition = Position(travel.x, travel.y, startPosition.level);
+
 	if (moveClock.step == 0)
 	{
 		if (!hitWall) // if it has not hit a solid wall yet
 		{
-			if (startPosition.x < xbound && startPosition.y < ybound)
+			if (startPosition.x < xbound && startPosition.y < ybound) //if in map bound
 			{
-				if (WORLD->inMapBounds(travel.x, travel.y, startPosition.level)
-					&& WORLD->getWalkability(travel.x, travel.y, startPosition.level) != false) // if in map bounds and travel position is walkable
+				if (WORLD->inMapBounds(mapPosition)
+					&& WORLD->getWalkability(mapPosition) != false) // if in map bounds and travel position is walkable
 				{
 					for (auto& creature : WORLD->creatureList)
 					{
 						if (mapPosition == creature->mapPosition)
 						{
-							creature->health -= 50;
-							GUI->logWindow->pushMessage(LogWindow::Message("you hit a creature", LogWindow::Message::MessageLevel::HIGH));
+							creature->health -= 50; //deal bullet damage, should be replaced later
+							GUI->logWindow->pushMessage(LogWindow::Message("You hit a creature!", LogWindow::Message::MessageLevel::HIGH));
 						}
 					}
 
@@ -163,11 +165,11 @@ void Bullet::update()
 				}
 				else //else if bullet has hit something that is not walkable
 				{
-					if (WORLD->inMapBounds(travel.x, travel.y, startPosition.level))
+					if (WORLD->inMapBounds(mapPosition))
 					{										  
-						if (WORLD->getTile(travel.x, travel.y, startPosition.level)->tag == Tile::Tag::DESTRUCTIBLE)
+						if (WORLD->getTile(mapPosition)->tag == Tile::Tag::DESTRUCTIBLE)
 						{									  
-							WORLD->getTile(travel.x, travel.y, startPosition.level)->interact();
+							WORLD->getTile(mapPosition)->interact();
 						}
 						hitWall = true;
 					}
@@ -177,14 +179,15 @@ void Bullet::update()
 					}
 				}
 			}
-			else
+			else // else not in map bound
 			{
 				hitWall = true;
 			}
 		}
 	}
 
-	mapPosition = Position(travel.x, travel.y, startPosition.level);
+	mapPosition = Position(travel.x, travel.y, startPosition.level); //second needed?
+	//map pos assignment orig here
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 

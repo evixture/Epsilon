@@ -32,13 +32,14 @@ void Creature::update()
 	{
 		health = 0; //prevent from taking further damage
 		ch = '$'; //set char to dead symbol
+		color = TCODColor::red;
 	}
 }
 
 void Creature::render(const std::shared_ptr<Pane>& pane) const
 {
 	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
+	pane->console->setCharForeground(renderPosition.x, renderPosition.y, (WORLD->isInFov(mapPosition))? color : TCODColor::darkerGrey); //out of fov creatures rendered with one step above normal fov grey to be more noticible
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -105,12 +106,12 @@ void Player::move()
 		{
 			if (movementClock.step == 0)
 			{
-				if (GUI->worldWindow->world->getWalkability(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.level))
+				if (GUI->worldWindow->world->getWalkability(Position(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.level)))
 				{
 					mapPosition.x += moveXSpeed;
 					moveXSpeed = 0;
 				}
-				if (GUI->worldWindow->world->getWalkability(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.level))
+				if (GUI->worldWindow->world->getWalkability(Position(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.level)))
 				{
 					mapPosition.y += moveYSpeed;
 					moveYSpeed = 0;
@@ -383,9 +384,9 @@ void Player::update()
 		
 		if (INPUT->space->isSwitched)
 		{
-			if (WORLD->getTile(mapPosition.x, mapPosition.y, mapPosition.level)->tag == Tile::Tag::STAIR)
+			if (WORLD->getTile(mapPosition)->tag == Tile::Tag::STAIR)
 			{
-				WORLD->getTile(mapPosition.x, mapPosition.y, mapPosition.level)->interact();
+				WORLD->getTile(mapPosition)->interact();
 			}
 		}
 	}
@@ -398,7 +399,8 @@ void Player::update()
 	if (!(health > 0)) //if not "alive"
 	{
 		health = 0; //prevent from taking further damage
-		ch = '$'; //set char to dead symbol
+		ch = '&'; //set char to dead symbol
+		color = TCODColor::red;
 	}
 }
 

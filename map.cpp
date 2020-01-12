@@ -165,13 +165,17 @@ World::World()
 	addItem(ITEM_SIR556(4, 7, 0, player.get()));
 	addItem(MAGAZINE_556Magazine30(5, 10, 0, player.get()));
 	addItem(MAGAZINE_45Magazine7(10, 10, 0, player.get()));
+
+	addCreature(std::make_shared<Creature>(Position(13, 38, 0), 'E', "Creature", TCODColor::white, 100, 0)); //replace colors
+	addCreature(std::make_shared<Creature>(Position(16, 22, 0), 'H', "Creature", TCODColor::blue, 100, 0));
+	addCreature(std::make_shared<Creature>(Position(64, 21, 0), 'F', "Creature", TCODColor::purple, 100, 0)); //grey when in fov???
 }
 
-std::shared_ptr<Tile> World::getTile(int x, int y, int level) const
+std::shared_ptr<Tile> World::getTile(Position position) const
 {
-	if (inMapBounds(x, y, level))
+	if (inMapBounds(position))
 	{
-		return debugmap->levelList[level][x + y * debugmap->width];
+		return debugmap->levelList[position.level][position.x + position.y * debugmap->width];
 	}
 	else
 	{
@@ -179,17 +183,17 @@ std::shared_ptr<Tile> World::getTile(int x, int y, int level) const
 	}
 }
 
-bool World::isExplored(int x, int y, int level) const
+bool World::isExplored(Position position) const //err with this
 {
-	x += xOffset;
-	y += yOffset;
+	//position.x += xOffset;
+	//position.y += yOffset;
 
-	return debugmap->levelList[level][x + y * debugmap->width]->explored;
+	return debugmap->levelList[position.level][position.x + position.y * debugmap->width]->explored;
 }
 
-TCODColor World::getBgColor(int x, int y, int level) const
+TCODColor World::getBgColor(Position position) const
 {
-	return debugmap->levelList[level][x + y * debugmap->width]->backgroundColor;
+	return debugmap->levelList[position.level][position.x + position.y * debugmap->width]->backgroundColor;
 }
 
 void World::addCreature(std::shared_ptr<Creature> creature)
@@ -207,11 +211,11 @@ void World::addContainer(std::shared_ptr<Container> container)
 	mapContainerList.push_back(container);
 }
 
-bool World::inMapBounds(int x, int y, int level) const
+bool World::inMapBounds(Position position) const
 {
-	if (level < 0 || level > debugmap->totalFloors - 1) return false;
-	if (x < 0 || x > debugmap->width - 1) return false;
-	if (y < 0 || y > debugmap->height - 1) return false;
+	if (position.level < 0 || position.level > debugmap->totalFloors - 1) return false;
+	if (position.x < 0 || position.x > debugmap->width - 1) return false;
+	if (position.y < 0 || position.y > debugmap->height - 1) return false;
 	return true;
 }
 
@@ -235,29 +239,29 @@ int World::getOffset(int playerx, int mapw, int renderw)
 	}
 }
 
-bool World::getWalkability(int x, int y, int level) const
+bool World::getWalkability(Position position) const
 {
-	if (x < 0) return false;
-	if (y < 0) return false;
-	if (x >= debugmap->width) return false;
-	if (y >= debugmap->height) return false;
+	if (position.x < 0) return false;
+	if (position.y < 0) return false;
+	if (position.x >= debugmap->width) return false;
+	if (position.y >= debugmap->height) return false;
 
-	return debugmap->levelList[level][x + y * debugmap->width]->walkable;
+	return debugmap->levelList[position.level][position.x + position.y * debugmap->width]->walkable;
 }
 
-bool World::getTransparency(int x, int y, int level, int height) const
+bool World::getTransparency(Position position, int height) const
 {
-	if (debugmap->levelList[level][x + y * debugmap->width])
+	if (debugmap->levelList[position.level][position.x + position.y * debugmap->width])
 	{
-		if (height <= debugmap->levelList[level][x + y * debugmap->width]->height)
+		if (height <= debugmap->levelList[position.level][position.x + position.y * debugmap->width]->height)
 		{
-			if (debugmap->levelList[level][x + y * debugmap->width]->tag == Tile::Tag::DESTRUCTIBLE && debugmap->levelList[level][x + y * debugmap->width]->getDestroyed())
+			if (debugmap->levelList[position.level][position.x + position.y * debugmap->width]->tag == Tile::Tag::DESTRUCTIBLE && debugmap->levelList[position.level][position.x + position.y * debugmap->width]->getDestroyed())
 			{
 				return true;
 			}
 			return false;
 		}
-		else if (height > debugmap->levelList[level][x + y * debugmap->width]->height)
+		else if (height > debugmap->levelList[position.level][position.x + position.y * debugmap->width]->height)
 		{
 			return true;
 		}
@@ -271,7 +275,7 @@ void World::updateProperties()
 	{
 		for (int x = 0; x < debugmap->width; x++)
 		{
-			fovMap->setProperties(x, y, getTransparency(x, y, player->mapPosition.level, player->height), getWalkability(x, y, player->mapPosition.level));
+			fovMap->setProperties(x, y, getTransparency(Position(x, y, player->mapPosition.level), player->height), getWalkability(Position(x, y, player->mapPosition.level)));
 		}
 	}
 }
@@ -281,18 +285,15 @@ void World::computeFov()
 	fovMap->computeFov(player->mapPosition.x, player->mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
 }
 
-bool World::isInFov(int x, int y, int level) const
+bool World::isInFov(Position position) const
 {
-	x += xOffset;
-	y += yOffset;
-
-	if (x < 0 || x >= debugmap->width || y < 0 || y >= debugmap->height)
+	if (position.x < 0 || position.x >= debugmap->width || position.y < 0 || position.y >= debugmap->height)
 	{
 		return false;
 	}
-	if (fovMap->isInFov(x, y))
+	if (fovMap->isInFov(position.x, position.y))
 	{
-		debugmap->levelList[level][x + y * debugmap->width]->explored = true;
+		debugmap->levelList[position.level][position.x + position.y * debugmap->width]->explored = true;
 		return true;
 	}
 	return false;
@@ -313,7 +314,7 @@ void World::update()
 	xOffset = getOffset(player->mapPosition.x, debugmap->width, MAPPANE->drawWindow->consoleWidth);
 	yOffset = getOffset(player->mapPosition.y, debugmap->height, MAPPANE->drawWindow->consoleHeight);
 
-	if (INPUT->num9->isSwitched)
+	if (INPUT->num9->isSwitched) // repeatable create live creature
 	{
 		addCreature(std::make_shared<Creature>(Position(30, 8, 0), 'E', "Creature", TCODColor::white, 100, 0));
 	}
@@ -341,12 +342,12 @@ void World::renderTiles(const std::shared_ptr<Pane>& pane) const
 	{
 		for (int x = xOffset; x < pane->consoleWidth + xOffset; x++)
 		{
-			getTile(x, y, player->mapPosition.level)->render(x - xOffset, y - yOffset, pane);
+			getTile(Position(x, y, player->mapPosition.level))->render(x - xOffset, y - yOffset, pane);
 		}
 	}
 }
 
-void World::renderEntities(const std::shared_ptr<Pane>& pane) const
+void World::renderCreatures(const std::shared_ptr<Pane>& pane) const
 {
 	for (auto& creature : creatureList)
 	{
@@ -374,5 +375,5 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 		}
 	}
 
-	renderEntities(pane);
+	renderCreatures(pane);
 }
