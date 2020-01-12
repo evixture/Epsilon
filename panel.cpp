@@ -393,7 +393,7 @@ void ProximityWindow::update()
 
 	for (auto& container : WORLD->mapContainerList)
 	{
-		if (container->containerItem->distToEnt < 5)
+		if (container->containerItem->distToEnt < 5 && WORLD->isInFov(container->containerItem->mapPosition))
 		{
 			proximityContainerList.push_back(container);
 		}
@@ -401,7 +401,7 @@ void ProximityWindow::update()
 
 	for (auto& item : WORLD->mapItemList)
 	{
-		if (item->distToEnt < 5)
+		if (item->distToEnt < 5 && WORLD->isInFov(item->mapPosition))
 		{
 			proximityItemList.push_back(item);
 		}
