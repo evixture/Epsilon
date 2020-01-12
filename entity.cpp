@@ -38,8 +38,11 @@ void Creature::update()
 
 void Creature::render(const std::shared_ptr<Pane>& pane) const
 {
-	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-	pane->console->setCharForeground(renderPosition.x, renderPosition.y, (WORLD->isInFov(mapPosition))? color : TCODColor::darkerGrey); //out of fov creatures rendered with one step above normal fov grey to be more noticible
+	if (WORLD->player->mapPosition.level == mapPosition.level)
+	{
+		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+		pane->console->setCharForeground(renderPosition.x, renderPosition.y, (WORLD->isInFov(mapPosition))? color : TCODColor::darkerGrey); //out of fov creatures rendered with one step above normal fov grey to be more noticible
+	}
 }
 
 //----------------------------------------------------------------------------------------------------
