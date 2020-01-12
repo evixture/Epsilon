@@ -388,24 +388,8 @@ ProximityWindow::ProximityWindow(int consoleWidth, int consoleHeight, int rx, in
 
 void ProximityWindow::update()
 {
-	proximityContainerList.clear();
-	proximityItemList.clear();
-
-	for (auto& container : WORLD->mapContainerList)
-	{
-		if (container->containerItem->distToEnt < 5 && WORLD->isInFov(container->containerItem->mapPosition))
-		{
-			proximityContainerList.push_back(container);
-		}
-	}
-
-	for (auto& item : WORLD->mapItemList)
-	{
-		if (item->distToEnt < 5 && WORLD->isInFov(item->mapPosition))
-		{
-			proximityItemList.push_back(item);
-		}
-	}
+	proximityItemList = WORLD->mapItemList; //can be optimized later
+	proximityContainerList = WORLD->mapContainerList;
 }
 
 void ProximityWindow::render() const
@@ -418,8 +402,11 @@ void ProximityWindow::render() const
 	{
 		if (container->containerItem->mapPosition.level == WORLD->player->mapPosition.level)
 		{
-			drawWindow->console->printf(0, line, "|%s", container->containerItem->tool->name.c_str());
-			line++;
+			if (container->containerItem->distToEnt < 5)
+			{
+				drawWindow->console->printf(0, line, "|%s", container->containerItem->tool->name.c_str());
+				line++;
+			}
 		}
 	}
 
@@ -427,8 +414,11 @@ void ProximityWindow::render() const
 	{
 		if (item->mapPosition.level == WORLD->player->mapPosition.level)
 		{
-			drawWindow->console->printf(0, line, "|%s", item->tool->name.c_str());
-			line++;
+			if (item->distToEnt < 5)
+			{
+				drawWindow->console->printf(0, line, "|%s", item->tool->name.c_str());
+				line++;
+			}
 		}
 	}
 

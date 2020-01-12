@@ -35,6 +35,12 @@ void ActionManager::doAction()
 
 //----------------------------------------------------------------------------------------------------
 
+Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position, Player* owner, ItemType type)
+	:size(size), tile(tile), tool(tool), mapPosition(position), renderPosition(position), distToEnt(5), owner(owner), type(type)
+{
+	createActionManager(owner);
+}
+
 void Item::createActionManager(Player* owner)
 {
 	if (type == ItemType::NODROP)
@@ -61,12 +67,6 @@ void Item::createActionManager(Player* owner)
 			std::shared_ptr<Action>(std::make_shared<Action>("Change Fire Mode", std::bind(&Player::changeFireMode, owner), Action::Type::CHANGEFIREMODE))
 		});
 	}
-}
-
-Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position, Player* owner, ItemType type)
-	:size(size), tile(tile), tool(tool), mapPosition(position), renderPosition(position), distToEnt(0), owner(owner), type(type)
-{
-	createActionManager(owner);
 }
 
 std::shared_ptr<MagazineData> Item::getMagazineData()

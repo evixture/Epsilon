@@ -158,7 +158,7 @@ World::World()
 {
 	debugmap = std::make_shared<Map>("data/maps/debugmap.txt");
 
-	creatureList.push_back(player = std::make_shared<Player>(Position(31, 17, 1)));
+	creatureList.push_back(player = std::make_shared<Player>(Position(2, 2, 0)));
 
 	fovMap = std::make_shared<TCODMap>(debugmap->width, debugmap->height);
 
@@ -328,7 +328,7 @@ void World::update()
 		addCreature(std::make_shared<Creature>(Position(30, 8, 0), 'E', "Creature", TCODColor::white, 100, 0));
 	}
 
-	updateEntities();
+	updateEntities(); //needs to be first to prevent bad fov checks
 	updateProperties();
 	computeFov();
 
