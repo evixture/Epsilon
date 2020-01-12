@@ -162,9 +162,21 @@ World::World()
 
 	fovMap = std::make_shared<TCODMap>(debugmap->width, debugmap->height);
 
+	//first floor
 	addItem(ITEM_SIR556(4, 7, 0, player.get()));
+	addItem(ITEM_SIR556(33, 21, 0, player.get()));
 	addItem(MAGAZINE_556Magazine30(5, 10, 0, player.get()));
+	addItem(MAGAZINE_556Magazine30(22, 36, 0, player.get()));
+	addItem(MAGAZINE_556Magazine30(31, 25, 0, player.get()));
+	addItem(MAGAZINE_556Magazine30(56, 6, 0, player.get()));
+
+
+	addItem(ITEM_SIP45(21, 45, 0, player.get()));
 	addItem(MAGAZINE_45Magazine7(10, 10, 0, player.get()));
+	addItem(MAGAZINE_45Magazine7(36, 50, 0, player.get()));
+	addItem(MAGAZINE_45Magazine7(49, 36, 0, player.get()));
+
+	addContainer(CONTAINER_SmallBackpack(35, 35, 0, player.get()));
 
 	addCreature(std::make_shared<Creature>(Position(13, 38, 0), 'E', "Creature", TCODColor::white, 100, 0)); //replace colors
 	addCreature(std::make_shared<Creature>(Position(16, 22, 0), 'H', "Creature", TCODColor::blue, 100, 0));

@@ -109,6 +109,40 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
+    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
+    <FUNCLINE>77</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>TCODBsp::w</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
+      <FILENAME>bsp.hpp</FILENAME>
+      <LINE>77</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
+    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
+    <FUNCLINE>77</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>TCODBsp::y</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
+      <FILENAME>bsp.hpp</FILENAME>
+      <LINE>77</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>TCODBsp::{ctor}</FUNCTION>
     <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
@@ -173,40 +207,6 @@
     <SFA>
       <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
       <FILENAME>bsp.hpp</FILENAME>
-      <LINE>77</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
-    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
-    <FUNCLINE>77</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>TCODBsp::y</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
-      <FILENAME>bsp.hpp</FILENAME>
-      <LINE>77</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
-    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
-    <FUNCLINE>77</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>TCODBsp::w</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
-      <FILENAME>bsp.hpp</FILENAME>
       <LINE>78</LINE>
       <COLUMN>1</COLUMN>
     </SFA>
@@ -240,113 +240,164 @@
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>9</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position::{ctor}</FUNCTION>
+    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position::y</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>9</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position::level' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position::{ctor}</FUNCTION>
+    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position::level</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>9</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position::x' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position::{ctor}</FUNCTION>
+    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position::x</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>42</LINE>
+      <LINE>51</LINE>
       <COLUMN>24</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
     <DESCRIPTION>The enum type 'Firearm::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
     <FUNCTION>Player::{ctor}</FUNCTION>
     <DECORATED>??0Player@@QEAA@UPosition@@@Z</DECORATED>
-    <FUNCLINE>38</FUNCLINE>
+    <FUNCLINE>47</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>78</LINE>
+      <LINE>141</LINE>
       <COLUMN>16</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorUp</FUNCTION>
     <DECORATED>?moveSelectorUp@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>62</FUNCLINE>
+    <FUNCLINE>125</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>87</LINE>
+      <LINE>150</LINE>
       <COLUMN>15</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>85</FUNCLINE>
+    <FUNCLINE>148</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>91</LINE>
+      <LINE>154</LINE>
       <COLUMN>20</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>85</FUNCLINE>
+    <FUNCLINE>148</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>100</LINE>
+      <LINE>163</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>85</FUNCLINE>
+    <FUNCLINE>148</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>186</LINE>
+      <LINE>248</LINE>
       <COLUMN>20</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>177</FUNCLINE>
+    <FUNCLINE>239</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>199</LINE>
+      <LINE>261</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>177</FUNCLINE>
+    <FUNCLINE>239</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>215</LINE>
+      <LINE>277</LINE>
       <COLUMN>18</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
     <DESCRIPTION>The enum type 'TCOD_chars_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>177</FUNCLINE>
+    <FUNCLINE>239</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

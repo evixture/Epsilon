@@ -240,6 +240,57 @@
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>9</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position::{ctor}</FUNCTION>
+    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position::y</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>9</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position::level' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position::{ctor}</FUNCTION>
+    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position::level</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>9</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position::x' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position::{ctor}</FUNCTION>
+    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position::x</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.cpp</FILENAME>
       <LINE>3</LINE>
       <COLUMN>5</COLUMN>
@@ -249,6 +300,23 @@
     <FUNCTION>Key::{ctor}</FUNCTION>
     <DECORATED>??0Key@@QEAA@W40Keyboard@sf@@@Z</DECORATED>
     <FUNCLINE>3</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>input.cpp</FILENAME>
+      <LINE>6</LINE>
+      <COLUMN>5</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Key::sfKey' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Key::{ctor}</FUNCTION>
+    <DECORATED>??0Key@@QEAA@XZ</DECORATED>
+    <FUNCLINE>6</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Key::sfKey</targetSymbol>
+    </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
@@ -306,23 +374,6 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.cpp</FILENAME>
-      <LINE>6</LINE>
-      <COLUMN>5</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Key::sfKey' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Key::{ctor}</FUNCTION>
-    <DECORATED>??0Key@@QEAA@XZ</DECORATED>
-    <FUNCLINE>6</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>Key::sfKey</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>input.cpp</FILENAME>
       <LINE>34</LINE>
       <COLUMN>13</COLUMN>
     </SFA>
@@ -341,12 +392,12 @@
       <COLUMN>13</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'MouseButton::sfMButton' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <DESCRIPTION>Variable 'MouseButton::buttonSwitch' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>MouseButton::{ctor}</FUNCTION>
     <DECORATED>??0MouseButton@@QEAA@XZ</DECORATED>
     <FUNCLINE>38</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>MouseButton::sfMButton</targetSymbol>
+      <targetSymbol>MouseButton::buttonSwitch</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -392,12 +443,12 @@
       <COLUMN>13</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'MouseButton::buttonSwitch' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <DESCRIPTION>Variable 'MouseButton::sfMButton' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>MouseButton::{ctor}</FUNCTION>
     <DECORATED>??0MouseButton@@QEAA@XZ</DECORATED>
     <FUNCLINE>38</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>MouseButton::buttonSwitch</targetSymbol>
+      <targetSymbol>MouseButton::sfMButton</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>

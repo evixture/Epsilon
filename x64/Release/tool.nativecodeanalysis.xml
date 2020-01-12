@@ -240,29 +240,80 @@
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>tool.cpp</FILENAME>
-      <LINE>189</LINE>
-      <COLUMN>9</COLUMN>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>9</LINE>
+      <COLUMN>1</COLUMN>
     </SFA>
-    <DEFECTCODE>26812</DEFECTCODE>
-    <DESCRIPTION>The enum type 'Firearm::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
-    <FUNCTION>Firearm::{ctor}</FUNCTION>
-    <DECORATED>??0Firearm@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VTCODColor@@MMW4AmmoType@MagazineData@@W4FireType@0@D@Z</DECORATED>
-    <FUNCLINE>189</FUNCLINE>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position::{ctor}</FUNCTION>
+    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position::y</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>9</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position::level' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position::{ctor}</FUNCTION>
+    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position::level</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>9</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position::x' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position::{ctor}</FUNCTION>
+    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position::x</targetSymbol>
+    </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>tool.cpp</FILENAME>
-      <LINE>441</LINE>
+      <LINE>210</LINE>
+      <COLUMN>9</COLUMN>
+    </SFA>
+    <DEFECTCODE>26812</DEFECTCODE>
+    <DESCRIPTION>The enum type 'Firearm::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>Firearm::{ctor}</FUNCTION>
+    <DECORATED>??0Firearm@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VTCODColor@@MMW4AmmoType@MagazineData@@W4FireType@0@D@Z</DECORATED>
+    <FUNCLINE>210</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>tool.cpp</FILENAME>
+      <LINE>466</LINE>
       <COLUMN>56</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Firearm::update</FUNCTION>
-    <DECORATED>?update@Firearm@@UEAAXHHHHN@Z</DECORATED>
-    <FUNCLINE>410</FUNCLINE>
+    <DECORATED>?update@Firearm@@UEAAXUPosition@@HHN@Z</DECORATED>
+    <FUNCLINE>431</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>
