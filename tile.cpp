@@ -20,13 +20,13 @@ void Tile::interact()
 
 void Tile::render(int x, int y, const std::shared_ptr<Pane>& pane) const
 {
-	if (WORLD->isInFov(Position(x + WORLD->xOffset, y + WORLD->yOffset, WORLD->player->mapPosition.level))) //err
+	if (WORLD->isInFov(Position(x + WORLD->xOffset, y + WORLD->yOffset, WORLD->player->mapPosition.level))) 
 	{
 		pane->console->setCharBackground(x, y, backgroundColor);
 		pane->console->setCharForeground(x, y, foregroundColor);
 		pane->console->setChar          (x, y, ch);
 	}
-	else if (WORLD->isExplored(Position(x + WORLD->xOffset, y + WORLD->yOffset, WORLD->player->mapPosition.level))) //err here
+	else if (WORLD->isExplored(Position(x + WORLD->xOffset, y + WORLD->yOffset, WORLD->player->mapPosition.level)))
 	{
 		pane->console->setCharBackground(x, y, TCODColor::black);
 		pane->console->setCharForeground(x, y, TCODColor::darkestGrey);

@@ -168,7 +168,7 @@ World::World()
 
 	addCreature(std::make_shared<Creature>(Position(13, 38, 0), 'E', "Creature", TCODColor::white, 100, 0)); //replace colors
 	addCreature(std::make_shared<Creature>(Position(16, 22, 0), 'H', "Creature", TCODColor::blue, 100, 0));
-	addCreature(std::make_shared<Creature>(Position(64, 21, 0), 'F', "Creature", TCODColor::purple, 100, 0)); //grey when in fov???
+	addCreature(std::make_shared<Creature>(Position(64, 21, 0), 'F', "Creature", TCODColor::purple, 100, 0));
 }
 
 std::shared_ptr<Tile> World::getTile(Position position) const
@@ -183,11 +183,8 @@ std::shared_ptr<Tile> World::getTile(Position position) const
 	}
 }
 
-bool World::isExplored(Position position) const //err with this
+bool World::isExplored(Position position) const
 {
-	//position.x += xOffset;
-	//position.y += yOffset;
-
 	return debugmap->levelList[position.level][position.x + position.y * debugmap->width]->explored;
 }
 

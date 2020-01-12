@@ -352,12 +352,27 @@ void LogWindow::render() const
 	clearWindow();
 
 	int line = 0;
-	for (int i = 0; i < messageList.size(); i++) //renders last message first
+	for (int i = 0; i < messageList.size(); i++)
 	{
-		drawWindow->console->printf(0, line, "| %s",  messageList[i].message.c_str());
-		for (int j = 0; j < drawWindow->consoleWidth; j++)
+		if (i == 0)
 		{
-			drawWindow->console->setCharForeground(j, line, messageList[i].color);
+			drawWindow->console->printf(0, line, "|>%s", messageList[i].message.c_str());
+		}
+		else
+		{
+			drawWindow->console->printf(0, line, "| %s",  messageList[i].message.c_str());
+		}
+
+		for (int j = 0; j < drawWindow->consoleWidth; j++) //set string message color
+		{
+			if (i == 0 && j == 1)
+			{
+				drawWindow->console->setCharForeground(j, line, UICOLOR_Selector);
+			}
+			else
+			{
+				drawWindow->console->setCharForeground(j, line, messageList[i].color);
+			}
 		}
 		line++;
 	}
