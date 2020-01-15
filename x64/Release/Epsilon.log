@@ -1,8 +1,22 @@
-﻿  panel.cpp
+﻿  aicreature.cpp
+  engine.cpp
+  entity.cpp
+  gui.cpp
+  input.cpp
+  item.cpp
+  main.cpp
+  map.cpp
+  panel.cpp
+  settings.cpp
+  tile.cpp
+  tool.cpp
+  utility.cpp
+  window.cpp
+  Compiling...
   Generating code
-  10 of 2046 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+  0 of 2046 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    58 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Release\Epsilon.exe
 E:\Libtcod\custom-libtcod-master\src\libtcod\console\console.h(122): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).

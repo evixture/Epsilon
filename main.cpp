@@ -9,7 +9,7 @@ int WinMain()
 		engine->update();
 		engine->render();
 	}
-
+	
 	TCOD_quit(); //does proper cleanup on exit
 	return 0;
 }

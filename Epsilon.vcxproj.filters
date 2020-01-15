@@ -52,6 +52,9 @@
     <Filter Include="Source\AICreature">
       <UniqueIdentifier>{e9fe92b9-2f69-44bf-8dc6-731ccfe5efc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Libraries">
+      <UniqueIdentifier>{6bf01d34-464e-4b34-b833-24a426bee49d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h">

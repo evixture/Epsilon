@@ -18,6 +18,7 @@
 //Libraries
 #include <libtcod.hpp>
 #include <SFML/Window.hpp>
+#include <pugixml.hpp>
 
 struct Pane;
 struct Player;
