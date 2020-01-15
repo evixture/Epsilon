@@ -12,4 +12,7 @@ int WinMain()
 	
 	TCOD_quit(); //does proper cleanup on exit
 	return 0;
+
+	//pugi::xml_document document;
+	//pugi::xml_parse_result result = document.load_file("data/maps/testxmlmap.xml");
 }

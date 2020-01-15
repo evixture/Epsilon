@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\pugixml-1.10\src\pugixml.cpp" />
     <ClCompile Include="aicreature.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="entity.cpp" />
@@ -59,6 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Epsilon.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="data\maps\testxmlmap.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -138,7 +142,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\pugixml-1.10\src;E:\Libtcod\custom-libtcod-master\src;E:\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Libtcod\custom-libtcod-master\src;E:\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>precomp.hpp</PrecompiledHeaderFile>
       <LanguageStandard>Default</LanguageStandard>
       <EnablePREfast>false</EnablePREfast>
@@ -150,8 +154,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\pugixml-1.10\scripts\vs2019\x64_Release;E:\SFML\SFML-2.5.1\lib;E:\Libtcod\custom-libtcod-master\build\msvs\libtcod\x64\Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-window.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libtcod.lib;pugixml.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\SFML\SFML-2.5.1\lib;E:\Libtcod\custom-libtcod-master\build\msvs\libtcod\x64\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-window.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libtcod.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -162,7 +166,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\pugixml-1.10\src;E:\Libtcod\custom-libtcod-master\src;E:\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Libtcod\custom-libtcod-master\src;E:\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>precomp.hpp</PrecompiledHeaderFile>
       <LanguageStandard>Default</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
@@ -174,8 +178,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\pugixml-1.10\scripts\vs2019\x64_Release;E:\SFML\SFML-2.5.1\lib;E:\Libtcod\custom-libtcod-master\build\msvs\libtcod\x64\Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-window.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libtcod.lib;pugixml.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\SFML\SFML-2.5.1\lib;E:\Libtcod\custom-libtcod-master\build\msvs\libtcod\x64\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-window.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libtcod.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

@@ -5,73 +5,1149 @@
     {
       "results": [
         {
-          "ruleId": "26451",
+          "ruleId": "26495",
           "message": {
-            "text": "Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2)."
+            "text": "Variable 'pugi::xml_attribute_struct::header' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/console/console.h"
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
                 },
                 "region": {
-                  "startLine": 122,
-                  "startColumn": 20,
-                  "endLine": 122,
-                  "endColumn": 24
+                  "startLine": 1096,
+                  "startColumn": 3,
+                  "endLine": 1096,
+                  "endColumn": 3
                 }
               },
-              "fullyQualifiedLogicalName": "public: struct TCOD_ConsoleTile * __cdecl TCOD_Console::end(void)"
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::xml_attribute_struct::xml_attribute_struct(struct pugi::impl::`anonymous namespace'::xml_memory_page *)"
             }
-          ]
+          ],
+          "properties": {
+            "targetSymbol": "pugi::xml_attribute_struct::header"
+          }
         },
         {
-          "ruleId": "26451",
+          "ruleId": "26812",
           "message": {
-            "text": "Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2)."
+            "text": "The enum type 'pugi::xml_node_type' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/console/console.h"
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
                 },
                 "region": {
-                  "startLine": 126,
-                  "startColumn": 20,
-                  "endLine": 126,
-                  "endColumn": 24
+                  "startLine": 1112,
+                  "startColumn": 3,
+                  "endLine": 1112,
+                  "endColumn": 3
                 }
               },
-              "fullyQualifiedLogicalName": "public: struct TCOD_ConsoleTile const * __cdecl TCOD_Console::end(void)const "
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::xml_node_struct::xml_node_struct(struct pugi::impl::`anonymous namespace'::xml_memory_page *,enum pugi::xml_node_type)"
             }
           ]
         },
         {
           "ruleId": "26495",
           "message": {
-            "text": "Variable 'tcod::tileset::Tileset::tiles_last_known_capacity' is uninitialized. Always initialize a member variable (type.6)."
+            "text": "Variable 'pugi::xml_node_struct::header' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/tileset/tileset.h"
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
                 },
                 "region": {
-                  "startLine": 52,
+                  "startLine": 1112,
                   "startColumn": 3,
-                  "endLine": 52,
+                  "endLine": 1112,
                   "endColumn": 3
                 }
               },
-              "fullyQualifiedLogicalName": "public: __cdecl tcod::tileset::Tileset::Tileset(int,int)"
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::xml_node_struct::xml_node_struct(struct pugi::impl::`anonymous namespace'::xml_memory_page *,enum pugi::xml_node_type)"
             }
           ],
           "properties": {
-            "targetSymbol": "tcod::tileset::Tileset::tiles_last_known_capacity"
+            "targetSymbol": "pugi::xml_node_struct::header"
           }
+        },
+        {
+          "ruleId": "26812",
+          "message": {
+            "text": "The enum type 'pugi::xml_encoding' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 1913,
+                  "startColumn": 11,
+                  "endLine": 1913,
+                  "endColumn": 52
+                }
+              },
+              "fullyQualifiedLogicalName": "enum pugi::xml_encoding __cdecl pugi::impl::`anonymous namespace'::get_wchar_encoding(void)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26812",
+          "message": {
+            "text": "The enum type 'pugi::xml_parse_status' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 2903,
+                  "startColumn": 26,
+                  "endLine": 2903,
+                  "endColumn": 26
+                }
+              },
+              "fullyQualifiedLogicalName": "struct pugi::xml_parse_result __cdecl pugi::impl::`anonymous namespace'::make_parse_result(enum pugi::xml_parse_status,__int64)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'pugi::impl::`anonymous-namespace'::xml_buffered_writer::scratch' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 3698,
+                  "startColumn": 3,
+                  "endLine": 3698,
+                  "endColumn": 3
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xml_buffered_writer::xml_buffered_writer(class pugi::xml_writer &,enum pugi::xml_encoding)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "pugi::impl::`anonymous-namespace'::xml_buffered_writer::scratch"
+          }
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'pugi::impl::`anonymous-namespace'::xml_buffered_writer::buffer' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 3698,
+                  "startColumn": 3,
+                  "endLine": 3698,
+                  "endColumn": 3
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xml_buffered_writer::xml_buffered_writer(class pugi::xml_writer &,enum pugi::xml_encoding)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "pugi::impl::`anonymous-namespace'::xml_buffered_writer::buffer"
+          }
+        },
+        {
+          "ruleId": "26812",
+          "message": {
+            "text": "The enum type 'pugi::impl::?A0x186f9f63::chartypex_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 3906,
+                  "startColumn": 16,
+                  "endLine": 3906,
+                  "endColumn": 16
+                }
+              },
+              "fullyQualifiedLogicalName": "void __cdecl pugi::impl::`anonymous namespace'::text_output_escaped(class pugi::impl::A0x186f9f63::xml_buffered_writer &,char const *,enum pugi::impl::A0x186f9f63::chartypex_t,unsigned int)"
+            }
+          ]
+        },
+        {
+          "ruleId": "28182",
+          "message": {
+            "text": "Dereferencing NULL pointer. 'dit' contains the same NULL value as 'copy' did. "
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 4466,
+                  "startColumn": 5,
+                  "endLine": 4466,
+                  "endColumn": 14
+                }
+              },
+              "fullyQualifiedLogicalName": "void __cdecl pugi::impl::`anonymous namespace'::node_copy_tree(struct pugi::xml_node_struct *,struct pugi::xml_node_struct *)"
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "step": 0,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4428,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 1,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4429,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 2,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4431,
+                            "startColumn": 21
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 3,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4433,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 4,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4434,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 5,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4436,
+                            "startColumn": 14
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 6,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4439,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 7,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4441,
+                            "startColumn": 20
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 8,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4443,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 9,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4445,
+                            "startColumn": 24
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 10,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4447,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 11,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4449,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 12,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4450,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 13,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4436,
+                            "startColumn": 14
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 14,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4439,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 15,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4441,
+                            "startColumn": 20
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 16,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4443,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "'dit' may be NULL (Skip this branch)"
+                        }
+                      },
+                      "kind": "branch",
+                      "importance": "important"
+                    },
+                    {
+                      "step": 17,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4459,
+                            "startColumn": 12
+                          }
+                        },
+                        "message": {
+                          "text": "Skip this branch, (assume 'sit->next_sibling' is false)"
+                        }
+                      },
+                      "kind": "branch",
+                      "importance": "important"
+                    },
+                    {
+                      "step": 18,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4465,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 19,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 4466,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "'dit' is dereferenced, but may still be NULL"
+                        }
+                      },
+                      "kind": "usage",
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "6054",
+          "message": {
+            "text": "String 'mantissa_buffer' might not be zero-terminated."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 8241,
+                  "startColumn": 10,
+                  "endLine": 8241,
+                  "endColumn": 90
+                }
+              },
+              "fullyQualifiedLogicalName": "class pugi::impl::A0x186f9f63::xpath_string __cdecl pugi::impl::`anonymous namespace'::convert_number_to_string(double,struct pugi::impl::A0x186f9f63::xpath_allocator *)"
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "step": 0,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 8230,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 1,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 8231,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 2,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 8234,
+                            "startColumn": 8
+                          }
+                        },
+                        "message": {
+                          "text": "This expression may not zero-terminate 'mantissa_buffer'"
+                        }
+                      },
+                      "kind": "declaration",
+                      "importance": "essential"
+                    },
+                    {
+                      "step": 3,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 8236,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 4,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 8237,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "step": 5,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 8238,
+                            "startColumn": 38
+                          }
+                        },
+                        "message": {
+                          "text": "'mantissa_buffer' is an Output from 'pugi::impl::`anonymous-namespace'::convert_number_to_mantissa_exponent' (declared on line 8184)"
+                        }
+                      },
+                      "kind": "declaration",
+                      "importance": "important"
+                    },
+                    {
+                      "step": 6,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 8241,
+                            "startColumn": 10
+                          }
+                        },
+                        "message": {
+                          "text": "'mantissa_buffer' is an Input to 'strlen' (declared at c:\\program files (x86)\\windows kits\\10\\include\\10.0.18362.0\\ucrt\\string.h:219)"
+                        }
+                      },
+                      "kind": "usage",
+                      "importance": "important"
+                    },
+                    {
+                      "step": 7,
+                      "location": {
+                        "physicalLocation": {
+                          "fileLocation": {
+                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                          },
+                          "region": {
+                            "startLine": 8241,
+                            "startColumn": 10
+                          }
+                        },
+                        "message": {
+                          "text": "'mantissa_buffer' is required to be zero-terminated by a SAL annotation on 'strlen'"
+                        }
+                      },
+                      "kind": "usage",
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 8551,
+                  "startColumn": 14,
+                  "endLine": 8551,
+                  "endColumn": 27
+                }
+              },
+              "fullyQualifiedLogicalName": "char * __cdecl pugi::impl::`anonymous namespace'::translate_table(char *,unsigned char const *)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'pugi::impl::`anonymous-namespace'::xpath_variable_boolean::name' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 8572,
+                  "startColumn": 3,
+                  "endLine": 8572,
+                  "endColumn": 3
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xpath_variable_boolean::xpath_variable_boolean(void)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "pugi::impl::`anonymous-namespace'::xpath_variable_boolean::name"
+          }
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'pugi::impl::`anonymous-namespace'::xpath_variable_number::name' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 8582,
+                  "startColumn": 3,
+                  "endLine": 8582,
+                  "endColumn": 3
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xpath_variable_number::xpath_variable_number(void)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "pugi::impl::`anonymous-namespace'::xpath_variable_number::name"
+          }
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'pugi::impl::`anonymous-namespace'::xpath_variable_string::name' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 8592,
+                  "startColumn": 3,
+                  "endLine": 8592,
+                  "endColumn": 3
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xpath_variable_string::xpath_variable_string(void)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "pugi::impl::`anonymous-namespace'::xpath_variable_string::name"
+          }
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'pugi::impl::`anonymous-namespace'::xpath_variable_node_set::name' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 8607,
+                  "startColumn": 3,
+                  "endLine": 8607,
+                  "endColumn": 3
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xpath_variable_node_set::xpath_variable_node_set(void)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "pugi::impl::`anonymous-namespace'::xpath_variable_node_set::name"
+          }
+        },
+        {
+          "ruleId": "26812",
+          "message": {
+            "text": "The enum type 'pugi::xpath_value_type' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 8652,
+                  "startColumn": 27,
+                  "endLine": 8652,
+                  "endColumn": 27
+                }
+              },
+              "fullyQualifiedLogicalName": "class pugi::xpath_variable * __cdecl pugi::impl::`anonymous namespace'::new_xpath_variable(enum pugi::xpath_value_type,char const *)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26812",
+          "message": {
+            "text": "The enum type 'pugi::xpath_node_set::type_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 8756,
+                  "startColumn": 4,
+                  "endLine": 8756,
+                  "endColumn": 27
+                }
+              },
+              "fullyQualifiedLogicalName": "enum pugi::xpath_node_set::type_t __cdecl pugi::impl::`anonymous namespace'::xpath_get_order(class pugi::xpath_node const *,class pugi::xpath_node const *)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26812",
+          "message": {
+            "text": "The enum type 'pugi::impl::?A0x186f9f63::lexeme_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 9255,
+                  "startColumn": 6,
+                  "endLine": 9255,
+                  "endColumn": 20
+                }
+              },
+              "fullyQualifiedLogicalName": "public: void __cdecl pugi::impl::`anonymous namespace'::xpath_lexer::next(void)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26812",
+          "message": {
+            "text": "The enum type 'pugi::impl::?A0x186f9f63::nodeset_eval_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 9572,
+                  "startColumn": 15,
+                  "endLine": 9572,
+                  "endColumn": 15
+                }
+              },
+              "fullyQualifiedLogicalName": "private: static bool __cdecl pugi::impl::`anonymous namespace'::xpath_ast_node::eval_once(enum pugi::xpath_node_set::type_t,enum pugi::impl::A0x186f9f63::nodeset_eval_t)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26812",
+          "message": {
+            "text": "The enum type 'pugi::impl::?A0x186f9f63::ast_type_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 10200,
+                  "startColumn": 3,
+                  "endLine": 10200,
+                  "endColumn": 3
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xpath_ast_node::xpath_ast_node(enum pugi::impl::A0x186f9f63::ast_type_t,enum pugi::xpath_value_type,char const *)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'pugi::impl::`anonymous-namespace'::xpath_ast_node::_data' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 10221,
+                  "startColumn": 3,
+                  "endLine": 10221,
+                  "endColumn": 3
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xpath_ast_node::xpath_ast_node(enum pugi::impl::A0x186f9f63::ast_type_t,enum pugi::xpath_value_type,class pugi::impl::A0x186f9f63::xpath_ast_node *,class pugi::impl::A0x186f9f63::xpath_ast_node *)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "pugi::impl::`anonymous-namespace'::xpath_ast_node::_data"
+          }
+        },
+        {
+          "ruleId": "26812",
+          "message": {
+            "text": "The enum type 'pugi::impl::?A0x186f9f63::axis_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 10226,
+                  "startColumn": 3,
+                  "endLine": 10226,
+                  "endColumn": 3
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xpath_ast_node::xpath_ast_node(enum pugi::impl::A0x186f9f63::ast_type_t,class pugi::impl::A0x186f9f63::xpath_ast_node *,enum pugi::impl::A0x186f9f63::axis_t,enum pugi::impl::A0x186f9f63::nodetest_t,char const *)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26812",
+          "message": {
+            "text": "The enum type 'pugi::impl::?A0x186f9f63::nodetest_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 10226,
+                  "startColumn": 3,
+                  "endLine": 10226,
+                  "endColumn": 3
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xpath_ast_node::xpath_ast_node(enum pugi::impl::A0x186f9f63::ast_type_t,class pugi::impl::A0x186f9f63::xpath_ast_node *,enum pugi::impl::A0x186f9f63::axis_t,enum pugi::impl::A0x186f9f63::nodetest_t,char const *)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26812",
+          "message": {
+            "text": "The enum type 'pugi::impl::?A0x186f9f63::predicate_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 10233,
+                  "startColumn": 3,
+                  "endLine": 10233,
+                  "endColumn": 3
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xpath_ast_node::xpath_ast_node(enum pugi::impl::A0x186f9f63::ast_type_t,class pugi::impl::A0x186f9f63::xpath_ast_node *,class pugi::impl::A0x186f9f63::xpath_ast_node *,enum pugi::impl::A0x186f9f63::predicate_t)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'pugi::impl::`anonymous-namespace'::xpath_ast_node::_data' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 10233,
+                  "startColumn": 3,
+                  "endLine": 10233,
+                  "endColumn": 3
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xpath_ast_node::xpath_ast_node(enum pugi::impl::A0x186f9f63::ast_type_t,class pugi::impl::A0x186f9f63::xpath_ast_node *,class pugi::impl::A0x186f9f63::xpath_ast_node *,enum pugi::impl::A0x186f9f63::predicate_t)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "pugi::impl::`anonymous-namespace'::xpath_ast_node::_data"
+          }
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'pugi::impl::`anonymous-namespace'::xpath_parser::_scratch' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 11935,
+                  "startColumn": 3,
+                  "endLine": 11935,
+                  "endColumn": 3
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xpath_parser::xpath_parser(char const *,class pugi::xpath_variable_set *,struct pugi::impl::A0x186f9f63::xpath_allocator *,struct pugi::xpath_parse_result *)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "pugi::impl::`anonymous-namespace'::xpath_parser::_scratch"
+          }
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'pugi::xpath_variable_set::_data' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 12337,
+                  "startColumn": 31,
+                  "endLine": 12337,
+                  "endColumn": 31
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::xpath_variable_set::xpath_variable_set(void)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "pugi::xpath_variable_set::_data"
+          }
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'pugi::xpath_variable_set::_data' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 12367,
+                  "startColumn": 31,
+                  "endLine": 12367,
+                  "endColumn": 31
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::xpath_variable_set::xpath_variable_set(class pugi::xpath_variable_set &&)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "pugi::xpath_variable_set::_data"
+          }
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 4516,
+                  "startColumn": 30,
+                  "endLine": 4516,
+                  "endColumn": 35
+                }
+              },
+              "fullyQualifiedLogicalName": "unsigned __int64 __cdecl pugi::impl::`anonymous namespace'::string_to_integer<unsigned __int64>(char const *,unsigned __int64,unsigned __int64)"
+            }
+          ]
         },
         {
           "ruleId": "26451",
@@ -82,403 +1158,112 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/tileset/tileset.h"
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
                 },
                 "region": {
-                  "startLine": 78,
-                  "startColumn": 29,
-                  "endLine": 78,
-                  "endColumn": 46
+                  "startLine": 4518,
+                  "startColumn": 31,
+                  "endLine": 4518,
+                  "endColumn": 49
                 }
               },
-              "fullyQualifiedLogicalName": "public: int __cdecl tcod::tileset::Tileset::set_tile(class tcod::tileset::Tile const &)"
-            }
-          ]
-        },
-        {
-          "ruleId": "26439",
-          "message": {
-            "text": "This kind of function may not throw. Declare it 'noexcept' (f.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/tileset/observer.h"
-                },
-                "region": {
-                  "startLine": 62,
-                  "startColumn": 3,
-                  "endLine": 62,
-                  "endColumn": 3
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl tcod::tileset::TilesetObserver::TilesetObserver(class tcod::tileset::TilesetObserver &&)"
-            }
-          ]
-        },
-        {
-          "ruleId": "26439",
-          "message": {
-            "text": "This kind of function may not throw. Declare it 'noexcept' (f.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/tileset/observer.h"
-                },
-                "region": {
-                  "startLine": 65,
-                  "startColumn": 20,
-                  "endLine": 65,
-                  "endColumn": 20
-                }
-              },
-              "fullyQualifiedLogicalName": "public: class tcod::tileset::TilesetObserver & __cdecl tcod::tileset::TilesetObserver::operator=(class tcod::tileset::TilesetObserver &&)"
-            }
-          ]
-        },
-        {
-          "ruleId": "26812",
-          "message": {
-            "text": "The enum type 'TCOD_distribution_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/mersenne.hpp"
-                },
-                "region": {
-                  "startLine": 222,
-                  "startColumn": 15,
-                  "endLine": 222,
-                  "endColumn": 15
-                }
-              },
-              "fullyQualifiedLogicalName": "public: void __cdecl TCODRandom::setDistribution(enum TCOD_distribution_t)"
-            }
-          ]
-        },
-        {
-          "ruleId": "26495",
-          "message": {
-            "text": "Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
-                },
-                "region": {
-                  "startLine": 77,
-                  "startColumn": 2,
-                  "endLine": 77,
-                  "endColumn": 2
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl TCODBsp::TCODBsp(void)"
-            }
-          ],
-          "properties": {
-            "targetSymbol": "TCODBsp::position"
-          }
-        },
-        {
-          "ruleId": "26495",
-          "message": {
-            "text": "Variable 'TCODBsp::x' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
-                },
-                "region": {
-                  "startLine": 77,
-                  "startColumn": 2,
-                  "endLine": 77,
-                  "endColumn": 2
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl TCODBsp::TCODBsp(void)"
-            }
-          ],
-          "properties": {
-            "targetSymbol": "TCODBsp::x"
-          }
-        },
-        {
-          "ruleId": "26495",
-          "message": {
-            "text": "Variable 'TCODBsp::horizontal' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
-                },
-                "region": {
-                  "startLine": 77,
-                  "startColumn": 2,
-                  "endLine": 77,
-                  "endColumn": 2
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl TCODBsp::TCODBsp(void)"
-            }
-          ],
-          "properties": {
-            "targetSymbol": "TCODBsp::horizontal"
-          }
-        },
-        {
-          "ruleId": "26495",
-          "message": {
-            "text": "Variable 'TCODBsp::h' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
-                },
-                "region": {
-                  "startLine": 77,
-                  "startColumn": 2,
-                  "endLine": 77,
-                  "endColumn": 2
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl TCODBsp::TCODBsp(void)"
-            }
-          ],
-          "properties": {
-            "targetSymbol": "TCODBsp::h"
-          }
-        },
-        {
-          "ruleId": "26495",
-          "message": {
-            "text": "Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
-                },
-                "region": {
-                  "startLine": 77,
-                  "startColumn": 2,
-                  "endLine": 77,
-                  "endColumn": 2
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl TCODBsp::TCODBsp(void)"
-            }
-          ],
-          "properties": {
-            "targetSymbol": "TCODBsp::y"
-          }
-        },
-        {
-          "ruleId": "26495",
-          "message": {
-            "text": "Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
-                },
-                "region": {
-                  "startLine": 77,
-                  "startColumn": 2,
-                  "endLine": 77,
-                  "endColumn": 2
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl TCODBsp::TCODBsp(void)"
-            }
-          ],
-          "properties": {
-            "targetSymbol": "TCODBsp::w"
-          }
-        },
-        {
-          "ruleId": "26495",
-          "message": {
-            "text": "Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
-                },
-                "region": {
-                  "startLine": 78,
-                  "startColumn": 2,
-                  "endLine": 78,
-                  "endColumn": 2
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl TCODBsp::TCODBsp(int,int,int,int)"
-            }
-          ],
-          "properties": {
-            "targetSymbol": "TCODBsp::position"
-          }
-        },
-        {
-          "ruleId": "26495",
-          "message": {
-            "text": "Variable 'TCODBsp::horizontal' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
-                },
-                "region": {
-                  "startLine": 78,
-                  "startColumn": 2,
-                  "endLine": 78,
-                  "endColumn": 2
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl TCODBsp::TCODBsp(int,int,int,int)"
-            }
-          ],
-          "properties": {
-            "targetSymbol": "TCODBsp::horizontal"
-          }
-        },
-        {
-          "ruleId": "26495",
-          "message": {
-            "text": "Variable 'Position::y' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/utility.h"
-                },
-                "region": {
-                  "startLine": 9,
-                  "startColumn": 2,
-                  "endLine": 9,
-                  "endColumn": 2
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl Position::Position(void)"
-            }
-          ],
-          "properties": {
-            "targetSymbol": "Position::y"
-          }
-        },
-        {
-          "ruleId": "26495",
-          "message": {
-            "text": "Variable 'Position::x' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/utility.h"
-                },
-                "region": {
-                  "startLine": 9,
-                  "startColumn": 2,
-                  "endLine": 9,
-                  "endColumn": 2
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl Position::Position(void)"
-            }
-          ],
-          "properties": {
-            "targetSymbol": "Position::x"
-          }
-        },
-        {
-          "ruleId": "26495",
-          "message": {
-            "text": "Variable 'Position::level' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/utility.h"
-                },
-                "region": {
-                  "startLine": 9,
-                  "startColumn": 2,
-                  "endLine": 9,
-                  "endColumn": 2
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl Position::Position(void)"
-            }
-          ],
-          "properties": {
-            "targetSymbol": "Position::level"
-          }
-        },
-        {
-          "ruleId": "26812",
-          "message": {
-            "text": "The enum type 'Firearm::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/tool.cpp"
-                },
-                "region": {
-                  "startLine": 210,
-                  "startColumn": 10,
-                  "endLine": 210,
-                  "endColumn": 10
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl Firearm::Firearm(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class TCODColor,float,float,enum MagazineData::AmmoType,enum Firearm::FireType,char)"
+              "fullyQualifiedLogicalName": "unsigned __int64 __cdecl pugi::impl::`anonymous namespace'::string_to_integer<unsigned __int64>(char const *,unsigned __int64,unsigned __int64)"
             }
           ]
         },
         {
           "ruleId": "26451",
           "message": {
-            "text": "Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2)."
+            "text": "Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/tool.cpp"
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
                 },
                 "region": {
-                  "startLine": 466,
-                  "startColumn": 26,
-                  "endLine": 466,
-                  "endColumn": 59
+                  "startLine": 4518,
+                  "startColumn": 31,
+                  "endLine": 4518,
+                  "endColumn": 43
                 }
               },
-              "fullyQualifiedLogicalName": "public: virtual void __cdecl Firearm::update(struct Position,int,int,double)"
+              "fullyQualifiedLogicalName": "unsigned __int64 __cdecl pugi::impl::`anonymous namespace'::string_to_integer<unsigned __int64>(char const *,unsigned __int64,unsigned __int64)"
             }
           ]
+        },
+        {
+          "ruleId": "26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 4540,
+                  "startColumn": 30,
+                  "endLine": 4540,
+                  "endColumn": 35
+                }
+              },
+              "fullyQualifiedLogicalName": "unsigned __int64 __cdecl pugi::impl::`anonymous namespace'::string_to_integer<unsigned __int64>(char const *,unsigned __int64,unsigned __int64)"
+            }
+          ]
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'pugi::impl::`anonymous-namespace'::xml_stream_chunk<wchar_t>::data' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 4847,
+                  "startColumn": 3,
+                  "endLine": 4847,
+                  "endColumn": 3
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xml_stream_chunk<wchar_t>::xml_stream_chunk<wchar_t>(void)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "pugi::impl::`anonymous-namespace'::xml_stream_chunk<wchar_t>::data"
+          }
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'pugi::impl::`anonymous-namespace'::xml_stream_chunk<char>::data' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
+                },
+                "region": {
+                  "startLine": 4847,
+                  "startColumn": 3,
+                  "endLine": 4847,
+                  "endColumn": 3
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xml_stream_chunk<char>::xml_stream_chunk<char>(void)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "pugi::impl::`anonymous-namespace'::xml_stream_chunk<char>::data"
+          }
         }
       ],
       "tool": {
@@ -489,7 +1274,7 @@
       },
       "invocations": [
         {
-          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x006E3170 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_4a4afa31ast -typedil -f tool.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1924 -D_MSC_FULL_VER=192428314 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\pugixml-1.10\\src -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -GF -Og -Ot -Oy -Oi -ltcg -DCODE_ANALYSIS -DNDEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Release\\tool.obj -Fdx64\\Release\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
+          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x006E3170 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_c8f0015bast -typedil -f ..\\..\\..\\..\\pugixml-1.10\\src\\pugixml.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1924 -D_MSC_FULL_VER=192428314 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\pugixml-1.10\\src -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -GF -Og -Ot -Oy -Oi -ltcg -DCODE_ANALYSIS -DNDEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Release\\pugixml.obj -Fdx64\\Release\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
         }
       ],
       "files": {
@@ -769,6 +1554,12 @@
             "resultFile"
           ]
         },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/tile.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
         "file:///e:/libtcod/custom-libtcod-master/src/libtcod/bresenham.hpp": {
           "roles": [
             "resultFile"
@@ -781,6 +1572,12 @@
         },
         "file:///e:/libtcod/custom-libtcod-master/src/libtcod/namegen.h": {
           "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/engine.cpp": {
+          "roles": [
+            "analysisTarget",
             "resultFile"
           ]
         },
@@ -1136,6 +1933,66 @@
           ]
         },
         "file:///e:/projects/visual studio/libtcod development/epsilon/utility.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/settings.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/panel.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/map.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/main.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/item.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/input.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/gui.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/aicreature.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/entity.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/pugixml-1.10/src/pugixml.cpp": {
           "roles": [
             "analysisTarget",
             "resultFile"

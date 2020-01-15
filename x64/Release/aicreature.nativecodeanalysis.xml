@@ -262,12 +262,12 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Position::level' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <DESCRIPTION>Variable 'Position::x' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>Position::{ctor}</FUNCTION>
     <DECORATED>??0Position@@QEAA@XZ</DECORATED>
     <FUNCLINE>9</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>Position::level</targetSymbol>
+      <targetSymbol>Position::x</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -279,12 +279,12 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Position::x' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <DESCRIPTION>Variable 'Position::level' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>Position::{ctor}</FUNCTION>
     <DECORATED>??0Position@@QEAA@XZ</DECORATED>
     <FUNCLINE>9</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>Position::x</targetSymbol>
+      <targetSymbol>Position::level</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>

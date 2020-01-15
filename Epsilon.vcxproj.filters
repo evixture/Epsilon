@@ -149,6 +149,9 @@
     <ClCompile Include="aicreature.cpp">
       <Filter>Source\AICreature</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\pugixml-1.10\src\pugixml.cpp">
+      <Filter>Libraries</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="data\Epsilon.ico">
@@ -159,5 +162,8 @@
     <ResourceCompile Include="Epsilon.rc">
       <Filter>Resources</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="data\maps\testxmlmap.xml" />
   </ItemGroup>
 </Project>
