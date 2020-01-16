@@ -4,6 +4,7 @@
 
 //STD
 #include <fstream>
+#include <sstream>
 #include <memory>
 #include <vector>
 #include <algorithm>

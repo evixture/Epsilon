@@ -8,147 +8,350 @@ Map::Map(std::string filePath)
 
 	int currentFloor = 0;
 
-	std::ifstream fileIn(filePath, std::ios::in);
+	pugi::xml_document document;
+	pugi::xml_parse_result result = document.load_file("data/maps/testxmlmap.xml");
 
-	if (fileIn.is_open())
+	if (result)
 	{
-		std::string s_mapName;
-		std::string s_tempTile;
-		
-		fileIn >> s_mapName >> totalFloors >> width >> height;
-		name = s_mapName.c_str();
-
-		//reserve vec size beforehand to inc perf?
-		levelList = std::vector < std::vector < std::shared_ptr < Tile >>> (totalFloors);
-
-		for (auto& level : levelList)
+		if (!document.child("map").empty())
 		{
-			level.reserve(width * height);
-		}
-		
-		while (!fileIn.eof())
-		{
-			if (fileIn.good())
+			pugi::xml_node mapNode = document.child("map");
+
+			if (!mapNode.child("name").empty())
 			{
-				fileIn >> s_tempTile;
+				name = mapNode.child("name").text().as_string();
+			}
+			else
+			{
+				//error
+			}
 
-				if (levelList[currentFloor].size() == width * height)
+			if (!mapNode.child("levels").empty())
+			{
+				totalFloors = mapNode.child("levels").text().as_int();
+				//std::string s_totalfloors = mapNode.child("levels").value();
+				//std::stringstream stream(s_totalfloors);
+				//stream >> totalFloors;
+			}
+			else
+			{
+				//error
+			}
+
+			if (!mapNode.child("width").empty())
+			{
+				width = mapNode.child("width").text().as_int();
+
+				//std::string s_width = mapNode.child("width").value();
+				//std::stringstream stream(s_width);
+				//stream >> width;
+			}
+			else
+			{
+				//error
+			}
+
+			if (!mapNode.child("height").empty())
+			{
+				height = mapNode.child("height").text().as_int();
+
+				//std::string s_height = mapNode.child("height").value();
+				//std::stringstream stream(s_height);
+				//stream >> height;
+			}
+			else
+			{
+				//error
+			}
+
+			if (!mapNode.child("floor").empty())
+			{
+				levelList = std::vector < std::vector < std::shared_ptr < Tile >>>(totalFloors);
+
+				std::string s_tile;
+
+				for (auto& level : levelList)
 				{
-					currentFloor++;
+					level.reserve(width * height);
 				}
 
-				switch (s_tempTile[0])
+				for (pugi::xml_node floorNode = mapNode.child("floor"); floorNode; floorNode = floorNode.next_sibling("floor")) //wont repeat at the end of the tile list
 				{
-				case '~':
-					//map layer divider
-					break;
+					pugi::xml_attribute floorAttr;
 
-				//FLOORS
-				case 'f':
-					switch (s_tempTile[1])
+					for (auto& attr : floorNode.attributes())
 					{
-					case '.':
-					{
-						int grassRand = RNG->getInt(0, 3);
+						floorAttr = attr;
+					}
+					int currentFloor;
+					std::stringstream(floorAttr.name()) >> currentFloor;
 
-						if (grassRand == 0)
+					s_tile = floorNode.text().as_string();
+
+					for (int tileLocation = 1; tileLocation < width * height * 3; tileLocation += 3) //check range
+					{
+						switch (s_tile[tileLocation])
 						{
-							levelList[currentFloor].push_back(TILE_Grass0);
+						case '~':
+							//map layer divider
+							break;
+
+							//FLOORS
+						case 'f':
+							switch (s_tile[tileLocation + 1])
+							{
+							case '.':
+							{
+								int grassRand = RNG->getInt(0, 3);
+
+								if (grassRand == 0)
+								{
+									levelList[currentFloor].push_back(TILE_Grass0);
+								}
+								else if (grassRand == 1)
+								{
+									levelList[currentFloor].push_back(TILE_Grass1);
+								}
+								else if (grassRand == 2)
+								{
+									levelList[currentFloor].push_back(TILE_Grass2);
+								}
+								else if (grassRand == 3)
+								{
+									levelList[currentFloor].push_back(TILE_Grass3);
+								}
+								break;
+							}
+							case '_':
+								levelList[currentFloor].push_back(TILE_BasicFloor);
+								break;
+							case '!':
+								levelList[currentFloor].push_back(TILE_BasicConcrete);
+								break;
+							case '*':
+								levelList[currentFloor].push_back(TILE_BasicFlower);
+								break;
+							case '3':
+								levelList[currentFloor].push_back(TILE_BasicShingle);
+								break;
+							default:
+								levelList[currentFloor].push_back(TILE_error);
+								break;
+							}
+							break;
+
+							//WALLS
+						case 'w':
+							switch (s_tile[tileLocation + 1])
+							{
+							case '=':
+								levelList[currentFloor].push_back(DESTRUCTIBLE_BasicWall);
+								break;
+							case 'O':
+								levelList[currentFloor].push_back(DESTRUCTIBLE_BasicWindow);
+								break;
+							}
+							break;
+
+							//DOORS
+						case 'd':
+							switch (s_tile[tileLocation + 1])
+							{
+							case '#':
+								levelList[currentFloor].push_back(TILE_BasicDoor);
+								break;
+							}
+							break;
+
+							//SKIES
+						case 's':
+							switch (s_tile[tileLocation + 1])
+							{
+							case '`':
+								levelList[currentFloor].push_back(TILE_BasicSky);
+								break;
+							}
+							break;
+
+							//PART HEIGHT
+						case 'p':
+							switch (s_tile[tileLocation + 1])
+							{
+							case 'n':
+								levelList[currentFloor].push_back(TILE_BasicTable);
+								break;
+							}
+							break;
+						case 't':
+							switch (s_tile[tileLocation + 1])
+							{
+							case '/':
+								levelList[currentFloor].push_back(STAIR_UpStair);
+								break;
+							case '\\':
+								levelList[currentFloor].push_back(STAIR_DownStair);
+								break;
+							}
+							break;
+
+							//ERROR TILE
+						default:
+							levelList[currentFloor].push_back(TILE_error);
+							break;
 						}
-						else if (grassRand == 1)
-						{
-							levelList[currentFloor].push_back(TILE_Grass1);
-						}
-						else if (grassRand == 2)
-						{
-							levelList[currentFloor].push_back(TILE_Grass2);
-						}
-						else if (grassRand == 3)
-						{
-							levelList[currentFloor].push_back(TILE_Grass3);
-						}
 					}
-						break;
-					case '_':
-						levelList[currentFloor].push_back(TILE_BasicFloor);
-						break;
-					case '!':
-						levelList[currentFloor].push_back(TILE_BasicConcrete);
-						break;
-					case '*':
-						levelList[currentFloor].push_back(TILE_BasicFlower);
-						break;
-					case '3':
-						levelList[currentFloor].push_back(TILE_BasicShingle);
-						break;
-					default:
-						levelList[currentFloor].push_back(TILE_error);
-						break;
-					}
-					break;
-
-				//WALLS
-				case 'w':
-					switch (s_tempTile[1])
-					{
-					case '=':
-						levelList[currentFloor].push_back(DESTRUCTIBLE_BasicWall);
-						break;
-					case 'O':
-						levelList[currentFloor].push_back(DESTRUCTIBLE_BasicWindow);
-						break;
-					}
-					break;
-
-				//DOORS
-				case 'd':
-					switch (s_tempTile[1])
-					{
-					case '#':
-						levelList[currentFloor].push_back(TILE_BasicDoor);
-						break;
-					}
-					break;
-
-				//SKIES
-				case 's':
-					switch (s_tempTile[1])
-					{
-					case '`':
-						levelList[currentFloor].push_back(TILE_BasicSky);
-						break;
-					}
-					break;
-
-				//PART HEIGHT
-				case 'p':
-					switch (s_tempTile[1])
-					{
-					case 'n':
-						levelList[currentFloor].push_back(TILE_BasicTable);
-						break;
-					}
-					break;
-				case 't':
-					switch (s_tempTile[1])
-					{
-					case '/':
-						levelList[currentFloor].push_back(STAIR_UpStair);
-						break;
-					case '\\':
-						levelList[currentFloor].push_back(STAIR_DownStair);
-						break;
-					}
-					break;
-
-				//ERROR TILE
-				default:
-					levelList[currentFloor].push_back(TILE_error);
-					break;
 				}
 			}
 		}
+		else
+		{
+			//error
+		}
+
+
 	}
+
+	//std::ifstream fileIn(filePath, std::ios::in);
+	//
+	//if (fileIn.is_open())
+	//{
+	//	std::string s_mapName;
+	//	std::string s_tempTile;
+	//	
+	//	fileIn >> s_mapName >> totalFloors >> width >> height;
+	//	name = s_mapName.c_str();
+	//
+	//	//reserve vec size beforehand to inc perf?
+	//	levelList = std::vector < std::vector < std::shared_ptr < Tile >>> (totalFloors);
+	//
+	//	for (auto& level : levelList)
+	//	{
+	//		level.reserve(width * height);
+	//	}
+	//	
+	//	while (!fileIn.eof())
+	//	{
+	//		if (fileIn.good())
+	//		{
+	//			fileIn >> s_tempTile;
+	//
+	//			if (levelList[currentFloor].size() == width * height)
+	//			{
+	//				currentFloor++;
+	//			}
+	//
+	//			switch (s_tempTile[0])
+	//			{
+	//			case '~':
+	//				//map layer divider
+	//				break;
+	//
+	//			//FLOORS
+	//			case 'f':
+	//				switch (s_tempTile[1])
+	//				{
+	//				case '.':
+	//				{
+	//					int grassRand = RNG->getInt(0, 3);
+	//
+	//					if (grassRand == 0)
+	//					{
+	//						levelList[currentFloor].push_back(TILE_Grass0);
+	//					}
+	//					else if (grassRand == 1)
+	//					{
+	//						levelList[currentFloor].push_back(TILE_Grass1);
+	//					}
+	//					else if (grassRand == 2)
+	//					{
+	//						levelList[currentFloor].push_back(TILE_Grass2);
+	//					}
+	//					else if (grassRand == 3)
+	//					{
+	//						levelList[currentFloor].push_back(TILE_Grass3);
+	//					}
+	//				}
+	//					break;
+	//				case '_':
+	//					levelList[currentFloor].push_back(TILE_BasicFloor);
+	//					break;
+	//				case '!':
+	//					levelList[currentFloor].push_back(TILE_BasicConcrete);
+	//					break;
+	//				case '*':
+	//					levelList[currentFloor].push_back(TILE_BasicFlower);
+	//					break;
+	//				case '3':
+	//					levelList[currentFloor].push_back(TILE_BasicShingle);
+	//					break;
+	//				default:
+	//					levelList[currentFloor].push_back(TILE_error);
+	//					break;
+	//				}
+	//				break;
+	//
+	//			//WALLS
+	//			case 'w':
+	//				switch (s_tempTile[1])
+	//				{
+	//				case '=':
+	//					levelList[currentFloor].push_back(DESTRUCTIBLE_BasicWall);
+	//					break;
+	//				case 'O':
+	//					levelList[currentFloor].push_back(DESTRUCTIBLE_BasicWindow);
+	//					break;
+	//				}
+	//				break;
+	//
+	//			//DOORS
+	//			case 'd':
+	//				switch (s_tempTile[1])
+	//				{
+	//				case '#':
+	//					levelList[currentFloor].push_back(TILE_BasicDoor);
+	//					break;
+	//				}
+	//				break;
+	//
+	//			//SKIES
+	//			case 's':
+	//				switch (s_tempTile[1])
+	//				{
+	//				case '`':
+	//					levelList[currentFloor].push_back(TILE_BasicSky);
+	//					break;
+	//				}
+	//				break;
+	//
+	//			//PART HEIGHT
+	//			case 'p':
+	//				switch (s_tempTile[1])
+	//				{
+	//				case 'n':
+	//					levelList[currentFloor].push_back(TILE_BasicTable);
+	//					break;
+	//				}
+	//				break;
+	//			case 't':
+	//				switch (s_tempTile[1])
+	//				{
+	//				case '/':
+	//					levelList[currentFloor].push_back(STAIR_UpStair);
+	//					break;
+	//				case '\\':
+	//					levelList[currentFloor].push_back(STAIR_DownStair);
+	//					break;
+	//				}
+	//				break;
+	//
+	//			//ERROR TILE
+	//			default:
+	//				levelList[currentFloor].push_back(TILE_error);
+	//				break;
+	//			}
+	//		}
+	//	}
+	//}
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -156,7 +359,7 @@ Map::Map(std::string filePath)
 World::World()
 	:xOffset(0), yOffset(0)
 {
-	debugmap = std::make_shared<Map>("data/maps/debugmap.txt");
+	debugmap = std::make_shared<Map>("data/maps/testxmlmap.xml");
 
 	creatureList.push_back(player = std::make_shared<Player>(Position(2, 2, 0)));
 
