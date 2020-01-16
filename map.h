@@ -12,6 +12,8 @@ struct Map //map class that takes a text file and converts it to a vector of til
 	std::vector<std::vector< std::shared_ptr<Tile >>> levelList; //list of list of tiles, list of floors->list of tiles
 
 	Map(std::string filePath); //map constructor that takes a string file path
+
+	std::shared_ptr<Tile> getTileFromCode(std::string code);
 };
 
 struct World
