@@ -1,100 +1,13 @@
 #include "main.hpp"
 
-/*
-
-pugi::xml_node mapNode = document.child("map");
-
-			if (!mapNode.child("name").empty())
-			{
-				name = mapNode.child("name").text().as_string();
-			}
-			else
-			{
-				//error
-			}
-
-			if (!mapNode.child("levels").empty())
-			{
-				totalFloors = mapNode.child("levels").text().as_int();
-			}
-			else
-			{
-				//error
-			}
-
-			if (!mapNode.child("width").empty())
-			{
-				width = mapNode.child("width").text().as_int();
-			}
-			else
-			{
-				//error
-			}
-
-			if (!mapNode.child("height").empty())
-			{
-				height = mapNode.child("height").text().as_int();
-			}
-			else
-			{
-				//error
-			}
-
-			if (!mapNode.child("floor").empty())
-			{
-				levelList = std::vector < std::vector < std::shared_ptr < Tile >>>(totalFloors);
-
-				std::string s_tileCodeList;
-
-				for (auto& level : levelList)
-				{
-					level.reserve(width * height);
-				}
-
-				for (pugi::xml_node floorNode = mapNode.child("floor"); floorNode; floorNode = floorNode.next_sibling("floor")) //wont repeat at the end of the tile list
-				{
-					pugi::xml_attribute floorAttr;
-
-					for (auto& attr : floorNode.attributes())
-					{
-						floorAttr = attr;
-					}
-					int currentFloor;
-					std::stringstream(floorAttr.name()) >> currentFloor;
-
-					//xmlDoc.child("map").child("name").attribute("category").value() || TRY THIS LATER
-
-					s_tileCodeList = floorNode.text().as_string();
-					std::string code;
-
-					for (int tileLocation = 1; tileLocation < width * height * 3; tileLocation += 3) //check range
-					{
-						code = s_tileCodeList[tileLocation];
-						code += s_tileCodeList[tileLocation + 1];
-
-						levelList[currentFloor].push_back(getTileFromCode(code));
-					}
-				}
-			}
-		}
-		else
-		{
-			//error
-		}
-
-
-*/
-
 Map::Map(std::string filePath)
 	:filePath(filePath), height(NULL), width(NULL), totalFloors(NULL)
 {
 	TCODRandom* RNG = TCODRandom::getInstance();
 	RNG->setDistribution(TCOD_DISTRIBUTION_LINEAR);
 
-	int currentFloor = 0;
-
 	pugi::xml_document document;
-	pugi::xml_parse_result result = document.load_file("data/maps/testxmlmap.xml");
+	pugi::xml_parse_result result = document.load_file(filePath.c_str());
 
 	if (result)
 	{
@@ -134,9 +47,14 @@ Map::Map(std::string filePath)
 
 						std::string s_tileCodeList = mapDataNode.text().as_string();
 						std::string code;
-						int floor = mapDataNode.attribute("level").as_int(); //check if not empty
+						int floor;
 
-						for (int tileLocation = 1; tileLocation < width * height * 3; tileLocation += 3) //check range
+						if (!mapDataNode.attribute("level").empty())
+						{
+							floor = mapDataNode.attribute("level").as_int();
+						}
+
+						for (int tileLocation = 1; tileLocation < width * height * 3; tileLocation += 3)
 						{
 							code = s_tileCodeList[tileLocation];
 							code += s_tileCodeList[tileLocation + 1];
@@ -148,375 +66,128 @@ Map::Map(std::string filePath)
 			}
 		}
 	}
-
-	//std::ifstream fileIn(filePath, std::ios::in);
-	//
-	//if (fileIn.is_open())
-	//{
-	//	std::string s_mapName;
-	//	std::string s_tempTile;
-	//	
-	//	fileIn >> s_mapName >> totalFloors >> width >> height;
-	//	name = s_mapName.c_str();
-	//
-	//	//reserve vec size beforehand to inc perf?
-	//	levelList = std::vector < std::vector < std::shared_ptr < Tile >>> (totalFloors);
-	//
-	//	for (auto& level : levelList)
-	//	{
-	//		level.reserve(width * height);
-	//	}
-	//	
-	//	while (!fileIn.eof())
-	//	{
-	//		if (fileIn.good())
-	//		{
-	//			fileIn >> s_tempTile;
-	//
-	//			if (levelList[currentFloor].size() == width * height)
-	//			{
-	//				currentFloor++;
-	//			}
-	//
-	//			switch (s_tempTile[0])
-	//			{
-	//			case '~':
-	//				//map layer divider
-	//				break;
-	//
-	//			//FLOORS
-	//			case 'f':
-	//				switch (s_tempTile[1])
-	//				{
-	//				case '.':
-	//				{
-	//					int grassRand = RNG->getInt(0, 3);
-	//
-	//					if (grassRand == 0)
-	//					{
-	//						levelList[currentFloor].push_back(TILE_Grass0);
-	//					}
-	//					else if (grassRand == 1)
-	//					{
-	//						levelList[currentFloor].push_back(TILE_Grass1);
-	//					}
-	//					else if (grassRand == 2)
-	//					{
-	//						levelList[currentFloor].push_back(TILE_Grass2);
-	//					}
-	//					else if (grassRand == 3)
-	//					{
-	//						levelList[currentFloor].push_back(TILE_Grass3);
-	//					}
-	//				}
-	//					break;
-	//				case '_':
-	//					levelList[currentFloor].push_back(TILE_BasicFloor);
-	//					break;
-	//				case '!':
-	//					levelList[currentFloor].push_back(TILE_BasicConcrete);
-	//					break;
-	//				case '*':
-	//					levelList[currentFloor].push_back(TILE_BasicFlower);
-	//					break;
-	//				case '3':
-	//					levelList[currentFloor].push_back(TILE_BasicShingle);
-	//					break;
-	//				default:
-	//					levelList[currentFloor].push_back(TILE_error);
-	//					break;
-	//				}
-	//				break;
-	//
-	//			//WALLS
-	//			case 'w':
-	//				switch (s_tempTile[1])
-	//				{
-	//				case '=':
-	//					levelList[currentFloor].push_back(DESTRUCTIBLE_BasicWall);
-	//					break;
-	//				case 'O':
-	//					levelList[currentFloor].push_back(DESTRUCTIBLE_BasicWindow);
-	//					break;
-	//				}
-	//				break;
-	//
-	//			//DOORS
-	//			case 'd':
-	//				switch (s_tempTile[1])
-	//				{
-	//				case '#':
-	//					levelList[currentFloor].push_back(TILE_BasicDoor);
-	//					break;
-	//				}
-	//				break;
-	//
-	//			//SKIES
-	//			case 's':
-	//				switch (s_tempTile[1])
-	//				{
-	//				case '`':
-	//					levelList[currentFloor].push_back(TILE_BasicSky);
-	//					break;
-	//				}
-	//				break;
-	//
-	//			//PART HEIGHT
-	//			case 'p':
-	//				switch (s_tempTile[1])
-	//				{
-	//				case 'n':
-	//					levelList[currentFloor].push_back(TILE_BasicTable);
-	//					break;
-	//				}
-	//				break;
-	//			case 't':
-	//				switch (s_tempTile[1])
-	//				{
-	//				case '/':
-	//					levelList[currentFloor].push_back(STAIR_UpStair);
-	//					break;
-	//				case '\\':
-	//					levelList[currentFloor].push_back(STAIR_DownStair);
-	//					break;
-	//				}
-	//				break;
-	//
-	//			//ERROR TILE
-	//			default:
-	//				levelList[currentFloor].push_back(TILE_error);
-	//				break;
-	//			}
-	//		}
-	//	}
-	//}
-
-/*
-
-switch (s_tileCodeList[tileLocation])
-						{
-						case '~':
-							//map layer divider
-							break;
-
-							//FLOORS
-						case 'f':
-							switch (s_tileCodeList[tileLocation + 1])
-							{
-							case '.':
-							{
-								int grassRand = RNG->getInt(0, 3);
-
-								if (grassRand == 0)
-								{
-									levelList[currentFloor].push_back(TILE_Grass0);
-								}
-								else if (grassRand == 1)
-								{
-									levelList[currentFloor].push_back(TILE_Grass1);
-								}
-								else if (grassRand == 2)
-								{
-									levelList[currentFloor].push_back(TILE_Grass2);
-								}
-								else if (grassRand == 3)
-								{
-									levelList[currentFloor].push_back(TILE_Grass3);
-								}
-								break;
-							}
-							case '_':
-								levelList[currentFloor].push_back(TILE_BasicFloor);
-								break;
-							case '!':
-								levelList[currentFloor].push_back(TILE_BasicConcrete);
-								break;
-							case '*':
-								levelList[currentFloor].push_back(TILE_BasicFlower);
-								break;
-							case '3':
-								levelList[currentFloor].push_back(TILE_BasicShingle);
-								break;
-							default:
-								levelList[currentFloor].push_back(TILE_error);
-								break;
-							}
-							break;
-
-							//WALLS
-						case 'w':
-							switch (s_tileCodeList[tileLocation + 1])
-							{
-							case '=':
-								levelList[currentFloor].push_back(DESTRUCTIBLE_BasicWall);
-								break;
-							case 'O':
-								levelList[currentFloor].push_back(DESTRUCTIBLE_BasicWindow);
-								break;
-							}
-							break;
-
-							//DOORS
-						case 'd':
-							switch (s_tileCodeList[tileLocation + 1])
-							{
-							case '#':
-								levelList[currentFloor].push_back(TILE_BasicDoor);
-								break;
-							}
-							break;
-
-							//SKIES
-						case 's':
-							switch (s_tileCodeList[tileLocation + 1])
-							{
-							case '`':
-								levelList[currentFloor].push_back(TILE_BasicSky);
-								break;
-							}
-							break;
-
-							//PART HEIGHT
-						case 'p':
-							switch (s_tileCodeList[tileLocation + 1])
-							{
-							case 'n':
-								levelList[currentFloor].push_back(TILE_BasicTable);
-								break;
-							}
-							break;
-						case 't':
-							switch (s_tileCodeList[tileLocation + 1])
-							{
-							case '/':
-								levelList[currentFloor].push_back(STAIR_UpStair);
-								break;
-							case '\\':
-								levelList[currentFloor].push_back(STAIR_DownStair);
-								break;
-							}
-							break;
-
-							//ERROR TILE
-						default:
-							levelList[currentFloor].push_back(TILE_error);
-							break;
-						}
-
-*/
 }
 
 std::shared_ptr<Tile> Map::getTileFromCode(std::string code)
 {
 	static TCODRandom* RNG = TCODRandom::getInstance();
-	RNG->setDistribution(TCOD_DISTRIBUTION_LINEAR); //check perf
+	if (!RNG)
+	{
+		RNG->setDistribution(TCOD_DISTRIBUTION_LINEAR);
+	}
 
 	switch (code[0])
 	{
-	case '~':
-		//map layer divider
-		break;
-
-		//FLOORS
-	case 'f':
+	case 'f': //floors
 		switch (code[1])
 		{
-		case '.':
-		{
-			int grassRand = RNG->getInt(0, 3);
-
-			if (grassRand == 0)
+			case '.': //grass
 			{
-				return TILE_Grass0;
+				int grassRand = RNG->getInt(0, 3);
+
+				if (grassRand == 0)
+				{
+					return TILE_Grass0;
+				}
+				else if (grassRand == 1)
+				{
+					return TILE_Grass1;
+				}
+				else if (grassRand == 2)
+				{
+					return TILE_Grass2;
+				}
+				else if (grassRand == 3)
+				{
+					return TILE_Grass3;
+				}
+				else return TILE_error;
+				break;
 			}
-			else if (grassRand == 1)
-			{
-				return TILE_Grass1;
-			}
-			else if (grassRand == 2)
-			{
-				return TILE_Grass2;
-			}
-			else if (grassRand == 3)
-			{
-				return TILE_Grass3;
-			}
-			break;
-		}
-		case '_':
-			return TILE_BasicFloor;
-			break;
-		case '!':
-			return TILE_BasicConcrete;
-			break;
-		case '*':
-			return TILE_BasicFlower;
-			break;
-		case '3':
-			return TILE_BasicShingle;
-			break;
-		default:
-			return TILE_error;
-			break;
+			case '_':
+				return TILE_BasicFloor;
+				break;
+			case '!':
+				return TILE_BasicConcrete;
+				break;
+			case '*':
+				return TILE_BasicFlower;
+				break;
+			case '3':
+				return TILE_BasicShingle;
+				break;
+			default:
+				return TILE_error;
+				break;
 		}
 		break;
 
-		//WALLS
-	case 'w':
+	case 'w': //walls
 		switch (code[1])
 		{
-		case '=':
-			return DESTRUCTIBLE_BasicWall;
-			break;
-		case 'O':
-			return DESTRUCTIBLE_BasicWindow;
-			break;
+			case '=':
+				return DESTRUCTIBLE_BasicWall;
+				break;
+			case 'O':
+				return DESTRUCTIBLE_BasicWindow;
+				break;
+			default:
+				return TILE_error;
+				break;
 		}
 		break;
 
-		//DOORS
-	case 'd':
+	case 'd': //doors
 		switch (code[1])
 		{
-		case '#':
-			return TILE_BasicDoor;
-			break;
+			case '#':
+				return TILE_BasicDoor;
+				break;
+			default:
+				return TILE_error;
+				break;
 		}
 		break;
 
-		//SKIES
-	case 's':
+	case 's': //skies
 		switch (code[1])
 		{
-		case '`':
-			return TILE_BasicSky;
-			break;
+			case '`':
+				return TILE_BasicSky;
+				break;
+			default:
+				return TILE_error;
+				break;
 		}
 		break;
 
-		//PART HEIGHT
-	case 'p':
+	case 'p': //partial height
 		switch (code[1])
 		{
-		case 'n':
-			return TILE_BasicTable;
-			break;
+			case 'n':
+				return TILE_BasicTable;
+				break;
+			default:
+				return TILE_error;
+				break;
 		}
 		break;
-	case 't':
+	case 't': //stairs
 		switch (code[1])
 		{
-		case '/':
-			return STAIR_UpStair;
-			break;
-		case '\\':
-			return STAIR_DownStair;
-			break;
+			case '/':
+				return STAIR_UpStair;
+				break;
+			case '\\':
+				return STAIR_DownStair;
+				break;
+			default:
+				return TILE_error;
+				break;
 		}
 		break;
 
-		//ERROR TILE
-	default:
+	default: //error tile
 		return TILE_error;
 		break;
 	}
@@ -527,7 +198,7 @@ std::shared_ptr<Tile> Map::getTileFromCode(std::string code)
 World::World()
 	:xOffset(0), yOffset(0)
 {
-	debugmap = std::make_shared<Map>("data/maps/testxmlmap.xml");
+	debugmap = std::make_shared<Map>("data/maps/debugmap.xml");
 
 	creatureList.push_back(player = std::make_shared<Player>(Position(2, 2, 0)));
 
@@ -568,7 +239,7 @@ std::shared_ptr<Tile> World::getTile(Position position) const
 
 bool World::isExplored(Position position) const
 {
-	return debugmap->levelList[position.level][position.x + position.y * debugmap->width]->explored;
+ 	return debugmap->levelList[position.level][position.x + position.y * debugmap->width]->explored;
 }
 
 TCODColor World::getBgColor(Position position) const

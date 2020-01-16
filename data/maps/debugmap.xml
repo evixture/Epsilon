@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <map>
   <!-- WHAT THIS NEEDS TO BE A VALID MAP 
-       -needs to have a base node of "map"
-       -needs to have a node "name" in map node used for the map name
-       -needs to have a node "levels" with the amount of floors in the map
-       -needs to have a node "width" and "height" for the dimensions of the map
-       -needs to have floor nodes with the attribute "level" with the values going through the amount of floors defined by level, starting from 0
+        -needs to have a base node of "map"
+          -needs to have a node "name" in map node used for the map name
+          -needs to have a node "levels" with the amount of floors in the map
+          -needs to have a node "width" and "height" for the dimensions of the map
+          -needs to have floor nodes with the attribute "level" with the values going through the amount of floors defined by level, starting from 0
    -->
   
   <name>xmlMap</name>
@@ -17,7 +17,7 @@
   <height>70</height>
 
   <floor level="0">
-s` w= f_ f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f! f! f! f. f. f. f. f. f. f. f. f. f. f. f. f. f! f! f! f! f! f! f! f! f! f! f! f! f! f! f! f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. w=
+w= w= f_ f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f! f! f! f. f. f. f. f. f. f. f. f. f. f. f. f. f! f! f! f! f! f! f! f! f! f! f! f! f! f! f! f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. w=
 w= f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f! f! f! f. f. f. f. f. f. f. f. f. f. f. f. f. f! f! f! f! f! f! f! f! f! f! f! f! f! f! f! f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. w=
 w= f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f! f! f! f. f. f. f. f. f. f. f. f. f. f. f. f. f! f! f! f! f! f! f! f! f! f! f! f! f! f! f! f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. w=
 w= f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f! f! f! f. f. f. f. f. f. f. f. f. f. f. f. f. f! f! f! f! f! f! f! f! f! f! f! f! f! f! f! f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. w=
@@ -86,7 +86,7 @@ w= f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f.
 w= f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. w=
 w= f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. w=
 w= f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. w=
-w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= s`
+w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w=
   </floor>
   <floor level="1">
 s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`

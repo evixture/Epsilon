@@ -62,7 +62,7 @@
     <ResourceCompile Include="Epsilon.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="data\maps\testxmlmap.xml" />
+    <Xml Include="data\maps\debugmap.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
