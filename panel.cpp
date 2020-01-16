@@ -402,7 +402,7 @@ void ProximityWindow::render() const
 	{
 		if (container->containerItem->mapPosition.level == WORLD->player->mapPosition.level)
 		{
-			if (container->containerItem->distToEnt < 5)
+			if (container->containerItem->distToEnt < 5 && WORLD->isInFov(container->containerItem->mapPosition))
 			{
 				drawWindow->console->printf(0, line, "|%s", container->containerItem->tool->name.c_str());
 				line++;
@@ -414,7 +414,7 @@ void ProximityWindow::render() const
 	{
 		if (item->mapPosition.level == WORLD->player->mapPosition.level)
 		{
-			if (item->distToEnt < 5)
+			if (item->distToEnt < 5 && WORLD->isInFov(item->mapPosition))
 			{
 				drawWindow->console->printf(0, line, "|%s", item->tool->name.c_str());
 				line++;
