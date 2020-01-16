@@ -9,7 +9,7 @@ Map::Map(std::string filePath)
 	pugi::xml_document document;
 	pugi::xml_parse_result result = document.load_file(filePath.c_str());
 
-	if (result)
+	if (result) //should add errors and exceptions to make sure map loads correctly
 	{
 		if (!document.child("map").empty())
 		{
@@ -52,15 +52,16 @@ Map::Map(std::string filePath)
 						if (!mapDataNode.attribute("level").empty())
 						{
 							floor = mapDataNode.attribute("level").as_int();
+
+							for (int tileLocation = 1; tileLocation < width * height * 3; tileLocation += 3)
+							{
+								code = s_tileCodeList[tileLocation];
+								code += s_tileCodeList[tileLocation + 1];
+
+								levelList[floor].push_back(getTileFromCode(code));
+							}
 						}
 
-						for (int tileLocation = 1; tileLocation < width * height * 3; tileLocation += 3)
-						{
-							code = s_tileCodeList[tileLocation];
-							code += s_tileCodeList[tileLocation + 1];
-
-							levelList[floor].push_back(getTileFromCode(code));
-						}
 					}
 				}
 			}
