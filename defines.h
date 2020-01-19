@@ -76,6 +76,17 @@ constexpr auto PI = 3.14159265;
 
 	if player height > floor height , visibility is true, else set to default vis
 	stand can see over crouch
+
+
+	TILE 
+
+	|	8 ft (ceiling)
+	| o	6 ft (stand)
+	| T	4 ft (crouch)
+	| ^	2 ft (prone)
+	 __ 0 ft (ground)
+	/_/ 2 ft
+	  2 ft	
 */
 
 //----------------------------------------------------------------------------------------------------
@@ -138,36 +149,45 @@ constexpr auto PI = 3.14159265;
 
 //============TILES==================================================CH===FOREGROUND=COLOR==========BACKGROUND=COLOR==========H==WALK===DEST |
 
+//tile height macros
+//	heights go from full to floor
+#define OOOOO 0
+#define OOOOI Tile::FLOOR
+#define OOOII Tile::FLOOR |		Tile::PRONE
+#define OOIII Tile::FLOOR |		Tile::PRONE |	Tile::CROUCH
+#define IIIII Tile::FLOOR |		Tile::PRONE |	Tile::CROUCH |	Tile::STAND |	Tile::FULL
+#define OOIOI Tile::FLOOR |						Tile::CROUCH
+
 //TILES
 	//GROUND
 		//GRASS PATTERNS
-			#define TILE_Grass0				std::make_shared<Tile>			('.',				WORLDCOLOR_GrassFG,		WORLDCOLOR_GrassBG,		0,	true)
-			#define TILE_Grass1				std::make_shared<Tile>			('"',				WORLDCOLOR_GrassFG,		WORLDCOLOR_GrassBG,		0,	true)
-			#define TILE_Grass2				std::make_shared<Tile>			('`',				WORLDCOLOR_GrassFG,		WORLDCOLOR_GrassBG,		0,	true)
-			#define TILE_Grass3				std::make_shared<Tile>			(',',				WORLDCOLOR_GrassFG,		WORLDCOLOR_GrassBG,		0,	true)
+			#define TILE_Grass0				std::make_shared<Tile>			('.',				WORLDCOLOR_GrassFG,		WORLDCOLOR_GrassBG,		OOOOI,	OOOOI)
+			#define TILE_Grass1				std::make_shared<Tile>			('"',				WORLDCOLOR_GrassFG,		WORLDCOLOR_GrassBG,		OOOOI,	OOOOI)
+			#define TILE_Grass2				std::make_shared<Tile>			('`',				WORLDCOLOR_GrassFG,		WORLDCOLOR_GrassBG,		OOOOI,	OOOOI)
+			#define TILE_Grass3				std::make_shared<Tile>			(',',				WORLDCOLOR_GrassFG,		WORLDCOLOR_GrassBG,		OOOOI,	OOOOI)
 
-	#define TILE_BasicFlower				std::make_shared<Tile>			(CHAR_Flower,		WORLDCOLOR_FlowerFG,	WORLDCOLOR_FlowerBG,	2,	true)
-	#define TILE_BasicFloor					std::make_shared<Tile>			(' ',				WORLDCOLOR_FloorFG,		WORLDCOLOR_FloorBG,		0,	true)
-	#define TILE_BasicConcrete				std::make_shared<Tile>			('`',				WORLDCOLOR_ConcreteFG,	WORLDCOLOR_ConcreteBG,	0,	true)
-	#define TILE_BasicShingle				std::make_shared<Tile>			(240,				WORLDCOLOR_ShingleFG,	WORLDCOLOR_ShingleBG,	0,	true)
+	#define TILE_BasicFlower				std::make_shared<Tile>			(CHAR_Flower,		WORLDCOLOR_FlowerFG,	WORLDCOLOR_FlowerBG,	OOOOI,	OOIII)
+	#define TILE_BasicFloor					std::make_shared<Tile>			(' ',				WORLDCOLOR_FloorFG,		WORLDCOLOR_FloorBG,		OOOOI,	OOOOI)
+	#define TILE_BasicConcrete				std::make_shared<Tile>			('`',				WORLDCOLOR_ConcreteFG,	WORLDCOLOR_ConcreteBG,	OOOOI,	OOOOI)
+	#define TILE_BasicShingle				std::make_shared<Tile>			(240,				WORLDCOLOR_ShingleFG,	WORLDCOLOR_ShingleBG,	OOOOI,	OOOOI)
 
 	//WALL
-	#define TILE_BasicDoor					std::make_shared<Tile>			(CHAR_Door,			WORLDCOLOR_DoorFG,		WORLDCOLOR_WallBG,		4,	true)
-	#define DESTRUCTIBLE_BasicWall			std::make_shared<Destructible>	('#',				WORLDCOLOR_WallFG,		WORLDCOLOR_WallBG,		4,	false,	4)
-	#define DESTRUCTIBLE_BasicWindow		std::make_shared<Destructible>	(CHAR_Window,		WORLDCOLOR_WindowFG,	WORLDCOLOR_WindowBG,	0,	false,	1)
+	#define TILE_BasicDoor					std::make_shared<Tile>			(CHAR_Door,			WORLDCOLOR_DoorFG,		WORLDCOLOR_WallBG,		IIIII,	OOOOI)
+	#define DESTRUCTIBLE_BasicWall			std::make_shared<Destructible>	('#',				WORLDCOLOR_WallFG,		WORLDCOLOR_WallBG,		IIIII,	IIIII,	4)
+	#define DESTRUCTIBLE_BasicWindow		std::make_shared<Destructible>	(CHAR_Window,		WORLDCOLOR_WindowFG,	WORLDCOLOR_WindowBG,	OOOOI,	OOIII,	1)
 
 	//PART HEIGHT
-	#define TILE_BasicTable					std::make_shared<Destructible>	(CHAR_Table,		WORLDCOLOR_TableFG,		WORLDCOLOR_FloorBG,		2,	false,	2)
+	#define TILE_BasicTable					std::make_shared<Destructible>	(CHAR_Table,		WORLDCOLOR_TableFG,		WORLDCOLOR_FloorBG,		OOIOI,	OOIOI,	2)
 
 	//STAIR
-	#define STAIR_UpStair					std::make_shared<Stair>			(CHAR_UpStair,		WORLDCOLOR_DoorFG,		WORLDCOLOR_FloorBG,		2,	1)
-	#define STAIR_DownStair					std::make_shared<Stair>			(CHAR_DownStair,	WORLDCOLOR_DoorFG,		WORLDCOLOR_FloorBG,		2,	-1)
+	#define STAIR_UpStair					std::make_shared<Stair>			(CHAR_UpStair,		WORLDCOLOR_DoorFG,		WORLDCOLOR_FloorBG,		OOOOI,	OOIII,	1)
+	#define STAIR_DownStair					std::make_shared<Stair>			(CHAR_DownStair,	WORLDCOLOR_DoorFG,		WORLDCOLOR_FloorBG,		OOOOI,	OOIII,	-1)
 
 	//SKY
-	#define TILE_BasicSky					std::make_shared<Tile>			(' ',				WORLDCOLOR_WindowBG,	WORLDCOLOR_WindowBG,	0,	false)
+	#define TILE_BasicSky					std::make_shared<Tile>			(' ',				WORLDCOLOR_WindowBG,	WORLDCOLOR_WindowBG,	OOOOO,	OOOOO)
 
 	//ERROR
-	#define TILE_error						std::make_shared<Tile>			('%',				TCODColor::black,		TCODColor::pink,		4,	true)
+	#define TILE_error						std::make_shared<Tile>			('%',				TCODColor::black,		TCODColor::pink,		IIIII,	IIIII)
 
 	//----------------------------------------------------------------------------------------------------
 

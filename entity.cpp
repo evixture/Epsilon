@@ -109,12 +109,12 @@ void Player::move()
 		{
 			if (movementClock.step == 0)
 			{
-				if (GUI->worldWindow->world->getWalkability(Position(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.level)))
+				if (GUI->worldWindow->world->getWalkability(Position(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.level), height))
 				{
 					mapPosition.x += moveXSpeed;
 					moveXSpeed = 0;
 				}
-				if (GUI->worldWindow->world->getWalkability(Position(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.level)))
+				if (GUI->worldWindow->world->getWalkability(Position(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.level), height))
 				{
 					mapPosition.y += moveYSpeed;
 					moveYSpeed = 0;

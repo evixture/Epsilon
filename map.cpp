@@ -291,32 +291,56 @@ int World::getOffset(int playerx, int mapw, int renderw)
 	}
 }
 
-bool World::getWalkability(Position position) const
+bool World::getWalkability(Position position, int height) const
 {
 	if (position.x < 0) return false;
 	if (position.y < 0) return false;
 	if (position.x >= debugmap->width) return false;
 	if (position.y >= debugmap->height) return false;
 
-	return debugmap->levelList[position.level][position.x + position.y * debugmap->width]->walkable;
+	bool walkableBool = true;
+
+	for (int i = 0; i < 4; i++)
+	{
+		if (debugmap->levelList[position.level][position.x + position.y * debugmap->width]->walkableFlag & unsigned char(pow(2, (height - i > 0)? height - i : 1))) // converts player height to the bit of flag
+		{
+			//if (height > 0)
+			//{
+				walkableBool = false;
+			//}
+		}
+	}
+
+	if (walkableBool == true && debugmap->levelList[position.level][position.x + position.y * debugmap->width]->walkableFlag & char(pow(2, 0)))
+	{
+		return true;
+	}
+	return false;
+	//return debugmap->levelList[position.level][position.x + position.y * debugmap->width]->walkable;
 }
 
 bool World::getTransparency(Position position, int height) const
 {
 	if (debugmap->levelList[position.level][position.x + position.y * debugmap->width])
 	{
-		if (height <= debugmap->levelList[position.level][position.x + position.y * debugmap->width]->height)
-		{
-			if (debugmap->levelList[position.level][position.x + position.y * debugmap->width]->tag == Tile::Tag::DESTRUCTIBLE && debugmap->levelList[position.level][position.x + position.y * debugmap->width]->getDestroyed())
-			{
-				return true;
-			}
-			return false;
-		}
-		else if (height > debugmap->levelList[position.level][position.x + position.y * debugmap->width]->height)
+		if (!(debugmap->levelList[position.level][position.x + position.y * debugmap->width]->transparentFlag & char(pow(2, height)))) // converts player height to the bit of flag
 		{
 			return true;
 		}
+		return false;
+		//if (height <= debugmap->levelList[position.level][position.x + position.y * debugmap->width]->height)
+		//{
+		//	if (debugmap->levelList[position.level][position.x + position.y * debugmap->width]->tag 
+		//		== Tile::Tag::DESTRUCTIBLE && debugmap->levelList[position.level][position.x + position.y * debugmap->width]->getDestroyed())
+		//	{
+		//		return true;
+		//	}
+		//	return false;
+		//}
+		//else if (height > debugmap->levelList[position.level][position.x + position.y * debugmap->width]->height)
+		//{
+		//	return true;
+		//}
 	}
 	return false;
 }
@@ -327,7 +351,7 @@ void World::updateProperties()
 	{
 		for (int x = 0; x < debugmap->width; x++)
 		{
-			fovMap->setProperties(x, y, getTransparency(Position(x, y, player->mapPosition.level), player->height), getWalkability(Position(x, y, player->mapPosition.level)));
+			fovMap->setProperties(x, y, getTransparency(Position(x, y, player->mapPosition.level), player->height), getWalkability(Position(x, y, player->mapPosition.level), player->height));
 		}
 	}
 }

@@ -150,7 +150,7 @@ void Bullet::update()
 			if (startPosition.x < xbound && startPosition.y < ybound) //if in map bound
 			{
 				if (WORLD->inMapBounds(mapPosition)
-					&& WORLD->getWalkability(mapPosition) != false) // if in map bounds and travel position is walkable
+					&& WORLD->getWalkability(mapPosition, 3) != false) // if in map bounds and travel position is walkable //REPLACE WITH BULLET HEIGHT
 				{
 					for (auto& creature : WORLD->creatureList)
 					{
@@ -395,7 +395,7 @@ void Firearm::changeFireMode()
 	//full->semi->safe->full
 	if (fireMode == FireType::SAFE)
 	{
-		if (availibleFireMode & FireType::FULL)
+		if (availibleFireMode & FireType::FULL) //if availible fire mode has FULL fire mode bit set
 		{
 			fireMode = FireType::FULL;
 		}

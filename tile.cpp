@@ -1,11 +1,11 @@
 #include "main.hpp"
 
-Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable)
-	:ch(ch), foregroundColor(foregroundColor), backgroundColor(backgroundColor), height(height), walkable(walkable), explored(false), tag(Tile::Tag::STATIC)
+Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, unsigned char transparentFlag, unsigned char walkableFlag)
+	:ch(ch), foregroundColor(foregroundColor), backgroundColor(backgroundColor), transparentFlag(transparentFlag), walkableFlag(walkableFlag), explored(false), tag(Tile::Tag::STATIC)
 {}
 
-Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable, Tag tag)
-	:ch(ch), foregroundColor(foregroundColor), backgroundColor(backgroundColor), height(height), walkable(walkable), tag(tag), explored(false)
+Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, unsigned char transparentFlag, unsigned char walkableFlag, Tag tag)
+	:ch(ch), foregroundColor(foregroundColor), backgroundColor(backgroundColor), transparentFlag(transparentFlag), walkableFlag(walkableFlag), tag(tag), explored(false)
 {}
 
 bool Tile::getDestroyed()
@@ -40,8 +40,8 @@ void Tile::render(int x, int y, const std::shared_ptr<Pane>& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Destructible::Destructible(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, bool walkable, int strength)
-	:Tile(ch, foregroundColor, backgroundColor, height, walkable, Tile::Tag::DESTRUCTIBLE), strength(strength), destroyed(false)
+Destructible::Destructible(int ch, TCODColor foregroundColor, TCODColor backgroundColor, unsigned char transparentFlag, unsigned char walkableFlag, int strength)
+	:Tile(ch, foregroundColor, backgroundColor, transparentFlag, walkableFlag, Tile::Tag::DESTRUCTIBLE), strength(strength), destroyed(false)
 {}
 
 bool Destructible::getDestroyed()
@@ -67,8 +67,8 @@ void Destructible::interact()
 
 //----------------------------------------------------------------------------------------------------
 
-Stair::Stair(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int height, int moveDistance)
-	:Tile(ch, foregroundColor, backgroundColor, height, true, Tile::Tag::STAIR), moveDistance(moveDistance)
+Stair::Stair(int ch, TCODColor foregroundColor, TCODColor backgroundColor, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance)
+	:Tile(ch, foregroundColor, backgroundColor, transparentFlag, Tile::FLOOR, Tile::Tag::STAIR), moveDistance(moveDistance)
 {}
 
 void Stair::interact()
