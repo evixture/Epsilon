@@ -60,7 +60,8 @@ void Destructible::interact()
 		ch = '%';
 		backgroundColor = backgroundColor * TCODColor::darkGrey;
 		foregroundColor = foregroundColor * TCODColor::lightGrey;
-		walkable = true;
+		walkableFlag = OOOOI;
+		transparentFlag = OOOOI;
 		destroyed = true;
 	}
 }

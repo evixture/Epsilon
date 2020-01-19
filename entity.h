@@ -55,6 +55,8 @@ struct Player : public Creature //player derived creature that the player intera
 	Player(Position pos); //player constructor that takes a position
 
 	void move();
+	void changeStanceUp();
+	void changeStanceDown();
 
 	void moveSelectorUp(); //moves the selector up on the inventory
 	void moveSelectorDown(); //moves the selector down on the inventory

@@ -304,10 +304,7 @@ bool World::getWalkability(Position position, int height) const
 	{
 		if (debugmap->levelList[position.level][position.x + position.y * debugmap->width]->walkableFlag & unsigned char(pow(2, (height - i > 0)? height - i : 1))) // converts player height to the bit of flag
 		{
-			//if (height > 0)
-			//{
-				walkableBool = false;
-			//}
+			walkableBool = false;
 		}
 	}
 
@@ -316,7 +313,6 @@ bool World::getWalkability(Position position, int height) const
 		return true;
 	}
 	return false;
-	//return debugmap->levelList[position.level][position.x + position.y * debugmap->width]->walkable;
 }
 
 bool World::getTransparency(Position position, int height) const
@@ -328,19 +324,6 @@ bool World::getTransparency(Position position, int height) const
 			return true;
 		}
 		return false;
-		//if (height <= debugmap->levelList[position.level][position.x + position.y * debugmap->width]->height)
-		//{
-		//	if (debugmap->levelList[position.level][position.x + position.y * debugmap->width]->tag 
-		//		== Tile::Tag::DESTRUCTIBLE && debugmap->levelList[position.level][position.x + position.y * debugmap->width]->getDestroyed())
-		//	{
-		//		return true;
-		//	}
-		//	return false;
-		//}
-		//else if (height > debugmap->levelList[position.level][position.x + position.y * debugmap->width]->height)
-		//{
-		//	return true;
-		//}
 	}
 	return false;
 }

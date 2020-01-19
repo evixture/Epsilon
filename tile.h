@@ -29,13 +29,11 @@ struct Tile //tile class used for the map and items
 	unsigned char walkableFlag;
 
 	int ch; //character representation of the tile
-	int height; //height of the tile
 
 	TCODColor foregroundColor; //foreground color of the tile
 	TCODColor backgroundColor; //background color of the tile
 
 	bool explored; //if the tile has been explored yet
-	bool walkable; //if the tile is able to be walked upon
 
 	Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, unsigned char transparentFlag, unsigned char walkableFlag); //generic constructor that take character, foreground and background color, height, and if it is walkable
 

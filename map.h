@@ -40,7 +40,7 @@ struct World
 	TCODColor getBgColor			(Position position) const; //gets the background color of the tile at specific coordinates
 
 	bool    getTransparency			(Position position, int height) const; //gets the transparency of a tile
-	bool    getWalkability/*use height?*/(Position position, int height) const; //gets the walkability of a tile
+	bool    getWalkability			(Position position, int height) const; //gets the walkability of a tile
 	bool	inMapBounds				(Position position) const; //checks if the coordinates are in the map bounds
 	bool	isInFov					(Position position) const; //returns true if the coordinates are in fov
 	bool	isExplored				(Position position) const; //checks if a tile has been explored previously

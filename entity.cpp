@@ -84,15 +84,48 @@ void Player::move()
 
 		if (INPUT->z->isSwitched)
 		{
-			height = 1;
+			int tempHeight = height;
+			for (int i = 0; i < int(abs(tempHeight - 1)); i++)
+			{
+				if (tempHeight - 1 > 0)
+				{
+					changeStanceDown();
+				}
+				else if (tempHeight - 1 < 0)
+				{
+					changeStanceUp();
+				}
+			}
 		}
 		if (INPUT->x->isSwitched)
 		{
-			height = 2;
+			int tempHeight = height;
+			for (int i = 0; i < int(abs(tempHeight - 2)); i++)
+			{
+				if (tempHeight - 2 > 0)
+				{
+					changeStanceDown();
+				}
+				else if (tempHeight - 2 < 0)
+				{
+					changeStanceUp();
+				}
+			}
 		}
 		if (INPUT->c->isSwitched)
 		{
-			height = 3;
+			int tempHeight = height;
+			for (int i = 0; i < int(abs(tempHeight - 3)); i++)
+			{
+				if (tempHeight - 3 > 0)
+				{
+					changeStanceDown();
+				}
+				else if (tempHeight - 3 < 0)
+				{
+					changeStanceUp();
+				}
+			}
 		}
 
 		movementClock.capacity = (int)((baseMoveTime / height) * SETTINGS->fpsCount);
@@ -123,6 +156,16 @@ void Player::move()
 			movementClock.tickDownWithReset();
 		}
 	}
+}
+
+void Player::changeStanceUp()
+{
+	if (WORLD->getWalkability(mapPosition, height + 1)) height += 1;
+}
+
+void Player::changeStanceDown()
+{
+	if (WORLD->getWalkability(mapPosition, height + 1)) height -= 1;
 }
 
 void Player::moveSelectorUp()
