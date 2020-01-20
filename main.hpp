@@ -14,11 +14,13 @@
 #include <mutex>
 #include <atomic>
 #include <functional>
+//#include <chrono>
 //#include <stdexcept>
 
 //Libraries
 #include <libtcod.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/System.hpp>
 #include <E:/pugixml-1.10/src/pugixml.hpp>
 
 struct Pane;

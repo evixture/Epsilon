@@ -17,7 +17,6 @@ Settings::Settings(int screenCharWidth, int screenCharHeight)
 	
 	TCODConsole::initRoot(screenCharWidth, screenCharHeight, windowTitle.c_str(), fullscreen, renderer);
 	TCODConsole::root->setDefaultBackground(UICOLOR_Root_BG);
-
 }
 
 void Settings::setFullscreen()
@@ -46,19 +45,22 @@ void Settings::printLogo() const
 
 void Settings::printDebugStats() const
 {
-	TCODConsole::root->printf(10, 0, "FPS>%i | mx>%i my>%i | px>%i py>%i pl>%i | winfoc>%i",
+	TCODConsole::root->printf(10, 0, "FPS>%i | mx>%i my>%i | px>%i py>%i pl>%i | winfoc>%i | lft>%f",
 		fpsCount,
 		SETTINGS->input->mouse.cx,
 		SETTINGS->input->mouse.cy,
 		WORLD->player->mapPosition.x,
 		WORLD->player->mapPosition.y,
 		WORLD->player->mapPosition.level,
-		TCODConsole::hasMouseFocus());
+		TCODConsole::hasMouseFocus(),
+		lastFrameTime.asSeconds());
+	//lastFrameTime.asSeconds()
 }
 
 void Settings::update(std::shared_ptr<Player> player)
 {
 	fpsCount = TCODSystem::getFps();
+	lastFrameTime = systemClock.restart();
 	input->update(player);
 
 	if (INPUT->f11->isSwitched)

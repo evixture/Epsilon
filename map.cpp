@@ -302,13 +302,13 @@ bool World::getWalkability(Position position, int height) const
 
 	for (int i = 0; i < 4; i++)
 	{
-		if (debugmap->levelList[position.level][position.x + position.y * debugmap->width]->walkableFlag & unsigned char(pow(2, (height - i > 0)? height - i : 1))) // converts player height to the bit of flag
+		if (debugmap->levelList[position.level][position.x + position.y * debugmap->width]->walkableFlag & heightToBitFlag((height - i > 0)? height - i : 1)) // converts player height to the bit of flag
 		{
 			walkableBool = false;
 		}
 	}
 
-	if (walkableBool == true && debugmap->levelList[position.level][position.x + position.y * debugmap->width]->walkableFlag & char(pow(2, 0)))
+	if (walkableBool == true && debugmap->levelList[position.level][position.x + position.y * debugmap->width]->walkableFlag & heightToBitFlag(0))
 	{
 		return true;
 	}
@@ -319,7 +319,7 @@ bool World::getTransparency(Position position, int height) const
 {
 	if (debugmap->levelList[position.level][position.x + position.y * debugmap->width])
 	{
-		if (!(debugmap->levelList[position.level][position.x + position.y * debugmap->width]->transparentFlag & char(pow(2, height)))) // converts player height to the bit of flag
+		if (!(debugmap->levelList[position.level][position.x + position.y * debugmap->width]->transparentFlag & heightToBitFlag(height))) // converts player height to the bit of flag
 		{
 			return true;
 		}

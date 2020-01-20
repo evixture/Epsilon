@@ -13,7 +13,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console/console.h"
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/console/console.h"
                 },
                 "region": {
                   "startLine": 122,
@@ -35,7 +35,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console/console.h"
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/console/console.h"
                 },
                 "region": {
                   "startLine": 126,
@@ -57,7 +57,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tileset/tileset.h"
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/tileset/tileset.h"
                 },
                 "region": {
                   "startLine": 52,
@@ -82,7 +82,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tileset/tileset.h"
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/tileset/tileset.h"
                 },
                 "region": {
                   "startLine": 78,
@@ -104,12 +104,12 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tileset/observer.h"
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/tileset/observer.h"
                 },
                 "region": {
-                  "startLine": 63,
+                  "startLine": 62,
                   "startColumn": 3,
-                  "endLine": 63,
+                  "endLine": 62,
                   "endColumn": 3
                 }
               },
@@ -126,12 +126,12 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tileset/observer.h"
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/tileset/observer.h"
                 },
                 "region": {
-                  "startLine": 66,
+                  "startLine": 65,
                   "startColumn": 20,
-                  "endLine": 66,
+                  "endLine": 65,
                   "endColumn": 20
                 }
               },
@@ -140,29 +140,26 @@
           ]
         },
         {
-          "ruleId": "26495",
+          "ruleId": "26812",
           "message": {
-            "text": "Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6)."
+            "text": "The enum type 'TCOD_distribution_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp"
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/mersenne.hpp"
                 },
                 "region": {
-                  "startLine": 77,
-                  "startColumn": 2,
-                  "endLine": 77,
-                  "endColumn": 2
+                  "startLine": 222,
+                  "startColumn": 15,
+                  "endLine": 222,
+                  "endColumn": 15
                 }
               },
-              "fullyQualifiedLogicalName": "public: __cdecl TCODBsp::TCODBsp(void)"
+              "fullyQualifiedLogicalName": "public: void __cdecl TCODRandom::setDistribution(enum TCOD_distribution_t)"
             }
-          ],
-          "properties": {
-            "targetSymbol": "TCODBsp::w"
-          }
+          ]
         },
         {
           "ruleId": "26495",
@@ -173,7 +170,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp"
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
                 },
                 "region": {
                   "startLine": 77,
@@ -192,38 +189,13 @@
         {
           "ruleId": "26495",
           "message": {
-            "text": "Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp"
-                },
-                "region": {
-                  "startLine": 77,
-                  "startColumn": 2,
-                  "endLine": 77,
-                  "endColumn": 2
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl TCODBsp::TCODBsp(void)"
-            }
-          ],
-          "properties": {
-            "targetSymbol": "TCODBsp::position"
-          }
-        },
-        {
-          "ruleId": "26495",
-          "message": {
             "text": "Variable 'TCODBsp::x' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp"
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
                 },
                 "region": {
                   "startLine": 77,
@@ -242,13 +214,63 @@
         {
           "ruleId": "26495",
           "message": {
+            "text": "Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
+                },
+                "region": {
+                  "startLine": 77,
+                  "startColumn": 2,
+                  "endLine": 77,
+                  "endColumn": 2
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl TCODBsp::TCODBsp(void)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "TCODBsp::position"
+          }
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
+                },
+                "region": {
+                  "startLine": 77,
+                  "startColumn": 2,
+                  "endLine": 77,
+                  "endColumn": 2
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl TCODBsp::TCODBsp(void)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "TCODBsp::w"
+          }
+        },
+        {
+          "ruleId": "26495",
+          "message": {
             "text": "Variable 'TCODBsp::horizontal' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp"
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
                 },
                 "region": {
                   "startLine": 77,
@@ -273,7 +295,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp"
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
                 },
                 "region": {
                   "startLine": 77,
@@ -298,7 +320,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp"
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
                 },
                 "region": {
                   "startLine": 78,
@@ -323,7 +345,7 @@
             {
               "physicalLocation": {
                 "fileLocation": {
-                  "uri": "file:///E:/Libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp"
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
                 },
                 "region": {
                   "startLine": 78,
@@ -338,37 +360,174 @@
           "properties": {
             "targetSymbol": "TCODBsp::horizontal"
           }
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'Position::y' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/utility.h"
+                },
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 2,
+                  "endLine": 9,
+                  "endColumn": 2
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl Position::Position(void)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Position::y"
+          }
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'Position::x' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/utility.h"
+                },
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 2,
+                  "endLine": 9,
+                  "endColumn": 2
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl Position::Position(void)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Position::x"
+          }
+        },
+        {
+          "ruleId": "26495",
+          "message": {
+            "text": "Variable 'Position::level' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "fileLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/utility.h"
+                },
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 2,
+                  "endLine": 9,
+                  "endColumn": 2
+                }
+              },
+              "fullyQualifiedLogicalName": "public: __cdecl Position::Position(void)"
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Position::level"
+          }
         }
       ],
       "tool": {
         "name": "PREfast",
         "fullName": "PREfast Code Analysis",
-        "version": "14.22.27905.0",
-        "fileVersion": "14.00.27905.00"
+        "version": "14.24.28315.0",
+        "fileVersion": "14.00.28315.00"
       },
       "invocations": [
         {
-          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x001C2090 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_c9265287ast -typedil -f gui.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -ZB64 -D_INTEGRAL_MAX_BITS=64 -pc \\:/ -D_MSC_VER=1922 -D_MSC_FULL_VER=192227905 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\libtcod-1.12.3-x86_64-msvc\\include -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Ot -DCODE_ANALYSIS -D_DEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D__MSVC_RUNTIME_CHECKS -RTCs -RTCu -D_DEBUG -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Debug\\gui.obj -Fdx64\\Debug\\vc142.pdb -Gd -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
+          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x00293170 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_aa9bce34ast -typedil -f gui.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1924 -D_MSC_FULL_VER=192428315 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Ot -Oi -DCODE_ANALYSIS -D_DEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_DEBUG -D_MT -D_DLL -GS -fpfast -D_M_FP_FAST -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Debug\\gui.obj -Fdx64\\Debug\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
         }
       ],
       "files": {
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/utility/matrix.h": {
+        "file:///e:/pugixml-1.10/src/pugiconfig.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/epsilon/window.cpp": {
+        "file:///e:/pugixml-1.10/src/pugixml.cpp": {
           "roles": [
             "analysisTarget",
             "resultFile"
           ]
         },
-        "file:///e:/sfml/sfml-2.5.1/include/sfml/window.hpp": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/fov.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/utility.h": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/console/console.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/image.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/fov.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/image.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/console.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/color/color.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/pugixml-1.10/src/pugixml.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/mouse.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/aicreature.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/gui.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/color.hpp": {
           "roles": [
             "resultFile"
           ]
@@ -378,302 +537,57 @@
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console.hpp": {
+        "file:///e:/projects/visual studio/libtcod development/epsilon/defines.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console/console.h": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/libtcod.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod.h": {
+        "file:///e:/projects/visual studio/libtcod development/epsilon/settings.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console.h": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/portability.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod.hpp": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/utility.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/portability.h": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/txtfield.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/zip.h": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/version.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/libtcod.h": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/txtfield.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/version.h": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/bsp.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/lex.hpp": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/lex.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bresenham.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/lex.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bresenham.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/bsp.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/color.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tileset/tile.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/mouse_types.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/color.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/mersenne_types.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/utf.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tree.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/color/color.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console/drawing.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/engine/display.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console_types.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/mouse.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/mouse.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/mersenne.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/mersenne.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/cursor.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console/printing.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/console/rexpaint.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/sdl2/event.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/list.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/parser.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/image.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/parser.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/image.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/fov.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tileset/tileset.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/projects/visual studio/libtcod development/epsilon/window.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/fov.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/fov_types.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/heightmap.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/heightmap.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/noise.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tileset/observer.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/noise_defaults.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/engine/globals.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/namegen.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/namegen.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/path.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/engine/error.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/sys.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/videomode.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/txtfield.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/engine/backend.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/color/canvas.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/utility/vector2.h": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/bresenham.h": {
           "roles": [
             "resultFile"
           ]
@@ -683,47 +597,263 @@
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tileset/tilesheet.h": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/console/printing.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/list.hpp": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/bsp.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/tree.hpp": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/mersenne_types.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/noise.hpp": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/tree.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/path.hpp": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/tree.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/sys.hpp": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/mouse_types.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/lock.hpp": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/color.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/txtfield.hpp": {
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/windowstyle.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/libtcod-1.12.3-x86_64-msvc/include/libtcod/zip.hpp": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/utility/vector2.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/utility/matrix.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/console/drawing.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/heightmap.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/console_types.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/tileset/tile.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/console/rexpaint.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/list.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/sdl2/event.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/list.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/heightmap.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/fov_types.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/noise.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/noise.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/tileset/observer.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/mouse.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/noise_defaults.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/bresenham.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/mersenne.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/lex.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/threadlocalptr.inl": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/engine/display.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/namegen.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/engine.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/path.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/parser.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/sys.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/zip.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/engine/backend.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/color/canvas.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/console.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/tileset/tileset.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/vector2.inl": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/mersenne.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/engine/error.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/engine/globals.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/tileset/tilesheet.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/mouse.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/namegen.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/parser.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/path.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/sys.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/zip.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window.hpp": {
           "roles": [
             "resultFile"
           ]
@@ -773,6 +903,11 @@
             "resultFile"
           ]
         },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/lock.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
         "file:///e:/sfml/sfml-2.5.1/include/sfml/system/memoryinputstream.hpp": {
           "roles": [
             "resultFile"
@@ -794,6 +929,11 @@
           ]
         },
         "file:///e:/sfml/sfml-2.5.1/include/sfml/system/string.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/utf.hpp": {
           "roles": [
             "resultFile"
           ]
@@ -828,23 +968,7 @@
             "resultFile"
           ]
         },
-        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/threadlocalptr.inl": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/projects/visual studio/libtcod development/epsilon/tile.cpp": {
-          "roles": [
-            "analysisTarget",
-            "resultFile"
-          ]
-        },
         "file:///e:/sfml/sfml-2.5.1/include/sfml/system/vector2.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/vector2.inl": {
           "roles": [
             "resultFile"
           ]
@@ -884,17 +1008,17 @@
             "resultFile"
           ]
         },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/cursor.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
         "file:///e:/sfml/sfml-2.5.1/include/sfml/window/joystick.hpp": {
           "roles": [
             "resultFile"
           ]
         },
         "file:///e:/sfml/sfml-2.5.1/include/sfml/window/keyboard.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/mouse.hpp": {
           "roles": [
             "resultFile"
           ]
@@ -909,6 +1033,11 @@
             "resultFile"
           ]
         },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/videomode.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
         "file:///e:/sfml/sfml-2.5.1/include/sfml/window/window.hpp": {
           "roles": [
             "resultFile"
@@ -919,12 +1048,32 @@
             "resultFile"
           ]
         },
-        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/windowstyle.hpp": {
+        "file:///e:/projects/visual studio/libtcod development/epsilon/utility.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/tool.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/item.h": {
           "roles": [
             "resultFile"
           ]
         },
         "file:///e:/projects/visual studio/libtcod development/epsilon/entity.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/aicreature.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/gui.h": {
           "roles": [
             "resultFile"
           ]
@@ -939,7 +1088,7 @@
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/epsilon/settings.h": {
+        "file:///e:/projects/visual studio/libtcod development/epsilon/window.h": {
           "roles": [
             "resultFile"
           ]
@@ -949,29 +1098,12 @@
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/epsilon/gui.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
         "file:///e:/projects/visual studio/libtcod development/epsilon/engine.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/projects/visual studio/libtcod development/epsilon/panel.cpp": {
-          "roles": [
-            "analysisTarget",
-            "resultFile"
-          ]
-        },
-        "file:///e:/projects/visual studio/libtcod development/epsilon/main.cpp": {
-          "roles": [
-            "analysisTarget",
-            "resultFile"
-          ]
-        },
-        "file:///e:/projects/visual studio/libtcod development/epsilon/gui.cpp": {
+        "file:///e:/projects/visual studio/libtcod development/epsilon/entity.cpp": {
           "roles": [
             "analysisTarget",
             "resultFile"
@@ -2103,6 +2235,17 @@
             },
             "helpUri": ""
           },
+          "26812": {
+            "id": "26812",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
           "6328": {
             "id": "6328",
             "name": "",
@@ -2754,6 +2897,17 @@
           },
           "26454": {
             "id": "26454",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "26478": {
+            "id": "26478",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",

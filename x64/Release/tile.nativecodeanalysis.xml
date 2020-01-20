@@ -288,4 +288,38 @@
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>tile.cpp</FILENAME>
+      <LINE>3</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Tile::tileHeights' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Tile::{ctor}</FUNCTION>
+    <DECORATED>??0Tile@@QEAA@HVTCODColor@@0EE@Z</DECORATED>
+    <FUNCLINE>3</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Tile::tileHeights</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>tile.cpp</FILENAME>
+      <LINE>7</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Tile::tileHeights' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Tile::{ctor}</FUNCTION>
+    <DECORATED>??0Tile@@QEAA@HVTCODColor@@0EEW4Tag@0@@Z</DECORATED>
+    <FUNCLINE>7</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Tile::tileHeights</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
 </DEFECTS>

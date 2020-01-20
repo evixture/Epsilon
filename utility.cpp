@@ -114,6 +114,11 @@ int square(int x)
 	return x * x;
 }
 
+unsigned char heightToBitFlag(int height)
+{
+	return 1 << height;
+}
+
 double getAngle(int ix, int iy, int tx, int ty)
 {
 	int dx = tx - ix;
@@ -132,34 +137,71 @@ double getDistance(int ix, int iy, int tx, int ty)
 //----------------------------------------------------------------------------------------------------
 
 //Clock Struct
-Clock::Clock(int capacity)
-	:capacity(capacity), step(capacity)
+Clock::Clock(float capacityInSeconds, float step, std::function<void()> action)
+	:capacity(capacityInSeconds), step(step), action(action)
 {}
 
-void Clock::tickDown()
+void Clock::update(bool tickDown, bool resetAtZero, bool callFunctionAtZero)
 {
-	if (step > 0)
+	if (tickDown)
 	{
-		step--;
+		if (step > 0.0f)
+		{
+			step -= SETTINGS->lastFrameTime.asSeconds();
+		}
+	}
+	if (step <= 0.0f) //should loop while step + capacity is less than capacity
+	{
+		if (callFunctionAtZero)
+		{
+			if (action)
+			{
+				action();
+			}
+		}
+		if (resetAtZero)
+		{
+			while (step <= 0)
+			{
+				step += capacity;
+			}
+		}
 	}
 }
 
-void Clock::tickDownWithReset()
+bool Clock::isAtZero()
 {
-	if (step > 0)
+	if (step <= 0.0f)
 	{
-		step--;
+		return true;
 	}
-	else
-	{
-		step = capacity;
-	}
+	return false;
 }
 
-void Clock::reset()
-{
-	step = capacity;
-}
+//void Clock::tickDown()
+//{
+//	if (step > 0)
+//	{
+//		step--;
+//	}
+//}
+//
+//void Clock::tickDownWithReset()
+//{
+//	if (step > 0)
+//	{
+//		step--;
+//	}
+//	else
+//	{
+//		step = capacity;
+//	}
+//}
+//
+//void Clock::reset()
+//{
+//	step = capacity;
+//}
 
 MagazineData::MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid)
 	:isValid(isValid), ammoType(ammoType), ammoCapacity(ammoCapacity), availableAmmo(availableAmmo)

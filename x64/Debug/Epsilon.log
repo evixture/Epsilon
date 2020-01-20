@@ -1,16 +1,3 @@
-﻿  aicreature.cpp
-  engine.cpp
-  entity.cpp
-  gui.cpp
-  input.cpp
-  item.cpp
-  main.cpp
-  map.cpp
-  panel.cpp
-  settings.cpp
-  tile.cpp
+﻿cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
   tool.cpp
-  utility.cpp
-  window.cpp
-  Generating Code...
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

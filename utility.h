@@ -33,17 +33,25 @@ private:
 
 struct Clock //clock used for timings
 {
-	int capacity; //number that the clock resets to
-	int step; //the steps util time is 0
+	float capacity; //number that the clock resets to
+	float step; //the steps util time is 0
 
-	Clock(int capacity); //clock constructor that takes a capacity
+	std::function<void()> action;
 
-	void tickDown(); //ticks clock down, does not reset at 0
-	void tickDownWithReset(); //ticks clock down, resets at 0
-	void reset(); //sets step to capacity
+	Clock(float capacityInSeconds, float step, std::function<void()> action = NULL); //clock constructor that takes a capacity
+
+	void update(bool tickDown, bool resetAtZero, bool callFunctionAtZero);
+
+	bool isAtZero();
+
+	//void tickDown(); //ticks clock down, does not reset at 0
+	//void tickDownWithReset(); //ticks clock down, resets at 0
+	//void reset(); //sets step to capacity
 };
 
 int square(int x); //squares a number
+
+unsigned char heightToBitFlag(int height);
 
 double getAngle(int ix, int iy, int tx, int ty); //gets the angle from 2 sets of coordinates
 double getDistance(int ix, int iy, int tx, int ty); //gets the distance from 2 sets of coordinates

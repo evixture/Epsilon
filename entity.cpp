@@ -48,7 +48,7 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Player::Player(Position pos)
-	:Creature(Position(pos), '@', "player", UICOLOR_Player_Color, 100, 0), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(0))
+	:Creature(Position(pos), '@', "player", UICOLOR_Player_Color, 100, 0), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(1.0f, 0.0f))
 {
 	inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
 	inventory[0]->addItem(	ITEM_SIP45(0, 0, 0, this));
@@ -127,8 +127,8 @@ void Player::move()
 				}
 			}
 		}
-
-		movementClock.capacity = (int)((baseMoveTime / height) * SETTINGS->fpsCount);
+		//(int)((baseMoveTime / height) * SETTINGS->fpsCount)
+		movementClock.capacity = float(baseMoveTime / height);
 
 		if (INPUT->w->isDown && INPUT->s->isDown) moveYSpeed = 0;
 		else if (INPUT->w->isDown && !INPUT->s->isDown) moveYSpeed = -1;
@@ -140,7 +140,7 @@ void Player::move()
 
 		if (moveXSpeed != 0 || moveYSpeed != 0)
 		{
-			if (movementClock.step == 0)
+			if (movementClock.isAtZero())
 			{
 				if (GUI->worldWindow->world->getWalkability(Position(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.level), height))
 				{
@@ -152,9 +152,10 @@ void Player::move()
 					mapPosition.y += moveYSpeed;
 					moveYSpeed = 0;
 				}
+				movementClock.update(false, true, false);
 			}
-			movementClock.tickDownWithReset();
 		}
+			movementClock.update(true, false, false);
 	}
 }
 

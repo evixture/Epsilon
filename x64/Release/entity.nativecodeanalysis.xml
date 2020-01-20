@@ -306,98 +306,98 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>144</LINE>
+      <LINE>187</LINE>
       <COLUMN>16</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorUp</FUNCTION>
     <DECORATED>?moveSelectorUp@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>128</FUNCLINE>
+    <FUNCLINE>171</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>153</LINE>
+      <LINE>196</LINE>
       <COLUMN>15</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>151</FUNCLINE>
+    <FUNCLINE>194</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>157</LINE>
+      <LINE>200</LINE>
       <COLUMN>20</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>151</FUNCLINE>
+    <FUNCLINE>194</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>166</LINE>
+      <LINE>209</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>151</FUNCLINE>
+    <FUNCLINE>194</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>251</LINE>
+      <LINE>294</LINE>
       <COLUMN>20</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>242</FUNCLINE>
+    <FUNCLINE>285</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>264</LINE>
+      <LINE>307</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>242</FUNCLINE>
+    <FUNCLINE>285</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>280</LINE>
+      <LINE>323</LINE>
       <COLUMN>18</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
     <DESCRIPTION>The enum type 'TCOD_chars_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>242</FUNCLINE>
+    <FUNCLINE>285</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

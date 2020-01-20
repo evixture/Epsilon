@@ -292,8 +292,8 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>26</LINE>
-      <COLUMN>23</COLUMN>
+      <LINE>45</LINE>
+      <COLUMN>27</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
@@ -306,11 +306,11 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>35</LINE>
-      <COLUMN>48</COLUMN>
+      <LINE>59</LINE>
+      <COLUMN>44</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Map::{ctor}</FUNCTION>
     <DECORATED>??0Map@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z</DECORATED>
     <FUNCLINE>3</FUNCLINE>
@@ -320,140 +320,70 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>166</LINE>
+      <LINE>183</LINE>
+      <COLUMN>11</COLUMN>
+    </SFA>
+    <DEFECTCODE>26812</DEFECTCODE>
+    <DESCRIPTION>The enum type 'Tile::TileHeights' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>Map::getTileFromCode</FUNCTION>
+    <DECORATED>?getTileFromCode@Map@@QEAA?AV?$shared_ptr@UTile@@@std@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@3@@Z</DECORATED>
+    <FUNCLINE>72</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>map.cpp</FILENAME>
+      <LINE>209</LINE>
       <COLUMN>9</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
     <DESCRIPTION>The enum type 'Firearm::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
     <FUNCTION>World::{ctor}</FUNCTION>
     <DECORATED>??0World@@QEAA@XZ</DECORATED>
-    <FUNCLINE>156</FUNCLINE>
+    <FUNCLINE>199</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>190</LINE>
+      <LINE>233</LINE>
       <COLUMN>56</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getTile</FUNCTION>
     <DECORATED>?getTile@World@@QEBA?AV?$shared_ptr@UTile@@@std@@UPosition@@@Z</DECORATED>
-    <FUNCLINE>186</FUNCLINE>
+    <FUNCLINE>229</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>200</LINE>
-      <COLUMN>55</COLUMN>
+      <LINE>243</LINE>
+      <COLUMN>56</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::isExplored</FUNCTION>
     <DECORATED>?isExplored@World@@QEBA_NUPosition@@@Z</DECORATED>
-    <FUNCLINE>198</FUNCLINE>
+    <FUNCLINE>241</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>205</LINE>
+      <LINE>248</LINE>
       <COLUMN>55</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getBgColor</FUNCTION>
     <DECORATED>?getBgColor@World@@QEBA?AVTCODColor@@UPosition@@@Z</DECORATED>
-    <FUNCLINE>203</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>258</LINE>
-      <COLUMN>55</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getWalkability</FUNCTION>
-    <DECORATED>?getWalkability@World@@QEBA_NUPosition@@@Z</DECORATED>
-    <FUNCLINE>251</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>263</LINE>
-      <COLUMN>52</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getTransparency</FUNCTION>
-    <DECORATED>?getTransparency@World@@QEBA_NUPosition@@H@Z</DECORATED>
-    <FUNCLINE>261</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>265</LINE>
-      <COLUMN>63</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getTransparency</FUNCTION>
-    <DECORATED>?getTransparency@World@@QEBA_NUPosition@@H@Z</DECORATED>
-    <FUNCLINE>261</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>267</LINE>
-      <COLUMN>54</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getTransparency</FUNCTION>
-    <DECORATED>?getTransparency@World@@QEBA_NUPosition@@H@Z</DECORATED>
-    <FUNCLINE>261</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>267</LINE>
-      <COLUMN>168</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getTransparency</FUNCTION>
-    <DECORATED>?getTransparency@World@@QEBA_NUPosition@@H@Z</DECORATED>
-    <FUNCLINE>261</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>273</LINE>
-      <COLUMN>67</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getTransparency</FUNCTION>
-    <DECORATED>?getTransparency@World@@QEBA_NUPosition@@H@Z</DECORATED>
-    <FUNCLINE>261</FUNCLINE>
+    <FUNCLINE>246</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
@@ -461,13 +391,69 @@
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
       <LINE>305</LINE>
+      <COLUMN>53</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>World::getWalkability</FUNCTION>
+    <DECORATED>?getWalkability@World@@QEBA_NUPosition@@H@Z</DECORATED>
+    <FUNCLINE>294</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>map.cpp</FILENAME>
+      <LINE>311</LINE>
+      <COLUMN>76</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>World::getWalkability</FUNCTION>
+    <DECORATED>?getWalkability@World@@QEBA_NUPosition@@H@Z</DECORATED>
+    <FUNCLINE>294</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>map.cpp</FILENAME>
+      <LINE>320</LINE>
+      <COLUMN>52</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>World::getTransparency</FUNCTION>
+    <DECORATED>?getTransparency@World@@QEBA_NUPosition@@H@Z</DECORATED>
+    <FUNCLINE>318</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>map.cpp</FILENAME>
+      <LINE>322</LINE>
+      <COLUMN>55</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>World::getTransparency</FUNCTION>
+    <DECORATED>?getTransparency@World@@QEBA_NUPosition@@H@Z</DECORATED>
+    <FUNCLINE>318</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>map.cpp</FILENAME>
+      <LINE>355</LINE>
       <COLUMN>49</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::isInFov</FUNCTION>
     <DECORATED>?isInFov@World@@QEBA_NUPosition@@@Z</DECORATED>
-    <FUNCLINE>297</FUNCLINE>
+    <FUNCLINE>347</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

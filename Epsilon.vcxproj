@@ -146,16 +146,17 @@
       <PrecompiledHeaderFile>precomp.hpp</PrecompiledHeaderFile>
       <LanguageStandard>Default</LanguageStandard>
       <EnablePREfast>false</EnablePREfast>
-      <AdditionalOptions>/Zo %(AdditionalOptions)</AdditionalOptions>
-      <MinimalRebuild>false</MinimalRebuild>
+      <MinimalRebuild>true</MinimalRebuild>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>E:\SFML\SFML-2.5.1\lib;E:\Libtcod\custom-libtcod-master\build\msvs\libtcod\x64\Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-window.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libtcod.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-window.lib;sfml-system.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libtcod.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -170,23 +171,24 @@
       <PrecompiledHeaderFile>precomp.hpp</PrecompiledHeaderFile>
       <LanguageStandard>Default</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
-      <AdditionalOptions>/Zo %(AdditionalOptions)</AdditionalOptions>
-      <MinimalRebuild>false</MinimalRebuild>
+      <MinimalRebuild>true</MinimalRebuild>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>E:\SFML\SFML-2.5.1\lib;E:\Libtcod\custom-libtcod-master\build\msvs\libtcod\x64\Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-window.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libtcod.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-window.lib;sfml-system.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libtcod.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
@@ -211,7 +213,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>

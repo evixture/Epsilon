@@ -116,7 +116,8 @@ void Tool::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Bullet::Bullet(int ch, Position startPosition, int dx, int dy, int xbound, int ybound)
-	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(startPosition.x, startPosition.y, tox, toy)), moveClock(Clock(0)), mapPosition(startPosition)
+	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(startPosition.x, startPosition.y, tox, toy)),
+	moveClock(Clock(.005f, 0.005f)), mapPosition(startPosition)
 {
 	do
 	{
@@ -138,12 +139,13 @@ Bullet::Bullet(int ch, Position startPosition, int dx, int dy, int xbound, int y
 
 void Bullet::update()
 {
-	moveClock.capacity = (int)(engine->settings->fpsCount * .005f);
-	moveClock.tickDownWithReset();
+	//moveClock.capacity = (int)(engine->settings->fpsCount * .005f);
+	//moveClock.tickDownWithReset();
+	moveClock.update(true, false, false);
 
 	mapPosition = Position(travel.x, travel.y, startPosition.level);
 
-	if (moveClock.step == 0)
+	if (moveClock.isAtZero())
 	{
 		if (!hitWall) // if it has not hit a solid wall yet
 		{
@@ -184,6 +186,7 @@ void Bullet::update()
 				hitWall = true;
 			}
 		}
+		moveClock.update(false, true, false);
 	}
 
 	mapPosition = Position(travel.x, travel.y, startPosition.level); //second needed?
@@ -208,7 +211,8 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Firearm::Firearm(std::string name, TCODColor color, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
-	:Tool(name, color, NULL, ammoType), maxFireTime(fireRate), maxReloadTime(reloadSpeed), fireMode(fireMode), availibleFireMode(availibleFireModeFlag), fireClock(0), reloadClock(0), selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
+	:Tool(name, color, NULL, ammoType), maxFireTime(fireRate), maxReloadTime(reloadSpeed), fireMode(fireMode), availibleFireMode(availibleFireModeFlag),
+	fireClock(Clock(fireRate, 0.0f)), reloadClock(Clock(reloadSpeed, 0.0f)), selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
 {}
 
 void Firearm::updateWeaponChar(double angle)
@@ -223,7 +227,7 @@ void Firearm::updateWeaponChar(double angle)
 	{
 		if (angle <= 22.5)
 		{
-			if (reloadClock.step != 0)
+			if (!reloadClock.isAtZero())
 			{
 				ch = '/';
 			}
@@ -234,7 +238,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
-			if (reloadClock.step != 0)
+			if (!reloadClock.isAtZero())
 			{
 				ch = TCOD_CHAR_HLINE;
 			}
@@ -245,7 +249,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle >= 67.5)
 		{
-			if (reloadClock.step != 0)
+			if (!reloadClock.isAtZero())
 			{
 				ch = '\\';
 			}
@@ -259,7 +263,7 @@ void Firearm::updateWeaponChar(double angle)
 	{
 		if (angle >= -22.5)
 		{
-			if (reloadClock.step != 0)
+			if (!reloadClock.isAtZero())
 			{
 				ch = '/';
 			}
@@ -270,7 +274,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
-			if (reloadClock.step != 0)
+			if (!reloadClock.isAtZero())
 			{
 				ch = TCOD_CHAR_VLINE;
 			}
@@ -281,7 +285,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle <= -67.5)
 		{
-			if (reloadClock.step != 0)
+			if (!reloadClock.isAtZero())
 			{
 				ch = '\\';
 			}
@@ -295,7 +299,7 @@ void Firearm::updateWeaponChar(double angle)
 	{
 		if (angle >= -22.5)
 		{
-			if (reloadClock.step != 0)
+			if (!reloadClock.isAtZero())
 			{
 				ch = '/';
 			}
@@ -306,7 +310,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
-			if (reloadClock.step != 0)
+			if (!reloadClock.isAtZero())
 			{
 				ch = TCOD_CHAR_VLINE;
 			}
@@ -317,7 +321,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle <= -67.5)
 		{
-			if (reloadClock.step != 0)
+			if (!reloadClock.isAtZero())
 			{
 				ch = '\\';
 			}
@@ -331,7 +335,7 @@ void Firearm::updateWeaponChar(double angle)
 	{
 		if (angle <= 22.5)
 		{
-			if (reloadClock.step != 0)
+			if (!reloadClock.isAtZero())
 			{
 				ch = '/';
 			}
@@ -342,7 +346,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
-			if (reloadClock.step != 0)
+			if (!reloadClock.isAtZero())
 			{
 				ch = TCOD_CHAR_HLINE;
 			}
@@ -353,7 +357,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle >= 67.5)
 		{
-			if (reloadClock.step != 0)
+			if (!reloadClock.isAtZero())
 			{
 				ch = '\\';
 			}
@@ -374,7 +378,7 @@ void Firearm::fireBullet()
 {
 	if (!(mapPosition.x == dx + mapPosition.x && mapPosition.y == dy + mapPosition.y))
 	{
-		fireClock.reset();
+		fireClock.update(false, true, false);
 		bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height));
 		selectedMagazine->availableAmmo--;
 	}
@@ -385,7 +389,7 @@ void Firearm::reload(std::shared_ptr<MagazineData>& magazine)
 	if (magazine->isValid != false)
 	{
 		selectedMagazine = magazine;
-		reloadClock.reset();
+		reloadClock.update(false, true, false);
 	}
 	else selectedMagazine = magazine;
 }
@@ -437,8 +441,8 @@ void Firearm::update(Position sourcePosition, int mx, int my, double angle)
 
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
-	fireClock.capacity = (int)(maxFireTime * SETTINGS->fpsCount);
-	reloadClock.capacity = (int)(maxReloadTime * SETTINGS->fpsCount);
+	//fireClock.capacity = (int)(maxFireTime * SETTINGS->fpsCount);
+	//reloadClock.capacity = (int)(maxReloadTime * SETTINGS->fpsCount);
 
 	updateToolPosition(angle);
 
@@ -446,22 +450,25 @@ void Firearm::update(Position sourcePosition, int mx, int my, double angle)
 
 	updateWeaponChar(angle);
 	
-	if (fireClock.step == 0 && selectedMagazine->availableAmmo != 0 && reloadClock.step == 0) //fires bullet
+	if (fireClock.isAtZero() && selectedMagazine->availableAmmo != 0 && reloadClock.isAtZero()) //fires bullet
 	{
 		if (fireMode == FireType::FULL && INPUT->leftMouseButton->isDown)
 		{
 			fireBullet();
+			fireClock.update(false, true, false);
 		}
 		else if (fireMode == FireType::SEMI && INPUT->leftMouseButton->isSwitched)
 		{
 			fireBullet();
+			fireClock.update(false, true, false);
 		}
 		else if (fireMode == FireType::SAFE)
 		{
 
 		}
 	}
-	fireClock.tickDown();
+	//fireClock.tickDown();
+	fireClock.update(true, false, false);
 
 	if (bulletList.size() > selectedMagazine->ammoCapacity * 2) //clean up extra bullets
 	{
@@ -473,7 +480,8 @@ void Firearm::update(Position sourcePosition, int mx, int my, double angle)
 		bullet->update();
 	}
 
-	reloadClock.tickDown();
+	//reloadClock.tickDown();
+	reloadClock.update(true, false, false);
 }
 
 void Firearm::render(const std::shared_ptr<Pane>& pane) const
