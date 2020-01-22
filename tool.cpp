@@ -115,9 +115,9 @@ void Tool::render(const std::shared_ptr<Pane>& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Bullet::Bullet(int ch, Position startPosition, int dx, int dy, int xbound, int ybound)
+Bullet::Bullet(int ch, Position startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
 	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(startPosition.x, startPosition.y, tox, toy)),
-	moveClock(Clock(.005f, 0.005f)), mapPosition(startPosition)
+	 mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveClock(Clock(float(1.0f / velocity), float(1.0f / velocity)))
 {
 	do
 	{
@@ -158,7 +158,8 @@ void Bullet::update()
 					{
 						if (mapPosition == creature->mapPosition)
 						{
-							creature->health -= 50; //deal bullet damage, should be replaced later
+							int damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass);
+							creature->health -= damage; //deal bullet damage, shoudl replace with deal damage function of creature
 							GUI->logWindow->pushMessage(LogWindow::Message("You hit a creature!", LogWindow::Message::MessageLevel::HIGH));
 						}
 					}
@@ -379,7 +380,15 @@ void Firearm::fireBullet()
 	if (!(mapPosition.x == dx + mapPosition.x && mapPosition.y == dy + mapPosition.y))
 	{
 		fireClock.update(false, true, false);
-		bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height));
+		if (ammoType == MagazineData::AmmoType::FIVEPOINTFIVESIX)
+		{
+			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, 300, 55));
+		}
+		else
+		{
+			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, 80, 230));
+
+		}
 		selectedMagazine->availableAmmo--;
 	}
 }

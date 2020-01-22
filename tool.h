@@ -35,12 +35,16 @@ struct Bullet //bullet that is fired from firearm
 {
 	int ch; //character represetation of the bulley
 
+	const int mass;
+	const int baseVelocity; //tile movements per second
+	int currentVelocity;
+
 	Position startPosition;
 	Position mapPosition;
 
 	bool hitWall; //if the bullet has made contact with the wall yet
 
-	Bullet(int ch, Position startPosition, int dx, int dy, int xbound, int ybound); //constructor that takes character, x and y to start, x and y destination, and map bounds
+	Bullet(int ch, Position startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass); //constructor that takes character, x and y to start, x and y destination, and map bounds
 
 	void update(); //updates bullet
 	void render(const std::shared_ptr<Pane>& pane) const; //renders bullet
