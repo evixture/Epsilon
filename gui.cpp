@@ -56,8 +56,8 @@ void Gui::renderMouse() const
 		{
 			if (INPUT->mouse.cy >= 3 && INPUT->mouse.cy <= 60)
 			TCODConsole::root->setCharBackground(INPUT->mouse.cx, INPUT->mouse.cy, 
-				worldWindow->world->getTile(Position(INPUT->mouse.cx - 1 + worldWindow->world->xOffset, INPUT->mouse.cy - 3 + worldWindow->world->yOffset, worldWindow->world->player->mapPosition.level))  //get bg color of the tile
-				->backgroundColor - TCODColor::darkestGrey);
+				worldWindow->world->getTile(Position(INPUT->mouse.cx - 1 + worldWindow->world->xOffset, INPUT->mouse.cy - 3 + worldWindow->world->yOffset, worldWindow->world->player->mapPosition.level))
+				->tileList[0]->backgroundColor - TCODColor::darkestGrey);//get bg color of the tile
 		}
 	}
 

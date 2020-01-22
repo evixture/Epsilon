@@ -158,36 +158,194 @@ constexpr auto PI = 3.14159265;
 #define IIIII Tile::FLOOR |		Tile::PRONE |	Tile::CROUCH |	Tile::STAND |	Tile::FULL
 #define OOIOI Tile::FLOOR |						Tile::CROUCH
 
+//TILE DATA
+#define DATA_Grass0																	\
+		{																			\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG)	\
+		}																			\
+
+#define DATA_Grass1																	\
+		std::vector<std::shared_ptr<TileData>>{																			\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>('"', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG)	\
+		}																			\
+
+#define DATA_Grass2																	\
+		std::vector<std::shared_ptr<TileData>>{																			\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>('`', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG)	\
+		}																			\
+
+#define DATA_Grass3																	\
+		std::vector<std::shared_ptr<TileData>>{																			\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(',', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG)	\
+		}																			\
+
+#define DATA_BasicFlower																		\
+		std::vector<std::shared_ptr<TileData>>{																						\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),					\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),					\
+			std::make_shared<TileData>(CHAR_Flower, WORLDCOLOR_FlowerFG, WORLDCOLOR_FlowerBG),	\
+			std::make_shared<TileData>(CHAR_Flower, WORLDCOLOR_FlowerFG, WORLDCOLOR_FlowerBG),	\
+			std::make_shared<TileData>(CHAR_Flower, WORLDCOLOR_FlowerFG, WORLDCOLOR_FlowerBG)	\
+		}																						\
+
+#define DATA_BasicFloor																\
+		std::vector<std::shared_ptr<TileData>>{																			\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),		\
+			std::make_shared<TileData>(' ', WORLDCOLOR_FloorFG, WORLDCOLOR_FloorBG)	\
+		}																			\
+
+
+#define DATA_BasicConcrete																	\
+		std::vector<std::shared_ptr<TileData>>{																					\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),				\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),				\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),				\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),				\
+			std::make_shared<TileData>('`', WORLDCOLOR_ConcreteFG, WORLDCOLOR_ConcreteBG)	\
+		}																					\
+
+
+#define DATA_BasicShingle																\
+		std::vector<std::shared_ptr<TileData>>{																				\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),			\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),			\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),			\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),			\
+			std::make_shared<TileData>(240, WORLDCOLOR_ShingleFG, WORLDCOLOR_ShingleBG)	\
+		}																				\
+
+
+#define DATA_BasicDoor																			\
+		std::vector<std::shared_ptr<TileData>>{																						\
+			std::make_shared<TileData>(CHAR_Door, WORLDCOLOR_DoorFG, WORLDCOLOR_WallBG),		\
+			std::make_shared<TileData>(CHAR_Door, WORLDCOLOR_DoorFG, WORLDCOLOR_WallBG),		\
+			std::make_shared<TileData>(CHAR_Door, WORLDCOLOR_DoorFG, WORLDCOLOR_WallBG),		\
+			std::make_shared<TileData>(CHAR_Door, WORLDCOLOR_DoorFG, WORLDCOLOR_WallBG),		\
+			std::make_shared<TileData>(CHAR_Door, WORLDCOLOR_DoorFG, WORLDCOLOR_WallBG)			\
+		}																						\
+
+
+#define DATA_BasicWall																\
+		std::vector<std::shared_ptr<TileData>>{																			\
+			std::make_shared<TileData>('#', WORLDCOLOR_WallFG, WORLDCOLOR_WallBG),	\
+			std::make_shared<TileData>('#', WORLDCOLOR_WallFG, WORLDCOLOR_WallBG),	\
+			std::make_shared<TileData>('#', WORLDCOLOR_WallFG, WORLDCOLOR_WallBG),	\
+			std::make_shared<TileData>('#', WORLDCOLOR_WallFG, WORLDCOLOR_WallBG),	\
+			std::make_shared<TileData>('#',	WORLDCOLOR_WallFG, WORLDCOLOR_WallBG)	\
+		}																			\
+
+
+#define DATA_BasicWindow																		\
+		std::vector<std::shared_ptr<TileData>>{																						\
+			std::make_shared<TileData>(CHAR_Window, WORLDCOLOR_WindowFG, WORLDCOLOR_WindowBG),	\
+			std::make_shared<TileData>(CHAR_Window, WORLDCOLOR_WindowFG, WORLDCOLOR_WindowBG),	\
+			std::make_shared<TileData>('#', WORLDCOLOR_WallFG, WORLDCOLOR_WallBG),				\
+			std::make_shared<TileData>('#', WORLDCOLOR_WallFG, WORLDCOLOR_WallBG),				\
+			std::make_shared<TileData>('#', WORLDCOLOR_WallFG, WORLDCOLOR_WallBG)				\
+		}																						\
+
+
+#define DATA_BasicTable																			\
+		std::vector<std::shared_ptr<TileData>>{																						\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),					\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),					\
+			std::make_shared<TileData>(CHAR_Table, WORLDCOLOR_TableFG, WORLDCOLOR_FloorBG),		\
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),					\
+			std::make_shared<TileData>(' ', WORLDCOLOR_FloorFG, WORLDCOLOR_FloorBG)				\
+		}																						\
+
+
+#define DATA_UpStair																			\
+		std::vector<std::shared_ptr<TileData>>{																						\
+			std::make_shared<TileData>(CHAR_UpStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG),	\
+			std::make_shared<TileData>(CHAR_UpStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG),	\
+			std::make_shared<TileData>(CHAR_UpStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG),	\
+			std::make_shared<TileData>(CHAR_UpStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG),	\
+			std::make_shared<TileData>(CHAR_UpStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG)		\
+		}																						\
+
+
+#define DATA_DownStair																			\
+		std::vector<std::shared_ptr<TileData>>{																						\
+			std::make_shared<TileData>(CHAR_DownStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG),	\
+			std::make_shared<TileData>(CHAR_DownStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG),	\
+			std::make_shared<TileData>(CHAR_DownStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG),	\
+			std::make_shared<TileData>(CHAR_DownStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG),	\
+			std::make_shared<TileData>(CHAR_DownStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG)	\
+		}																						\
+
+
+#define DATA_BasicSky																	\
+		std::vector<std::shared_ptr<TileData>>{																				\
+			std::make_shared<TileData>(' ', WORLDCOLOR_WindowBG, WORLDCOLOR_WindowBG),	\
+			std::make_shared<TileData>(' ', WORLDCOLOR_WindowBG, WORLDCOLOR_WindowBG),	\
+			std::make_shared<TileData>(' ', WORLDCOLOR_WindowBG, WORLDCOLOR_WindowBG),	\
+			std::make_shared<TileData>(' ', WORLDCOLOR_WindowBG, WORLDCOLOR_WindowBG),	\
+			std::make_shared<TileData>(' ',	WORLDCOLOR_WindowBG, WORLDCOLOR_WindowBG)	\
+		}																				\
+
+
+#define DATA_Error																\
+		std::vector<std::shared_ptr<TileData>>{																		\
+			std::make_shared<TileData>('%', TCODColor::pink, TCODColor::pink),	\
+			std::make_shared<TileData>('%', TCODColor::pink, TCODColor::pink),	\
+			std::make_shared<TileData>('%', TCODColor::pink, TCODColor::pink),	\
+			std::make_shared<TileData>('%', TCODColor::pink, TCODColor::pink),	\
+			std::make_shared<TileData>('%', TCODColor::pink, TCODColor::pink)	\
+		}																		\
+
+
 //TILES
 	//GROUND
 		//GRASS PATTERNS
-			#define TILE_Grass0				std::make_shared<Tile>			('.',				WORLDCOLOR_GrassFG,		WORLDCOLOR_GrassBG,		OOOOI,	OOOOI)
-			#define TILE_Grass1				std::make_shared<Tile>			('"',				WORLDCOLOR_GrassFG,		WORLDCOLOR_GrassBG,		OOOOI,	OOOOI)
-			#define TILE_Grass2				std::make_shared<Tile>			('`',				WORLDCOLOR_GrassFG,		WORLDCOLOR_GrassBG,		OOOOI,	OOOOI)
-			#define TILE_Grass3				std::make_shared<Tile>			(',',				WORLDCOLOR_GrassFG,		WORLDCOLOR_GrassBG,		OOOOI,	OOOOI)
+			//#define TILE_Grass0				std::make_shared<Tile>			(DATA_Grass0,			OOOOI,	OOOOI)
+#define TILE_Grass0				std::make_shared<Tile>			({std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),	std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG)},	OOOOI,	OOOOI)
 
-	#define TILE_BasicFlower				std::make_shared<Tile>			(CHAR_Flower,		WORLDCOLOR_FlowerFG,	WORLDCOLOR_FlowerBG,	OOOOI,	OOIII)
-	#define TILE_BasicFloor					std::make_shared<Tile>			(' ',				WORLDCOLOR_FloorFG,		WORLDCOLOR_FloorBG,		OOOOI,	OOOOI)
-	#define TILE_BasicConcrete				std::make_shared<Tile>			('`',				WORLDCOLOR_ConcreteFG,	WORLDCOLOR_ConcreteBG,	OOOOI,	OOOOI)
-	#define TILE_BasicShingle				std::make_shared<Tile>			(240,				WORLDCOLOR_ShingleFG,	WORLDCOLOR_ShingleBG,	OOOOI,	OOOOI)
+			#define TILE_Grass1				std::make_shared<Tile>			(DATA_Grass1,			OOOOI,	OOOOI)
+			#define TILE_Grass2				std::make_shared<Tile>			(DATA_Grass2,			OOOOI,	OOOOI)
+			#define TILE_Grass3				std::make_shared<Tile>			(DATA_Grass3,			OOOOI,	OOOOI)
+
+	#define TILE_BasicFlower				std::make_shared<Tile>			(DATA_BasicFlower,		OOOOI,	OOIII)
+	#define TILE_BasicFloor					std::make_shared<Tile>			(DATA_BasicFloor,		OOOOI,	OOOOI)
+	#define TILE_BasicConcrete				std::make_shared<Tile>			(DATA_BasicConcrete,	OOOOI,	OOOOI)
+	#define TILE_BasicShingle				std::make_shared<Tile>			(DATA_BasicShingle,		OOOOI,	OOOOI)
 
 	//WALL
-	#define TILE_BasicDoor					std::make_shared<Tile>			(CHAR_Door,			WORLDCOLOR_DoorFG,		WORLDCOLOR_WallBG,		IIIII,	OOOOI)
-	#define DESTRUCTIBLE_BasicWall			std::make_shared<Destructible>	('#',				WORLDCOLOR_WallFG,		WORLDCOLOR_WallBG,		IIIII,	IIIII,	4)
-	#define DESTRUCTIBLE_BasicWindow		std::make_shared<Destructible>	(CHAR_Window,		WORLDCOLOR_WindowFG,	WORLDCOLOR_WindowBG,	OOIII,	IIIII,	1)
+	#define TILE_BasicDoor					std::make_shared<Tile>			(DATA_BasicDoor,		IIIII,	OOOOI)
+	#define DESTRUCTIBLE_BasicWall			std::make_shared<Destructible>	(DATA_BasicWall,		IIIII,	IIIII,	4)
+	#define DESTRUCTIBLE_BasicWindow		std::make_shared<Destructible>	(DATA_BasicWindow,		OOIII,	IIIII,	1)
 
 	//PART HEIGHT
-	#define TILE_BasicTable					std::make_shared<Destructible>	(CHAR_Table,		WORLDCOLOR_TableFG,		WORLDCOLOR_FloorBG,		OOIOI,	OOIOI,	2)
+	#define TILE_BasicTable					std::make_shared<Destructible>	(DATA_BasicTable,		OOIOI,	OOIOI,	2)
 
 	//STAIR
-	#define STAIR_UpStair					std::make_shared<Stair>			(CHAR_UpStair,		WORLDCOLOR_DoorFG,		WORLDCOLOR_FloorBG,		OOOOI,	OOIII,	1)
-	#define STAIR_DownStair					std::make_shared<Stair>			(CHAR_DownStair,	WORLDCOLOR_DoorFG,		WORLDCOLOR_FloorBG,		OOOOI,	OOIII,	-1)
+	#define STAIR_UpStair					std::make_shared<Stair>			(DATA_UpStair,			OOOOI,	OOIII,	1)
+	#define STAIR_DownStair					std::make_shared<Stair>			(DATA_DownStair,		OOOOI,	OOIII,	-1)
 
 	//SKY
-	#define TILE_BasicSky					std::make_shared<Tile>			(' ',				WORLDCOLOR_WindowBG,	WORLDCOLOR_WindowBG,	OOOOO,	OOOOO)
+	#define TILE_BasicSky					std::make_shared<Tile>			(DATA_BasicSky,			OOOOO,	OOOOO)
 
 	//ERROR
-	#define TILE_error						std::make_shared<Tile>			('%',				TCODColor::black,		TCODColor::pink,		IIIII,	IIIII)
+	#define TILE_error						std::make_shared<Tile>			(DATA_Error,			IIIII,	IIIII)
 
 	//----------------------------------------------------------------------------------------------------
 
@@ -208,12 +366,12 @@ ITEM SIZES
 		SNIPER RIFLES
 */
 
-//DEFAULTS
-			#define DEFAULT_ITEM_TILE								std::make_shared<Tile>			('L',										TCODColor::darkestGrey,														TCODColor::darkGrey,	1,						true)
+//DEFAULTS										'L',										TCODColor::darkestGrey,														TCODColor::darkGrey,	1,						true
+			#define DEFAULT_ITEM_TILE								std::make_shared<Tile>			(TILE_error)
 
 //CONTAINERS
-	//SMALL BACKPACK
-				#define TILE_SmallBackpack							std::make_shared<Tile>			(CHAR_Backpack,								ITEMCOLOR_SMALLBACKPACKFG,													ITEMCOLOR_ITEMBG,		1,						true)
+	//SMALL BACKPACK							CHAR_Backpack,								ITEMCOLOR_SMALLBACKPACKFG,													ITEMCOLOR_ITEMBG,		1,						true
+				#define TILE_SmallBackpack							std::make_shared<Tile>			(TILE_error)
 				#define TOOL_SmallBackpack							std::make_shared<Tool>			("Small Backpack",							ITEMCOLOR_SMALLBACKPACKFG,													CHAR_Backpack)
 			#define ITEM_SmallBackpack(x, y, level, owner)			std::make_shared<Item>			(2,											TILE_SmallBackpack,															TOOL_SmallBackpack,		Position(x, y, level),	owner,										Item::ItemType::NORMAL)
 		#define CONTAINER_SmallBackpack(x, y, level, owner)			std::make_shared<Container>		(5,											ITEM_SmallBackpack(x, y, level, owner))
@@ -224,24 +382,24 @@ ITEM SIZES
 
 //PISTOLS
 	//SIP45 (standard issie pistol .45 cal)
-		//WEAPON
-				#define TILE_SIP45									std::make_shared<Tile>			(CHAR_Pistol,								ITEMCOLOR_PISTOLFG,															ITEMCOLOR_ITEMBG,		1,						true)
+		//WEAPON									CHAR_Pistol,								ITEMCOLOR_PISTOLFG,															ITEMCOLOR_ITEMBG,		1,						true
+				#define TILE_SIP45									std::make_shared<Tile>			(TILE_error)
 				#define WEAPON_SIP45								std::make_shared<Firearm>		("SIP45",									ITEMCOLOR_PISTOLFG,															.15f,					1.0f,					MagazineData::AmmoType::FOURTYFIVEACP,		Firearm::FireType::SEMI,	Firearm::FireType::SEMI | Firearm::FireType::SAFE)
 			#define ITEM_SIP45(x, y, level, owner)					std::make_shared<Item>			(2,											TILE_SIP45,																	WEAPON_SIP45,			Position(x, y, level),	owner,										Item::ItemType::FIREARM)
-		//MAGAZINE
-					#define TILE_45Magazine7						std::make_shared<Tile>			(CHAR_PistolMagazine,						ITEMCOLOR_PISTOLFG,															ITEMCOLOR_ITEMBG,		1,						true)
+		//MAGAZINE											CHAR_PistolMagazine,						ITEMCOLOR_PISTOLFG,															ITEMCOLOR_ITEMBG,		1,						true
+					#define TILE_45Magazine7						std::make_shared<Tile>			(TILE_error)
 					#define TOOL_45Magazine7						std::make_shared<Tool>			("45 Magazine -7-",						ITEMCOLOR_PISTOLFG,															CHAR_PistolMagazine)
 				#define ITEM_45Magazine7(x, y, level, owner)		Item							(1, TILE_45Magazine7,						TOOL_45Magazine7,															Position(x, y, level),	owner,					Item::ItemType::NORMAL)
 			#define MAGAZINE_45Magazine7(x, y, level, owner)		std::make_shared<MagazineItem>	(ITEM_45Magazine7(x, y, level, owner),		std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP,		7,						7))
 
 //RIFLES
 	//SIR556 (standard issue rifle 5.56 cal)
-		//WEAPON
-				#define TILE_SIR556									std::make_shared<Tile>			(CHAR_Rifle,								ITEMCOLOR_RIFLEFG,															ITEMCOLOR_ITEMBG,		1,						true)
+		//WEAPON													CHAR_Rifle,								ITEMCOLOR_RIFLEFG,															ITEMCOLOR_ITEMBG,		1,						true
+				#define TILE_SIR556									std::make_shared<Tile>			(TILE_error)
 				#define WEAPON_SIR556									std::make_shared<Firearm>	("SIR556",									ITEMCOLOR_RIFLEFG,															.09f,					2.0f,					MagazineData::AmmoType::FIVEPOINTFIVESIX,	Firearm::FireType::FULL,	Firearm::FireType::FULL | Firearm::FireType::SEMI | Firearm::FireType::SAFE)
 			#define ITEM_SIR556(x, y, level, owner)					std::make_shared<Item>			(3,											TILE_SIR556,																WEAPON_SIR556,			Position(x, y, level),	owner,										Item::ItemType::FIREARM)
-		//MAGAZINE
-					#define TILE_556Magazine30						std::make_shared<Tile>			(CHAR_RifleMagazine,						ITEMCOLOR_RIFLEFG,															ITEMCOLOR_ITEMBG,		1,						true)
+		//MAGAZINE									CHAR_RifleMagazine,						ITEMCOLOR_RIFLEFG,															ITEMCOLOR_ITEMBG,		1,						true
+					#define TILE_556Magazine30						std::make_shared<Tile>			(TILE_error)
 					#define TOOL_556Magazine30						std::make_shared<Tool>			("5.56 Magazine -30-",						ITEMCOLOR_RIFLEFG,															CHAR_RifleMagazine)
 				#define ITEM_556Magazine30(x, y, level, owner)		Item							(1,											TILE_556Magazine30,															TOOL_556Magazine30,		Position(x, y, level),	owner,										Item::ItemType::NORMAL)
 			#define MAGAZINE_556Magazine30(x, y, level, owner)		std::make_shared<MagazineItem>	(ITEM_556Magazine30(x, y, level, owner),	std::make_shared<MagazineData>(MagazineData::AmmoType::FIVEPOINTFIVESIX,	30,						30))

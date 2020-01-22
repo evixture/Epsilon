@@ -50,11 +50,11 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 Player::Player(Position pos)
 	:Creature(Position(pos), '@', "player", UICOLOR_Player_Color, 100, 0), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(1.0f, 0.0f))
 {
-	inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
-	inventory[0]->addItem(	ITEM_SIP45(0, 0, 0, this));
-	inventory[0]->addItem(	MAGAZINE_45Magazine7(0, 0, 0, this));
-	inventory[0]->addItem(	MAGAZINE_45Magazine7(0, 0, 0, this));
-	inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
+	//inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
+	//inventory[0]->addItem(	ITEM_SIP45(0, 0, 0, this));
+	//inventory[0]->addItem(	MAGAZINE_45Magazine7(0, 0, 0, this));
+	//inventory[0]->addItem(	MAGAZINE_45Magazine7(0, 0, 0, this));
+	//inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
 
 	if (inventory.size() > 0)
 	{
@@ -321,12 +321,12 @@ void Player::filterIndexes()
 		}
 		else
 		{
-			selectedItem = ITEM_Hands(0, 0, 0, this);
+			//selectedItem = ITEM_Hands(0, 0, 0, this);
 		}
 	}
 	else
 	{
-		selectedItem = ITEM_Hands(0, 0, 0, this);
+		//selectedItem = ITEM_Hands(0, 0, 0, this);
 	}
 }
 

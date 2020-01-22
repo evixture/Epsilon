@@ -1,11 +1,11 @@
 #include "main.hpp"
 
-Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, unsigned char transparentFlag, unsigned char walkableFlag)
-	:ch(ch), foregroundColor(foregroundColor), backgroundColor(backgroundColor), transparentFlag(transparentFlag), walkableFlag(walkableFlag), explored(false), tag(Tile::Tag::STATIC)
+Tile::Tile(std::vector<std::shared_ptr<TileData>> tileList, unsigned char transparentFlag, unsigned char walkableFlag)
+	:tileList(tileList), transparentFlag(transparentFlag), walkableFlag(walkableFlag), explored(false), tag(Tile::Tag::STATIC)
 {}
 
-Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, unsigned char transparentFlag, unsigned char walkableFlag, Tag tag)
-	:ch(ch), foregroundColor(foregroundColor), backgroundColor(backgroundColor), transparentFlag(transparentFlag), walkableFlag(walkableFlag), tag(tag), explored(false)
+Tile::Tile(std::vector<std::shared_ptr<TileData>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, Tag tag)
+	:tileList(tileList), transparentFlag(transparentFlag), walkableFlag(walkableFlag), tag(tag), explored(false)
 {}
 
 bool Tile::getDestroyed()
@@ -18,30 +18,39 @@ void Tile::interact()
 	return;
 }
 
-void Tile::render(int x, int y, const std::shared_ptr<Pane>& pane) const
+void Tile::render(Position renderPosition, const std::shared_ptr<Pane>& pane) const
 {
-	if (WORLD->isInFov(Position(x + WORLD->xOffset, y + WORLD->yOffset, WORLD->player->mapPosition.level))) 
+	//if player height it greater than tallest nontransparent tile, render the tallest tile's data, else render tile on player's level
+	if (transparentFlag & heightToBitFlag(WORLD->player->height))
 	{
-		pane->console->setCharBackground(x, y, backgroundColor);
-		pane->console->setCharForeground(x, y, foregroundColor);
-		pane->console->setChar          (x, y, ch);
+		if (WORLD->isInFov(Position(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, WORLD->player->mapPosition.level))) 
+		{
+			pane->console->setCharBackground(renderPosition.x, renderPosition.y, tileList[renderPosition.level]->backgroundColor);
+			pane->console->setCharForeground(renderPosition.x, renderPosition.y, tileList[renderPosition.level]->foregroundColor);
+			pane->console->setChar          (renderPosition.x, renderPosition.y, tileList[renderPosition.level]->ch);
+		}
+		else if (WORLD->isExplored(Position(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, WORLD->player->mapPosition.level)))
+		{
+			pane->console->setCharBackground(renderPosition.x, renderPosition.y, TCODColor::black);
+			pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
+			pane->console->setChar(renderPosition.x, renderPosition.y, tileList[renderPosition.level]->ch);
+		}
+		else
+		{
+			pane->console->setCharBackground(renderPosition.x, renderPosition.y, TCODColor::black);
+		}
+
 	}
-	else if (WORLD->isExplored(Position(x + WORLD->xOffset, y + WORLD->yOffset, WORLD->player->mapPosition.level)))
-	{
-		pane->console->setCharBackground(x, y, TCODColor::black);
-		pane->console->setCharForeground(x, y, TCODColor::darkestGrey);
-		pane->console->setChar          (x, y, ch);
-	}
-	else
-	{
-		pane->console->setCharBackground(x, y, TCODColor::black);
-	}
+	//else
+	//{
+	//	for (int i = 0;)
+	//}
 }
 
 //----------------------------------------------------------------------------------------------------
 
-Destructible::Destructible(int ch, TCODColor foregroundColor, TCODColor backgroundColor, unsigned char transparentFlag, unsigned char walkableFlag, int strength)
-	:Tile(ch, foregroundColor, backgroundColor, transparentFlag, walkableFlag, Tile::Tag::DESTRUCTIBLE), strength(strength), destroyed(false)
+Destructible::Destructible(std::vector<std::shared_ptr<TileData>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int strength)
+	:Tile(tileList, transparentFlag, walkableFlag, Tile::Tag::DESTRUCTIBLE), strength(strength), destroyed(false)
 {}
 
 bool Destructible::getDestroyed()
@@ -57,9 +66,18 @@ void Destructible::interact()
 	}
 	else
 	{
-		ch = '%';
-		backgroundColor = backgroundColor * TCODColor::darkGrey;
-		foregroundColor = foregroundColor * TCODColor::lightGrey;
+		tileList = std::vector<std::shared_ptr<TileData>>
+		{
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),
+			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),
+			std::make_shared<TileData>('%', tileList[3]->foregroundColor * TCODColor::lightGrey, tileList[3]->backgroundColor * TCODColor::darkGrey)
+		};
+
+		//ch = '%';
+		//backgroundColor = backgroundColor * TCODColor::darkGrey;
+		//foregroundColor = foregroundColor * TCODColor::lightGrey;
 		walkableFlag = OOOOI;
 		transparentFlag = OOOOI;
 		destroyed = true;
@@ -68,11 +86,15 @@ void Destructible::interact()
 
 //----------------------------------------------------------------------------------------------------
 
-Stair::Stair(int ch, TCODColor foregroundColor, TCODColor backgroundColor, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance)
-	:Tile(ch, foregroundColor, backgroundColor, transparentFlag, Tile::FLOOR, Tile::Tag::STAIR), moveDistance(moveDistance)
+Stair::Stair(std::vector<std::shared_ptr<TileData>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance)
+	:Tile(tileList, transparentFlag, Tile::FLOOR, Tile::Tag::STAIR), moveDistance(moveDistance)
 {}
 
 void Stair::interact()
 {
 	WORLD->player->mapPosition.level += moveDistance;
 }
+
+TileData::TileData(int ch, TCODColor foregroundColor, TCODColor backgroundColor)
+	:ch(ch), foregroundColor(foregroundColor), backgroundColor(backgroundColor)
+{}
