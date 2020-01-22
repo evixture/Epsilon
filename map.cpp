@@ -88,37 +88,38 @@ std::shared_ptr<Tile> Map::getTileFromCode(std::string code)
 
 				if (grassRand == 0)
 				{
-					return std::make_shared<Tile>((std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }), OOOOI, OOOOI);
+					//return std::make_shared<Tile>(DATA_Grass0, OOOOI, OOOOI);
+					return TILE_Grass0;
 				}
 				else if (grassRand == 1)
 				{
-					return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+					return TILE_Grass1;
 				}
 				else if (grassRand == 2)
 				{
-					return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+					return TILE_Grass2;
 				}
 				else if (grassRand == 3)
 				{
-					return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+					return TILE_Grass3;
 				}
-				else return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				else return TILE_error;
 				break;
 			}
 			case '_':
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return TILE_BasicFloor;
 				break;
 			case '!':
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return TILE_BasicConcrete;
 				break;
 			case '*':
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return TILE_BasicFlower;
 				break;
 			case '3':
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return TILE_BasicShingle;
 				break;
 			default:
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return TILE_error;
 				break;
 		}
 		break;
@@ -127,13 +128,13 @@ std::shared_ptr<Tile> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case '=':
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return DESTRUCTIBLE_BasicWall;
 				break;
 			case 'O':
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return DESTRUCTIBLE_BasicWindow;
 				break;
 			default:
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return TILE_error;
 				break;
 		}
 		break;
@@ -142,10 +143,10 @@ std::shared_ptr<Tile> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case '#':
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return TILE_BasicDoor;
 				break;
 			default:
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return TILE_error;
 				break;
 		}
 		break;
@@ -154,10 +155,10 @@ std::shared_ptr<Tile> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case '`':
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return TILE_BasicSky;
 				break;
 			default:
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return TILE_error;
 				break;
 		}
 		break;
@@ -166,10 +167,10 @@ std::shared_ptr<Tile> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case 'n':
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return TILE_BasicTable;
 				break;
 			default:
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return TILE_error;
 				break;
 		}
 		break;
@@ -177,19 +178,19 @@ std::shared_ptr<Tile> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case '/':
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return STAIR_UpStair;
 				break;
 			case '\\':
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return STAIR_DownStair;
 				break;
 			default:
-				return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+				return TILE_error;
 				break;
 		}
 		break;
 
 	default: //error tile
-		return std::make_shared<Tile>(std::vector<std::shared_ptr<TileData>>{std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink), std::make_shared<TileData>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG) }, OOOOI, OOOOI);
+		return TILE_error;
 		break;
 	}
 }
@@ -206,20 +207,20 @@ World::World()
 	fovMap = std::make_shared<TCODMap>(debugmap->width, debugmap->height);
 
 	//first floor
-	//addItem(ITEM_SIR556(4, 7, 0, player.get()));
-	//addItem(ITEM_SIR556(33, 21, 0, player.get()));
-	//addItem(MAGAZINE_556Magazine30(5, 10, 0, player.get()));
-	//addItem(MAGAZINE_556Magazine30(22, 36, 0, player.get()));
-	//addItem(MAGAZINE_556Magazine30(31, 25, 0, player.get()));
-	//addItem(MAGAZINE_556Magazine30(56, 6, 0, player.get()));
-	//
-	//
-	//addItem(ITEM_SIP45(21, 45, 0, player.get()));
-	//addItem(MAGAZINE_45Magazine7(10, 10, 0, player.get()));
-	//addItem(MAGAZINE_45Magazine7(36, 50, 0, player.get()));
-	//addItem(MAGAZINE_45Magazine7(49, 36, 0, player.get()));
-	//
-	//addContainer(CONTAINER_SmallBackpack(35, 35, 0, player.get()));
+	addItem(ITEM_SIR556(4, 7, 0, player.get()));
+	addItem(ITEM_SIR556(33, 21, 0, player.get()));
+	addItem(MAGAZINE_556Magazine30(5, 10, 0, player.get()));
+	addItem(MAGAZINE_556Magazine30(22, 36, 0, player.get()));
+	addItem(MAGAZINE_556Magazine30(31, 25, 0, player.get()));
+	addItem(MAGAZINE_556Magazine30(56, 6, 0, player.get()));
+	
+	//second floor
+	addItem(ITEM_SIP45(21, 45, 0, player.get()));
+	addItem(MAGAZINE_45Magazine7(10, 10, 0, player.get()));
+	addItem(MAGAZINE_45Magazine7(36, 50, 0, player.get()));
+	addItem(MAGAZINE_45Magazine7(49, 36, 0, player.get()));
+	
+	addContainer(CONTAINER_SmallBackpack(35, 35, 0, player.get()));
 
 	addCreature(std::make_shared<Creature>(Position(13, 38, 0), 'E', "Creature", TCODColor::white, 100, 0)); //replace colors
 	addCreature(std::make_shared<Creature>(Position(16, 22, 0), 'H', "Creature", TCODColor::blue, 100, 0));

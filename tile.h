@@ -39,16 +39,13 @@ struct Tile //tile class used for the map and items
 
 	std::vector<std::shared_ptr<TileData>> tileList;
 
-	//int ch; //character representation of the tile
-	//
-	//TCODColor foregroundColor; //foreground color of the tile
-	//TCODColor backgroundColor; //background color of the tile
-
 	bool explored; //if the tile has been explored yet
 
 	Tile(std::vector<std::shared_ptr<TileData>> tileList, unsigned char transparentFlag, unsigned char walkableFlag); //generic constructor that take character, foreground and background color, height, and if it is walkable
 
 	Tile(std::vector<std::shared_ptr<TileData>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, Tag tag); //constructor that take character, foreground and background color, height, if it is walkable, and the tile type
+
+	std::shared_ptr<TileData> getTileData(int height) const;
 
 	virtual bool getDestroyed(); //virtual returns if the tile has been destroyed
 	virtual void interact(); //virtual behaves differently depending on tile type

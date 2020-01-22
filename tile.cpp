@@ -8,6 +8,35 @@ Tile::Tile(std::vector<std::shared_ptr<TileData>> tileList, unsigned char transp
 	:tileList(tileList), transparentFlag(transparentFlag), walkableFlag(walkableFlag), tag(tag), explored(false)
 {}
 
+std::shared_ptr<TileData> Tile::getTileData(int height) const
+{
+	//if (walkableFlag & heightToBitFlag(height))
+	//{
+		//if (transparentFlag & heightToBitFlag(height))
+		//{
+		//	return tileList[height];
+		//}
+		if (tileList[height]->ch != 0)
+		{
+			return tileList[height];
+		}
+	//}
+	else if (tileList[height]->ch == 0)
+	{
+		for (int i = 0; i <= height; i++) //start at player height, then move down the property list to 
+		{
+			if (walkableFlag & heightToBitFlag(height - i))
+			{
+				//if (transparentFlag & heightToBitFlag(height - i))
+				//{
+					return tileList[height - i];
+				//}
+			}
+		}
+	}
+	return std::make_shared<TileData>('%', TCODColor::pink, TCODColor::pink);
+}
+
 bool Tile::getDestroyed()
 {
 	return false;
@@ -21,31 +50,24 @@ void Tile::interact()
 void Tile::render(Position renderPosition, const std::shared_ptr<Pane>& pane) const
 {
 	//if player height it greater than tallest nontransparent tile, render the tallest tile's data, else render tile on player's level
-	if (transparentFlag & heightToBitFlag(WORLD->player->height))
-	{
 		if (WORLD->isInFov(Position(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, WORLD->player->mapPosition.level))) 
 		{
-			pane->console->setCharBackground(renderPosition.x, renderPosition.y, tileList[renderPosition.level]->backgroundColor);
-			pane->console->setCharForeground(renderPosition.x, renderPosition.y, tileList[renderPosition.level]->foregroundColor);
-			pane->console->setChar          (renderPosition.x, renderPosition.y, tileList[renderPosition.level]->ch);
+			pane->console->setCharBackground(renderPosition.x, renderPosition.y, getTileData(renderPosition.level)->backgroundColor);
+			pane->console->setCharForeground(renderPosition.x, renderPosition.y, getTileData(renderPosition.level)->foregroundColor);
+			pane->console->setChar          (renderPosition.x, renderPosition.y, getTileData(renderPosition.level)->ch);
 		}
 		else if (WORLD->isExplored(Position(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, WORLD->player->mapPosition.level)))
 		{
 			pane->console->setCharBackground(renderPosition.x, renderPosition.y, TCODColor::black);
 			pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
-			pane->console->setChar(renderPosition.x, renderPosition.y, tileList[renderPosition.level]->ch);
+			pane->console->setChar(renderPosition.x, renderPosition.y, getTileData(renderPosition.level)->ch);
 		}
 		else
 		{
 			pane->console->setCharBackground(renderPosition.x, renderPosition.y, TCODColor::black);
 		}
-
 	}
-	//else
-	//{
-	//	for (int i = 0;)
-	//}
-}
+	
 
 //----------------------------------------------------------------------------------------------------
 
