@@ -298,7 +298,7 @@
     <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'Tile::tileHeights' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>Tile::{ctor}</FUNCTION>
-    <DECORATED>??0Tile@@QEAA@HVTCODColor@@0EE@Z</DECORATED>
+    <DECORATED>??0Tile@@QEAA@V?$vector@V?$shared_ptr@UTileData@@@std@@V?$allocator@V?$shared_ptr@UTileData@@@std@@@2@@std@@EE@Z</DECORATED>
     <FUNCLINE>3</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>Tile::tileHeights</targetSymbol>
@@ -315,11 +315,25 @@
     <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'Tile::tileHeights' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>Tile::{ctor}</FUNCTION>
-    <DECORATED>??0Tile@@QEAA@HVTCODColor@@0EEW4Tag@0@@Z</DECORATED>
+    <DECORATED>??0Tile@@QEAA@V?$vector@V?$shared_ptr@UTileData@@@std@@V?$allocator@V?$shared_ptr@UTileData@@@std@@@2@@std@@EEW4Tag@0@@Z</DECORATED>
     <FUNCLINE>7</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>Tile::tileHeights</targetSymbol>
     </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>tile.cpp</FILENAME>
+      <LINE>32</LINE>
+      <COLUMN>28</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>Tile::getTileData</FUNCTION>
+    <DECORATED>?getTileData@Tile@@QEBA?AV?$shared_ptr@UTileData@@@std@@H@Z</DECORATED>
+    <FUNCLINE>11</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>
