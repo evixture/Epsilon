@@ -90,16 +90,14 @@ void Destructible::interact()
 	{
 		tileList = std::vector<std::shared_ptr<TileData>>
 		{
-			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),
-			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),
-			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),
-			std::make_shared<TileData>(' ', TCODColor::pink, TCODColor::pink),
-			std::make_shared<TileData>('%', tileList[3]->foregroundColor * TCODColor::lightGrey, tileList[3]->backgroundColor * TCODColor::darkGrey)
+			//std::make_shared<TileData>('%', tileList[0]->foregroundColor * TCODColor::lightGrey, tileList[0]->backgroundColor * TCODColor::darkGrey),
+			std::make_shared<TileData>('%', tileList[0]->foregroundColor * TCODColor::lightGrey, tileList[0]->backgroundColor * TCODColor::darkGrey),
+			std::make_shared<TileData>(0, TCODColor::pink, TCODColor::pink),
+			std::make_shared<TileData>(0, TCODColor::pink, TCODColor::pink),
+			std::make_shared<TileData>(0, TCODColor::pink, TCODColor::pink),
+			std::make_shared<TileData>(0, TCODColor::pink, TCODColor::pink)
 		};
 
-		//ch = '%';
-		//backgroundColor = backgroundColor * TCODColor::darkGrey;
-		//foregroundColor = foregroundColor * TCODColor::lightGrey;
 		walkableFlag = OOOOI;
 		transparentFlag = OOOOI;
 		destroyed = true;

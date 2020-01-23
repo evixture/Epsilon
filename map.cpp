@@ -167,7 +167,10 @@ std::shared_ptr<Tile> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case 'n':
-				return TILE_BasicTable;
+				return TILE_BasicTableTop;
+				break;
+			case 'l':
+				return TILE_BasicTableLeg;
 				break;
 			default:
 				return TILE_error;
