@@ -7,8 +7,8 @@ struct Tool //base class for the holdable component to items
 
 	MagazineData::AmmoType ammoType; //type of ammo used for weapons
 	
-	Position mapPosition;
-	Position sourcePosition;
+	Position4 mapPosition;
+	Position4 sourcePosition;
 
 	int dx; //the delta x of the player and the mouse
 	int dy; //the delta y of the player and the mouse
@@ -24,27 +24,28 @@ struct Tool //base class for the holdable component to items
 	virtual void changeFireMode();
 	virtual void updateToolPosition(double angle); //takes angle and updates tool position
 
-	virtual void update(Position sourcePosition, int mx, int my, double angle); //virtual updates tool
+	virtual void update(Position4 sourcePosition, int mx, int my, double angle); //virtual updates tool
 	virtual void render(const std::shared_ptr<Pane>& pane) const; //virtual renders tool
 
 protected:
-	Position renderPosition;
+	Position4 renderPosition;
 };
 
 struct Bullet //bullet that is fired from firearm
 {
 	int ch; //character represetation of the bulley
+	int height;
 
 	const int mass;
 	const int baseVelocity; //tile movements per second
 	int currentVelocity;
 
-	Position startPosition;
-	Position mapPosition;
+	Position4 startPosition;
+	Position4 mapPosition;
 
 	bool hitWall; //if the bullet has made contact with the wall yet
 
-	Bullet(int ch, Position startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass); //constructor that takes character, x and y to start, x and y destination, and map bounds
+	Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass); //constructor that takes character, x and y to start, x and y destination, and map bounds
 
 	void update(); //updates bullet
 	void render(const std::shared_ptr<Pane>& pane) const; //renders bullet
@@ -59,7 +60,7 @@ private:
 	BLine travel; //bresanham line that the bullet travels along
 	Clock moveClock; //clock that determines when bullet moves
 
-	Position renderPosition;
+	Position4 renderPosition;
 };
 
 struct Firearm : public Tool //firearm that fires bullets that interact with the world
@@ -79,7 +80,7 @@ struct Firearm : public Tool //firearm that fires bullets that interact with the
 	void reload(std::shared_ptr<MagazineData>& magazine); //reloads firearm, use from player
 	void changeFireMode();
 
-	void update(Position sourcePosition, int mx, int my, double angle); //updates firearm
+	void update(Position4 sourcePosition, int mx, int my, double angle); //updates firearm
 	void render(const std::shared_ptr<Pane>& pane) const; //renders firearm
 
 private:

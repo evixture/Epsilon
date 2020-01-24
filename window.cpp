@@ -33,7 +33,7 @@ void Ribon::render() const
 //----------------------------------------------------------------------------------------------------
 
 Window::Window(int consoleWidth, int consoleHeight, std::string panelName, int rx, int ry)
-	:consoleWidth(consoleWidth), consoleHeight(consoleHeight), panelName(panelName), renderpos(Position(rx, ry, NULL))
+	:consoleWidth(consoleWidth), consoleHeight(consoleHeight), panelName(panelName), renderpos(Position3(rx, ry, NULL))
 {
 	mainWindow = std::make_shared<Pane>(consoleWidth, consoleHeight, UICOLOR_Root_BG, UICOLOR_Root_FG);
 	ribon = std::make_shared<Ribon>(panelName, consoleWidth);

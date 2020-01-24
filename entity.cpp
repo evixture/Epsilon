@@ -1,7 +1,7 @@
 #include "main.hpp"
 
-Entity::Entity(Position pos, int ch, std::string name, TCODColor color)
-	: mapPosition(pos), renderPosition(pos), ch(ch), color(color), name(name), height(3)
+Entity::Entity(Position4 pos, int ch, std::string name, TCODColor color)
+	:mapPosition(pos), renderPosition(pos), ch(ch), color(color), name(name)
 {}
 
 void Entity::update()
@@ -17,8 +17,8 @@ void Entity::render(const std::shared_ptr<Pane>& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Creature::Creature(Position pos, int ch, std::string name, TCODColor color, int health, int armor)
-	:Entity(Position(pos), ch, name, color), health(health), armor(armor), angle(0), containerIndex(0), itemIndex(0), nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
+Creature::Creature(Position4 position, int ch, std::string name, TCODColor color, int health, int armor)
+	:Entity(position, ch, name, color), health(health), armor(armor), angle(0), containerIndex(0), itemIndex(0), nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
 {
 }
 
@@ -47,8 +47,8 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Player::Player(Position pos)
-	:Creature(Position(pos), '@', "player", UICOLOR_Player_Color, 100, 0), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(1.0f, 0.0f))
+Player::Player(Position4 position)
+	:Creature(position, '@', "player", UICOLOR_Player_Color, 100, 0), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(1.0f, 0.0f))
 {
 	inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
 	inventory[0]->addItem(	ITEM_SIP45(0, 0, 0, this));
@@ -84,14 +84,14 @@ void Player::move()
 
 		if (INPUT->z->isSwitched)
 		{
-			int tempHeight = height;
-			for (int i = 0; i < int(abs(tempHeight - 1)); i++)
+			int testHeight = mapPosition.height;
+			for (int i = 0; i < int(abs(testHeight - 1)); i++)
 			{
-				if (tempHeight - 1 > 0)
+				if (testHeight - 1 > 0)
 				{
 					changeStanceDown();
 				}
-				else if (tempHeight - 1 < 0)
+				else if (testHeight - 1 < 0)
 				{
 					changeStanceUp();
 				}
@@ -99,14 +99,14 @@ void Player::move()
 		}
 		if (INPUT->x->isSwitched)
 		{
-			int tempHeight = height;
-			for (int i = 0; i < int(abs(tempHeight - 2)); i++)
+			int testHeight = mapPosition.height;
+			for (int i = 0; i < int(abs(testHeight - 2)); i++)
 			{
-				if (tempHeight - 2 > 0)
+				if (testHeight - 2 > 0)
 				{
 					changeStanceDown();
 				}
-				else if (tempHeight - 2 < 0)
+				else if (testHeight - 2 < 0)
 				{
 					changeStanceUp();
 				}
@@ -114,21 +114,21 @@ void Player::move()
 		}
 		if (INPUT->c->isSwitched)
 		{
-			int tempHeight = height;
-			for (int i = 0; i < int(abs(tempHeight - 3)); i++)
+			int testHeight = mapPosition.height;
+			for (int i = 0; i < int(abs(testHeight - 3)); i++)
 			{
-				if (tempHeight - 3 > 0)
+				if (testHeight - 3 > 0)
 				{
 					changeStanceDown();
 				}
-				else if (tempHeight - 3 < 0)
+				else if (testHeight - 3 < 0)
 				{
 					changeStanceUp();
 				}
 			}
 		}
 		//(int)((baseMoveTime / height) * SETTINGS->fpsCount)
-		movementClock.capacity = float(baseMoveTime / height);
+		movementClock.capacity = float(baseMoveTime / mapPosition.height);
 
 		if (INPUT->w->isDown && INPUT->s->isDown) moveYSpeed = 0;
 		else if (INPUT->w->isDown && !INPUT->s->isDown) moveYSpeed = -1;
@@ -142,12 +142,12 @@ void Player::move()
 		{
 			if (movementClock.isAtZero())
 			{
-				if (GUI->worldWindow->world->getWalkability(Position(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.level), height))
+				if (GUI->worldWindow->world->getWalkability(Position4(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.height, mapPosition.level)))
 				{
 					mapPosition.x += moveXSpeed;
 					moveXSpeed = 0;
 				}
-				if (GUI->worldWindow->world->getWalkability(Position(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.level), height))
+				if (GUI->worldWindow->world->getWalkability(Position4(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.height, mapPosition.level)))
 				{
 					mapPosition.y += moveYSpeed;
 					moveYSpeed = 0;
@@ -161,12 +161,12 @@ void Player::move()
 
 void Player::changeStanceUp()
 {
-	if (WORLD->getWalkability(mapPosition, height + 1)) height += 1;
+	if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height + 1, mapPosition.level))) mapPosition.height += 1;
 }
 
 void Player::changeStanceDown()
 {
-	if (WORLD->getWalkability(mapPosition, height + 1)) height -= 1;
+	if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height - 1, mapPosition.level))) mapPosition.height -= 1;
 }
 
 void Player::moveSelectorUp()

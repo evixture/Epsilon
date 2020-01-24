@@ -73,9 +73,9 @@ PlayerWindow::PlayerWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 
 void PlayerWindow::update()
 {
-	if (WORLD->player->height == 1) playerStance = "Prone";
-	else if (WORLD->player->height == 2) playerStance = "Crouching";
-	else if (WORLD->player->height == 3) playerStance = "Standing";
+	if (WORLD->player->mapPosition.height == 1) playerStance = "Prone";
+	else if (WORLD->player->mapPosition.height == 2) playerStance = "Crouching";
+	else if (WORLD->player->mapPosition.height == 3) playerStance = "Standing";
 
 	if (WORLD->player->baseMoveTime == .5f) playerSpeed = "Walking";
 	else if (WORLD->player->baseMoveTime == .25f) playerSpeed = "Running";

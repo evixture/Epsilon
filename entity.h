@@ -2,20 +2,18 @@
 
 struct Entity //generic entity base for use on map
 {
-	Position mapPosition; //the position of the entity on the map
+	Position4 mapPosition; //the position of the entity on the map
 	int ch; //character representation of the character
 	TCODColor color; //foreground color of the entity
 	std::string name; //string name of entity
 
-	int height; //height of the entity
-
-	Entity(Position pos, int ch, std::string name, TCODColor color); //entity constructor that takes position, character, string name, and color
+	Entity(Position4 pos, int ch, std::string name, TCODColor color); //entity constructor that takes position, character, string name, and color
 
 	virtual void update(); //virtual update entity
 	virtual void render(const std::shared_ptr<Pane> &pane) const; //virtual render entity
 
 protected:
-	Position renderPosition; //position of the entity on the map pane
+	Position3 renderPosition; //position of the entity on the map pane
 };
 
 struct Creature : public Entity //creature base used for player and other beings
@@ -35,7 +33,7 @@ struct Creature : public Entity //creature base used for player and other beings
 
 	std::shared_ptr<MagazineData> nullMagazine; //a generic magazine that is used then a firearm has no actual magazine
 
-	Creature(Position pos, int ch, std::string name, TCODColor color, int health, int armor); //creature constructor that takes a position, character, string name, color, health, and armor
+	Creature(Position4 pos, int ch, std::string name, TCODColor color, int health, int armor); //creature constructor that takes a position, character, string name, color, health, and armor
 
 	//virtual void moveSelectorUp() = 0; //moves the selector up on the inventory
 	//virtual void moveSelectorDown() = 0; //moves the selector down on the inventory
@@ -52,7 +50,7 @@ struct Player : public Creature //player derived creature that the player intera
 {
 	float baseMoveTime; //time before the player moves a unit
 
-	Player(Position pos); //player constructor that takes a position
+	Player(Position4 pos); //player constructor that takes a position
 
 	void move();
 	void changeStanceUp();

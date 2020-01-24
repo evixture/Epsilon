@@ -1,18 +1,32 @@
 #include "main.hpp"
 
-struct Position //position struct with x, y, and z dimensions
+struct Position3 //position struct with x, y, and z dimensions
 {
 	int x; //x coordinate
 	int y; //y coordinate
 	int level; //z / height coordinate
 
-	Position() {}
-	Position(int x, int y, int level); //position constructor that takes x, y, and level ints
+	Position3() {}
+	Position3(int x, int y, int level); //position constructor that takes x, y, and level ints
 
-	bool operator == (const Position& compPosition);
+	bool operator == (const Position3& compPosition);
 };
 
-Position offsetPosition(Position mapPosition, int xOffset, int yOffset); //used to calculate render position from map offsets
+struct Position4
+{
+	int x;
+	int y;
+	int height;
+	int level;
+
+	Position4() {}
+	Position4(int x, int y, int height, int level); //position constructor that takes x, y, and level ints
+
+	bool operator == (const Position4& compPosition);
+	operator Position3() const;
+};
+
+Position4 offsetPosition(Position4 mapPosition, int xOffset, int yOffset); //used to calculate render position from map offsets
 
 struct BLine //line algorithm used for bullet paths
 {

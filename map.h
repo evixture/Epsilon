@@ -36,14 +36,15 @@ struct World
 	void addItem(std::shared_ptr<Item> item);
 	void addContainer(std::shared_ptr<Container> container);
 
-	std::shared_ptr<Tile> getTile	(Position position) const; //returns the tile at specific coordinates
-	TCODColor getBgColor			(Position position) const; //gets the background color of the tile at specific coordinates
+	std::shared_ptr<Tile> getTile	(Position3 position) const; //returns the tile at specific coordinates
+	TCODColor getBgColor			(Position3 position) const; //gets the background color of the tile at specific coordinates
 
-	bool    getTransparency			(Position position, int height) const; //gets the transparency of a tile
-	bool    getWalkability			(Position position, int height) const; //gets the walkability of a tile
-	bool	inMapBounds				(Position position) const; //checks if the coordinates are in the map bounds
-	bool	isInFov					(Position position) const; //returns true if the coordinates are in fov
-	bool	isExplored				(Position position) const; //checks if a tile has been explored previously
+	bool    getTransparency			(Position4 position) const; //gets the transparency of a tile
+	bool    getWalkability			(Position4 position) const; //gets the walkability of a tile
+	bool	getSolidity				(Position4 position) const;
+	bool	inMapBounds				(Position3 position) const; //checks if the coordinates are in the map bounds
+	bool	isInFov					(Position3 position) const; //returns true if the coordinates are in fov
+	bool	isExplored				(Position3 position) const; //checks if a tile has been explored previously
 
 	void update(); //updates the map
 

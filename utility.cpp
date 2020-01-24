@@ -1,10 +1,10 @@
 #include "main.hpp"
 
-Position::Position(int x, int y, int level)
+Position3::Position3(int x, int y, int level)
 	:x(x), y(y), level(level)
 {}
 
-bool Position::operator==(const Position & compPosition)
+bool Position3::operator==(const Position3 & compPosition)
 {
 	if (this->x == compPosition.x && this->y == compPosition.y && this->level == compPosition.level)
 	{
@@ -13,9 +13,30 @@ bool Position::operator==(const Position & compPosition)
 	return false;
 }
 
-Position offsetPosition(Position mapPosition, int xOffset, int yOffset)
+Position4 offsetPosition(Position4 mapPosition, int xOffset, int yOffset)
 {
-	return Position(mapPosition.x - xOffset, mapPosition.y - yOffset, mapPosition.level);
+	return Position4(mapPosition.x - xOffset, mapPosition.y - yOffset, mapPosition.height, mapPosition.level);
+}
+
+//----------------------------------------------------------------------------------------------------
+
+Position4::Position4(int x, int y, int height, int level)
+	:x(x), y(y), height(height), level(level)
+{
+}
+
+bool Position4::operator==(const Position4& compPosition)
+{
+	if (this->x == compPosition.x && this->y == compPosition.y && this->height == compPosition.height && this->level == compPosition.level)
+	{
+		return true;
+	}
+	return false;
+}
+
+Position4::operator Position3() const
+{
+	return Position3(this->x, this->y, this->level);
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -206,3 +227,4 @@ bool Clock::isAtZero()
 MagazineData::MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid)
 	:isValid(isValid), ammoType(ammoType), ammoCapacity(ammoCapacity), availableAmmo(availableAmmo)
 {}
+

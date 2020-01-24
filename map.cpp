@@ -205,7 +205,7 @@ World::World()
 {
 	debugmap = std::make_shared<Map>("data/maps/debugmap.xml");
 
-	creatureList.push_back(player = std::make_shared<Player>(Position(2, 2, 0)));
+	creatureList.push_back(player = std::make_shared<Player>(Position4(2, 2, 3, 0)));
 
 	fovMap = std::make_shared<TCODMap>(debugmap->width, debugmap->height);
 
@@ -225,12 +225,12 @@ World::World()
 	
 	addContainer(CONTAINER_SmallBackpack(35, 35, 0, player.get()));
 
-	addCreature(std::make_shared<Creature>(Position(13, 38, 0), 'E', "Creature", TCODColor::white, 100, 0)); //replace colors
-	addCreature(std::make_shared<Creature>(Position(16, 22, 0), 'H', "Creature", TCODColor::blue, 100, 0));
-	addCreature(std::make_shared<Creature>(Position(64, 21, 0), 'F', "Creature", TCODColor::purple, 100, 0));
+	addCreature(std::make_shared<Creature>(Position4(13, 38, 3, 0), 'E', "Creature", TCODColor::white, 100, 0)); //replace colors
+	addCreature(std::make_shared<Creature>(Position4(16, 22, 3, 0), 'H', "Creature", TCODColor::blue, 100, 0));
+	addCreature(std::make_shared<Creature>(Position4(64, 21, 3, 0), 'F', "Creature", TCODColor::purple, 100, 0));
 }
 
-std::shared_ptr<Tile> World::getTile(Position position) const
+std::shared_ptr<Tile> World::getTile(Position3 position) const
 {
 	if (inMapBounds(position))
 	{
@@ -242,12 +242,12 @@ std::shared_ptr<Tile> World::getTile(Position position) const
 	}
 }
 
-bool World::isExplored(Position position) const
+bool World::isExplored(Position3 position) const
 {
  	return debugmap->levelList[position.level][position.x + position.y * debugmap->width]->explored;
 }
 
-TCODColor World::getBgColor(Position position) const
+TCODColor World::getBgColor(Position3 position) const
 {
 	return debugmap->levelList[position.level][position.x + position.y * debugmap->width]->tileList[0]->backgroundColor;
 }
@@ -267,7 +267,7 @@ void World::addContainer(std::shared_ptr<Container> container)
 	mapContainerList.push_back(container);
 }
 
-bool World::inMapBounds(Position position) const
+bool World::inMapBounds(Position3 position) const
 {
 	if (position.level < 0 || position.level > debugmap->totalFloors - 1) return false;
 	if (position.x < 0 || position.x > debugmap->width - 1) return false;
@@ -295,7 +295,7 @@ int World::getOffset(int playerx, int mapw, int renderw)
 	}
 }
 
-bool World::getWalkability(Position position, int height) const
+bool World::getWalkability(Position4 position) const
 {
 	if (position.x < 0) return false;
 	if (position.y < 0) return false;
@@ -306,24 +306,33 @@ bool World::getWalkability(Position position, int height) const
 
 	for (int i = 0; i < 4; i++)
 	{
-		if (debugmap->levelList[position.level][position.x + position.y * debugmap->width]->walkableFlag & heightToBitFlag((height - i > 0)? height - i : 1)) // converts player height to the bit of flag
+		if (getTile(position)->walkableFlag & heightToBitFlag((position.height - i > 0)? position.height - i : 1)) // converts player height to the bit of flag
 		{
 			walkableBool = false;
 		}
 	}
 
-	if (walkableBool == true && debugmap->levelList[position.level][position.x + position.y * debugmap->width]->walkableFlag & heightToBitFlag(0))
+	if (walkableBool == true && getTile(position)->walkableFlag & heightToBitFlag(0))
 	{
 		return true;
 	}
 	return false;
 }
 
-bool World::getTransparency(Position position, int height) const
+bool World::getSolidity(Position4 position) const
 {
-	if (debugmap->levelList[position.level][position.x + position.y * debugmap->width])
+	if (getTile(position)->walkableFlag & heightToBitFlag(position.height))
 	{
-		if (!(debugmap->levelList[position.level][position.x + position.y * debugmap->width]->transparentFlag & heightToBitFlag(height))) // converts player height to the bit of flag
+		return true;
+	}
+	return false;
+}
+
+bool World::getTransparency(Position4 position) const
+{
+	if (getTile(position)->walkableFlag)
+	{
+		if (!(getTile(position)->transparentFlag & heightToBitFlag(position.height))) // converts player height to the bit of flag
 		{
 			return true;
 		}
@@ -338,7 +347,7 @@ void World::updateProperties()
 	{
 		for (int x = 0; x < debugmap->width; x++)
 		{
-			fovMap->setProperties(x, y, getTransparency(Position(x, y, player->mapPosition.level), player->height), getWalkability(Position(x, y, player->mapPosition.level), player->height));
+			fovMap->setProperties(x, y, getTransparency(Position4(x, y, player->mapPosition.height, player->mapPosition.level)), getWalkability(Position4(x, y, player->mapPosition.height, player->mapPosition.level)));
 		}
 	}
 }
@@ -348,7 +357,7 @@ void World::computeFov()
 	fovMap->computeFov(player->mapPosition.x, player->mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
 }
 
-bool World::isInFov(Position position) const
+bool World::isInFov(Position3 position) const
 {
 	if (position.x < 0 || position.x >= debugmap->width || position.y < 0 || position.y >= debugmap->height)
 	{
@@ -379,7 +388,7 @@ void World::update()
 
 	if (INPUT->num9->isSwitched) // repeatable create live creature
 	{
-		addCreature(std::make_shared<Creature>(Position(30, 8, 0), 'E', "Creature", TCODColor::white, 100, 0));
+		addCreature(std::make_shared<Creature>(Position4(30, 8, 3, 0), 'E', "Creature", TCODColor::white, 100, 0));
 	}
 
 	updateEntities(); //needs to be first to prevent bad fov checks
@@ -405,7 +414,7 @@ void World::renderTiles(const std::shared_ptr<Pane>& pane) const
 	{
 		for (int x = xOffset; x < pane->consoleWidth + xOffset; x++)
 		{
-			getTile(Position(x, y, player->mapPosition.level))->render(Position(x - xOffset, y - yOffset, player->height), pane);
+			getTile(Position3(x, y, player->mapPosition.level))->render(Position4(x - xOffset, y - yOffset, player->mapPosition.height, player->mapPosition.level), pane);
 		}
 	}
 }

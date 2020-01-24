@@ -1,5 +1,4 @@
-﻿  pugixml.cpp
-  aicreature.cpp
+﻿  aicreature.cpp
   engine.cpp
   entity.cpp
   gui.cpp
@@ -15,9 +14,9 @@
   window.cpp
   Compiling...
   Generating code
-  447 of 2235 functions (20.0%) were compiled, the rest were copied from previous compilation.
-    131 functions were new in current compilation
-    205 functions had inline decision re-evaluated but remain unchanged
+  2 of 2235 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    4 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Release\Epsilon.exe
 E:\pugixml-1.10\src\pugixml.cpp(1096): warning C26495: Variable 'pugi::xml_attribute_struct::header' is uninitialized. Always initialize a member variable (type.6).
@@ -93,5 +92,5 @@ E:\Projects\Visual Studio\Libtcod Development\Epsilon\settings.cpp(10): warning 
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\tile.cpp(3): warning C26495: Variable 'Tile::tileHeights' is uninitialized. Always initialize a member variable (type.6).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\tile.cpp(7): warning C26495: Variable 'Tile::tileHeights' is uninitialized. Always initialize a member variable (type.6).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\tile.cpp(32): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(214): warning C26812: The enum type 'Firearm::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(482): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(213): warning C26812: The enum type 'Firearm::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(481): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).

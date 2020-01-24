@@ -50,7 +50,7 @@ struct Tile //tile class used for the map and items
 	virtual bool getDestroyed(); //virtual returns if the tile has been destroyed
 	virtual void interact(); //virtual behaves differently depending on tile type
 
-	void render(Position renderPosition, const std::shared_ptr<Pane>& pane) const; //renders tile
+	void render(Position4 renderPosition, const std::shared_ptr<Pane>& pane) const; //renders tile
 };
 
 struct Destructible : public Tile //destructible type of tile that can be destroyed by various items

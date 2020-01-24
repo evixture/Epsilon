@@ -47,24 +47,24 @@ void Tile::interact()
 	return;
 }
 
-void Tile::render(Position renderPosition, const std::shared_ptr<Pane>& pane) const
+void Tile::render(Position4 renderPosition, const std::shared_ptr<Pane>& pane) const
 {
 	//if player height it greater than tallest nontransparent tile, render the tallest tile's data, else render tile on player's level
-		if (WORLD->isInFov(Position(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, WORLD->player->mapPosition.level))) 
+		if (WORLD->isInFov(Position3(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.level)))
 		{
-			pane->console->setCharBackground(renderPosition.x, renderPosition.y, getTileData(renderPosition.level)->backgroundColor);
-			pane->console->setCharForeground(renderPosition.x, renderPosition.y, getTileData(renderPosition.level)->foregroundColor);
-			pane->console->setChar          (renderPosition.x, renderPosition.y, getTileData(renderPosition.level)->ch);
+			pane->console->setCharBackground(renderPosition.x,					renderPosition.y,					getTileData(renderPosition.height)->backgroundColor);
+			pane->console->setCharForeground(renderPosition.x,					renderPosition.y,					getTileData(renderPosition.height)->foregroundColor);
+			pane->console->setChar          (renderPosition.x,					renderPosition.y,					getTileData(renderPosition.height)->ch);
 		}
-		else if (WORLD->isExplored(Position(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, WORLD->player->mapPosition.level)))
+		else if (WORLD->isExplored(Position3(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset,	renderPosition.level)))
 		{
-			pane->console->setCharBackground(renderPosition.x, renderPosition.y, TCODColor::black);
-			pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
-			pane->console->setChar(renderPosition.x, renderPosition.y, getTileData(renderPosition.level)->ch);
+			pane->console->setCharBackground(renderPosition.x,					renderPosition.y,					TCODColor::black);
+			pane->console->setCharForeground(renderPosition.x,					renderPosition.y,					TCODColor::darkestGrey);
+			pane->console->setChar			(renderPosition.x,					renderPosition.y,					getTileData(renderPosition.height)->ch);
 		}
 		else
 		{
-			pane->console->setCharBackground(renderPosition.x, renderPosition.y, TCODColor::black);
+			pane->console->setCharBackground(renderPosition.x,					renderPosition.y,					TCODColor::black);
 		}
 	}
 	

@@ -31,7 +31,7 @@ struct Item //an item that a creature can hold and interact with
 	int size; //size that the item tekes up in the inventory
 	double distToEnt; //the distance from the player to the item, used to highlight the item when the player is in proximity
 
-	Position mapPosition; //the position of the item on the map
+	Position4 mapPosition; //the position of the item on the map
 
 	std::shared_ptr<Tile> tile; //the tile component used when the item is on the map
 	std::shared_ptr<Tool> tool; //the tool component used when the item is in the player's inventory
@@ -41,18 +41,18 @@ struct Item //an item that a creature can hold and interact with
 
 	void createActionManager(Player* owner); //makes an action manager action list based on the item type
 
-	Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position, Player* owner, ItemType type); //item constructor that takes a size, tile, too, position, and a player used for action manager
+	Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position4 position, Player* owner, ItemType type); //item constructor that takes a size, tile, too, position, and a player used for action manager
 
 	virtual std::shared_ptr<MagazineData> getMagazineData(); //used to get the important data of the magazine, returns generic magazine when called from item
 
-	void updateTool(Position mapPosition, int mx, int my, double angle); //updates tool, used when in player inventory
+	void updateTool(Position4 mapPosition, int mx, int my, double angle); //updates tool, used when in player inventory
 	void renderTool(const std::shared_ptr<Pane>& pane) const; //renders tool, used then in player inventory
 
 	void updateTile(); //used to update tile, used when on the map
 	void renderTile(const std::shared_ptr<Pane>& pane) const; //renders the tile, used when on the map
 
 private:
-	Position renderPosition; //the position of the item on the map window
+	Position4 renderPosition; //the position of the item on the map window
 };
 
 struct MagazineItem : public Item //magazine derived class of base item

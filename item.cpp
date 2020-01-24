@@ -35,7 +35,7 @@ void ActionManager::doAction()
 
 //----------------------------------------------------------------------------------------------------
 
-Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position position, Player* owner, ItemType type)
+Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position4 position, Player* owner, ItemType type)
 	:size(size), tile(tile), tool(tool), mapPosition(position), renderPosition(position), distToEnt(5), owner(owner), type(type)
 {
 	createActionManager(owner);
@@ -74,11 +74,11 @@ std::shared_ptr<MagazineData> Item::getMagazineData()
 	return std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 }
 
-void Item::updateTool(Position mapPosition, int mx, int my, double angle)
+void Item::updateTool(Position4 mapPosition, int mx, int my, double angle)
 {
 	tool->update(mapPosition, mx, my, angle);
 
-	this->mapPosition = Position(tool->sourcePosition.x + WORLD->xOffset, tool->sourcePosition.y + WORLD->yOffset, mapPosition.level);
+	this->mapPosition = Position4(tool->sourcePosition.x + WORLD->xOffset, tool->sourcePosition.y + WORLD->yOffset, mapPosition.height, mapPosition.level);
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
@@ -96,7 +96,7 @@ void Item::updateTile()
 
 void Item::renderTile(const std::shared_ptr<Pane>& pane) const
 {
-	tile->render(Position(renderPosition.x, renderPosition.y, WORLD->player->height), pane);
+	tile->render(Position4(renderPosition.x, renderPosition.y, WORLD->player->mapPosition.height, renderPosition.level), pane);
 
 	if (distToEnt < 5 && WORLD->isInFov(mapPosition))
 	{

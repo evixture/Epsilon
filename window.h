@@ -34,7 +34,7 @@ struct Window //group of panes and consoles that is the base for gui panels
 	int consoleWidth; //width of the window in tiles
 	int consoleHeight; //height of the window in tiles
 	std::string panelName; //string name of the window for use with ribon
-	Position renderpos; //tile coordinates to render window on root console
+	Position3 renderpos; //tile coordinates to render window on root console
 
 	std::shared_ptr<Pane> drawWindow; //window that is availible to render to by other classes
 

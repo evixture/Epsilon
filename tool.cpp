@@ -1,11 +1,11 @@
 #include "main.hpp"
 
 Tool::Tool(std::string name, TCODColor color, int ch)
-	:name(name), color(color), ch(ch), mapPosition(Position(0, 0, 0)), dx(0), dy(0), sourcePosition(Position(0, 0, 0)), ammoType(MagazineData::AmmoType::NONE)
+	:name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), ammoType(MagazineData::AmmoType::NONE)
 {}
 
 Tool::Tool(std::string name, TCODColor color, int ch, MagazineData::AmmoType ammoType)
-	:name(name), color(color), ch(ch), mapPosition(Position(0, 0, 0)), dx(0), dy(0), sourcePosition(Position(0, 0, 0)), ammoType(ammoType)
+	:name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), ammoType(ammoType)
 {}
 
 std::shared_ptr<MagazineData> Tool::getMagData()
@@ -95,7 +95,7 @@ void Tool::updateToolPosition(double angle)
 	}
 }
 
-void Tool::update(Position sourcePosition, int mx, int my, double angle)
+void Tool::update(Position4 sourcePosition, int mx, int my, double angle)
 {
 	dx = mx - sourcePosition.x;
 	dy = my - sourcePosition.y;
@@ -115,9 +115,9 @@ void Tool::render(const std::shared_ptr<Pane>& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Bullet::Bullet(int ch, Position startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
+Bullet::Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
 	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(startPosition.x, startPosition.y, tox, toy)),
-	 mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveClock(Clock(float(1.0f / velocity), float(1.0f / velocity)))
+	 mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveClock(Clock(float(1.0f / velocity), float(1.0f / velocity))), height(height)
 {
 	do
 	{
@@ -143,43 +143,38 @@ void Bullet::update()
 	//moveClock.tickDownWithReset();
 	moveClock.update(true, false, false);
 
-	mapPosition = Position(travel.x, travel.y, startPosition.level);
+	//mapPosition = Position3(travel.x, travel.y, startPosition.level);
 
 	if (moveClock.isAtZero())
 	{
 		if (!hitWall) // if it has not hit a solid wall yet
 		{
-			if (startPosition.x < xbound && startPosition.y < ybound) //if in map bound
+			if (WORLD->inMapBounds(mapPosition)) //if in map bound
 			{
-				if (WORLD->inMapBounds(mapPosition)
-					&& WORLD->getWalkability(mapPosition, 3) != false) // if in map bounds and travel position is walkable //REPLACE WITH BULLET HEIGHT
+				if (WORLD->getSolidity(mapPosition) == false) // if in map bounds and travel position is walkable //REPLACE WITH BULLET HEIGHT
 				{
 					for (auto& creature : WORLD->creatureList)
 					{
 						if (mapPosition == creature->mapPosition)
 						{
-							int damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass);
+							int damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //replace with creature take damage function
 							creature->health -= damage; //deal bullet damage, shoudl replace with deal damage function of creature
 							GUI->logWindow->pushMessage(LogWindow::Message("You hit a creature!", LogWindow::Message::MessageLevel::HIGH));
 						}
 					}
-
 					travel.step();
 				}
-				else //else if bullet has hit something that is not walkable
+				else if (WORLD->getSolidity(mapPosition) == true) //else if bullet has hit something that is not walkable
+				{										  
+					if (WORLD->getTile(mapPosition)->tag == Tile::Tag::DESTRUCTIBLE)
+					{									  
+						WORLD->getTile(mapPosition)->interact();
+					}
+					hitWall = true;
+				}
+				else
 				{
-					if (WORLD->inMapBounds(mapPosition))
-					{										  
-						if (WORLD->getTile(mapPosition)->tag == Tile::Tag::DESTRUCTIBLE)
-						{									  
-							WORLD->getTile(mapPosition)->interact();
-						}
-						hitWall = true;
-					}
-					else
-					{
-						hitWall = true;
-					}
+					hitWall = true;
 				}
 			}
 			else // else not in map bound
@@ -190,8 +185,7 @@ void Bullet::update()
 		moveClock.update(false, true, false);
 	}
 
-	mapPosition = Position(travel.x, travel.y, startPosition.level); //second needed?
-	//map pos assignment orig here
+	mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.level); //second needed?
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
@@ -441,7 +435,7 @@ void Firearm::changeFireMode()
 	}
 }
 
-void Firearm::update(Position sourcePosition, int mx, int my, double angle)
+void Firearm::update(Position4 sourcePosition, int mx, int my, double angle)
 {
 	dx = mx - sourcePosition.x + WORLD->xOffset;
 	dy = my - sourcePosition.y + WORLD->yOffset;
@@ -455,6 +449,7 @@ void Firearm::update(Position sourcePosition, int mx, int my, double angle)
 
 	updateToolPosition(angle);
 
+	mapPosition.height = sourcePosition.height;
 	mapPosition.level = sourcePosition.level;
 
 	updateWeaponChar(angle);
