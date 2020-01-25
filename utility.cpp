@@ -155,6 +155,11 @@ double getDistance(int ix, int iy, int tx, int ty)
 	return sqrt(xLength + yLength);
 }
 
+float getFallTime(int height)
+{
+	return sqrt((2.0f * height) / 16);
+}
+
 //----------------------------------------------------------------------------------------------------
 
 //Clock Struct
@@ -182,9 +187,12 @@ void Clock::update(bool tickDown, bool resetAtZero, bool callFunctionAtZero)
 		}
 		if (resetAtZero)
 		{
-			while (step <= 0)
+			if (capacity != 0.0f)
 			{
-				step += capacity;
+				while (step <= 0)
+				{
+					step += capacity;
+				}
 			}
 		}
 	}

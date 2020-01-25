@@ -54,7 +54,6 @@ void Settings::printDebugStats() const
 		WORLD->player->mapPosition.level,
 		TCODConsole::hasMouseFocus(),
 		lastFrameTime.asSeconds());
-	//lastFrameTime.asSeconds()
 }
 
 void Settings::update(std::shared_ptr<Player> player)

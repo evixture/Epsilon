@@ -1,11 +1,15 @@
 #include "main.hpp"
 
 Tool::Tool(std::string name, TCODColor color, int ch)
-	:name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), ammoType(MagazineData::AmmoType::NONE)
+	:name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), ammoType(MagazineData::AmmoType::NONE), fireMode(SAFE), availibleFireMode(0)
 {}
 
 Tool::Tool(std::string name, TCODColor color, int ch, MagazineData::AmmoType ammoType)
-	:name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), ammoType(ammoType)
+	:name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), ammoType(ammoType), fireMode(SAFE), availibleFireMode(0)
+{}
+
+Tool::Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
+	: name(name), color(color), ch(NULL), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), ammoType(ammoType), fireMode(fireMode), availibleFireMode(availibleFireModeFlag)
 {}
 
 std::shared_ptr<MagazineData> Tool::getMagData()
@@ -117,7 +121,7 @@ void Tool::render(const std::shared_ptr<Pane>& pane) const
 
 Bullet::Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
 	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(startPosition.x, startPosition.y, tox, toy)),
-	 mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveClock(Clock(float(1.0f / velocity), float(1.0f / velocity))), height(height)
+	 mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveClock(Clock(float(1.0f / velocity), float(1.0f / velocity))), fallClock(Clock(getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1), getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1)))
 {
 	do
 	{
@@ -139,50 +143,74 @@ Bullet::Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int 
 
 void Bullet::update()
 {
-	//moveClock.capacity = (int)(engine->settings->fpsCount * .005f);
-	//moveClock.tickDownWithReset();
 	moveClock.update(true, false, false);
+	fallClock.update(true, false, false);
 
-	//mapPosition = Position3(travel.x, travel.y, startPosition.level);
-
-	if (moveClock.isAtZero())
+	if (currentVelocity > 0 && mapPosition.height > 0)
 	{
-		if (!hitWall) // if it has not hit a solid wall yet
+		if (moveClock.isAtZero()) //change to use position after step to pass through and then set map position to step position if good
 		{
-			if (WORLD->inMapBounds(mapPosition)) //if in map bound
+			if (WORLD->inMapBounds(mapPosition))
 			{
-				if (WORLD->getSolidity(mapPosition) == false) // if in map bounds and travel position is walkable //REPLACE WITH BULLET HEIGHT
+				if (WORLD->getSolidity(mapPosition) == true)
 				{
-					for (auto& creature : WORLD->creatureList)
-					{
-						if (mapPosition == creature->mapPosition)
-						{
-							int damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //replace with creature take damage function
-							creature->health -= damage; //deal bullet damage, shoudl replace with deal damage function of creature
-							GUI->logWindow->pushMessage(LogWindow::Message("You hit a creature!", LogWindow::Message::MessageLevel::HIGH));
-						}
-					}
-					travel.step();
-				}
-				else if (WORLD->getSolidity(mapPosition) == true) //else if bullet has hit something that is not walkable
-				{										  
-					if (WORLD->getTile(mapPosition)->tag == Tile::Tag::DESTRUCTIBLE)
+					if (WORLD->getTile(mapPosition)->tag == Block::Tag::DESTRUCTIBLE)
 					{									  
 						WORLD->getTile(mapPosition)->interact();
 					}
-					hitWall = true;
+
+					if (currentVelocity - WORLD->getTile(mapPosition)->getTileData(mapPosition.height)->deceleration <= 0)
+					{
+						currentVelocity = 0;
+					}
+					else
+					{
+						currentVelocity -= WORLD->getTile(mapPosition)->getTileData(mapPosition.height)->deceleration;
+					}
+					
+					GUI->logWindow->pushMessage(LogWindow::Message("You hit a wall!", LogWindow::Message::MessageLevel::HIGH));
 				}
-				else
+				else if (WORLD->getSolidity(mapPosition) == false)
 				{
-					hitWall = true;
+					for (auto& creature : WORLD->creatureList)
+					{
+						if (creature->mapPosition == mapPosition) //also checks height, may give bad results
+						{
+							if (creature->health > 0)
+							{
+								int damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //replace with creature take damage function
+								creature->health -= damage; //deal bullet damage, shoudl replace with deal damage function of creature
+
+								if (currentVelocity - 100 < 0) //ballistics
+								{
+									currentVelocity = 0;
+								}
+								else currentVelocity -= 100;
+							}
+
+							GUI->logWindow->pushMessage(LogWindow::Message("You hit a creature!", LogWindow::Message::MessageLevel::HIGH));
+						}
+					}
 				}
+				travel.step();
+				moveClock.update(false, true, false);
 			}
-			else // else not in map bound
+			else
 			{
-				hitWall = true;
+				currentVelocity = 0;
+				mapPosition.height = 0;
 			}
 		}
-		moveClock.update(false, true, false);
+		if (fallClock.isAtZero())
+		{
+			mapPosition.height--;
+			fallClock.capacity = getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1);
+
+			fallClock.update(false, true, false);
+		}
+
+		moveClock.capacity = 1.0f / currentVelocity;
+
 	}
 
 	mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.level); //second needed?
@@ -191,14 +219,30 @@ void Bullet::update()
 
 void Bullet::render(const std::shared_ptr<Pane>& pane) const
 {
-	if (!hitWall)
+	if (WORLD->player->mapPosition.level == startPosition.level)
 	{
-		if (WORLD->player->mapPosition.level == startPosition.level)
+		if (currentVelocity > 0)
 		{
-			pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::brass);
+			if (mapPosition.height > 0)
+			{
+				pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::brass);
 
-			if (startPosition.x == travel.x && startPosition.y == travel.y) pane->console->setChar(renderPosition.x, renderPosition.y, '*'); //muzzle flash ??
-			else pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+				if ((startPosition.x == travel.x && startPosition.y == travel.y))
+				{
+					pane->console->setChar(renderPosition.x, renderPosition.y, '*'); //muzzle flash ??
+				}
+				else
+				{
+					pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+				}
+			}
+			else
+			{
+				if (WORLD->getTile(mapPosition)->getTileData(mapPosition.height)->ch != 0)
+				{
+					WORLD->getTile(mapPosition)->getTileData(mapPosition.height)->ch = ch; //move to update
+				}
+			}
 		}
 	}
 }
@@ -206,7 +250,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Firearm::Firearm(std::string name, TCODColor color, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
-	:Tool(name, color, NULL, ammoType), maxFireTime(fireRate), maxReloadTime(reloadSpeed), fireMode(fireMode), availibleFireMode(availibleFireModeFlag),
+	:Tool(name, color, ammoType, fireMode, availibleFireModeFlag), maxFireTime(fireRate), maxReloadTime(reloadSpeed),
 	fireClock(Clock(fireRate, 0.0f)), reloadClock(Clock(reloadSpeed, 0.0f)), selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
 {}
 
@@ -444,9 +488,6 @@ void Firearm::update(Position4 sourcePosition, int mx, int my, double angle)
 
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
-	//fireClock.capacity = (int)(maxFireTime * SETTINGS->fpsCount);
-	//reloadClock.capacity = (int)(maxReloadTime * SETTINGS->fpsCount);
-
 	updateToolPosition(angle);
 
 	mapPosition.height = sourcePosition.height;
@@ -471,7 +512,6 @@ void Firearm::update(Position4 sourcePosition, int mx, int my, double angle)
 
 		}
 	}
-	//fireClock.tickDown();
 	fireClock.update(true, false, false);
 
 	if (bulletList.size() > selectedMagazine->ammoCapacity * 2) //clean up extra bullets
@@ -484,7 +524,6 @@ void Firearm::update(Position4 sourcePosition, int mx, int my, double angle)
 		bullet->update();
 	}
 
-	//reloadClock.tickDown();
 	reloadClock.update(true, false, false);
 }
 

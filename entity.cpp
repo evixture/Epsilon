@@ -431,7 +431,7 @@ void Player::update()
 		
 		if (INPUT->space->isSwitched)
 		{
-			if (WORLD->getTile(mapPosition)->tag == Tile::Tag::STAIR)
+			if (WORLD->getTile(mapPosition)->tag == Block::Tag::STAIR)
 			{
 				WORLD->getTile(mapPosition)->interact();
 			}

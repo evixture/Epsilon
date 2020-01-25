@@ -8,6 +8,8 @@ struct Action //handles item actions
 	std::function<void()> action; //the function that is called when activated
 
 	Action(std::string name, std::function<void()> action, Type actionType); //action constructor that takes string name, function, and action type
+
+	void update();
 };
 
 struct ActionManager //manages all of the actions of an item
@@ -17,6 +19,8 @@ struct ActionManager //manages all of the actions of an item
 	std::shared_ptr<Action> selectedAction; //the selected action of the item
 
 	ActionManager(std::vector<std::shared_ptr<Action>> actionList); //constructor of action manager that takes a list of actions
+
+	void update();
 
 	void moveSelectorUp(); //moves the action index down in value
 	void moveSelectorDown(); //moves the action index up in value
@@ -33,7 +37,7 @@ struct Item //an item that a creature can hold and interact with
 
 	Position4 mapPosition; //the position of the item on the map
 
-	std::shared_ptr<Tile> tile; //the tile component used when the item is on the map
+	std::shared_ptr<Block> tile; //the tile component used when the item is on the map
 	std::shared_ptr<Tool> tool; //the tool component used when the item is in the player's inventory
 
 	Player* owner;
@@ -41,7 +45,7 @@ struct Item //an item that a creature can hold and interact with
 
 	void createActionManager(Player* owner); //makes an action manager action list based on the item type
 
-	Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position4 position, Player* owner, ItemType type); //item constructor that takes a size, tile, too, position, and a player used for action manager
+	Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, Player* owner, ItemType type); //item constructor that takes a size, tile, too, position, and a player used for action manager
 
 	virtual std::shared_ptr<MagazineData> getMagazineData(); //used to get the important data of the magazine, returns generic magazine when called from item
 

@@ -15,8 +15,11 @@ struct Tool //base class for the holdable component to items
 
 	std::string name; //string name of tool
 
+	enum FireType { SAFE = 0x01, SEMI = 0x02, FULL = 0x04 } fireMode; //fire mode for the firearm
+
 	Tool(std::string name, TCODColor color, int ch); //constuctor used for generic tool that takes string name, color, and character
 	Tool(std::string name, TCODColor color, int ch, MagazineData::AmmoType ammoType); //constructor used for weapons that takes string name, color, character, and ammo type
+	Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag); 
 
 	virtual std::shared_ptr<MagazineData> getMagData(); //returns the magazine component, only useful for magazines
 
@@ -29,6 +32,7 @@ struct Tool //base class for the holdable component to items
 
 protected:
 	Position4 renderPosition;
+	unsigned char availibleFireMode;
 };
 
 struct Bullet //bullet that is fired from firearm
@@ -59,15 +63,13 @@ private:
 
 	BLine travel; //bresanham line that the bullet travels along
 	Clock moveClock; //clock that determines when bullet moves
+	Clock fallClock;
 
 	Position4 renderPosition;
 };
 
 struct Firearm : public Tool //firearm that fires bullets that interact with the world
 {
-	enum FireType {SAFE = 0x01, SEMI = 0x02, FULL = 0x04} fireMode; //fire mode for the firearm
-	unsigned char availibleFireMode;
-
 	std::shared_ptr<MagazineData> selectedMagazine; //the magazine that is currently in the firearm, is a generic mag if no mag is in firearm
 
 	float maxFireTime; //maximum time in seconds that it takes for the next bullet to fire

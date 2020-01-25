@@ -4,11 +4,38 @@ Action::Action(std::string name, std::function<void()> action, Type actionType)
 	:name(name), action(action), type(actionType)
 {}
 
+void Action::update()
+{
+	if (type == Type::CHANGEFIREMODE)
+	{
+		if (WORLD->player->selectedItem->tool->fireMode == Tool::SAFE)
+		{
+			name = "Change Fire Mode : SAFE";
+		}
+		else if (WORLD->player->selectedItem->tool->fireMode == Tool::SEMI)
+		{
+			name = "Change Fire Mode : SEMI";
+		}
+		else if (WORLD->player->selectedItem->tool->fireMode == Tool::FULL)
+		{
+			name = "Change Fire Mode : FULL";
+		}
+	}
+}
+
 //----------------------------------------------------------------------------------------------------
 
 ActionManager::ActionManager(std::vector<std::shared_ptr<Action>> actionList)
 	:actionList(actionList), actionIndex(0), selectedAction(this->actionList[actionIndex])
 {}
+
+void ActionManager::update()
+{
+	for (auto& action : actionList)
+	{
+		action->update();
+	}
+}
 
 void ActionManager::moveSelectorUp()
 {
@@ -35,7 +62,7 @@ void ActionManager::doAction()
 
 //----------------------------------------------------------------------------------------------------
 
-Item::Item(int size, std::shared_ptr<Tile> tile, std::shared_ptr<Tool> tool, Position4 position, Player* owner, ItemType type)
+Item::Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, Player* owner, ItemType type)
 	:size(size), tile(tile), tool(tool), mapPosition(position), renderPosition(position), distToEnt(5), owner(owner), type(type)
 {
 	createActionManager(owner);
@@ -77,6 +104,7 @@ std::shared_ptr<MagazineData> Item::getMagazineData()
 void Item::updateTool(Position4 mapPosition, int mx, int my, double angle)
 {
 	tool->update(mapPosition, mx, my, angle);
+	actionManager->update();
 
 	this->mapPosition = Position4(tool->sourcePosition.x + WORLD->xOffset, tool->sourcePosition.y + WORLD->yOffset, mapPosition.height, mapPosition.level);
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);

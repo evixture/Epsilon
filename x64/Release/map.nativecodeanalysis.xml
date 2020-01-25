@@ -245,12 +245,12 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Position::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Position::{ctor}</FUNCTION>
-    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <DESCRIPTION>Variable 'Position3::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position3::{ctor}</FUNCTION>
+    <DECORATED>??0Position3@@QEAA@XZ</DECORATED>
     <FUNCLINE>9</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>Position::y</targetSymbol>
+      <targetSymbol>Position3::y</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -262,12 +262,12 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Position::x' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Position::{ctor}</FUNCTION>
-    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <DESCRIPTION>Variable 'Position3::x' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position3::{ctor}</FUNCTION>
+    <DECORATED>??0Position3@@QEAA@XZ</DECORATED>
     <FUNCLINE>9</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>Position::x</targetSymbol>
+      <targetSymbol>Position3::x</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -279,12 +279,80 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Position::level' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Position::{ctor}</FUNCTION>
-    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <DESCRIPTION>Variable 'Position3::level' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position3::{ctor}</FUNCTION>
+    <DECORATED>??0Position3@@QEAA@XZ</DECORATED>
     <FUNCLINE>9</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>Position::level</targetSymbol>
+      <targetSymbol>Position3::level</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>22</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position4::level' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position4::{ctor}</FUNCTION>
+    <DECORATED>??0Position4@@QEAA@XZ</DECORATED>
+    <FUNCLINE>22</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position4::level</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>22</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position4::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position4::{ctor}</FUNCTION>
+    <DECORATED>??0Position4@@QEAA@XZ</DECORATED>
+    <FUNCLINE>22</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position4::y</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>22</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position4::height' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position4::{ctor}</FUNCTION>
+    <DECORATED>??0Position4@@QEAA@XZ</DECORATED>
+    <FUNCLINE>22</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position4::height</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>22</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position4::x' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position4::{ctor}</FUNCTION>
+    <DECORATED>??0Position4@@QEAA@XZ</DECORATED>
+    <FUNCLINE>22</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position4::x</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -324,9 +392,9 @@
       <COLUMN>11</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
-    <DESCRIPTION>The enum type 'Tile::TileHeights' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <DESCRIPTION>The enum type 'Block::TileHeights' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
     <FUNCTION>Map::getTileFromCode</FUNCTION>
-    <DECORATED>?getTileFromCode@Map@@QEAA?AV?$shared_ptr@UTile@@@std@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@3@@Z</DECORATED>
+    <DECORATED>?getTileFromCode@Map@@QEAA?AV?$shared_ptr@UBlock@@@std@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@3@@Z</DECORATED>
     <FUNCLINE>72</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
@@ -354,7 +422,7 @@
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getTile</FUNCTION>
-    <DECORATED>?getTile@World@@QEBA?AV?$shared_ptr@UTile@@@std@@UPosition@@@Z</DECORATED>
+    <DECORATED>?getTile@World@@QEBA?AV?$shared_ptr@UBlock@@@std@@UPosition3@@@Z</DECORATED>
     <FUNCLINE>233</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
@@ -368,7 +436,7 @@
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::isExplored</FUNCTION>
-    <DECORATED>?isExplored@World@@QEBA_NUPosition@@@Z</DECORATED>
+    <DECORATED>?isExplored@World@@QEBA_NUPosition3@@@Z</DECORATED>
     <FUNCLINE>245</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
@@ -382,7 +450,7 @@
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getBgColor</FUNCTION>
-    <DECORATED>?getBgColor@World@@QEBA?AVTCODColor@@UPosition@@@Z</DECORATED>
+    <DECORATED>?getBgColor@World@@QEBA?AVTCODColor@@UPosition3@@@Z</DECORATED>
     <FUNCLINE>250</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
@@ -390,70 +458,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>309</LINE>
-      <COLUMN>53</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getWalkability</FUNCTION>
-    <DECORATED>?getWalkability@World@@QEBA_NUPosition@@H@Z</DECORATED>
-    <FUNCLINE>298</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>315</LINE>
-      <COLUMN>76</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getWalkability</FUNCTION>
-    <DECORATED>?getWalkability@World@@QEBA_NUPosition@@H@Z</DECORATED>
-    <FUNCLINE>298</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>324</LINE>
-      <COLUMN>52</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getTransparency</FUNCTION>
-    <DECORATED>?getTransparency@World@@QEBA_NUPosition@@H@Z</DECORATED>
-    <FUNCLINE>322</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>326</LINE>
-      <COLUMN>55</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getTransparency</FUNCTION>
-    <DECORATED>?getTransparency@World@@QEBA_NUPosition@@H@Z</DECORATED>
-    <FUNCLINE>322</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>359</LINE>
+      <LINE>364</LINE>
       <COLUMN>49</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::isInFov</FUNCTION>
-    <DECORATED>?isInFov@World@@QEBA_NUPosition@@@Z</DECORATED>
-    <FUNCLINE>351</FUNCLINE>
+    <DECORATED>?isInFov@World@@QEBA_NUPosition3@@@Z</DECORATED>
+    <FUNCLINE>356</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

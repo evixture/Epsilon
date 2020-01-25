@@ -245,12 +245,12 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Position::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Position::{ctor}</FUNCTION>
-    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <DESCRIPTION>Variable 'Position3::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position3::{ctor}</FUNCTION>
+    <DECORATED>??0Position3@@QEAA@XZ</DECORATED>
     <FUNCLINE>9</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>Position::y</targetSymbol>
+      <targetSymbol>Position3::y</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -262,12 +262,12 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Position::x' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Position::{ctor}</FUNCTION>
-    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <DESCRIPTION>Variable 'Position3::x' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position3::{ctor}</FUNCTION>
+    <DECORATED>??0Position3@@QEAA@XZ</DECORATED>
     <FUNCLINE>9</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>Position::x</targetSymbol>
+      <targetSymbol>Position3::x</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -279,12 +279,80 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Position::level' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Position::{ctor}</FUNCTION>
-    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <DESCRIPTION>Variable 'Position3::level' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position3::{ctor}</FUNCTION>
+    <DECORATED>??0Position3@@QEAA@XZ</DECORATED>
     <FUNCLINE>9</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>Position::level</targetSymbol>
+      <targetSymbol>Position3::level</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>22</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position4::level' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position4::{ctor}</FUNCTION>
+    <DECORATED>??0Position4@@QEAA@XZ</DECORATED>
+    <FUNCLINE>22</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position4::level</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>22</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position4::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position4::{ctor}</FUNCTION>
+    <DECORATED>??0Position4@@QEAA@XZ</DECORATED>
+    <FUNCLINE>22</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position4::y</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>22</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position4::height' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position4::{ctor}</FUNCTION>
+    <DECORATED>??0Position4@@QEAA@XZ</DECORATED>
+    <FUNCLINE>22</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position4::height</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>22</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position4::x' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position4::{ctor}</FUNCTION>
+    <DECORATED>??0Position4@@QEAA@XZ</DECORATED>
+    <FUNCLINE>22</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position4::x</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -293,15 +361,15 @@
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>tile.cpp</FILENAME>
       <LINE>3</LINE>
-      <COLUMN>6</COLUMN>
+      <COLUMN>7</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Tile::tileHeights' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Tile::{ctor}</FUNCTION>
-    <DECORATED>??0Tile@@QEAA@V?$vector@V?$shared_ptr@UTileData@@@std@@V?$allocator@V?$shared_ptr@UTileData@@@std@@@2@@std@@EE@Z</DECORATED>
+    <DESCRIPTION>Variable 'Block::tileHeights' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Block::{ctor}</FUNCTION>
+    <DECORATED>??0Block@@QEAA@V?$vector@V?$shared_ptr@UTile@@@std@@V?$allocator@V?$shared_ptr@UTile@@@std@@@2@@std@@EE@Z</DECORATED>
     <FUNCLINE>3</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>Tile::tileHeights</targetSymbol>
+      <targetSymbol>Block::tileHeights</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -310,15 +378,15 @@
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>tile.cpp</FILENAME>
       <LINE>7</LINE>
-      <COLUMN>6</COLUMN>
+      <COLUMN>7</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Tile::tileHeights' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Tile::{ctor}</FUNCTION>
-    <DECORATED>??0Tile@@QEAA@V?$vector@V?$shared_ptr@UTileData@@@std@@V?$allocator@V?$shared_ptr@UTileData@@@std@@@2@@std@@EEW4Tag@0@@Z</DECORATED>
+    <DESCRIPTION>Variable 'Block::tileHeights' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Block::{ctor}</FUNCTION>
+    <DECORATED>??0Block@@QEAA@V?$vector@V?$shared_ptr@UTile@@@std@@V?$allocator@V?$shared_ptr@UTile@@@std@@@2@@std@@EEW4Tag@0@@Z</DECORATED>
     <FUNCLINE>7</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>Tile::tileHeights</targetSymbol>
+      <targetSymbol>Block::tileHeights</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -331,8 +399,8 @@
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>Tile::getTileData</FUNCTION>
-    <DECORATED>?getTileData@Tile@@QEBA?AV?$shared_ptr@UTileData@@@std@@H@Z</DECORATED>
+    <FUNCTION>Block::getTileData</FUNCTION>
+    <DECORATED>?getTileData@Block@@QEBA?AV?$shared_ptr@UTile@@@std@@H@Z</DECORATED>
     <FUNCLINE>11</FUNCLINE>
     <PATH></PATH>
   </DEFECT>

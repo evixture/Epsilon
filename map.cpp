@@ -25,7 +25,7 @@ Map::Map(std::string filePath)
 					if (std::string(mapDataNode.name()) == "levels")
 					{
 						totalFloors = mapDataNode.text().as_int();
-						levelList = std::vector < std::vector < std::shared_ptr < Tile >>>(totalFloors);
+						levelList = std::vector < std::vector < std::shared_ptr < Block >>>(totalFloors);
 					}
 
 					if (std::string(mapDataNode.name()) == "width")
@@ -69,7 +69,7 @@ Map::Map(std::string filePath)
 	}
 }
 
-std::shared_ptr<Tile> Map::getTileFromCode(std::string code)
+std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 {
 	static TCODRandom* RNG = TCODRandom::getInstance();
 	if (!RNG)
@@ -88,7 +88,7 @@ std::shared_ptr<Tile> Map::getTileFromCode(std::string code)
 
 				if (grassRand == 0)
 				{
-					//return std::make_shared<Tile>(DATA_Grass0, OOOOI, OOOOI);
+					//return std::make_shared<Block>(DATA_Grass0, OOOOI, OOOOI);
 					return TILE_Grass0;
 				}
 				else if (grassRand == 1)
@@ -230,7 +230,7 @@ World::World()
 	addCreature(std::make_shared<Creature>(Position4(64, 21, 3, 0), 'F', "Creature", TCODColor::purple, 100, 0));
 }
 
-std::shared_ptr<Tile> World::getTile(Position3 position) const
+std::shared_ptr<Block> World::getTile(Position3 position) const
 {
 	if (inMapBounds(position))
 	{
@@ -330,13 +330,9 @@ bool World::getSolidity(Position4 position) const
 
 bool World::getTransparency(Position4 position) const
 {
-	if (getTile(position)->walkableFlag)
+	if (!(getTile(position)->transparentFlag & heightToBitFlag(position.height))) // converts player height to the bit of flag
 	{
-		if (!(getTile(position)->transparentFlag & heightToBitFlag(position.height))) // converts player height to the bit of flag
-		{
-			return true;
-		}
-		return false;
+		return true;
 	}
 	return false;
 }

@@ -69,6 +69,7 @@ unsigned char heightToBitFlag(int height);
 
 double getAngle(int ix, int iy, int tx, int ty); //gets the angle from 2 sets of coordinates
 double getDistance(int ix, int iy, int tx, int ty); //gets the distance from 2 sets of coordinates
+float getFallTime(int height);
 
 struct MagazineData //contains all of the important data for magazines
 {
