@@ -5,15 +5,15 @@ struct Armor;
 struct Tool //base class for the holdable component to items
 {
 	TCODColor color; //foreground color of tool
-	int ch; //character representation of tool
+	unsigned char ch; //character representation of tool
 
 	MagazineData::AmmoType ammoType; //type of ammo used for weapons
 	
 	Position4 mapPosition;
 	Position4 sourcePosition;
 
-	int dx; //the delta x of the player and the mouse
-	int dy; //the delta y of the player and the mouse
+	short int dx; //the delta x of the player and the mouse
+	short int dy; //the delta y of the player and the mouse
 
 	std::string name; //string name of tool
 
@@ -40,12 +40,11 @@ protected:
 
 struct Bullet //bullet that is fired from firearm
 {
-	int ch; //character represetation of the bulley
-	int height;
+	unsigned char ch; //character represetation of the bulley
 
-	const int mass;
-	const int baseVelocity; //tile movements per second
-	int currentVelocity;
+	const short int mass;
+	const short int baseVelocity; //tile movements per second
+	short int currentVelocity;
 
 	Position4 startPosition;
 	Position4 mapPosition;
@@ -58,11 +57,11 @@ struct Bullet //bullet that is fired from firearm
 	void render(const std::shared_ptr<Pane>& pane) const; //renders bullet
 
 private:
-	int tox; //x destination of bullet
-	int toy; //y destination of bullet
+	short int tox; //x destination of bullet
+	short int toy; //y destination of bullet
 
-	int xbound; //x map bound
-	int ybound; //y map bound
+	int xbound; //CHECK x map bound
+	int ybound; //CHECK y map bound
 
 	BLine travel; //bresanham line that the bullet travels along
 	Clock moveClock; //clock that determines when bullet moves
@@ -100,8 +99,8 @@ private:
 
 struct Armor : public Tool
 {
-	int defense;
-	int durability;
+	unsigned short int defense;
+	unsigned short int durability;
 
 	Armor(std::string name, TCODColor color, int defense, int durability);
 

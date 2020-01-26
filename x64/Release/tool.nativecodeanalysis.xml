@@ -360,14 +360,28 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>tool.cpp</FILENAME>
-      <LINE>118</LINE>
+      <LINE>4</LINE>
+      <COLUMN>173</COLUMN>
+    </SFA>
+    <DEFECTCODE>26812</DEFECTCODE>
+    <DESCRIPTION>The enum type 'Tool::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>Tool::{ctor}</FUNCTION>
+    <DECORATED>??0Tool@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VTCODColor@@H@Z</DECORATED>
+    <FUNCLINE>3</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>tool.cpp</FILENAME>
+      <LINE>122</LINE>
       <COLUMN>8</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'Bullet::height' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>Bullet::{ctor}</FUNCTION>
     <DECORATED>??0Bullet@@QEAA@HUPosition4@@HHHHHH@Z</DECORATED>
-    <FUNCLINE>118</FUNCLINE>
+    <FUNCLINE>122</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>Bullet::height</targetSymbol>
     </ADDITIONALINFO>
@@ -377,28 +391,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>tool.cpp</FILENAME>
-      <LINE>293</LINE>
-      <COLUMN>9</COLUMN>
-    </SFA>
-    <DEFECTCODE>26812</DEFECTCODE>
-    <DESCRIPTION>The enum type 'Firearm::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
-    <FUNCTION>Firearm::{ctor}</FUNCTION>
-    <DECORATED>??0Firearm@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VTCODColor@@MMW4AmmoType@MagazineData@@W4FireType@0@D@Z</DECORATED>
-    <FUNCLINE>293</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>tool.cpp</FILENAME>
-      <LINE>562</LINE>
+      <LINE>519</LINE>
       <COLUMN>56</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Firearm::update</FUNCTION>
     <DECORATED>?update@Firearm@@UEAAXUPosition4@@HHN@Z</DECORATED>
-    <FUNCLINE>523</FUNCLINE>
+    <FUNCLINE>484</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

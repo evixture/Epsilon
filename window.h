@@ -2,8 +2,8 @@
 
 struct Pane //TCOD console with width, height, and colors
 {
-	int consoleWidth; //width of the console in tiles
-	int consoleHeight; //height of console in tiles
+	const unsigned short int consoleWidth; //width of the console in tiles
+	const unsigned short int consoleHeight; //height of console in tiles
 	TCODConsole* console; //TCOD console from Libtcod
 
 	TCODColor backgroundColor; //background color of console
@@ -17,7 +17,7 @@ struct Pane //TCOD console with width, height, and colors
 
 struct Ribon //top ribon for windows that displays the window name
 {
-	int consoleWidth; //width of the ribon in tiles
+	const unsigned short int consoleWidth; //width of the ribon in tiles
 
 	std::shared_ptr<Pane> ribonWindow; //ribon pane
 
@@ -31,8 +31,8 @@ private:
 
 struct Window //group of panes and consoles that is the base for gui panels
 {
-	int consoleWidth; //width of the window in tiles
-	int consoleHeight; //height of the window in tiles
+	const unsigned short int consoleWidth; //width of the window in tiles
+	const unsigned short int consoleHeight; //height of the window in tiles
 	std::string panelName; //string name of the window for use with ribon
 	Position3 renderpos; //tile coordinates to render window on root console
 

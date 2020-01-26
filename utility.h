@@ -2,9 +2,9 @@
 
 struct Position3 //position struct with x, y, and z dimensions
 {
-	int x; //x coordinate
-	int y; //y coordinate
-	int level; //z / height coordinate
+	unsigned int x; //x coordinate
+	unsigned int y; //y coordinate
+	unsigned int level; //z / height coordinate
 
 	Position3() {}
 	Position3(int x, int y, int level); //position constructor that takes x, y, and level ints
@@ -14,10 +14,10 @@ struct Position3 //position struct with x, y, and z dimensions
 
 struct Position4
 {
-	int x;
-	int y;
-	int height;
-	int level;
+	unsigned int x;
+	unsigned int y;
+	unsigned char height;
+	unsigned int level;
 
 	Position4() {}
 	Position4(int x, int y, int height, int level); //position constructor that takes x, y, and level ints
@@ -63,19 +63,16 @@ struct Clock //clock used for timings
 	//void reset(); //sets step to capacity
 };
 
-int square(int x); //squares a number
-
-unsigned char heightToBitFlag(int height);
-
-double getAngle(int ix, int iy, int tx, int ty); //gets the angle from 2 sets of coordinates
-double getDistance(int ix, int iy, int tx, int ty); //gets the distance from 2 sets of coordinates
-float getFallTime(int height);
+unsigned char	heightToBitFlag(int height);
+double			getAngle(int ix, int iy, int tx, int ty); //gets the angle from 2 sets of coordinates
+double			getDistance(int ix, int iy, int tx, int ty); //gets the distance from 2 sets of coordinates
+float			getFallTime(int height);
 
 struct MagazineData //contains all of the important data for magazines
 {
 	enum class AmmoType { NONE, FOURTYFIVEACP, FIVEPOINTFIVESIX } ammoType; //the type of ammo that the magazine uses
 
-	int ammoCapacity; //the total capacity of the magazine
+	unsigned short int ammoCapacity; //the total capacity of the magazine
 	int availableAmmo; //how much ammo is availible for use in the magazine
 
 	bool isValid; //if the magazine is valid - actually contains ammo

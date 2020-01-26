@@ -130,11 +130,6 @@ bool BLine::end()
 
 //----------------------------------------------------------------------------------------------------
 
-int square(int x)
-{
-	return x * x;
-}
-
 unsigned char heightToBitFlag(int height)
 {
 	return 1 << height;
@@ -142,16 +137,14 @@ unsigned char heightToBitFlag(int height)
 
 double getAngle(int ix, int iy, int tx, int ty)
 {
-	int dx = tx - ix;
-	int dy = ty - iy;
-	double itan = (double)(dy) / (double)(dx);
-	return atan(itan) * 180 / PI;
+	double itan = (double)(ty - iy) / (double)(tx - ix);
+	return atan(itan) * 180.0 / PI;
 }
 
 double getDistance(int ix, int iy, int tx, int ty)
 {
-	int xLength = square(tx - ix);
-	int yLength = square(ty - iy);
+	int xLength = pow(tx - ix, 2);
+	int yLength = pow(ty - iy, 2);
 	return sqrt(xLength + yLength);
 }
 
@@ -206,31 +199,6 @@ bool Clock::isAtZero()
 	}
 	return false;
 }
-
-//void Clock::tickDown()
-//{
-//	if (step > 0)
-//	{
-//		step--;
-//	}
-//}
-//
-//void Clock::tickDownWithReset()
-//{
-//	if (step > 0)
-//	{
-//		step--;
-//	}
-//	else
-//	{
-//		step = capacity;
-//	}
-//}
-//
-//void Clock::reset()
-//{
-//	step = capacity;
-//}
 
 MagazineData::MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid)
 	:isValid(isValid), ammoType(ammoType), ammoCapacity(ammoCapacity), availableAmmo(availableAmmo)

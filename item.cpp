@@ -50,7 +50,7 @@ void ActionManager::moveSelectorDown()
 {
 	if (actionIndex + 1 < actionList.size())
 	{
-		actionIndex++;
+		++actionIndex;
 		selectedAction = actionList[actionIndex];
 	}
 }

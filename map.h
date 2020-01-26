@@ -5,7 +5,7 @@ struct Map //map class that takes a text file and converts it to a vector of til
 	std::string filePath; //string path to the text file
 
 	std::string name; //string name of the map
-	int totalFloors; //the total number of floors of the map
+	unsigned short int totalFloors; //the total number of floors of the map
 	int width; //the width of the map
 	int height; //the height of the map
 
@@ -18,8 +18,8 @@ struct Map //map class that takes a text file and converts it to a vector of til
 
 struct World
 {
-	int xOffset; //the x offset of the rendered portion of the map
-	int yOffset; //the y offset of the rendered portion of the map
+	int xOffset; //CHECK the x offset of the rendered portion of the map
+	int yOffset; //CHECK the y offset of the rendered portion of the map
 
 	std::shared_ptr<Map> debugmap;
 	std::shared_ptr<TCODMap> fovMap; //the part of the map used to calculate the fov

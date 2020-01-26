@@ -271,9 +271,9 @@ void World::addContainer(std::shared_ptr<Container> container)
 
 bool World::inMapBounds(Position3 position) const
 {
-	if (position.level < 0 || position.level > debugmap->totalFloors - 1) return false;
-	if (position.x < 0 || position.x > debugmap->width - 1) return false;
-	if (position.y < 0 || position.y > debugmap->height - 1) return false;
+	if (position.level < 0 || position.level >= debugmap->totalFloors) return false;
+	if (position.x < 0 || position.x >= debugmap->width) return false;
+	if (position.y < 0 || position.y >= debugmap->height) return false;
 	return true;
 }
 
@@ -299,16 +299,17 @@ int World::getOffset(int playerx, int mapw, int renderw)
 
 bool World::getWalkability(Position4 position) const
 {
-	if (position.x < 0) return false;
-	if (position.y < 0) return false;
-	if (position.x >= debugmap->width) return false;
-	if (position.y >= debugmap->height) return false;
+	if (!inMapBounds(position)) //should never be called??
+	{
+		return false;
+	}
 
 	bool walkableBool = true;
+	unsigned char walkableFlag = getTile(position)->walkableFlag;
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < position.height; ++i) //check bound
 	{
-		if (getTile(position)->walkableFlag & heightToBitFlag((position.height - i > 0)? position.height - i : 1)) // converts player height to the bit of flag
+		if (walkableFlag & heightToBitFlag(position.height - i)) // converts player height to the bit of flag
 		{
 			walkableBool = false;
 		}
@@ -341,11 +342,12 @@ bool World::getTransparency(Position4 position) const
 
 void World::updateProperties()
 {
-	for (int y = 0; y < debugmap->height; y++)
+	for (int y = 0; y < debugmap->height; ++y)
 	{
-		for (int x = 0; x < debugmap->width; x++)
+		for (int x = 0; x < debugmap->width; ++x)
 		{
-			fovMap->setProperties(x, y, getTransparency(Position4(x, y, player->mapPosition.height, player->mapPosition.level)), getWalkability(Position4(x, y, player->mapPosition.height, player->mapPosition.level)));
+			Position4 position = Position4(x, y, player->mapPosition.height, player->mapPosition.level);
+			fovMap->setProperties(x, y, getTransparency(position), getWalkability(position));
 		}
 	}
 }
@@ -357,13 +359,13 @@ void World::computeFov()
 
 bool World::isInFov(Position3 position) const
 {
-	if (position.x < 0 || position.x >= debugmap->width || position.y < 0 || position.y >= debugmap->height)
+	if (!inMapBounds(position))
 	{
 		return false;
 	}
 	if (fovMap->isInFov(position.x, position.y) && position.level == player->mapPosition.level)
 	{
-		debugmap->levelList[position.level][position.x + position.y * debugmap->width]->explored = true;
+		getTile(position)->explored = true;
 		return true;
 	}
 	return false;
@@ -408,11 +410,12 @@ void World::update()
 
 void World::renderTiles(const std::shared_ptr<Pane>& pane) const
 {
-	for (int y = yOffset; y < pane->consoleHeight + yOffset; y++)
+	for (int y = yOffset; y < pane->consoleHeight + yOffset; ++y)
 	{
-		for (int x = xOffset; x < pane->consoleWidth + xOffset; x++)
+		for (int x = xOffset; x < pane->consoleWidth + xOffset; ++x)
 		{
-			getTile(Position3(x, y, player->mapPosition.level))->render(Position4(x - xOffset, y - yOffset, player->mapPosition.height, player->mapPosition.level), pane);
+			std::shared_ptr<Block> block = getTile(Position3(x, y, player->mapPosition.level));
+			block->render(Position4(x - xOffset, y - yOffset, player->mapPosition.height, player->mapPosition.level), pane);
 		}
 	}
 }

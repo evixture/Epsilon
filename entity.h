@@ -3,7 +3,7 @@
 struct Entity //generic entity base for use on map
 {
 	Position4 mapPosition; //the position of the entity on the map
-	int ch; //character representation of the character
+	unsigned char ch; //character representation of the character
 	TCODColor color; //foreground color of the entity
 	std::string name; //string name of entity
 
@@ -20,7 +20,7 @@ struct Creature : public Entity //creature base used for player and other beings
 {
 	double angle; //angle that the creature us facing
 
-	int health; //the health of the creature
+	short int health; //the health of the creature
 	Armor equippedArmor; //the armor of the creature
 
 	int containerIndex; //the index of the selected item's container in the inventory
@@ -75,6 +75,6 @@ struct Player : public Creature //player derived creature that the player intera
 private:
 	Clock movementClock; //clock for player input
 
-	int moveXSpeed; //the amount that the player moves in the x dimension
-	int moveYSpeed; //the amount that the player moves in the y dimension
+	char moveXSpeed; //the amount that the player moves in the x dimension
+	char moveYSpeed; //the amount that the player moves in the y dimension
 };

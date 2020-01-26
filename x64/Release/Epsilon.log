@@ -6,17 +6,24 @@
   item.cpp
   main.cpp
   map.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(274,43): warning C4018: '>=': signed/unsigned mismatch
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(275,35): warning C4018: '>=': signed/unsigned mismatch
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(276,35): warning C4018: '>=': signed/unsigned mismatch
   panel.cpp
   settings.cpp
   tile.cpp
   tool.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(136,35): warning C4018: '<': signed/unsigned mismatch
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(136,114): warning C4018: '<': signed/unsigned mismatch
   utility.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(146,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(147,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   window.cpp
   Compiling...
   Generating code
-  634 of 2239 functions (28.3%) were compiled, the rest were copied from previous compilation.
-    226 functions were new in current compilation
-    114 functions had inline decision re-evaluated but remain unchanged
+  148 of 2324 functions ( 6.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    9 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Release\Epsilon.exe
 E:\pugixml-1.10\src\pugixml.cpp(1096): warning C26495: Variable 'pugi::xml_attribute_struct::header' is uninitialized. Always initialize a member variable (type.6).
@@ -57,38 +64,39 @@ E:\Libtcod\custom-libtcod-master\src\libtcod\tileset\tileset.h(78): warning C264
 E:\Libtcod\custom-libtcod-master\src\libtcod\tileset\observer.h(62): warning C26439: This kind of function may not throw. Declare it 'noexcept' (f.6).
 E:\Libtcod\custom-libtcod-master\src\libtcod\tileset\observer.h(65): warning C26439: This kind of function may not throw. Declare it 'noexcept' (f.6).
 E:\Libtcod\custom-libtcod-master\src\libtcod\mersenne.hpp(222): warning C26812: The enum type 'TCOD_distribution_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Libtcod\custom-libtcod-master\src\libtcod\bsp.hpp(77): warning C26495: Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6).
+E:\Libtcod\custom-libtcod-master\src\libtcod\bsp.hpp(77): warning C26495: Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6).
 E:\Libtcod\custom-libtcod-master\src\libtcod\bsp.hpp(78): warning C26495: Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.h(9): warning C26495: Variable 'Position3::y' is uninitialized. Always initialize a member variable (type.6).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.h(22): warning C26495: Variable 'Position4::level' is uninitialized. Always initialize a member variable (type.6).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(53): warning C26812: The enum type 'Block::TileHeights' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(54): warning C26812: The enum type 'Firearm::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(188): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(197): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(201): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(210): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(295): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(308): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(324): warning C26812: The enum type 'TCOD_chars_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(23): warning C26812: The enum type 'Tool::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(91): warning C26812: The enum type 'Block::TileHeights' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(226): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(235): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(239): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(248): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(333): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(346): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\entity.cpp(362): warning C26812: The enum type 'TCOD_chars_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(3): warning C26812: The enum type 'sf::Keyboard::Key' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(6): warning C26495: Variable 'Key::isSwitched' is uninitialized. Always initialize a member variable (type.6).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(34): warning C26812: The enum type 'sf::Mouse::Button' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(38): warning C26495: Variable 'MouseButton::buttonSwitch' is uninitialized. Always initialize a member variable (type.6).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(69): warning C26812: The enum type 'TCOD_event_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\item.cpp(24): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\item.cpp(51): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(45): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(59): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(187): warning C26812: The enum type 'Block::TileHeights' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(213): warning C26812: The enum type 'Firearm::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(237): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(247): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(252): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(364): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(213): warning C26812: The enum type 'Tool::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(239): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(249): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(254): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\settings.cpp(10): warning C26812: The enum type 'TCOD_fov_algorithm_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\settings.cpp(10): warning C26812: The enum type 'TCOD_renderer_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\tile.cpp(3): warning C26495: Variable 'Block::tileHeights' is uninitialized. Always initialize a member variable (type.6).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\tile.cpp(7): warning C26495: Variable 'Block::tileHeights' is uninitialized. Always initialize a member variable (type.6).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\tile.cpp(32): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(118): warning C26495: Variable 'Bullet::height' is uninitialized. Always initialize a member variable (type.6).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(293): warning C26812: The enum type 'Firearm::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(562): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tile.cpp(25): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(4): warning C26812: The enum type 'Tool::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(122): warning C26495: Variable 'Bullet::height' is uninitialized. Always initialize a member variable (type.6).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(519): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(140): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(140): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).

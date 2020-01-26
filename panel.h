@@ -8,8 +8,8 @@ struct StatusWindow : public Window //player status pane derived window that ren
 	void render() const; //renders the window
 
 private:
-	int displayHealth; //the health that is displayed
-	int displayArmor; //the armor that is displayed
+	unsigned short int displayHealth; //the health that is displayed
+	unsigned short int displayArmor; //the armor that is displayed
 };
 
 struct MapWindow : public Window //map pane derived window that handles the world
@@ -54,7 +54,7 @@ struct SplashWindow : public Window //the startup window
 	void render() const; //renders the window
 
 private:
-	int menuIndex; //menu selection index
+	unsigned char menuIndex; //menu selection index
 	std::string menuSelection; //name of menu item at index
 	std::vector<std::string> menuItemList; //list of strings of menu names
 

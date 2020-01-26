@@ -23,10 +23,10 @@ transparency
 
 struct Tile
 {
-	int ch;
+	unsigned char ch;
 	TCODColor foregroundColor; //foreground color of the tile
 	TCODColor backgroundColor; //background color of the tile
-	int deceleration;
+	unsigned short int deceleration;
 
 	Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int deceleration);
 };
@@ -57,7 +57,7 @@ struct Block //tile class used for the map and items
 struct Destructible : public Block //destructible type of tile that can be destroyed by various items
 {
 	bool destroyed; //if the tile has been destroyed of not
-	int strength; //the strenth that the tile has before being destroyed
+	int strength; //CHECK  the strenth that the tile has before being destroyed
 
 	Destructible(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int strength); //constructor for destructible that takes character, colors, height, walkability, and strength
 
@@ -67,7 +67,7 @@ struct Destructible : public Block //destructible type of tile that can be destr
 
 struct Stair : public Block //stair type of tile that allows travel between floors
 {
-	int moveDistance; //number of floors that the stair moves up or down
+	char moveDistance; //number of floors that the stair moves up or down
 	
 	Stair(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance); //constructor for stair that takes character, colors, height, walkability, and move distance
 

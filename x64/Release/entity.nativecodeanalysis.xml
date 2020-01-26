@@ -360,126 +360,126 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>53</LINE>
+      <LINE>23</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26812</DEFECTCODE>
+    <DESCRIPTION>The enum type 'Tool::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>Tool::{ctor}</FUNCTION>
+    <DECORATED>??0Tool@@QEAA@AEBU0@@Z</DECORATED>
+    <FUNCLINE>39</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>entity.cpp</FILENAME>
+      <LINE>91</LINE>
       <COLUMN>22</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
     <DESCRIPTION>The enum type 'Block::TileHeights' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
     <FUNCTION>Player::{ctor}</FUNCTION>
     <DECORATED>??0Player@@QEAA@UPosition4@@@Z</DECORATED>
-    <FUNCLINE>50</FUNCLINE>
+    <FUNCLINE>88</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>54</LINE>
-      <COLUMN>24</COLUMN>
-    </SFA>
-    <DEFECTCODE>26812</DEFECTCODE>
-    <DESCRIPTION>The enum type 'Firearm::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
-    <FUNCTION>Player::{ctor}</FUNCTION>
-    <DECORATED>??0Player@@QEAA@UPosition4@@@Z</DECORATED>
-    <FUNCLINE>50</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>entity.cpp</FILENAME>
-      <LINE>188</LINE>
+      <LINE>226</LINE>
       <COLUMN>16</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorUp</FUNCTION>
     <DECORATED>?moveSelectorUp@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>172</FUNCLINE>
+    <FUNCLINE>210</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>197</LINE>
+      <LINE>235</LINE>
       <COLUMN>15</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>195</FUNCLINE>
+    <FUNCLINE>233</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>201</LINE>
+      <LINE>239</LINE>
       <COLUMN>20</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>195</FUNCLINE>
+    <FUNCLINE>233</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>210</LINE>
+      <LINE>248</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>195</FUNCLINE>
+    <FUNCLINE>233</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>295</LINE>
+      <LINE>333</LINE>
       <COLUMN>20</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>286</FUNCLINE>
+    <FUNCLINE>324</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>308</LINE>
+      <LINE>346</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>286</FUNCLINE>
+    <FUNCLINE>324</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>324</LINE>
+      <LINE>362</LINE>
       <COLUMN>18</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
     <DESCRIPTION>The enum type 'TCOD_chars_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>286</FUNCLINE>
+    <FUNCLINE>324</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

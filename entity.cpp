@@ -123,7 +123,7 @@ void Player::move()
 		if (INPUT->z->isSwitched)
 		{
 			int testHeight = mapPosition.height;
-			for (int i = 0; i < int(abs(testHeight - 1)); i++)
+			for (int i = 0; i < int(abs(testHeight - 1)); ++i)
 			{
 				if (testHeight - 1 > 0)
 				{
@@ -138,7 +138,7 @@ void Player::move()
 		if (INPUT->x->isSwitched)
 		{
 			int testHeight = mapPosition.height;
-			for (int i = 0; i < int(abs(testHeight - 2)); i++)
+			for (int i = 0; i < int(abs(testHeight - 2)); ++i)
 			{
 				if (testHeight - 2 > 0)
 				{
@@ -153,7 +153,7 @@ void Player::move()
 		if (INPUT->c->isSwitched)
 		{
 			int testHeight = mapPosition.height;
-			for (int i = 0; i < int(abs(testHeight - 3)); i++)
+			for (int i = 0; i < int(abs(testHeight - 3)); ++i)
 			{
 				if (testHeight - 3 > 0)
 				{
@@ -165,7 +165,7 @@ void Player::move()
 				}
 			}
 		}
-		//(int)((baseMoveTime / height) * SETTINGS->fpsCount)
+
 		movementClock.capacity = float(baseMoveTime / mapPosition.height);
 
 		if (INPUT->w->isDown && INPUT->s->isDown) moveYSpeed = 0;
@@ -180,12 +180,12 @@ void Player::move()
 		{
 			if (movementClock.isAtZero())
 			{
-				if (GUI->worldWindow->world->getWalkability(Position4(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.height, mapPosition.level)))
+				if (WORLD->getWalkability(Position4(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.height, mapPosition.level)))
 				{
 					mapPosition.x += moveXSpeed;
 					moveXSpeed = 0;
 				}
-				if (GUI->worldWindow->world->getWalkability(Position4(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.height, mapPosition.level)))
+				if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.height, mapPosition.level)))
 				{
 					mapPosition.y += moveYSpeed;
 					moveYSpeed = 0;
@@ -225,7 +225,7 @@ void Player::moveSelectorUp()
 	{
 		if (itemIndex + 3 <= inventory[containerIndex]->itemList.size())
 		{
-			itemIndex++;
+			++itemIndex;
 		}
 	}
 }
@@ -234,20 +234,20 @@ void Player::moveSelectorDown()
 {
 	if (itemIndex + 1 < inventory[containerIndex]->itemList.size())
 	{
-		itemIndex++;
+		++itemIndex;
 	}
 	else if (itemIndex + 1 >= inventory[containerIndex]->itemList.size())
 	{
 		if (containerIndex < inventory.size() - 1)
 		{
-			containerIndex++;
+			++containerIndex;
 			itemIndex = -1;
 		}
 		else if (itemIndex == -1)
 		{
 			if (itemIndex + 2 <= inventory[containerIndex]->itemList.size())
 			{
-				itemIndex++;
+				++itemIndex;
 			}
 		}
 	}
@@ -255,7 +255,7 @@ void Player::moveSelectorDown()
 
 void Player::pickUpItem()
 {
-	for (int i = 0; i < WORLD->mapItemList.size(); i++)
+	for (int i = 0; i < WORLD->mapItemList.size(); ++i)
 	{
 		if (WORLD->mapItemList[i] != nullptr && WORLD->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->mapItemList[i]->mapPosition.level == mapPosition.level)
 		{
@@ -272,7 +272,7 @@ void Player::pickUpItem()
 		}
 	}
 
-	for (int i = 0; i < WORLD->mapContainerList.size(); i++)
+	for (int i = 0; i < WORLD->mapContainerList.size(); ++i)
 	{
 		if (WORLD->mapContainerList[i] != nullptr && WORLD->mapContainerList[i]->containerItem->mapPosition.x == mapPosition.x && WORLD->mapContainerList[i]->containerItem->mapPosition.y == mapPosition.y && WORLD->mapContainerList[i]->containerItem->mapPosition.level == mapPosition.level)
 		{
@@ -370,9 +370,9 @@ void Player::filterIndexes()
 
 void Player::reload()
 {
-	for (int i = 0; i < inventory.size(); i++)
+	for (int i = 0; i < inventory.size(); ++i)
 	{
-		for (int j = 0; j < inventory[i]->itemList.size(); j++)
+		for (int j = 0; j < inventory[i]->itemList.size(); ++j)
 		{
 			if (inventory[i]->itemList[j]->getMagazineData()->isValid == true) // if it is actually a magazine
 			{

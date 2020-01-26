@@ -15,7 +15,7 @@ struct Action //handles item actions
 struct ActionManager //manages all of the actions of an item
 {
 	std::vector<std::shared_ptr<Action>> actionList; //list of actions for an item
-	int actionIndex; //the index of the selected item in the action list
+	unsigned char actionIndex; //the index of the selected item in the action list
 	std::shared_ptr<Action> selectedAction; //the selected action of the item
 
 	ActionManager(std::vector<std::shared_ptr<Action>> actionList); //constructor of action manager that takes a list of actions
@@ -32,7 +32,7 @@ struct Item //an item that a creature can hold and interact with
 {
 	enum class ItemType {NODROP, NORMAL, FIREARM, MAGAZINE, ARMOR} type;
 
-	int size; //size that the item tekes up in the inventory
+	unsigned char size; //size that the item tekes up in the inventory
 	double distToEnt; //the distance from the player to the item, used to highlight the item when the player is in proximity
 
 	Position4 mapPosition; //the position of the item on the map
@@ -70,8 +70,8 @@ struct MagazineItem : public Item //magazine derived class of base item
 
 struct Container //container, used to hold items in the inventory
 {
-	int itemCapacity; //the maximum units of items the container can hold 
-	int currentSize; //the current size used up of all of the items in the container
+	unsigned char itemCapacity; //the maximum units of items the container can hold 
+	unsigned char currentSize; //the current size used up of all of the items in the container
 
 	std::shared_ptr<Item> containerItem; //item representation of the container
 

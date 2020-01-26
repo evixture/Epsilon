@@ -5,10 +5,10 @@ struct Font //font class that holds the needed data to set the tcod font
 	std::string filePath; //string file path to the font
 	std::string name; //name of the font
 
-	int format; //bit mask format of the font
+	unsigned char format; //bit mask format of the font
 
-	int charH; //height of font in characters
-	int charW; //width of font in characters
+	unsigned char charH; //height of font in characters
+	unsigned char charW; //width of font in characters
 	std::string xDim; //x dimension of font
 	std::string yDim; //y dimension of font
 
@@ -20,17 +20,13 @@ struct Settings //settings class that hold most of the settings for the game and
 	int screenCharWidth; //total width of root window in characters
 	int screenCharHeight; //total height of root window in characters
 
-	/*std::chrono::milliseconds beforeFrameTime;
-	std::chrono::milliseconds afterFrameTime;
-	std::chrono::milliseconds lastFrameTime;*/
-
 	sf::Clock systemClock;
 	sf::Time lastFrameTime;
 
-	int fpsCount; //the amount of frames pushed in the last second increment
+	unsigned int fpsCount; //the amount of frames pushed in the last second increment
 
 	TCOD_fov_algorithm_t fovtype; //the type of fov algorithm used for the map
-	int fovRad; //the radius of tiles that the fov is calculated for
+	unsigned int fovRad; //the radius of tiles that the fov is calculated for
 	bool lightWalls; //if the fov algorithm lights the tiles
 
 	std::shared_ptr<Input> input; //input component for keyboard and mouse
@@ -46,7 +42,7 @@ struct Settings //settings class that hold most of the settings for the game and
 	void render() const; //renders settings to root
 
 private:
-	int maxFps; //fps cap for tcod
+	unsigned int maxFps; //fps cap for tcod
 
 	TCOD_renderer_t renderer; //type of library used to render the window
 	std::string windowTitle; //string title of the main window
