@@ -1,2 +1,4 @@
-﻿  item.cpp
+﻿  entity.cpp
+  tool.cpp
+  Generating Code...
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

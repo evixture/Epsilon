@@ -70,11 +70,7 @@ Item::Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Po
 
 void Item::createActionManager(Player* owner)
 {
-	if (type == ItemType::NODROP)
-	{
-
-	}
-	else if (type == ItemType::NORMAL)
+	if (type == ItemType::NORMAL)
 	{
 		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
 			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP))
@@ -92,6 +88,19 @@ void Item::createActionManager(Player* owner)
 			std::shared_ptr<Action>(std::make_shared<Action>("Reload", std::bind(&Player::reload, owner), Action::Type::RELOAD)),
 			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP)),
 			std::shared_ptr<Action>(std::make_shared<Action>("Change Fire Mode", std::bind(&Player::changeFireMode, owner), Action::Type::CHANGEFIREMODE))
+		});
+	}
+	else if (type == ItemType::ARMOR)
+	{
+		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
+			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP)),
+			std::shared_ptr<Action>(std::make_shared<Action>("Equip", std::bind(&Player::equipArmor, owner), Action::Type::EQUIP))
+		});
+	}
+	else// (type == ItemType::NODROP)
+	{
+		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
+			std::shared_ptr<Action>(std::make_shared<Action>("", std::bind(&Player::filterIndexes, owner), Action::Type::DROP))
 		});
 	}
 }

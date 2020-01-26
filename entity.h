@@ -21,7 +21,7 @@ struct Creature : public Entity //creature base used for player and other beings
 	double angle; //angle that the creature us facing
 
 	int health; //the health of the creature
-	int armor; //the armor of the creature
+	Armor equippedArmor; //the armor of the creature
 
 	int containerIndex; //the index of the selected item's container in the inventory
 	int itemIndex; //the index of the selected item in the inventory
@@ -33,7 +33,7 @@ struct Creature : public Entity //creature base used for player and other beings
 
 	std::shared_ptr<MagazineData> nullMagazine; //a generic magazine that is used then a firearm has no actual magazine
 
-	Creature(Position4 pos, int ch, std::string name, TCODColor color, int health, int armor); //creature constructor that takes a position, character, string name, color, health, and armor
+	Creature(Position4 pos, int ch, std::string name, TCODColor color, int health, Armor armor); //creature constructor that takes a position, character, string name, color, health, and armor
 
 	//virtual void moveSelectorUp() = 0; //moves the selector up on the inventory
 	//virtual void moveSelectorDown() = 0; //moves the selector down on the inventory
@@ -41,6 +41,7 @@ struct Creature : public Entity //creature base used for player and other beings
 	//virtual void dropItem() = 0; //drops the selected item
 	//virtual void filterIndexes() = 0; //filters the container and item indexes to make sure they are in range
 	//virtual void reload() = 0; //reloads the selected item
+	void takeDamage(Bullet* bullet);
 
 	virtual void update(); //virtual updates the creature
 	void virtual render(const std::shared_ptr<Pane>& pane) const; // virtual renders the creature
@@ -62,8 +63,11 @@ struct Player : public Creature //player derived creature that the player intera
 
 	void pickUpItem(); //picks up the item on the ground
 	void dropItem(); //drops the selected item
+
 	void reload(); //reloads the selected item
 	void changeFireMode();
+	void equipArmor();
+
 
 	void update(); //updates the player
 	void render(const std::shared_ptr<Pane>& pane) const; //renders the player

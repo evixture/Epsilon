@@ -17,9 +17,47 @@ void Entity::render(const std::shared_ptr<Pane>& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Creature::Creature(Position4 position, int ch, std::string name, TCODColor color, int health, int armor)
-	:Entity(position, ch, name, color), health(health), armor(armor), angle(0), containerIndex(0), itemIndex(0), nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
+Creature::Creature(Position4 position, int ch, std::string name, TCODColor color, int health, Armor armor)
+	:Entity(position, ch, name, color), health(health), equippedArmor(armor), angle(0), containerIndex(0), itemIndex(0), nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
 {
+}
+
+void Creature::takeDamage(Bullet* bullet)
+{
+	if (equippedArmor.durability > 0) //if the armor durability is high enough
+	{
+		if (bullet->currentVelocity - equippedArmor.defense > 0) //if bullet is fast enough to pass through armor
+		{
+			equippedArmor.durability -= bullet->currentVelocity; //should happen before taking damage to prevent high damage
+			bullet->currentVelocity -= equippedArmor.defense;
+
+			health -= int(float(bullet->currentVelocity / (bullet->baseVelocity * 2.0f)) * bullet->mass);
+
+			bullet->currentVelocity -= 100; //slowdown after going through body
+		}
+		else if (bullet->currentVelocity - equippedArmor.defense <= 0) //if the bullet is stopped by the armor
+		{
+			equippedArmor.durability -= bullet->currentVelocity;
+			bullet->currentVelocity = 0;
+		}
+
+		if (equippedArmor.durability < 0)
+		{
+			equippedArmor.durability = 0;
+		}
+	}
+	else
+	{
+		int damage = int(float(bullet->currentVelocity / (bullet->baseVelocity * 2.0f)) * bullet->mass);
+		health -= damage;
+
+		bullet->currentVelocity -= 100; //slowdown after going through body
+	}
+
+	if (health < 0)
+	{
+		health = 0;
+	}
 }
 
 void Creature::update()
@@ -48,7 +86,7 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Player::Player(Position4 position)
-	:Creature(position, '@', "player", UICOLOR_Player_Color, 100, 0), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(1.0f, 0.0f))
+	:Creature(position, '@', "player", UICOLOR_Player_Color, 100, Armor("", TCODColor::pink, 0, 0)), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(1.0f, 0.0f))
 {
 	inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
 	inventory[0]->addItem(	ITEM_SIP45(0, 0, 0, this));
@@ -367,6 +405,11 @@ void Player::reload()
 void Player::changeFireMode()
 {
 	selectedItem->tool->changeFireMode();
+}
+
+void Player::equipArmor()
+{
+	selectedItem->tool->equip(equippedArmor);
 }
 
 void Player::update()

@@ -1,5 +1,7 @@
 #include "main.hpp"
 
+struct Armor;
+
 struct Tool //base class for the holdable component to items
 {
 	TCODColor color; //foreground color of tool
@@ -18,7 +20,6 @@ struct Tool //base class for the holdable component to items
 	enum FireType { SAFE = 0x01, SEMI = 0x02, FULL = 0x04 } fireMode; //fire mode for the firearm
 
 	Tool(std::string name, TCODColor color, int ch); //constuctor used for generic tool that takes string name, color, and character
-	Tool(std::string name, TCODColor color, int ch, MagazineData::AmmoType ammoType); //constructor used for weapons that takes string name, color, character, and ammo type
 	Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag); 
 
 	virtual std::shared_ptr<MagazineData> getMagData(); //returns the magazine component, only useful for magazines
@@ -26,6 +27,8 @@ struct Tool //base class for the holdable component to items
 	virtual void reload(std::shared_ptr<MagazineData>& magazine); //does nothing in tool
 	virtual void changeFireMode();
 	virtual void updateToolPosition(double angle); //takes angle and updates tool position
+
+	virtual void equip(Armor& armor);
 
 	virtual void update(Position4 sourcePosition, int mx, int my, double angle); //virtual updates tool
 	virtual void render(const std::shared_ptr<Pane>& pane) const; //virtual renders tool
@@ -95,3 +98,29 @@ private:
 	void fireBullet(); //fires a bullet
 };
 
+struct Armor : public Tool
+{
+	int defense;
+	int durability;
+
+	Armor(std::string name, TCODColor color, int defense, int durability);
+
+	void equip(Armor& armor);
+};
+
+/*
+
+BODY ARMOR
+	int defense value
+			based on the tier that the armor is in
+	int durability
+			based on the quality of the armor
+
+	void update()
+
+	void render()
+		uses the tool render function
+
+	void equip armor()
+
+*/

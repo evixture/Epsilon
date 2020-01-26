@@ -4,10 +4,6 @@ Tool::Tool(std::string name, TCODColor color, int ch)
 	:name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), ammoType(MagazineData::AmmoType::NONE), fireMode(SAFE), availibleFireMode(0)
 {}
 
-Tool::Tool(std::string name, TCODColor color, int ch, MagazineData::AmmoType ammoType)
-	:name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), ammoType(ammoType), fireMode(SAFE), availibleFireMode(0)
-{}
-
 Tool::Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
 	: name(name), color(color), ch(NULL), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), ammoType(ammoType), fireMode(fireMode), availibleFireMode(availibleFireModeFlag)
 {}
@@ -99,6 +95,10 @@ void Tool::updateToolPosition(double angle)
 	}
 }
 
+void Tool::equip(Armor& armor)
+{
+}
+
 void Tool::update(Position4 sourcePosition, int mx, int my, double angle)
 {
 	dx = mx - sourcePosition.x;
@@ -174,18 +174,20 @@ void Bullet::update()
 				{
 					for (auto& creature : WORLD->creatureList)
 					{
-						if (creature->mapPosition == mapPosition) //also checks height, may give bad results
+						if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.level == mapPosition.level) //also checks height, may give bad results
 						{
 							if (creature->health > 0)
 							{
-								int damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //replace with creature take damage function
-								creature->health -= damage; //deal bullet damage, shoudl replace with deal damage function of creature
+								creature->takeDamage(this);
 
-								if (currentVelocity - 100 < 0) //ballistics
-								{
-									currentVelocity = 0;
-								}
-								else currentVelocity -= 100;
+								//int damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //replace with creature take damage function
+								//creature->health -= damage; //deal bullet damage, shoudl replace with deal damage function of creature
+
+								//if (currentVelocity - 100 < 0) //ballistics
+								//{
+								//	currentVelocity = 0;
+								//}
+								//else currentVelocity -= 100;
 							}
 
 							GUI->logWindow->pushMessage(LogWindow::Message("You hit a creature!", LogWindow::Message::MessageLevel::HIGH));
@@ -535,5 +537,22 @@ void Firearm::render(const std::shared_ptr<Pane>& pane) const
 	for (auto& bullet : bulletList)
 	{
 		bullet->render(pane);
+	}
+}
+
+Armor::Armor(std::string name, TCODColor color, int defense, int durability)
+	:Tool(name, color, 234), defense(defense), durability(durability)
+{
+}
+
+void Armor::equip(Armor& armor) //if the passed armor is not equal to the armor of this, then replace passed armor with this armor
+{
+	if (this->defense == armor.defense && this->durability == armor.durability) //if armor is already equipped
+	{
+		armor = Armor("", TCODColor::pink, 0, 0); //Armor("", TCODColor::pink, 0, 0)
+	}
+	else
+	{
+		armor = Armor(this->name, this->color, this->defense, this->durability);
 	}
 }

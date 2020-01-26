@@ -216,6 +216,8 @@ World::World()
 	addItem(MAGAZINE_556Magazine30(22, 36, 0, player.get()));
 	addItem(MAGAZINE_556Magazine30(31, 25, 0, player.get()));
 	addItem(MAGAZINE_556Magazine30(56, 6, 0, player.get()));
+
+	addItem(ITEM_testArmor(3, 3, 0, player.get()));
 	
 	//second floor
 	addItem(ITEM_SIP45(21, 45, 0, player.get()));
@@ -225,9 +227,9 @@ World::World()
 	
 	addContainer(CONTAINER_SmallBackpack(35, 35, 0, player.get()));
 
-	addCreature(std::make_shared<Creature>(Position4(13, 38, 3, 0), 'E', "Creature", TCODColor::white, 100, 0)); //replace colors
-	addCreature(std::make_shared<Creature>(Position4(16, 22, 3, 0), 'H', "Creature", TCODColor::blue, 100, 0));
-	addCreature(std::make_shared<Creature>(Position4(64, 21, 3, 0), 'F', "Creature", TCODColor::purple, 100, 0));
+	addCreature(std::make_shared<Creature>(Position4(13, 38, 3, 0), '1', "Creature", TCODColor::white, 100, Armor("armor", TCODColor::pink, 100, 200))); //replace colors
+	addCreature(std::make_shared<Creature>(Position4(16, 22, 3, 0), '0', "Creature", TCODColor::blue, 100, Armor("armor", TCODColor::pink, 0, 0)));
+	addCreature(std::make_shared<Creature>(Position4(64, 21, 3, 0), '2', "Creature", TCODColor::purple, 100, Armor("armor", TCODColor::pink, 200, 400)));
 }
 
 std::shared_ptr<Block> World::getTile(Position3 position) const
@@ -384,7 +386,7 @@ void World::update()
 
 	if (INPUT->num9->isSwitched) // repeatable create live creature
 	{
-		addCreature(std::make_shared<Creature>(Position4(30, 8, 3, 0), 'E', "Creature", TCODColor::white, 100, 0));
+		addCreature(std::make_shared<Creature>(Position4(30, 8, 3, 0), '0', "Creature", TCODColor::white, 100, Armor("", TCODColor::pink, 0, 0)));
 	}
 
 	updateEntities(); //needs to be first to prevent bad fov checks

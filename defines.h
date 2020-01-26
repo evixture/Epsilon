@@ -359,6 +359,15 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(0,				TCODColor::pink,			TCODColor::pink	, 0)							\
 		}																							\
 
+#define DATA_testArmor																				\
+		std::vector<std::shared_ptr<Tile>>{														\
+			std::make_shared<Tile>(234,	TCODColor::pink,	TCODColor::black, 0),	\
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0)							\
+		}																							\
+
 
 //TILES
 	//GROUND
@@ -425,6 +434,11 @@ ITEM SIZES
 		#define TOOL_Hands											std::make_shared<Tool>			("Hands",									ITEMCOLOR_HANDFG,															TCOD_CHAR_UMLAUT)
 	#define ITEM_Hands(x, y, level, owner)							std::make_shared<Item>			(1,											DEFAULT_ITEM_TILE,															TOOL_Hands,						Position4(x, y, 0, level),		owner,										Item::ItemType::NODROP)
 
+//testarmor
+		#define TILE_testArmor										std::make_shared<Block>			(DATA_testArmor, OOOOI, OOOOI)
+		#define ARMOR_testArmor										std::make_shared<Armor>			("test armor",								TCODColor::pink,															100,							300)
+	#define ITEM_testArmor(x, y, level, owner)						std::make_shared<Item>			(2,											TILE_testArmor,																ARMOR_testArmor,				Position4(x, y, 0, level),		owner,										Item::ItemType::ARMOR)
+
 //PISTOLS
 	//SIP45 (standard issue pistol .45 cal)
 		//WEAPON
@@ -441,7 +455,7 @@ ITEM SIZES
 	//SIR556 (standard issue rifle 5.56 cal)
 		//WEAPON
 				#define TILE_SIR556									std::make_shared<Block>			(DATA_Rifle, OOOOI, OOOOI)
-				#define WEAPON_SIR556									std::make_shared<Firearm>	("SIR556",									ITEMCOLOR_RIFLEFG,															.09f,							2.0f,							MagazineData::AmmoType::FIVEPOINTFIVESIX,	Firearm::FireType::FULL,	Firearm::FireType::FULL | Firearm::FireType::SEMI | Firearm::FireType::SAFE)
+				#define WEAPON_SIR556								std::make_shared<Firearm>		("SIR556",									ITEMCOLOR_RIFLEFG,															.09f,							2.0f,							MagazineData::AmmoType::FIVEPOINTFIVESIX,	Firearm::FireType::FULL,	Firearm::FireType::FULL | Firearm::FireType::SEMI | Firearm::FireType::SAFE)
 			#define ITEM_SIR556(x, y, level, owner)					std::make_shared<Item>			(3,											TILE_SIR556,																WEAPON_SIR556,					Position4(x, y, 0, level),		owner,										Item::ItemType::FIREARM)
 		//MAGAZINE
 					#define TILE_556Magazine30						std::make_shared<Block>			(DATA_RifleMagazine, OOOOI, OOOOI)

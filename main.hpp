@@ -24,6 +24,7 @@
 #include <E:/pugixml-1.10/src/pugixml.hpp>
 
 struct Pane;
+struct Creature;
 struct Player;
 
 //Class File Imports

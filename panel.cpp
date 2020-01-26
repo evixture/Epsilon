@@ -33,7 +33,7 @@ StatusWindow::StatusWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 void StatusWindow::update()
 {
 	displayHealth = WORLD->player->health;
-	displayArmor = WORLD->player->armor;
+	displayArmor =  WORLD->player->equippedArmor.defense - 50; //300 div def??
 }
 
 void StatusWindow::render() const
@@ -43,7 +43,7 @@ void StatusWindow::render() const
 	drawWindow->console->printf(0, 0, "Health : [");
 	for (int i = 0; i < 20; i++)
 	{
-		if (i * 5 < WORLD->player->health)
+		if (i * 5 < displayHealth)
 		{
 			drawWindow->console->printf(i + 10, 0, "=");
 			drawWindow->console->setCharForeground(i + 10, 0, TCODColor::red);
@@ -54,10 +54,10 @@ void StatusWindow::render() const
 	drawWindow->console->printf(0, 1, "Armor  : [");
 	for (int i = 0; i < 20; i++)
 	{
-		if (i * 5 < WORLD->player->armor)
+		if (i * 5 < displayArmor)
 		{
 			drawWindow->console->printf(i + 10, 1, "=");
-			drawWindow->console->setCharForeground(i + 10, 0, TCODColor::blue);
+			drawWindow->console->setCharForeground(i + 10, 1, TCODColor::blue);
 		}
 	}
 	drawWindow->console->printf(30, 1, "]");
