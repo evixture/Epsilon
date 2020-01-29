@@ -764,12 +764,12 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <DESCRIPTION>Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>TCODBsp::{ctor}</FUNCTION>
     <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
     <FUNCLINE>77</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>TCODBsp::w</targetSymbol>
+      <targetSymbol>TCODBsp::position</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT><DEFECT>
@@ -850,92 +850,92 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>226</LINE>
+      <LINE>232</LINE>
       <COLUMN>16</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorUp</FUNCTION>
     <DECORATED>?moveSelectorUp@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>210</FUNCLINE>
+    <FUNCLINE>216</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>235</LINE>
+      <LINE>241</LINE>
       <COLUMN>15</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>233</FUNCLINE>
+    <FUNCLINE>239</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>239</LINE>
+      <LINE>245</LINE>
       <COLUMN>20</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>233</FUNCLINE>
+    <FUNCLINE>239</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>248</LINE>
+      <LINE>254</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>233</FUNCLINE>
+    <FUNCLINE>239</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>333</LINE>
+      <LINE>339</LINE>
       <COLUMN>20</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>324</FUNCLINE>
+    <FUNCLINE>330</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>346</LINE>
+      <LINE>352</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>324</FUNCLINE>
+    <FUNCLINE>330</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>362</LINE>
+      <LINE>368</LINE>
       <COLUMN>18</COLUMN>
     </SFA>
     <DEFECTCODE>26812</DEFECTCODE>
     <DESCRIPTION>The enum type 'TCOD_chars_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>324</FUNCLINE>
+    <FUNCLINE>330</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
@@ -1200,30 +1200,27 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>tool.cpp</FILENAME>
-      <LINE>122</LINE>
-      <COLUMN>8</COLUMN>
+      <LINE>147</LINE>
+      <COLUMN>24</COLUMN>
     </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Bullet::height' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Bullet::{ctor}</FUNCTION>
-    <DECORATED>??0Bullet@@QEAA@HUPosition4@@HHHHHH@Z</DECORATED>
-    <FUNCLINE>122</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>Bullet::height</targetSymbol>
-    </ADDITIONALINFO>
+    <DEFECTCODE>6319</DEFECTCODE>
+    <DESCRIPTION>Use of the comma-operator in a tested expression causes the left argument to be ignored when it has no side-effects.</DESCRIPTION>
+    <FUNCTION>Bullet::update</FUNCTION>
+    <DECORATED>?update@Bullet@@QEAAXXZ</DECORATED>
+    <FUNCLINE>144</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>tool.cpp</FILENAME>
-      <LINE>519</LINE>
-      <COLUMN>56</COLUMN>
+      <LINE>212</LINE>
+      <COLUMN>24</COLUMN>
     </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>Firearm::update</FUNCTION>
-    <DECORATED>?update@Firearm@@UEAAXUPosition4@@HHN@Z</DECORATED>
-    <FUNCLINE>484</FUNCLINE>
+    <DEFECTCODE>6319</DEFECTCODE>
+    <DESCRIPTION>Use of the comma-operator in a tested expression causes the left argument to be ignored when it has no side-effects.</DESCRIPTION>
+    <FUNCTION>Bullet::update</FUNCTION>
+    <DECORATED>?update@Bullet@@QEAAXXZ</DECORATED>
+    <FUNCLINE>144</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>

@@ -592,9 +592,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/entity.cpp"
                 },
                 "region": {
-                  "startLine": 226,
+                  "startLine": 232,
                   "startColumn": 7,
-                  "endLine": 226,
+                  "endLine": 232,
                   "endColumn": 19
                 }
               },
@@ -614,9 +614,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/entity.cpp"
                 },
                 "region": {
-                  "startLine": 235,
+                  "startLine": 241,
                   "startColumn": 6,
-                  "endLine": 235,
+                  "endLine": 241,
                   "endColumn": 18
                 }
               },
@@ -636,9 +636,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/entity.cpp"
                 },
                 "region": {
-                  "startLine": 239,
+                  "startLine": 245,
                   "startColumn": 11,
-                  "endLine": 239,
+                  "endLine": 245,
                   "endColumn": 23
                 }
               },
@@ -658,9 +658,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/entity.cpp"
                 },
                 "region": {
-                  "startLine": 248,
+                  "startLine": 254,
                   "startColumn": 8,
-                  "endLine": 248,
+                  "endLine": 254,
                   "endColumn": 20
                 }
               },
@@ -680,9 +680,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/entity.cpp"
                 },
                 "region": {
-                  "startLine": 333,
+                  "startLine": 339,
                   "startColumn": 6,
-                  "endLine": 333,
+                  "endLine": 339,
                   "endColumn": 23
                 }
               },
@@ -702,9 +702,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/entity.cpp"
                 },
                 "region": {
-                  "startLine": 346,
+                  "startLine": 352,
                   "startColumn": 8,
-                  "endLine": 346,
+                  "endLine": 352,
                   "endColumn": 20
                 }
               },
@@ -724,9 +724,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/entity.cpp"
                 },
                 "region": {
-                  "startLine": 362,
+                  "startLine": 368,
                   "startColumn": 19,
-                  "endLine": 362,
+                  "endLine": 368,
                   "endColumn": 19
                 }
               },
@@ -743,7 +743,7 @@
       },
       "invocations": [
         {
-          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x01023170 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_26befee4ast -typedil -f entity.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1924 -D_MSC_FULL_VER=192428315 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Og -Ot -Oy -Oi -ltcg -DCODE_ANALYSIS -DNDEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Release\\entity.obj -Fdx64\\Release\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
+          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x01023170 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_64b60e6dast -typedil -f entity.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1924 -D_MSC_FULL_VER=192428315 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Og -Ot -Oy -Oi -ltcg -DCODE_ANALYSIS -DNDEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Release\\entity.obj -Fdx64\\Release\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
         }
       ],
       "files": {

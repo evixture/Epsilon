@@ -374,31 +374,28 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>tool.cpp</FILENAME>
-      <LINE>122</LINE>
-      <COLUMN>8</COLUMN>
+      <LINE>147</LINE>
+      <COLUMN>24</COLUMN>
     </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Bullet::height' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Bullet::{ctor}</FUNCTION>
-    <DECORATED>??0Bullet@@QEAA@HUPosition4@@HHHHHH@Z</DECORATED>
-    <FUNCLINE>122</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>Bullet::height</targetSymbol>
-    </ADDITIONALINFO>
+    <DEFECTCODE>6319</DEFECTCODE>
+    <DESCRIPTION>Use of the comma-operator in a tested expression causes the left argument to be ignored when it has no side-effects.</DESCRIPTION>
+    <FUNCTION>Bullet::update</FUNCTION>
+    <DECORATED>?update@Bullet@@QEAAXXZ</DECORATED>
+    <FUNCLINE>144</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>tool.cpp</FILENAME>
-      <LINE>519</LINE>
-      <COLUMN>56</COLUMN>
+      <LINE>212</LINE>
+      <COLUMN>24</COLUMN>
     </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>Firearm::update</FUNCTION>
-    <DECORATED>?update@Firearm@@UEAAXUPosition4@@HHN@Z</DECORATED>
-    <FUNCLINE>484</FUNCLINE>
+    <DEFECTCODE>6319</DEFECTCODE>
+    <DESCRIPTION>Use of the comma-operator in a tested expression causes the left argument to be ignored when it has no side-effects.</DESCRIPTION>
+    <FUNCTION>Bullet::update</FUNCTION>
+    <DECORATED>?update@Bullet@@QEAAXXZ</DECORATED>
+    <FUNCLINE>144</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

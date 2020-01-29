@@ -121,7 +121,7 @@ void Tool::render(const std::shared_ptr<Pane>& pane) const
 
 Bullet::Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
 	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(startPosition.x, startPosition.y, tox, toy)),
-	 mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveClock(Clock(float(1.0f / velocity), float(1.0f / velocity))), fallClock(Clock(getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1), getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1)))
+	 mapPosition(startPosition), mass(mass), baseVelocity(400), currentVelocity(400), moveClock(Clock(float(1.0f / velocity), float(1.0f / velocity))), fallClock(Clock(getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1), getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1)))
 {
 	do
 	{
@@ -143,79 +143,94 @@ Bullet::Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int 
 
 void Bullet::update()
 {
-	moveClock.update(true, false, false);
-	fallClock.update(true, false, false);
 
-	if (currentVelocity > 0 && mapPosition.height > 0)
+	while (moveClock.score > 1, moveClock.score--)
 	{
-		if (moveClock.isAtZero()) //change to use position after step to pass through and then set map position to step position if good
+		if (currentVelocity > 0 && mapPosition.height > 0)
 		{
-			if (WORLD->inMapBounds(mapPosition))
+			if (moveClock.isAtZero()) //change to use position after step to pass through and then set map position to step position if good
 			{
-				if (WORLD->getSolidity(mapPosition) == true)
+				if (WORLD->inMapBounds(mapPosition))
 				{
-					if (WORLD->getTile(mapPosition)->tag == Block::Tag::DESTRUCTIBLE)
-					{									  
-						WORLD->getTile(mapPosition)->interact();
-					}
-
-					if (currentVelocity - WORLD->getTile(mapPosition)->getTileData(mapPosition.height)->deceleration <= 0)
+					if (WORLD->getSolidity(mapPosition) == true)
 					{
-						currentVelocity = 0;
-					}
-					else
-					{
-						currentVelocity -= WORLD->getTile(mapPosition)->getTileData(mapPosition.height)->deceleration;
-					}
-					
-					GUI->logWindow->pushMessage(LogWindow::Message("You hit a wall!", LogWindow::Message::MessageLevel::HIGH));
-				}
-				else if (WORLD->getSolidity(mapPosition) == false)
-				{
-					for (auto& creature : WORLD->creatureList)
-					{
-						if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.level == mapPosition.level) //also checks height, may give bad results
+						if (WORLD->getTile(mapPosition)->tag == Block::Tag::DESTRUCTIBLE)
 						{
-							if (creature->health > 0)
+							WORLD->getTile(mapPosition)->interact();
+						}
+
+						if (currentVelocity - WORLD->getTile(mapPosition)->getTileData(mapPosition.height)->deceleration <= 0)
+						{
+							currentVelocity = 0;
+						}
+						else
+						{
+							currentVelocity -= WORLD->getTile(mapPosition)->getTileData(mapPosition.height)->deceleration;
+						}
+
+						GUI->logWindow->pushMessage(LogWindow::Message("You hit a wall!", LogWindow::Message::MessageLevel::HIGH));
+					}
+					else if (WORLD->getSolidity(mapPosition) == false)
+					{
+						for (auto& creature : WORLD->creatureList)
+						{
+							if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.level == mapPosition.level) //also checks height, may give bad results
 							{
-								creature->takeDamage(this);
+								if (creature->health > 0)
+								{
+									creature->takeDamage(this);
 
-								//int damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //replace with creature take damage function
-								//creature->health -= damage; //deal bullet damage, shoudl replace with deal damage function of creature
+									//int damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //replace with creature take damage function
+									//creature->health -= damage; //deal bullet damage, shoudl replace with deal damage function of creature
 
-								//if (currentVelocity - 100 < 0) //ballistics
-								//{
-								//	currentVelocity = 0;
-								//}
-								//else currentVelocity -= 100;
+									//if (currentVelocity - 100 < 0) //ballistics
+									//{
+									//	currentVelocity = 0;
+									//}
+									//else currentVelocity -= 100;
+								}
+
+								GUI->logWindow->pushMessage(LogWindow::Message("You hit a creature!", LogWindow::Message::MessageLevel::HIGH));
 							}
-
-							GUI->logWindow->pushMessage(LogWindow::Message("You hit a creature!", LogWindow::Message::MessageLevel::HIGH));
 						}
 					}
+					travel.step();
+					moveClock.update(false, true); //slow, may be perventing time reset 
 				}
-				travel.step();
-				moveClock.update(false, true, false);
-			}
-			else
-			{
-				currentVelocity = 0;
-				mapPosition.height = 0;
+				else
+				{
+					currentVelocity = 0;
+					mapPosition.height = 0;
+				}
+
+				//moveClock.score--;
 			}
 		}
-		if (fallClock.isAtZero())
-		{
-			mapPosition.height--;
-			fallClock.capacity = getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1);
-
-			fallClock.update(false, true, false);
-		}
-
-		moveClock.capacity = 1.0f / currentVelocity;
-
 	}
+	moveClock.score = 1;
 
-	mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.level); //second needed?
+	while (fallClock.score > 1, fallClock.score--)
+	{
+		if (currentVelocity > 0 && mapPosition.height > 0)
+		{
+			if (fallClock.isAtZero())
+			{
+				mapPosition.height--;
+				fallClock.capacity = getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1);
+
+				fallClock.update(false, true);
+				//fallClock.score--;
+			}
+
+			moveClock.capacity = 1.0f / currentVelocity;
+		}
+	}
+	fallClock.score = 1;
+
+	moveClock.update(true, false);
+	fallClock.update(true, false); //fast bullets still too slow
+
+	mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.level);
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
@@ -419,7 +434,7 @@ void Firearm::fireBullet()
 {
 	if (!(mapPosition.x == dx + mapPosition.x && mapPosition.y == dy + mapPosition.y))
 	{
-		fireClock.update(false, true, false);
+		fireClock.update(false, true);
 		if (ammoType == MagazineData::AmmoType::FIVEPOINTFIVESIX)
 		{
 			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, 300, 55));
@@ -438,7 +453,7 @@ void Firearm::reload(std::shared_ptr<MagazineData>& magazine)
 	if (magazine->isValid != false)
 	{
 		selectedMagazine = magazine;
-		reloadClock.update(false, true, false);
+		reloadClock.update(false, true);
 	}
 	else selectedMagazine = magazine;
 }
@@ -502,31 +517,38 @@ void Firearm::update(Position4 sourcePosition, int mx, int my, double angle)
 		if (fireMode == FireType::FULL && INPUT->leftMouseButton->isDown)
 		{
 			fireBullet();
-			fireClock.update(false, true, false);
+			fireClock.update(false, true);
 		}
 		else if (fireMode == FireType::SEMI && INPUT->leftMouseButton->isSwitched)
 		{
 			fireBullet();
-			fireClock.update(false, true, false);
+			fireClock.update(false, true);
 		}
 		else if (fireMode == FireType::SAFE)
 		{
 
 		}
 	}
-	fireClock.update(true, false, false);
+	fireClock.update(true, false);
 
-	if (bulletList.size() > selectedMagazine->ammoCapacity * 2) //clean up extra bullets
+	if (bulletList.size() > selectedMagazine->ammoCapacity) //clean up extra bullets
 	{
 		bulletList.pop_back();
 	}
 
-	for (auto& bullet : bulletList) //update bullets
+	for (int i = 0; i < bulletList.size(); ++i) //update bullets
 	{
-		bullet->update();
+		if (bulletList[i]->currentVelocity <= 0)
+		{
+			bulletList.erase(bulletList.begin() + i);
+		}
+		else
+		{
+			bulletList[i]->update();
+		}
 	}
 
-	reloadClock.update(true, false, false);
+	reloadClock.update(true, false);
 }
 
 void Firearm::render(const std::shared_ptr<Pane>& pane) const

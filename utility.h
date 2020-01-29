@@ -50,11 +50,13 @@ struct Clock //clock used for timings
 	float capacity; //number that the clock resets to
 	float step; //the steps util time is 0
 
-	std::function<void()> action;
+	int score; //rename to better descrip
 
-	Clock(float capacityInSeconds, float step, std::function<void()> action = NULL); //clock constructor that takes a capacity
+	//std::function<void()> action;
 
-	void update(bool tickDown, bool resetAtZero, bool callFunctionAtZero);
+	Clock(float capacityInSeconds, float step); //clock constructor that takes a capacity
+
+	void update(bool tickDown, bool resetAtZero);
 
 	bool isAtZero();
 

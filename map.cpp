@@ -315,7 +315,7 @@ bool World::getWalkability(Position4 position) const
 		}
 	}
 
-	if (walkableBool == true && getTile(position)->walkableFlag & heightToBitFlag(0))
+	if (walkableBool == true && walkableFlag & heightToBitFlag(0))
 	{
 		return true;
 	}

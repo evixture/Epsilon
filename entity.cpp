@@ -113,87 +113,93 @@ void Player::move()
 {
 	if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
 	{
-		if (INPUT->lshift->isDown) baseMoveTime = .25f;
-		else if (INPUT->lctrl->isDown)	baseMoveTime = 1.0f;
-		else baseMoveTime = .5f;
-
-		moveXSpeed = 0;
-		moveYSpeed = 0;
-
-		if (INPUT->z->isSwitched)
+		for (int i = 0; i < movementClock.score; i++)
 		{
-			int testHeight = mapPosition.height;
-			for (int i = 0; i < int(abs(testHeight - 1)); ++i)
+
+			if (INPUT->lshift->isDown) baseMoveTime = .25f;
+			else if (INPUT->lctrl->isDown)	baseMoveTime = 1.0f;
+			else baseMoveTime = .5f;
+
+			moveXSpeed = 0;
+			moveYSpeed = 0;
+
+			if (INPUT->z->isSwitched)
 			{
-				if (testHeight - 1 > 0)
+				int testHeight = mapPosition.height;
+				for (int i = 0; i < int(abs(testHeight - 1)); ++i)
 				{
-					changeStanceDown();
+					if (testHeight - 1 > 0)
+					{
+						changeStanceDown();
+					}
+					else if (testHeight - 1 < 0)
+					{
+						changeStanceUp();
+					}
 				}
-				else if (testHeight - 1 < 0)
+			}
+			if (INPUT->x->isSwitched)
+			{
+				int testHeight = mapPosition.height;
+				for (int i = 0; i < int(abs(testHeight - 2)); ++i)
 				{
-					changeStanceUp();
+					if (testHeight - 2 > 0)
+					{
+						changeStanceDown();
+					}
+					else if (testHeight - 2 < 0)
+					{
+						changeStanceUp();
+					}
+				}
+			}
+			if (INPUT->c->isSwitched)
+			{
+				int testHeight = mapPosition.height;
+				for (int i = 0; i < int(abs(testHeight - 3)); ++i)
+				{
+					if (testHeight - 3 > 0)
+					{
+						changeStanceDown();
+					}
+					else if (testHeight - 3 < 0)
+					{
+						changeStanceUp();
+					}
+				}
+			}
+
+			movementClock.capacity = float(baseMoveTime / mapPosition.height);
+
+			if (INPUT->w->isDown && INPUT->s->isDown) moveYSpeed = 0;
+			else if (INPUT->w->isDown && !INPUT->s->isDown) moveYSpeed = -1;
+			else if (INPUT->s->isDown && !INPUT->w->isDown) moveYSpeed = 1;
+
+			if (INPUT->a->isDown && INPUT->d->isDown) moveXSpeed = 0;
+			else if (INPUT->a->isDown && !INPUT->d->isDown) moveXSpeed = -1;
+			else if (INPUT->d->isDown && !INPUT->a->isDown) moveXSpeed = 1;
+
+			if (moveXSpeed != 0 || moveYSpeed != 0)
+			{
+				if (movementClock.isAtZero())
+				{
+			
+					if (WORLD->getWalkability(Position4(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.height, mapPosition.level)))
+					{
+						mapPosition.x += moveXSpeed;
+						moveXSpeed = 0;
+					}
+					if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.height, mapPosition.level)))
+					{
+						mapPosition.y += moveYSpeed;
+						moveYSpeed = 0;
+					}
+					movementClock.update(false, true); //
+					--movementClock.score;
 				}
 			}
 		}
-		if (INPUT->x->isSwitched)
-		{
-			int testHeight = mapPosition.height;
-			for (int i = 0; i < int(abs(testHeight - 2)); ++i)
-			{
-				if (testHeight - 2 > 0)
-				{
-					changeStanceDown();
-				}
-				else if (testHeight - 2 < 0)
-				{
-					changeStanceUp();
-				}
-			}
-		}
-		if (INPUT->c->isSwitched)
-		{
-			int testHeight = mapPosition.height;
-			for (int i = 0; i < int(abs(testHeight - 3)); ++i)
-			{
-				if (testHeight - 3 > 0)
-				{
-					changeStanceDown();
-				}
-				else if (testHeight - 3 < 0)
-				{
-					changeStanceUp();
-				}
-			}
-		}
-
-		movementClock.capacity = float(baseMoveTime / mapPosition.height);
-
-		if (INPUT->w->isDown && INPUT->s->isDown) moveYSpeed = 0;
-		else if (INPUT->w->isDown && !INPUT->s->isDown) moveYSpeed = -1;
-		else if (INPUT->s->isDown && !INPUT->w->isDown) moveYSpeed = 1;
-
-		if (INPUT->a->isDown && INPUT->d->isDown) moveXSpeed = 0;
-		else if (INPUT->a->isDown && !INPUT->d->isDown) moveXSpeed = -1;
-		else if (INPUT->d->isDown && !INPUT->a->isDown) moveXSpeed = 1;
-
-		if (moveXSpeed != 0 || moveYSpeed != 0)
-		{
-			if (movementClock.isAtZero())
-			{
-				if (WORLD->getWalkability(Position4(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.height, mapPosition.level)))
-				{
-					mapPosition.x += moveXSpeed;
-					moveXSpeed = 0;
-				}
-				if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.height, mapPosition.level)))
-				{
-					mapPosition.y += moveYSpeed;
-					moveYSpeed = 0;
-				}
-				movementClock.update(false, true, false);
-			}
-		}
-			movementClock.update(true, false, false);
+				movementClock.update(true, false); //
 	}
 }
 

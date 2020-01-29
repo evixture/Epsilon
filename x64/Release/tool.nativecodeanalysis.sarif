@@ -559,9 +559,9 @@
           ]
         },
         {
-          "ruleId": "26495",
+          "ruleId": "6319",
           "message": {
-            "text": "Variable 'Bullet::height' is uninitialized. Always initialize a member variable (type.6)."
+            "text": "Use of the comma-operator in a tested expression causes the left argument to be ignored when it has no side-effects."
           },
           "locations": [
             {
@@ -570,23 +570,20 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/tool.cpp"
                 },
                 "region": {
-                  "startLine": 122,
+                  "startLine": 147,
                   "startColumn": 9,
-                  "endLine": 122,
-                  "endColumn": 9
+                  "endLine": 147,
+                  "endColumn": 27
                 }
               },
-              "fullyQualifiedLogicalName": "public: __cdecl Bullet::Bullet(int,struct Position4,int,int,int,int,int,int)"
+              "fullyQualifiedLogicalName": "public: void __cdecl Bullet::update(void)"
             }
-          ],
-          "properties": {
-            "targetSymbol": "Bullet::height"
-          }
+          ]
         },
         {
-          "ruleId": "26451",
+          "ruleId": "6319",
           "message": {
-            "text": "Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2)."
+            "text": "Use of the comma-operator in a tested expression causes the left argument to be ignored when it has no side-effects."
           },
           "locations": [
             {
@@ -595,13 +592,13 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/tool.cpp"
                 },
                 "region": {
-                  "startLine": 519,
-                  "startColumn": 26,
-                  "endLine": 519,
-                  "endColumn": 59
+                  "startLine": 212,
+                  "startColumn": 9,
+                  "endLine": 212,
+                  "endColumn": 27
                 }
               },
-              "fullyQualifiedLogicalName": "public: virtual void __cdecl Firearm::update(struct Position4,int,int,double)"
+              "fullyQualifiedLogicalName": "public: void __cdecl Bullet::update(void)"
             }
           ]
         }
@@ -614,26 +611,10 @@
       },
       "invocations": [
         {
-          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x01023170 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_ff7c155bast -typedil -f tool.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1924 -D_MSC_FULL_VER=192428315 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Og -Ot -Oy -Oi -ltcg -DCODE_ANALYSIS -DNDEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Release\\tool.obj -Fdx64\\Release\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
+          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x01023170 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_e1d9f65fast -typedil -f tool.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1924 -D_MSC_FULL_VER=192428315 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Og -Ot -Oy -Oi -ltcg -DCODE_ANALYSIS -DNDEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Release\\tool.obj -Fdx64\\Release\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
         }
       ],
       "files": {
-        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/sys.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/projects/visual studio/libtcod development/epsilon/window.cpp": {
-          "roles": [
-            "analysisTarget",
-            "resultFile"
-          ]
-        },
-        "file:///e:/sfml/sfml-2.5.1/include/sfml/window.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
         "file:///e:/libtcod/custom-libtcod-master/src/libtcod/color.hpp": {
           "roles": [
             "resultFile"
@@ -641,6 +622,23 @@
         },
         "file:///e:/projects/visual studio/libtcod development/epsilon/main.hpp": {
           "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/path.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/utility.cpp": {
+          "roles": [
+            "analysisTarget",
             "resultFile"
           ]
         },
@@ -909,18 +907,12 @@
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/path.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp": {
-          "roles": [
-            "analysisTarget",
-            "resultFile"
-          ]
-        },
         "file:///e:/libtcod/custom-libtcod-master/src/libtcod/parser.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/sys.h": {
           "roles": [
             "resultFile"
           ]
@@ -996,6 +988,11 @@
           ]
         },
         "file:///e:/libtcod/custom-libtcod-master/src/libtcod/zip.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window.hpp": {
           "roles": [
             "resultFile"
           ]
@@ -1257,12 +1254,6 @@
         },
         "file:///e:/projects/visual studio/libtcod development/epsilon/engine.h": {
           "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/projects/visual studio/libtcod development/epsilon/utility.cpp": {
-          "roles": [
-            "analysisTarget",
             "resultFile"
           ]
         }
