@@ -45,25 +45,25 @@ private:
 		origy,  destx,  desty;
 };
 
-struct Clock //clock used for timings
-{
-	float capacity; //number that the clock resets to
-	float step; //the steps util time is 0
-
-	int score; //rename to better descrip
-
-	//std::function<void()> action;
-
-	Clock(float capacityInSeconds, float step); //clock constructor that takes a capacity
-
-	void update(bool tickDown, bool resetAtZero);
-
-	bool isAtZero();
-
-	//void tickDown(); //ticks clock down, does not reset at 0
-	//void tickDownWithReset(); //ticks clock down, resets at 0
-	//void reset(); //sets step to capacity
-};
+//struct Clock //clock used for timings
+//{
+//	float capacity; //number that the clock resets to
+//	float step; //the steps util time is 0
+//
+//	int score; //rename to better descrip
+//
+//	//std::function<void()> action;
+//
+//	Clock(float capacityInSeconds, float step); //clock constructor that takes a capacity
+//
+//	void update(bool tickDown, bool resetAtZero);
+//
+//	bool isAtZero();
+//
+//	//void tickDown(); //ticks clock down, does not reset at 0
+//	//void tickDownWithReset(); //ticks clock down, resets at 0
+//	//void reset(); //sets step to capacity
+//};
 
 unsigned char	heightToBitFlag(int height);
 double			getAngle(int ix, int iy, int tx, int ty); //gets the angle from 2 sets of coordinates

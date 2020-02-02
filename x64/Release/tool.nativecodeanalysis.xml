@@ -370,32 +370,4 @@
     <FUNCLINE>3</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>tool.cpp</FILENAME>
-      <LINE>147</LINE>
-      <COLUMN>24</COLUMN>
-    </SFA>
-    <DEFECTCODE>6319</DEFECTCODE>
-    <DESCRIPTION>Use of the comma-operator in a tested expression causes the left argument to be ignored when it has no side-effects.</DESCRIPTION>
-    <FUNCTION>Bullet::update</FUNCTION>
-    <DECORATED>?update@Bullet@@QEAAXXZ</DECORATED>
-    <FUNCLINE>144</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>tool.cpp</FILENAME>
-      <LINE>212</LINE>
-      <COLUMN>24</COLUMN>
-    </SFA>
-    <DEFECTCODE>6319</DEFECTCODE>
-    <DESCRIPTION>Use of the comma-operator in a tested expression causes the left argument to be ignored when it has no side-effects.</DESCRIPTION>
-    <FUNCTION>Bullet::update</FUNCTION>
-    <DECORATED>?update@Bullet@@QEAAXXZ</DECORATED>
-    <FUNCLINE>144</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
 </DEFECTS>

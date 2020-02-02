@@ -86,7 +86,7 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Player::Player(Position4 position)
-	:Creature(position, '@', "player", UICOLOR_Player_Color, 100, Armor("", TCODColor::pink, 0, 0)), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), movementClock(Clock(1.0f, 0.0f))
+	:Creature(position, '@', "player", UICOLOR_Player_Color, 100, Armor("", TCODColor::pink, 0, 0)), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), moveNumCalls(0), moveSpeed(0)
 {
 	inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
 	inventory[0]->addItem(	ITEM_SIP45(0, 0, 0, this));
@@ -113,17 +113,14 @@ void Player::move()
 {
 	if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
 	{
-		for (int i = 0; i < movementClock.score; i++)
-		{
+		if (INPUT->lshift->isDown) baseMoveTime = .25f;
+		else if (INPUT->lctrl->isDown)	baseMoveTime = 1.0f;
+		else baseMoveTime = .5f;
 
-			if (INPUT->lshift->isDown) baseMoveTime = .25f;
-			else if (INPUT->lctrl->isDown)	baseMoveTime = 1.0f;
-			else baseMoveTime = .5f;
+		moveXSpeed = 0;
+		moveYSpeed = 0;
 
-			moveXSpeed = 0;
-			moveYSpeed = 0;
-
-			if (INPUT->z->isSwitched)
+		if (INPUT->z->isSwitched)
 			{
 				int testHeight = mapPosition.height;
 				for (int i = 0; i < int(abs(testHeight - 1)); ++i)
@@ -138,7 +135,7 @@ void Player::move()
 					}
 				}
 			}
-			if (INPUT->x->isSwitched)
+		if (INPUT->x->isSwitched)
 			{
 				int testHeight = mapPosition.height;
 				for (int i = 0; i < int(abs(testHeight - 2)); ++i)
@@ -153,7 +150,7 @@ void Player::move()
 					}
 				}
 			}
-			if (INPUT->c->isSwitched)
+		if (INPUT->c->isSwitched)
 			{
 				int testHeight = mapPosition.height;
 				for (int i = 0; i < int(abs(testHeight - 3)); ++i)
@@ -169,37 +166,34 @@ void Player::move()
 				}
 			}
 
-			movementClock.capacity = float(baseMoveTime / mapPosition.height);
+		moveSpeed = baseMoveTime / mapPosition.height;
 
-			if (INPUT->w->isDown && INPUT->s->isDown) moveYSpeed = 0;
-			else if (INPUT->w->isDown && !INPUT->s->isDown) moveYSpeed = -1;
-			else if (INPUT->s->isDown && !INPUT->w->isDown) moveYSpeed = 1;
+		if (INPUT->w->isDown && INPUT->s->isDown) moveYSpeed = 0;
+		else if (INPUT->w->isDown && !INPUT->s->isDown) moveYSpeed = -1;
+		else if (INPUT->s->isDown && !INPUT->w->isDown) moveYSpeed = 1;
 
-			if (INPUT->a->isDown && INPUT->d->isDown) moveXSpeed = 0;
-			else if (INPUT->a->isDown && !INPUT->d->isDown) moveXSpeed = -1;
-			else if (INPUT->d->isDown && !INPUT->a->isDown) moveXSpeed = 1;
+		if (INPUT->a->isDown && INPUT->d->isDown) moveXSpeed = 0;
+		else if (INPUT->a->isDown && !INPUT->d->isDown) moveXSpeed = -1;
+		else if (INPUT->d->isDown && !INPUT->a->isDown) moveXSpeed = 1;
 
-			if (moveXSpeed != 0 || moveYSpeed != 0)
+		if (moveXSpeed != 0 || moveYSpeed != 0)
+		{
+			moveNumCalls += SETTINGS->lastFrameTime.asSeconds() / moveSpeed;
+			for (int i = 1; i <= moveNumCalls; moveNumCalls--)
 			{
-				if (movementClock.isAtZero())
+		
+				if (WORLD->getWalkability(Position4(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.height, mapPosition.level)))
 				{
-			
-					if (WORLD->getWalkability(Position4(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.height, mapPosition.level)))
-					{
-						mapPosition.x += moveXSpeed;
-						moveXSpeed = 0;
-					}
-					if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.height, mapPosition.level)))
-					{
-						mapPosition.y += moveYSpeed;
-						moveYSpeed = 0;
-					}
-					movementClock.update(false, true); //
-					--movementClock.score;
+					mapPosition.x += moveXSpeed;
+					moveXSpeed = 0;
+				}
+				if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.height, mapPosition.level)))
+				{
+					mapPosition.y += moveYSpeed;
+					moveYSpeed = 0;
 				}
 			}
 		}
-				movementClock.update(true, false); //
 	}
 }
 

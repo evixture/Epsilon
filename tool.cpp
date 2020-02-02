@@ -121,7 +121,7 @@ void Tool::render(const std::shared_ptr<Pane>& pane) const
 
 Bullet::Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
 	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(startPosition.x, startPosition.y, tox, toy)),
-	 mapPosition(startPosition), mass(mass), baseVelocity(400), currentVelocity(400), moveClock(Clock(float(1.0f / velocity), float(1.0f / velocity))), fallClock(Clock(getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1), getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1)))
+	mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveNumCalls(0), fallNumCalls(0)
 {
 	do
 	{
@@ -143,16 +143,15 @@ Bullet::Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int 
 
 void Bullet::update()
 {
-
-	while (moveClock.score > 1, moveClock.score--)
-	{
 		if (currentVelocity > 0 && mapPosition.height > 0)
 		{
-			if (moveClock.isAtZero()) //change to use position after step to pass through and then set map position to step position if good
+			moveNumCalls += SETTINGS->lastFrameTime.asSeconds() / (1.0f / currentVelocity);
+
+			for (int i = 1; i < moveNumCalls; moveNumCalls--)
 			{
 				if (WORLD->inMapBounds(mapPosition))
 				{
-					if (WORLD->getSolidity(mapPosition) == true)
+					if (WORLD->getSolidity(mapPosition) == true) //if hit a wall
 					{
 						if (WORLD->getTile(mapPosition)->tag == Block::Tag::DESTRUCTIBLE)
 						{
@@ -172,22 +171,13 @@ void Bullet::update()
 					}
 					else if (WORLD->getSolidity(mapPosition) == false)
 					{
-						for (auto& creature : WORLD->creatureList)
+						for (auto& creature : WORLD->creatureList) //if hit a creature
 						{
 							if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.level == mapPosition.level) //also checks height, may give bad results
 							{
 								if (creature->health > 0)
 								{
 									creature->takeDamage(this);
-
-									//int damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //replace with creature take damage function
-									//creature->health -= damage; //deal bullet damage, shoudl replace with deal damage function of creature
-
-									//if (currentVelocity - 100 < 0) //ballistics
-									//{
-									//	currentVelocity = 0;
-									//}
-									//else currentVelocity -= 100;
 								}
 
 								GUI->logWindow->pushMessage(LogWindow::Message("You hit a creature!", LogWindow::Message::MessageLevel::HIGH));
@@ -195,7 +185,6 @@ void Bullet::update()
 						}
 					}
 					travel.step();
-					moveClock.update(false, true); //slow, may be perventing time reset 
 				}
 				else
 				{
@@ -203,34 +192,24 @@ void Bullet::update()
 					mapPosition.height = 0;
 				}
 
-				//moveClock.score--;
-			}
-		}
-	}
-	moveClock.score = 1;
+				mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.level);
 
-	while (fallClock.score > 1, fallClock.score--)
-	{
+			}
+
+		}
+	
 		if (currentVelocity > 0 && mapPosition.height > 0)
 		{
-			if (fallClock.isAtZero())
+			fallNumCalls += SETTINGS->lastFrameTime.asSeconds() / (getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1));
+
+			for (int i = 1; i < fallNumCalls; fallNumCalls--)
 			{
 				mapPosition.height--;
-				fallClock.capacity = getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1);
-
-				fallClock.update(false, true);
-				//fallClock.score--;
 			}
-
-			moveClock.capacity = 1.0f / currentVelocity;
+			mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.level);
 		}
-	}
-	fallClock.score = 1;
 
-	moveClock.update(true, false);
-	fallClock.update(true, false); //fast bullets still too slow
-
-	mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.level);
+	mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.level); //needed??
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
@@ -266,9 +245,10 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Firearm::Firearm(std::string name, TCODColor color, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
-	:Tool(name, color, ammoType, fireMode, availibleFireModeFlag), maxFireTime(fireRate), maxReloadTime(reloadSpeed),
-	fireClock(Clock(fireRate, 0.0f)), reloadClock(Clock(reloadSpeed, 0.0f)), selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
+Firearm::Firearm(std::string name, TCODColor color, int fireRPM, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
+	:Tool(name, color, ammoType, fireMode, availibleFireModeFlag), fireRPM(fireRPM), reloadRPS(reloadSpeed),
+	//fireClock(Clock(fireRate, 0.0f)), reloadClock(Clock(reloadSpeed, 0.0f)),
+	selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), fireNumCalls(0), reloadNumCalls(0)
 {}
 
 void Firearm::updateWeaponChar(double angle)
@@ -283,7 +263,7 @@ void Firearm::updateWeaponChar(double angle)
 	{
 		if (angle <= 22.5)
 		{
-			if (!reloadClock.isAtZero())
+			if (!(reloadNumCalls >= 0))
 			{
 				ch = '/';
 			}
@@ -294,7 +274,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
-			if (!reloadClock.isAtZero())
+			if (!(reloadNumCalls >= 0))
 			{
 				ch = TCOD_CHAR_HLINE;
 			}
@@ -305,7 +285,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle >= 67.5)
 		{
-			if (!reloadClock.isAtZero())
+			if (!(reloadNumCalls >= 0))
 			{
 				ch = '\\';
 			}
@@ -319,7 +299,7 @@ void Firearm::updateWeaponChar(double angle)
 	{
 		if (angle >= -22.5)
 		{
-			if (!reloadClock.isAtZero())
+			if (!(reloadNumCalls >= 0))
 			{
 				ch = '/';
 			}
@@ -330,7 +310,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
-			if (!reloadClock.isAtZero())
+			if (!(reloadNumCalls >= 0))
 			{
 				ch = TCOD_CHAR_VLINE;
 			}
@@ -341,7 +321,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle <= -67.5)
 		{
-			if (!reloadClock.isAtZero())
+			if (!(reloadNumCalls >= 0))
 			{
 				ch = '\\';
 			}
@@ -355,7 +335,7 @@ void Firearm::updateWeaponChar(double angle)
 	{
 		if (angle >= -22.5)
 		{
-			if (!reloadClock.isAtZero())
+			if (!(reloadNumCalls >= 0))
 			{
 				ch = '/';
 			}
@@ -366,7 +346,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
-			if (!reloadClock.isAtZero())
+			if (!(reloadNumCalls >= 0))
 			{
 				ch = TCOD_CHAR_VLINE;
 			}
@@ -377,7 +357,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle <= -67.5)
 		{
-			if (!reloadClock.isAtZero())
+			if (!(reloadNumCalls >= 0))
 			{
 				ch = '\\';
 			}
@@ -391,7 +371,7 @@ void Firearm::updateWeaponChar(double angle)
 	{
 		if (angle <= 22.5)
 		{
-			if (!reloadClock.isAtZero())
+			if (!(reloadNumCalls >= 0))
 			{
 				ch = '/';
 			}
@@ -402,7 +382,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
-			if (!reloadClock.isAtZero())
+			if (!(reloadNumCalls >= 0))
 			{
 				ch = TCOD_CHAR_HLINE;
 			}
@@ -413,7 +393,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle >= 67.5)
 		{
-			if (!reloadClock.isAtZero())
+			if (!(reloadNumCalls >= 0))
 			{
 				ch = '\\';
 			}
@@ -434,17 +414,29 @@ void Firearm::fireBullet()
 {
 	if (!(mapPosition.x == dx + mapPosition.x && mapPosition.y == dy + mapPosition.y))
 	{
-		fireClock.update(false, true);
-		if (ammoType == MagazineData::AmmoType::FIVEPOINTFIVESIX)
+		if (fireMode == FireType::SEMI)
 		{
-			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, 300, 55));
+			fireNumCalls = 1;
 		}
 		else
 		{
-			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, 80, 230));
-
+			fireNumCalls += SETTINGS->lastFrameTime.asSeconds() / (60.0f / fireRPM);
 		}
-		selectedMagazine->availableAmmo--;
+
+		for (int i = 1; i <= fireNumCalls; fireNumCalls--)
+		{
+			if (ammoType == MagazineData::AmmoType::FIVEPOINTFIVESIX)
+			{
+				bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, 300, 55));
+			}
+			else
+			{
+				bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, 80, 230));
+
+			}
+			selectedMagazine->availableAmmo--;
+		}
+
 	}
 }
 
@@ -452,10 +444,13 @@ void Firearm::reload(std::shared_ptr<MagazineData>& magazine)
 {
 	if (magazine->isValid != false)
 	{
-		selectedMagazine = magazine;
-		reloadClock.update(false, true);
+		if (reloadNumCalls >= 0) //if it can reload
+		{
+			selectedMagazine = magazine;
+			reloadNumCalls -= reloadRPS;
+		}
 	}
-	else selectedMagazine = magazine;
+//	else selectedMagazine = magazine;
 }
 
 void Firearm::changeFireMode()
@@ -512,24 +507,22 @@ void Firearm::update(Position4 sourcePosition, int mx, int my, double angle)
 
 	updateWeaponChar(angle);
 	
-	if (fireClock.isAtZero() && selectedMagazine->availableAmmo != 0 && reloadClock.isAtZero()) //fires bullet
+	if (fireNumCalls >= 0 && selectedMagazine->availableAmmo != 0 && reloadNumCalls >= 0) //fires bullet
 	{
+		
 		if (fireMode == FireType::FULL && INPUT->leftMouseButton->isDown)
 		{
 			fireBullet();
-			fireClock.update(false, true);
 		}
 		else if (fireMode == FireType::SEMI && INPUT->leftMouseButton->isSwitched)
 		{
 			fireBullet();
-			fireClock.update(false, true);
 		}
 		else if (fireMode == FireType::SAFE)
 		{
 
 		}
 	}
-	fireClock.update(true, false);
 
 	if (bulletList.size() > selectedMagazine->ammoCapacity) //clean up extra bullets
 	{
@@ -548,7 +541,10 @@ void Firearm::update(Position4 sourcePosition, int mx, int my, double angle)
 		}
 	}
 
-	reloadClock.update(true, false);
+	if (reloadNumCalls < 0)
+	{
+		reloadNumCalls += SETTINGS->lastFrameTime.asSeconds();
+	}
 }
 
 void Firearm::render(const std::shared_ptr<Pane>& pane) const

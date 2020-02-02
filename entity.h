@@ -73,7 +73,8 @@ struct Player : public Creature //player derived creature that the player intera
 	void render(const std::shared_ptr<Pane>& pane) const; //renders the player
 
 private:
-	Clock movementClock; //clock for player input
+	float moveNumCalls;
+	float moveSpeed;
 
 	char moveXSpeed; //the amount that the player moves in the x dimension
 	char moveYSpeed; //the amount that the player moves in the y dimension

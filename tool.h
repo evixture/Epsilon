@@ -64,20 +64,21 @@ private:
 	int ybound; //CHECK y map bound
 
 	BLine travel; //bresanham line that the bullet travels along
-	Clock moveClock; //clock that determines when bullet moves
-	Clock fallClock;
 
 	Position4 renderPosition;
+
+	float moveNumCalls;
+	float fallNumCalls;
 };
 
 struct Firearm : public Tool //firearm that fires bullets that interact with the world
 {
 	std::shared_ptr<MagazineData> selectedMagazine; //the magazine that is currently in the firearm, is a generic mag if no mag is in firearm
 
-	float maxFireTime; //maximum time in seconds that it takes for the next bullet to fire
-	float maxReloadTime; //maximum time in seconds it takes to reload the magazine
+	int fireRPM; //maximum time in seconds that it takes for the next bullet to fire
+	float reloadRPS; //maximum time in seconds it takes to reload the magazine
 
-	Firearm(std::string name, TCODColor color, float fireRate, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag); //constructor of firearm that takes string name, foreground color, fire rate, reload speed, ammo type, and fire type
+	Firearm(std::string name, TCODColor color, int fireRPM, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag); //constructor of firearm that takes string name, foreground color, fire rate, reload speed, ammo type, and fire type
 
 	std::shared_ptr<MagazineData> getMagData(); //returns the important data of the selected magazine
 
@@ -90,8 +91,11 @@ struct Firearm : public Tool //firearm that fires bullets that interact with the
 private:
 	std::vector<std::shared_ptr<Bullet>> bulletList; //private list of bullets that the fire owns
 
-	Clock fireClock; //clock that determines when the firearm fires
-	Clock reloadClock; //clock that determines how long it takes for the firearm to reload
+	//Clock fireClock; //clock that determines when the firearm fires
+	//Clock reloadClock; //clock that determines how long it takes for the firearm to reload
+
+	float fireNumCalls;
+	float reloadNumCalls;
 
 	void updateWeaponChar(double angle); //updates the weapon character
 	void fireBullet(); //fires a bullet
