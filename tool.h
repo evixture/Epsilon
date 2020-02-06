@@ -67,8 +67,11 @@ private:
 
 	Position4 renderPosition;
 
-	float moveNumCalls;
-	float fallNumCalls;
+	Clock moveClock;
+	Clock fallClock;
+
+	//float moveNumCalls;
+	//float fallNumCalls;
 };
 
 struct Firearm : public Tool //firearm that fires bullets that interact with the world
@@ -76,7 +79,7 @@ struct Firearm : public Tool //firearm that fires bullets that interact with the
 	std::shared_ptr<MagazineData> selectedMagazine; //the magazine that is currently in the firearm, is a generic mag if no mag is in firearm
 
 	int fireRPM; //maximum time in seconds that it takes for the next bullet to fire
-	float reloadRPS; //maximum time in seconds it takes to reload the magazine
+	float reloadTime; //maximum time in seconds it takes to reload the magazine
 
 	Firearm(std::string name, TCODColor color, int fireRPM, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag); //constructor of firearm that takes string name, foreground color, fire rate, reload speed, ammo type, and fire type
 
@@ -94,8 +97,11 @@ private:
 	//Clock fireClock; //clock that determines when the firearm fires
 	//Clock reloadClock; //clock that determines how long it takes for the firearm to reload
 
-	float fireNumCalls;
-	float reloadNumCalls;
+	//float fireNumCalls;
+	//float reloadNumCalls;
+
+	Clock fireClock;
+	Clock reloadClock;
 
 	void updateWeaponChar(double angle); //updates the weapon character
 	void fireBullet(); //fires a bullet

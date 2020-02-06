@@ -45,6 +45,17 @@ private:
 		origy,  destx,  desty;
 };
 
+struct Clock
+{
+	float numCalls;
+	float timeBetweenUpdates;
+
+	Clock(float timeBetweenUpdates);
+
+	void tickUp();
+	void addTime(float seconds);
+};
+
 //struct Clock //clock used for timings
 //{
 //	float capacity; //number that the clock resets to
@@ -56,11 +67,11 @@ private:
 //
 //	Clock(float capacityInSeconds, float step); //clock constructor that takes a capacity
 //
-//	void update(bool tickDown, bool resetAtZero);
+//	void update(bool tickUp, bool resetAtZero);
 //
 //	bool isAtZero();
 //
-//	//void tickDown(); //ticks clock down, does not reset at 0
+//	//void tickUp(); //ticks clock down, does not reset at 0
 //	//void tickDownWithReset(); //ticks clock down, resets at 0
 //	//void reset(); //sets step to capacity
 //};

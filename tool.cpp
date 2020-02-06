@@ -121,7 +121,7 @@ void Tool::render(const std::shared_ptr<Pane>& pane) const
 
 Bullet::Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
 	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(startPosition.x, startPosition.y, tox, toy)),
-	mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveNumCalls(0), fallNumCalls(0)
+	mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveClock(1.0f / velocity), fallClock(0)//, moveNumCalls(0), fallNumCalls(0)
 {
 	do
 	{
@@ -145,9 +145,10 @@ void Bullet::update()
 {
 		if (currentVelocity > 0 && mapPosition.height > 0)
 		{
-			moveNumCalls += SETTINGS->lastFrameTime.asSeconds() / (1.0f / currentVelocity);
+			//moveNumCalls += SETTINGS->lastFrameTime.asSeconds() / (1.0f / currentVelocity);
+			moveClock.tickUp();
 
-			for (int i = 1; i < moveNumCalls; moveNumCalls--)
+			for (int i = 1; i < moveClock.numCalls; moveClock.numCalls--)
 			{
 				if (WORLD->inMapBounds(mapPosition))
 				{
@@ -200,9 +201,12 @@ void Bullet::update()
 	
 		if (currentVelocity > 0 && mapPosition.height > 0)
 		{
-			fallNumCalls += SETTINGS->lastFrameTime.asSeconds() / (getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1));
+			//fallNumCalls += SETTINGS->lastFrameTime.asSeconds() / (getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1));
 
-			for (int i = 1; i < fallNumCalls; fallNumCalls--)
+			fallClock.timeBetweenUpdates = (getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1)); //need??
+			fallClock.tickUp();
+
+			for (int i = 1; i < fallClock.numCalls; fallClock.numCalls--)
 			{
 				mapPosition.height--;
 			}
@@ -245,10 +249,10 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Firearm::Firearm(std::string name, TCODColor color, int fireRPM, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
-	:Tool(name, color, ammoType, fireMode, availibleFireModeFlag), fireRPM(fireRPM), reloadRPS(reloadSpeed),
+Firearm::Firearm(std::string name, TCODColor color, int shotsPerSecond, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
+	:Tool(name, color, ammoType, fireMode, availibleFireModeFlag), fireRPM(shotsPerSecond), reloadTime(reloadSpeed),
 	//fireClock(Clock(fireRate, 0.0f)), reloadClock(Clock(reloadSpeed, 0.0f)),
-	selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), fireNumCalls(0), reloadNumCalls(0)
+	selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), fireClock(shotsPerSecond), reloadClock(reloadSpeed)//, fireNumCalls(0), reloadNumCalls(0)
 {}
 
 void Firearm::updateWeaponChar(double angle)
@@ -263,7 +267,7 @@ void Firearm::updateWeaponChar(double angle)
 	{
 		if (angle <= 22.5)
 		{
-			if (!(reloadNumCalls >= 0))
+			if (!(reloadClock.numCalls >= 0))
 			{
 				ch = '/';
 			}
@@ -274,7 +278,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
-			if (!(reloadNumCalls >= 0))
+			if (!(reloadClock.numCalls >= 0))
 			{
 				ch = TCOD_CHAR_HLINE;
 			}
@@ -285,7 +289,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle >= 67.5)
 		{
-			if (!(reloadNumCalls >= 0))
+			if (!(reloadClock.numCalls >= 0))
 			{
 				ch = '\\';
 			}
@@ -299,7 +303,7 @@ void Firearm::updateWeaponChar(double angle)
 	{
 		if (angle >= -22.5)
 		{
-			if (!(reloadNumCalls >= 0))
+			if (!(reloadClock.numCalls >= 0))
 			{
 				ch = '/';
 			}
@@ -310,7 +314,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
-			if (!(reloadNumCalls >= 0))
+			if (!(reloadClock.numCalls >= 0))
 			{
 				ch = TCOD_CHAR_VLINE;
 			}
@@ -321,7 +325,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle <= -67.5)
 		{
-			if (!(reloadNumCalls >= 0))
+			if (!(reloadClock.numCalls >= 0))
 			{
 				ch = '\\';
 			}
@@ -335,7 +339,7 @@ void Firearm::updateWeaponChar(double angle)
 	{
 		if (angle >= -22.5)
 		{
-			if (!(reloadNumCalls >= 0))
+			if (!(reloadClock.numCalls >= 0))
 			{
 				ch = '/';
 			}
@@ -346,7 +350,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle <= -22.5 && angle >= -67.5)
 		{
-			if (!(reloadNumCalls >= 0))
+			if (!(reloadClock.numCalls >= 0))
 			{
 				ch = TCOD_CHAR_VLINE;
 			}
@@ -357,7 +361,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle <= -67.5)
 		{
-			if (!(reloadNumCalls >= 0))
+			if (!(reloadClock.numCalls >= 0))
 			{
 				ch = '\\';
 			}
@@ -371,7 +375,7 @@ void Firearm::updateWeaponChar(double angle)
 	{
 		if (angle <= 22.5)
 		{
-			if (!(reloadNumCalls >= 0))
+			if (!(reloadClock.numCalls >= 0))
 			{
 				ch = '/';
 			}
@@ -382,7 +386,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle >= 22.5 && angle <= 67.5)
 		{
-			if (!(reloadNumCalls >= 0))
+			if (!(reloadClock.numCalls >= 0))
 			{
 				ch = TCOD_CHAR_HLINE;
 			}
@@ -393,7 +397,7 @@ void Firearm::updateWeaponChar(double angle)
 		}
 		else if (angle >= 67.5)
 		{
-			if (!(reloadNumCalls >= 0))
+			if (!(reloadClock.numCalls >= 0))
 			{
 				ch = '\\';
 			}
@@ -416,14 +420,14 @@ void Firearm::fireBullet()
 	{
 		if (fireMode == FireType::SEMI)
 		{
-			fireNumCalls = 1;
+			fireClock.numCalls = 1; //check later to see if it prevents overfireing
 		}
 		else
 		{
-			fireNumCalls += SETTINGS->lastFrameTime.asSeconds() / (60.0f / fireRPM);
+			fireClock.tickUp();
 		}
 
-		for (int i = 1; i <= fireNumCalls; fireNumCalls--)
+		for (int i = 1; i <= fireClock.numCalls; fireClock.numCalls--)
 		{
 			if (ammoType == MagazineData::AmmoType::FIVEPOINTFIVESIX)
 			{
@@ -444,10 +448,11 @@ void Firearm::reload(std::shared_ptr<MagazineData>& magazine)
 {
 	if (magazine->isValid != false)
 	{
-		if (reloadNumCalls >= 0) //if it can reload
+		if (reloadClock.numCalls >= 0.0f) //if it can reload
 		{
 			selectedMagazine = magazine;
-			reloadNumCalls -= reloadRPS;
+			//reloadClock.numCalls -= reloadTime;
+			reloadClock.addTime(reloadTime);
 		}
 	}
 //	else selectedMagazine = magazine;
@@ -507,7 +512,7 @@ void Firearm::update(Position4 sourcePosition, int mx, int my, double angle)
 
 	updateWeaponChar(angle);
 	
-	if (fireNumCalls >= 0 && selectedMagazine->availableAmmo != 0 && reloadNumCalls >= 0) //fires bullet
+	if (fireClock.numCalls >= 0.0f && selectedMagazine->availableAmmo != 0 && reloadClock.numCalls >= 0.0f) //fires bullet
 	{
 		
 		if (fireMode == FireType::FULL && INPUT->leftMouseButton->isDown)
@@ -541,9 +546,9 @@ void Firearm::update(Position4 sourcePosition, int mx, int my, double angle)
 		}
 	}
 
-	if (reloadNumCalls < 0)
+	if (reloadClock.numCalls < 0.0f)
 	{
-		reloadNumCalls += SETTINGS->lastFrameTime.asSeconds();
+		reloadClock.tickUp();
 	}
 }
 

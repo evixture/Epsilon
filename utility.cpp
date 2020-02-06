@@ -160,9 +160,9 @@ float getFallTime(int height)
 //	:capacity(capacityInSeconds), step(step), score(1)
 //{}
 //
-//void Clock::update(bool tickDown, bool resetAtZero)
+//void Clock::update(bool tickUp, bool resetAtZero)
 //{
-//	if (tickDown)
+//	if (tickUp)
 //	{
 //		if (step > 0.0f)
 //		{
@@ -208,3 +208,18 @@ MagazineData::MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmm
 	:isValid(isValid), ammoType(ammoType), ammoCapacity(ammoCapacity), availableAmmo(availableAmmo)
 {}
 
+Clock::Clock(float timeBetweenUpdates)
+	:numCalls(0), timeBetweenUpdates(timeBetweenUpdates)
+{
+}
+
+void Clock::tickUp()
+{
+	numCalls += SETTINGS->lastFrameTime.asSeconds() / timeBetweenUpdates;
+}
+
+void Clock::addTime(float seconds)
+{
+	//numCalls -= seconds / SETTINGS->lastFrameTime.asSeconds();
+	numCalls -= seconds / timeBetweenUpdates;
+}

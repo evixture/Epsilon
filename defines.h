@@ -443,7 +443,7 @@ ITEM SIZES
 	//SIP45 (standard issue pistol .45 cal)
 		//WEAPON
 				#define TILE_SIP45									std::make_shared<Block>			(DATA_Pistol, OOOOI, OOOOI)
-				#define WEAPON_SIP45								std::make_shared<Firearm>		("SIP45",									ITEMCOLOR_PISTOLFG,															400,							1.0f,							MagazineData::AmmoType::FOURTYFIVEACP,		Firearm::FireType::SEMI,	Firearm::FireType::SEMI | Firearm::FireType::SAFE)
+				#define WEAPON_SIP45								std::make_shared<Firearm>		("SIP45",									ITEMCOLOR_PISTOLFG,															2,							1.0f,							MagazineData::AmmoType::FOURTYFIVEACP,		Firearm::FireType::SEMI,	Firearm::FireType::SEMI | Firearm::FireType::SAFE)
 			#define ITEM_SIP45(x, y, level, owner)					std::make_shared<Item>			(2,											TILE_SIP45,																	WEAPON_SIP45,					Position4(x, y, 0, level),		owner,										Item::ItemType::FIREARM)
 		//MAGAZINE
 					#define TILE_45Magazine7						std::make_shared<Block>			(DATA_PistolMagazine, OOOOI, OOOOI)
@@ -455,7 +455,7 @@ ITEM SIZES
 	//SIR556 (standard issue rifle 5.56 cal)
 		//WEAPON
 				#define TILE_SIR556									std::make_shared<Block>			(DATA_Rifle, OOOOI, OOOOI)
-				#define WEAPON_SIR556								std::make_shared<Firearm>		("SIR556",									ITEMCOLOR_RIFLEFG,															666,							2.0f,							MagazineData::AmmoType::FIVEPOINTFIVESIX,	Firearm::FireType::FULL,	Firearm::FireType::FULL | Firearm::FireType::SEMI | Firearm::FireType::SAFE)
+				#define WEAPON_SIR556								std::make_shared<Firearm>		("SIR556",									ITEMCOLOR_RIFLEFG,															10,							2.0f,							MagazineData::AmmoType::FIVEPOINTFIVESIX,	Firearm::FireType::FULL,	Firearm::FireType::FULL | Firearm::FireType::SEMI | Firearm::FireType::SAFE)
 			#define ITEM_SIR556(x, y, level, owner)					std::make_shared<Item>			(3,											TILE_SIR556,																WEAPON_SIR556,					Position4(x, y, 0, level),		owner,										Item::ItemType::FIREARM)
 		//MAGAZINE
 					#define TILE_556Magazine30						std::make_shared<Block>			(DATA_RifleMagazine, OOOOI, OOOOI)

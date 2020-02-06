@@ -86,7 +86,7 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Player::Player(Position4 position)
-	:Creature(position, '@', "player", UICOLOR_Player_Color, 100, Armor("", TCODColor::pink, 0, 0)), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), moveNumCalls(0), moveSpeed(0)
+	:Creature(position, '@', "player", UICOLOR_Player_Color, 100, Armor("", TCODColor::pink, 0, 0)), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), moveClock(0), moveSpeed(0)
 {
 	inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
 	inventory[0]->addItem(	ITEM_SIP45(0, 0, 0, this));
@@ -178,10 +178,11 @@ void Player::move()
 
 		if (moveXSpeed != 0 || moveYSpeed != 0)
 		{
-			moveNumCalls += SETTINGS->lastFrameTime.asSeconds() / moveSpeed;
-			for (int i = 1; i <= moveNumCalls; moveNumCalls--)
+			moveClock.timeBetweenUpdates = moveSpeed;
+			moveClock.tickUp();
+
+			for (int i = 1; i <= moveClock.numCalls; moveClock.numCalls--)
 			{
-		
 				if (WORLD->getWalkability(Position4(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.height, mapPosition.level)))
 				{
 					mapPosition.x += moveXSpeed;
