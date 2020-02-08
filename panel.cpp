@@ -191,7 +191,7 @@ void SplashWindow::update()
 {
 	menuSelection = menuItemList[menuIndex];
 
-	if (INPUT->w->isSwitched)
+	if (INPUT->moveUpKey->isSwitched)
 	{
 		if (menuIndex > 0)
 		{
@@ -199,7 +199,7 @@ void SplashWindow::update()
 		}
 	}
 
-	if (INPUT->s->isSwitched)
+	if (INPUT->moveDownKey->isSwitched)
 	{
 		if (menuIndex < menuItemList.size() - 1)
 		{
@@ -207,7 +207,7 @@ void SplashWindow::update()
 		}
 	}
 
-	if (INPUT->space->isSwitched)
+	if (INPUT->worldInteractKey->isSwitched)
 	{
 		if (menuItemList[menuIndex] == "Start")
 		{

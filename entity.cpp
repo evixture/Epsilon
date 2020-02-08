@@ -113,14 +113,14 @@ void Player::move()
 {
 	if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
 	{
-		if (INPUT->lshift->isDown) baseMoveTime = .25f;
-		else if (INPUT->lctrl->isDown)	baseMoveTime = 1.0f;
+		if (INPUT->moveFastKey->isDown) baseMoveTime = .25f;
+		else if (INPUT->moveSlowKey->isDown)	baseMoveTime = 1.0f;
 		else baseMoveTime = .5f;
 
 		moveXSpeed = 0;
 		moveYSpeed = 0;
 
-		if (INPUT->z->isSwitched)
+		if (INPUT->proneKey->isSwitched)
 			{
 				int testHeight = mapPosition.height;
 				for (int i = 0; i < int(abs(testHeight - 1)); ++i)
@@ -135,7 +135,7 @@ void Player::move()
 					}
 				}
 			}
-		if (INPUT->x->isSwitched)
+		if (INPUT->crouchKey->isSwitched)
 			{
 				int testHeight = mapPosition.height;
 				for (int i = 0; i < int(abs(testHeight - 2)); ++i)
@@ -150,7 +150,7 @@ void Player::move()
 					}
 				}
 			}
-		if (INPUT->c->isSwitched)
+		if (INPUT->standKey->isSwitched)
 			{
 				int testHeight = mapPosition.height;
 				for (int i = 0; i < int(abs(testHeight - 3)); ++i)
@@ -168,13 +168,13 @@ void Player::move()
 
 		moveSpeed = baseMoveTime / mapPosition.height;
 
-		if (INPUT->w->isDown && INPUT->s->isDown) moveYSpeed = 0;
-		else if (INPUT->w->isDown && !INPUT->s->isDown) moveYSpeed = -1;
-		else if (INPUT->s->isDown && !INPUT->w->isDown) moveYSpeed = 1;
+		if (INPUT->moveUpKey->isDown && INPUT->moveDownKey->isDown) moveYSpeed = 0;
+		else if (INPUT->moveUpKey->isDown && !INPUT->moveDownKey->isDown) moveYSpeed = -1;
+		else if (INPUT->moveDownKey->isDown && !INPUT->moveUpKey->isDown) moveYSpeed = 1;
 
-		if (INPUT->a->isDown && INPUT->d->isDown) moveXSpeed = 0;
-		else if (INPUT->a->isDown && !INPUT->d->isDown) moveXSpeed = -1;
-		else if (INPUT->d->isDown && !INPUT->a->isDown) moveXSpeed = 1;
+		if (INPUT->moveLeftKey->isDown && INPUT->moveRightKey->isDown) moveXSpeed = 0;
+		else if (INPUT->moveLeftKey->isDown && !INPUT->moveRightKey->isDown) moveXSpeed = -1;
+		else if (INPUT->moveRightKey->isDown && !INPUT->moveLeftKey->isDown) moveXSpeed = 1;
 
 		if (moveXSpeed != 0 || moveYSpeed != 0)
 		{
@@ -423,7 +423,7 @@ void Player::update()
 		
 		if (INPUT->mouse.wheel_up || INPUT->mouse.wheel_down)
 		{
-			if (!INPUT->lalt->isDown)
+			if (!INPUT->deepInteractKey->isDown)
 			{
 				if (INPUT->mouse.wheel_up)
 				{
@@ -434,7 +434,7 @@ void Player::update()
 					moveSelectorDown();
 				}
 			}
-			else if (INPUT->lalt->isDown)
+			else if (INPUT->deepInteractKey->isDown)
 			{
 				if (INPUT->mouse.wheel_up)
 				{
@@ -447,17 +447,17 @@ void Player::update()
 			}
 		}
 		
-		if (INPUT->e->isSwitched)
+		if (INPUT->pickUpKey->isSwitched)
 		{
 			pickUpItem();
 		}
 		
-		if (INPUT->q->isSwitched)
+		if (INPUT->dropKey->isSwitched)
 		{
 			dropItem();
 		}
 		
-		if (INPUT->rightMouseButton->isSwitched)
+		if (INPUT->alternateUseButton->isSwitched)
 		{
 			selectedItem->actionManager->doAction();
 		}
@@ -468,12 +468,12 @@ void Player::update()
 		
 		selectedItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle);
 		
-		if (INPUT->r->isSwitched)
+		if (INPUT->reloadKey->isSwitched)
 		{
 			reload();
 		}
 		
-		if (INPUT->space->isSwitched)
+		if (INPUT->worldInteractKey->isSwitched)
 		{
 			if (WORLD->getTile(mapPosition)->tag == Block::Tag::STAIR)
 			{
@@ -482,7 +482,7 @@ void Player::update()
 		}
 	}
 
-	if (INPUT->num0->isSwitched)
+	if (INPUT->debug2Key->isSwitched)
 	{
 		health -= 25;
 	}

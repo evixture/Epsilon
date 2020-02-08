@@ -386,7 +386,7 @@ void World::update()
 	xOffset = getOffset(player->mapPosition.x, debugmap->width, MAPPANE->drawWindow->consoleWidth);
 	yOffset = getOffset(player->mapPosition.y, debugmap->height, MAPPANE->drawWindow->consoleHeight);
 
-	if (INPUT->num9->isSwitched) // repeatable create live creature
+	if (INPUT->debug1Key->isSwitched) // repeatable create live creature
 	{
 		addCreature(std::make_shared<Creature>(Position4(30, 8, 3, 0), '0', "Creature", TCODColor::white, 100, Armor("", TCODColor::pink, 0, 0)));
 	}

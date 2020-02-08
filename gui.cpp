@@ -18,7 +18,7 @@ Gui::Gui(int windowX, int windowY)
 
 void Gui::update()
 {
-	if (INPUT->i->isSwitched)
+	if (INPUT->inventoryKey->isSwitched)
 	{
 		if (activeWindow == Gui::ActiveWindow::INVENTORYFULL)
 		{

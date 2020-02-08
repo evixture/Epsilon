@@ -515,11 +515,11 @@ void Firearm::update(Position4 sourcePosition, int mx, int my, double angle)
 	if (fireClock.numCalls >= 0.0f && selectedMagazine->availableAmmo != 0 && reloadClock.numCalls >= 0.0f) //fires bullet
 	{
 		
-		if (fireMode == FireType::FULL && INPUT->leftMouseButton->isDown)
+		if (fireMode == FireType::FULL && INPUT->primaryUseButton->isDown)
 		{
 			fireBullet();
 		}
-		else if (fireMode == FireType::SEMI && INPUT->leftMouseButton->isSwitched)
+		else if (fireMode == FireType::SEMI && INPUT->primaryUseButton->isSwitched)
 		{
 			fireBullet();
 		}

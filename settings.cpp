@@ -60,9 +60,9 @@ void Settings::update(std::shared_ptr<Player> player)
 {
 	fpsCount = TCODSystem::getFps();
 	lastFrameTime = systemClock.restart();
-	input->update(player);
+	input->update();
 
-	if (INPUT->f11->isSwitched)
+	if (INPUT->fullscreenKey->isSwitched)
 	{
 		setFullscreen();
 	}
