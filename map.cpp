@@ -13,59 +13,119 @@ Map::Map(std::string filePath)
 	{
 		if (!document.child("map").empty())
 		{
+			bool hasName = false;
+			bool hasLevels = false;
+			bool hasWidth = false;
+			bool hasHeight = false;
+
 			for (auto& mapDataNode : document.child("map").children())
 			{
 				if (!mapDataNode.empty())
 				{
-					if (std::string(mapDataNode.name()) == "name")
+					if (!hasName) //if the map name hasnt been found, get the name
 					{
-						name = mapDataNode.text().as_string();
+						hasName = getMapName(mapDataNode); //gives bool if created right
 					}
-
-					if (std::string(mapDataNode.name()) == "levels")
+					if (!hasLevels)
 					{
-						totalFloors = mapDataNode.text().as_int();
-						levelList = std::vector < std::vector < std::shared_ptr < Block >>>(totalFloors);
+						hasLevels = getMapLevels(mapDataNode);
 					}
-
-					if (std::string(mapDataNode.name()) == "width")
+					if (!hasWidth)
 					{
-						width = mapDataNode.text().as_int();
+						hasWidth = getMapWidth(mapDataNode);
 					}
-
-					if (std::string(mapDataNode.name()) == "height")
+					if (!hasHeight)
 					{
-						height = mapDataNode.text().as_int();
+						hasHeight = getMapHeight(mapDataNode);
 					}
-
-					if (std::string(mapDataNode.name()) == "floor")
+					
+					if (hasName && hasLevels && hasWidth && hasHeight) //if the map has gotten all of the map data properly
 					{
-						for (auto& level : levelList)
-						{
-							level.reserve(width * height);
-						}
-
-						std::string s_tileCodeList = mapDataNode.text().as_string();
-						std::string code;
-						int floor;
-
-						if (!mapDataNode.attribute("level").empty())
-						{
-							floor = mapDataNode.attribute("level").as_int();
-
-							for (int tileLocation = 1; tileLocation < width * height * 3; tileLocation += 3)
-							{
-								code = s_tileCodeList[tileLocation];
-								code += s_tileCodeList[tileLocation + 1];
-
-								levelList[floor].push_back(getTileFromCode(code));
-							}
-						}
-
+						createBlockMap(mapDataNode);
 					}
 				}
 			}
 		}
+	}
+}
+
+bool Map::getMapName(pugi::xml_node& dataNode)
+{
+	std::string testName = dataNode.name();
+
+	if (testName == "name")
+	{
+		name = dataNode.text().as_string();
+		return true;
+	}
+	return false;
+}
+
+bool Map::getMapLevels(pugi::xml_node& dataNode)
+{
+	std::string testName = dataNode.name();
+
+	if (testName == "levels")
+	{
+		totalFloors = dataNode.text().as_int();
+		levelList = std::vector < std::vector < std::shared_ptr < Block >>>(totalFloors);
+		return true;
+	}
+	return false;
+}
+
+bool Map::getMapHeight(pugi::xml_node& dataNode)
+{
+	std::string testName = dataNode.name();
+
+	if (testName == "height")
+	{
+		height = dataNode.text().as_int();
+		return true;
+	}
+	return false;
+}
+
+bool Map::getMapWidth(pugi::xml_node& dataNode)
+{
+	std::string testName = dataNode.name();
+
+	if (testName == "width")
+	{
+		width = dataNode.text().as_int();
+		return true;
+	}
+	return false;
+}
+
+void Map::createBlockMap(pugi::xml_node& dataNode)
+{
+	std::string testName = dataNode.name();
+
+	if (testName == "floor")
+	{
+		for (auto& level : levelList)
+		{
+			level.reserve(width * height);
+		}
+
+		std::string s_tileCodeList = dataNode.text().as_string();
+		std::string code;
+		int floor;
+
+		if (!dataNode.attribute("level").empty())
+		{
+			floor = dataNode.attribute("level").as_int();
+
+			for (int tileLocation = 1; tileLocation < width * height * 3; tileLocation += 3)
+			{
+				code = s_tileCodeList[tileLocation];
+				code += s_tileCodeList[tileLocation + 1];
+
+				levelList[floor].push_back(getTileFromCode(code));
+			}
+		}
+
 	}
 }
 
@@ -198,6 +258,20 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 	}
 }
 
+
+/*
+ <creatures>
+	<!--<player>                  -->
+	<!--  <x>2</x>                -->
+	<!--  <y>2</y>                -->
+	<!--  <height>3</height>      -->
+	<!--  <floor>0</floor>        -->
+	<!--</player>                 -->
+  </creatures>                    -->
+  <items>
+
+  </items>
+*/
 //----------------------------------------------------------------------------------------------------
 
 World::World()

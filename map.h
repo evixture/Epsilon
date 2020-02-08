@@ -13,6 +13,13 @@ struct Map //map class that takes a text file and converts it to a vector of til
 
 	Map(std::string filePath); //map constructor that takes a string file path
 
+	bool getMapName(pugi::xml_node& dataNode);
+	bool getMapLevels(pugi::xml_node& dataNode);
+	bool getMapHeight(pugi::xml_node& dataNode);
+	bool getMapWidth(pugi::xml_node& dataNode);
+
+	void createBlockMap(pugi::xml_node& dataNode);
+
 	std::shared_ptr<Block> getTileFromCode(std::string code);
 };
 
