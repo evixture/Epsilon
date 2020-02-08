@@ -49,6 +49,7 @@ struct Block //tile class used for the map and items
 	std::shared_ptr<Tile> getTileData(int height) const;
 
 	virtual bool getDestroyed(); //virtual returns if the tile has been destroyed
+	virtual void destroy(int);
 	virtual void interact(); //virtual behaves differently depending on tile type
 
 	void render(Position4 renderPosition, const std::shared_ptr<Pane>& pane) const; //renders tile
@@ -61,6 +62,7 @@ struct Destructible : public Block //destructible type of tile that can be destr
 
 	Destructible(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int strength); //constructor for destructible that takes character, colors, height, walkability, and strength
 
+	void destroy(int damage);
 	bool getDestroyed(); //returns true if the tile has been destroyed
 	void interact(); //increments strength down until destroyed
 };
@@ -71,5 +73,6 @@ struct Stair : public Block //stair type of tile that allows travel between floo
 	
 	Stair(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance); //constructor for stair that takes character, colors, height, walkability, and move distance
 
+	void destroy(int);
 	void interact(); //moves player the move distance
 };

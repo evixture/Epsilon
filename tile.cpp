@@ -35,6 +35,10 @@ bool Block::getDestroyed()
 	return false;
 }
 
+void Block::destroy(int)
+{
+}
+
 void Block::interact()
 {
 	return;
@@ -71,18 +75,19 @@ Destructible::Destructible(std::vector<std::shared_ptr<Tile>> tileList, unsigned
 	:Block(tileList, transparentFlag, walkableFlag, Block::Tag::DESTRUCTIBLE), strength(strength), destroyed(false)
 {}
 
-bool Destructible::getDestroyed()
+void Destructible::destroy(int damage)
 {
-	return destroyed;
-}
-
-void Destructible::interact()
-{
-	if (strength > 0)
+	if (strength - damage >= 0)
 	{
-		strength--;
+		strength -= damage;
 	}
 	else
+	{
+		strength = 0;
+	}
+
+
+	if (strength <= 0) //if it has no strength left
 	{
 		tileList = std::vector<std::shared_ptr<Tile>>
 		{
@@ -94,11 +99,20 @@ void Destructible::interact()
 			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 
-		
+
 		walkableFlag = OOOOI;
 		transparentFlag = OOOOI;
 		destroyed = true;
 	}
+}
+
+bool Destructible::getDestroyed()
+{
+	return destroyed;
+}
+
+void Destructible::interact()
+{
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -106,6 +120,10 @@ void Destructible::interact()
 Stair::Stair(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance)
 	:Block(tileList, transparentFlag, Block::FLOOR, Block::Tag::STAIR), moveDistance(moveDistance)
 {}
+
+void Stair::destroy(int)
+{
+}
 
 void Stair::interact()
 {

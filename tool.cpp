@@ -156,7 +156,7 @@ void Bullet::update()
 					{
 						if (WORLD->getTile(mapPosition)->tag == Block::Tag::DESTRUCTIBLE)
 						{
-							WORLD->getTile(mapPosition)->interact();
+							WORLD->getTile(mapPosition)->destroy(mass);
 						}
 
 						if (currentVelocity - WORLD->getTile(mapPosition)->getTileData(mapPosition.height)->deceleration <= 0)
