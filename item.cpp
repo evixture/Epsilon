@@ -63,7 +63,7 @@ void ActionManager::doAction()
 //----------------------------------------------------------------------------------------------------
 
 Item::Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, Player* owner, ItemType type)
-	:size(size), tile(tile), tool(tool), mapPosition(position), renderPosition(position), distToEnt(5), owner(owner), type(type)
+	:size(size), tile(tile), tool(tool), mapPosition(position), renderPosition(position), distToEnt(5), owner(owner), type(type), barColor(TCODColor::white)
 {
 	createActionManager(owner);
 }
@@ -110,9 +110,9 @@ std::shared_ptr<MagazineData> Item::getMagazineData()
 	return std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 }
 
-void Item::updateTool(Position4 mapPosition, int mx, int my, double angle)
+void Item::updateTool(Position4 mapPosition, int mx, int my, double angle, bool isHeld)
 {
-	tool->update(mapPosition, mx, my, angle);
+	tool->update(mapPosition, mx, my, angle, isHeld);
 	actionManager->update();
 
 	this->mapPosition = Position4(tool->sourcePosition.x + WORLD->xOffset, tool->sourcePosition.y + WORLD->yOffset, mapPosition.height, mapPosition.level);

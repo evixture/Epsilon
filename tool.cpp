@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 Tool::Tool(std::string name, TCODColor color, int ch)
-	:name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), ammoType(MagazineData::AmmoType::NONE), fireMode(SAFE), availibleFireMode(0)
+	:name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), ammoType(MagazineData::AmmoType::NONE), fireMode(SAFE), availibleFireMode(0), isHeld(false)
 {}
 
 Tool::Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
@@ -99,8 +99,15 @@ void Tool::equip(Armor& armor)
 {
 }
 
-void Tool::update(Position4 sourcePosition, int mx, int my, double angle)
+void Tool::update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld)
 {
+	this->isHeld = isHeld;
+
+	if (isHeld)
+	{
+		//behavior if it is held
+	}
+
 	dx = mx - sourcePosition.x;
 	dy = my - sourcePosition.y;
 
@@ -113,8 +120,11 @@ void Tool::update(Position4 sourcePosition, int mx, int my, double angle)
 
 void Tool::render(const std::shared_ptr<Pane>& pane) const
 {
-	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
+	if (isHeld)
+	{
+		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+		pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
+	}
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -251,7 +261,6 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 
 Firearm::Firearm(std::string name, TCODColor color, int shotsPerSecond, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
 	:Tool(name, color, ammoType, fireMode, availibleFireModeFlag), fireRPM(shotsPerSecond), reloadTime(reloadSpeed),
-	//fireClock(Clock(fireRate, 0.0f)), reloadClock(Clock(reloadSpeed, 0.0f)),
 	selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), fireClock(shotsPerSecond), reloadClock(reloadSpeed)//, fireNumCalls(0), reloadNumCalls(0)
 {}
 
@@ -496,7 +505,7 @@ void Firearm::changeFireMode()
 	}
 }
 
-void Firearm::update(Position4 sourcePosition, int mx, int my, double angle)
+void Firearm::update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld)
 {
 	dx = mx - sourcePosition.x + WORLD->xOffset;
 	dy = my - sourcePosition.y + WORLD->yOffset;
@@ -512,20 +521,22 @@ void Firearm::update(Position4 sourcePosition, int mx, int my, double angle)
 
 	updateWeaponChar(angle);
 	
-	if (fireClock.numCalls >= 0.0f && selectedMagazine->availableAmmo != 0 && reloadClock.numCalls >= 0.0f) //fires bullet
+	if (isHeld)
 	{
-		
-		if (fireMode == FireType::FULL && INPUT->primaryUseButton->isDown)
+		if (fireClock.numCalls >= 0.0f && selectedMagazine->availableAmmo != 0 && reloadClock.numCalls >= 0.0f) //fires bullet
 		{
-			fireBullet();
-		}
-		else if (fireMode == FireType::SEMI && INPUT->primaryUseButton->isSwitched)
-		{
-			fireBullet();
-		}
-		else if (fireMode == FireType::SAFE)
-		{
+			if (fireMode == FireType::FULL && INPUT->primaryUseButton->isDown)
+			{
+				fireBullet();
+			}
+			else if (fireMode == FireType::SEMI && INPUT->primaryUseButton->isSwitched)
+			{
+				fireBullet();
+			}
+			else if (fireMode == FireType::SAFE)
+			{
 
+			}
 		}
 	}
 
@@ -554,8 +565,11 @@ void Firearm::update(Position4 sourcePosition, int mx, int my, double angle)
 
 void Firearm::render(const std::shared_ptr<Pane>& pane) const
 {
-	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
+	if (isHeld)
+	{
+		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+		pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
+	}
 
 	for (auto& bullet : bulletList)
 	{

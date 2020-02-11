@@ -466,7 +466,68 @@ void Player::update()
 		
 		angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
 		
-		selectedItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle);
+		/*
+		for containers in inventory
+			if held item is the container item
+			//
+
+			else
+				for items in container inventory
+					if i and j is same as indexes
+
+
+					if (containerIndex != -1) //if a container is selected
+					{
+						if (containerIndex == i && itemIndex == -1) //if the container item is selected
+						{
+							//update selected container item
+							GUI->logWindow->pushMessage(LogWindow::Message("update selected container item", LogWindow::Message::MessageLevel::LOW));
+						}
+						else if (i == containerIndex && j == itemIndex)
+						{
+							//update selected item
+							GUI->logWindow->pushMessage(LogWindow::Message("update selected item", LogWindow::Message::MessageLevel::LOW));
+						}
+
+						//update other items
+					}
+		*/
+
+		for (int i = 0; i < inventory.size(); i++)
+		{
+			if (itemIndex == -1 && containerIndex == i) //if container is the held item
+			{
+				//spec update the held container
+				//GUI->logWindow->pushMessage(LogWindow::Message("update selected container item", LogWindow::Message::MessageLevel::LOW));
+				inventory[i]->containerItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
+			}
+			else
+			{
+				//normal update the container
+				inventory[i]->containerItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
+			}
+			
+			for (int j = 0; j < inventory[i]->itemList.size(); j++) //stops when i gets to empty container list
+			{
+				if (itemIndex != -1)
+				{
+					if (itemIndex == j && containerIndex == i)
+					{
+						inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
+						//spec update held item
+						//GUI->logWindow->pushMessage(LogWindow::Message("update selected item", LogWindow::Message::MessageLevel::LOW));
+					}
+					else
+					{
+						//normal update the item
+						inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
+					}
+				}
+			}
+			
+		}
+
+		//selectedItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle);
 		
 		if (INPUT->reloadKey->isSwitched)
 		{

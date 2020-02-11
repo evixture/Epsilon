@@ -129,12 +129,13 @@ void InventoryWindow::render() const
 				if (container == WORLD->player->inventory[WORLD->player->containerIndex] && WORLD->player->itemIndex == -1)
 				{
 					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name.c_str());
-					drawWindow->console->setCharForeground(1, drawLineStart, UICOLOR_Selector);
+					drawWindow->console->setCharForeground(1, drawLineStart, UICOLOR_Selector); //color the cursor
+					drawWindow->console->setCharForeground(0, drawLineStart, WORLD->player->inventory[WORLD->player->containerIndex]->containerItem->barColor); //color the bar
 				}
 				else
 				{
 					drawWindow->console->printf(0, drawLineStart, "| %s", container->containerItem->tool->name.c_str());
-
+					drawWindow->console->setCharForeground(0, drawLineStart, WORLD->player->inventory[WORLD->player->containerIndex]->containerItem->barColor); //color the bar
 				}
 				++drawLine;
 			}
@@ -154,10 +155,12 @@ void InventoryWindow::render() const
 					{
 						drawWindow->console->printf(0, drawLine, "|>  %s", item->tool->name.c_str());
 						drawWindow->console->setCharForeground(1, drawLine, UICOLOR_Selector);
+						drawWindow->console->setCharForeground(0, drawLine, item->barColor); //color the bar
 					}
 					else
 					{
 						drawWindow->console->printf(0, drawLine, "|   %s", item->tool->name.c_str());
+						drawWindow->console->setCharForeground(0, drawLine, item->barColor); //color the bar
 					}
 					++drawLine;
 				}

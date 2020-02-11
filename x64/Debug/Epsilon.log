@@ -1,4 +1,2 @@
-﻿  map.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(349,35): warning C4018: '>=': signed/unsigned mismatch
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(350,35): warning C4018: '>=': signed/unsigned mismatch
+﻿  item.cpp
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

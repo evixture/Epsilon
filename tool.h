@@ -7,6 +7,8 @@ struct Tool //base class for the holdable component to items
 	TCODColor color; //foreground color of tool
 	unsigned char ch; //character representation of tool
 
+	bool isHeld;
+
 	MagazineData::AmmoType ammoType; //type of ammo used for weapons
 	
 	Position4 mapPosition;
@@ -30,7 +32,7 @@ struct Tool //base class for the holdable component to items
 
 	virtual void equip(Armor& armor);
 
-	virtual void update(Position4 sourcePosition, int mx, int my, double angle); //virtual updates tool
+	virtual void update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld); //virtual updates tool
 	virtual void render(const std::shared_ptr<Pane>& pane) const; //virtual renders tool
 
 protected:
@@ -88,7 +90,7 @@ struct Firearm : public Tool //firearm that fires bullets that interact with the
 	void reload(std::shared_ptr<MagazineData>& magazine); //reloads firearm, use from player
 	void changeFireMode();
 
-	void update(Position4 sourcePosition, int mx, int my, double angle); //updates firearm
+	void update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld); //updates firearm
 	void render(const std::shared_ptr<Pane>& pane) const; //renders firearm
 
 private:
