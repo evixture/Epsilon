@@ -110,10 +110,17 @@ std::shared_ptr<MagazineData> Item::getMagazineData()
 	return std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 }
 
+void Item::changeBarColor()
+{
+	tool->changeBarColor(barColor);
+}
+
 void Item::updateTool(Position4 mapPosition, int mx, int my, double angle, bool isHeld)
 {
 	tool->update(mapPosition, mx, my, angle, isHeld);
 	actionManager->update();
+
+	changeBarColor();
 
 	this->mapPosition = Position4(tool->sourcePosition.x + WORLD->xOffset, tool->sourcePosition.y + WORLD->yOffset, mapPosition.height, mapPosition.level);
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
@@ -174,4 +181,9 @@ MagazineItem::MagazineItem(Item item, std::shared_ptr<MagazineData> magazineData
 std::shared_ptr<MagazineData> MagazineItem::getMagazineData()
 {
 	return magazineData;
+}
+
+void MagazineItem::changeBarColor()
+{
+	barColor = TCODColor::lerp(TCODColor::red, TCODColor::darkerGreen, (float(magazineData->availableAmmo) / float(magazineData->ammoCapacity)));
 }

@@ -50,6 +50,7 @@ struct Item //an item that a creature can hold and interact with
 	Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, Player* owner, ItemType type); //item constructor that takes a size, tile, too, position, and a player used for action manager
 
 	virtual std::shared_ptr<MagazineData> getMagazineData(); //used to get the important data of the magazine, returns generic magazine when called from item
+	virtual void changeBarColor();
 
 	void updateTool(Position4 mapPosition, int mx, int my, double angle, bool isHeld); //updates tool, used when in player inventory
 	void renderTool(const std::shared_ptr<Pane>& pane) const; //renders tool, used then in player inventory
@@ -68,6 +69,8 @@ struct MagazineItem : public Item //magazine derived class of base item
 	MagazineItem(Item item, std::shared_ptr<MagazineData> magazineData); //magazine item constructor that takes an item and magazine data
 
 	std::shared_ptr<MagazineData> getMagazineData(); //returns the magazine data of this class
+
+	void changeBarColor();
 };
 
 struct Container //container, used to hold items in the inventory

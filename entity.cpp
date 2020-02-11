@@ -490,7 +490,7 @@ void Player::update()
 						}
 
 						//update other items
-					}
+			//1, -1		}
 		*/
 
 		for (int i = 0; i < inventory.size(); i++)
@@ -519,10 +519,10 @@ void Player::update()
 					}
 					else
 					{
-						//normal update the item
-						inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
 					}
 				}
+						//normal update the item
+						inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
 			}
 			
 		}

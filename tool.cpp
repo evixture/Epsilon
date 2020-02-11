@@ -95,6 +95,10 @@ void Tool::updateToolPosition(double angle)
 	}
 }
 
+void Tool::changeBarColor(TCODColor& color)
+{
+}
+
 void Tool::equip(Armor& armor)
 {
 }
@@ -502,6 +506,18 @@ void Firearm::changeFireMode()
 		{
 			fireMode = FireType::SAFE;
 		}
+	}
+}
+
+void Firearm::changeBarColor(TCODColor& color)
+{
+	if (selectedMagazine->isValid == true)
+	{
+		color = TCODColor::darkerGreen;
+	}
+	else
+	{
+		color = TCODColor::darkFlame;
 	}
 }
 
