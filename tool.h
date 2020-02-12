@@ -37,6 +37,8 @@ struct Tool //base class for the holdable component to items
 	virtual void update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld); //virtual updates tool
 	virtual void render(const std::shared_ptr<Pane>& pane) const; //virtual renders tool
 
+	float out;
+
 protected:
 	Position4 renderPosition;
 	unsigned char availibleFireMode;
@@ -82,10 +84,10 @@ struct Firearm : public Tool //firearm that fires bullets that interact with the
 {
 	std::shared_ptr<MagazineData> selectedMagazine; //the magazine that is currently in the firearm, is a generic mag if no mag is in firearm
 
-	int fireRPM; //maximum time in seconds that it takes for the next bullet to fire
+	int fireRPS; //maximum time in seconds that it takes for the next bullet to fire
 	float reloadTime; //maximum time in seconds it takes to reload the magazine
 
-	Firearm(std::string name, TCODColor color, int fireRPM, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag); //constructor of firearm that takes string name, foreground color, fire rate, reload speed, ammo type, and fire type
+	Firearm(std::string name, TCODColor color, int fireRPS, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag); //constructor of firearm that takes string name, foreground color, fire rate, reload speed, ammo type, and fire type
 
 	std::shared_ptr<MagazineData> getMagData(); //returns the important data of the selected magazine
 

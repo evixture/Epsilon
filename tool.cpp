@@ -264,8 +264,8 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Firearm::Firearm(std::string name, TCODColor color, int shotsPerSecond, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
-	:Tool(name, color, ammoType, fireMode, availibleFireModeFlag), fireRPM(shotsPerSecond), reloadTime(reloadSpeed),
-	selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), fireClock(shotsPerSecond), reloadClock(reloadSpeed)//, fireNumCalls(0), reloadNumCalls(0)
+	:Tool(name, color, ammoType, fireMode, availibleFireModeFlag), fireRPS(shotsPerSecond), reloadTime(reloadSpeed),
+	selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), fireClock(1.0f / shotsPerSecond), reloadClock(reloadSpeed)//, fireNumCalls(0), reloadNumCalls(0)
 {}
 
 void Firearm::updateWeaponChar(double angle)
@@ -440,7 +440,9 @@ void Firearm::fireBullet()
 			fireClock.tickUp();
 		}
 
-		for (int i = 1; i <= fireClock.numCalls; fireClock.numCalls--)
+		out = fireClock.numCalls;
+
+		for (int i = 1.0f; i <= fireClock.numCalls; fireClock.numCalls--)
 		{
 			if (ammoType == MagazineData::AmmoType::FIVEPOINTFIVESIX)
 			{
@@ -459,52 +461,58 @@ void Firearm::fireBullet()
 
 void Firearm::reload(std::shared_ptr<MagazineData>& magazine)
 {
-	if (magazine->isValid != false)
+	if (isHeld)
 	{
-		if (reloadClock.numCalls >= 0.0f) //if it can reload
+		if (magazine->isValid != false)
 		{
-			selectedMagazine = magazine;
-			//reloadClock.numCalls -= reloadTime;
-			reloadClock.addTime(reloadTime);
+			if (reloadClock.numCalls >= 0.0f) //if it can reload
+			{
+				selectedMagazine = magazine;
+				//reloadClock.numCalls -= reloadTime;
+				reloadClock.addTime(reloadTime);
+			}
 		}
+	//	else selectedMagazine = magazine;
 	}
-//	else selectedMagazine = magazine;
 }
 
 void Firearm::changeFireMode()
 {
-	//full->semi->safe->full
-	if (fireMode == FireType::SAFE)
+	if (isHeld)
 	{
-		if (availibleFireMode & FireType::FULL) //if availible fire mode has FULL fire mode bit set
+		//full->semi->safe->full
+		if (fireMode == FireType::SAFE)
 		{
-			fireMode = FireType::FULL;
+			if (availibleFireMode & FireType::FULL) //if availible fire mode has FULL fire mode bit set
+			{
+				fireMode = FireType::FULL;
+			}
+			else if (availibleFireMode & FireType::SEMI)
+			{
+				fireMode = FireType::SEMI;
+			}
 		}
-		else if (availibleFireMode & FireType::SEMI)
+		else if (fireMode == FireType::SEMI)
 		{
-			fireMode = FireType::SEMI;
+			if (availibleFireMode & FireType::SAFE)
+			{
+				fireMode = FireType::SAFE;
+			}
+			else if (availibleFireMode & FireType::FULL)
+			{
+				fireMode = FireType::FULL;
+			}
 		}
-	}
-	else if (fireMode == FireType::SEMI)
-	{
-		if (availibleFireMode & FireType::SAFE)
+		else if (fireMode == FireType::FULL)
 		{
-			fireMode = FireType::SAFE;
-		}
-		else if (availibleFireMode & FireType::FULL)
-		{
-			fireMode = FireType::FULL;
-		}
-	}
-	else if (fireMode == FireType::FULL)
-	{
-		if (availibleFireMode & FireType::SEMI)
-		{
-			fireMode = FireType::SEMI;
-		}
-		else if (availibleFireMode & FireType::SAFE)
-		{
-			fireMode = FireType::SAFE;
+			if (availibleFireMode & FireType::SEMI)
+			{
+				fireMode = FireType::SEMI;
+			}
+			else if (availibleFireMode & FireType::SAFE)
+			{
+				fireMode = FireType::SAFE;
+			}
 		}
 	}
 }
@@ -600,12 +608,15 @@ Armor::Armor(std::string name, TCODColor color, int defense, int durability)
 
 void Armor::equip(Armor& armor) //if the passed armor is not equal to the armor of this, then replace passed armor with this armor
 {
-	if (this->defense == armor.defense && this->durability == armor.durability) //if armor is already equipped
+	if (isHeld)
 	{
-		armor = Armor("", TCODColor::pink, 0, 0); //Armor("", TCODColor::pink, 0, 0)
-	}
-	else
-	{
-		armor = Armor(this->name, this->color, this->defense, this->durability);
+		if (this->defense == armor.defense && this->durability == armor.durability) //if armor is already equipped
+		{
+			armor = Armor("", TCODColor::pink, 0, 0); //Armor("", TCODColor::pink, 0, 0)
+		}
+		else
+		{
+			armor = Armor(this->name, this->color, this->defense, this->durability);
+		}
 	}
 }
