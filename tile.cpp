@@ -100,8 +100,8 @@ void Destructible::destroy(int damage)
 		};
 
 
-		walkableFlag = ep::blockFlag::OOOOI;
-		transparentFlag = ep::blockFlag::OOOOI;
+		walkableFlag = OOOOI;
+		transparentFlag = OOOOI;
 		destroyed = true;
 	}
 }

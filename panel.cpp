@@ -4,7 +4,7 @@ MapWindow::MapWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 	:Window(consoleWidth, consoleHeight, "World", rx, ry)
 {
 	//actual map dims should be 60x60
-	mapSidePanel = std::make_shared<Pane>(1, 61, ep::color::gui::Panel_Ribbon_BG, ep::color::gui::Panel_Ribbon_FG);
+	mapSidePanel = std::make_shared<Pane>(1, 61, UICOLOR_Panel_Ribbon_BG, UICOLOR_Panel_Ribbon_FG);
 	world = std::make_shared<World>();
 }
 
@@ -129,7 +129,7 @@ void InventoryWindow::render() const
 				if (container == WORLD->player->inventory[WORLD->player->containerIndex] && WORLD->player->itemIndex == -1)
 				{
 					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name.c_str());
-					drawWindow->console->setCharForeground(1, drawLineStart, ep::color::gui::Selector); //color the cursor
+					drawWindow->console->setCharForeground(1, drawLineStart, UICOLOR_Selector); //color the cursor
 					drawWindow->console->setCharForeground(0, drawLineStart, WORLD->player->inventory[WORLD->player->containerIndex]->containerItem->barColor); //color the bar
 				}
 				else
@@ -154,7 +154,7 @@ void InventoryWindow::render() const
 					if (item == WORLD->player->selectedItem)
 					{
 						drawWindow->console->printf(0, drawLine, "|>  %s", item->tool->name.c_str());
-						drawWindow->console->setCharForeground(1, drawLine, ep::color::gui::Selector);
+						drawWindow->console->setCharForeground(1, drawLine, UICOLOR_Selector);
 						drawWindow->console->setCharForeground(0, drawLine, item->barColor); //color the bar
 					}
 					else
@@ -243,7 +243,7 @@ void SplashWindow::renderMenuOptions() const
 		if (i == menuIndex)
 		{
 			drawWindow->console->printf(50, 50 + i, "|> %s", menuItemList[i].c_str());
-			drawWindow->console->setCharForeground(51, 50 + i, ep::color::gui::Selector);
+			drawWindow->console->setCharForeground(51, 50 + i, UICOLOR_Selector);
 		}
 		else
 		{
@@ -292,7 +292,7 @@ void InventoryFullWindow::render() const
 				if (container == WORLD->player->inventory[WORLD->player->containerIndex] && WORLD->player->itemIndex == -1)
 				{
 					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name.c_str());
-					drawWindow->console->setCharForeground(1, drawLineStart, ep::color::gui::Selector);
+					drawWindow->console->setCharForeground(1, drawLineStart, UICOLOR_Selector);
 				}
 				else
 				{
@@ -316,7 +316,7 @@ void InventoryFullWindow::render() const
 					if (item == WORLD->player->selectedItem)
 					{
 						drawWindow->console->printf(0, drawLine, "|>  %s", item->tool->name.c_str());
-						drawWindow->console->setCharForeground(1, drawLine, ep::color::gui::Selector);
+						drawWindow->console->setCharForeground(1, drawLine, UICOLOR_Selector);
 					}
 					else
 					{
@@ -344,9 +344,9 @@ void InventoryFullWindow::render() const
 LogWindow::Message::Message(std::string message, MessageLevel messageLevel)
 	:message(message), messageLevel(messageLevel)
 {
-	if (messageLevel == Message::MessageLevel::HIGH) color = ep::color::gui::MessageHigh;
-	else if (messageLevel == Message::MessageLevel::MEDIUM) color = ep::color::gui::MessageMedium;
-	else color = ep::color::gui::MessageLow;
+	if (messageLevel == Message::MessageLevel::HIGH) color = UICOLOR_MessageHigh;
+	else if (messageLevel == Message::MessageLevel::MEDIUM) color = UICOLOR_MessageMedium;
+	else color = UICOLOR_MessageLow;
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -383,7 +383,7 @@ void LogWindow::render() const
 		{
 			if (i == 0 && j == 1)
 			{
-				drawWindow->console->setCharForeground(j, line, ep::color::gui::Selector);
+				drawWindow->console->setCharForeground(j, line, UICOLOR_Selector);
 			}
 			else
 			{
@@ -478,7 +478,7 @@ void ActionWindow::render() const
 				if (action == actionManager->selectedAction)
 				{
 					drawWindow->console->printf(0, line, "|>%s", action->name.c_str());
-					drawWindow->console->setCharForeground(1, line, ep::color::gui::Selector);
+					drawWindow->console->setCharForeground(1, line, UICOLOR_Selector);
 				}
 				else
 				{

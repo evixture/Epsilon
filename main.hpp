@@ -1,5 +1,7 @@
 #pragma once
 
+#include "defines.h"
+
 //STD
 #include <fstream>
 #include <sstream>
@@ -21,14 +23,11 @@
 #include <SFML/System.hpp>
 #include <E:/pugixml-1.10/src/pugixml.hpp>
 
-struct Tile;
 struct Pane;
 struct Creature;
 struct Player;
 
 //Class File Imports
-#include "defines.h"
-
 #include "utility.h"
 
 	#include "tile.h"
@@ -36,7 +35,7 @@ struct Player;
 #include "item.h"
 
 	#include "entity.h"
-//	#include "aicreature.h"
+	#include "aicreature.h"
 #include "map.h"
 
 	#include "input.h"
