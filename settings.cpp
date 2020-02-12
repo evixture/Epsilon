@@ -16,7 +16,7 @@ Settings::Settings(int screenCharWidth, int screenCharHeight)
 	input = std::make_shared<Input>();
 	
 	TCODConsole::initRoot(screenCharWidth, screenCharHeight, windowTitle.c_str(), fullscreen, renderer);
-	TCODConsole::root->setDefaultBackground(UICOLOR_Root_BG);
+	TCODConsole::root->setDefaultBackground(ep::color::gui::Root_BG);
 }
 
 void Settings::setFullscreen()

@@ -21,7 +21,7 @@ void Pane::render() const
 Ribon::Ribon(std::string windowName, int consoleWidth)
 	: windowName(windowName), consoleWidth(consoleWidth)
 {
-	ribonWindow = std::make_shared<Pane>(consoleWidth, 1, UICOLOR_Panel_Ribbon_BG, UICOLOR_Panel_Ribbon_FG);
+	ribonWindow = std::make_shared<Pane>(consoleWidth, 1, ep::color::gui::Panel_Ribbon_BG, ep::color::gui::Panel_Ribbon_FG);
 }
 
 void Ribon::render() const
@@ -35,9 +35,9 @@ void Ribon::render() const
 Window::Window(int consoleWidth, int consoleHeight, std::string panelName, int rx, int ry)
 	:consoleWidth(consoleWidth), consoleHeight(consoleHeight), panelName(panelName), renderpos(Position3(rx, ry, NULL))
 {
-	mainWindow = std::make_shared<Pane>(consoleWidth, consoleHeight, UICOLOR_Root_BG, UICOLOR_Root_FG);
+	mainWindow = std::make_shared<Pane>(consoleWidth, consoleHeight, ep::color::gui::Root_BG, ep::color::gui::Root_FG);
 	ribon = std::make_shared<Ribon>(panelName, consoleWidth);
-	drawWindow = std::make_shared<Pane>(consoleWidth, consoleHeight - 1, UICOLOR_Panel_Draw_BG, UICOLOR_Panel_Draw_FG);
+	drawWindow = std::make_shared<Pane>(consoleWidth, consoleHeight - 1, ep::color::gui::Panel_Draw_BG, ep::color::gui::Panel_Draw_FG);
 }
 
 void Window::update()

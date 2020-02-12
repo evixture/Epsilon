@@ -3,7 +3,7 @@
 Engine::Engine(int screenCharWidth, int screenCharHeight)
 	:gamestate(Gamestate::MAIN), settings(std::make_shared<Settings>(screenCharWidth, screenCharHeight)), gui(std::make_shared<Gui>(screenCharWidth, screenCharHeight))
 {
-	TCODConsole::root->setDefaultBackground(UICOLOR_Root_BG);
+	TCODConsole::root->setDefaultBackground(ep::color::gui::Root_BG);
 }
 
 void Engine::update()
