@@ -30,7 +30,7 @@ struct ActionManager //manages all of the actions of an item
 
 struct Item //an item that a creature can hold and interact with
 {
-	enum class ItemType {NODROP, NORMAL, FIREARM, MAGAZINE, ARMOR} type;
+	enum class ItemType {NODROP, NORMAL, FIREARM, MAGAZINE, ARMOR, MELEE} type;
 
 	unsigned char size; //size that the item tekes up in the inventory
 	double distToEnt; //the distance from the player to the item, used to highlight the item when the player is in proximity

@@ -290,7 +290,8 @@ World::World()
 	addItem(MAGAZINE_556Magazine30(22, 36, 0, player.get()));
 	addItem(MAGAZINE_556Magazine30(31, 25, 0, player.get()));
 	addItem(MAGAZINE_556Magazine30(56, 6, 0, player.get()));
-
+	
+	addItem(ITEM_testKnife(5, 5, 0, player.get()));
 	addItem(ITEM_testArmor(3, 3, 0, player.get()));
 	
 	//second floor

@@ -144,9 +144,9 @@ Melee::Melee(Tool tool, int bluntDamage, int sharpDamage)
 void Melee::doMeleeDamage(std::shared_ptr<Creature>& creature)
 {
 	if (creature->health >= 0) //if creature is alive
-	{																				//should melee degrade armor???
-		float sharpDamageResult = sharpDamage * (1 - (creature->equippedArmor.defense / 400));
-		float bluntDamageResult = bluntDamage * 1; //should bluntdamage do less damage at higher armor?
+	{																				//should melee degrade armor??? HOW TO CHECK IF NOT HOLDING CREATURE
+		float sharpDamageResult = sharpDamage * (1.0f - (creature->equippedArmor.defense / 400.0f));
+		float bluntDamageResult = bluntDamage * 1.0f; //should bluntdamage do less damage at higher armor?
 
 		int totalDamage = int(sharpDamageResult + bluntDamageResult);
 
@@ -174,7 +174,10 @@ void Melee::update(Position4 sourcePosition, int mx, int my, double angle, bool 
 				if ((sourcePosition.x == creature->mapPosition.x && sourcePosition.y == creature->mapPosition.y && sourcePosition.floor == creature->mapPosition.floor) || //if the creature is on top of the creature
 					(mapPosition.x == creature->mapPosition.x && mapPosition.y == creature->mapPosition.y && mapPosition.floor == creature->mapPosition.floor)) //if the melee tool is on top of the creature
 				{
-					doMeleeDamage(creature);
+					if (creature != WORLD->player)
+					{
+						doMeleeDamage(creature);
+					}
 				}
 			}
 		}

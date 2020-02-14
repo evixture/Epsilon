@@ -368,6 +368,15 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0)							\
 		}																							\
 
+#define DATA_testKnife																				\
+		std::vector<std::shared_ptr<Tile>>{														\
+			std::make_shared<Tile>('!',	TCODColor::red,		TCODColor::white, 0),	\
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0)							\
+		}																							\
+
 
 //TILES
 	//GROUND
@@ -455,10 +464,17 @@ ITEM SIZES
 	//SIR556 (standard issue rifle 5.56 cal)
 		//WEAPON
 				#define TILE_SIR556									std::make_shared<Block>			(DATA_Rifle, OOOOI, OOOOI)
-				#define WEAPON_SIR556								std::make_shared<Firearm>		("SIR556",									ITEMCOLOR_RIFLEFG,															10,							2.0f,							MagazineData::AmmoType::FIVEPOINTFIVESIX,	Firearm::FireType::FULL,	Firearm::FireType::FULL | Firearm::FireType::SEMI | Firearm::FireType::SAFE)
+				#define WEAPON_SIR556								std::make_shared<Firearm>		("SIR556",									ITEMCOLOR_RIFLEFG,															10,								2.0f,							MagazineData::AmmoType::FIVEPOINTFIVESIX,	Firearm::FireType::FULL,	Firearm::FireType::FULL | Firearm::FireType::SEMI | Firearm::FireType::SAFE)
 			#define ITEM_SIR556(x, y, level, owner)					std::make_shared<Item>			(3,											TILE_SIR556,																WEAPON_SIR556,					Position4(x, y, 0, level),		owner,										Item::ItemType::FIREARM)
 		//MAGAZINE
 					#define TILE_556Magazine30						std::make_shared<Block>			(DATA_RifleMagazine, OOOOI, OOOOI)
 					#define TOOL_556Magazine30						std::make_shared<Tool>			("5.56 Magazine -30-",						ITEMCOLOR_RIFLEFG,															CHAR_RifleMagazine)
 				#define ITEM_556Magazine30(x, y, level, owner)		Item							(1,											TILE_556Magazine30,															TOOL_556Magazine30,				Position4(x, y, 0, level),		owner,										Item::ItemType::NORMAL)
 			#define MAGAZINE_556Magazine30(x, y, level, owner)		std::make_shared<MagazineItem>	(ITEM_556Magazine30(x, y, level, owner),	std::make_shared<MagazineData>(MagazineData::AmmoType::FIVEPOINTFIVESIX,	30,								30))
+
+//MELEE
+	//TEST KNIFE
+		#define TILE_testKnife										std::make_shared<Block>			(DATA_testKnife, OOOOI, OOOOI)
+		#define MELEE_testKnife										std::make_shared<Melee>			(Tool("Test Knife 34 damage",				ITEMCOLOR_RIFLEFG,															'!'),							0,								34)
+	#define ITEM_testKnife(x, y, level, owner)						std::make_shared<Item>			(1,											TILE_testKnife,																MELEE_testKnife,				Position4(x, y, 0, level),		owner,										Item::ItemType::MELEE)
+
