@@ -122,7 +122,7 @@ void Item::updateTool(Position4 mapPosition, int mx, int my, double angle, bool 
 
 	changeBarColor();
 
-	this->mapPosition = Position4(tool->sourcePosition.x + WORLD->xOffset, tool->sourcePosition.y + WORLD->yOffset, mapPosition.height, mapPosition.level);
+	this->mapPosition = Position4(tool->sourcePosition.x + WORLD->xOffset, tool->sourcePosition.y + WORLD->yOffset, mapPosition.height, mapPosition.floor);
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
@@ -140,7 +140,7 @@ void Item::updateTile()
 
 void Item::renderTile(const std::shared_ptr<Pane>& pane) const
 {
-	tile->render(Position4(renderPosition.x, renderPosition.y, WORLD->player->mapPosition.height, renderPosition.level), pane);
+	tile->render(Position4(renderPosition.x, renderPosition.y, WORLD->player->mapPosition.height, renderPosition.floor), pane);
 
 	if (distToEnt < 5 && WORLD->isInFov(mapPosition))
 	{

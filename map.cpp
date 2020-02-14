@@ -310,7 +310,7 @@ std::shared_ptr<Block> World::getTile(Position3 position) const
 {
 	if (inMapBounds(position))
 	{
-		return debugmap->levelList[position.level][position.x + position.y * debugmap->width];
+		return debugmap->levelList[position.floor][position.x + position.y * debugmap->width];
 	}
 	else
 	{
@@ -320,12 +320,12 @@ std::shared_ptr<Block> World::getTile(Position3 position) const
 
 bool World::isExplored(Position3 position) const
 {
- 	return debugmap->levelList[position.level][position.x + position.y * debugmap->width]->explored;
+ 	return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]->explored;
 }
 
 TCODColor World::getBgColor(Position3 position) const
 {
-	return debugmap->levelList[position.level][position.x + position.y * debugmap->width]->tileList[0]->backgroundColor;
+	return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]->tileList[0]->backgroundColor;
 }
 
 void World::addCreature(std::shared_ptr<Creature> creature)
@@ -345,7 +345,7 @@ void World::addContainer(std::shared_ptr<Container> container)
 
 bool World::inMapBounds(Position3 position) const
 {
-	if (position.level < 0 || position.level >= debugmap->totalFloors) return false;
+	if (position.floor < 0 || position.floor >= debugmap->totalFloors) return false;
 	if (position.x < 0 || position.x >= debugmap->width) return false;
 	if (position.y < 0 || position.y >= debugmap->height) return false;
 	return true;
@@ -420,7 +420,7 @@ void World::updateProperties()
 	{
 		for (int x = 0; x < debugmap->width; ++x)
 		{
-			Position4 position = Position4(x, y, player->mapPosition.height, player->mapPosition.level);
+			Position4 position = Position4(x, y, player->mapPosition.height, player->mapPosition.floor);
 			fovMap->setProperties(x, y, getTransparency(position), getWalkability(position));
 		}
 	}
@@ -437,7 +437,7 @@ bool World::isInFov(Position3 position) const
 	{
 		return false;
 	}
-	if (fovMap->isInFov(position.x, position.y) && position.level == player->mapPosition.level)
+	if (fovMap->isInFov(position.x, position.y) && position.floor == player->mapPosition.floor)
 	{
 		getTile(position)->explored = true;
 		return true;
@@ -488,8 +488,8 @@ void World::renderTiles(const std::shared_ptr<Pane>& pane) const
 	{
 		for (int x = xOffset; x < pane->consoleWidth + xOffset; ++x)
 		{
-			std::shared_ptr<Block> block = getTile(Position3(x, y, player->mapPosition.level));
-			block->render(Position4(x - xOffset, y - yOffset, player->mapPosition.height, player->mapPosition.level), pane);
+			std::shared_ptr<Block> block = getTile(Position3(x, y, player->mapPosition.floor));
+			block->render(Position4(x - xOffset, y - yOffset, player->mapPosition.height, player->mapPosition.floor), pane);
 		}
 	}
 }
@@ -508,7 +508,7 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 
 	for (auto& item : mapItemList)
 	{
-		if (item->mapPosition.level == player->mapPosition.level)
+		if (item->mapPosition.floor == player->mapPosition.floor)
 		{
 			item->renderTile(pane);
 		}
@@ -516,7 +516,7 @@ void World::render(const std::shared_ptr<Pane>& pane) const
 
 	for (auto& container : mapContainerList)
 	{
-		if (container->containerItem->mapPosition.level == player->mapPosition.level)
+		if (container->containerItem->mapPosition.floor == player->mapPosition.floor)
 		{
 			container->containerItem->renderTile(pane);
 		}

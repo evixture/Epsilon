@@ -1,12 +1,12 @@
 #include "main.hpp"
 
-Position3::Position3(int x, int y, int level)
-	:x(x), y(y), level(level)
+Position3::Position3(int x, int y, int floor)
+	:x(x), y(y), floor(floor)
 {}
 
 bool Position3::operator==(const Position3 & compPosition)
 {
-	if (this->x == compPosition.x && this->y == compPosition.y && this->level == compPosition.level)
+	if (this->x == compPosition.x && this->y == compPosition.y && this->floor == compPosition.floor)
 	{
 		return true;
 	}
@@ -15,19 +15,19 @@ bool Position3::operator==(const Position3 & compPosition)
 
 Position4 offsetPosition(Position4 mapPosition, int xOffset, int yOffset)
 {
-	return Position4(mapPosition.x - xOffset, mapPosition.y - yOffset, mapPosition.height, mapPosition.level);
+	return Position4(mapPosition.x - xOffset, mapPosition.y - yOffset, mapPosition.height, mapPosition.floor);
 }
 
 //----------------------------------------------------------------------------------------------------
 
-Position4::Position4(int x, int y, int height, int level)
-	:x(x), y(y), height(height), level(level)
+Position4::Position4(int x, int y, int height, int floor)
+	:x(x), y(y), height(height), floor(floor)
 {
 }
 
 bool Position4::operator==(const Position4& compPosition)
 {
-	if (this->x == compPosition.x && this->y == compPosition.y && this->height == compPosition.height && this->level == compPosition.level)
+	if (this->x == compPosition.x && this->y == compPosition.y && this->height == compPosition.height && this->floor == compPosition.floor)
 	{
 		return true;
 	}
@@ -36,7 +36,7 @@ bool Position4::operator==(const Position4& compPosition)
 
 Position4::operator Position3() const
 {
-	return Position3(this->x, this->y, this->level);
+	return Position3(this->x, this->y, this->floor);
 }
 
 //----------------------------------------------------------------------------------------------------

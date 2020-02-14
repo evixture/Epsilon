@@ -46,8 +46,8 @@ void Block::interact()
 
 void Block::render(Position4 renderPosition, const std::shared_ptr<Pane>& pane) const
 {
-	//if player height it greater than tallest nontransparent tile, render the tallest tile's data, else render tile on player's level
-	Position3 position = Position3(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.level);
+	//if player height it greater than tallest nontransparent tile, render the tallest tile's data, else render tile on player's floor
+	Position3 position = Position3(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.floor);
 	std::shared_ptr<Tile> tile = getTileData(renderPosition.height);
 
 		if (WORLD->isInFov(position))
@@ -127,7 +127,7 @@ void Stair::destroy(int)
 
 void Stair::interact()
 {
-	WORLD->player->mapPosition.level += moveDistance;
+	WORLD->player->mapPosition.floor += moveDistance;
 }
 
 Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int deceleration)

@@ -1,2 +1,25 @@
-﻿  settings.cpp
+﻿  aicreature.cpp
+  engine.cpp
+  entity.cpp
+  gui.cpp
+  input.cpp
+  item.cpp
+  main.cpp
+  map.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(349,35): warning C4018: '>=': signed/unsigned mismatch
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(350,35): warning C4018: '>=': signed/unsigned mismatch
+  panel.cpp
+  settings.cpp
+  tile.cpp
+  tool.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(148,27): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(149,27): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(221,35): warning C4018: '<': signed/unsigned mismatch
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(221,114): warning C4018: '<': signed/unsigned mismatch
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(554,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  utility.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(146,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(147,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  window.cpp
+  Generating Code...
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

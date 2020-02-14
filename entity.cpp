@@ -22,43 +22,43 @@ Creature::Creature(Position4 position, int ch, std::string name, TCODColor color
 {
 }
 
-void Creature::takeDamage(Bullet* bullet)
-{
-	if (equippedArmor.durability > 0) //if the armor durability is high enough
-	{
-		if (bullet->currentVelocity - equippedArmor.defense > 0) //if bullet is fast enough to pass through armor
-		{
-			equippedArmor.durability -= bullet->currentVelocity; //should happen before taking damage to prevent high damage
-			bullet->currentVelocity -= equippedArmor.defense;
-
-			health -= int(float(bullet->currentVelocity / (bullet->baseVelocity * 2.0f)) * bullet->mass);
-
-			bullet->currentVelocity -= 100; //slowdown after going through body
-		}
-		else if (bullet->currentVelocity - equippedArmor.defense <= 0) //if the bullet is stopped by the armor
-		{
-			equippedArmor.durability -= bullet->currentVelocity;
-			bullet->currentVelocity = 0;
-		}
-
-		if (equippedArmor.durability < 0)
-		{
-			equippedArmor.durability = 0;
-		}
-	}
-	else
-	{
-		int damage = int(float(bullet->currentVelocity / (bullet->baseVelocity * 2.0f)) * bullet->mass);
-		health -= damage;
-
-		bullet->currentVelocity -= 100; //slowdown after going through body
-	}
-
-	if (health < 0)
-	{
-		health = 0;
-	}
-}
+//void Creature::takeDamage(Bullet* bullet)
+//{
+//	//if (equippedArmor.durability > 0) //if the armor durability is high enough
+//	//{
+//	//	if (bullet->currentVelocity - equippedArmor.defense > 0) //if bullet is fast enough to pass through armor
+//	//	{
+//	//		equippedArmor.durability -= bullet->currentVelocity; //should happen before taking damage to prevent high damage
+//	//		bullet->currentVelocity -= equippedArmor.defense;
+//
+//	//		health -= int(float(bullet->currentVelocity / (bullet->baseVelocity * 2.0f)) * bullet->mass);
+//
+//	//		bullet->currentVelocity -= 100; //slowdown after going through body
+//	//	}
+//	//	else if (bullet->currentVelocity - equippedArmor.defense <= 0) //if the bullet is stopped by the armor
+//	//	{
+//	//		equippedArmor.durability -= bullet->currentVelocity;
+//	//		bullet->currentVelocity = 0;
+//	//	}
+//
+//	//	if (equippedArmor.durability < 0)
+//	//	{
+//	//		equippedArmor.durability = 0;
+//	//	}
+//	//}
+//	//else
+//	//{
+//	//	int damage = int(float(bullet->currentVelocity / (bullet->baseVelocity * 2.0f)) * bullet->mass);
+//	//	health -= damage;
+//
+//	//	bullet->currentVelocity -= 100; //slowdown after going through body
+//	//}
+//
+//	//if (health < 0)
+//	//{
+//	//	health = 0;
+//	//}
+//}
 
 void Creature::update()
 {
@@ -76,7 +76,7 @@ void Creature::update()
 
 void Creature::render(const std::shared_ptr<Pane>& pane) const
 {
-	if (WORLD->player->mapPosition.level == mapPosition.level)
+	if (WORLD->player->mapPosition.floor == mapPosition.floor)
 	{
 		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
 		pane->console->setCharForeground(renderPosition.x, renderPosition.y, (WORLD->isInFov(mapPosition))? color : TCODColor::darkerGrey); //out of fov creatures rendered with one step above normal fov grey to be more noticible
@@ -183,12 +183,12 @@ void Player::move()
 
 			for (int i = 1; i <= moveClock.numCalls; moveClock.numCalls--)
 			{
-				if (WORLD->getWalkability(Position4(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.height, mapPosition.level)))
+				if (WORLD->getWalkability(Position4(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.height, mapPosition.floor)))
 				{
 					mapPosition.x += moveXSpeed;
 					moveXSpeed = 0;
 				}
-				if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.height, mapPosition.level)))
+				if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.height, mapPosition.floor)))
 				{
 					mapPosition.y += moveYSpeed;
 					moveYSpeed = 0;
@@ -200,12 +200,12 @@ void Player::move()
 
 void Player::changeStanceUp()
 {
-	if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height + 1, mapPosition.level))) mapPosition.height += 1;
+	if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height + 1, mapPosition.floor))) mapPosition.height += 1;
 }
 
 void Player::changeStanceDown()
 {
-	if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height - 1, mapPosition.level))) mapPosition.height -= 1;
+	if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height - 1, mapPosition.floor))) mapPosition.height -= 1;
 }
 
 void Player::moveSelectorUp()
@@ -258,7 +258,7 @@ void Player::pickUpItem()
 {
 	for (int i = 0; i < WORLD->mapItemList.size(); ++i)
 	{
-		if (WORLD->mapItemList[i] != nullptr && WORLD->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->mapItemList[i]->mapPosition.level == mapPosition.level)
+		if (WORLD->mapItemList[i] != nullptr && WORLD->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->mapItemList[i]->mapPosition.floor == mapPosition.floor)
 		{
 			if (containerIndex != -1)
 			{
@@ -275,7 +275,7 @@ void Player::pickUpItem()
 
 	for (int i = 0; i < WORLD->mapContainerList.size(); ++i)
 	{
-		if (WORLD->mapContainerList[i] != nullptr && WORLD->mapContainerList[i]->containerItem->mapPosition.x == mapPosition.x && WORLD->mapContainerList[i]->containerItem->mapPosition.y == mapPosition.y && WORLD->mapContainerList[i]->containerItem->mapPosition.level == mapPosition.level)
+		if (WORLD->mapContainerList[i] != nullptr && WORLD->mapContainerList[i]->containerItem->mapPosition.x == mapPosition.x && WORLD->mapContainerList[i]->containerItem->mapPosition.y == mapPosition.y && WORLD->mapContainerList[i]->containerItem->mapPosition.floor == mapPosition.floor)
 		{
 			GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->mapContainerList[i]->containerItem->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 

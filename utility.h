@@ -4,10 +4,10 @@ struct Position3 //position struct with x, y, and z dimensions
 {
 	unsigned int x; //x coordinate
 	unsigned int y; //y coordinate
-	unsigned int level; //z / height coordinate
+	unsigned int floor; //z / height coordinate
 
 	Position3() {}
-	Position3(int x, int y, int level); //position constructor that takes x, y, and level ints
+	Position3(int x, int y, int floor); //position constructor that takes x, y, and floor ints
 
 	bool operator == (const Position3& compPosition);
 };
@@ -17,10 +17,10 @@ struct Position4
 	unsigned int x;
 	unsigned int y;
 	unsigned char height;
-	unsigned int level;
+	unsigned int floor;
 
 	Position4() {}
-	Position4(int x, int y, int height, int level); //position constructor that takes x, y, and level ints
+	Position4(int x, int y, int height, int floor); //position constructor that takes x, y, and floor ints
 
 	bool operator == (const Position4& compPosition);
 	operator Position3() const;

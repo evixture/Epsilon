@@ -44,6 +44,19 @@ protected:
 	unsigned char availibleFireMode;
 };
 
+struct Melee : public Tool
+{
+	int bluntDamage;
+	int sharpDamage;
+
+	Melee(Tool tool, int bluntDamage, int sharpDamage);
+
+	virtual void doMeleeDamage(std::shared_ptr<Creature>& creature);
+
+	virtual void update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld);
+	virtual void render(const std::shared_ptr<Pane>& pane) const;
+};
+
 struct Bullet //bullet that is fired from firearm
 {
 	unsigned char ch; //character represetation of the bulley
@@ -58,6 +71,8 @@ struct Bullet //bullet that is fired from firearm
 	bool hitWall; //if the bullet has made contact with the wall yet
 
 	Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass); //constructor that takes character, x and y to start, x and y destination, and map bounds
+
+	void doBulletDamage(std::shared_ptr<Creature>& creature);
 
 	void update(); //updates bullet
 	void render(const std::shared_ptr<Pane>& pane) const; //renders bullet
@@ -80,7 +95,7 @@ private:
 	//float fallNumCalls;
 };
 
-struct Firearm : public Tool //firearm that fires bullets that interact with the world
+struct Firearm : public Melee //firearm that fires bullets that interact with the world
 {
 	std::shared_ptr<MagazineData> selectedMagazine; //the magazine that is currently in the firearm, is a generic mag if no mag is in firearm
 

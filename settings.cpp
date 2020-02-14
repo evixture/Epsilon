@@ -51,7 +51,7 @@ void Settings::printDebugStats() const
 		SETTINGS->input->mouse.cy,
 		WORLD->player->mapPosition.x,
 		WORLD->player->mapPosition.y,
-		WORLD->player->mapPosition.level,
+		WORLD->player->mapPosition.floor,
 		TCODConsole::hasMouseFocus(),
 		lastFrameTime.asSeconds(),
 		WORLD->player->containerIndex,

@@ -107,7 +107,7 @@ void Tool::update(Position4 sourcePosition, int mx, int my, double angle, bool i
 {
 	this->isHeld = isHeld;
 
-	if (isHeld)
+	if (this->isHeld)
 	{
 		//behavior if it is held
 	}
@@ -120,11 +120,82 @@ void Tool::update(Position4 sourcePosition, int mx, int my, double angle, bool i
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
 	updateToolPosition(angle);
+
+	mapPosition.height = sourcePosition.height;
+	mapPosition.floor = sourcePosition.floor;
 }
 
 void Tool::render(const std::shared_ptr<Pane>& pane) const
 {
-	if (isHeld)
+	if (this->isHeld)
+	{
+		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+		pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
+	}
+}
+
+//----------------------------------------------------------------------------------------------------
+
+Melee::Melee(Tool tool, int bluntDamage, int sharpDamage)
+	: Tool(tool), bluntDamage(bluntDamage), sharpDamage(sharpDamage)
+{
+}
+
+void Melee::doMeleeDamage(std::shared_ptr<Creature>& creature)
+{
+	if (creature->health >= 0) //if creature is alive
+	{																				//should melee degrade armor???
+		float sharpDamageResult = sharpDamage * (1 - (creature->equippedArmor.defense / 400));
+		float bluntDamageResult = bluntDamage * 1; //should bluntdamage do less damage at higher armor?
+
+		int totalDamage = int(sharpDamageResult + bluntDamageResult);
+
+		if (creature->health - totalDamage < 0)
+		{
+			creature->health = 0;
+		}
+		else
+		{
+			creature->health -= totalDamage;
+		}
+	}
+}
+
+void Melee::update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld)
+{
+	this->isHeld = isHeld;
+
+	if (this->isHeld)
+	{
+		if (INPUT->primaryUseButton->isSwitched)
+		{
+			for (auto& creature : WORLD->creatureList)
+			{
+				if ((sourcePosition.x == creature->mapPosition.x && sourcePosition.y == creature->mapPosition.y && sourcePosition.floor == creature->mapPosition.floor) || //if the creature is on top of the creature
+					(mapPosition.x == creature->mapPosition.x && mapPosition.y == creature->mapPosition.y && mapPosition.floor == creature->mapPosition.floor)) //if the melee tool is on top of the creature
+				{
+					doMeleeDamage(creature);
+				}
+			}
+		}
+	}
+
+	dx = mx - sourcePosition.x;
+	dy = my - sourcePosition.y;
+
+	this->sourcePosition = sourcePosition;
+
+	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+
+	updateToolPosition(angle);
+
+	mapPosition.height = sourcePosition.height;
+	mapPosition.floor = sourcePosition.floor;
+}
+
+void Melee::render(const std::shared_ptr<Pane>& pane) const
+{
+	if (this->isHeld)
 	{
 		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
 		pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
@@ -153,6 +224,44 @@ Bullet::Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int 
 	toy += startPosition.y;
 
 	travel = BLine(startPosition.x, startPosition.y, tox, toy);
+}
+
+void Bullet::doBulletDamage(std::shared_ptr<Creature>& creature)
+{
+	if (creature->equippedArmor.durability > 0) //if the armor durability is high enough
+	{
+		if (currentVelocity - creature->equippedArmor.defense > 0) //if bullet is fast enough to pass through armor
+		{
+			creature->equippedArmor.durability -= currentVelocity; //should happen before taking damage to prevent high damage
+			currentVelocity -= creature->equippedArmor.defense;
+
+			creature->health -= int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //2.0f can be changed to manage ttk and bullet damage
+
+			currentVelocity -= 100; //slowdown after going through body
+		}
+		else if (currentVelocity - creature->equippedArmor.defense <= 0) //if the bullet is stopped by the armor
+		{
+			creature->equippedArmor.durability -= currentVelocity;
+			currentVelocity = 0;
+		}
+
+		if (creature->equippedArmor.durability < 0)
+		{
+			creature->equippedArmor.durability = 0;
+		}
+	}
+	else
+	{
+		int damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass);
+		creature->health -= damage;
+
+		currentVelocity -= 100; //slowdown after going through body
+	}
+
+	if (creature->health < 0)
+	{
+		creature->health = 0;
+	}
 }
 
 void Bullet::update()
@@ -188,11 +297,11 @@ void Bullet::update()
 					{
 						for (auto& creature : WORLD->creatureList) //if hit a creature
 						{
-							if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.level == mapPosition.level) //also checks height, may give bad results
+							if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.floor == mapPosition.floor) //also checks height, may give bad results
 							{
 								if (creature->health > 0)
 								{
-									creature->takeDamage(this);
+									doBulletDamage(creature); //replace with method do damage that takes creature
 								}
 
 								GUI->logWindow->pushMessage(LogWindow::Message("You hit a creature!", LogWindow::Message::MessageLevel::HIGH));
@@ -207,7 +316,7 @@ void Bullet::update()
 					mapPosition.height = 0;
 				}
 
-				mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.level);
+				mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.floor);
 
 			}
 
@@ -224,16 +333,16 @@ void Bullet::update()
 			{
 				mapPosition.height--;
 			}
-			mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.level);
+			mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.floor);
 		}
 
-	mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.level); //needed??
+	mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.floor); //needed??
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
 void Bullet::render(const std::shared_ptr<Pane>& pane) const
 {
-	if (WORLD->player->mapPosition.level == startPosition.level)
+	if (WORLD->player->mapPosition.floor == startPosition.floor)
 	{
 		if (currentVelocity > 0)
 		{
@@ -264,7 +373,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Firearm::Firearm(std::string name, TCODColor color, int shotsPerSecond, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
-	:Tool(name, color, ammoType, fireMode, availibleFireModeFlag), fireRPS(shotsPerSecond), reloadTime(reloadSpeed),
+	:Melee(Tool(name, color, ammoType, fireMode, availibleFireModeFlag), 0, 0), fireRPS(shotsPerSecond), reloadTime(reloadSpeed),
 	selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), fireClock(1.0f / shotsPerSecond), reloadClock(reloadSpeed)//, fireNumCalls(0), reloadNumCalls(0)
 {}
 
@@ -531,6 +640,8 @@ void Firearm::changeBarColor(TCODColor& color)
 
 void Firearm::update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld)
 {
+	this->isHeld = isHeld;
+
 	dx = mx - sourcePosition.x + WORLD->xOffset;
 	dy = my - sourcePosition.y + WORLD->yOffset;
 
@@ -541,11 +652,11 @@ void Firearm::update(Position4 sourcePosition, int mx, int my, double angle, boo
 	updateToolPosition(angle);
 
 	mapPosition.height = sourcePosition.height;
-	mapPosition.level = sourcePosition.level;
+	mapPosition.floor = sourcePosition.floor;
 
 	updateWeaponChar(angle);
 	
-	if (isHeld)
+	if (this->isHeld)
 	{
 		if (fireClock.numCalls >= 0.0f && selectedMagazine->availableAmmo != 0 && reloadClock.numCalls >= 0.0f) //fires bullet
 		{
@@ -589,7 +700,7 @@ void Firearm::update(Position4 sourcePosition, int mx, int my, double angle, boo
 
 void Firearm::render(const std::shared_ptr<Pane>& pane) const
 {
-	if (isHeld)
+	if (this->isHeld)
 	{
 		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
 		pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
@@ -620,3 +731,4 @@ void Armor::equip(Armor& armor) //if the passed armor is not equal to the armor 
 		}
 	}
 }
+

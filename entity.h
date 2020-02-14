@@ -41,7 +41,7 @@ struct Creature : public Entity //creature base used for player and other beings
 	//virtual void dropItem() = 0; //drops the selected item
 	//virtual void filterIndexes() = 0; //filters the container and item indexes to make sure they are in range
 	//virtual void reload() = 0; //reloads the selected item
-	void takeDamage(Bullet* bullet);
+	//void takeDamage(Bullet* bullet);
 
 	virtual void update(); //virtual updates the creature
 	void virtual render(const std::shared_ptr<Pane>& pane) const; // virtual renders the creature
