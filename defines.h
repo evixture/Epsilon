@@ -1,5 +1,8 @@
 constexpr auto PI = 3.14159265;
 
+//#pragma warning (disable : C26812)
+
+
 //CLASS SHORTCUTS
 #define ENGINE		engine
 #define SETTINGS	engine->settings

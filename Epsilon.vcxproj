@@ -197,6 +197,9 @@
       <LanguageStandard>Default</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
       <MinimalRebuild>false</MinimalRebuild>
+      <DisableSpecificWarnings>/wd26812;</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>
+      </TreatSpecificWarningsAsErrors>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -222,6 +225,9 @@
       <LanguageStandard>Default</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
       <MinimalRebuild>false</MinimalRebuild>
+      <DisableSpecificWarnings>/wd26812;</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>
+      </TreatSpecificWarningsAsErrors>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

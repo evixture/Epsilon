@@ -2,9 +2,9 @@
 
 struct Position3 //position struct with x, y, and z dimensions
 {
-	unsigned int x; //x coordinate
-	unsigned int y; //y coordinate
-	unsigned int floor; //z / height coordinate
+	int x; //x coordinate
+	int y; //y coordinate
+	int floor; //z / height coordinate
 
 	Position3() {}
 	Position3(int x, int y, int floor); //position constructor that takes x, y, and floor ints
@@ -14,7 +14,7 @@ struct Position3 //position struct with x, y, and z dimensions
 
 struct Position4 : public Position3
 {
-	unsigned char height;
+	char height;
 
 	Position4() {}
 	Position4(int x, int y, int height, int floor); //position constructor that takes x, y, and floor ints
@@ -51,26 +51,6 @@ struct Clock
 	void tickUp();
 	void addTime(float seconds);
 };
-
-//struct Clock //clock used for timings
-//{
-//	float capacity; //number that the clock resets to
-//	float step; //the steps util time is 0
-//
-//	int score; //rename to better descrip
-//
-//	//std::function<void()> action;
-//
-//	Clock(float capacityInSeconds, float step); //clock constructor that takes a capacity
-//
-//	void update(bool tickUp, bool resetAtZero);
-//
-//	bool isAtZero();
-//
-//	//void tickUp(); //ticks clock down, does not reset at 0
-//	//void tickDownWithReset(); //ticks clock down, resets at 0
-//	//void reset(); //sets step to capacity
-//};
 
 unsigned char	heightToBitFlag(int height);
 double			getAngle(int ix, int iy, int tx, int ty); //gets the angle from 2 sets of coordinates

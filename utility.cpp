@@ -138,8 +138,8 @@ double getAngle(int ix, int iy, int tx, int ty)
 
 double getDistance(int ix, int iy, int tx, int ty)
 {
-	int xLength = pow(tx - ix, 2);
-	int yLength = pow(ty - iy, 2);
+	double xLength = pow(tx - ix, 2);
+	double yLength = pow(ty - iy, 2);
 	return sqrt(xLength + yLength);
 }
 

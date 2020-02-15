@@ -64,7 +64,7 @@ void Creature::update()
 {
 	angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx, engine->settings->input->mouse.cy);
 
-	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
 
 	if (!(health > 0)) //if not "alive"
 	{
@@ -415,7 +415,7 @@ void Player::equipArmor()
 
 void Player::update()
 {
-	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
 
 	if (health > 0) //if player is alive
 	{

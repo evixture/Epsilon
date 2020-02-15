@@ -39,8 +39,6 @@ struct Tool //base class for the holdable component to items
 	virtual void update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld); //virtual updates tool
 	virtual void render(const std::shared_ptr<Pane>& pane) const; //virtual renders tool
 
-	float out;
-
 protected:
 	Position4 renderPosition;
 	unsigned char availibleFireMode;

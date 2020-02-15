@@ -5,7 +5,7 @@ Tool::Tool(std::string name, TCODColor color, int ch)
 {}
 
 Tool::Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
-	: name(name), color(color), ch(NULL), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), ammoType(ammoType), fireMode(fireMode), availibleFireMode(availibleFireModeFlag)
+	: name(name), color(color), ch(NULL), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), ammoType(ammoType), fireMode(fireMode), availibleFireMode(availibleFireModeFlag), isHeld(false)
 {}
 
 std::shared_ptr<MagazineData> Tool::getMagData()
@@ -21,7 +21,7 @@ void Tool::changeFireMode()
 
 void Tool::updateToolPosition(double angle)
 {
-	float absAngle = abs(angle);
+	double absAngle = abs(angle);
 
 	if (isnan(angle)) return;
 
@@ -452,7 +452,7 @@ void Firearm::updateToolPosition(double angle)
 	03|04
 	*/
 	
-	float absAngle = abs(angle);
+	double absAngle = abs(angle);
 
 	if (isnan(angle)) return;
 
@@ -732,9 +732,7 @@ void Firearm::fireBullet()
 			fireClock.tickUp();
 		}
 
-		out = fireClock.numCalls;
-
-		for (int i = 1.0f; i <= fireClock.numCalls; fireClock.numCalls--)
+		for (float i = 1.0f; i <= fireClock.numCalls; fireClock.numCalls--)
 		{
 			if (ammoType == MagazineData::AmmoType::FIVEPOINTFIVESIX)
 			{
