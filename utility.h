@@ -12,18 +12,14 @@ struct Position3 //position struct with x, y, and z dimensions
 	bool operator == (const Position3& compPosition);
 };
 
-struct Position4
+struct Position4 : public Position3
 {
-	unsigned int x;
-	unsigned int y;
 	unsigned char height;
-	unsigned int floor;
 
 	Position4() {}
 	Position4(int x, int y, int height, int floor); //position constructor that takes x, y, and floor ints
 
 	bool operator == (const Position4& compPosition);
-	operator Position3() const;
 };
 
 Position4 offsetPosition(Position4 mapPosition, int xOffset, int yOffset); //used to calculate render position from map offsets

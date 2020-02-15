@@ -21,7 +21,7 @@ Position4 offsetPosition(Position4 mapPosition, int xOffset, int yOffset)
 //----------------------------------------------------------------------------------------------------
 
 Position4::Position4(int x, int y, int height, int floor)
-	:x(x), y(y), height(height), floor(floor)
+	:Position3(x, y, floor), height(height)
 {
 }
 
@@ -32,11 +32,6 @@ bool Position4::operator==(const Position4& compPosition)
 		return true;
 	}
 	return false;
-}
-
-Position4::operator Position3() const
-{
-	return Position3(this->x, this->y, this->floor);
 }
 
 //----------------------------------------------------------------------------------------------------

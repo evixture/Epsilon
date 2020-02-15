@@ -18,8 +18,8 @@ E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(288,114): warning
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(455,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(737,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   utility.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(146,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(147,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(141,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(142,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   window.cpp
   Generating Code...
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe
