@@ -14,8 +14,8 @@ struct Tool //base class for the holdable component to items
 	Position4 mapPosition;
 	Position4 sourcePosition;
 
-	short int dx; //the delta x of the player and the mouse
-	short int dy; //the delta y of the player and the mouse
+	int dx; //the delta x of the player and the mouse
+	int dy; //the delta y of the player and the mouse
 
 	std::string name; //string name of tool
 
@@ -33,6 +33,8 @@ struct Tool //base class for the holdable component to items
 	virtual void changeBarColor(TCODColor& color);
 
 	virtual void equip(Armor& armor);
+
+	virtual void updatePositions(Position4 sourcePosition, int mx, int my, double angle);
 
 	virtual void update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld); //virtual updates tool
 	virtual void render(const std::shared_ptr<Pane>& pane) const; //virtual renders tool
@@ -111,6 +113,8 @@ struct Firearm : public Melee //firearm that fires bullets that interact with th
 
 	void changeBarColor(TCODColor& color);
 
+	void updateToolPosition(double angle); //updates the weapon character //replace with derived updateposition from tool
+
 	void update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld); //updates firearm
 	void render(const std::shared_ptr<Pane>& pane) const; //renders firearm
 
@@ -126,7 +130,6 @@ private:
 	Clock fireClock;
 	Clock reloadClock;
 
-	void updateWeaponChar(double angle); //updates the weapon character
 	void fireBullet(); //fires a bullet
 };
 

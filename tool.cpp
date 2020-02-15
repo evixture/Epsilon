@@ -21,78 +21,148 @@ void Tool::changeFireMode()
 
 void Tool::updateToolPosition(double angle)
 {
-	if (dx >= 0 && dy >= 0)
+	float absAngle = abs(angle);
+
+	if (isnan(angle)) return;
+
+	if (absAngle < 22.5f)
 	{
-		if (angle <= 22.5)
+		if (dx <= 0)
 		{
-			mapPosition.x = sourcePosition.x + 1;
-			mapPosition.y = sourcePosition.y;
+				mapPosition.x = sourcePosition.x - 1;
+				mapPosition.y = sourcePosition.y;
+				return;
 		}
-		else if (angle >= 22.5 && angle <= 67.5)
+		else
 		{
-			mapPosition.x = sourcePosition.x + 1;
-			mapPosition.y = sourcePosition.y + 1;
-		}
-		else if (angle >= 67.5)
-		{
-			mapPosition.x = sourcePosition.x;
-			mapPosition.y = sourcePosition.y + 1;
+				mapPosition.x = sourcePosition.x + 1;
+				mapPosition.y = sourcePosition.y;
+				return;
 		}
 	}
-	else if (dx >= 0 && dy <= 0)
+	else if (absAngle > 65.7f)
 	{
-		if (angle >= -22.5)
-		{
-			mapPosition.x = sourcePosition.x + 1;
-			mapPosition.y = sourcePosition.y;
-		}
-		else if (angle <= -22.5 && angle >= -67.5)
-		{
-			mapPosition.x = sourcePosition.x + 1;
-			mapPosition.y = sourcePosition.y - 1;
-		}
-		else if (angle <= -67.5)
+		if (dy <= 0)
 		{
 			mapPosition.x = sourcePosition.x;
 			mapPosition.y = sourcePosition.y - 1;
+			return;
 		}
-	}
-	else if (dx <= 0 && dy >= 0)
-	{
-		if (angle >= -22.5)
-		{
-			mapPosition.x = sourcePosition.x - 1;
-			mapPosition.y = sourcePosition.y;
-		}
-		else if (angle <= -22.5 && angle >= -67.5)
-		{
-			mapPosition.x = sourcePosition.x - 1;
-			mapPosition.y = sourcePosition.y + 1;
-		}
-		else if (angle <= -67.5)
+		else
 		{
 			mapPosition.x = sourcePosition.x;
 			mapPosition.y = sourcePosition.y + 1;
+			return;
 		}
 	}
-	else if (dx <= 0 && dy <= 0)
+	else //45 degree
 	{
-		if (angle <= 22.5)
+		if (dx <= 0)
 		{
-			mapPosition.x = sourcePosition.x - 1;
-			mapPosition.y = sourcePosition.y;
+			if (dy <= 0) //top left
+			{
+				mapPosition.x = sourcePosition.x - 1;
+				mapPosition.y = sourcePosition.y - 1;
+				return;
+			}
+			else //bottom left
+			{
+				mapPosition.x = sourcePosition.x - 1;
+				mapPosition.y = sourcePosition.y + 1;
+				return;
+			}
 		}
-		else if (angle >= 22.5 && angle <= 67.5)
+		else
 		{
-			mapPosition.x = sourcePosition.x - 1;
-			mapPosition.y = sourcePosition.y - 1;
-		}
-		else if (angle >= 67.5)
-		{
-			mapPosition.x = sourcePosition.x;
-			mapPosition.y = sourcePosition.y - 1;
+			if (dy <= 0) //top right
+			{
+				mapPosition.x = sourcePosition.x + 1;
+				mapPosition.y = sourcePosition.y - 1;
+				return;
+			}
+			else //bottom rigth
+			{
+				mapPosition.x = sourcePosition.x + 1;
+				mapPosition.y = sourcePosition.y + 1;
+				return;
+			}
 		}
 	}
+
+	
+
+	//if (dx >= 0 && dy >= 0)
+	//{
+	//	if (angle <= 22.5)
+	//	{
+	//		mapPosition.x = sourcePosition.x + 1;
+	//		mapPosition.y = sourcePosition.y;
+	//	}
+	//	else if (angle >= 22.5 && angle <= 67.5)
+	//	{
+	//		mapPosition.x = sourcePosition.x + 1;
+	//		mapPosition.y = sourcePosition.y + 1;
+	//	}
+	//	else if (angle >= 67.5)
+	//	{
+	//		mapPosition.x = sourcePosition.x;
+	//		mapPosition.y = sourcePosition.y + 1;
+	//	}
+	//}
+	//else if (dx >= 0 && dy < 0)
+	//{
+	//	if (angle >= -22.5)
+	//	{
+	//		mapPosition.x = sourcePosition.x + 1;
+	//		mapPosition.y = sourcePosition.y;
+	//	}
+	//	else if (angle <= -22.5 && angle >= -67.5)
+	//	{
+	//		mapPosition.x = sourcePosition.x + 1;
+	//		mapPosition.y = sourcePosition.y - 1;
+	//	}
+	//	else if (angle <= -67.5)
+	//	{
+	//		mapPosition.x = sourcePosition.x;
+	//		mapPosition.y = sourcePosition.y - 1;
+	//	}
+	//}
+	//else if (dx < 0 && dy >= 0)
+	//{
+	//	if (angle >= -22.5)
+	//	{
+	//		mapPosition.x = sourcePosition.x - 1;
+	//		mapPosition.y = sourcePosition.y;
+	//	}
+	//	else if (angle <= -22.5 && angle >= -67.5)
+	//	{
+	//		mapPosition.x = sourcePosition.x - 1;
+	//		mapPosition.y = sourcePosition.y + 1;
+	//	}
+	//	else if (angle <= -67.5)
+	//	{
+	//		mapPosition.x = sourcePosition.x;
+	//		mapPosition.y = sourcePosition.y + 1;
+	//	}
+	//}
+	//else if (dx < 0 && dy < 0)
+	//{
+	//	if (angle <= 22.5)
+	//	{
+	//		mapPosition.x = sourcePosition.x - 1;
+	//		mapPosition.y = sourcePosition.y;
+	//	}
+	//	else if (angle >= 22.5 && angle <= 67.5)
+	//	{
+	//		mapPosition.x = sourcePosition.x - 1;
+	//		mapPosition.y = sourcePosition.y - 1;
+	//	}
+	//	else if (angle >= 67.5)
+	//	{
+	//		mapPosition.x = sourcePosition.x;
+	//		mapPosition.y = sourcePosition.y - 1;
+	//	}
+	//}
 }
 
 void Tool::changeBarColor(TCODColor& color)
@@ -101,6 +171,20 @@ void Tool::changeBarColor(TCODColor& color)
 
 void Tool::equip(Armor& armor)
 {
+}
+
+void Tool::updatePositions(Position4 sourcePosition, int mx, int my, double angle)
+{
+	this->sourcePosition = sourcePosition;
+	mapPosition.height = sourcePosition.height;
+	mapPosition.floor = sourcePosition.floor;
+
+	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+
+	dx = mx - sourcePosition.x + WORLD->xOffset; //takes mouse input, applies to all creatures, but only useful for player
+	dy = my - sourcePosition.y + WORLD->yOffset;
+
+	updateToolPosition(angle);
 }
 
 void Tool::update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld)
@@ -112,17 +196,7 @@ void Tool::update(Position4 sourcePosition, int mx, int my, double angle, bool i
 		//behavior if it is held
 	}
 
-	dx = mx - sourcePosition.x;
-	dy = my - sourcePosition.y;
-
-	this->sourcePosition = sourcePosition;
-
-	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
-
-	updateToolPosition(angle);
-
-	mapPosition.height = sourcePosition.height;
-	mapPosition.floor = sourcePosition.floor;
+	updatePositions(sourcePosition, mx, my, angle);
 }
 
 void Tool::render(const std::shared_ptr<Pane>& pane) const
@@ -144,7 +218,7 @@ Melee::Melee(Tool tool, int bluntDamage, int sharpDamage)
 void Melee::doMeleeDamage(std::shared_ptr<Creature>& creature)
 {
 	if (creature->health >= 0) //if creature is alive
-	{																				//should melee degrade armor??? HOW TO CHECK IF NOT HOLDING CREATURE
+	{																				//HOW TO CHECK IF NOT HOLDING CREATURE
 		float sharpDamageResult = sharpDamage * (1.0f - (creature->equippedArmor.defense / 400.0f));
 		float bluntDamageResult = bluntDamage * 1.0f; //should bluntdamage do less damage at higher armor?
 
@@ -183,17 +257,7 @@ void Melee::update(Position4 sourcePosition, int mx, int my, double angle, bool 
 		}
 	}
 
-	dx = mx - sourcePosition.x;
-	dy = my - sourcePosition.y;
-
-	this->sourcePosition = sourcePosition;
-
-	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
-
-	updateToolPosition(angle);
-
-	mapPosition.height = sourcePosition.height;
-	mapPosition.floor = sourcePosition.floor;
+	updatePositions(sourcePosition, mx, my, angle);
 }
 
 void Melee::render(const std::shared_ptr<Pane>& pane) const
@@ -380,7 +444,7 @@ Firearm::Firearm(std::string name, TCODColor color, int shotsPerSecond, float re
 	selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), fireClock(1.0f / shotsPerSecond), reloadClock(reloadSpeed)//, fireNumCalls(0), reloadNumCalls(0)
 {}
 
-void Firearm::updateWeaponChar(double angle)
+void Firearm::updateToolPosition(double angle)
 {
 	/*
 	02|01
@@ -388,150 +452,266 @@ void Firearm::updateWeaponChar(double angle)
 	03|04
 	*/
 	
-	if (dx >= 0 && dy >= 0) //04
+	float absAngle = abs(angle);
+
+	if (isnan(angle)) return;
+
+	if (absAngle < 22.5f) //left / right
 	{
-		if (angle <= 22.5)
+		if (dx <= 0) //left
 		{
-			if (!(reloadClock.numCalls >= 0))
-			{
-				ch = '/';
-			}
-			else
-			{
-				ch = TCOD_CHAR_HLINE;
-			}
+			mapPosition.x = sourcePosition.x - 1;
+			mapPosition.y = sourcePosition.y;
+
 		}
-		else if (angle >= 22.5 && angle <= 67.5)
+		else //right
 		{
-			if (!(reloadClock.numCalls >= 0))
-			{
-				ch = TCOD_CHAR_HLINE;
-			}
-			else
-			{
-				ch = '\\';
-			}
+			mapPosition.x = sourcePosition.x + 1;
+			mapPosition.y = sourcePosition.y;
 		}
-		else if (angle >= 67.5)
+
+		if (!(reloadClock.numCalls >= 0)) //if reloading
 		{
-			if (!(reloadClock.numCalls >= 0))
+			ch = '/';
+		}
+		else
+		{
+			ch = TCOD_CHAR_HLINE;
+		}
+	}
+	else if (absAngle > 65.7f) //up / down
+	{
+		if (dy <= 0) //up
+		{
+			mapPosition.x = sourcePosition.x;
+			mapPosition.y = sourcePosition.y - 1;
+		}
+		else //down
+		{
+			mapPosition.x = sourcePosition.x;
+			mapPosition.y = sourcePosition.y + 1;
+		}
+
+		if (!(reloadClock.numCalls >= 0)) //if reloading
+		{
+			ch = '\\';
+		}
+		else
+		{
+			ch = TCOD_CHAR_VLINE;
+		}
+	}
+	else //45 degree
+	{
+		if (dx <= 0)
+		{
+			if (dy <= 0) //top left
 			{
-				ch = '\\';
+				mapPosition.x = sourcePosition.x - 1;
+				mapPosition.y = sourcePosition.y - 1;
+
+				if (!(reloadClock.numCalls >= 0)) //if reloading
+				{
+					ch = TCOD_CHAR_HLINE;
+				}
+				else
+				{
+					ch = '\\';
+				}
 			}
-			else
+			else //bottom left
 			{
-				ch = TCOD_CHAR_VLINE;
+				mapPosition.x = sourcePosition.x - 1;
+				mapPosition.y = sourcePosition.y + 1;
+
+				if (!(reloadClock.numCalls >= 0)) //if reloading
+				{
+					ch = TCOD_CHAR_VLINE;
+				}
+				else
+				{
+					ch = '/';
+				}
+			}
+
+		}
+		else
+		{
+			if (dy <= 0) //top right
+			{
+				mapPosition.x = sourcePosition.x + 1;
+				mapPosition.y = sourcePosition.y - 1;
+
+				if (!(reloadClock.numCalls >= 0)) //if reloading
+				{
+					ch = TCOD_CHAR_VLINE;
+				}
+				else
+				{
+					ch = '/';
+				}
+			}
+			else //bottom right
+			{
+				mapPosition.x = sourcePosition.x + 1;
+				mapPosition.y = sourcePosition.y + 1;
+
+				if (!(reloadClock.numCalls >= 0)) //if reloading
+				{
+					ch = TCOD_CHAR_HLINE;
+				}
+				else
+				{
+					ch = '\\';
+				}
 			}
 		}
 	}
-	else if (dx >= 0 && dy <= 0) //01
-	{
-		if (angle >= -22.5)
-		{
-			if (!(reloadClock.numCalls >= 0))
-			{
-				ch = '/';
-			}
-			else
-			{
-				ch = TCOD_CHAR_HLINE;
-			}
-		}
-		else if (angle <= -22.5 && angle >= -67.5)
-		{
-			if (!(reloadClock.numCalls >= 0))
-			{
-				ch = TCOD_CHAR_VLINE;
-			}
-			else
-			{
-				ch = '/';
-			}
-		}
-		else if (angle <= -67.5)
-		{
-			if (!(reloadClock.numCalls >= 0))
-			{
-				ch = '\\';
-			}
-			else
-			{
-				ch = TCOD_CHAR_VLINE;
-			}
-		}
-	}
-	else if (dx <= 0 && dy >= 0) //02
-	{
-		if (angle >= -22.5)
-		{
-			if (!(reloadClock.numCalls >= 0))
-			{
-				ch = '/';
-			}
-			else
-			{
-				ch = TCOD_CHAR_HLINE;
-			}
-		}
-		else if (angle <= -22.5 && angle >= -67.5)
-		{
-			if (!(reloadClock.numCalls >= 0))
-			{
-				ch = TCOD_CHAR_VLINE;
-			}
-			else
-			{
-				ch = '/';
-			}
-		}
-		else if (angle <= -67.5)
-		{
-			if (!(reloadClock.numCalls >= 0))
-			{
-				ch = '\\';
-			}
-			else
-			{
-				ch = TCOD_CHAR_VLINE;
-			}
-		}
-	}
-	else if (dx <= 0 && dy <= 0) //03
-	{
-		if (angle <= 22.5)
-		{
-			if (!(reloadClock.numCalls >= 0))
-			{
-				ch = '/';
-			}
-			else
-			{
-				ch = TCOD_CHAR_HLINE;
-			}
-		}
-		else if (angle >= 22.5 && angle <= 67.5)
-		{
-			if (!(reloadClock.numCalls >= 0))
-			{
-				ch = TCOD_CHAR_HLINE;
-			}
-			else
-			{
-				ch = '\\';
-			}
-		}
-		else if (angle >= 67.5)
-		{
-			if (!(reloadClock.numCalls >= 0))
-			{
-				ch = '\\';
-			}
-			else
-			{
-				ch = TCOD_CHAR_VLINE;
-			}
-		}
-	}
+
+	//if (dx >= 0 && dy >= 0) //04
+	//{
+	//	if (angle <= 22.5)
+	//	{
+	//		if (!(reloadClock.numCalls >= 0))
+	//		{
+	//			ch = '/';
+	//		}
+	//		else
+	//		{
+	//			ch = TCOD_CHAR_HLINE;
+	//		}
+	//	}
+	//	else if (angle >= 22.5 && angle <= 67.5)
+	//	{
+	//		if (!(reloadClock.numCalls >= 0))
+	//		{
+	//			ch = TCOD_CHAR_HLINE;
+	//		}
+	//		else
+	//		{
+	//			ch = '\\';
+	//		}
+	//	}
+	//	else if (angle >= 67.5)
+	//	{
+	//		if (!(reloadClock.numCalls >= 0))
+	//		{
+	//			ch = '\\';
+	//		}
+	//		else
+	//		{
+	//			ch = TCOD_CHAR_VLINE;
+	//		}
+	//	}
+	//}
+	//else if (dx >= 0 && dy <= 0) //01
+	//{
+	//	if (angle >= -22.5)
+	//	{
+	//		if (!(reloadClock.numCalls >= 0))
+	//		{
+	//			ch = '/';
+	//		}
+	//		else
+	//		{
+	//			ch = TCOD_CHAR_HLINE;
+	//		}
+	//	}
+	//	else if (angle <= -22.5 && angle >= -67.5)
+	//	{
+	//		if (!(reloadClock.numCalls >= 0))
+	//		{
+	//			ch = TCOD_CHAR_VLINE;
+	//		}
+	//		else
+	//		{
+	//			ch = '/';
+	//		}
+	//	}
+	//	else if (angle <= -67.5)
+	//	{
+	//		if (!(reloadClock.numCalls >= 0))
+	//		{
+	//			ch = '\\';
+	//		}
+	//		else
+	//		{
+	//			ch = TCOD_CHAR_VLINE;
+	//		}
+	//	}
+	//}
+	//else if (dx <= 0 && dy >= 0) //02
+	//{
+	//	if (angle >= -22.5)
+	//	{
+	//		if (!(reloadClock.numCalls >= 0))
+	//		{
+	//			ch = '/';
+	//		}
+	//		else
+	//		{
+	//			ch = TCOD_CHAR_HLINE;
+	//		}
+	//	}
+	//	else if (angle <= -22.5 && angle >= -67.5)
+	//	{
+	//		if (!(reloadClock.numCalls >= 0))
+	//		{
+	//			ch = TCOD_CHAR_VLINE;
+	//		}
+	//		else
+	//		{
+	//			ch = '/';
+	//		}
+	//	}
+	//	else if (angle <= -67.5)
+	//	{
+	//		if (!(reloadClock.numCalls >= 0))
+	//		{
+	//			ch = '\\';
+	//		}
+	//		else
+	//		{
+	//			ch = TCOD_CHAR_VLINE;
+	//		}
+	//	}
+	//}
+	//else if (dx <= 0 && dy <= 0) //03
+	//{
+	//	if (angle <= 22.5)
+	//	{
+	//		if (!(reloadClock.numCalls >= 0))
+	//		{
+	//			ch = '/';
+	//		}
+	//		else
+	//		{
+	//			ch = TCOD_CHAR_HLINE;
+	//		}
+	//	}
+	//	else if (angle >= 22.5 && angle <= 67.5)
+	//	{
+	//		if (!(reloadClock.numCalls >= 0))
+	//		{
+	//			ch = TCOD_CHAR_HLINE;
+	//		}
+	//		else
+	//		{
+	//			ch = '\\';
+	//		}
+	//	}
+	//	else if (angle >= 67.5)
+	//	{
+	//		if (!(reloadClock.numCalls >= 0))
+	//		{
+	//			ch = '\\';
+	//		}
+	//		else
+	//		{
+	//			ch = TCOD_CHAR_VLINE;
+	//		}
+	//	}
+	//}
 }
 
 std::shared_ptr<MagazineData> Firearm::getMagData()
@@ -644,20 +824,6 @@ void Firearm::changeBarColor(TCODColor& color)
 void Firearm::update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld)
 {
 	this->isHeld = isHeld;
-
-	dx = mx - sourcePosition.x + WORLD->xOffset;
-	dy = my - sourcePosition.y + WORLD->yOffset;
-
-	this->sourcePosition = sourcePosition;
-
-	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
-
-	updateToolPosition(angle);
-
-	mapPosition.height = sourcePosition.height;
-	mapPosition.floor = sourcePosition.floor;
-
-	updateWeaponChar(angle);
 	
 	if (this->isHeld)
 	{
@@ -699,6 +865,10 @@ void Firearm::update(Position4 sourcePosition, int mx, int my, double angle, boo
 	{
 		reloadClock.tickUp();
 	}
+	
+	updatePositions(sourcePosition, mx, my, angle);
+
+	//updateWeaponChar(angle);
 }
 
 void Firearm::render(const std::shared_ptr<Pane>& pane) const
