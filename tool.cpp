@@ -19,6 +19,10 @@ void Tool::reload(std::shared_ptr<MagazineData>& magazine)
 void Tool::changeFireMode()
 {}
 
+void Tool::useMelee()
+{
+}
+
 void Tool::updateToolPosition(double angle)
 {
 	double absAngle = abs(angle);
@@ -215,6 +219,21 @@ Melee::Melee(Tool tool, int bluntDamage, int sharpDamage)
 {
 }
 
+void Melee::useMelee()
+{
+	for (auto& creature : WORLD->creatureList)
+	{
+		if ((sourcePosition.x == creature->mapPosition.x && sourcePosition.y == creature->mapPosition.y && sourcePosition.floor == creature->mapPosition.floor) || //if the creature is on top of the creature
+			(mapPosition.x == creature->mapPosition.x && mapPosition.y == creature->mapPosition.y && mapPosition.floor == creature->mapPosition.floor)) //if the melee tool is on top of the creature
+		{
+			if (creature != WORLD->player)
+			{
+				doMeleeDamage(creature);
+			}
+		}
+	}
+}
+
 void Melee::doMeleeDamage(std::shared_ptr<Creature>& creature)
 {
 	if (creature->health >= 0) //if creature is alive
@@ -243,17 +262,7 @@ void Melee::update(Position4 sourcePosition, int mx, int my, double angle, bool 
 	{
 		if (INPUT->primaryUseButton->isSwitched)
 		{
-			for (auto& creature : WORLD->creatureList)
-			{
-				if ((sourcePosition.x == creature->mapPosition.x && sourcePosition.y == creature->mapPosition.y && sourcePosition.floor == creature->mapPosition.floor) || //if the creature is on top of the creature
-					(mapPosition.x == creature->mapPosition.x && mapPosition.y == creature->mapPosition.y && mapPosition.floor == creature->mapPosition.floor)) //if the melee tool is on top of the creature
-				{
-					if (creature != WORLD->player)
-					{
-						doMeleeDamage(creature);
-					}
-				}
-			}
+			useMelee();
 		}
 	}
 
@@ -440,7 +449,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Firearm::Firearm(std::string name, TCODColor color, int shotsPerSecond, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
-	:Melee(Tool(name, color, ammoType, fireMode, availibleFireModeFlag), 0, 0), fireRPS(shotsPerSecond), reloadTime(reloadSpeed),
+	:Melee(Tool(name, color, ammoType, fireMode, availibleFireModeFlag), /* MELEE DAMAGE */ 25, 0), fireRPS(shotsPerSecond), reloadTime(reloadSpeed),
 	selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), fireClock(1.0f / shotsPerSecond), reloadClock(reloadSpeed)//, fireNumCalls(0), reloadNumCalls(0)
 {}
 

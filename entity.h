@@ -64,9 +64,11 @@ struct Player : public Creature //player derived creature that the player intera
 	void pickUpItem(); //picks up the item on the ground
 	void dropItem(); //drops the selected item
 
+	//actions
 	void reload(); //reloads the selected item
 	void changeFireMode();
 	void equipArmor();
+	void useMelee();
 
 
 	void update(); //updates the player

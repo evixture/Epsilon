@@ -28,6 +28,7 @@ struct Tool //base class for the holdable component to items
 
 	virtual void reload(std::shared_ptr<MagazineData>& magazine); //does nothing in tool
 	virtual void changeFireMode();
+	virtual void useMelee();
 	virtual void updateToolPosition(double angle); //takes angle and updates tool position
 
 	virtual void changeBarColor(TCODColor& color);
@@ -51,10 +52,13 @@ struct Melee : public Tool
 
 	Melee(Tool tool, int bluntDamage, int sharpDamage);
 
-	virtual void doMeleeDamage(std::shared_ptr<Creature>& creature);
-
+	void useMelee();
+	
 	virtual void update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld);
 	virtual void render(const std::shared_ptr<Pane>& pane) const;
+
+private:
+	virtual void doMeleeDamage(std::shared_ptr<Creature>& creature);
 };
 
 struct Bullet //bullet that is fired from firearm

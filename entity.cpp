@@ -413,6 +413,11 @@ void Player::equipArmor()
 	selectedItem->tool->equip(equippedArmor);
 }
 
+void Player::useMelee()
+{
+	selectedItem->tool->useMelee();
+}
+
 void Player::update()
 {
 	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));

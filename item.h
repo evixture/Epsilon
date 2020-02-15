@@ -2,7 +2,7 @@
 
 struct Action //handles item actions
 {
-	enum class Type {DROP, RELOAD, CHANGEFIREMODE, EQUIP} type; //main type of action, enum for easy comparison
+	enum class Type {DROP, RELOAD, CHANGEFIREMODE, EQUIP, MELEE} type; //main type of action, enum for easy comparison
 
 	std::string name; //the string name of the action so it can be rendered in action pane
 	std::function<void()> action; //the function that is called when activated
