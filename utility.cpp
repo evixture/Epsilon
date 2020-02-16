@@ -218,3 +218,46 @@ void Clock::addTime(float seconds)
 	//numCalls -= seconds / SETTINGS->lastFrameTime.asSeconds();
 	numCalls -= seconds / timeBetweenUpdates;
 }
+
+Menu::Menu(std::vector<std::string> menuList)
+	:menuList(menuList), menuIndex(0)
+{
+	menuSelection = menuList[menuIndex];
+}
+
+void Menu::update()
+{
+	menuSelection = menuList[menuIndex];
+
+	if (INPUT->moveUpKey->isSwitched)
+	{
+		if (menuIndex > 0)
+		{
+			menuIndex--;
+		}
+	}
+
+	if (INPUT->moveDownKey->isSwitched)
+	{
+		if (menuIndex < menuList.size() - 1)
+		{
+			++menuIndex;
+		}
+	}
+}
+
+void Menu::render(const std::shared_ptr<Pane>& pane, const int rx, const int ry) const
+{
+	for (int i = 0; i < menuList.size(); ++i)
+	{
+		if (i == menuIndex)
+		{
+			pane->console->printf(rx, ry + i, "|> %s", menuList[i].c_str());
+			pane->console->setCharForeground(rx + 1, ry + i, UICOLOR_Selector);
+		}
+		else
+		{
+			pane->console->printf(rx, ry + i, "|  %s", menuList[i].c_str());
+		}
+	}
+}

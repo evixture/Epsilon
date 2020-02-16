@@ -11,8 +11,9 @@ Gui::Gui(int windowX, int windowY)
 	windowList.push_back(proximityWindow	= std::make_shared<ProximityWindow>	(30, 12, 89, 26));
 	windowList.push_back(actionWindow		= std::make_shared<ActionWindow>	(30, 12, 89, 13));
 
-	startupSplashWindow = std::make_shared<SplashWindow>		(118, 62, 1, 1);
-	inventoryFullWindow = std::make_shared<InventoryFullWindow>	(55, 61, 64, 2);
+	pauseWindow =			std::make_shared<PauseWindow>			(118, 61, 1, 2);
+	startupSplashWindow =	std::make_shared<SplashWindow>			(118, 61, 1, 2);
+	inventoryFullWindow =	std::make_shared<InventoryFullWindow>	(55, 61, 64, 2);
 }
 
 
@@ -45,6 +46,10 @@ void Gui::update()
 	{
 		worldWindow->update();
 		inventoryFullWindow->update();
+	}
+	else if (activeWindow == Gui::ActiveWindow::PAUSE)
+	{
+		pauseWindow->update();
 	}
 }
 
@@ -81,6 +86,10 @@ void Gui::render() const
 	{
 		worldWindow->render();
 		inventoryFullWindow->render();
+	}
+	else if (activeWindow == Gui::ActiveWindow::PAUSE)
+	{
+		pauseWindow->render();
 	}
 
 	renderMouse();

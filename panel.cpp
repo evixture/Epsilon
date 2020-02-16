@@ -182,41 +182,28 @@ void InventoryWindow::render() const
 //----------------------------------------------------------------------------------------------------
 
 SplashWindow::SplashWindow(int consoleWidth, int consoleHeight, int rx, int ry)
-	:Window(consoleWidth, consoleHeight, "EPSILON", rx, ry), menuIndex(0)
+	:Window(consoleWidth, consoleHeight, "EPSILON", rx, ry), menu(Menu(std::vector<std::string>{"Start", "Exit"}))
 {
-	menuItemList.push_back("Start");
-	menuItemList.push_back("Exit");
+	//menu = Menu(std::vector<std::string>{"Start", "Exit"});
 
-	menuSelection = menuItemList[menuIndex];
+	//menuItemList.push_back("Start");
+	//menuItemList.push_back("Exit");
+	//
+	//menuSelection = menuItemList[menuIndex];
 }
 
 void SplashWindow::update()
 {
-	menuSelection = menuItemList[menuIndex];
-
-	if (INPUT->moveUpKey->isSwitched)
-	{
-		if (menuIndex > 0)
-		{
-			menuIndex--;
-		}
-	}
-
-	if (INPUT->moveDownKey->isSwitched)
-	{
-		if (menuIndex < menuItemList.size() - 1)
-		{
-			++menuIndex;
-		}
-	}
+	//menu update
+	menu.update();
 
 	if (INPUT->worldInteractKey->isSwitched)
 	{
-		if (menuItemList[menuIndex] == "Start")
+		if (menu.menuSelection == "Start")
 		{
 			GUI->activeWindow = Gui::ActiveWindow::NONE;
 		}
-		else if (menuItemList[menuIndex] == "Exit")
+		else if (menu.menuSelection == "Exit")
 		{
 			engine->gamestate = Engine::Gamestate::EXIT;
 		}
@@ -238,18 +225,8 @@ void SplashWindow::renderLargeLogo() const
 
 void SplashWindow::renderMenuOptions() const
 {
-	for (int i = 0; i < menuItemList.size(); ++i)
-	{
-		if (i == menuIndex)
-		{
-			drawWindow->console->printf(50, 50 + i, "|> %s", menuItemList[i].c_str());
-			drawWindow->console->setCharForeground(51, 50 + i, UICOLOR_Selector);
-		}
-		else
-		{
-			drawWindow->console->printf(50, 50 + i, "|  %s", menuItemList[i].c_str());
-		}
-	}
+	//menu render
+	menu.render(drawWindow, 50, 50);
 }
 
 void SplashWindow::render() const
@@ -488,6 +465,92 @@ void ActionWindow::render() const
 				++line;
 			}
 		}
+	}
+
+	pushWindow();
+}
+
+//----------------------------------------------------------------------------------------------------
+
+PauseWindow::PauseWindow(int consoleWidth, int consoleHeight, int rx, int ry)
+	:Window(consoleWidth, consoleHeight, "Paused", rx, ry), 
+	baseMenu(std::vector<std::string>{"Return", "Settings", "Exit"}), settingsMenu(std::vector<std::string>{"Input", "Video", "Back"}), 
+	baseMenuActive(true), settingsMenuActive(false)
+{
+}
+
+void PauseWindow::update()
+{
+	if (baseMenuActive)
+	{
+		baseMenu.update();
+	}
+	else if (settingsMenuActive)
+	{
+		settingsMenu.update();
+	}
+
+	if (INPUT->worldInteractKey->isSwitched)
+	{
+		if (baseMenuActive)
+		{
+			if (baseMenu.menuSelection == "Return")
+			{
+				GUI->activeWindow = Gui::ActiveWindow::NONE;
+			}
+			else if (baseMenu.menuSelection == "Settings")
+			{
+				baseMenuActive = false;
+				settingsMenuActive = true;
+			}
+			else if (baseMenu.menuSelection == "Exit")
+			{
+				ENGINE->gamestate = Engine::Gamestate::EXIT;
+			}
+		}
+		else if (settingsMenuActive)
+		{
+			if (settingsMenu.menuSelection == "Input")
+			{
+				//enter input menu
+			}
+			else if (settingsMenu.menuSelection == "Video")
+			{
+				//enter video menu
+			}
+			else if (settingsMenu.menuSelection == "Back")
+			{
+				settingsMenuActive = false;
+				baseMenuActive = true;
+			}
+		}
+	}
+
+	if (INPUT->menuKey->isSwitched && GUI->activeWindow == Gui::ActiveWindow::PAUSE)
+	{
+		if (baseMenuActive)
+		{
+			GUI->activeWindow = Gui::ActiveWindow::NONE;
+		}
+		else if (settingsMenuActive)
+		{
+			settingsMenuActive = false;
+			baseMenuActive = true;
+		}
+	}
+}
+
+void PauseWindow::render() const
+{
+	clearWindow();
+
+	if (baseMenuActive)
+	{
+		baseMenu.render(drawWindow, 50, 50);
+	}
+	else if (settingsMenuActive)
+	{
+		settingsMenu.render(drawWindow, 50, 50);
 	}
 
 	pushWindow();

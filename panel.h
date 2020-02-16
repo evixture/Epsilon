@@ -54,9 +54,11 @@ struct SplashWindow : public Window //the startup window
 	void render() const; //renders the window
 
 private:
-	unsigned char menuIndex; //menu selection index
-	std::string menuSelection; //name of menu item at index
-	std::vector<std::string> menuItemList; //list of strings of menu names
+	//unsigned char menuIndex; //menu selection index
+	//std::string menuSelection; //name of menu item at index
+	//std::vector<std::string> menuItemList; //list of strings of menu names
+
+	Menu menu;
 
 	void renderLargeLogo() const;
 	void renderMenuOptions() const;
@@ -116,4 +118,32 @@ struct ActionWindow : public Window //shows the availible actions for the player
 
 private:
 	std::shared_ptr<ActionManager> actionManager; //the list of availible actions
+};
+
+struct PauseWindow : public Window
+{
+	/*
+	
+	Pause Menu : 
+		Settings
+			Input
+				key binds
+			Video
+				
+		Exit
+	
+	*/
+
+
+	PauseWindow(int consoleWidth, int consoleHeight, int rx, int ry);
+
+	void update();
+	void render() const; //renders the window
+
+private:
+	Menu baseMenu;
+	Menu settingsMenu;
+
+	bool baseMenuActive;
+	bool settingsMenuActive;
 };

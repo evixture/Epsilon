@@ -218,6 +218,10 @@ void Input::update()
 
 	if (menuKey->isSwitched)
 	{
-		engine->gamestate = Engine::Gamestate::EXIT;
+		if (GUI->activeWindow == Gui::ActiveWindow::NONE)
+		{
+			GUI->activeWindow = Gui::ActiveWindow::PAUSE;
+			INPUT->menuKey->isSwitched = false;
+		}
 	}
 }

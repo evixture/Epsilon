@@ -68,3 +68,17 @@ struct MagazineData //contains all of the important data for magazines
 
 	MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid = true); //magazine data constructor that takes ammo type, capacity, availible ammo, and validity
 };
+
+struct Menu
+{
+	std::string menuSelection;
+
+	Menu(std::vector<std::string> menuList);
+
+	void update();
+	void render(const std::shared_ptr<Pane>& pane, const int rx, const int ry) const;
+
+private:
+	unsigned int menuIndex;
+	std::vector<std::string> menuList;
+};
