@@ -49,14 +49,14 @@ void Settings::printDebugStats() const
 		fpsCount,
 		SETTINGS->input->mouse.cx,
 		SETTINGS->input->mouse.cy,
-		WORLD->player->mapPosition.x,
-		WORLD->player->mapPosition.y,
-		WORLD->player->mapPosition.floor,
+		WORLD->debugmap->player->mapPosition.x,
+		WORLD->debugmap->player->mapPosition.y,
+		WORLD->debugmap->player->mapPosition.floor,
 		TCODConsole::hasMouseFocus(),
 		lastFrameTime.asSeconds(),
-		WORLD->player->selectedItem->tool->dx,
-		WORLD->player->selectedItem->tool->dy,
-		WORLD->player->angle);
+		WORLD->debugmap->player->selectedItem->tool->dx,
+		WORLD->debugmap->player->selectedItem->tool->dy,
+		WORLD->debugmap->player->angle);
 }
 
 void Settings::update(std::shared_ptr<Player> player)

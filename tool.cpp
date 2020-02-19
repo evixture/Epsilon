@@ -221,12 +221,12 @@ Melee::Melee(Tool tool, int bluntDamage, int sharpDamage)
 
 void Melee::useMelee()
 {
-	for (auto& creature : WORLD->creatureList)
+	for (auto& creature : WORLD->debugmap->creatureList)
 	{
 		if ((sourcePosition.x == creature->mapPosition.x && sourcePosition.y == creature->mapPosition.y && sourcePosition.floor == creature->mapPosition.floor) || //if the creature is on top of the creature
 			(mapPosition.x == creature->mapPosition.x && mapPosition.y == creature->mapPosition.y && mapPosition.floor == creature->mapPosition.floor)) //if the melee tool is on top of the creature
 		{
-			if (creature != WORLD->player)
+			if (creature != WORLD->debugmap->player)
 			{
 				doMeleeDamage(creature);
 			}
@@ -371,7 +371,7 @@ void Bullet::update()
 					}
 					else if (WORLD->getSolidity(mapPosition) == false)
 					{
-						for (auto& creature : WORLD->creatureList) //if hit a creature
+						for (auto& creature : WORLD->debugmap->creatureList) //if hit a creature
 						{
 							if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.floor == mapPosition.floor) //also checks height, may give bad results
 							{
@@ -418,7 +418,7 @@ void Bullet::update()
 
 void Bullet::render(const std::shared_ptr<Pane>& pane) const
 {
-	if (WORLD->player->mapPosition.floor == startPosition.floor)
+	if (WORLD->debugmap->player->mapPosition.floor == startPosition.floor)
 	{
 		if (currentVelocity > 0)
 		{

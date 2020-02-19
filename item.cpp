@@ -8,15 +8,15 @@ void Action::update()
 {
 	if (type == Type::CHANGEFIREMODE)
 	{
-		if (WORLD->player->selectedItem->tool->fireMode == Tool::SAFE)
+		if (WORLD->debugmap->player->selectedItem->tool->fireMode == Tool::SAFE)
 		{
 			name = "Change Fire Mode : SAFE";
 		}
-		else if (WORLD->player->selectedItem->tool->fireMode == Tool::SEMI)
+		else if (WORLD->debugmap->player->selectedItem->tool->fireMode == Tool::SEMI)
 		{
 			name = "Change Fire Mode : SEMI";
 		}
-		else if (WORLD->player->selectedItem->tool->fireMode == Tool::FULL)
+		else if (WORLD->debugmap->player->selectedItem->tool->fireMode == Tool::FULL)
 		{
 			name = "Change Fire Mode : FULL";
 		}
@@ -154,14 +154,14 @@ void Item::renderTool(const std::shared_ptr<Pane>& pane) const
 
 void Item::updateTile()
 {
-	distToEnt = getDistance(WORLD->player->mapPosition.x, WORLD->player->mapPosition.y, mapPosition.x, mapPosition.y);
+	distToEnt = getDistance(WORLD->debugmap->player->mapPosition.x, WORLD->debugmap->player->mapPosition.y, mapPosition.x, mapPosition.y);
 
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
 void Item::renderTile(const std::shared_ptr<Pane>& pane) const
 {
-	tile->render(Position4(renderPosition.x, renderPosition.y, WORLD->player->mapPosition.height, renderPosition.floor), pane);
+	tile->render(Position4(renderPosition.x, renderPosition.y, WORLD->debugmap->player->mapPosition.height, renderPosition.floor), pane);
 
 	if (distToEnt < 5 && WORLD->isInFov(mapPosition))
 	{

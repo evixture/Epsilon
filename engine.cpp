@@ -8,7 +8,7 @@ Engine::Engine(int screenCharWidth, int screenCharHeight)
 
 void Engine::update()
 {
-	settings->update(gui->worldWindow->world->player);
+	settings->update(gui->worldWindow->world->debugmap->player);
 	gui->update();
 }
 

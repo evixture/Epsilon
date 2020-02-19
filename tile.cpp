@@ -127,7 +127,7 @@ void Stair::destroy(int)
 
 void Stair::interact()
 {
-	WORLD->player->mapPosition.floor += moveDistance;
+	WORLD->debugmap->player->mapPosition.floor += moveDistance;
 }
 
 Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int deceleration)

@@ -32,14 +32,14 @@ StatusWindow::StatusWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 
 void StatusWindow::update()
 {
-	if (displayHealth != WORLD->player->health)
+	if (displayHealth != WORLD->debugmap->player->health)
 	{
-		displayHealth = WORLD->player->health;
+		displayHealth = WORLD->debugmap->player->health;
 	}
 
-	if (displayArmor != WORLD->player->equippedArmor.defense)
+	if (displayArmor != WORLD->debugmap->player->equippedArmor.defense)
 	{
-		displayArmor =  WORLD->player->equippedArmor.defense; //300 div def??
+		displayArmor =  WORLD->debugmap->player->equippedArmor.defense; //300 div def??
 	}
 }
 
@@ -80,13 +80,13 @@ PlayerWindow::PlayerWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 
 void PlayerWindow::update()
 {
-	if		(WORLD->player->mapPosition.height == 1	&& playerStance != "Prone")		playerStance = "Prone";
-	else if (WORLD->player->mapPosition.height == 2 && playerStance != "Crouching") playerStance = "Crouching";
-	else if (WORLD->player->mapPosition.height == 3 && playerStance != "Standing")	playerStance = "Standing";
-
-	if		(WORLD->player->baseMoveTime == .5f		&& playerSpeed != "Walking")	playerSpeed = "Walking";
-	else if (WORLD->player->baseMoveTime == .25f	&& playerSpeed != "Running")	playerSpeed = "Running";
-	else if (WORLD->player->baseMoveTime == 1.0f	&& playerSpeed != "Creeping")	playerSpeed = "Creeping";
+	if		(WORLD->debugmap->player->mapPosition.height == 1	&& playerStance != "Prone")		playerStance = "Prone";
+	else if (WORLD->debugmap->player->mapPosition.height == 2 && playerStance != "Crouching") playerStance = "Crouching";
+	else if (WORLD->debugmap->player->mapPosition.height == 3 && playerStance != "Standing")	playerStance = "Standing";
+					
+	if		(WORLD->debugmap->player->baseMoveTime == .5f		&& playerSpeed != "Walking")	playerSpeed = "Walking";
+	else if (WORLD->debugmap->player->baseMoveTime == .25f	&& playerSpeed != "Running")	playerSpeed = "Running";
+	else if (WORLD->debugmap->player->baseMoveTime == 1.0f	&& playerSpeed != "Creeping")	playerSpeed = "Creeping";
 }
 
 void PlayerWindow::render() const
@@ -107,9 +107,9 @@ InventoryWindow::InventoryWindow(int consoleWidth, int consoleHeight, int rx, in
 
 void InventoryWindow::update()
 {
-	if (inventoryItemList != WORLD->player->inventory)
+	if (inventoryItemList != WORLD->debugmap->player->inventory)
 	{
-		inventoryItemList = WORLD->player->inventory;
+		inventoryItemList = WORLD->debugmap->player->inventory;
 	}
 }
 
@@ -126,16 +126,16 @@ void InventoryWindow::render() const
 		{
 			if (i == 0)
 			{
-				if (container == WORLD->player->inventory[WORLD->player->containerIndex] && WORLD->player->itemIndex == -1)
+				if (container == WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex] && WORLD->debugmap->player->itemIndex == -1)
 				{
 					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name.c_str());
 					drawWindow->console->setCharForeground(1, drawLineStart, UICOLOR_Selector); //color the cursor
-					drawWindow->console->setCharForeground(0, drawLineStart, WORLD->player->inventory[WORLD->player->containerIndex]->containerItem->barColor); //color the bar
+					drawWindow->console->setCharForeground(0, drawLineStart, WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex]->containerItem->barColor); //color the bar
 				}
 				else
 				{
 					drawWindow->console->printf(0, drawLineStart, "| %s", container->containerItem->tool->name.c_str());
-					drawWindow->console->setCharForeground(0, drawLineStart, WORLD->player->inventory[WORLD->player->containerIndex]->containerItem->barColor); //color the bar
+					drawWindow->console->setCharForeground(0, drawLineStart, WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex]->containerItem->barColor); //color the bar
 				}
 				++drawLine;
 			}
@@ -151,7 +151,7 @@ void InventoryWindow::render() const
 			{
 				if (j == 0)
 				{
-					if (item == WORLD->player->selectedItem)
+					if (item == WORLD->debugmap->player->selectedItem)
 					{
 						drawWindow->console->printf(0, drawLine, "|>  %s", item->tool->name.c_str());
 						drawWindow->console->setCharForeground(1, drawLine, UICOLOR_Selector);
@@ -247,9 +247,9 @@ InventoryFullWindow::InventoryFullWindow(int consoleWidth, int consoleHeight, in
 
 void InventoryFullWindow::update()
 {
-	if (inventoryItemList != WORLD->player->inventory)
+	if (inventoryItemList != WORLD->debugmap->player->inventory)
 	{
-		inventoryItemList = WORLD->player->inventory;
+		inventoryItemList = WORLD->debugmap->player->inventory;
 	}
 }
 
@@ -266,7 +266,7 @@ void InventoryFullWindow::render() const
 		{
 			if (i == 0)
 			{
-				if (container == WORLD->player->inventory[WORLD->player->containerIndex] && WORLD->player->itemIndex == -1)
+				if (container == WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex] && WORLD->debugmap->player->itemIndex == -1)
 				{
 					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name.c_str());
 					drawWindow->console->setCharForeground(1, drawLineStart, UICOLOR_Selector);
@@ -290,7 +290,7 @@ void InventoryFullWindow::render() const
 			{
 				if (j == 0)
 				{
-					if (item == WORLD->player->selectedItem)
+					if (item == WORLD->debugmap->player->selectedItem)
 					{
 						drawWindow->console->printf(0, drawLine, "|>  %s", item->tool->name.c_str());
 						drawWindow->console->setCharForeground(1, drawLine, UICOLOR_Selector);
@@ -381,14 +381,14 @@ ProximityWindow::ProximityWindow(int consoleWidth, int consoleHeight, int rx, in
 
 void ProximityWindow::update()
 {
-	if (proximityItemList != WORLD->mapItemList)
+	if (proximityItemList != WORLD->debugmap->mapItemList)
 	{
-		proximityItemList = WORLD->mapItemList; //can be optimized later
+		proximityItemList = WORLD->debugmap->mapItemList; //can be optimized later
 	}
 
-	if (proximityContainerList != WORLD->mapContainerList)
+	if (proximityContainerList != WORLD->debugmap->mapContainerList)
 	{
-		proximityContainerList = WORLD->mapContainerList;
+		proximityContainerList = WORLD->debugmap->mapContainerList;
 	}
 }
 
@@ -400,7 +400,7 @@ void ProximityWindow::render() const
 
 	for (auto& container : proximityContainerList)
 	{
-		if (container->containerItem->mapPosition.floor == WORLD->player->mapPosition.floor)
+		if (container->containerItem->mapPosition.floor == WORLD->debugmap->player->mapPosition.floor)
 		{
 			if (container->containerItem->distToEnt < 5 && WORLD->isInFov(container->containerItem->mapPosition))
 			{
@@ -412,7 +412,7 @@ void ProximityWindow::render() const
 
 	for (auto& item : proximityItemList)
 	{
-		if (item->mapPosition.floor == WORLD->player->mapPosition.floor)
+		if (item->mapPosition.floor == WORLD->debugmap->player->mapPosition.floor)
 		{
 			if (item->distToEnt < 5 && WORLD->isInFov(item->mapPosition))
 			{
@@ -433,11 +433,11 @@ ActionWindow::ActionWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 
 void ActionWindow::update()
 {
-	if (WORLD->player->selectedItem->actionManager)
+	if (WORLD->debugmap->player->selectedItem->actionManager)
 	{
-		if (actionManager != WORLD->player->selectedItem->actionManager)
+		if (actionManager != WORLD->debugmap->player->selectedItem->actionManager)
 		{
-			actionManager = WORLD->player->selectedItem->actionManager;
+			actionManager = WORLD->debugmap->player->selectedItem->actionManager;
 		}
 	}
 }

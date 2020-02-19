@@ -76,7 +76,7 @@ void Creature::update()
 
 void Creature::render(const std::shared_ptr<Pane>& pane) const
 {
-	if (WORLD->player->mapPosition.floor == mapPosition.floor)
+	if (WORLD->debugmap->player->mapPosition.floor == mapPosition.floor)
 	{
 		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
 		pane->console->setCharForeground(renderPosition.x, renderPosition.y, (WORLD->isInFov(mapPosition))? color : TCODColor::darkerGrey); //out of fov creatures rendered with one step above normal fov grey to be more noticible
@@ -256,31 +256,31 @@ void Player::moveSelectorDown()
 
 void Player::pickUpItem()
 {
-	for (int i = 0; i < WORLD->mapItemList.size(); ++i)
+	for (int i = 0; i < WORLD->debugmap->mapItemList.size(); ++i)
 	{
-		if (WORLD->mapItemList[i] != nullptr && WORLD->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->mapItemList[i]->mapPosition.floor == mapPosition.floor)
+		if (WORLD->debugmap->mapItemList[i] != nullptr && WORLD->debugmap->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->debugmap->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->debugmap->mapItemList[i]->mapPosition.floor == mapPosition.floor)
 		{
 			if (containerIndex != -1)
 			{
-				if (inventory[containerIndex]->addItem(WORLD->mapItemList[i]))
+				if (inventory[containerIndex]->addItem(WORLD->debugmap->mapItemList[i]))
 				{
-					GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->mapItemList[i]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
+					GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapItemList[i]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 
-					WORLD->mapItemList.erase(WORLD->mapItemList.begin() + i);
+					WORLD->debugmap->mapItemList.erase(WORLD->debugmap->mapItemList.begin() + i);
 					return;
 				}
 			}
 		}
 	}
 
-	for (int i = 0; i < WORLD->mapContainerList.size(); ++i)
+	for (int i = 0; i < WORLD->debugmap->mapContainerList.size(); ++i)
 	{
-		if (WORLD->mapContainerList[i] != nullptr && WORLD->mapContainerList[i]->containerItem->mapPosition.x == mapPosition.x && WORLD->mapContainerList[i]->containerItem->mapPosition.y == mapPosition.y && WORLD->mapContainerList[i]->containerItem->mapPosition.floor == mapPosition.floor)
+		if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->containerItem->mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->containerItem->mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->containerItem->mapPosition.floor == mapPosition.floor)
 		{
-			GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->mapContainerList[i]->containerItem->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
+			GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapContainerList[i]->containerItem->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 
-			inventory.push_back(WORLD->mapContainerList[i]);
-			WORLD->mapContainerList.erase(WORLD->mapContainerList.begin() + i);
+			inventory.push_back(WORLD->debugmap->mapContainerList[i]);
+			WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
 			return;
 		}
 	}
@@ -307,7 +307,7 @@ void Player::dropItem()
 			}
 			GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->itemList[itemIndex]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 
-			WORLD->mapItemList.push_back(selectedItem);
+			WORLD->debugmap->mapItemList.push_back(selectedItem);
 
 			inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
 		}
@@ -315,7 +315,7 @@ void Player::dropItem()
 		{
 			GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->containerItem->tool->name, LogWindow::Message::MessageLevel::LOW));
 			
-			WORLD->mapContainerList.push_back(inventory[containerIndex]);
+			WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
 
 			inventory.erase(inventory.begin() + containerIndex);
 		}

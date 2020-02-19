@@ -34,7 +34,7 @@ private:
 	bool getMapHeight(pugi::xml_node& dataNode);
 	bool getMapWidth(pugi::xml_node& dataNode);
 
-	void createBlockMap(pugi::xml_node& dataNode);
+	bool createBlockMap(pugi::xml_node& dataNode);
 
 	bool getCreatures(pugi::xml_node& dataNode);
 	bool getItems(pugi::xml_node& dataNode);
