@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <map>
-  <!-- WHAT THIS NEEDS TO BE A VALID MAP 
-        -needs to have a base node of "map"
-          -needs to have a node "name" in map node used for the map name
-          -needs to have a node "levels" with the amount of floors in the map
-          -needs to have a node "width" and "height" for the dimensions of the map
-          -needs to have floor nodes with the attribute "level" with the values going through the amount of floors defined by level, starting from 0
-   -->
-  
-  <name>xmlMap</name>
-  
-  <levels>2</levels>
-  
-  <width>71</width>
-  
-  <height>70</height>
+	<!-- WHAT THIS NEEDS TO BE A VALID MAP 
+				-needs to have a base node of "map"
+					-needs to have a node "name" in map node used for the map name
+					-needs to have a node "levels" with the amount of floors in the map
+					-needs to have a node "width" and "height" for the dimensions of the map
+					-needs to have floor nodes with the attribute "level" with the values going through the amount of floors defined by level, starting from 0
+	 -->
+	
+	<name>xmlMap</name>
+	
+	<levels>2</levels>
+	
+	<width>71</width>
+	
+	<height>70</height>
 
-  <floor level="0">
+	<floor level="0">
 w= w= f_ f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f! f! f! f. f. f. f. f. f. f. f. f. f. f. f. f. f! f! f! f! f! f! f! f! f! f! f! f! f! f! f! f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. w=
 w= f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f! f! f! f. f. f. f. f. f. f. f. f. f. f. f. f. f! f! f! f! f! f! f! f! f! f! f! f! f! f! f! f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. w=
 w= f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f! f! f! f. f. f. f. f. f. f. f. f. f. f. f. f. f! f! f! f! f! f! f! f! f! f! f! f! f! f! f! f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. w=
@@ -87,8 +87,8 @@ w= f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f.
 w= f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. w=
 w= f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. f. w=
 w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w= w=
-  </floor>
-  <floor level="1">
+	</floor>
+	<floor level="1">
 s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
 s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
 s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
@@ -159,6 +159,64 @@ s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
 s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
 s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
 s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
-  </floor>
- 
+	</floor>
+  <!-- = = = = = = = = = = = = = = = = = -->
+	<creatures>
+    
+		<creature name = "Player"> <!-- if name is "player", treats as a player -->
+			<x>2</x>
+			<y>2</y>
+			<level>3</level>
+			<floor>0</floor>
+		</creature>
+
+    <creature name = "Creature"> <!-- "creature" is name -->
+      <x>16</x>
+      <y>22</y>
+      <level>3</level>
+      <floor>0</floor>
+      <ch>0</ch>
+      <color>blue</color>
+      <health>100</health>
+      <armor>
+        <defense>100</defense>
+        <durabilty>200</durabilty>
+        <color>pink</color>
+      </armor>
+    </creature>
+    
+	</creatures>
+  <!-- = = = = = = = = = = = = = = = = = -->
+  <items>
+    
+    <item type = "SIR556">
+      <x>4</x>
+      <y>7</y>
+      <floor>0</floor>
+    </item>
+    
+    <item type = "556Magazine30">
+      <x>5</x>
+      <y>10</y>
+      <floor>0</floor>
+    </item>
+    
+    <item type = "45Magazine7">
+      <x>10</x>
+      <y>10</y>
+      <floor>0</floor>
+    </item>
+    
+  </items>
+  <!-- = = = = = = = = = = = = = = = = = -->
+  <containers>
+
+    <container type = "SmallBackpack">
+      <x>20</x>
+      <y>20</y>
+      <floor>0</floor>
+    </container>
+    
+  </containers>
+  
 </map>

@@ -30,28 +30,6 @@
           }
         },
         {
-          "ruleId": "26812",
-          "message": {
-            "text": "The enum type 'pugi::xml_node_type' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                },
-                "region": {
-                  "startLine": 1112,
-                  "startColumn": 3,
-                  "endLine": 1112,
-                  "endColumn": 3
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl pugi::xml_node_struct::xml_node_struct(struct pugi::impl::`anonymous namespace'::xml_memory_page *,enum pugi::xml_node_type)"
-            }
-          ]
-        },
-        {
           "ruleId": "26495",
           "message": {
             "text": "Variable 'pugi::xml_node_struct::header' is uninitialized. Always initialize a member variable (type.6)."
@@ -75,50 +53,6 @@
           "properties": {
             "targetSymbol": "pugi::xml_node_struct::header"
           }
-        },
-        {
-          "ruleId": "26812",
-          "message": {
-            "text": "The enum type 'pugi::xml_encoding' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                },
-                "region": {
-                  "startLine": 1913,
-                  "startColumn": 11,
-                  "endLine": 1913,
-                  "endColumn": 52
-                }
-              },
-              "fullyQualifiedLogicalName": "enum pugi::xml_encoding __cdecl pugi::impl::`anonymous namespace'::get_wchar_encoding(void)"
-            }
-          ]
-        },
-        {
-          "ruleId": "26812",
-          "message": {
-            "text": "The enum type 'pugi::xml_parse_status' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                },
-                "region": {
-                  "startLine": 2903,
-                  "startColumn": 26,
-                  "endLine": 2903,
-                  "endColumn": 26
-                }
-              },
-              "fullyQualifiedLogicalName": "struct pugi::xml_parse_result __cdecl pugi::impl::`anonymous namespace'::make_parse_result(enum pugi::xml_parse_status,__int64)"
-            }
-          ]
         },
         {
           "ruleId": "26495",
@@ -169,28 +103,6 @@
           "properties": {
             "targetSymbol": "pugi::impl::`anonymous-namespace'::xml_buffered_writer::scratch"
           }
-        },
-        {
-          "ruleId": "26812",
-          "message": {
-            "text": "The enum type 'pugi::impl::?A0x186f9f63::chartypex_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                },
-                "region": {
-                  "startLine": 3906,
-                  "startColumn": 16,
-                  "endLine": 3906,
-                  "endColumn": 16
-                }
-              },
-              "fullyQualifiedLogicalName": "void __cdecl pugi::impl::`anonymous namespace'::text_output_escaped(class pugi::impl::A0x186f9f63::xml_buffered_writer &,char const *,enum pugi::impl::A0x186f9f63::chartypex_t,unsigned int)"
-            }
-          ]
         },
         {
           "ruleId": "28182",
@@ -537,174 +449,6 @@
           ]
         },
         {
-          "ruleId": "6054",
-          "message": {
-            "text": "String 'mantissa_buffer' might not be zero-terminated."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                },
-                "region": {
-                  "startLine": 8241,
-                  "startColumn": 10,
-                  "endLine": 8241,
-                  "endColumn": 90
-                }
-              },
-              "fullyQualifiedLogicalName": "class pugi::impl::A0x186f9f63::xpath_string __cdecl pugi::impl::`anonymous namespace'::convert_number_to_string(double,struct pugi::impl::A0x186f9f63::xpath_allocator *)"
-            }
-          ],
-          "codeFlows": [
-            {
-              "threadFlows": [
-                {
-                  "locations": [
-                    {
-                      "step": 0,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                          },
-                          "region": {
-                            "startLine": 8230,
-                            "startColumn": 15
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "step": 1,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                          },
-                          "region": {
-                            "startLine": 8231,
-                            "startColumn": 7
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "step": 2,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                          },
-                          "region": {
-                            "startLine": 8234,
-                            "startColumn": 8
-                          }
-                        },
-                        "message": {
-                          "text": "This expression may not zero-terminate 'mantissa_buffer'"
-                        }
-                      },
-                      "kind": "declaration",
-                      "importance": "essential"
-                    },
-                    {
-                      "step": 3,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                          },
-                          "region": {
-                            "startLine": 8236,
-                            "startColumn": 9
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "step": 4,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                          },
-                          "region": {
-                            "startLine": 8237,
-                            "startColumn": 7
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "step": 5,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                          },
-                          "region": {
-                            "startLine": 8238,
-                            "startColumn": 38
-                          }
-                        },
-                        "message": {
-                          "text": "'mantissa_buffer' is an Output from 'pugi::impl::`anonymous-namespace'::convert_number_to_mantissa_exponent' (declared on line 8184)"
-                        }
-                      },
-                      "kind": "declaration",
-                      "importance": "important"
-                    },
-                    {
-                      "step": 6,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                          },
-                          "region": {
-                            "startLine": 8241,
-                            "startColumn": 10
-                          }
-                        },
-                        "message": {
-                          "text": "'mantissa_buffer' is an Input to 'strlen' (declared at c:\\program files (x86)\\windows kits\\10\\include\\10.0.18362.0\\ucrt\\string.h:219)"
-                        }
-                      },
-                      "kind": "usage",
-                      "importance": "important"
-                    },
-                    {
-                      "step": 7,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                          },
-                          "region": {
-                            "startLine": 8241,
-                            "startColumn": 10
-                          }
-                        },
-                        "message": {
-                          "text": "'mantissa_buffer' is required to be zero-terminated by a SAL annotation on 'strlen'"
-                        }
-                      },
-                      "kind": "usage",
-                      "importance": "essential"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
           "ruleId": "26451",
           "message": {
             "text": "Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2)."
@@ -827,116 +571,6 @@
           }
         },
         {
-          "ruleId": "26812",
-          "message": {
-            "text": "The enum type 'pugi::xpath_value_type' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                },
-                "region": {
-                  "startLine": 8652,
-                  "startColumn": 27,
-                  "endLine": 8652,
-                  "endColumn": 27
-                }
-              },
-              "fullyQualifiedLogicalName": "class pugi::xpath_variable * __cdecl pugi::impl::`anonymous namespace'::new_xpath_variable(enum pugi::xpath_value_type,char const *)"
-            }
-          ]
-        },
-        {
-          "ruleId": "26812",
-          "message": {
-            "text": "The enum type 'pugi::xpath_node_set::type_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                },
-                "region": {
-                  "startLine": 8756,
-                  "startColumn": 4,
-                  "endLine": 8756,
-                  "endColumn": 27
-                }
-              },
-              "fullyQualifiedLogicalName": "enum pugi::xpath_node_set::type_t __cdecl pugi::impl::`anonymous namespace'::xpath_get_order(class pugi::xpath_node const *,class pugi::xpath_node const *)"
-            }
-          ]
-        },
-        {
-          "ruleId": "26812",
-          "message": {
-            "text": "The enum type 'pugi::impl::?A0x186f9f63::lexeme_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                },
-                "region": {
-                  "startLine": 9255,
-                  "startColumn": 6,
-                  "endLine": 9255,
-                  "endColumn": 20
-                }
-              },
-              "fullyQualifiedLogicalName": "public: void __cdecl pugi::impl::`anonymous namespace'::xpath_lexer::next(void)"
-            }
-          ]
-        },
-        {
-          "ruleId": "26812",
-          "message": {
-            "text": "The enum type 'pugi::impl::?A0x186f9f63::nodeset_eval_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                },
-                "region": {
-                  "startLine": 9572,
-                  "startColumn": 15,
-                  "endLine": 9572,
-                  "endColumn": 15
-                }
-              },
-              "fullyQualifiedLogicalName": "private: static bool __cdecl pugi::impl::`anonymous namespace'::xpath_ast_node::eval_once(enum pugi::xpath_node_set::type_t,enum pugi::impl::A0x186f9f63::nodeset_eval_t)"
-            }
-          ]
-        },
-        {
-          "ruleId": "26812",
-          "message": {
-            "text": "The enum type 'pugi::impl::?A0x186f9f63::ast_type_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                },
-                "region": {
-                  "startLine": 10200,
-                  "startColumn": 3,
-                  "endLine": 10200,
-                  "endColumn": 3
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xpath_ast_node::xpath_ast_node(enum pugi::impl::A0x186f9f63::ast_type_t,enum pugi::xpath_value_type,char const *)"
-            }
-          ]
-        },
-        {
           "ruleId": "26495",
           "message": {
             "text": "Variable 'pugi::impl::`anonymous-namespace'::xpath_ast_node::_data' is uninitialized. Always initialize a member variable (type.6)."
@@ -960,72 +594,6 @@
           "properties": {
             "targetSymbol": "pugi::impl::`anonymous-namespace'::xpath_ast_node::_data"
           }
-        },
-        {
-          "ruleId": "26812",
-          "message": {
-            "text": "The enum type 'pugi::impl::?A0x186f9f63::axis_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                },
-                "region": {
-                  "startLine": 10226,
-                  "startColumn": 3,
-                  "endLine": 10226,
-                  "endColumn": 3
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xpath_ast_node::xpath_ast_node(enum pugi::impl::A0x186f9f63::ast_type_t,class pugi::impl::A0x186f9f63::xpath_ast_node *,enum pugi::impl::A0x186f9f63::axis_t,enum pugi::impl::A0x186f9f63::nodetest_t,char const *)"
-            }
-          ]
-        },
-        {
-          "ruleId": "26812",
-          "message": {
-            "text": "The enum type 'pugi::impl::?A0x186f9f63::nodetest_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                },
-                "region": {
-                  "startLine": 10226,
-                  "startColumn": 3,
-                  "endLine": 10226,
-                  "endColumn": 3
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xpath_ast_node::xpath_ast_node(enum pugi::impl::A0x186f9f63::ast_type_t,class pugi::impl::A0x186f9f63::xpath_ast_node *,enum pugi::impl::A0x186f9f63::axis_t,enum pugi::impl::A0x186f9f63::nodetest_t,char const *)"
-            }
-          ]
-        },
-        {
-          "ruleId": "26812",
-          "message": {
-            "text": "The enum type 'pugi::impl::?A0x186f9f63::predicate_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/pugixml-1.10/src/pugixml.cpp"
-                },
-                "region": {
-                  "startLine": 10233,
-                  "startColumn": 3,
-                  "endLine": 10233,
-                  "endColumn": 3
-                }
-              },
-              "fullyQualifiedLogicalName": "public: __cdecl pugi::impl::`anonymous namespace'::xpath_ast_node::xpath_ast_node(enum pugi::impl::A0x186f9f63::ast_type_t,class pugi::impl::A0x186f9f63::xpath_ast_node *,class pugi::impl::A0x186f9f63::xpath_ast_node *,enum pugi::impl::A0x186f9f63::predicate_t)"
-            }
-          ]
         },
         {
           "ruleId": "26495",
@@ -1269,22 +837,575 @@
       "tool": {
         "name": "PREfast",
         "fullName": "PREfast Code Analysis",
-        "version": "14.24.28315.0",
-        "fileVersion": "14.00.28315.00"
+        "version": "14.24.28316.0",
+        "fileVersion": "14.00.28316.00"
       },
       "invocations": [
         {
-          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x00293170 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_9932698aast -typedil -f ..\\..\\..\\..\\pugixml-1.10\\src\\pugixml.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1924 -D_MSC_FULL_VER=192428315 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Ot -Oi -DCODE_ANALYSIS -D_DEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_DEBUG -D_MT -D_DLL -GS -fpfast -D_M_FP_FAST -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Debug\\pugixml.obj -Fdx64\\Debug\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
+          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x00393170 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_0af3c322ast -typedil -f ..\\..\\..\\..\\pugixml-1.10\\src\\pugixml.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1924 -D_MSC_FULL_VER=192428316 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Ot -Oi -DCODE_ANALYSIS -D_DEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_DEBUG -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -Fox64\\Debug\\pugixml.obj -Fdx64\\Debug\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeMinimumRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
         }
       ],
       "files": {
-        "file:///e:/pugixml-1.10/src/pugixml.cpp": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/sys.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/window.cpp": {
           "roles": [
             "analysisTarget",
             "resultFile"
           ]
         },
-        "file:///e:/pugixml-1.10/src/pugiconfig.hpp": {
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/color.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/main.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/utility.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/defines.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/fov.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/console/console.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/image.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/fov.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/image.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/console.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/namegen.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/portability.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/libtcod.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/settings.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/txtfield.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/version.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/txtfield.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/bsp.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/lex.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/bresenham.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/thread.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/console/printing.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/bsp.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/mersenne_types.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/tree.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/tree.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/mouse_types.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/color.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/windowstyle.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/color/color.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/utility/vector2.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/utility/matrix.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/console/drawing.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/heightmap.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/console_types.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/tileset/tile.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/console/rexpaint.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/list.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/sdl2/event.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/list.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/heightmap.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/fov_types.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/noise.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/noise.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/tileset/observer.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/mouse.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/noise_defaults.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/lex.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/mersenne.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/threadlocalptr.inl": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/tile.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/bresenham.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/engine/display.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/namegen.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/engine.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/path.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/parser.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/zip.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/engine/backend.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/color/canvas.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/console.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/tileset/tileset.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/vector2.inl": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/mersenne.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/engine/error.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/engine/globals.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/tileset/tilesheet.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/mouse.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/parser.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/path.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/sys.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/zip.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/config.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/clock.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/export.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/time.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/err.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/fileinputstream.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/inputstream.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/noncopyable.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/lock.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/memoryinputstream.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/contextsettings.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/mutex.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/sleep.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/string.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/utf.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/utf.inl": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/string.inl": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/thread.inl": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/event.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/threadlocal.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/threadlocalptr.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/vector2.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/vector3.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/system/vector3.inl": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/clipboard.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/tile.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/export.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/context.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/glresource.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/cursor.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/joystick.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/keyboard.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/mouse.hpp": {
           "roles": [
             "resultFile"
           ]
@@ -1293,33 +1414,162 @@
           "roles": [
             "resultFile"
           ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/sensor.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/touch.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/videomode.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/window.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window/windowhandle.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/pugixml-1.10/src/pugiconfig.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/utility.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/tool.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/item.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/entity.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/aicreature.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/gui.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/map.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/input.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/window.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/panel.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/engine.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/utility.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/settings.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/panel.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/map.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/main.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/item.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/input.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/gui.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/aicreature.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/entity.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/pugixml-1.10/src/pugixml.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
         }
       },
       "logicalLocations": {},
       "resources": {
         "rules": {
-          "28216": {
-            "id": "28216",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6054": {
-            "id": "6054",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
           "28243": {
             "id": "28243",
             "name": "",
@@ -1333,6 +1583,61 @@
           },
           "6001": {
             "id": "6001",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "26453": {
+            "id": "26453",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "6505": {
+            "id": "6505",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "6066": {
+            "id": "6066",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "6303": {
+            "id": "6303",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "6101": {
+            "id": "6101",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -1375,52 +1680,8 @@
             },
             "helpUri": ""
           },
-          "6280": {
-            "id": "6280",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6277": {
-            "id": "6277",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6031": {
-            "id": "6031",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
           "28211": {
             "id": "28211",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6314": {
-            "id": "6314",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -1441,41 +1702,19 @@
             },
             "helpUri": ""
           },
+          "6518": {
+            "id": "6518",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
           "6059": {
             "id": "6059",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6278": {
-            "id": "6278",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6702": {
-            "id": "6702",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6306": {
-            "id": "6306",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -1496,8 +1735,41 @@
             },
             "helpUri": ""
           },
-          "6288": {
-            "id": "6288",
+          "6306": {
+            "id": "6306",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "6702": {
+            "id": "6702",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "6500": {
+            "id": "6500",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "26451": {
+            "id": "26451",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -1518,17 +1790,6 @@
             },
             "helpUri": ""
           },
-          "6705": {
-            "id": "6705",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
           "6064": {
             "id": "6064",
             "name": "",
@@ -1540,8 +1801,8 @@
             },
             "helpUri": ""
           },
-          "6101": {
-            "id": "6101",
+          "6705": {
+            "id": "6705",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -1551,41 +1812,8 @@
             },
             "helpUri": ""
           },
-          "6220": {
-            "id": "6220",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6303": {
-            "id": "6303",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6066": {
-            "id": "6066",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6706": {
-            "id": "6706",
+          "26452": {
+            "id": "26452",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -1617,8 +1845,30 @@
             },
             "helpUri": ""
           },
-          "26437": {
-            "id": "26437",
+          "6706": {
+            "id": "6706",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "6504": {
+            "id": "6504",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "6525": {
+            "id": "6525",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -1639,17 +1889,6 @@
             },
             "helpUri": ""
           },
-          "26449": {
-            "id": "26449",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
           "6201": {
             "id": "6201",
             "name": "",
@@ -1661,316 +1900,8 @@
             },
             "helpUri": ""
           },
-          "6214": {
-            "id": "6214",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6215": {
-            "id": "6215",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6248": {
-            "id": "6248",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6216": {
-            "id": "6216",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6217": {
-            "id": "6217",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28020": {
-            "id": "28020",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6226": {
-            "id": "6226",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6230": {
-            "id": "6230",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6235": {
-            "id": "6235",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6268": {
-            "id": "6268",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28308": {
-            "id": "28308",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6236": {
-            "id": "6236",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28309": {
-            "id": "28309",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6237": {
-            "id": "6237",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6297": {
-            "id": "6297",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6242": {
-            "id": "6242",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6250": {
-            "id": "6250",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28350": {
-            "id": "28350",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6255": {
-            "id": "6255",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6258": {
-            "id": "6258",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6259": {
-            "id": "6259",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28303": {
-            "id": "28303",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6260": {
-            "id": "6260",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28301": {
-            "id": "28301",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28039": {
-            "id": "28039",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6262": {
-            "id": "6262",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28300": {
-            "id": "28300",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6263": {
-            "id": "6263",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6269": {
-            "id": "6269",
+          "26449": {
+            "id": "26449",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -1991,8 +1922,8 @@
             },
             "helpUri": ""
           },
-          "6287": {
-            "id": "6287",
+          "6386": {
+            "id": "6386",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -2024,8 +1955,8 @@
             },
             "helpUri": ""
           },
-          "6286": {
-            "id": "6286",
+          "6387": {
+            "id": "6387",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -2046,8 +1977,8 @@
             },
             "helpUri": ""
           },
-          "6285": {
-            "id": "6285",
+          "6272": {
+            "id": "6272",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -2057,8 +1988,8 @@
             },
             "helpUri": ""
           },
-          "6272": {
-            "id": "6272",
+          "6385": {
+            "id": "6385",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -2090,30 +2021,8 @@
             },
             "helpUri": ""
           },
-          "6283": {
-            "id": "6283",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
           "6274": {
             "id": "6274",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6281": {
-            "id": "6281",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -2134,41 +2043,8 @@
             },
             "helpUri": ""
           },
-          "6279": {
-            "id": "6279",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6282": {
-            "id": "6282",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6506": {
-            "id": "6506",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6289": {
-            "id": "6289",
+          "6277": {
+            "id": "6277",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -2200,63 +2076,8 @@
             },
             "helpUri": ""
           },
-          "6292": {
-            "id": "6292",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6293": {
-            "id": "6293",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6294": {
-            "id": "6294",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6295": {
-            "id": "6295",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6296": {
-            "id": "6296",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6299": {
-            "id": "6299",
+          "6305": {
+            "id": "6305",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -2277,8 +2098,8 @@
             },
             "helpUri": ""
           },
-          "6305": {
-            "id": "6305",
+          "6503": {
+            "id": "6503",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -2288,118 +2109,8 @@
             },
             "helpUri": ""
           },
-          "6308": {
-            "id": "6308",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28215": {
-            "id": "28215",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6310": {
-            "id": "6310",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28217": {
-            "id": "28217",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6312": {
-            "id": "6312",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28212": {
-            "id": "28212",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6317": {
-            "id": "6317",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6318": {
-            "id": "6318",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6319": {
-            "id": "6319",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28203": {
-            "id": "28203",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6324": {
-            "id": "6324",
+          "6551": {
+            "id": "6551",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -2420,17 +2131,6 @@
             },
             "helpUri": ""
           },
-          "26812": {
-            "id": "26812",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
           "6328": {
             "id": "6328",
             "name": "",
@@ -2442,184 +2142,8 @@
             },
             "helpUri": ""
           },
-          "28234": {
-            "id": "28234",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28137": {
-            "id": "28137",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6331": {
-            "id": "6331",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28237": {
-            "id": "28237",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6332": {
-            "id": "6332",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28236": {
-            "id": "28236",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6333": {
-            "id": "6333",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28230": {
-            "id": "28230",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6335": {
-            "id": "6335",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6381": {
-            "id": "6381",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6383": {
-            "id": "6383",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6384": {
-            "id": "6384",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6385": {
-            "id": "6385",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6386": {
-            "id": "6386",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6387": {
-            "id": "6387",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6388": {
-            "id": "6388",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6500": {
-            "id": "6500",
+          "6703": {
+            "id": "6703",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -2640,8 +2164,8 @@
             },
             "helpUri": ""
           },
-          "6503": {
-            "id": "6503",
+          "26450": {
+            "id": "26450",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -2651,8 +2175,8 @@
             },
             "helpUri": ""
           },
-          "6504": {
-            "id": "6504",
+          "28263": {
+            "id": "28263",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -2662,8 +2186,19 @@
             },
             "helpUri": ""
           },
-          "6505": {
-            "id": "6505",
+          "6704": {
+            "id": "6704",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "6506": {
+            "id": "6506",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -2750,30 +2285,8 @@
             },
             "helpUri": ""
           },
-          "6518": {
-            "id": "6518",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
           "6522": {
             "id": "6522",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6525": {
-            "id": "6525",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -2816,261 +2329,8 @@
             },
             "helpUri": ""
           },
-          "6551": {
-            "id": "6551",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
           "6552": {
             "id": "6552",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6703": {
-            "id": "6703",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28263": {
-            "id": "28263",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6704": {
-            "id": "6704",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26441": {
-            "id": "26441",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6993": {
-            "id": "6993",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6995": {
-            "id": "6995",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "6997": {
-            "id": "6997",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26100": {
-            "id": "26100",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26101": {
-            "id": "26101",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26110": {
-            "id": "26110",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26111": {
-            "id": "26111",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26112": {
-            "id": "26112",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26115": {
-            "id": "26115",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26116": {
-            "id": "26116",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26117": {
-            "id": "26117",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26140": {
-            "id": "26140",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26439": {
-            "id": "26439",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26444": {
-            "id": "26444",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26450": {
-            "id": "26450",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26451": {
-            "id": "26451",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26452": {
-            "id": "26452",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26453": {
-            "id": "26453",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -3091,41 +2351,8 @@
             },
             "helpUri": ""
           },
-          "26478": {
-            "id": "26478",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
           "26495": {
             "id": "26495",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28289": {
-            "id": "28289",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "26498": {
-            "id": "26498",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -3146,149 +2373,6 @@
             },
             "helpUri": ""
           },
-          "28022": {
-            "id": "28022",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28023": {
-            "id": "28023",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28024": {
-            "id": "28024",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28112": {
-            "id": "28112",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28113": {
-            "id": "28113",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28125": {
-            "id": "28125",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28138": {
-            "id": "28138",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28159": {
-            "id": "28159",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28241": {
-            "id": "28241",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28160": {
-            "id": "28160",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28163": {
-            "id": "28163",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28245": {
-            "id": "28245",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28164": {
-            "id": "28164",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
           "28182": {
             "id": "28182",
             "name": "",
@@ -3300,41 +2384,19 @@
             },
             "helpUri": ""
           },
-          "28183": {
-            "id": "28183",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28193": {
-            "id": "28193",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28196": {
-            "id": "28196",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
           "28202": {
             "id": "28202",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "28203": {
+            "id": "28203",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -3377,30 +2439,19 @@
             },
             "helpUri": ""
           },
-          "28254": {
-            "id": "28254",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
-          "28209": {
-            "id": "28209",
-            "name": "",
-            "shortDescription": "",
-            "fullDescription": "",
-            "configuration": {
-              "enabled": true,
-              "defaultLevel": "warning"
-            },
-            "helpUri": ""
-          },
           "28210": {
             "id": "28210",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "28212": {
+            "id": "28212",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -3423,6 +2474,39 @@
           },
           "28214": {
             "id": "28214",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "28215": {
+            "id": "28215",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "28216": {
+            "id": "28216",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "28217": {
+            "id": "28217",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -3586,6 +2670,17 @@
             },
             "helpUri": ""
           },
+          "28230": {
+            "id": "28230",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
           "28231": {
             "id": "28231",
             "name": "",
@@ -3619,8 +2714,41 @@
             },
             "helpUri": ""
           },
+          "28234": {
+            "id": "28234",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
           "28235": {
             "id": "28235",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "28236": {
+            "id": "28236",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "28237": {
+            "id": "28237",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -3663,8 +2791,19 @@
             },
             "helpUri": ""
           },
-          "28244": {
-            "id": "28244",
+          "28241": {
+            "id": "28241",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "28245": {
+            "id": "28245",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -3698,6 +2837,17 @@
           },
           "28251": {
             "id": "28251",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "28254": {
+            "id": "28254",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -3806,6 +2956,17 @@
             },
             "helpUri": ""
           },
+          "28289": {
+            "id": "28289",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
           "28290": {
             "id": "28290",
             "name": "",
@@ -3828,8 +2989,41 @@
             },
             "helpUri": ""
           },
+          "28300": {
+            "id": "28300",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "28301": {
+            "id": "28301",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
           "28302": {
             "id": "28302",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "28303": {
+            "id": "28303",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -3861,8 +3055,8 @@
             },
             "helpUri": ""
           },
-          "28306": {
-            "id": "28306",
+          "28308": {
+            "id": "28308",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",
@@ -3872,8 +3066,19 @@
             },
             "helpUri": ""
           },
-          "28307": {
-            "id": "28307",
+          "28309": {
+            "id": "28309",
+            "name": "",
+            "shortDescription": "",
+            "fullDescription": "",
+            "configuration": {
+              "enabled": true,
+              "defaultLevel": "warning"
+            },
+            "helpUri": ""
+          },
+          "28350": {
+            "id": "28350",
             "name": "",
             "shortDescription": "",
             "fullDescription": "",

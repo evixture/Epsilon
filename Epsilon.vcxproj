@@ -120,19 +120,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <RunCodeAnalysis>false</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>NativeMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>NativeMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>NativeMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>NativeMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -197,7 +200,7 @@
       <LanguageStandard>Default</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
       <MinimalRebuild>false</MinimalRebuild>
-      <DisableSpecificWarnings>/wd26812;</DisableSpecificWarnings>
+      <DisableSpecificWarnings>C26812</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>
       </TreatSpecificWarningsAsErrors>
     </ClCompile>
@@ -225,7 +228,7 @@
       <LanguageStandard>Default</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
       <MinimalRebuild>false</MinimalRebuild>
-      <DisableSpecificWarnings>/wd26812;</DisableSpecificWarnings>
+      <DisableSpecificWarnings>C26812</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>
       </TreatSpecificWarningsAsErrors>
     </ClCompile>

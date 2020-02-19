@@ -129,6 +129,142 @@ void Map::createBlockMap(pugi::xml_node& dataNode)
 	}
 }
 
+bool Map::getCreatures(pugi::xml_node& dataNode)
+{
+	std::string testName = dataNode.name();
+
+	if (testName == "creatures")
+	{
+		for (auto& creature : dataNode.child("creatures").children()) //for nodes in the creatures 
+		{
+			int x;
+			int y;
+			int level;
+			int floor;
+
+			std::string name;
+			int ch;
+			TCODColor color;
+			int health;
+			int armorDefense;
+			int armorDurability;
+			TCODColor armorColor;
+
+			if (creature.attribute("name").as_string() == "Player") //should check if not empty first
+			{
+				x = creature.child("x").text().as_int();
+				y = creature.child("y").text().as_int();
+				level = creature.child("level").text().as_int();
+				floor = creature.child("floor").text().as_int();
+
+				creatureList.push_back(player = std::make_shared<Player>(Position4(x, y, level, floor)));
+			}
+			else
+			{
+				x = creature.child("x").text().as_int();
+				y = creature.child("y").text().as_int();
+				level = creature.child("level").text().as_int();
+				floor = creature.child("floor").text().as_int();
+
+				name = creature.attribute("name").as_string();
+				ch = creature.child("ch").text().as_int(); //may need to be as_string().cstr()
+
+				std::string colorName;
+
+				colorName = dataNode.child("color").text().as_string();
+
+				if (colorName == "blue")
+				{
+					color = TCODColor::blue;
+				}
+
+				for (auto& armorData : creature.child("armor").children()) //need for loop?
+				{
+					armorDefense = armorData.child("defense").text().as_int();
+					armorDurability = armorData.child("durability").text().as_int();
+
+					std::string armorColorName = armorData.child("color").text().as_string();
+
+					if (armorColorName == "pink")
+					{
+						armorColor = TCODColor::pink;
+					}
+				}
+
+				creatureList.push_back(std::make_shared<Creature>(Position4(x, y, level, floor), ch, name, color, health, Armor("name", armorColor, armorDefense, armorDurability))); //missing armor name in file
+			}
+		}
+		return true;
+	}
+	return false;
+}
+
+bool Map::getItems(pugi::xml_node& dataNode)
+{
+	std::string testName = dataNode.name();
+
+	if (testName == "items")
+	{
+		for (auto& item : dataNode.child("items").children())
+		{
+			int x;
+			int y;
+			int floor;
+
+			std::string name;
+
+			x = item.child("x").text().as_int();
+			y = item.child("y").text().as_int();
+			floor = item.child("floor").text().as_int();
+			name = item.attribute("type").as_string();
+
+			if (name == "SIR556")
+			{
+				mapItemList.push_back(ITEM_SIR556(x, y, floor, player.get()));
+			}
+			else if (name == "556Magazine30")
+			{
+				mapItemList.push_back(MAGAZINE_556Magazine30(x, y, floor, player.get()));
+			}
+			else if (name == "45Magazine7")
+			{
+				mapItemList.push_back(MAGAZINE_45Magazine7(x, y, floor, player.get()));
+			}
+		}
+		return true;
+	}
+	return false;
+}
+
+bool Map::getContainers(pugi::xml_node& dataNode)
+{
+	std::string testName = dataNode.name();
+
+	if (testName == "containers")
+	{
+		for (auto& container : dataNode.child("containers").children())
+		{
+			int x;
+			int y;
+			int floor;
+
+			std::string name;
+
+			x = container.child("x").text().as_int();
+			y = container.child("y").text().as_int();
+			floor = container.child("floor").text().as_int();
+			name = container.attribute("type").as_string();
+
+			if (name == "SmallBackpack")
+			{
+				mapContainerList.push_back(CONTAINER_SmallBackpack(x, y, floor, player.get()));
+			}
+		}
+		return true;
+	}
+	return false;
+}
+
 std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 {
 	static TCODRandom* RNG = TCODRandom::getInstance();

@@ -61,48 +61,6 @@
   </DEFECT>
   <DEFECT>
     <SFA>
-      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\tileset\</FILEPATH>
-      <FILENAME>observer.h</FILENAME>
-      <LINE>62</LINE>
-      <COLUMN>2</COLUMN>
-    </SFA>
-    <DEFECTCODE>26439</DEFECTCODE>
-    <DESCRIPTION>This kind of function may not throw. Declare it 'noexcept' (f.6).</DESCRIPTION>
-    <FUNCTION>tcod::tileset::TilesetObserver::{ctor}</FUNCTION>
-    <DECORATED>??0TilesetObserver@tileset@tcod@@QEAA@$$QEAV012@@Z</DECORATED>
-    <FUNCLINE>62</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\tileset\</FILEPATH>
-      <FILENAME>observer.h</FILENAME>
-      <LINE>65</LINE>
-      <COLUMN>19</COLUMN>
-    </SFA>
-    <DEFECTCODE>26439</DEFECTCODE>
-    <DESCRIPTION>This kind of function may not throw. Declare it 'noexcept' (f.6).</DESCRIPTION>
-    <FUNCTION>tcod::tileset::TilesetObserver::=</FUNCTION>
-    <DECORATED>??4TilesetObserver@tileset@tcod@@QEAAAEAV012@$$QEAV012@@Z</DECORATED>
-    <FUNCLINE>65</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
-      <FILENAME>mersenne.hpp</FILENAME>
-      <LINE>222</LINE>
-      <COLUMN>14</COLUMN>
-    </SFA>
-    <DEFECTCODE>26812</DEFECTCODE>
-    <DESCRIPTION>The enum type 'TCOD_distribution_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
-    <FUNCTION>TCODRandom::setDistribution</FUNCTION>
-    <DECORATED>?setDistribution@TCODRandom@@QEAAXW4TCOD_distribution_t@@@Z</DECORATED>
-    <FUNCLINE>222</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
       <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
       <FILENAME>bsp.hpp</FILENAME>
       <LINE>77</LINE>
@@ -245,12 +203,12 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Position::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Position::{ctor}</FUNCTION>
-    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <DESCRIPTION>Variable 'Position3::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position3::{ctor}</FUNCTION>
+    <DECORATED>??0Position3@@QEAA@XZ</DECORATED>
     <FUNCLINE>9</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>Position::y</targetSymbol>
+      <targetSymbol>Position3::y</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -262,12 +220,12 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Position::x' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Position::{ctor}</FUNCTION>
-    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <DESCRIPTION>Variable 'Position3::x' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position3::{ctor}</FUNCTION>
+    <DECORATED>??0Position3@@QEAA@XZ</DECORATED>
     <FUNCLINE>9</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>Position::x</targetSymbol>
+      <targetSymbol>Position3::x</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -279,12 +237,63 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Position::level' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Position::{ctor}</FUNCTION>
-    <DECORATED>??0Position@@QEAA@XZ</DECORATED>
+    <DESCRIPTION>Variable 'Position3::floor' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position3::{ctor}</FUNCTION>
+    <DECORATED>??0Position3@@QEAA@XZ</DECORATED>
     <FUNCLINE>9</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>Position::level</targetSymbol>
+      <targetSymbol>Position3::floor</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>19</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position4::height' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position4::{ctor}</FUNCTION>
+    <DECORATED>??0Position4@@QEAA@XZ</DECORATED>
+    <FUNCLINE>19</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position4::height</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>input.h</FILENAME>
+      <LINE>19</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'KeyboardButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>KeyboardButton::{ctor}</FUNCTION>
+    <DECORATED>??0KeyboardButton@@QEAA@XZ</DECORATED>
+    <FUNCLINE>19</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>KeyboardButton::button</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>input.h</FILENAME>
+      <LINE>29</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'MouseButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>MouseButton::{ctor}</FUNCTION>
+    <DECORATED>??0MouseButton@@QEAA@XZ</DECORATED>
+    <FUNCLINE>29</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>MouseButton::button</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -292,168 +301,70 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>45</LINE>
-      <COLUMN>27</COLUMN>
+      <LINE>109</LINE>
+      <COLUMN>23</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>Map::{ctor}</FUNCTION>
-    <DECORATED>??0Map@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z</DECORATED>
-    <FUNCLINE>3</FUNCLINE>
+    <FUNCTION>Map::createBlockMap</FUNCTION>
+    <DECORATED>?createBlockMap@Map@@QEAAXAEAVxml_node@pugi@@@Z</DECORATED>
+    <FUNCLINE>101</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>59</LINE>
-      <COLUMN>44</COLUMN>
+      <LINE>123</LINE>
+      <COLUMN>40</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>Map::{ctor}</FUNCTION>
-    <DECORATED>??0Map@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z</DECORATED>
-    <FUNCLINE>3</FUNCLINE>
+    <FUNCTION>Map::createBlockMap</FUNCTION>
+    <DECORATED>?createBlockMap@Map@@QEAAXAEAVxml_node@pugi@@@Z</DECORATED>
+    <FUNCLINE>101</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>183</LINE>
-      <COLUMN>11</COLUMN>
-    </SFA>
-    <DEFECTCODE>26812</DEFECTCODE>
-    <DESCRIPTION>The enum type 'Tile::TileHeights' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
-    <FUNCTION>Map::getTileFromCode</FUNCTION>
-    <DECORATED>?getTileFromCode@Map@@QEAA?AV?$shared_ptr@UTile@@@std@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@3@@Z</DECORATED>
-    <FUNCLINE>72</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>209</LINE>
-      <COLUMN>9</COLUMN>
-    </SFA>
-    <DEFECTCODE>26812</DEFECTCODE>
-    <DESCRIPTION>The enum type 'Firearm::FireType' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
-    <FUNCTION>World::{ctor}</FUNCTION>
-    <DECORATED>??0World@@QEAA@XZ</DECORATED>
-    <FUNCLINE>199</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>233</LINE>
+      <LINE>314</LINE>
       <COLUMN>56</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getTile</FUNCTION>
-    <DECORATED>?getTile@World@@QEBA?AV?$shared_ptr@UTile@@@std@@UPosition@@@Z</DECORATED>
-    <FUNCLINE>229</FUNCLINE>
+    <DECORATED>?getTile@World@@QEBA?AV?$shared_ptr@UBlock@@@std@@UPosition3@@@Z</DECORATED>
+    <FUNCLINE>310</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>243</LINE>
+      <LINE>324</LINE>
       <COLUMN>56</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::isExplored</FUNCTION>
-    <DECORATED>?isExplored@World@@QEBA_NUPosition@@@Z</DECORATED>
-    <FUNCLINE>241</FUNCLINE>
+    <DECORATED>?isExplored@World@@QEBA_NUPosition3@@@Z</DECORATED>
+    <FUNCLINE>322</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>248</LINE>
+      <LINE>329</LINE>
       <COLUMN>55</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getBgColor</FUNCTION>
-    <DECORATED>?getBgColor@World@@QEBA?AVTCODColor@@UPosition@@@Z</DECORATED>
-    <FUNCLINE>246</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>305</LINE>
-      <COLUMN>53</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getWalkability</FUNCTION>
-    <DECORATED>?getWalkability@World@@QEBA_NUPosition@@H@Z</DECORATED>
-    <FUNCLINE>294</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>311</LINE>
-      <COLUMN>76</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getWalkability</FUNCTION>
-    <DECORATED>?getWalkability@World@@QEBA_NUPosition@@H@Z</DECORATED>
-    <FUNCLINE>294</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>320</LINE>
-      <COLUMN>52</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getTransparency</FUNCTION>
-    <DECORATED>?getTransparency@World@@QEBA_NUPosition@@H@Z</DECORATED>
-    <FUNCLINE>318</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>322</LINE>
-      <COLUMN>55</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::getTransparency</FUNCTION>
-    <DECORATED>?getTransparency@World@@QEBA_NUPosition@@H@Z</DECORATED>
-    <FUNCLINE>318</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>map.cpp</FILENAME>
-      <LINE>355</LINE>
-      <COLUMN>49</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>World::isInFov</FUNCTION>
-    <DECORATED>?isInFov@World@@QEBA_NUPosition@@@Z</DECORATED>
-    <FUNCLINE>347</FUNCLINE>
+    <DECORATED>?getBgColor@World@@QEBA?AVTCODColor@@UPosition3@@@Z</DECORATED>
+    <FUNCLINE>327</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

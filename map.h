@@ -9,16 +9,36 @@ struct Map //map class that takes a text file and converts it to a vector of til
 	int width; //the width of the map
 	int height; //the height of the map
 
+
+
+	std::shared_ptr<Player> player; //the player														//add to map
+																										//add to map
+	std::vector<std::shared_ptr<Creature>> creatureList; //list of all entities on the map				//add to map
+	std::vector<std::shared_ptr<Item>> mapItemList; //list of all items on the map						//add to map
+	std::vector<std::shared_ptr<Container>> mapContainerList; //list of all containers on the map		//add to map
+
+																										//add to map
+	//void addCreature(std::shared_ptr<Creature> creature);												//add to map
+	//void addItem(std::shared_ptr<Item> item);															//add to map
+	//void addContainer(std::shared_ptr<Container> container);
+
+
+
 	std::vector<std::vector< std::shared_ptr<Block >>> levelList; //list of list of tiles, list of floors->list of tiles
 
 	Map(std::string filePath); //map constructor that takes a string file path
 
+private:
 	bool getMapName(pugi::xml_node& dataNode);
 	bool getMapLevels(pugi::xml_node& dataNode);
 	bool getMapHeight(pugi::xml_node& dataNode);
 	bool getMapWidth(pugi::xml_node& dataNode);
 
 	void createBlockMap(pugi::xml_node& dataNode);
+
+	bool getCreatures(pugi::xml_node& dataNode);
+	bool getItems(pugi::xml_node& dataNode);
+	bool getContainers(pugi::xml_node& dataNode);
 
 	std::shared_ptr<Block> getTileFromCode(std::string code);
 };
@@ -31,17 +51,7 @@ struct World
 	std::shared_ptr<Map> debugmap;
 	std::shared_ptr<TCODMap> fovMap; //the part of the map used to calculate the fov
 
-	std::shared_ptr<Player> player; //the player
-
-	std::vector<std::shared_ptr<Creature>> creatureList; //list of all entities on the map
-	std::vector<std::shared_ptr<Item>> mapItemList; //list of all items on the map
-	std::vector<std::shared_ptr<Container>> mapContainerList; //list of all containers on the map
-
 	World(); //world contructor that takes nothing
-
-	void addCreature(std::shared_ptr<Creature> creature);
-	void addItem(std::shared_ptr<Item> item);
-	void addContainer(std::shared_ptr<Container> container);
 
 	std::shared_ptr<Block> getTile	(Position3 position) const; //returns the tile at specific coordinates
 	TCODColor getBgColor			(Position3 position) const; //gets the background color of the tile at specific coordinates
