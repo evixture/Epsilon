@@ -59,7 +59,7 @@ struct Item //an item that a creature can hold and interact with
 	void renderTile(const std::shared_ptr<Pane>& pane) const; //renders the tile, used when on the map
 
 private:
-	Position4 renderPosition; //the position of the item on the map window
+	Position4 tileRenderPosition; //the position of the item on the map window
 };
 
 struct MagazineItem : public Item //magazine derived class of base item

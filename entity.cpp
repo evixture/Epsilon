@@ -210,45 +210,51 @@ void Player::changeStanceDown()
 
 void Player::moveSelectorUp()
 {
-	if (itemIndex > -1)
+	if (!(itemIndex == -1 && containerIndex == -1)) // if not hands
 	{
-		itemIndex--;
-	}
-	else if (itemIndex == -1)
-	{
-		if (containerIndex > 0)
+		if (itemIndex > -1)
 		{
-			containerIndex--;
-			itemIndex = (int)(inventory[containerIndex]->itemList.size() - 1);
+			itemIndex--;
 		}
-	}
-	else if (itemIndex == -2)
-	{
-		if (itemIndex + 3 <= inventory[containerIndex]->itemList.size())
+		else if (itemIndex == -1)
 		{
-			++itemIndex;
+			if (containerIndex > 0)
+			{
+				containerIndex--;
+				itemIndex = (int)(inventory[containerIndex]->itemList.size() - 1);
+			}
+		}
+		else if (itemIndex == -2)
+		{
+			if (itemIndex + 3 <= inventory[containerIndex]->itemList.size())
+			{
+				++itemIndex;
+			}
 		}
 	}
 }
 
 void Player::moveSelectorDown()
 {
-	if (itemIndex + 1 < inventory[containerIndex]->itemList.size())
+	if (!(itemIndex == -1 && containerIndex == -1)) //if not hands
 	{
-		++itemIndex;
-	}
-	else if (itemIndex + 1 >= inventory[containerIndex]->itemList.size())
-	{
-		if (containerIndex < inventory.size() - 1)
+		if (itemIndex + 1 < inventory[containerIndex]->itemList.size())
 		{
-			++containerIndex;
-			itemIndex = -1;
+			++itemIndex;
 		}
-		else if (itemIndex == -1)
+		else if (itemIndex + 1 >= inventory[containerIndex]->itemList.size())
 		{
-			if (itemIndex + 2 <= inventory[containerIndex]->itemList.size())
+			if (containerIndex < inventory.size() - 1)
 			{
-				++itemIndex;
+				++containerIndex;
+				itemIndex = -1;
+			}
+			else if (itemIndex == -1)
+			{
+				if (itemIndex + 2 <= inventory[containerIndex]->itemList.size())
+				{
+					++itemIndex;
+				}
 			}
 		}
 	}

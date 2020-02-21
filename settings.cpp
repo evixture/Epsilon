@@ -45,7 +45,7 @@ void Settings::printLogo() const
 
 void Settings::printDebugStats() const
 {
-	TCODConsole::root->printf(10, 0, "FPS>%i | Mouse %i, %i | Player %i, %i %i | winfoc>%i | lft>%f | dx %i | dy %i | angle %f",
+	TCODConsole::root->printf(10, 0, "FPS>%i | Mouse %i, %i | Player %i, %i %i | winfoc>%i | lft>%f | ii %i | ci %i | angle %f",
 		fpsCount,
 		SETTINGS->input->mouse.cx,
 		SETTINGS->input->mouse.cy,
@@ -54,8 +54,8 @@ void Settings::printDebugStats() const
 		WORLD->debugmap->player->mapPosition.floor,
 		TCODConsole::hasMouseFocus(),
 		lastFrameTime.asSeconds(),
-		WORLD->debugmap->player->selectedItem->tool->dx,
-		WORLD->debugmap->player->selectedItem->tool->dy,
+		WORLD->debugmap->player->itemIndex,
+		WORLD->debugmap->player->containerIndex,
 		WORLD->debugmap->player->angle);
 }
 

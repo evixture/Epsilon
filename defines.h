@@ -445,7 +445,7 @@ ITEM SIZES
 //ITEMS
 	//HANDS
 		//	#define TOOL_Hands											std::make_shared<Tool>			("Hands",									ITEMCOLOR_HANDFG,															TCOD_CHAR_UMLAUT)
-			#define MELEE_Hands											std::make_shared<Melee>			(Tool("Hands",								ITEMCOLOR_HANDFG,															65),								30,																			20)
+			#define MELEE_Hands											std::make_shared<Melee>			(Tool("Hands",								ITEMCOLOR_HANDFG,															TCOD_CHAR_UMLAUT),								30,																			20)
 		#define ITEM_Hands(x, y, level, owner)							std::make_shared<Item>			(1,											DEFAULT_ITEM_TILE,															MELEE_Hands,						Position4(x, y, 0, level),		owner,										Item::ItemType::NODROP)
 
 	//testarmor

@@ -63,7 +63,7 @@ void ActionManager::doAction()
 //----------------------------------------------------------------------------------------------------
 
 Item::Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, Player* owner, ItemType type)
-	:size(size), tile(tile), tool(tool), mapPosition(position), renderPosition(position), distToEnt(5), owner(owner), type(type), barColor(TCODColor::white)
+	:size(size), tile(tile), tool(tool), mapPosition(position), tileRenderPosition(position), distToEnt(5), owner(owner), type(type), barColor(TCODColor::white)
 {
 	createActionManager(owner);
 }
@@ -143,8 +143,9 @@ void Item::updateTool(Position4 mapPosition, int mx, int my, double angle, bool 
 
 	changeBarColor();
 
-	this->mapPosition = Position4(tool->sourcePosition.x + WORLD->xOffset, tool->sourcePosition.y + WORLD->yOffset, mapPosition.height, mapPosition.floor);
-	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+	//this->mapPosition = Position4(tool->sourcePosition.x + WORLD->xOffset, tool->sourcePosition.y + WORLD->yOffset, mapPosition.height, mapPosition.floor); //CHECK
+	this->mapPosition = Position4(tool->sourcePosition.x, tool->sourcePosition.y, mapPosition.height, mapPosition.floor);
+	tileRenderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
 void Item::renderTool(const std::shared_ptr<Pane>& pane) const
@@ -156,16 +157,16 @@ void Item::updateTile()
 {
 	distToEnt = getDistance(WORLD->debugmap->player->mapPosition.x, WORLD->debugmap->player->mapPosition.y, mapPosition.x, mapPosition.y);
 
-	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+	tileRenderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
 void Item::renderTile(const std::shared_ptr<Pane>& pane) const
 {
-	tile->render(Position4(renderPosition.x, renderPosition.y, WORLD->debugmap->player->mapPosition.height, renderPosition.floor), pane);
+	tile->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.height, tileRenderPosition.floor), pane);
 
 	if (distToEnt < 5 && WORLD->isInFov(mapPosition))
 	{
-		pane->console->setCharBackground(renderPosition.x, renderPosition.y, tile->tileList[0]->backgroundColor + TCODColor::darkGrey);
+		pane->console->setCharBackground(tileRenderPosition.x, tileRenderPosition.y, tile->tileList[0]->backgroundColor + TCODColor::darkGrey);
 	}
 }
 

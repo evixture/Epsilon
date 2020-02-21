@@ -179,28 +179,29 @@ void Tool::equip(Armor& armor)
 
 void Tool::updatePositions(Position4 sourcePosition, int mx, int my, double angle)
 {
-	this->sourcePosition = sourcePosition;
+	this->sourcePosition = sourcePosition; //map position = source position
+	//mapPosition = this->sourcePosition;
 	mapPosition.height = sourcePosition.height;
 	mapPosition.floor = sourcePosition.floor;
-
-	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
 	dx = mx - sourcePosition.x + WORLD->xOffset; //takes mouse input, applies to all creatures, but only useful for player
 	dy = my - sourcePosition.y + WORLD->yOffset;
 
 	updateToolPosition(angle);
+
+	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset); // has to be after update tool position
 }
 
 void Tool::update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld)
 {
 	this->isHeld = isHeld;
+	updatePositions(sourcePosition, mx, my, angle);
 
 	if (this->isHeld)
 	{
 		//behavior if it is held
 	}
 
-	updatePositions(sourcePosition, mx, my, angle);
 }
 
 void Tool::render(const std::shared_ptr<Pane>& pane) const
@@ -223,8 +224,9 @@ void Melee::useMelee()
 {
 	for (auto& creature : WORLD->debugmap->creatureList)
 	{
-		if ((sourcePosition.x == creature->mapPosition.x && sourcePosition.y == creature->mapPosition.y && sourcePosition.floor == creature->mapPosition.floor) || //if the creature is on top of the creature
-			(mapPosition.x == creature->mapPosition.x && mapPosition.y == creature->mapPosition.y && mapPosition.floor == creature->mapPosition.floor)) //if the melee tool is on top of the creature
+		//if ((sourcePosition.x == creature->mapPosition.x && sourcePosition.y == creature->mapPosition.y && sourcePosition.floor == creature->mapPosition.floor) || //if the creature is on top of the creature
+		//	(mapPosition.x == creature->mapPosition.x && mapPosition.y == creature->mapPosition.y && mapPosition.floor == creature->mapPosition.floor)) //if the melee tool is on top of the creature
+		if (mapPosition.x == creature->mapPosition.x && mapPosition.y == creature->mapPosition.y)
 		{
 			if (creature != WORLD->debugmap->player)
 			{
@@ -257,6 +259,7 @@ void Melee::doMeleeDamage(std::shared_ptr<Creature>& creature)
 void Melee::update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld)
 {
 	this->isHeld = isHeld;
+	updatePositions(sourcePosition, mx, my, angle);
 
 	if (this->isHeld)
 	{
@@ -266,7 +269,6 @@ void Melee::update(Position4 sourcePosition, int mx, int my, double angle, bool 
 		}
 	}
 
-	updatePositions(sourcePosition, mx, my, angle);
 }
 
 void Melee::render(const std::shared_ptr<Pane>& pane) const
@@ -831,6 +833,7 @@ void Firearm::changeBarColor(TCODColor& color)
 void Firearm::update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld)
 {
 	this->isHeld = isHeld;
+	updatePositions(sourcePosition, mx, my, angle);
 	
 	if (this->isHeld)
 	{
@@ -873,7 +876,6 @@ void Firearm::update(Position4 sourcePosition, int mx, int my, double angle, boo
 		reloadClock.tickUp();
 	}
 	
-	updatePositions(sourcePosition, mx, my, angle);
 
 	//updateWeaponChar(angle);
 }
