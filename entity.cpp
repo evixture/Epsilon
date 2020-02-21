@@ -505,38 +505,45 @@ void Player::update()
 
 		*/
 
-		for (int i = 0; i < inventory.size(); i++)
+		if (inventory.size() > 0)
 		{
-			if (itemIndex == -1 && containerIndex == i) //if container is the held item
+			for (int i = 0; i < inventory.size(); i++)
 			{
-				//spec update the held container
-				//GUI->logWindow->pushMessage(LogWindow::Message("update selected container item", LogWindow::Message::MessageLevel::LOW));
-				inventory[i]->containerItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
-			}
-			else
-			{
-				//normal update the container
-				inventory[i]->containerItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
-			}
-			
-			for (int j = 0; j < inventory[i]->itemList.size(); j++) //stops when i gets to empty container list
-			{
-				if (itemIndex != -1)
+				if (itemIndex == -1 && containerIndex == i) //if container is the held item
 				{
-					if (itemIndex == j && containerIndex == i)
+					//spec update the held container
+					//GUI->logWindow->pushMessage(LogWindow::Message("update selected container item", LogWindow::Message::MessageLevel::LOW));
+					inventory[i]->containerItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
+				}
+				else
+				{
+					//normal update the container
+					inventory[i]->containerItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
+				}
+			
+				for (int j = 0; j < inventory[i]->itemList.size(); j++) //stops when i gets to empty container list
+				{
+					if (itemIndex != -1)
 					{
-						inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
-						//spec update held item
-						//GUI->logWindow->pushMessage(LogWindow::Message("update selected item", LogWindow::Message::MessageLevel::LOW));
-					}
-					else
-					{
-						//normal update the item
-						inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
+						if (itemIndex == j && containerIndex == i)
+						{
+							inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
+							//spec update held item
+							//GUI->logWindow->pushMessage(LogWindow::Message("update selected item", LogWindow::Message::MessageLevel::LOW));
+						}
+						else
+						{
+							//normal update the item
+							inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
+						}
 					}
 				}
-			}
 			
+			}
+		}
+		else
+		{
+			selectedItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
 		}
 
 		//selectedItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle);

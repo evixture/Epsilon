@@ -175,12 +175,12 @@ s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
       <y>22</y>
       <level>3</level>
       <floor>0</floor>
-      <ch>0</ch>
+      <ch>A</ch>
       <color>blue</color>
       <health>100</health>
       <armor>
         <defense>100</defense>
-        <durabilty>200</durabilty>
+        <durability>200</durability>
         <color>pink</color>
       </armor>
     </creature>

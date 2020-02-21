@@ -181,45 +181,63 @@ bool Map::getCreatures(pugi::xml_node& dataNode)
 			int armorDurability;
 			TCODColor armorColor;
 
-			//auto type1 = creature.attribute("name").value();
-			//auto type2 = creature.attribute("name").as_string();
 
-			name = creature.attribute("name").as_string();
+			if (!(creature.attribute("name").empty()))	name	= creature.attribute("name").as_string();
+			else return false;
+
+			if (!(creature.child("x").empty()))			x		= creature.child("x").text().as_int();
+			else return false;
+
+			if (!(creature.child("y").empty()))			y		= creature.child("y").text().as_int();
+			else return false;
+
+			if (!(creature.child("level").empty()))		level	= creature.child("level").text().as_int();
+			else return false;
+
+			if (!(creature.child("floor").empty()))		floor	= creature.child("floor").text().as_int();
+			else return false;
+
 
 			if (name == std::string("Player")) //should check if not empty first
 			{
-				x = creature.child("x").text().as_int();
-				y = creature.child("y").text().as_int();
-				level = creature.child("level").text().as_int();
-				floor = creature.child("floor").text().as_int();
-
 				creatureList.push_back(player = std::make_shared<Player>(Position4(x, y, level, floor)));
 			}
 			else
 			{
-				x = creature.child("x").text().as_int();
-				y = creature.child("y").text().as_int();
-				level = creature.child("level").text().as_int();
-				floor = creature.child("floor").text().as_int();
-
-				//name = creature.attribute("name").as_string();
-				ch = creature.child("ch").text().as_int(); //may need to be as_string().cstr()
+				if (!(creature.child("ch").empty())) ch = creature.child("ch").text().as_string()[0];
+				else return false;
 
 				std::string colorName;
+				if (!(creature.child("color").empty())) colorName = creature.child("color").text().as_string();
+				else return false;
 
-				colorName = dataNode.child("color").text().as_string();
-
-				if (colorName == "blue")
+				if (colorName == "blue") //add more colors, switch?
 				{
 					color = TCODColor::blue;
 				}
 
-				for (auto& armorData : creature.child("armor").children()) //need for loop?
-				{
-					armorDefense = armorData.child("defense").text().as_int();
-					armorDurability = armorData.child("durability").text().as_int();
+				if (!(creature.child("health").empty())) health = creature.child("health").text().as_int();
+				else return false;
 
-					std::string armorColorName = armorData.child("color").text().as_string();
+				pugi::xml_node armorData;
+				if (!(creature.child("armor").empty()))
+				{
+					armorData = creature.child("armor");
+
+					bool empty = creature.child("armor").child("durability").empty();
+
+					//
+					if (!(creature.child("armor").child("defense").empty())) armorDefense = armorData.child("defense").text().as_int();
+					else return false;
+
+					//					
+					if (!(creature.child("armor").child("durability").empty())) armorDurability = armorData.child("durability").text().as_int();
+					else return false;
+
+					std::string armorColorName;
+					//
+					if (!(creature.child("armor").child("color").empty())) armorColorName = armorData.child("color").text().as_string();
+					else return false;
 
 					if (armorColorName == "pink")
 					{
@@ -227,8 +245,8 @@ bool Map::getCreatures(pugi::xml_node& dataNode)
 					}
 				}
 
-				creatureList.push_back(std::make_shared<Creature>(Position4(x, y, level, floor), ch, name, color, health, Armor("name", armorColor, armorDefense, armorDurability))); //missing armor name in file
-			}
+				creatureList.push_back(std::make_shared<Creature>(Position4(x, y, level, floor), ch, name, color, health, Armor("TEMP", armorColor, armorDefense, armorDurability))); //missing armor name in file
+			}	
 		}
 		return true;
 	}
@@ -249,10 +267,17 @@ bool Map::getItems(pugi::xml_node& dataNode)
 
 			std::string name;
 
-			x = item.child("x").text().as_int();
-			y = item.child("y").text().as_int();
-			floor = item.child("floor").text().as_int();
-			name = item.attribute("type").as_string();
+			if (!(item.attribute("type").empty()))	name = item.attribute("type").as_string();
+			else return false;
+
+			if (!(item.child("x").empty()))		x = item.child("x").text().as_int();
+			else return false;
+
+			if (!(item.child("y").empty()))		y = item.child("y").text().as_int();
+			else return false;
+
+			if (!(item.child("floor").empty())) floor = item.child("floor").text().as_int();
+			else return false;
 
 			if (name == "SIR556")
 			{
@@ -286,10 +311,17 @@ bool Map::getContainers(pugi::xml_node& dataNode)
 
 			std::string name;
 
-			x = container.child("x").text().as_int();
-			y = container.child("y").text().as_int();
-			floor = container.child("floor").text().as_int();
-			name = container.attribute("type").as_string();
+			if (!(container.child("x").empty()))		x = container.child("x").text().as_int();
+			else return false;
+
+			if (!(container.child("y").empty()))		y = container.child("y").text().as_int();
+			else return false;
+
+			if (!(container.child("floor").empty()))	floor = container.child("floor").text().as_int();
+			else return false;
+
+			if (!(container.child("type").empty()))		name = container.attribute("type").as_string();
+			else return false;
 
 			if (name == "SmallBackpack")
 			{
@@ -430,20 +462,6 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 	}
 }
 
-
-/*
- <creatures>
-	<!--<player>                  -->
-	<!--  <x>2</x>                -->
-	<!--  <y>2</y>                -->
-	<!--  <height>3</height>      -->
-	<!--  <floor>0</floor>        -->
-	<!--</player>                 -->
-  </creatures>                    -->
-  <items>
-
-  </items>
-*/
 //----------------------------------------------------------------------------------------------------
 
 World::World()
@@ -455,6 +473,7 @@ World::World()
 
 	fovMap = std::make_shared<TCODMap>(debugmap->width, debugmap->height);
 
+	//try to add back
 	//first floor
 	//addItem(ITEM_SIR556(4, 7, 0, player.get()));
 	//addItem(ITEM_SIR556(33, 21, 0, player.get()));
