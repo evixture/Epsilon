@@ -59,7 +59,7 @@ void Settings::printDebugStats() const
 		WORLD->debugmap->player->angle);
 }
 
-void Settings::update(std::shared_ptr<Player> player)
+void Settings::update()
 {
 	fpsCount = TCODSystem::getFps();
 	lastFrameTime = systemClock.restart();

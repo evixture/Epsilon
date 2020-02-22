@@ -177,7 +177,7 @@ void Tool::equip(Armor& armor)
 {
 }
 
-void Tool::updatePositions(Position4 sourcePosition, int mx, int my, double angle)
+void Tool::updatePositions(Position4& sourcePosition, int& mx, int& my, double& angle)
 {
 	this->sourcePosition = sourcePosition; //map position = source position
 	//mapPosition = this->sourcePosition;
@@ -192,7 +192,7 @@ void Tool::updatePositions(Position4 sourcePosition, int mx, int my, double angl
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset); // has to be after update tool position
 }
 
-void Tool::update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld)
+void Tool::update(Position4& sourcePosition, int& mx, int& my, double& angle, bool& isHeld)
 {
 	this->isHeld = isHeld;
 	updatePositions(sourcePosition, mx, my, angle);
@@ -256,7 +256,7 @@ void Melee::doMeleeDamage(std::shared_ptr<Creature>& creature)
 	}
 }
 
-void Melee::update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld)
+void Melee::update(Position4& sourcePosition, int& mx, int& my, double& angle, bool& isHeld)
 {
 	this->isHeld = isHeld;
 	updatePositions(sourcePosition, mx, my, angle);
@@ -306,34 +306,37 @@ Bullet::Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int 
 
 void Bullet::doBulletDamage(std::shared_ptr<Creature>& creature)
 {
-	if (creature->equippedArmor.durability > 0) //if the armor durability is high enough
+	if (creature->health > 0)
 	{
-		if (currentVelocity - creature->equippedArmor.defense > 0) //if bullet is fast enough to pass through armor
+		if (creature->equippedArmor.durability > 0) //if the armor durability is high enough
 		{
-			creature->equippedArmor.durability -= currentVelocity; //should happen before taking damage to prevent high damage
-			currentVelocity -= creature->equippedArmor.defense;
+			if (currentVelocity - creature->equippedArmor.defense > 0) //if bullet is fast enough to pass through armor
+			{
+				creature->equippedArmor.durability -= currentVelocity; //should happen before taking damage to prevent high damage
+				currentVelocity -= creature->equippedArmor.defense;
 
-			creature->health -= int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //2.0f can be changed to manage ttk and bullet damage
+				creature->health -= int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //2.0f can be changed to manage ttk and bullet damage
+
+				currentVelocity -= 100; //slowdown after going through body
+			}
+			else if (currentVelocity - creature->equippedArmor.defense <= 0) //if the bullet is stopped by the armor
+			{
+				creature->equippedArmor.durability -= currentVelocity;
+				currentVelocity = 0;
+			}
+
+			if (creature->equippedArmor.durability < 0)
+			{
+				creature->equippedArmor.durability = 0;
+			}
+		}
+		else
+		{
+			int damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass);
+			creature->health -= damage;
 
 			currentVelocity -= 100; //slowdown after going through body
 		}
-		else if (currentVelocity - creature->equippedArmor.defense <= 0) //if the bullet is stopped by the armor
-		{
-			creature->equippedArmor.durability -= currentVelocity;
-			currentVelocity = 0;
-		}
-
-		if (creature->equippedArmor.durability < 0)
-		{
-			creature->equippedArmor.durability = 0;
-		}
-	}
-	else
-	{
-		int damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass);
-		creature->health -= damage;
-
-		currentVelocity -= 100; //slowdown after going through body
 	}
 
 	if (creature->health < 0)
@@ -830,7 +833,7 @@ void Firearm::changeBarColor(TCODColor& color)
 	}
 }
 
-void Firearm::update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld)
+void Firearm::update(Position4& sourcePosition, int& mx, int& my, double& angle, bool& isHeld)
 {
 	this->isHeld = isHeld;
 	updatePositions(sourcePosition, mx, my, angle);

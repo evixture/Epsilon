@@ -362,18 +362,18 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(0,				TCODColor::pink,			TCODColor::pink	, 0)							\
 		}																							\
 
-#define DATA_testArmor																				\
+#define DATA_L1R3Armor																				\
 		std::vector<std::shared_ptr<Tile>>{														\
-			std::make_shared<Tile>(234,	TCODColor::pink,	TCODColor::black, 0),	\
+			std::make_shared<Tile>(234,	TCODColor::lightGrey,	ITEMCOLOR_ITEMBG, 0),	\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0)							\
 		}																							\
 
-#define DATA_testKnife																				\
+#define DATA_Knife																				\
 		std::vector<std::shared_ptr<Tile>>{														\
-			std::make_shared<Tile>('!',	TCODColor::red,		TCODColor::white, 0),	\
+			std::make_shared<Tile>('!',	TCODColor::silver,		ITEMCOLOR_ITEMBG, 0),	\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
@@ -433,25 +433,25 @@ ITEM SIZES
 */
 
 //DEFAULTS
-			#define DEFAULT_ITEM_TILE								std::make_shared<Block>			(DATA_BasicDoor, OOOOI, OOOOI)
+			#define DEFAULT_ITEM_TILE								std::make_shared<Block>				(DATA_BasicDoor, OOOOI, OOOOI)
 
 //CONTAINERS
 	//SMALL BACKPACK
-				#define TILE_SmallBackpack							std::make_shared<Block>			(DATA_Backpack, OOOOI, OOOOI)
-				#define TOOL_SmallBackpack							std::make_shared<Tool>			("Small Backpack",							ITEMCOLOR_SMALLBACKPACKFG,													CHAR_Backpack)
-			#define ITEM_SmallBackpack(x, y, level, owner)			std::make_shared<Item>			(2,											TILE_SmallBackpack,															TOOL_SmallBackpack,				Position4(x, y, 0, level),		owner,										Item::ItemType::NORMAL)
-		#define CONTAINER_SmallBackpack(x, y, level, owner)			std::make_shared<Container>		(5,											ITEM_SmallBackpack(x, y, level, owner))
+				#define TILE_SmallBackpack							std::make_shared<Block>				(DATA_Backpack, OOOOI, OOOOI)
+				#define TOOL_SmallBackpack							std::make_shared<Tool>				("Small Backpack",							ITEMCOLOR_SMALLBACKPACKFG,													CHAR_Backpack)
+			#define ITEM_SmallBackpack(x, y, level, owner)			std::make_shared<Item>				(2,											TILE_SmallBackpack,															TOOL_SmallBackpack,				Position4(x, y, 0, level),		owner,										Item::ItemType::NORMAL)
+		#define CONTAINER_SmallBackpack(x, y, level, owner)			std::make_shared<Container>			(5,											ITEM_SmallBackpack(x, y, level, owner))
 
 //ITEMS
 	//HANDS
 		//	#define TOOL_Hands											std::make_shared<Tool>			("Hands",									ITEMCOLOR_HANDFG,															TCOD_CHAR_UMLAUT)
 			#define MELEE_Hands											std::make_shared<Melee>			(Tool("Hands",								ITEMCOLOR_HANDFG,															TCOD_CHAR_UMLAUT),								30,																			20)
-		#define ITEM_Hands(x, y, level, owner)							std::make_shared<Item>			(1,											DEFAULT_ITEM_TILE,															MELEE_Hands,						Position4(x, y, 0, level),		owner,										Item::ItemType::NODROP)
+		#define ITEM_Hands(x, y, level, owner)							std::make_shared<Item>			(1,											DEFAULT_ITEM_TILE,															MELEE_Hands,						Position4(x, y, 0, level),		owner,										Item::ItemType::HAND)
 
-	//testarmor
-			#define TILE_testArmor										std::make_shared<Block>			(DATA_testArmor, OOOOI, OOOOI)
-			#define ARMOR_testArmor										std::make_shared<Armor>			("test armor",								TCODColor::pink,															100,							300)
-		#define ITEM_testArmor(x, y, level, owner)						std::make_shared<Item>			(2,											TILE_testArmor,																ARMOR_testArmor,				Position4(x, y, 0, level),		owner,										Item::ItemType::ARMOR)
+	//Level 1, Rank 3 Armor (level 1 is 100 strength, rank 3 is 300 durability)
+			#define TILE_L1R3Armor										std::make_shared<Block>			(DATA_L1R3Armor, OOOOI, OOOOI)
+			#define ARMOR_L1R3Armor										std::make_shared<Armor>			("test armor",								TCODColor::pink,															100,							300)
+		#define ITEM_L1R3Armor(x, y, level, owner)						std::make_shared<Item>			(2,											TILE_L1R3Armor,																ARMOR_L1R3Armor,				Position4(x, y, 0, level),		owner,										Item::ItemType::ARMOR)
 
 	//PISTOLS
 		//SIP45 (standard issue pistol .45 cal)
@@ -478,9 +478,8 @@ ITEM SIZES
 				#define MAGAZINE_556Magazine30(x, y, level, owner)		std::make_shared<MagazineItem>	(ITEM_556Magazine30(x, y, level, owner),	std::make_shared<MagazineData>(MagazineData::AmmoType::FIVEPOINTFIVESIX,	30,								30))
 
 	//MELEE
-		//TEST KNIFE
-			#define TILE_testKnife										std::make_shared<Block>			(DATA_testKnife, OOOOI, OOOOI)
-		//	#define TOOL_testKnife										std::make_shared<Tool>			("Test Knife 34 damage",					ITEMCOLOR_RIFLEFG,															'!')
-			#define MELEE_testKnife										std::make_shared<Melee>			(Tool("Test Knife 34 damage",				ITEMCOLOR_RIFLEFG,															'!'),							0,								34)
-		#define ITEM_testKnife(x, y, level, owner)						std::make_shared<Item>			(1,											TILE_testKnife,																MELEE_testKnife,				Position4(x, y, 0, level),		owner,										Item::ItemType::MELEE)
+		//Knife
+			#define TILE_Knife											std::make_shared<Block>			(DATA_Knife, OOOOI, OOOOI)
+			#define MELEE_Knife											std::make_shared<Melee>			(Tool("-Test Knife 34 damage-",				TCODColor::silver,															'!'),							0,								34)
+		#define ITEM_Knife(x, y, level, owner)							std::make_shared<Item>			(1,											TILE_Knife,																	MELEE_Knife,				Position4(x, y, 0, level),		owner,										Item::ItemType::MELEE)
 

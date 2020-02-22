@@ -118,10 +118,16 @@ void Item::createActionManager(Player* owner)
 			std::shared_ptr<Action>(std::make_shared<Action>("Equip", std::bind(&Player::equipArmor, owner), Action::Type::EQUIP))
 		});
 	}
-	else// (type == ItemType::NODROP)
+	else if (type == ItemType::HAND)
 	{
 		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
-			std::shared_ptr<Action>(std::make_shared<Action>("", std::bind(&Player::filterIndexes, owner), Action::Type::DROP))
+			std::shared_ptr<Action>(std::make_shared<Action>("Melee", std::bind(&Player::useMelee, owner), Action::Type::MELEE))
+		});
+	}
+	else
+	{
+		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
+			std::shared_ptr<Action>(std::make_shared<Action>("ERROR", std::bind(&Player::filterIndexes, owner), Action::Type::DROP))
 		});
 	}
 }
@@ -136,7 +142,7 @@ void Item::changeBarColor()
 	tool->changeBarColor(barColor);
 }
 
-void Item::updateTool(Position4 mapPosition, int mx, int my, double angle, bool isHeld)
+void Item::updateTool(Position4& mapPosition, int mx, int my, double angle, bool isHeld)
 {
 	tool->update(mapPosition, mx, my, angle, isHeld);
 	actionManager->update();

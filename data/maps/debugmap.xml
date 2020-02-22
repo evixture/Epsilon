@@ -160,9 +160,9 @@ s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
 s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
 s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
 	</floor>
-  <!-- = = = = = = = = = = = = = = = = = -->
+	<!-- = = = = = = = = = = = = = = = = = -->
 	<creatures>
-    
+		
 		<creature name = "Player"> <!-- if name is "player", treats as a player -->
 			<x>2</x>
 			<y>2</y>
@@ -170,53 +170,139 @@ s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
 			<floor>0</floor>
 		</creature>
 
-    <creature name = "Creature"> <!-- "creature" is name -->
-      <x>16</x>
-      <y>22</y>
-      <level>3</level>
-      <floor>0</floor>
-      <ch>A</ch>
-      <color>blue</color>
-      <health>100</health>
-      <armor>
-        <defense>100</defense>
-        <durability>200</durability>
-        <color>pink</color>
-      </armor>
-    </creature>
-    
-	</creatures>
-  <!-- = = = = = = = = = = = = = = = = = -->
-  <items>
-    
-    <item type = "SIR556">
-      <x>4</x>
-      <y>7</y>
-      <floor>0</floor>
-    </item>
-    
-    <item type = "556Magazine30">
-      <x>5</x>
-      <y>10</y>
-      <floor>0</floor>
-    </item>
-    
-    <item type = "45Magazine7">
-      <x>10</x>
-      <y>10</y>
-      <floor>0</floor>
-    </item>
-    
-  </items>
-  <!-- = = = = = = = = = = = = = = = = = -->
-  <containers>
+		<creature name = "Creature0">
+			<!-- "creature" is name -->
+			<x>16</x>
+			<y>22</y>
+			<level>3</level>
+			<floor>0</floor>
+			<ch>0</ch>
+			<color>blue</color>
+			<health>100</health>
+			<armor>
+				<defense>0</defense>
+				<durability>0</durability>
+				<color>pink</color>
+			</armor>
+		</creature>
 
-    <container type = "SmallBackpack">
-      <x>16</x>
-      <y>20</y>
+		<creature name = "Creature1"> <!-- "creature" is name -->
+			<x>13</x>
+			<y>38</y>
+			<level>3</level>
+			<floor>0</floor>
+			<ch>1</ch>
+			<color>white</color>
+			<health>100</health>
+			<armor>
+				<defense>100</defense>
+				<durability>200</durability>
+				<color>pink</color> <!-- need? -->
+			</armor>
+		</creature>
+
+		<creature name = "Creature2">
+			<!-- "creature" is name -->
+			<x>64</x>
+			<y>21</y>
+			<level>3</level>
+			<floor>0</floor>
+			<ch>2</ch>
+			<color>purple</color>
+			<health>100</health>
+			<armor>
+				<defense>200</defense>
+				<durability>400</durability>
+				<color>pink</color>
+			</armor>
+		</creature>
+		
+	</creatures>
+	<!-- = = = = = = = = = = = = = = = = = -->
+	<items>
+		
+		<item type = "SIR556">
+			<x>4</x>
+			<y>7</y>
+			<floor>0</floor>
+		</item>
+
+    <item type = "SIR556">
+      <x>33</x>
+      <y>21</y>
       <floor>0</floor>
-    </container>
+    </item>
+		
+		<item type = "556Magazine30">
+			<x>5</x>
+			<y>10</y>
+			<floor>0</floor>
+		</item>
+
+    <item type = "556Magazine30">
+      <x>22</x>
+      <y>36</y>
+      <floor>0</floor>
+    </item>
+
+    <item type = "556Magazine30">
+      <x>31</x>
+      <y>25</y>
+      <floor>0</floor>
+    </item>
+
+    <item type = "556Magazine30">
+      <x>56</x>
+      <y>6</y>
+      <floor>0</floor>
+    </item>
+		
+		<item type = "45Magazine7">
+			<x>10</x>
+			<y>10</y>
+			<floor>0</floor>
+		</item>
+
+    <item type = "45Magazine7">
+      <x>36</x>
+      <y>50</y>
+      <floor>0</floor>
+    </item>
+
+    <item type = "45Magazine7">
+      <x>49</x>
+      <y>36</y>
+      <floor>0</floor>
+    </item>
     
-  </containers>
-  
+    <item type = "L1R3Armor">
+      <x>3</x>
+      <y>3</y>
+      <floor>0</floor>
+    </item>
+
+    <item type = "Knife">
+      <x>5</x>
+      <y>5</y>
+      <floor>0</floor>
+    </item>
+
+    <item type = "SIP45">
+      <x>21</x>
+      <y>45</y>
+      <floor>0</floor>
+    </item>
+
+  </items>
+	<!-- = = = = = = = = = = = = = = = = = -->
+	<containers>
+
+		<container type = "SmallBackpack">
+			<x>35</x>
+			<y>235</y>
+			<floor>0</floor>
+		</container>
+		
+	</containers>
+	
 </map>

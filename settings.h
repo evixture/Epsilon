@@ -38,7 +38,7 @@ struct Settings //settings class that hold most of the settings for the game and
 
 	void setFullscreen(); //sets window fullscreen on or off
 
-	void update(std::shared_ptr<Player> player); //updates settings
+	void update(); //updates settings
 	void render() const; //renders settings to root
 
 private:

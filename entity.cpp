@@ -183,12 +183,12 @@ void Player::move()
 
 			for (int i = 1; i <= moveClock.numCalls; moveClock.numCalls--)
 			{
-				if (WORLD->getWalkability(Position4(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.height, mapPosition.floor)))
+				if (WORLD->getWalkability(Position4(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.height, mapPosition.floor), true))
 				{
 					mapPosition.x += moveXSpeed;
 					moveXSpeed = 0;
 				}
-				if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.height, mapPosition.floor)))
+				if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.height, mapPosition.floor), true))
 				{
 					mapPosition.y += moveYSpeed;
 					moveYSpeed = 0;
@@ -200,12 +200,12 @@ void Player::move()
 
 void Player::changeStanceUp()
 {
-	if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height + 1, mapPosition.floor))) mapPosition.height += 1;
+	if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height + 1, mapPosition.floor), false)) mapPosition.height += 1;
 }
 
 void Player::changeStanceDown()
 {
-	if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height - 1, mapPosition.floor))) mapPosition.height -= 1;
+	if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height - 1, mapPosition.floor), false)) mapPosition.height -= 1;
 }
 
 void Player::moveSelectorUp()

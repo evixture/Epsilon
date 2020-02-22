@@ -17,13 +17,6 @@ struct Map //map class that takes a text file and converts it to a vector of til
 	std::vector<std::shared_ptr<Item>> mapItemList; //list of all items on the map						//add to map
 	std::vector<std::shared_ptr<Container>> mapContainerList; //list of all containers on the map		//add to map
 
-																										//add to map
-	//void addCreature(std::shared_ptr<Creature> creature);												//add to map
-	//void addItem(std::shared_ptr<Item> item);															//add to map
-	//void addContainer(std::shared_ptr<Container> container);
-
-
-
 	std::vector<std::vector< std::shared_ptr<Block >>> levelList; //list of list of tiles, list of floors->list of tiles
 
 	Map(std::string filePath); //map constructor that takes a string file path
@@ -54,14 +47,18 @@ struct World
 	World(); //world contructor that takes nothing
 
 	std::shared_ptr<Block> getTile	(Position3 position) const; //returns the tile at specific coordinates
-	TCODColor getBgColor			(Position3 position) const; //gets the background color of the tile at specific coordinates
+	TCODColor getBgColor			(Position3& position) const; //gets the background color of the tile at specific coordinates
 
-	bool    getTransparency			(Position4 position) const; //gets the transparency of a tile
-	bool    getWalkability			(Position4 position) const; //gets the walkability of a tile
-	bool	getSolidity				(Position4 position) const;
-	bool	inMapBounds				(Position3 position) const; //checks if the coordinates are in the map bounds
+	bool    getTransparency			(Position4& position) const; //gets the transparency of a tile
+	bool    getWalkability			(Position4 position, bool checkCreatures) const; //gets the walkability of a tile
+	bool	getSolidity				(Position4& position) const;
+	bool	inMapBounds				(Position3& position) const; //checks if the coordinates are in the map bounds
 	bool	isInFov					(Position3 position) const; //returns true if the coordinates are in fov
-	bool	isExplored				(Position3 position) const; //checks if a tile has been explored previously
+	bool	isExplored				(Position3& position) const; //checks if a tile has been explored previously
+
+	void addCreature(std::shared_ptr<Creature> creature);												
+	void addItem(std::shared_ptr<Item> item);															
+	void addContainer(std::shared_ptr<Container> container);
 
 	void update(); //updates the map
 

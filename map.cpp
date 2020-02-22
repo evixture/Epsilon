@@ -211,10 +211,10 @@ bool Map::getCreatures(pugi::xml_node& dataNode)
 				if (!(creature.child("color").empty())) colorName = creature.child("color").text().as_string();
 				else return false;
 
-				if (colorName == "blue") //add more colors, switch?
-				{
-					color = TCODColor::blue;
-				}
+				if (colorName == "blue")		color = TCODColor::blue;
+				else if (colorName == "white")	color = TCODColor::white;
+				else if (colorName == "purple") color = TCODColor::purple;
+				else							color = TCODColor::yellow;
 
 				if (!(creature.child("health").empty())) health = creature.child("health").text().as_int();
 				else return false;
@@ -279,18 +279,11 @@ bool Map::getItems(pugi::xml_node& dataNode)
 			if (!(item.child("floor").empty())) floor = item.child("floor").text().as_int();
 			else return false;
 
-			if (name == "SIR556")
-			{
-				mapItemList.push_back(ITEM_SIR556(x, y, floor, player.get()));
-			}
-			else if (name == "556Magazine30")
-			{
-				mapItemList.push_back(MAGAZINE_556Magazine30(x, y, floor, player.get()));
-			}
-			else if (name == "45Magazine7")
-			{
-				mapItemList.push_back(MAGAZINE_45Magazine7(x, y, floor, player.get()));
-			}
+			if (name == "SIR556") mapItemList.push_back(ITEM_SIR556(x, y, floor, player.get()));			
+			else if (name == "556Magazine30") mapItemList.push_back(MAGAZINE_556Magazine30(x, y, floor, player.get()));			
+			else if (name == "45Magazine7") mapItemList.push_back(MAGAZINE_45Magazine7(x, y, floor, player.get()));
+			else if (name == "L1R3Armor") mapItemList.push_back(ITEM_L1R3Armor(x, y, floor, player.get()));
+			else if (name == "Knife") mapItemList.push_back(ITEM_Knife(x, y, floor, player.get()));
 		}
 		return true;
 	}
@@ -469,33 +462,7 @@ World::World()
 {
 	debugmap = std::make_shared<Map>("data/maps/debugmap.xml");
 
-	//creatureList.push_back(player = std::make_shared<Player>(Position4(2, 2, 3, 0)));
-
 	fovMap = std::make_shared<TCODMap>(debugmap->width, debugmap->height);
-
-	//try to add back
-	//first floor
-	//addItem(ITEM_SIR556(4, 7, 0, player.get()));
-	//addItem(ITEM_SIR556(33, 21, 0, player.get()));
-	//addItem(MAGAZINE_556Magazine30(5, 10, 0, player.get()));
-	//addItem(MAGAZINE_556Magazine30(22, 36, 0, player.get()));
-	//addItem(MAGAZINE_556Magazine30(31, 25, 0, player.get()));
-	//addItem(MAGAZINE_556Magazine30(56, 6, 0, player.get()));
-	//
-	//addItem(ITEM_testKnife(5, 5, 0, player.get()));
-	//addItem(ITEM_testArmor(3, 3, 0, player.get()));
-	//
-	////second floor
-	//addItem(ITEM_SIP45(21, 45, 0, player.get()));
-	//addItem(MAGAZINE_45Magazine7(10, 10, 0, player.get()));
-	//addItem(MAGAZINE_45Magazine7(36, 50, 0, player.get()));
-	//addItem(MAGAZINE_45Magazine7(49, 36, 0, player.get()));
-	//
-	//addContainer(CONTAINER_SmallBackpack(35, 35, 0, player.get()));
-	//
-	//addCreature(std::make_shared<Creature>(Position4(13, 38, 3, 0), '1', "Creature", TCODColor::white, 100, Armor("armor", TCODColor::pink, 100, 200))); //replace colors
-	//addCreature(std::make_shared<Creature>(Position4(16, 22, 3, 0), '0', "Creature", TCODColor::blue, 100, Armor("armor", TCODColor::pink, 0, 0)));
-	//addCreature(std::make_shared<Creature>(Position4(64, 21, 3, 0), '2', "Creature", TCODColor::purple, 100, Armor("armor", TCODColor::pink, 200, 400)));
 }
 
 std::shared_ptr<Block> World::getTile(Position3 position) const
@@ -510,32 +477,32 @@ std::shared_ptr<Block> World::getTile(Position3 position) const
 	}
 }
 
-bool World::isExplored(Position3 position) const
+bool World::isExplored(Position3& position) const
 {
  	return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]->explored;
 }
 
-TCODColor World::getBgColor(Position3 position) const
+TCODColor World::getBgColor(Position3& position) const
 {
 	return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]->tileList[0]->backgroundColor;
 }
 
-//void World::addCreature(std::shared_ptr<Creature> creature)
-//{
-//	creatureList.push_back(creature);
-//}
-//
-//void World::addItem(std::shared_ptr<Item> item)
-//{
-//	mapItemList.push_back(item);
-//}
-//
-//void World::addContainer(std::shared_ptr<Container> container)
-//{
-//	mapContainerList.push_back(container);
-//}
+void World::addCreature(std::shared_ptr<Creature> creature)
+{
+	debugmap->creatureList.push_back(creature);
+}
 
-bool World::inMapBounds(Position3 position) const
+void World::addItem(std::shared_ptr<Item> item)
+{
+	debugmap->mapItemList.push_back(item);
+}
+
+void World::addContainer(std::shared_ptr<Container> container)
+{
+	debugmap->mapContainerList.push_back(container);
+}
+
+bool World::inMapBounds(Position3& position) const
 {
 	if (position.floor < 0 || position.floor >= debugmap->totalFloors) return false;
 	if (position.x < 0 || position.x >= debugmap->width) return false;
@@ -563,11 +530,25 @@ int World::getOffset(int playerx, int mapw, int renderw)
 	}
 }
 
-bool World::getWalkability(Position4 position) const
+bool World::getWalkability(Position4 position, bool checkCreatures) const
 {
 	if (!inMapBounds(position)) //should never be called??
 	{
 		return false;
+	}
+
+	if (checkCreatures)
+	{
+		for (auto& creature : debugmap->creatureList)
+		{
+			if (position.x == creature->mapPosition.x && position.y == creature->mapPosition.y)
+			{
+				if (creature->health > 0)
+				{
+					return false;
+				}
+			}
+		}
 	}
 
 	bool walkableBool = true;
@@ -588,7 +569,7 @@ bool World::getWalkability(Position4 position) const
 	return false;
 }
 
-bool World::getSolidity(Position4 position) const
+bool World::getSolidity(Position4& position) const
 {
 	if (getTile(position)->walkableFlag & heightToBitFlag(position.height))
 	{
@@ -597,7 +578,7 @@ bool World::getSolidity(Position4 position) const
 	return false;
 }
 
-bool World::getTransparency(Position4 position) const
+bool World::getTransparency(Position4& position) const
 {
 	if (!(getTile(position)->transparentFlag & heightToBitFlag(position.height))) // converts player height to the bit of flag
 	{
@@ -613,7 +594,7 @@ void World::updateProperties()
 		for (int x = 0; x < debugmap->width; ++x)
 		{
 			Position4 position = Position4(x, y, debugmap->player->mapPosition.height, debugmap->player->mapPosition.floor);
-			fovMap->setProperties(x, y, getTransparency(position), getWalkability(position));
+			fovMap->setProperties(x, y, getTransparency(position), getWalkability(position, true));
 		}
 	}
 }
@@ -654,7 +635,7 @@ void World::update()
 
 	if (INPUT->debug1Key->isSwitched) // repeatable create live creature
 	{
-		//addCreature(std::make_shared<Creature>(Position4(30, 8, 3, 0), '0', "Creature", TCODColor::white, 100, Armor("", TCODColor::pink, 0, 0)));
+		addCreature(std::make_shared<Creature>(Position4(30, 8, 3, 0), '0', "Creature", TCODColor::white, 100, Armor("", TCODColor::pink, 0, 0)));
 	}
 
 	updateEntities(); //needs to be first to prevent bad fov checks

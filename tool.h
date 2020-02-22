@@ -35,9 +35,9 @@ struct Tool //base class for the holdable component to items
 
 	virtual void equip(Armor& armor);
 
-	virtual void updatePositions(Position4 sourcePosition, int mx, int my, double angle);
+	virtual void updatePositions(Position4& sourcePosition, int& mx, int& my, double& angle);
 
-	virtual void update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld); //virtual updates tool
+	virtual void update(Position4& sourcePosition, int& mx, int& my, double& angle, bool& isHeld); //virtual updates tool
 	virtual void render(const std::shared_ptr<Pane>& pane) const; //virtual renders tool
 
 protected:
@@ -54,7 +54,7 @@ struct Melee : public Tool
 
 	void useMelee();
 	
-	virtual void update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld);
+	virtual void update(Position4& sourcePosition, int& mx, int& my, double& angle, bool& isHeld);
 	virtual void render(const std::shared_ptr<Pane>& pane) const;
 
 private:
@@ -74,6 +74,7 @@ struct Bullet //bullet that is fired from firearm
 
 	bool hitWall; //if the bullet has made contact with the wall yet
 
+	//check if use ref
 	Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass); //constructor that takes character, x and y to start, x and y destination, and map bounds
 
 	void doBulletDamage(std::shared_ptr<Creature>& creature);
@@ -117,7 +118,7 @@ struct Firearm : public Melee //firearm that fires bullets that interact with th
 
 	void updateToolPosition(double angle); //updates the weapon character //replace with derived updateposition from tool
 
-	void update(Position4 sourcePosition, int mx, int my, double angle, bool isHeld); //updates firearm
+	void update(Position4& sourcePosition, int& mx, int& my, double& angle, bool& isHeld); //updates firearm
 	void render(const std::shared_ptr<Pane>& pane) const; //renders firearm
 
 private:
@@ -137,8 +138,8 @@ private:
 
 struct Armor : public Tool
 {
-	unsigned short int defense;
-	unsigned short int durability;
+	short int defense;
+	short int durability;
 
 	Armor(std::string name, TCODColor color, int defense, int durability);
 

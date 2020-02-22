@@ -30,7 +30,7 @@ struct ActionManager //manages all of the actions of an item
 
 struct Item //an item that a creature can hold and interact with
 {
-	enum class ItemType {NODROP, NORMAL, FIREARM, MAGAZINE, ARMOR, MELEE} type;
+	enum class ItemType {HAND, NORMAL, FIREARM, MAGAZINE, ARMOR, MELEE} type;
 
 	unsigned char size; //size that the item tekes up in the inventory
 	double distToEnt; //the distance from the player to the item, used to highlight the item when the player is in proximity
@@ -52,7 +52,7 @@ struct Item //an item that a creature can hold and interact with
 	virtual std::shared_ptr<MagazineData> getMagazineData(); //used to get the important data of the magazine, returns generic magazine when called from item
 	virtual void changeBarColor();
 
-	void updateTool(Position4 mapPosition, int mx, int my, double angle, bool isHeld); //updates tool, used when in player inventory
+	void updateTool(Position4& mapPosition, int mx, int my, double angle, bool isHeld); //updates tool, used when in player inventory
 	void renderTool(const std::shared_ptr<Pane>& pane) const; //renders tool, used then in player inventory
 
 	void updateTile(); //used to update tile, used when on the map
