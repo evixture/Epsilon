@@ -50,7 +50,6 @@ Map::Map(std::string filePath)
 						if (!hasMap)
 						{
 							hasMap = createBlockMap(mapDataNode);
-							//hasMap = true;
 						}
 
 						if (hasMap)
@@ -70,9 +69,7 @@ Map::Map(std::string filePath)
 								hasContainers = getContainers(mapDataNode);
 							}
 						}
-
 					}
-
 				}
 			}
 		}
@@ -226,16 +223,15 @@ bool Map::getCreatures(pugi::xml_node& dataNode)
 
 					bool empty = creature.child("armor").child("durability").empty();
 
-					//
 					if (!(creature.child("armor").child("defense").empty())) armorDefense = armorData.child("defense").text().as_int();
 					else return false;
-
-					//					
+				
 					if (!(creature.child("armor").child("durability").empty())) armorDurability = armorData.child("durability").text().as_int();
 					else return false;
 
+
 					std::string armorColorName;
-					//
+
 					if (!(creature.child("armor").child("color").empty())) armorColorName = armorData.child("color").text().as_string();
 					else return false;
 
@@ -244,7 +240,6 @@ bool Map::getCreatures(pugi::xml_node& dataNode)
 						armorColor = TCODColor::pink;
 					}
 				}
-
 				creatureList.push_back(std::make_shared<Creature>(Position4(x, y, level, floor), ch, name, color, health, Armor("TEMP", armorColor, armorDefense, armorDurability))); //missing armor name in file
 			}	
 		}
@@ -279,11 +274,11 @@ bool Map::getItems(pugi::xml_node& dataNode)
 			if (!(item.child("floor").empty())) floor = item.child("floor").text().as_int();
 			else return false;
 
-			if (name == "SIR556") mapItemList.push_back(ITEM_SIR556(x, y, floor, player.get()));			
-			else if (name == "556Magazine30") mapItemList.push_back(MAGAZINE_556Magazine30(x, y, floor, player.get()));			
-			else if (name == "45Magazine7") mapItemList.push_back(MAGAZINE_45Magazine7(x, y, floor, player.get()));
-			else if (name == "L1R3Armor") mapItemList.push_back(ITEM_L1R3Armor(x, y, floor, player.get()));
-			else if (name == "Knife") mapItemList.push_back(ITEM_Knife(x, y, floor, player.get()));
+			if		(name == "SIR556")			mapItemList.push_back(ITEM_SIR556(x, y, floor, player.get()));			
+			else if (name == "556Magazine30")	mapItemList.push_back(MAGAZINE_556Magazine30(x, y, floor, player.get()));			
+			else if (name == "45Magazine7")		mapItemList.push_back(MAGAZINE_45Magazine7(x, y, floor, player.get()));
+			else if (name == "L1R3Armor")		mapItemList.push_back(ITEM_L1R3Armor(x, y, floor, player.get()));
+			else if (name == "Knife")			mapItemList.push_back(ITEM_Knife(x, y, floor, player.get()));
 		}
 		return true;
 	}
@@ -345,7 +340,6 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 
 				if (grassRand == 0)
 				{
-					//return std::make_shared<Block>(DATA_Grass0, OOOOI, OOOOI);
 					return TILE_Grass0;
 				}
 				else if (grassRand == 1)
@@ -554,9 +548,9 @@ bool World::getWalkability(Position4 position, bool checkCreatures) const
 	bool walkableBool = true;
 	unsigned char walkableFlag = getTile(position)->walkableFlag;
 
-	for (int i = 0; i < position.height; ++i) //check bound
+	for (int i = 0; i < position.height; ++i)
 	{
-		if (walkableFlag & heightToBitFlag(position.height - i)) // converts player height to the bit of flag
+		if (walkableFlag & heightToBitFlag(position.height - i))
 		{
 			walkableBool = false;
 		}
@@ -580,7 +574,7 @@ bool World::getSolidity(Position4& position) const
 
 bool World::getTransparency(Position4& position) const
 {
-	if (!(getTile(position)->transparentFlag & heightToBitFlag(position.height))) // converts player height to the bit of flag
+	if (!(getTile(position)->transparentFlag & heightToBitFlag(position.height)))
 	{
 		return true;
 	}

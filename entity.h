@@ -70,6 +70,7 @@ struct Player : public Creature //player derived creature that the player intera
 	void equipArmor();
 	void useMelee();
 
+	void updateTools();
 
 	void update(); //updates the player
 	void render(const std::shared_ptr<Pane>& pane) const; //renders the player

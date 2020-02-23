@@ -70,19 +70,6 @@ Item::Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Po
 
 void Item::createActionManager(Player* owner)
 {
-	/*
-	ACTIONS
-	
-		std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP))
-		std::shared_ptr<Action>(std::make_shared<Action>("Melee",std::bind(&Player::useMelee, owner), Action::Type::MELEE))
-		std::shared_ptr<Action>(std::make_shared<Action>("Reload", std::bind(&Player::reload, owner), Action::Type::RELOAD)),
-		std::shared_ptr<Action>(std::make_shared<Action>("Change Fire Mode", std::bind(&Player::changeFireMode, owner), Action::Type::CHANGEFIREMODE))
-		std::shared_ptr<Action>(std::make_shared<Action>("Equip", std::bind(&Player::equipArmor, owner), Action::Type::EQUIP))
-
-		std::shared_ptr<Action>(std::make_shared<Action>("", std::bind(&Player::filterIndexes, owner), Action::Type::DROP))
-	*/
-
-
 	if (type == ItemType::NORMAL)
 	{
 		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
@@ -149,7 +136,6 @@ void Item::updateTool(Position4& mapPosition, int mx, int my, double angle, bool
 
 	changeBarColor();
 
-	//this->mapPosition = Position4(tool->sourcePosition.x + WORLD->xOffset, tool->sourcePosition.y + WORLD->yOffset, mapPosition.height, mapPosition.floor); //CHECK
 	this->mapPosition = Position4(tool->sourcePosition.x, tool->sourcePosition.y, mapPosition.height, mapPosition.floor);
 	tileRenderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }

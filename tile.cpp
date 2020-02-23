@@ -20,10 +20,7 @@ std::shared_ptr<Tile> Block::getTileData(int height) const
 		{
 			if (walkableFlag & heightToBitFlag(height - i))
 			{
-				//if (transparentFlag & heightToBitFlag(height - i))
-				//{
-					return tileList[height - i];
-				//}
+				return tileList[height - i];
 			}
 		}
 	}
@@ -90,14 +87,12 @@ void Destructible::destroy(int damage)
 	{
 		tileList = std::vector<std::shared_ptr<Tile>>
 		{
-			//std::make_shared<Tile>('%', tileList[0]->foregroundColor * TCODColor::lightGrey, tileList[0]->backgroundColor * TCODColor::darkGrey),
 			std::make_shared<Tile>('%', tileList[0]->foregroundColor * TCODColor::lightGrey, tileList[0]->backgroundColor * TCODColor::darkGrey, 0),
 			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
 			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
 			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
 			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
-
 
 		walkableFlag = OOOOI;
 		transparentFlag = OOOOI;

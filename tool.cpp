@@ -92,81 +92,6 @@ void Tool::updateToolPosition(double angle)
 			}
 		}
 	}
-
-	
-
-	//if (dx >= 0 && dy >= 0)
-	//{
-	//	if (angle <= 22.5)
-	//	{
-	//		mapPosition.x = sourcePosition.x + 1;
-	//		mapPosition.y = sourcePosition.y;
-	//	}
-	//	else if (angle >= 22.5 && angle <= 67.5)
-	//	{
-	//		mapPosition.x = sourcePosition.x + 1;
-	//		mapPosition.y = sourcePosition.y + 1;
-	//	}
-	//	else if (angle >= 67.5)
-	//	{
-	//		mapPosition.x = sourcePosition.x;
-	//		mapPosition.y = sourcePosition.y + 1;
-	//	}
-	//}
-	//else if (dx >= 0 && dy < 0)
-	//{
-	//	if (angle >= -22.5)
-	//	{
-	//		mapPosition.x = sourcePosition.x + 1;
-	//		mapPosition.y = sourcePosition.y;
-	//	}
-	//	else if (angle <= -22.5 && angle >= -67.5)
-	//	{
-	//		mapPosition.x = sourcePosition.x + 1;
-	//		mapPosition.y = sourcePosition.y - 1;
-	//	}
-	//	else if (angle <= -67.5)
-	//	{
-	//		mapPosition.x = sourcePosition.x;
-	//		mapPosition.y = sourcePosition.y - 1;
-	//	}
-	//}
-	//else if (dx < 0 && dy >= 0)
-	//{
-	//	if (angle >= -22.5)
-	//	{
-	//		mapPosition.x = sourcePosition.x - 1;
-	//		mapPosition.y = sourcePosition.y;
-	//	}
-	//	else if (angle <= -22.5 && angle >= -67.5)
-	//	{
-	//		mapPosition.x = sourcePosition.x - 1;
-	//		mapPosition.y = sourcePosition.y + 1;
-	//	}
-	//	else if (angle <= -67.5)
-	//	{
-	//		mapPosition.x = sourcePosition.x;
-	//		mapPosition.y = sourcePosition.y + 1;
-	//	}
-	//}
-	//else if (dx < 0 && dy < 0)
-	//{
-	//	if (angle <= 22.5)
-	//	{
-	//		mapPosition.x = sourcePosition.x - 1;
-	//		mapPosition.y = sourcePosition.y;
-	//	}
-	//	else if (angle >= 22.5 && angle <= 67.5)
-	//	{
-	//		mapPosition.x = sourcePosition.x - 1;
-	//		mapPosition.y = sourcePosition.y - 1;
-	//	}
-	//	else if (angle >= 67.5)
-	//	{
-	//		mapPosition.x = sourcePosition.x;
-	//		mapPosition.y = sourcePosition.y - 1;
-	//	}
-	//}
 }
 
 void Tool::changeBarColor(TCODColor& color)
@@ -179,8 +104,7 @@ void Tool::equip(Armor& armor)
 
 void Tool::updatePositions(Position4& sourcePosition, int& mx, int& my, double& angle)
 {
-	this->sourcePosition = sourcePosition; //map position = source position
-	//mapPosition = this->sourcePosition;
+	this->sourcePosition = sourcePosition;
 	mapPosition.height = sourcePosition.height;
 	mapPosition.floor = sourcePosition.floor;
 
@@ -284,7 +208,7 @@ void Melee::render(const std::shared_ptr<Pane>& pane) const
 
 Bullet::Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
 	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), travel(BLine(startPosition.x, startPosition.y, tox, toy)),
-	mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveClock(1.0f / velocity), fallClock(0)//, moveNumCalls(0), fallNumCalls(0)
+	mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveClock(1.0f / velocity), fallClock(0)
 {
 	do
 	{
@@ -349,7 +273,6 @@ void Bullet::update()
 {
 		if (currentVelocity > 0 && mapPosition.height > 0)
 		{
-			//moveNumCalls += SETTINGS->lastFrameTime.asSeconds() / (1.0f / currentVelocity);
 			moveClock.tickUp();
 
 			for (int i = 1; i < moveClock.numCalls; moveClock.numCalls--)
@@ -382,9 +305,8 @@ void Bullet::update()
 							{
 								if (creature->health > 0)
 								{
-									doBulletDamage(creature); //replace with method do damage that takes creature
+									doBulletDamage(creature);
 								}
-
 								GUI->logWindow->pushMessage(LogWindow::Message("You hit a creature!", LogWindow::Message::MessageLevel::HIGH));
 							}
 						}
@@ -405,9 +327,7 @@ void Bullet::update()
 	
 		if (currentVelocity > 0 && mapPosition.height > 0)
 		{
-			//fallNumCalls += SETTINGS->lastFrameTime.asSeconds() / (getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1));
-
-			fallClock.timeBetweenUpdates = (getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1)); //need??
+			fallClock.timeBetweenUpdates = (getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1));
 			fallClock.tickUp();
 
 			for (int i = 1; i < fallClock.numCalls; fallClock.numCalls--)
@@ -433,7 +353,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 
 				if ((startPosition.x == travel.x && startPosition.y == travel.y))
 				{
-					pane->console->setChar(renderPosition.x, renderPosition.y, '*'); //muzzle flash ??
+					pane->console->setChar(renderPosition.x, renderPosition.y, '*'); //muzzle flash
 				}
 				else
 				{
@@ -581,151 +501,6 @@ void Firearm::updateToolPosition(double angle)
 			}
 		}
 	}
-
-	//if (dx >= 0 && dy >= 0) //04
-	//{
-	//	if (angle <= 22.5)
-	//	{
-	//		if (!(reloadClock.numCalls >= 0))
-	//		{
-	//			ch = '/';
-	//		}
-	//		else
-	//		{
-	//			ch = TCOD_CHAR_HLINE;
-	//		}
-	//	}
-	//	else if (angle >= 22.5 && angle <= 67.5)
-	//	{
-	//		if (!(reloadClock.numCalls >= 0))
-	//		{
-	//			ch = TCOD_CHAR_HLINE;
-	//		}
-	//		else
-	//		{
-	//			ch = '\\';
-	//		}
-	//	}
-	//	else if (angle >= 67.5)
-	//	{
-	//		if (!(reloadClock.numCalls >= 0))
-	//		{
-	//			ch = '\\';
-	//		}
-	//		else
-	//		{
-	//			ch = TCOD_CHAR_VLINE;
-	//		}
-	//	}
-	//}
-	//else if (dx >= 0 && dy <= 0) //01
-	//{
-	//	if (angle >= -22.5)
-	//	{
-	//		if (!(reloadClock.numCalls >= 0))
-	//		{
-	//			ch = '/';
-	//		}
-	//		else
-	//		{
-	//			ch = TCOD_CHAR_HLINE;
-	//		}
-	//	}
-	//	else if (angle <= -22.5 && angle >= -67.5)
-	//	{
-	//		if (!(reloadClock.numCalls >= 0))
-	//		{
-	//			ch = TCOD_CHAR_VLINE;
-	//		}
-	//		else
-	//		{
-	//			ch = '/';
-	//		}
-	//	}
-	//	else if (angle <= -67.5)
-	//	{
-	//		if (!(reloadClock.numCalls >= 0))
-	//		{
-	//			ch = '\\';
-	//		}
-	//		else
-	//		{
-	//			ch = TCOD_CHAR_VLINE;
-	//		}
-	//	}
-	//}
-	//else if (dx <= 0 && dy >= 0) //02
-	//{
-	//	if (angle >= -22.5)
-	//	{
-	//		if (!(reloadClock.numCalls >= 0))
-	//		{
-	//			ch = '/';
-	//		}
-	//		else
-	//		{
-	//			ch = TCOD_CHAR_HLINE;
-	//		}
-	//	}
-	//	else if (angle <= -22.5 && angle >= -67.5)
-	//	{
-	//		if (!(reloadClock.numCalls >= 0))
-	//		{
-	//			ch = TCOD_CHAR_VLINE;
-	//		}
-	//		else
-	//		{
-	//			ch = '/';
-	//		}
-	//	}
-	//	else if (angle <= -67.5)
-	//	{
-	//		if (!(reloadClock.numCalls >= 0))
-	//		{
-	//			ch = '\\';
-	//		}
-	//		else
-	//		{
-	//			ch = TCOD_CHAR_VLINE;
-	//		}
-	//	}
-	//}
-	//else if (dx <= 0 && dy <= 0) //03
-	//{
-	//	if (angle <= 22.5)
-	//	{
-	//		if (!(reloadClock.numCalls >= 0))
-	//		{
-	//			ch = '/';
-	//		}
-	//		else
-	//		{
-	//			ch = TCOD_CHAR_HLINE;
-	//		}
-	//	}
-	//	else if (angle >= 22.5 && angle <= 67.5)
-	//	{
-	//		if (!(reloadClock.numCalls >= 0))
-	//		{
-	//			ch = TCOD_CHAR_HLINE;
-	//		}
-	//		else
-	//		{
-	//			ch = '\\';
-	//		}
-	//	}
-	//	else if (angle >= 67.5)
-	//	{
-	//		if (!(reloadClock.numCalls >= 0))
-	//		{
-	//			ch = '\\';
-	//		}
-	//		else
-	//		{
-	//			ch = TCOD_CHAR_VLINE;
-	//		}
-	//	}
-	//}
 }
 
 std::shared_ptr<MagazineData> Firearm::getMagData()
@@ -772,7 +547,6 @@ void Firearm::reload(std::shared_ptr<MagazineData>& magazine)
 			if (reloadClock.numCalls >= 0.0f) //if it can reload
 			{
 				selectedMagazine = magazine;
-				//reloadClock.numCalls -= reloadTime;
 				reloadClock.addTime(reloadTime);
 			}
 		}
@@ -885,9 +659,6 @@ void Firearm::update(Position4& sourcePosition, int& mx, int& my, double& angle,
 	{
 		reloadClock.tickUp();
 	}
-	
-
-	//updateWeaponChar(angle);
 }
 
 void Firearm::render(const std::shared_ptr<Pane>& pane) const
@@ -915,7 +686,7 @@ void Armor::equip(Armor& armor) //if the passed armor is not equal to the armor 
 	{
 		if (this->defense == armor.defense && this->durability == armor.durability) //if armor is already equipped
 		{
-			armor = Armor("", TCODColor::pink, 0, 0); //Armor("", TCODColor::pink, 0, 0)
+			armor = Armor("", TCODColor::pink, 0, 0);
 		}
 		else
 		{

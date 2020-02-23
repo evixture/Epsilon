@@ -134,35 +134,6 @@ Input::Input()
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &mouse);
 	TCODMouse::showCursor(false);
 
-	/*buttonList.push_back(w = std::make_shared<Key>(sf::Keyboard::W));
-	buttonList.push_back(a = std::make_shared<Key>(sf::Keyboard::A));
-	buttonList.push_back(s = std::make_shared<Key>(sf::Keyboard::S));
-	buttonList.push_back(d = std::make_shared<Key>(sf::Keyboard::D));
-
-	buttonList.push_back(lctrl		= std::make_shared<Key>(sf::Keyboard::LControl));
-	buttonList.push_back(lshift	= std::make_shared<Key>(sf::Keyboard::LShift));
-	buttonList.push_back(lalt		= std::make_shared<Key>(sf::Keyboard::LAlt));
-
-	buttonList.push_back(z = std::make_shared<Key>(sf::Keyboard::Z));
-	buttonList.push_back(x = std::make_shared<Key>(sf::Keyboard::X));
-	buttonList.push_back(c = std::make_shared<Key>(sf::Keyboard::C));
-
-	buttonList.push_back(e = std::make_shared<Key>(sf::Keyboard::E));
-	buttonList.push_back(q = std::make_shared<Key>(sf::Keyboard::Q));
-	buttonList.push_back(r = std::make_shared<Key>(sf::Keyboard::R));
-
-	buttonList.push_back(i = std::make_shared<Key>(sf::Keyboard::I));
-
-	buttonList.push_back(num0 = std::make_shared<Key>(sf::Keyboard::Num0));
-	buttonList.push_back(num9 = std::make_shared<Key>(sf::Keyboard::Num9));
-
-	buttonList.push_back(space		= std::make_shared<Key>(sf::Keyboard::Space));
-	buttonList.push_back(f11		= std::make_shared<Key>(sf::Keyboard::F11));
-	buttonList.push_back(escape	= std::make_shared<Key>(sf::Keyboard::Escape));
-
-	mouseList.push_back(leftMouseButton		= std::make_shared<MouseButton>(sf::Mouse::Left));
-	mouseList.push_back(rightMouseButton	= std::make_shared<MouseButton>(sf::Mouse::Right));*/
-
 	buttonList.push_back(moveUpKey =			std::make_shared<KeyboardButton>(sf::Keyboard::W));
 	buttonList.push_back(moveDownKey =			std::make_shared<KeyboardButton>(sf::Keyboard::S));
 	buttonList.push_back(moveLeftKey =			std::make_shared<KeyboardButton>(sf::Keyboard::A));

@@ -150,55 +150,6 @@ float getFallTime(int height)
 
 //----------------------------------------------------------------------------------------------------
 
-//Clock Struct
-//Clock::Clock(float capacityInSeconds, float step)
-//	:capacity(capacityInSeconds), step(step), score(1)
-//{}
-//
-//void Clock::update(bool tickUp, bool resetAtZero)
-//{
-//	if (tickUp)
-//	{
-//		if (step > 0.0f)
-//		{
-//			step -= SETTINGS->lastFrameTime.asSeconds();
-//		}
-//	}
-//	if (step <= 0.0f) //should loop while step + capacity is less than capacity
-//	{
-//		if (resetAtZero)
-//		{
-//			if (capacity != 0.0f)
-//			{
-//				//while step + capacity < 0, add 1 to score
-//				//in class, while clock score is greater than 0, update extra time, --score
-//				//score = 0; //need to prevent overflow??
-//				//while (step <= 0)
-//				//{
-//				//	step += capacity;
-//				//	++score; //should = 1 on base reset, if greater, used to call extra times
-//				//}
-//
-//				while (step <= 0)
-//				{
-//					step += capacity;
-//					++score; //how many extra times that the function needs to be called
-//				}
-//
-//			}
-//		}
-//	}
-//}
-//
-////bool Clock::isAtZero()
-//{
-//	if (step <= 0.0f)
-//	{
-//		return true;
-//	}
-//	return false;
-//}
-
 MagazineData::MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid)
 	:isValid(isValid), ammoType(ammoType), ammoCapacity(ammoCapacity), availableAmmo(availableAmmo)
 {}
@@ -215,7 +166,6 @@ void Clock::tickUp()
 
 void Clock::addTime(float seconds)
 {
-	//numCalls -= seconds / SETTINGS->lastFrameTime.asSeconds();
 	numCalls -= seconds / timeBetweenUpdates;
 }
 

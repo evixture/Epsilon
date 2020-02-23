@@ -39,7 +39,7 @@ void StatusWindow::update()
 
 	if (displayArmor != WORLD->debugmap->player->equippedArmor.defense)
 	{
-		displayArmor =  WORLD->debugmap->player->equippedArmor.defense; //300 div def??
+		displayArmor =  WORLD->debugmap->player->equippedArmor.defense;
 	}
 }
 
@@ -184,12 +184,6 @@ void InventoryWindow::render() const
 SplashWindow::SplashWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 	:Window(consoleWidth, consoleHeight, "EPSILON", rx, ry), menu(Menu(std::vector<std::string>{"Start", "Exit"}))
 {
-	//menu = Menu(std::vector<std::string>{"Start", "Exit"});
-
-	//menuItemList.push_back("Start");
-	//menuItemList.push_back("Exit");
-	//
-	//menuSelection = menuItemList[menuIndex];
 }
 
 void SplashWindow::update()

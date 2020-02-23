@@ -22,44 +22,6 @@ Creature::Creature(Position4 position, int ch, std::string name, TCODColor color
 {
 }
 
-//void Creature::takeDamage(Bullet* bullet)
-//{
-//	//if (equippedArmor.durability > 0) //if the armor durability is high enough
-//	//{
-//	//	if (bullet->currentVelocity - equippedArmor.defense > 0) //if bullet is fast enough to pass through armor
-//	//	{
-//	//		equippedArmor.durability -= bullet->currentVelocity; //should happen before taking damage to prevent high damage
-//	//		bullet->currentVelocity -= equippedArmor.defense;
-//
-//	//		health -= int(float(bullet->currentVelocity / (bullet->baseVelocity * 2.0f)) * bullet->mass);
-//
-//	//		bullet->currentVelocity -= 100; //slowdown after going through body
-//	//	}
-//	//	else if (bullet->currentVelocity - equippedArmor.defense <= 0) //if the bullet is stopped by the armor
-//	//	{
-//	//		equippedArmor.durability -= bullet->currentVelocity;
-//	//		bullet->currentVelocity = 0;
-//	//	}
-//
-//	//	if (equippedArmor.durability < 0)
-//	//	{
-//	//		equippedArmor.durability = 0;
-//	//	}
-//	//}
-//	//else
-//	//{
-//	//	int damage = int(float(bullet->currentVelocity / (bullet->baseVelocity * 2.0f)) * bullet->mass);
-//	//	health -= damage;
-//
-//	//	bullet->currentVelocity -= 100; //slowdown after going through body
-//	//}
-//
-//	//if (health < 0)
-//	//{
-//	//	health = 0;
-//	//}
-//}
-
 void Creature::update()
 {
 	angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx, engine->settings->input->mouse.cy);
@@ -424,6 +386,48 @@ void Player::useMelee()
 	selectedItem->tool->useMelee();
 }
 
+void Player::updateTools()
+{
+	if (inventory.size() > 0)
+	{
+		for (int i = 0; i < inventory.size(); i++)
+		{
+			if (itemIndex == -1 && containerIndex == i) //if container is the held item
+			{
+				//special update the held container
+				inventory[i]->containerItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
+			}
+			else
+			{
+				//normal update the container
+				inventory[i]->containerItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
+			}
+
+			for (int j = 0; j < inventory[i]->itemList.size(); j++) //stops when i gets to empty container list
+			{
+				if (itemIndex != -1)
+				{
+					if (itemIndex == j && containerIndex == i)
+					{
+						//special update held item
+						inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
+					}
+					else
+					{
+						//normal update the item
+						inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
+					}
+				}
+			}
+
+		}
+	}
+	else
+	{
+		selectedItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
+	}
+}
+
 void Player::update()
 {
 	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
@@ -477,82 +481,7 @@ void Player::update()
 		
 		angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
 		
-		/*
-		for containers in inventory
-			if held item is the container item
-			//
-
-			else
-				for items in container inventory
-					if i and j is same as indexes
-
-
-					if (containerIndex != -1) //if a container is selected
-					{
-						if (containerIndex == i && itemIndex == -1) //if the container item is selected
-						{
-							//update selected container item
-							GUI->logWindow->pushMessage(LogWindow::Message("update selected container item", LogWindow::Message::MessageLevel::LOW));
-						}
-						else if (i == containerIndex && j == itemIndex)
-						{
-							//update selected item
-							GUI->logWindow->pushMessage(LogWindow::Message("update selected item", LogWindow::Message::MessageLevel::LOW));
-						}
-
-						//update other items
-			//1, -1		}
-
-			backpack1	0 -1
-			sir45		0 0
-			magazine	0 1
-			backpack2	1 -1
-
-
-		*/
-
-		if (inventory.size() > 0)
-		{
-			for (int i = 0; i < inventory.size(); i++)
-			{
-				if (itemIndex == -1 && containerIndex == i) //if container is the held item
-				{
-					//spec update the held container
-					//GUI->logWindow->pushMessage(LogWindow::Message("update selected container item", LogWindow::Message::MessageLevel::LOW));
-					inventory[i]->containerItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
-				}
-				else
-				{
-					//normal update the container
-					inventory[i]->containerItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
-				}
-			
-				for (int j = 0; j < inventory[i]->itemList.size(); j++) //stops when i gets to empty container list
-				{
-					if (itemIndex != -1)
-					{
-						if (itemIndex == j && containerIndex == i)
-						{
-							inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
-							//spec update held item
-							//GUI->logWindow->pushMessage(LogWindow::Message("update selected item", LogWindow::Message::MessageLevel::LOW));
-						}
-						else
-						{
-							//normal update the item
-							inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
-						}
-					}
-				}
-			
-			}
-		}
-		else
-		{
-			selectedItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
-		}
-
-		//selectedItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle);
+		updateTools();
 		
 		if (INPUT->reloadKey->isSwitched)
 		{
