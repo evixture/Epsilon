@@ -267,14 +267,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.h</FILENAME>
-      <LINE>19</LINE>
+      <LINE>21</LINE>
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'KeyboardButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>KeyboardButton::{ctor}</FUNCTION>
     <DECORATED>??0KeyboardButton@@QEAA@XZ</DECORATED>
-    <FUNCLINE>19</FUNCLINE>
+    <FUNCLINE>21</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>KeyboardButton::button</targetSymbol>
     </ADDITIONALINFO>
@@ -284,14 +284,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.h</FILENAME>
-      <LINE>29</LINE>
+      <LINE>31</LINE>
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'MouseButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>MouseButton::{ctor}</FUNCTION>
     <DECORATED>??0MouseButton@@QEAA@XZ</DECORATED>
-    <FUNCLINE>29</FUNCLINE>
+    <FUNCLINE>31</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>MouseButton::button</targetSymbol>
     </ADDITIONALINFO>

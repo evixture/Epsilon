@@ -67,6 +67,40 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
+    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
+    <FUNCLINE>77</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>TCODBsp::w</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
+      <FILENAME>bsp.hpp</FILENAME>
+      <LINE>77</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
+    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
+    <FUNCLINE>77</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>TCODBsp::y</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
+      <FILENAME>bsp.hpp</FILENAME>
+      <LINE>77</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>TCODBsp::{ctor}</FUNCTION>
     <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
@@ -101,23 +135,6 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
-    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
-    <FUNCLINE>77</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>TCODBsp::w</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
-      <FILENAME>bsp.hpp</FILENAME>
-      <LINE>77</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'TCODBsp::horizontal' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>TCODBsp::{ctor}</FUNCTION>
     <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
@@ -141,23 +158,6 @@
     <FUNCLINE>77</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>TCODBsp::h</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
-      <FILENAME>bsp.hpp</FILENAME>
-      <LINE>77</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
-    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
-    <FUNCLINE>77</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>TCODBsp::y</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -267,14 +267,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.h</FILENAME>
-      <LINE>19</LINE>
+      <LINE>21</LINE>
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'KeyboardButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>KeyboardButton::{ctor}</FUNCTION>
     <DECORATED>??0KeyboardButton@@QEAA@XZ</DECORATED>
-    <FUNCLINE>19</FUNCLINE>
+    <FUNCLINE>21</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>KeyboardButton::button</targetSymbol>
     </ADDITIONALINFO>
@@ -284,14 +284,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.h</FILENAME>
-      <LINE>29</LINE>
+      <LINE>31</LINE>
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'MouseButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>MouseButton::{ctor}</FUNCTION>
     <DECORATED>??0MouseButton@@QEAA@XZ</DECORATED>
-    <FUNCLINE>29</FUNCLINE>
+    <FUNCLINE>31</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>MouseButton::button</targetSymbol>
     </ADDITIONALINFO>

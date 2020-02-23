@@ -267,14 +267,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.h</FILENAME>
-      <LINE>19</LINE>
+      <LINE>21</LINE>
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'KeyboardButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>KeyboardButton::{ctor}</FUNCTION>
     <DECORATED>??0KeyboardButton@@QEAA@XZ</DECORATED>
-    <FUNCLINE>19</FUNCLINE>
+    <FUNCLINE>21</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>KeyboardButton::button</targetSymbol>
     </ADDITIONALINFO>
@@ -284,14 +284,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.h</FILENAME>
-      <LINE>29</LINE>
+      <LINE>31</LINE>
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'MouseButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>MouseButton::{ctor}</FUNCTION>
     <DECORATED>??0MouseButton@@QEAA@XZ</DECORATED>
-    <FUNCLINE>29</FUNCLINE>
+    <FUNCLINE>31</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>MouseButton::button</targetSymbol>
     </ADDITIONALINFO>
@@ -301,70 +301,70 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>139</LINE>
+      <LINE>136</LINE>
       <COLUMN>23</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Map::createBlockMap</FUNCTION>
     <DECORATED>?createBlockMap@Map@@AEAA_NAEAVxml_node@pugi@@@Z</DECORATED>
-    <FUNCLINE>131</FUNCLINE>
+    <FUNCLINE>128</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>153</LINE>
+      <LINE>150</LINE>
       <COLUMN>40</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Map::createBlockMap</FUNCTION>
     <DECORATED>?createBlockMap@Map@@AEAA_NAEAVxml_node@pugi@@@Z</DECORATED>
-    <FUNCLINE>131</FUNCLINE>
+    <FUNCLINE>128</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>472</LINE>
+      <LINE>466</LINE>
       <COLUMN>56</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getTile</FUNCTION>
     <DECORATED>?getTile@World@@QEBA?AV?$shared_ptr@UBlock@@@std@@UPosition3@@@Z</DECORATED>
-    <FUNCLINE>468</FUNCLINE>
+    <FUNCLINE>462</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>482</LINE>
+      <LINE>476</LINE>
       <COLUMN>56</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::isExplored</FUNCTION>
     <DECORATED>?isExplored@World@@QEBA_NAEAUPosition3@@@Z</DECORATED>
-    <FUNCLINE>480</FUNCLINE>
+    <FUNCLINE>474</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>487</LINE>
+      <LINE>481</LINE>
       <COLUMN>55</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::getBgColor</FUNCTION>
     <DECORATED>?getBgColor@World@@QEBA?AVTCODColor@@AEAUPosition3@@@Z</DECORATED>
-    <FUNCLINE>485</FUNCLINE>
+    <FUNCLINE>479</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

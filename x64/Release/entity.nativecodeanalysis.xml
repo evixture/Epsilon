@@ -267,14 +267,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.h</FILENAME>
-      <LINE>19</LINE>
+      <LINE>21</LINE>
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'KeyboardButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>KeyboardButton::{ctor}</FUNCTION>
     <DECORATED>??0KeyboardButton@@QEAA@XZ</DECORATED>
-    <FUNCLINE>19</FUNCLINE>
+    <FUNCLINE>21</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>KeyboardButton::button</targetSymbol>
     </ADDITIONALINFO>
@@ -284,14 +284,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>input.h</FILENAME>
-      <LINE>29</LINE>
+      <LINE>31</LINE>
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'MouseButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>MouseButton::{ctor}</FUNCTION>
     <DECORATED>??0MouseButton@@QEAA@XZ</DECORATED>
-    <FUNCLINE>29</FUNCLINE>
+    <FUNCLINE>31</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>MouseButton::button</targetSymbol>
     </ADDITIONALINFO>
@@ -301,84 +301,84 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>229</LINE>
+      <LINE>191</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorUp</FUNCTION>
     <DECORATED>?moveSelectorUp@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>211</FUNCLINE>
+    <FUNCLINE>173</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>241</LINE>
+      <LINE>203</LINE>
       <COLUMN>16</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>237</FUNCLINE>
+    <FUNCLINE>199</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>245</LINE>
+      <LINE>207</LINE>
       <COLUMN>21</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>237</FUNCLINE>
+    <FUNCLINE>199</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>254</LINE>
+      <LINE>216</LINE>
       <COLUMN>18</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>237</FUNCLINE>
+    <FUNCLINE>199</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>340</LINE>
+      <LINE>302</LINE>
       <COLUMN>20</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>331</FUNCLINE>
+    <FUNCLINE>293</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>353</LINE>
+      <LINE>315</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@QEAAXXZ</DECORATED>
-    <FUNCLINE>331</FUNCLINE>
+    <FUNCLINE>293</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>
