@@ -152,7 +152,10 @@ bool Map::createBlockMap(pugi::xml_node& dataNode)
 				levelList[floor].push_back(getTileFromCode(code));
 			}
 		}
-		return true;
+		if (levelList.size() == totalFloors && levelList[totalFloors - 1].size() == width * height)
+		{
+			return true;
+		}
 	}
 	return false;
 }
