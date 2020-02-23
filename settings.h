@@ -20,8 +20,8 @@ struct Settings //settings class that hold most of the settings for the game and
 	int screenCharWidth; //total width of root window in characters
 	int screenCharHeight; //total height of root window in characters
 
-	sf::Clock systemClock;
-	sf::Time lastFrameTime;
+	sf::Clock systemClock; //sytem clock used to get the last frame time
+	sf::Time lastFrameTime; //the time between the last frame and the current frame
 
 	unsigned int fpsCount; //the amount of frames pushed in the last second increment
 

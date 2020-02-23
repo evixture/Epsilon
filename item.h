@@ -35,14 +35,14 @@ struct Item //an item that a creature can hold and interact with
 	unsigned char size; //size that the item tekes up in the inventory
 	double distToEnt; //the distance from the player to the item, used to highlight the item when the player is in proximity
 	
-	TCODColor barColor;
+	TCODColor barColor; //color of the bar to render on the side of the inventory
 
 	Position4 mapPosition; //the position of the item on the map
 
 	std::shared_ptr<Block> tile; //the tile component used when the item is on the map
 	std::shared_ptr<Tool> tool; //the tool component used when the item is in the player's inventory
 
-	Player* owner;
+	Player* owner; //should later be replaced with creature pointer after player methods are moved
 	std::shared_ptr<ActionManager> actionManager; //used to activate more advanced interactions with the item
 
 	void createActionManager(Player* owner); //makes an action manager action list based on the item type
@@ -50,7 +50,7 @@ struct Item //an item that a creature can hold and interact with
 	Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, Player* owner, ItemType type); //item constructor that takes a size, tile, too, position, and a player used for action manager
 
 	virtual std::shared_ptr<MagazineData> getMagazineData(); //used to get the important data of the magazine, returns generic magazine when called from item
-	virtual void changeBarColor();
+	virtual void changeBarColor(); //updates the inventory bar color
 
 	void updateTool(Position4& mapPosition, int mx, int my, double angle, bool isHeld); //updates tool, used when in player inventory
 	void renderTool(const std::shared_ptr<Pane>& pane) const; //renders tool, used then in player inventory

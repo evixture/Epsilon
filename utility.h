@@ -14,7 +14,7 @@ struct Position3 //position struct with x, y, and z dimensions
 
 struct Position4 : public Position3
 {
-	char height;
+	char height; //the height of the creature's view (NOT THE FLOOR)
 
 	Position4() {}
 	Position4(int x, int y, int height, int floor); //position constructor that takes x, y, and floor ints
@@ -43,19 +43,19 @@ private:
 
 struct Clock
 {
-	float numCalls;
-	float timeBetweenUpdates;
+	float numCalls; //the number of calls for the function that uses the clock; is greater than 1 if a function needs to be called multiple times for low fps
+	float timeBetweenUpdates; //the time that should be between each call
 
 	Clock(float timeBetweenUpdates);
 
-	void tickUp();
-	void addTime(float seconds);
+	void tickUp(); //tick up the clock based on the last frame time
+	void addTime(float seconds); //adds time by decreasing the numCalls
 };
 
-unsigned char	heightToBitFlag(int height);
+unsigned char	heightToBitFlag(int height); //translates the height of a creature to be used for a block's enum flag
 double			getAngle(int ix, int iy, int tx, int ty); //gets the angle from 2 sets of coordinates
 double			getDistance(int ix, int iy, int tx, int ty); //gets the distance from 2 sets of coordinates
-float			getFallTime(int height);
+float			getFallTime(int height); //used to get the time to fall for a bullet
 
 struct MagazineData //contains all of the important data for magazines
 {
@@ -71,14 +71,14 @@ struct MagazineData //contains all of the important data for magazines
 
 struct Menu
 {
-	std::string menuSelection;
+	std::string menuSelection; //the name of the menu item that is selected
 
 	Menu(std::vector<std::string> menuList);
 
-	void update();
-	void render(const std::shared_ptr<Pane>& pane, const int rx, const int ry) const;
+	void update(); //updates the menu selection
+	void render(const std::shared_ptr<Pane>& pane, const int rx, const int ry) const; //renders the menu on a pane at render coords
 
 private:
-	unsigned int menuIndex;
-	std::vector<std::string> menuList;
+	unsigned int menuIndex; //the index of the menu selection in the menu list
+	std::vector<std::string> menuList; //the list of all of the posible menu entries
 };

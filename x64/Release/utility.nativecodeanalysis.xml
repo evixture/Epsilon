@@ -61,48 +61,6 @@
   </DEFECT>
   <DEFECT>
     <SFA>
-      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\tileset\</FILEPATH>
-      <FILENAME>observer.h</FILENAME>
-      <LINE>62</LINE>
-      <COLUMN>2</COLUMN>
-    </SFA>
-    <DEFECTCODE>26439</DEFECTCODE>
-    <DESCRIPTION>This kind of function may not throw. Declare it 'noexcept' (f.6).</DESCRIPTION>
-    <FUNCTION>tcod::tileset::TilesetObserver::{ctor}</FUNCTION>
-    <DECORATED>??0TilesetObserver@tileset@tcod@@QEAA@$$QEAV012@@Z</DECORATED>
-    <FUNCLINE>62</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\tileset\</FILEPATH>
-      <FILENAME>observer.h</FILENAME>
-      <LINE>65</LINE>
-      <COLUMN>19</COLUMN>
-    </SFA>
-    <DEFECTCODE>26439</DEFECTCODE>
-    <DESCRIPTION>This kind of function may not throw. Declare it 'noexcept' (f.6).</DESCRIPTION>
-    <FUNCTION>tcod::tileset::TilesetObserver::=</FUNCTION>
-    <DECORATED>??4TilesetObserver@tileset@tcod@@QEAAAEAV012@$$QEAV012@@Z</DECORATED>
-    <FUNCLINE>65</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
-      <FILENAME>mersenne.hpp</FILENAME>
-      <LINE>222</LINE>
-      <COLUMN>14</COLUMN>
-    </SFA>
-    <DEFECTCODE>26812</DEFECTCODE>
-    <DESCRIPTION>The enum type 'TCOD_distribution_t' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
-    <FUNCTION>TCODRandom::setDistribution</FUNCTION>
-    <DECORATED>?setDistribution@TCODRandom@@QEAAXW4TCOD_distribution_t@@@Z</DECORATED>
-    <FUNCLINE>222</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
       <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
       <FILENAME>bsp.hpp</FILENAME>
       <LINE>77</LINE>
@@ -132,6 +90,23 @@
     <FUNCLINE>77</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>TCODBsp::x</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
+      <FILENAME>bsp.hpp</FILENAME>
+      <LINE>77</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
+    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
+    <FUNCLINE>77</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>TCODBsp::w</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -183,23 +158,6 @@
     <FUNCLINE>77</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>TCODBsp::y</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Libtcod\custom-libtcod-master\src\libtcod\</FILEPATH>
-      <FILENAME>bsp.hpp</FILENAME>
-      <LINE>77</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>TCODBsp::{ctor}</FUNCTION>
-    <DECORATED>??0TCODBsp@@QEAA@XZ</DECORATED>
-    <FUNCLINE>77</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>TCODBsp::w</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -279,12 +237,12 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Position3::level' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <DESCRIPTION>Variable 'Position3::floor' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>Position3::{ctor}</FUNCTION>
     <DECORATED>??0Position3@@QEAA@XZ</DECORATED>
     <FUNCLINE>9</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>Position3::level</targetSymbol>
+      <targetSymbol>Position3::floor</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -292,48 +250,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>utility.h</FILENAME>
-      <LINE>22</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Position4::level' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Position4::{ctor}</FUNCTION>
-    <DECORATED>??0Position4@@QEAA@XZ</DECORATED>
-    <FUNCLINE>22</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>Position4::level</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>utility.h</FILENAME>
-      <LINE>22</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Position4::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Position4::{ctor}</FUNCTION>
-    <DECORATED>??0Position4@@QEAA@XZ</DECORATED>
-    <FUNCLINE>22</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>Position4::y</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>utility.h</FILENAME>
-      <LINE>22</LINE>
+      <LINE>19</LINE>
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'Position4::height' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>Position4::{ctor}</FUNCTION>
     <DECORATED>??0Position4@@QEAA@XZ</DECORATED>
-    <FUNCLINE>22</FUNCLINE>
+    <FUNCLINE>19</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>Position4::height</targetSymbol>
     </ADDITIONALINFO>
@@ -342,17 +266,34 @@
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>utility.h</FILENAME>
-      <LINE>22</LINE>
+      <FILENAME>input.h</FILENAME>
+      <LINE>19</LINE>
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Position4::x' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Position4::{ctor}</FUNCTION>
-    <DECORATED>??0Position4@@QEAA@XZ</DECORATED>
-    <FUNCLINE>22</FUNCLINE>
+    <DESCRIPTION>Variable 'KeyboardButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>KeyboardButton::{ctor}</FUNCTION>
+    <DECORATED>??0KeyboardButton@@QEAA@XZ</DECORATED>
+    <FUNCLINE>19</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>Position4::x</targetSymbol>
+      <targetSymbol>KeyboardButton::button</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>input.h</FILENAME>
+      <LINE>29</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'MouseButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>MouseButton::{ctor}</FUNCTION>
+    <DECORATED>??0MouseButton@@QEAA@XZ</DECORATED>
+    <FUNCLINE>29</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>MouseButton::button</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -360,28 +301,28 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>utility.cpp</FILENAME>
-      <LINE>140</LINE>
+      <LINE>135</LINE>
       <COLUMN>27</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>getAngle</FUNCTION>
     <DECORATED>?getAngle@@YANHHHH@Z</DECORATED>
-    <FUNCLINE>138</FUNCLINE>
+    <FUNCLINE>133</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>utility.cpp</FILENAME>
-      <LINE>140</LINE>
+      <LINE>135</LINE>
       <COLUMN>47</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>getAngle</FUNCTION>
     <DECORATED>?getAngle@@YANHHHH@Z</DECORATED>
-    <FUNCLINE>138</FUNCLINE>
+    <FUNCLINE>133</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

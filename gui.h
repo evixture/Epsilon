@@ -17,7 +17,7 @@ struct Gui //contains all of the window panels used for rendering everything tha
 	std::shared_ptr<InventoryFullWindow> inventoryFullWindow; //shows what is in the player's inventory in a larger view
 
 	//Full-screen Windows
-	std::shared_ptr<PauseWindow> pauseWindow;
+	std::shared_ptr<PauseWindow> pauseWindow; //the pause menu that allows changing settings and exiting the game
 	std::shared_ptr<SplashWindow> startupSplashWindow; //the startup main menu that shows initial menu options and the large logo
 
 	Gui(int windowX, int windowY);

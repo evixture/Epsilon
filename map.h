@@ -9,13 +9,11 @@ struct Map //map class that takes a text file and converts it to a vector of til
 	int width; //the width of the map
 	int height; //the height of the map
 
-
-
-	std::shared_ptr<Player> player; //the player														//add to map
-																										//add to map
-	std::vector<std::shared_ptr<Creature>> creatureList; //list of all entities on the map				//add to map
-	std::vector<std::shared_ptr<Item>> mapItemList; //list of all items on the map						//add to map
-	std::vector<std::shared_ptr<Container>> mapContainerList; //list of all containers on the map		//add to map
+	std::shared_ptr<Player> player; //the player													
+																									
+	std::vector<std::shared_ptr<Creature>> creatureList; //list of all entities on the map			
+	std::vector<std::shared_ptr<Item>> mapItemList; //list of all items on the map					
+	std::vector<std::shared_ptr<Container>> mapContainerList; //list of all containers on the map	
 
 	std::vector<std::vector< std::shared_ptr<Block >>> levelList; //list of list of tiles, list of floors->list of tiles
 
@@ -41,7 +39,7 @@ struct World
 	int xOffset; //CHECK the x offset of the rendered portion of the map
 	int yOffset; //CHECK the y offset of the rendered portion of the map
 
-	std::shared_ptr<Map> debugmap;
+	std::shared_ptr<Map> debugmap; //main map used for debugging
 	std::shared_ptr<TCODMap> fovMap; //the part of the map used to calculate the fov
 
 	World(); //world contructor that takes nothing
@@ -56,9 +54,9 @@ struct World
 	bool	isInFov					(Position3 position) const; //returns true if the coordinates are in fov
 	bool	isExplored				(Position3& position) const; //checks if a tile has been explored previously
 
-	void addCreature(std::shared_ptr<Creature> creature);												
-	void addItem(std::shared_ptr<Item> item);															
-	void addContainer(std::shared_ptr<Container> container);
+	void addCreature(std::shared_ptr<Creature> creature); //adds a creature to the current map										
+	void addItem(std::shared_ptr<Item> item); //adds an item to the current map							
+	void addContainer(std::shared_ptr<Container> container); //adds a container to the current map			
 
 	void update(); //updates the map
 

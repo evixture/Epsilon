@@ -283,7 +283,7 @@ void Melee::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Bullet::Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
-	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), hitWall(false), travel(BLine(startPosition.x, startPosition.y, tox, toy)),
+	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), travel(BLine(startPosition.x, startPosition.y, tox, toy)),
 	mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveClock(1.0f / velocity), fallClock(0)//, moveNumCalls(0), fallNumCalls(0)
 {
 	do
@@ -825,7 +825,14 @@ void Firearm::changeBarColor(TCODColor& color)
 {
 	if (selectedMagazine->isValid == true)
 	{
-		color = TCODColor::darkerGreen;
+		if (selectedMagazine->availableAmmo > 0)
+		{
+			color = TCODColor::darkerGreen;
+		}
+		else
+		{
+			color = TCODColor::red;
+		}
 	}
 	else
 	{

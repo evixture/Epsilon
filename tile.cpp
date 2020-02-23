@@ -41,7 +41,6 @@ void Block::destroy(int)
 
 void Block::interact()
 {
-	return;
 }
 
 void Block::render(Position4 renderPosition, const std::shared_ptr<Pane>& pane) const
@@ -111,19 +110,11 @@ bool Destructible::getDestroyed()
 	return destroyed;
 }
 
-void Destructible::interact()
-{
-}
-
 //----------------------------------------------------------------------------------------------------
 
 Stair::Stair(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance)
 	:Block(tileList, transparentFlag, Block::FLOOR, Block::Tag::STAIR), moveDistance(moveDistance)
 {}
-
-void Stair::destroy(int)
-{
-}
 
 void Stair::interact()
 {

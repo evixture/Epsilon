@@ -200,7 +200,8 @@
       <LanguageStandard>Default</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
       <MinimalRebuild>false</MinimalRebuild>
-      <DisableSpecificWarnings>C26812</DisableSpecificWarnings>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>
       </TreatSpecificWarningsAsErrors>
     </ClCompile>
@@ -228,7 +229,8 @@
       <LanguageStandard>Default</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
       <MinimalRebuild>false</MinimalRebuild>
-      <DisableSpecificWarnings>C26812</DisableSpecificWarnings>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>
       </TreatSpecificWarningsAsErrors>
     </ClCompile>

@@ -7,12 +7,12 @@ struct Tool //base class for the holdable component to items
 	TCODColor color; //foreground color of tool
 	unsigned char ch; //character representation of tool
 
-	bool isHeld;
+	bool isHeld; //if the tool is being held by a creature
 
 	MagazineData::AmmoType ammoType; //type of ammo used for weapons
 	
-	Position4 mapPosition;
-	Position4 sourcePosition;
+	Position4 mapPosition; //the position of the tool on the map
+	Position4 sourcePosition; //the position of the creature that is holding the tool
 
 	int dx; //the delta x of the player and the mouse
 	int dy; //the delta y of the player and the mouse
@@ -24,60 +24,55 @@ struct Tool //base class for the holdable component to items
 	Tool(std::string name, TCODColor color, int ch); //constuctor used for generic tool that takes string name, color, and character
 	Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag); 
 
-	virtual std::shared_ptr<MagazineData> getMagData(); //returns the magazine component, only useful for magazines
-
-	virtual void reload(std::shared_ptr<MagazineData>& magazine); //does nothing in tool
-	virtual void changeFireMode();
-	virtual void useMelee();
 	virtual void updateToolPosition(double angle); //takes angle and updates tool position
-
-	virtual void changeBarColor(TCODColor& color);
-
-	virtual void equip(Armor& armor);
-
-	virtual void updatePositions(Position4& sourcePosition, int& mx, int& my, double& angle);
+	virtual void updatePositions(Position4& sourcePosition, int& mx, int& my, double& angle); //updates the position of the tool
 
 	virtual void update(Position4& sourcePosition, int& mx, int& my, double& angle, bool& isHeld); //virtual updates tool
 	virtual void render(const std::shared_ptr<Pane>& pane) const; //virtual renders tool
 
-protected:
-	Position4 renderPosition;
-	unsigned char availibleFireMode;
+	virtual std::shared_ptr<MagazineData> getMagData();				//returns the magazine component, only useful for magazines
+	virtual void reload(std::shared_ptr<MagazineData>& magazine);	//does nothing in tool
+	virtual void changeFireMode();									//does nothing in tool
+	virtual void useMelee();										//does nothing in tool
+	virtual void changeBarColor(TCODColor& color);					//does nothing in tool
+	virtual void equip(Armor& armor);								//does nothing in tool
+
+protected: //derived has access
+	Position4 renderPosition; //the position of the tool in the render window
+	unsigned char availibleFireMode; //bit flag of the availible fire modes
 };
 
 struct Melee : public Tool
 {
-	int bluntDamage;
-	int sharpDamage;
+	int bluntDamage; //the amount of blunt damage done to a creature by something like a sledgehammer or a fist, best against armor but should be overall less
+	int sharpDamage; //the amount of bladed damage done to a creature by something like a knife, not as good against body armor, but should overall be higher
 
 	Melee(Tool tool, int bluntDamage, int sharpDamage);
 
-	void useMelee();
+	void useMelee(); //use the melee weapon
 	
 	virtual void update(Position4& sourcePosition, int& mx, int& my, double& angle, bool& isHeld);
 	virtual void render(const std::shared_ptr<Pane>& pane) const;
 
 private:
-	virtual void doMeleeDamage(std::shared_ptr<Creature>& creature);
+	void doMeleeDamage(std::shared_ptr<Creature>& creature); //deals damage against a creature based on the blunt and sharp damage
 };
 
 struct Bullet //bullet that is fired from firearm
 {
 	unsigned char ch; //character represetation of the bulley
 
-	const short int mass;
+	const short int mass; //the mass of the bullets in grains
 	const short int baseVelocity; //tile movements per second
-	short int currentVelocity;
+	short int currentVelocity; //the current speed of the bullet
 
-	Position4 startPosition;
-	Position4 mapPosition;
-
-	bool hitWall; //if the bullet has made contact with the wall yet
+	Position4 startPosition; //the starting position of the bullet on the map
+	Position4 mapPosition; //the current position of the bullet on the map
 
 	//check if use ref
 	Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass); //constructor that takes character, x and y to start, x and y destination, and map bounds
 
-	void doBulletDamage(std::shared_ptr<Creature>& creature);
+	void doBulletDamage(std::shared_ptr<Creature>& creature); //deals damage to a creature based on the armor, mass, and velocity of the bullet
 
 	void update(); //updates bullet
 	void render(const std::shared_ptr<Pane>& pane) const; //renders bullet
@@ -91,13 +86,10 @@ private:
 
 	BLine travel; //bresanham line that the bullet travels along
 
-	Position4 renderPosition;
+	Position4 renderPosition; //the position of the bullet on the render window
 
 	Clock moveClock;
 	Clock fallClock;
-
-	//float moveNumCalls;
-	//float fallNumCalls;
 };
 
 struct Firearm : public Melee //firearm that fires bullets that interact with the world
@@ -112,9 +104,9 @@ struct Firearm : public Melee //firearm that fires bullets that interact with th
 	std::shared_ptr<MagazineData> getMagData(); //returns the important data of the selected magazine
 
 	void reload(std::shared_ptr<MagazineData>& magazine); //reloads firearm, use from player
-	void changeFireMode();
+	void changeFireMode(); //switches the fire mode
 
-	void changeBarColor(TCODColor& color);
+	void changeBarColor(TCODColor& color); //changes the bar color; red on no magazine, green when reloaded
 
 	void updateToolPosition(double angle); //updates the weapon character //replace with derived updateposition from tool
 
@@ -124,12 +116,6 @@ struct Firearm : public Melee //firearm that fires bullets that interact with th
 private:
 	std::vector<std::shared_ptr<Bullet>> bulletList; //private list of bullets that the fire owns
 
-	//Clock fireClock; //clock that determines when the firearm fires
-	//Clock reloadClock; //clock that determines how long it takes for the firearm to reload
-
-	//float fireNumCalls;
-	//float reloadNumCalls;
-
 	Clock fireClock;
 	Clock reloadClock;
 
@@ -138,27 +124,10 @@ private:
 
 struct Armor : public Tool
 {
-	short int defense;
-	short int durability;
+	short int defense; //the velocity of bullet that the armor can stop
+	short int durability; //the amount of hits based on mass the armor can take
 
 	Armor(std::string name, TCODColor color, int defense, int durability);
 
-	void equip(Armor& armor);
+	void equip(Armor& armor); //applies the armor to the player
 };
-
-/*
-
-BODY ARMOR
-	int defense value
-			based on the tier that the armor is in
-	int durability
-			based on the quality of the armor
-
-	void update()
-
-	void render()
-		uses the tool render function
-
-	void equip armor()
-
-*/

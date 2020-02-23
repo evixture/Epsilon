@@ -54,10 +54,6 @@ struct SplashWindow : public Window //the startup window
 	void render() const; //renders the window
 
 private:
-	//unsigned char menuIndex; //menu selection index
-	//std::string menuSelection; //name of menu item at index
-	//std::vector<std::string> menuItemList; //list of strings of menu names
-
 	Menu menu;
 
 	void renderLargeLogo() const;
@@ -122,19 +118,6 @@ private:
 
 struct PauseWindow : public Window
 {
-	/*
-	
-	Pause Menu : 
-		Settings
-			Input
-				key binds
-			Video
-				
-		Exit
-	
-	*/
-
-
 	PauseWindow(int consoleWidth, int consoleHeight, int rx, int ry);
 
 	void update();
