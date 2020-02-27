@@ -31,6 +31,8 @@ struct PlayerWindow : public Window //player pane that renders player speed and 
 	void render() const; //renders the window
 
 private:
+	void renderSpeedAndStance() const;
+
 	int playerSpeed; //string of player's speed
 	int playerStance; //string of player's stance
 };

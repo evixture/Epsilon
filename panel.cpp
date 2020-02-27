@@ -82,77 +82,53 @@ void PlayerWindow::update()
 {	  
 	playerStance = WORLD->debugmap->player->mapPosition.height;
 
-	if (WORLD->debugmap->player->moveXSpeed == 0 && WORLD->debugmap->player->moveYSpeed == 0) playerSpeed = 0;
+	if (!(INPUT->moveUpKey->isDown) && !(INPUT->moveDownKey->isDown) && !(INPUT->moveLeftKey->isDown) && !(INPUT->moveRightKey->isDown)) playerSpeed = 0;
 	else if (WORLD->debugmap->player->baseMoveTime == .25f) playerSpeed = 3;
 	else if (WORLD->debugmap->player->baseMoveTime == .5f) playerSpeed = 2;
 	else if (WORLD->debugmap->player->baseMoveTime == 1.0f) playerSpeed = 1; //jittery
-
-
-	//if		(WORLD->debugmap->player->mapPosition.height == 1	&& playerStance != "Prone")		playerStance = "Prone";
-	//else if (WORLD->debugmap->player->mapPosition.height == 2 && playerStance != "Crouching") playerStance = "Crouching";
-	//else if (WORLD->debugmap->player->mapPosition.height == 3 && playerStance != "Standing")	playerStance = "Standing";
-	//				
-	//if		(WORLD->debugmap->player->baseMoveTime == .5f		&& playerSpeed != "Walking")	playerSpeed = "Walking";
-	//else if (WORLD->debugmap->player->baseMoveTime == .25f	&& playerSpeed != "Running")	playerSpeed = "Running";
-	//else if (WORLD->debugmap->player->baseMoveTime == 1.0f	&& playerSpeed != "Creeping")	playerSpeed = "Creeping";
 }
 
-void PlayerWindow::render() const
+void PlayerWindow::renderSpeedAndStance() const
 {
-	clearWindow();
-
-	/*
-	
-
-	_
-	| OOO
-	| OOO
-	| OOO
-	_ 
-	x[---]
-	
-	..........
-	*/
-
 	drawWindow->console->setChar(0, 8, CHAR_Table);
-	drawWindow->console->setChar(0, 7, 'a');
-	drawWindow->console->setChar(0, 0, 'a');
+	drawWindow->console->setChar(0, 7, CHAR_BottomSquareBrace);
+	drawWindow->console->setChar(0, 0, CHAR_TopSquareBrace);
 
-	drawWindow->console->setChar(1, 8, 'b');
-	drawWindow->console->setChar(8, 8, 'b');
+	drawWindow->console->setChar(1, 8, '[');
+	drawWindow->console->setChar(8, 8, ']');
 
 
-	for (int x = 0; x < playerSpeed * 2; x++) //draw height graph
+	for (int x = 0; x < playerSpeed * 2; x++) //draw speed graph
 	{
-		drawWindow->console->setChar(x + 2, 8, 'O');
+		drawWindow->console->setChar(x + 2, 8, '=');
+		drawWindow->console->setCharForeground(x + 2, 8, TCODColor::red);
 	}
 
-	for (int y = 0; y < playerStance * 2; y++) //draw speed graph
+	for (int y = 0; y < playerStance * 2; y++) //draw height graph
 	{
-		drawWindow->console->setChar(0, (6 - y), 'O');
+		drawWindow->console->setChar(0, (6 - y), CHAR_VerticalEquals);
+		drawWindow->console->setCharForeground(0, (6 - y), TCODColor::blue);
 	}
 
 	for (int y = 0; y < playerStance * 2; y++)
 	{
 		for (int x = 0; x < playerSpeed * 2; x++)
 		{
-			/*
-			
-			0000
-			0000
-			0000
-			0000
-			0000
-			0000
-			
-			*/
-
 			drawWindow->console->setChar((x + 2), (6 - y), CHAR_Table);
+			drawWindow->console->setCharForeground((x + 2), (6 - y), TCODColor::purple);
 		}
 	}
+}
+
+void PlayerWindow::render() const
+{
+	clearWindow();
+
+	renderSpeedAndStance();
 
 	pushWindow();
 }
+
 
 //----------------------------------------------------------------------------------------------------
 

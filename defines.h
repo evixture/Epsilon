@@ -55,6 +55,11 @@ constexpr auto PI = 3.14159265;
 #define CHAR_Table 20
 #define CHAR_Window 21
 
+//7 8 9
+#define CHAR_BottomSquareBrace 22
+#define CHAR_TopSquareBrace 23
+#define CHAR_VerticalEquals 24
+
 #define CHAR_Pistol 128
 #define CHAR_SMG 129
 #define CHAR_Rifle 130
