@@ -31,8 +31,8 @@ struct PlayerWindow : public Window //player pane that renders player speed and 
 	void render() const; //renders the window
 
 private:
-	std::string playerSpeed; //string of player's speed
-	std::string playerStance; //string of player's stance
+	int playerSpeed; //string of player's speed
+	int playerStance; //string of player's stance
 };
 
 struct InventoryWindow : public Window //inventory pane that renders what is in the player's inventory

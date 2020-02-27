@@ -45,6 +45,47 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 	}
 }
 
+void Creature::move()
+{
+}
+
+void Creature::changeStanceUp()
+{
+}
+
+void Creature::changeStanceDown()
+{
+}
+
+void Creature::pickUpItem()
+{
+}
+
+void Creature::dropItem()
+{
+}
+
+void Creature::reload()
+{
+}
+
+void Creature::changeFireMode()
+{
+}
+
+void Creature::equipArmor()
+{
+}
+
+void Creature::useMelee()
+{
+}
+
+void Creature::updateTools()
+{
+}
+
+
 //----------------------------------------------------------------------------------------------------
 
 Player::Player(Position4 position)
@@ -75,7 +116,7 @@ void Player::move()
 {
 	if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
 	{
-		if (INPUT->moveFastKey->isDown) baseMoveTime = .25f;
+		if (INPUT->moveFastKey->isDown)			baseMoveTime = .25f;
 		else if (INPUT->moveSlowKey->isDown)	baseMoveTime = 1.0f;
 		else baseMoveTime = .5f;
 
@@ -434,7 +475,6 @@ void Player::update()
 
 	if (health > 0) //if player is alive
 	{
-		move();
 		
 		if (INPUT->mouse.wheel_up || INPUT->mouse.wheel_down)
 		{
@@ -495,6 +535,9 @@ void Player::update()
 				WORLD->getTile(mapPosition)->interact();
 			}
 		}
+
+		move();
+
 	}
 
 	if (INPUT->debug2Key->isSwitched)
@@ -517,3 +560,4 @@ void Player::render(const std::shared_ptr<Pane>& pane) const
 
 	selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
 }
+

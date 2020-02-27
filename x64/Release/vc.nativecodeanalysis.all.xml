@@ -589,7 +589,7 @@
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorUp</FUNCTION>
-    <DECORATED>?moveSelectorUp@Player@@QEAAXXZ</DECORATED>
+    <DECORATED>?moveSelectorUp@Player@@AEAAXXZ</DECORATED>
     <FUNCLINE>173</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
@@ -602,7 +602,7 @@
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
-    <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
+    <DECORATED>?moveSelectorDown@Player@@AEAAXXZ</DECORATED>
     <FUNCLINE>199</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
@@ -615,7 +615,7 @@
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
-    <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
+    <DECORATED>?moveSelectorDown@Player@@AEAAXXZ</DECORATED>
     <FUNCLINE>199</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
@@ -628,7 +628,7 @@
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
-    <DECORATED>?moveSelectorDown@Player@@QEAAXXZ</DECORATED>
+    <DECORATED>?moveSelectorDown@Player@@AEAAXXZ</DECORATED>
     <FUNCLINE>199</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
@@ -641,7 +641,7 @@
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
-    <DECORATED>?filterIndexes@Player@@QEAAXXZ</DECORATED>
+    <DECORATED>?filterIndexes@Player@@AEAAXXZ</DECORATED>
     <FUNCLINE>293</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
@@ -654,7 +654,7 @@
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
-    <DECORATED>?filterIndexes@Player@@QEAAXXZ</DECORATED>
+    <DECORATED>?filterIndexes@Player@@AEAAXXZ</DECORATED>
     <FUNCLINE>293</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>

@@ -35,32 +35,44 @@ struct Creature : public Entity //creature base used for player and other beings
 
 	Creature(Position4 pos, int ch, std::string name, TCODColor color, int health, Armor armor); //creature constructor that takes a position, character, string name, color, health, and armor
 
-	//virtual void moveSelectorUp() = 0; //moves the selector up on the inventory
-	//virtual void moveSelectorDown() = 0; //moves the selector down on the inventory
-	//virtual void pickUpItem() = 0; //picks up the item on the ground
-	//virtual void dropItem() = 0; //drops the selected item
-	//virtual void filterIndexes() = 0; //filters the container and item indexes to make sure they are in range
-	//virtual void reload() = 0; //reloads the selected item
-	//void takeDamage(Bullet* bullet);
+	//movement
+	virtual void move();
+	virtual void changeStanceUp(); //need?
+	virtual void changeStanceDown(); //need?
+
+	//world interact
+	virtual void pickUpItem();
+	virtual void dropItem();
+
+	//actions
+	virtual void reload();
+	virtual void changeFireMode();
+	virtual void equipArmor();
+	virtual void useMelee();
+
+	virtual void updateTools();
+
+	//need to include functions that only calls from selected item?
 
 	virtual void update(); //virtual updates the creature
-	void virtual render(const std::shared_ptr<Pane>& pane) const; // virtual renders the creature
+	virtual void render(const std::shared_ptr<Pane>& pane) const; // virtual renders the creature
 };
 
 struct Player : public Creature //player derived creature that the player interacts through
 {
 	float baseMoveTime; //time before the player moves a unit
 
+	char moveXSpeed; //the amount that the player moves in the x dimension
+	char moveYSpeed; //the amount that the player moves in the y dimension
+
 	Player(Position4 pos); //player constructor that takes a position
 
+	//movement
 	void move();
 	void changeStanceUp();
 	void changeStanceDown();
 
-	void moveSelectorUp(); //moves the selector up on the inventory
-	void moveSelectorDown(); //moves the selector down on the inventory
-	void filterIndexes(); //filters the container and item indexes to make sure they are in range
-
+	//world interact
 	void pickUpItem(); //picks up the item on the ground
 	void dropItem(); //drops the selected item
 
@@ -76,9 +88,11 @@ struct Player : public Creature //player derived creature that the player intera
 	void render(const std::shared_ptr<Pane>& pane) const; //renders the player
 
 private:
+	void moveSelectorUp(); //moves the selector up on the inventory
+	void moveSelectorDown(); //moves the selector down on the inventory
+	void filterIndexes(); //filters the container and item indexes to make sure they are in range
+
 	float moveSpeed;
 	Clock moveClock;
 
-	char moveXSpeed; //the amount that the player moves in the x dimension
-	char moveYSpeed; //the amount that the player moves in the y dimension
 };

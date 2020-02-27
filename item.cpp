@@ -114,7 +114,7 @@ void Item::createActionManager(Player* owner)
 	else
 	{
 		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
-			std::shared_ptr<Action>(std::make_shared<Action>("ERROR", std::bind(&Player::filterIndexes, owner), Action::Type::DROP))
+			std::shared_ptr<Action>(std::make_shared<Action>("ERROR", std::bind(&Player::equipArmor, owner), Action::Type::EQUIP))
 		});
 	}
 }
