@@ -79,13 +79,13 @@ PlayerWindow::PlayerWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 {}
 
 void PlayerWindow::update()
-{	  
+{
 	playerStance = WORLD->debugmap->player->mapPosition.height;
 
 	if (!(INPUT->moveUpKey->isDown) && !(INPUT->moveDownKey->isDown) && !(INPUT->moveLeftKey->isDown) && !(INPUT->moveRightKey->isDown)) playerSpeed = 0;
 	else if (WORLD->debugmap->player->baseMoveTime == .25f) playerSpeed = 3;
 	else if (WORLD->debugmap->player->baseMoveTime == .5f) playerSpeed = 2;
-	else if (WORLD->debugmap->player->baseMoveTime == 1.0f) playerSpeed = 1; //jittery
+	else if (WORLD->debugmap->player->baseMoveTime == 1.0f) playerSpeed = 1;
 }
 
 void PlayerWindow::renderSpeedAndStance() const
@@ -114,7 +114,7 @@ void PlayerWindow::renderSpeedAndStance() const
 	{
 		for (int x = 0; x < playerSpeed * 2; x++)
 		{
-			drawWindow->console->setChar((x + 2), (6 - y), CHAR_Table);
+			drawWindow->console->setChar((x + 2), (6 - y), '\\');
 			drawWindow->console->setCharForeground((x + 2), (6 - y), TCODColor::purple);
 		}
 	}
@@ -213,13 +213,54 @@ void InventoryWindow::render() const
 //----------------------------------------------------------------------------------------------------
 
 SplashWindow::SplashWindow(int consoleWidth, int consoleHeight, int rx, int ry)
-	:Window(consoleWidth, consoleHeight, "EPSILON", rx, ry), menu(Menu(std::vector<std::string>{"Start", "Exit"}))
+	:Window(consoleWidth, consoleHeight, "EPSILON", rx, ry), menu(Menu(std::vector<std::string>{"Start", "Exit"})), slashClock(Clock(.03f)), numSlashIndexes(57) //best at higher numbers
 {
+	for (int i = 0; i < (drawWindow->consoleWidth * drawWindow->consoleHeight) / 4; i++)
+	{
+		slashList.push_back(0);
+	}
+
+	
+	for (int i = 0; i < numSlashIndexes; i++)
+	{
+		int val;
+
+		if (i == 0) val = 0;
+		else
+		{
+			val = (slashList.size() / numSlashIndexes) * i;
+		}
+
+		slashIndexList.push_back(val);
+	}
 }
 
 void SplashWindow::update()
 {
-	//menu update
+	slashClock.tickUp();
+
+	for (int i = 1; i <= slashClock.numCalls; slashClock.numCalls--)
+	{
+		for (auto& index : slashIndexList)
+		{
+			slashList[index]++;
+
+			if (slashList[index] > 3)
+			{
+				slashList[index] = 0;
+			}
+		
+			if (index + 1 < slashList.size())
+			{
+				index++;
+			}
+			else
+			{
+				index = 0;
+			}
+		}
+	}
+
 	menu.update();
 
 	if (INPUT->worldInteractKey->isSwitched)
@@ -257,6 +298,41 @@ void SplashWindow::renderMenuOptions() const
 void SplashWindow::render() const
 {
 	clearWindow();
+
+	int slashWidth = ((drawWindow->consoleWidth / 2) - (drawWindow->consoleWidth % 2));
+	int slashHeight = ((drawWindow->consoleHeight / 2) - (drawWindow->consoleHeight % 2));
+
+	for (int y = 0; y < slashHeight; y++)
+	{
+		for (int x = 0; x < slashWidth; x++)
+		{
+			if (((x < 46 / 2) || (x > 60 / 2)) || ((y < 18 / 2) || (y > 28 / 2))) /*not in logo*/
+			{
+				if (((x < 48 / 2) || (x > 58 / 2)) || ((y < 48 / 2) || (y > 52 / 2))) /*not in menu options*/
+				{
+					switch (slashList[x + y * slashWidth])
+					{
+					case 0:
+						drawWindow->console->setChar(1 + (x * 2), 1 + (y * 2), '|');
+						drawWindow->console->setCharForeground(1 + (x * 2), 1 + (y * 2), TCODColor::darkerGrey);
+						break;
+					case 1:
+						drawWindow->console->setChar(1 + (x * 2), 1 + (y * 2), '/');
+						drawWindow->console->setCharForeground(1 + (x * 2), 1 + (y * 2), TCODColor::darkerGrey);
+						break;
+					case 2:
+						drawWindow->console->setChar(1 + (x * 2), 1 + (y * 2), '-');
+						drawWindow->console->setCharForeground(1 + (x * 2), 1 + (y * 2), TCODColor::darkerGrey);
+						break;
+					case 3:
+						drawWindow->console->setChar(1 + (x * 2), 1 + (y * 2), '\\');
+						drawWindow->console->setCharForeground(1 + (x * 2), 1 + (y * 2), TCODColor::darkerGrey);
+						break;
+					}
+				}
+			}
+		}
+	}
 
 	renderLargeLogo();
 	renderMenuOptions();

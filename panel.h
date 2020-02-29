@@ -50,6 +50,7 @@ private:
 
 struct SplashWindow : public Window //the startup window
 {
+
 	SplashWindow(int consoleWidth, int consoleHeight, int rx, int ry); //window constructor that takes console width and heightm and render coordinates
 
 	void update(); //updates the window
@@ -57,6 +58,13 @@ struct SplashWindow : public Window //the startup window
 
 private:
 	Menu menu;
+
+	std::vector<char> slashList;
+
+	const int numSlashIndexes;
+	std::vector<int> slashIndexList;
+
+	Clock slashClock;
 
 	void renderLargeLogo() const;
 	void renderMenuOptions() const;

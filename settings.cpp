@@ -45,7 +45,7 @@ void Settings::printLogo() const
 
 void Settings::printDebugStats() const
 {
-	TCODConsole::root->printf(10, 0, "FPS>%i | Mouse %i, %i | Player %i, %i %i | winfoc>%i | lft>%f | ii %i | ci %i | angle %f",
+	TCODConsole::root->printf(10, 0, "FPS>%i | Mouse %i, %i | Player %i, %i, %i | winfoc>%i | lft>%f | ii %i | ci %i | angle %f",
 		fpsCount,
 		SETTINGS->input->mouse.cx,
 		SETTINGS->input->mouse.cy,
