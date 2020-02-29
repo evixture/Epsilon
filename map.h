@@ -40,7 +40,7 @@ struct World
 	int yOffset; //CHECK the y offset of the rendered portion of the map
 
 	std::shared_ptr<Map> debugmap; //main map used for debugging
-	std::shared_ptr<TCODMap> fovMap; //the part of the map used to calculate the fov
+	std::vector<std::shared_ptr<TCODMap>> fovMapList; //the part of the map used to calculate the fov
 
 	World(); //world contructor that takes nothing
 
@@ -51,7 +51,7 @@ struct World
 	bool    getWalkability			(Position4 position, bool checkCreatures) const; //gets the walkability of a tile
 	bool	getSolidity				(Position4& position) const;
 	bool	inMapBounds				(Position3& position) const; //checks if the coordinates are in the map bounds
-	bool	isInFov					(Position3 position) const; //returns true if the coordinates are in fov
+	bool	isInFov					(Position4 position) const; //returns true if the coordinates are in fov
 	bool	isExplored				(Position3& position) const; //checks if a tile has been explored previously
 
 	void addCreature(std::shared_ptr<Creature> creature); //adds a creature to the current map										
@@ -65,7 +65,7 @@ struct World
 private:
 	int getOffset		(int playerx, int mapw, int renderw); //returns the map offset
 
-	void computeFov();  //computes the fov map
+	void computeFov(Position4 mapPosition);  //computes the fov map
 	void updateProperties(); //updates tcod map properties
 
 	void updateEntities(); //updates all entities

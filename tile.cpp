@@ -43,7 +43,7 @@ void Block::interact()
 void Block::render(Position4 renderPosition, const std::shared_ptr<Pane>& pane) const
 {
 	//if player height it greater than tallest nontransparent tile, render the tallest tile's data, else render tile on player's floor
-	Position3 position = Position3(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.floor);
+	Position4 position = Position4(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.height, renderPosition.floor);
 	std::shared_ptr<Tile> tile = getTileData(renderPosition.height);
 
 		if (WORLD->isInFov(position))

@@ -459,7 +459,12 @@ World::World()
 {
 	debugmap = std::make_shared<Map>("data/maps/debugmap.xml");
 
-	fovMap = std::make_shared<TCODMap>(debugmap->width, debugmap->height);
+	for (int i = 0; i < 3; i++)
+	{
+		fovMapList.push_back(std::make_shared<TCODMap>(debugmap->width, debugmap->height)); //71 * 70 = 4970 * 3 = 14910 total tiles to update each cycle
+		//fovMapList = std::make_shared<TCODMap>(debugmap->width, debugmap->height);
+	}
+
 }
 
 std::shared_ptr<Block> World::getTile(Position3 position) const
@@ -538,7 +543,7 @@ bool World::getWalkability(Position4 position, bool checkCreatures) const
 	{
 		for (auto& creature : debugmap->creatureList)
 		{
-			if (position.x == creature->mapPosition.x && position.y == creature->mapPosition.y)
+			if (position.floor == creature->mapPosition.floor && position.x == creature->mapPosition.x && position.y == creature->mapPosition.y)
 			{
 				if (creature->health > 0)
 				{
@@ -586,28 +591,47 @@ bool World::getTransparency(Position4& position) const
 
 void World::updateProperties()
 {
-	for (int y = 0; y < debugmap->height; ++y)
+	Position4 position;
+
+	for (int h = 0; h < 3; h++)
 	{
-		for (int x = 0; x < debugmap->width; ++x)
+		for (int y = 0; y < debugmap->height; ++y)
 		{
-			Position4 position = Position4(x, y, debugmap->player->mapPosition.height, debugmap->player->mapPosition.floor);
-			fovMap->setProperties(x, y, getTransparency(position), getWalkability(position, true));
+			for (int x = 0; x < debugmap->width; ++x)
+			{
+				position = Position4(x, y, h, debugmap->player->mapPosition.floor);
+	
+				//what if each creature has its own 60 by 60 personal fov map (BAD IDEA)
+				//how to unitize for optimization for bigger maps??
+				fovMapList[h]->setProperties(x, y, getTransparency(position), getWalkability(position, true)); //very very big bottleneck
+			}
 		}
 	}
 }
 
-void World::computeFov()
+void World::computeFov(Position4 mapPosition) //calculate the fov from the point of view of the map position
 {
-	fovMap->computeFov(debugmap->player->mapPosition.x, debugmap->player->mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
+	int height;
+
+	if (mapPosition.height < 1) height = 0;
+	else height = mapPosition.height - 1;
+
+	//int x = mapPosition.x;
+	//int y = mapPosition.y;
+
+	fovMapList[height]->computeFov(10, -1, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
 }
 
-bool World::isInFov(Position3 position) const
+bool World::isInFov(Position4 position) const
 {
 	if (!inMapBounds(position))
 	{
 		return false;
 	}
-	if (fovMap->isInFov(position.x, position.y) && position.floor == debugmap->player->mapPosition.floor)
+
+	if (position.height < 1) return false;
+
+	if (fovMapList[position.height - 1]->isInFov(position.x, position.y) && position.floor == debugmap->player->mapPosition.floor)
 	{
 		getTile(position)->explored = true;
 		return true;
@@ -637,7 +661,7 @@ void World::update()
 
 	updateEntities(); //needs to be first to prevent bad fov checks
 	updateProperties();
-	computeFov();
+	computeFov(debugmap->player->mapPosition);
 
 	for (auto& item : debugmap->mapItemList)
 	{

@@ -190,7 +190,7 @@ void Player::move()
 				{
 					mapPosition.x += moveXSpeed;
 					moveXSpeed = 0;
-				}
+				} 
 				if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.height, mapPosition.floor), true))
 				{
 					mapPosition.y += moveYSpeed;
