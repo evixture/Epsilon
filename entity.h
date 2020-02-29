@@ -37,8 +37,8 @@ struct Creature : public Entity //creature base used for player and other beings
 
 	//movement
 	virtual void move();
-	virtual void changeStanceUp(); //need?
-	virtual void changeStanceDown(); //need?
+	virtual void changeStanceUp();
+	virtual void changeStanceDown();
 
 	//world interact
 	virtual void pickUpItem();

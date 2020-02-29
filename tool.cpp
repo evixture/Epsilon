@@ -676,7 +676,7 @@ void Firearm::render(const std::shared_ptr<Pane>& pane) const
 }
 
 Armor::Armor(std::string name, TCODColor color, int defense, int durability)
-	:Tool(name, color, 234), defense(defense), durability(durability)
+	:Tool(name, color, CHAR_BallisticVest), defense(defense), durability(durability)
 {
 }
 
