@@ -58,9 +58,84 @@ struct Stair : public Block //stair type of tile that allows travel between floo
 
 //map sections
 /*
+CURRENT MAP
+	INIT
+		block list is directly created from the block list of the xml map
 
-20 x 20 arrays 
+	UPDATE
+		all tiles in the tile list are updated every frame
+
+	RENDER
+
+SECTION BASED MAP
+	INIT
+		details below
+
+	UPDATE
+		map should update all of the blocks in the section list as well as all of the sections that bullets interact with
+
+		fovMap??  OPTIMIZATION:::
+			HAS TO BE A SINGLE CONTINUOUS FOV MAP, COORDS CAN NOT BE OUT OF MAP
+			UPDATE FOV MAP BASED ON COORDS FROM EACH SECTION
+
+			IF FOV MAP IS NOT ON THE SAME LEVEL AS THE PLAYER HEIGHT, ONLY UPDATE EVERY SO OFTEN
+
+	render
+		render every block in the section list
 
 
+RENDER VIEW PORT IS 60 x 60
+	THE SECTION LIST SHOULD ALWAYS BE 5 X 5 ARRAY OF 15 X 15 SECTIONS
+
+	THE START OF THE SECTION LIST IS THE OFFSET DIVIDED BY SECTION WIDTH : OFFSET 10 / SECTION WIDTH 15 = 0, START OF SECTION IS 0
+
+	XMLMAP IS 1 DIMENSIONAL ARRAY; SHOULD BE MULTIPLE OF SECTION DIMENSION
+
+
+
+	  0|    2|    3|
+	|  |  |  |  |  |
+-	0  1  2  3  4  5
+-	6  7  8  9 10 11
+-  12 13 14 15 16 17
+-  18 19 20 21 22 23
+-  24 25 26 27 28 29
+-  30 31 32 33 34 35
+
+SECTIONS 2 X 2
+
+SECTION 0
+	0  1
+	6  7
+
+SECTION 1
+	2  3
+	8  9
+
+SECTION 2
+	4  5
+	10 11
+
+	SHOULD THE MAP BE SAVED AS A SECTION ARRAY AND THEN THE MAP CLASS TAKES CERTAIN SECTIONS?
+		OR SHOULD EACH SECTION BE TAKEN FROM THE MAP FILE EACH FRAME?
+
+	SECTION LIST = VECTOR LEVELS ( VECTOR SECTIONS ( VECTOR BLOCKS ( VECTOR TILES )))
+
+
+	FOR (INT FLOOR = 0; FLOOR <= TOTAL FLOORS; FLOOR ++)
+	{
+		FOR (INT SECT = 0; SECT <= (MAPWIDTH / SECTION WIDTH) * (MAP HEIGHT / SECTION HEIGHT); SECT ++)
+		{
+			FOR (INT Y = 0; Y <= MAPWIDTH * (SECTION HEIGHT - 1); Y += MAPWIDTH )
+			{
+				FOR (INT X = SECTION INDEX * SECTION WIDTH; I < SECTIONINDEX * SECTION WIDTH + SECTION WIDTH; X++)
+				{
+					SECTION LIST [ FLOOR ] [ SECT ] PUSHBACK (GET TILE FROM CODE ( MAPSTRING [X + Y] ))
+
+					//SECTION LIST [ FLOORS ] PUSHBACK ( BLOCKLIST [GET TILE FROM CODE (MAPSTRING[X + Y]] )
+				}
+			}
+		}
+	}
 
 */
