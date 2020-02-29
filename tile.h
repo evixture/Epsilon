@@ -54,3 +54,13 @@ struct Stair : public Block //stair type of tile that allows travel between floo
 
 	void interact(); //moves player the move distance
 };
+
+
+//map sections
+/*
+
+20 x 20 arrays 
+
+
+
+*/

@@ -82,8 +82,13 @@ bool Map::getMapName(pugi::xml_node& dataNode)
 
 	if (testName == "name")
 	{
-		name = dataNode.text().as_string();
-		return true;
+		if (!dataNode.text().empty())
+		{
+			name = dataNode.text().as_string();
+			return true;
+		}
+		//else throw "Could not get map name!";
+		//return false;
 	}
 	return false;
 }
@@ -94,9 +99,13 @@ bool Map::getMapLevels(pugi::xml_node& dataNode)
 
 	if (testName == "levels")
 	{
-		totalFloors = dataNode.text().as_int();
-		levelList = std::vector < std::vector < std::shared_ptr < Block >>>(totalFloors);
-		return true;
+		if (!dataNode.text().empty())
+		{
+			totalFloors = dataNode.text().as_int();
+			levelList = std::vector < std::vector < std::shared_ptr < Block >>>(totalFloors);
+			return true;
+		}
+		//else throw "Could not get the number of map levels!";
 	}
 	return false;
 }
@@ -107,8 +116,12 @@ bool Map::getMapHeight(pugi::xml_node& dataNode)
 
 	if (testName == "height")
 	{
-		height = dataNode.text().as_int();
-		return true;
+		if (!dataNode.text().empty())
+		{
+			height = dataNode.text().as_int();
+			return true;
+		}
+		//else throw "Could not get the map height!";
 	}
 	return false;
 }
@@ -119,8 +132,12 @@ bool Map::getMapWidth(pugi::xml_node& dataNode)
 
 	if (testName == "width")
 	{
-		width = dataNode.text().as_int();
-		return true;
+		if (!dataNode.text().empty())
+		{
+			width = dataNode.text().as_int();
+			return true;
+		}
+		//else throw "Coild not get the map width!";
 	}
 	return false;
 }
@@ -619,7 +636,7 @@ void World::computeFov(Position4 mapPosition) //calculate the fov from the point
 	//int x = mapPosition.x;
 	//int y = mapPosition.y;
 
-	fovMapList[height]->computeFov(10, -1, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
+	fovMapList[height]->computeFov(mapPosition.x, mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
 }
 
 bool World::isInFov(Position4 position) const
