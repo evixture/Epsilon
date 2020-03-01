@@ -90,7 +90,6 @@ void Destructible::destroy(int damage)
 			std::make_shared<Tile>('%', tileList[0]->foregroundColor * TCODColor::lightGrey, tileList[0]->backgroundColor * TCODColor::darkGrey, 0),
 			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
 			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
 			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 

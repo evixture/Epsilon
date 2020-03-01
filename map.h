@@ -54,6 +54,8 @@ struct World
 	bool	isInFov					(Position4 position) const; //returns true if the coordinates are in fov
 	bool	isExplored				(Position3& position) const; //checks if a tile has been explored previously
 
+	void updateBlock(Position3 blockPosition);
+
 	void addCreature(std::shared_ptr<Creature> creature); //adds a creature to the current map										
 	void addItem(std::shared_ptr<Item> item); //adds an item to the current map							
 	void addContainer(std::shared_ptr<Container> container); //adds a container to the current map			
@@ -64,6 +66,8 @@ struct World
 
 private:
 	int getOffset		(int playerx, int mapw, int renderw); //returns the map offset
+
+	void createFovMap();
 
 	void computeFov(Position4 mapPosition);  //computes the fov map
 	void updateProperties(); //updates tcod map properties

@@ -482,6 +482,7 @@ World::World()
 		//fovMapList = std::make_shared<TCODMap>(debugmap->width, debugmap->height);
 	}
 
+	createFovMap();
 }
 
 std::shared_ptr<Block> World::getTile(Position3 position) const
@@ -499,6 +500,18 @@ std::shared_ptr<Block> World::getTile(Position3 position) const
 bool World::isExplored(Position3& position) const
 {
  	return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]->explored;
+}
+
+void World::updateBlock(Position3 blockPosition)
+{
+	Position4 position;
+
+	for (int h = 0; h < 3; h++)
+	{
+		position = Position4(blockPosition.x, blockPosition.y, h + 1, blockPosition.floor);
+
+		fovMapList[h]->setProperties(position.x, position.y, getTransparency(position), getWalkability(position, true)); //very very big bottleneck	
+	}
 }
 
 TCODColor World::getBgColor(Position3& position) const
@@ -546,6 +559,26 @@ int World::getOffset(int playerx, int mapw, int renderw)
 	else
 	{
 		return 0;
+	}
+}
+
+void World::createFovMap()
+{
+	Position4 position;
+
+	for (int h = 0; h < 3; h++)
+	{
+		for (int y = 0; y < debugmap->height; ++y)
+		{
+			for (int x = 0; x < debugmap->width; ++x)
+			{
+				position = Position4(x, y, h + 1, debugmap->player->mapPosition.floor);
+
+				//what if each creature has its own 60 by 60 personal fov map (BAD IDEA)
+				//how to unitize for optimization for bigger maps??
+				fovMapList[h]->setProperties(x, y, getTransparency(position), getWalkability(position, true)); //very very big bottleneck
+			}
+		}
 	}
 }
 
@@ -608,22 +641,22 @@ bool World::getTransparency(Position4& position) const
 
 void World::updateProperties()
 {
-	Position4 position;
-
-	for (int h = 0; h < 3; h++)
-	{
-		for (int y = 0; y < debugmap->height; ++y)
-		{
-			for (int x = 0; x < debugmap->width; ++x)
-			{
-				position = Position4(x, y, h, debugmap->player->mapPosition.floor);
-	
-				//what if each creature has its own 60 by 60 personal fov map (BAD IDEA)
-				//how to unitize for optimization for bigger maps??
-				fovMapList[h]->setProperties(x, y, getTransparency(position), getWalkability(position, true)); //very very big bottleneck
-			}
-		}
-	}
+	//Position4 position;
+	//
+	//for (int h = 0; h < 3; h++)
+	//{
+	//	for (int y = 0; y < debugmap->height; ++y)
+	//	{
+	//		for (int x = 0; x < debugmap->width; ++x)
+	//		{
+	//			position = Position4(x, y, h, debugmap->player->mapPosition.floor);
+	//
+	//			//what if each creature has its own 60 by 60 personal fov map (BAD IDEA)
+	//			//how to unitize for optimization for bigger maps??
+	//			fovMapList[h]->setProperties(x, y, getTransparency(position), getWalkability(position, true)); //very very big bottleneck
+	//		}
+	//	}
+	//}
 }
 
 void World::computeFov(Position4 mapPosition) //calculate the fov from the point of view of the map position

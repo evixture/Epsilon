@@ -446,8 +446,8 @@ void Player::updateTools()
 
 			for (int j = 0; j < inventory[i]->itemList.size(); j++) //stops when i gets to empty container list
 			{
-				if (itemIndex != -1)
-				{
+				//if (itemIndex != -1)
+				//{
 					if (itemIndex == j && containerIndex == i)
 					{
 						//special update held item
@@ -458,7 +458,7 @@ void Player::updateTools()
 						//normal update the item
 						inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
 					}
-				}
+				//}
 			}
 
 		}
