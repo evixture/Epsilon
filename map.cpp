@@ -706,7 +706,11 @@ void World::update()
 
 	if (INPUT->debug1Key->isSwitched) // repeatable create live creature
 	{
-		addCreature(std::make_shared<Creature>(Position4(30, 8, 3, 0), '0', "Creature", TCODColor::white, 100, Armor("", TCODColor::pink, 0, 0)));
+		//addCreature(std::make_shared<Creature>(Position4(30, 8, 3, 0), '0', "Creature", TCODColor::white, 100, Armor("", TCODColor::pink, 0, 0)));
+		//addCreature(std::make_shared<AICreature>(Creature(Position4(30, 8, 3, 0), 'I', "AI Creature", TCODColor::white, 100, Armor("", TCODColor::pink, 0, 0))));
+		Creature creature = Creature(Position4(30, 8, 3, 0), 'I', "AI Creature", TCODColor::white, 100, Armor("", TCODColor::pink, 0, 0));
+
+		debugmap->creatureList.push_back(std::make_shared<AICreature>(creature, fovMapList[2].get())); //use whole map list
 	}
 
 	updateEntities(); //needs to be first to prevent bad fov checks

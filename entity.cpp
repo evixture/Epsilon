@@ -22,39 +22,18 @@ Creature::Creature(Position4 position, int ch, std::string name, TCODColor color
 {
 }
 
-void Creature::update()
-{
-	angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx, engine->settings->input->mouse.cy);
-
-	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
-
-	if (!(health > 0)) //if not "alive"
-	{
-		health = 0; //prevent from taking further damage
-		ch = '$'; //set char to dead symbol
-		color = TCODColor::red;
-	}
-}
-
-void Creature::render(const std::shared_ptr<Pane>& pane) const
-{
-	if (WORLD->debugmap->player->mapPosition.floor == mapPosition.floor)
-	{
-		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-		pane->console->setCharForeground(renderPosition.x, renderPosition.y, (WORLD->isInFov(mapPosition))? color : TCODColor::darkerGrey); //out of fov creatures rendered with one step above normal fov grey to be more noticible
-	}
-}
-
 void Creature::move()
 {
 }
 
 void Creature::changeStanceUp()
 {
+	if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height + 1, mapPosition.floor), false)) mapPosition.height += 1;
 }
 
 void Creature::changeStanceDown()
 {
+	if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height - 1, mapPosition.floor), false)) mapPosition.height -= 1;
 }
 
 void Creature::pickUpItem()
@@ -85,6 +64,28 @@ void Creature::updateTools()
 {
 }
 
+void Creature::update()
+{
+	angle = getAngle(renderPosition.x, renderPosition.y, INPUT->mouse.cx, INPUT->mouse.cy);
+
+	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
+
+	if (!(health > 0)) //if not "alive"
+	{
+		health = 0; //prevent from taking further damage
+		ch = '$'; //set char to dead symbol
+		color = TCODColor::red;
+	}
+}
+
+void Creature::render(const std::shared_ptr<Pane>& pane) const
+{
+	if (WORLD->debugmap->player->mapPosition.floor == mapPosition.floor)
+	{
+		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+		pane->console->setCharForeground(renderPosition.x, renderPosition.y, (WORLD->isInFov(mapPosition))? color : TCODColor::darkerGrey); //out of fov creatures rendered with one step above normal fov grey to be more noticible
+	}
+}
 
 //----------------------------------------------------------------------------------------------------
 
@@ -199,16 +200,6 @@ void Player::move()
 			}
 		}
 	}
-}
-
-void Player::changeStanceUp()
-{
-	if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height + 1, mapPosition.floor), false)) mapPosition.height += 1;
-}
-
-void Player::changeStanceDown()
-{
-	if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height - 1, mapPosition.floor), false)) mapPosition.height -= 1;
 }
 
 void Player::moveSelectorUp()
@@ -446,21 +437,17 @@ void Player::updateTools()
 
 			for (int j = 0; j < inventory[i]->itemList.size(); j++) //stops when i gets to empty container list
 			{
-				//if (itemIndex != -1)
-				//{
-					if (itemIndex == j && containerIndex == i)
-					{
-						//special update held item
-						inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
-					}
-					else
-					{
-						//normal update the item
-						inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
-					}
-				//}
+				if (itemIndex == j && containerIndex == i)
+				{
+					//special update held item
+					inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
+				}
+				else
+				{
+					//normal update the item
+					inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
+				}
 			}
-
 		}
 	}
 	else
@@ -539,17 +526,16 @@ void Player::update()
 		move();
 
 	}
-
-	if (INPUT->debug2Key->isSwitched)
-	{
-		health -= 25;
-	}
-
-	if (!(health > 0)) //if not "alive"
+	else //if dead
 	{
 		health = 0; //prevent from taking further damage
 		ch = '&'; //set char to dead symbol
 		color = TCODColor::red;
+	}
+
+	if (INPUT->debug2Key->isSwitched)
+	{
+		//health -= 25;
 	}
 }
 
@@ -558,6 +544,9 @@ void Player::render(const std::shared_ptr<Pane>& pane) const
 	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
 	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
 
-	selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
+	if (health > 0)
+	{
+		selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
+	}
 }
 

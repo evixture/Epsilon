@@ -37,11 +37,11 @@ struct Creature : public Entity //creature base used for player and other beings
 
 	//movement
 	virtual void move();
-	virtual void changeStanceUp();
-	virtual void changeStanceDown();
+	void changeStanceUp();
+	void changeStanceDown();
 
 	//world interact
-	virtual void pickUpItem();
+	virtual void pickUpItem(); //should eventually chenge to pure
 	virtual void dropItem();
 
 	//actions
@@ -69,8 +69,6 @@ struct Player : public Creature //player derived creature that the player intera
 
 	//movement
 	void move();
-	void changeStanceUp();
-	void changeStanceDown();
 
 	//world interact
 	void pickUpItem(); //picks up the item on the ground
