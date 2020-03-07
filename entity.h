@@ -67,6 +67,8 @@ struct Player : public Creature //player derived creature that the player intera
 	char xMoveDist; //the amount that the player moves in the x dimension
 	char yMoveDist; //the amount that the player moves in the y dimension
 
+	TCODColor backgroundColor;
+
 	Player(Position4 pos); //player constructor that takes a position
 
 	//movement

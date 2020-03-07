@@ -158,6 +158,8 @@ Input::Input()
 	buttonList.push_back(fullscreenKey =		std::make_shared < KeyboardButton>(sf::Keyboard::F11));
 	buttonList.push_back(menuKey =				std::make_shared < KeyboardButton>(sf::Keyboard::Escape));
 
+	buttonList.push_back(highlightKey =			std::make_shared < KeyboardButton>(sf::Keyboard::H));
+
 	buttonList.push_back(debug1Key =			std::make_shared < KeyboardButton>(sf::Keyboard::Num9));
 	buttonList.push_back(debug2Key =			std::make_shared < KeyboardButton>(sf::Keyboard::Num0));
 

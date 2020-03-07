@@ -18,7 +18,7 @@ void Entity::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Creature::Creature(Position4 position, int ch, std::string name, TCODColor color, int health, Armor armor)
-	:Entity(position, ch, name, color), health(health), equippedArmor(armor), angle(0), containerIndex(0), itemIndex(0), 
+	:Entity(position, ch, name, color), health(health), equippedArmor(armor), angle(0), containerIndex(0), itemIndex(0),
 	nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), moveClock(0), moveSpeed(0), baseMoveTime(0.0f)
 {
 }
@@ -91,7 +91,7 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Player::Player(Position4 position)
-	:Creature(position, '@', "player", UICOLOR_Player_Color, 100, Armor("", TCODColor::pink, 0, 0)), xMoveDist(0), yMoveDist(0)
+	:Creature(position, '@', "player", UICOLOR_Player_Color, 100, Armor("", TCODColor::pink, 0, 0)), xMoveDist(0), yMoveDist(0), backgroundColor(TCODColor::pink)
 {
 	inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
 	inventory[0]->addItem(	ITEM_SIP45(0, 0, 0, this));
@@ -465,7 +465,12 @@ void Player::update()
 
 	if (health > 0) //if player is alive
 	{
-		
+		if (INPUT->highlightKey->isDown)
+		{
+			backgroundColor = TCODColor::yellow;
+		}
+		else backgroundColor = TCODColor::pink;
+
 		if (INPUT->mouse.wheel_up || INPUT->mouse.wheel_down)
 		{
 			if (!INPUT->deepInteractKey->isDown)
@@ -546,6 +551,11 @@ void Player::render(const std::shared_ptr<Pane>& pane) const
 {
 	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
 	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
+
+	if (backgroundColor != TCODColor::pink)
+	{
+		pane->console->setCharBackground(renderPosition.x, renderPosition.y, backgroundColor);
+	}
 
 	if (health > 0)
 	{
