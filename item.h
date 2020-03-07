@@ -42,12 +42,12 @@ struct Item //an item that a creature can hold and interact with
 	std::shared_ptr<Block> tile; //the tile component used when the item is on the map
 	std::shared_ptr<Tool> tool; //the tool component used when the item is in the player's inventory
 
-	Player* owner; //should later be replaced with creature pointer after player methods are moved
+	Creature* owner; 
 	std::shared_ptr<ActionManager> actionManager; //used to activate more advanced interactions with the item
 
-	void createActionManager(Player* owner); //makes an action manager action list based on the item type
+	void createActionManager(Creature* owner); //makes an action manager action list based on the item type
 
-	Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, Player* owner, ItemType type); //item constructor that takes a size, tile, too, position, and a player used for action manager
+	Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, Creature* owner, ItemType type); //item constructor that takes a size, tile, too, position, and a player used for action manager
 
 	virtual std::shared_ptr<MagazineData> getMagazineData(); //used to get the important data of the magazine, returns generic magazine when called from item
 	virtual void changeBarColor(); //updates the inventory bar color

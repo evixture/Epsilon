@@ -639,35 +639,12 @@ bool World::getTransparency(Position4& position) const
 	return false;
 }
 
-void World::updateProperties()
-{
-	//Position4 position;
-	//
-	//for (int h = 0; h < 3; h++)
-	//{
-	//	for (int y = 0; y < debugmap->height; ++y)
-	//	{
-	//		for (int x = 0; x < debugmap->width; ++x)
-	//		{
-	//			position = Position4(x, y, h, debugmap->player->mapPosition.floor);
-	//
-	//			//what if each creature has its own 60 by 60 personal fov map (BAD IDEA)
-	//			//how to unitize for optimization for bigger maps??
-	//			fovMapList[h]->setProperties(x, y, getTransparency(position), getWalkability(position, true)); //very very big bottleneck
-	//		}
-	//	}
-	//}
-}
-
 void World::computeFov(Position4 mapPosition) //calculate the fov from the point of view of the map position
 {
 	int height;
 
 	if (mapPosition.height < 1) height = 0;
 	else height = mapPosition.height - 1;
-
-	//int x = mapPosition.x;
-	//int y = mapPosition.y;
 
 	fovMapList[height]->computeFov(mapPosition.x, mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
 }
@@ -714,7 +691,6 @@ void World::update()
 	}
 
 	updateEntities(); //needs to be first to prevent bad fov checks
-	updateProperties();
 	computeFov(debugmap->player->mapPosition);
 
 	for (auto& item : debugmap->mapItemList)
@@ -726,6 +702,9 @@ void World::update()
 	{
 		container->containerItem->updateTile();
 	}
+
+	//WHEN TO CLEAR SOUND LIST
+
 }
 
 //--------------------------------------------------------------------------------------------

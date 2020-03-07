@@ -55,6 +55,9 @@
     <Filter Include="Libraries">
       <UniqueIdentifier>{6bf01d34-464e-4b34-b833-24a426bee49d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Sound">
+      <UniqueIdentifier>{8fd2a4d9-7450-4913-9e35-041aa071365b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h">
@@ -105,6 +108,7 @@
     <ClInclude Include="aicreature.h">
       <Filter>Source\AICreature</Filter>
     </ClInclude>
+    <ClInclude Include="sound.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -152,6 +156,7 @@
     <ClCompile Include="..\..\..\..\pugixml-1.10\src\pugixml.cpp">
       <Filter>Libraries</Filter>
     </ClCompile>
+    <ClCompile Include="sound.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="data\Epsilon.ico">

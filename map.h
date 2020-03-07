@@ -1,6 +1,6 @@
 #include "main.hpp"
 
-struct Map //map class that takes a text file and converts it to a vector of tiles
+struct Map //map class deals with the map and creatures and the data used for the world
 {
 	std::string filePath; //string path to the text file
 
@@ -34,13 +34,15 @@ private:
 	std::shared_ptr<Block> getTileFromCode(std::string code);
 };
 
-struct World
+struct World //world struct that deals with rendering and updating the map
 {
 	int xOffset; //CHECK the x offset of the rendered portion of the map
 	int yOffset; //CHECK the y offset of the rendered portion of the map
 
 	std::shared_ptr<Map> debugmap; //main map used for debugging
 	std::vector<std::shared_ptr<TCODMap>> fovMapList; //the part of the map used to calculate the fov
+
+	std::vector<std::shared_ptr<Sound>> soundList;
 
 	World(); //world contructor that takes nothing
 
@@ -70,7 +72,6 @@ private:
 	void createFovMap();
 
 	void computeFov(Position4 mapPosition);  //computes the fov map
-	void updateProperties(); //updates tcod map properties
 
 	void updateEntities(); //updates all entities
 

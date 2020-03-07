@@ -62,59 +62,59 @@ void ActionManager::doAction()
 
 //----------------------------------------------------------------------------------------------------
 
-Item::Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, Player* owner, ItemType type)
+Item::Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, Creature* owner, ItemType type)
 	:size(size), tile(tile), tool(tool), mapPosition(position), tileRenderPosition(position), distToEnt(5), owner(owner), type(type), barColor(TCODColor::white)
 {
 	createActionManager(owner);
 }
 
-void Item::createActionManager(Player* owner)
+void Item::createActionManager(Creature* owner)
 {
 	if (type == ItemType::NORMAL)
 	{
 		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
-			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP))
+			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Creature::dropItem, owner), Action::Type::DROP))
 		});
 	}
 	else if (type == ItemType::MAGAZINE)
 	{
 		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
-			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP))
+			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Creature::dropItem, owner), Action::Type::DROP))
 		});
 	}
 	else if (type == ItemType::MELEE)
 	{
 		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
-			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP)),
-			std::shared_ptr<Action>(std::make_shared<Action>("Melee",std::bind(&Player::useMelee, owner), Action::Type::MELEE))
+			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Creature::dropItem, owner), Action::Type::DROP)),
+			std::shared_ptr<Action>(std::make_shared<Action>("Melee",std::bind(&Creature::useMelee, owner), Action::Type::MELEE))
 		});
 	}
 	else if (type == ItemType::FIREARM)
 	{
 		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
-			std::shared_ptr<Action>(std::make_shared<Action>("Reload", std::bind(&Player::reload, owner), Action::Type::RELOAD)),
-			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP)),
-			std::shared_ptr<Action>(std::make_shared<Action>("Change Fire Mode", std::bind(&Player::changeFireMode, owner), Action::Type::CHANGEFIREMODE)),
-			std::shared_ptr<Action>(std::make_shared<Action>("Melee", std::bind(&Player::useMelee, owner), Action::Type::MELEE))
+			std::shared_ptr<Action>(std::make_shared<Action>("Reload", std::bind(&Creature::reload, owner), Action::Type::RELOAD)),
+			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Creature::dropItem, owner), Action::Type::DROP)),
+			std::shared_ptr<Action>(std::make_shared<Action>("Change Fire Mode", std::bind(&Creature::changeFireMode, owner), Action::Type::CHANGEFIREMODE)),
+			std::shared_ptr<Action>(std::make_shared<Action>("Melee", std::bind(&Creature::useMelee, owner), Action::Type::MELEE))
 		});
 	}
 	else if (type == ItemType::ARMOR)
 	{
 		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
-			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Player::dropItem, owner), Action::Type::DROP)),
-			std::shared_ptr<Action>(std::make_shared<Action>("Equip", std::bind(&Player::equipArmor, owner), Action::Type::EQUIP))
+			std::shared_ptr<Action>(std::make_shared<Action>("Drop", std::bind(&Creature::dropItem, owner), Action::Type::DROP)),
+			std::shared_ptr<Action>(std::make_shared<Action>("Equip", std::bind(&Creature::equipArmor, owner), Action::Type::EQUIP))
 		});
 	}
 	else if (type == ItemType::HAND)
 	{
 		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
-			std::shared_ptr<Action>(std::make_shared<Action>("Melee", std::bind(&Player::useMelee, owner), Action::Type::MELEE))
+			std::shared_ptr<Action>(std::make_shared<Action>("Melee", std::bind(&Creature::useMelee, owner), Action::Type::MELEE))
 		});
 	}
 	else
 	{
 		actionManager = std::make_shared<ActionManager>(std::vector<std::shared_ptr<Action>> {
-			std::shared_ptr<Action>(std::make_shared<Action>("ERROR", std::bind(&Player::equipArmor, owner), Action::Type::EQUIP))
+			std::shared_ptr<Action>(std::make_shared<Action>("ERROR", std::bind(&Creature::equipArmor, owner), Action::Type::EQUIP))
 		});
 	}
 }

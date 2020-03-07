@@ -228,7 +228,7 @@ SplashWindow::SplashWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 		if (i == 0) val = 0;
 		else
 		{
-			val = (slashList.size() / numSlashIndexes) * i;
+			val = (int)(slashList.size() / numSlashIndexes) * i;
 		}
 
 		slashIndexList.push_back(val);

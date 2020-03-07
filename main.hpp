@@ -30,6 +30,8 @@ struct Player;
 	#include "tool.h"
 #include "item.h"
 
+	#include "sound.h"
+
 	#include "entity.h"
 	#include "aicreature.h"
 #include "map.h"
