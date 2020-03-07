@@ -1,14 +1,32 @@
 #include "main.hpp"
 
 AICreature::AICreature(Creature creature, TCODMap* fovMap)
-	:Creature(creature), path(TCODPath(fovMap, 0.0f))
+	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black)
 {
 	//selectedItem = std::make_shared<Item>(ITEM_SIP45(0, 0, 0, this));
 }
 
 void AICreature::move()
 {
+	if (moveSpeedMode == 2)			baseMoveTime = .25f; //sprint
+	else if (moveSpeedMode == 0)	baseMoveTime = 1.0f; //creep
+	else							baseMoveTime = .5f;	 //walk
 
+	moveSpeed = baseMoveTime / mapPosition.height;
+
+	moveClock.timeBetweenUpdates = moveSpeed;
+	moveClock.tickUp();
+
+	for (int i = 1; i <= moveClock.numCalls; moveClock.numCalls--)
+	{
+		if (!path.isEmpty()) //has path to walk on
+		{
+			path.walk(&mapPosition.x, &mapPosition.y, false);
+
+			//call on move
+			WORLD->updateBlock(mapPosition);		
+		}
+	}
 }
 
 void AICreature::pickUpItem()
@@ -47,15 +65,18 @@ void AICreature::update() //ai and behavior attributes update here
 
 	if (health > 0)
 	{
-		if (INPUT->debug2Key->isSwitched)
-		{
-			path.compute(mapPosition.x, mapPosition.y, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3);
+		if (INPUT->debug2Key->isSwitched)																									//debug pathfinding
+		{																																	//
+			path.compute(mapPosition.x, mapPosition.y, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset);			//
 		}
+		
+		move();
 
-		if (!path.isEmpty())
+		if (WORLD->isInPlayerFov(mapPosition)) //should it check for all creatures if they are in its fov? if so, need to find out how to make individual fov maps
 		{
-			path.walk(&mapPosition.x, &mapPosition.y, false);
+			debugBGColor = TCODColor::yellow;
 		}
+		else debugBGColor = TCODColor::black;
 	}
 
 	if (!(health > 0)) //if not "alive"
@@ -71,6 +92,7 @@ void AICreature::render(const std::shared_ptr<Pane>& pane) const
 {
 	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
 	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
+	pane->console->setCharBackground(renderPosition.x, renderPosition.y, debugBGColor);
 
 	if (health > 0)
 	{

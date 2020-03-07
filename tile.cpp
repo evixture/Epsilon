@@ -46,7 +46,7 @@ void Block::render(Position4 renderPosition, const std::shared_ptr<Pane>& pane) 
 	Position4 position = Position4(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.height, renderPosition.floor);
 	std::shared_ptr<Tile> tile = getTileData(renderPosition.height);
 
-		if (WORLD->isInFov(position))
+		if (WORLD->isInPlayerFov(position))
 		{
 			pane->console->setCharBackground(renderPosition.x,					renderPosition.y,					tile->backgroundColor);
 			pane->console->setCharForeground(renderPosition.x,					renderPosition.y,					tile->foregroundColor);

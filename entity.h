@@ -18,6 +18,10 @@ protected:
 
 struct Creature : public Entity //creature base used for player and other beings
 {
+	float baseMoveTime; //time before the player moves a unit
+	float moveSpeed;
+	Clock moveClock;
+
 	double angle; //angle that the creature us facing
 
 	short int health; //the health of the creature
@@ -60,10 +64,8 @@ struct Creature : public Entity //creature base used for player and other beings
 
 struct Player : public Creature //player derived creature that the player interacts through
 {
-	float baseMoveTime; //time before the player moves a unit
-
-	char moveXSpeed; //the amount that the player moves in the x dimension
-	char moveYSpeed; //the amount that the player moves in the y dimension
+	char xMoveDist; //the amount that the player moves in the x dimension
+	char yMoveDist; //the amount that the player moves in the y dimension
 
 	Player(Position4 pos); //player constructor that takes a position
 
@@ -90,7 +92,5 @@ private:
 	void moveSelectorDown(); //moves the selector down on the inventory
 	void filterIndexes(); //filters the container and item indexes to make sure they are in range
 
-	float moveSpeed;
-	Clock moveClock;
 
 };

@@ -53,7 +53,7 @@ struct World //world struct that deals with rendering and updating the map
 	bool    getWalkability			(Position4 position, bool checkCreatures) const; //gets the walkability of a tile
 	bool	getSolidity				(Position4& position) const;
 	bool	inMapBounds				(Position3& position) const; //checks if the coordinates are in the map bounds
-	bool	isInFov					(Position4 position) const; //returns true if the coordinates are in fov
+	bool	isInPlayerFov					(Position4 position) const; //returns true if the coordinates are in fov
 	bool	isExplored				(Position3& position) const; //checks if a tile has been explored previously
 
 	void updateBlock(Position3 blockPosition);

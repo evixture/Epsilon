@@ -4,6 +4,10 @@ struct AICreature : public Creature
 {
 	TCODPath path;
 
+	int moveSpeedMode;
+
+	TCODColor debugBGColor;
+
 	AICreature(Creature creature, TCODMap* fovMap);
 
 	void move();

@@ -18,7 +18,8 @@ void Entity::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Creature::Creature(Position4 position, int ch, std::string name, TCODColor color, int health, Armor armor)
-	:Entity(position, ch, name, color), health(health), equippedArmor(armor), angle(0), containerIndex(0), itemIndex(0), nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false))
+	:Entity(position, ch, name, color), health(health), equippedArmor(armor), angle(0), containerIndex(0), itemIndex(0), 
+	nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), moveClock(0), moveSpeed(0), baseMoveTime(0.0f)
 {
 }
 
@@ -83,14 +84,14 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 	if (WORLD->debugmap->player->mapPosition.floor == mapPosition.floor)
 	{
 		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-		pane->console->setCharForeground(renderPosition.x, renderPosition.y, (WORLD->isInFov(mapPosition))? color : TCODColor::darkerGrey); //out of fov creatures rendered with one step above normal fov grey to be more noticible
+		pane->console->setCharForeground(renderPosition.x, renderPosition.y, (WORLD->isInPlayerFov(mapPosition))? color : TCODColor::darkerGrey); //out of fov creatures rendered with one step above normal fov grey to be more noticible
 	}
 }
 
 //----------------------------------------------------------------------------------------------------
 
 Player::Player(Position4 position)
-	:Creature(position, '@', "player", UICOLOR_Player_Color, 100, Armor("", TCODColor::pink, 0, 0)), baseMoveTime(0.0f), moveXSpeed(0), moveYSpeed(0), moveClock(0), moveSpeed(0)
+	:Creature(position, '@', "player", UICOLOR_Player_Color, 100, Armor("", TCODColor::pink, 0, 0)), xMoveDist(0), yMoveDist(0)
 {
 	inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
 	inventory[0]->addItem(	ITEM_SIP45(0, 0, 0, this));
@@ -119,10 +120,10 @@ void Player::move()
 	{
 		if (INPUT->moveFastKey->isDown)			baseMoveTime = .25f;
 		else if (INPUT->moveSlowKey->isDown)	baseMoveTime = 1.0f;
-		else baseMoveTime = .5f;
+		else									baseMoveTime = .5f;
 
-		moveXSpeed = 0;
-		moveYSpeed = 0;
+		xMoveDist = 0;
+		yMoveDist = 0;
 
 		if (INPUT->proneKey->isSwitched)
 			{
@@ -172,31 +173,33 @@ void Player::move()
 
 		moveSpeed = baseMoveTime / mapPosition.height;
 
-		if (INPUT->moveUpKey->isDown && INPUT->moveDownKey->isDown) moveYSpeed = 0;
-		else if (INPUT->moveUpKey->isDown && !INPUT->moveDownKey->isDown) moveYSpeed = -1;
-		else if (INPUT->moveDownKey->isDown && !INPUT->moveUpKey->isDown) moveYSpeed = 1;
+		if (INPUT->moveUpKey->isDown && INPUT->moveDownKey->isDown) yMoveDist = 0;
+		else if (INPUT->moveUpKey->isDown && !INPUT->moveDownKey->isDown) yMoveDist = -1;
+		else if (INPUT->moveDownKey->isDown && !INPUT->moveUpKey->isDown) yMoveDist = 1;
 
-		if (INPUT->moveLeftKey->isDown && INPUT->moveRightKey->isDown) moveXSpeed = 0;
-		else if (INPUT->moveLeftKey->isDown && !INPUT->moveRightKey->isDown) moveXSpeed = -1;
-		else if (INPUT->moveRightKey->isDown && !INPUT->moveLeftKey->isDown) moveXSpeed = 1;
+		if (INPUT->moveLeftKey->isDown && INPUT->moveRightKey->isDown) xMoveDist = 0;
+		else if (INPUT->moveLeftKey->isDown && !INPUT->moveRightKey->isDown) xMoveDist = -1;
+		else if (INPUT->moveRightKey->isDown && !INPUT->moveLeftKey->isDown) xMoveDist = 1;
 
-		if (moveXSpeed != 0 || moveYSpeed != 0)
+		if (xMoveDist != 0 || yMoveDist != 0)
 		{
 			moveClock.timeBetweenUpdates = moveSpeed;
 			moveClock.tickUp();
 
 			for (int i = 1; i <= moveClock.numCalls; moveClock.numCalls--)
 			{
-				if (WORLD->getWalkability(Position4(mapPosition.x + moveXSpeed, mapPosition.y, mapPosition.height, mapPosition.floor), true))
+				if (WORLD->getWalkability(Position4(mapPosition.x + xMoveDist, mapPosition.y, mapPosition.height, mapPosition.floor), true))
 				{
-					mapPosition.x += moveXSpeed;
-					moveXSpeed = 0;
+					mapPosition.x += xMoveDist;
+					xMoveDist = 0;
 				} 
-				if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y + moveYSpeed, mapPosition.height, mapPosition.floor), true))
+				if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y + yMoveDist, mapPosition.height, mapPosition.floor), true))
 				{
-					mapPosition.y += moveYSpeed;
-					moveYSpeed = 0;
+					mapPosition.y += yMoveDist;
+					yMoveDist = 0;
 				}
+
+				WORLD->updateBlock(mapPosition);
 			}
 		}
 	}

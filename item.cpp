@@ -156,7 +156,7 @@ void Item::renderTile(const std::shared_ptr<Pane>& pane) const
 {
 	tile->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.height, tileRenderPosition.floor), pane);
 
-	if (distToEnt < 5 && WORLD->isInFov(mapPosition))
+	if (distToEnt < 5 && WORLD->isInPlayerFov(mapPosition))
 	{
 		pane->console->setCharBackground(tileRenderPosition.x, tileRenderPosition.y, tile->tileList[0]->backgroundColor + TCODColor::darkGrey);
 	}

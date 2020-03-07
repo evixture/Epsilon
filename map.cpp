@@ -510,7 +510,7 @@ void World::updateBlock(Position3 blockPosition)
 	{
 		position = Position4(blockPosition.x, blockPosition.y, h + 1, blockPosition.floor);
 
-		fovMapList[h]->setProperties(position.x, position.y, getTransparency(position), getWalkability(position, true)); //very very big bottleneck	
+		fovMapList[h]->setProperties(position.x, position.y, getTransparency(position), getWalkability(position, true));
 	}
 }
 
@@ -649,7 +649,7 @@ void World::computeFov(Position4 mapPosition) //calculate the fov from the point
 	fovMapList[height]->computeFov(mapPosition.x, mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
 }
 
-bool World::isInFov(Position4 position) const
+bool World::isInPlayerFov(Position4 position) const
 {
 	if (!inMapBounds(position))
 	{
