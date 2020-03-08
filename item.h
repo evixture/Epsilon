@@ -52,7 +52,7 @@ struct Item //an item that a creature can hold and interact with
 	virtual std::shared_ptr<MagazineData> getMagazineData(); //used to get the important data of the magazine, returns generic magazine when called from item
 	virtual void changeBarColor(); //updates the inventory bar color
 
-	void updateTool(Position4& mapPosition, int mx, int my, double angle, bool isHeld); //updates tool, used when in player inventory
+	void updateTool(Position4& mapPosition, int mx, int my, bool isHeld); //updates tool, used when in player inventory
 	void renderTool(const std::shared_ptr<Pane>& pane) const; //renders tool, used then in player inventory
 
 	void updateTile(); //used to update tile, used when on the map

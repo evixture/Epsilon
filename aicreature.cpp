@@ -1,9 +1,9 @@
 #include "main.hpp"
 
 AICreature::AICreature(Creature creature, TCODMap* fovMap)
-	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), interest(0.0f), interestDecay(.025f), interestDecayClock(1.0f)
+	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), interest(0.0f), interestDecay(.025f), interestDecayClock(1.0f), pathStep(0)
 {
-	//selectedItem = std::make_shared<Item>(ITEM_SIP45(0, 0, 0, this));
+	selectedItem = ITEM_SIP45(0, 0, 0, this);
 }
 
 void AICreature::move()
@@ -21,10 +21,21 @@ void AICreature::move()
 	{
 		if (!path.isEmpty()) //has path to walk on
 		{
+			//if (pathStep + 1 > path.size())
+			//{
+			//	pathStep = path.size();
+			//}
+			//else
+			//{
+			//	pathStep++;
+			//}
+
 			path.walk(&mapPosition.x, &mapPosition.y, true);
 
 			//call on move
-			WORLD->updateBlock(mapPosition);		
+			//path.get(pathStep, &destX, &destY);
+
+			//WORLD->updateBlock(mapPosition);		
 		}
 	}
 }
@@ -55,26 +66,28 @@ void AICreature::useMelee()
 
 void AICreature::updateTools()
 {
+	angle = getAngle(mapPosition.x, mapPosition.y, destX, destY);
+
+	selectedItem->updateTool(mapPosition, destX, destY, true);
 }
 
 void AICreature::update() //ai and behavior attributes update here
 {
-	angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx, engine->settings->input->mouse.cy);
-
 	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
 
 	if (health > 0)
 	{
-		if (INPUT->debug2Key->isSwitched)																									//debug pathfinding
-		{																																	//
-			path.compute(mapPosition.x, mapPosition.y, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset);			//
+		if (INPUT->debug2Key->isSwitched) //debug pathfinding
+		{	
+			destX = INPUT->mouse.cx - 1 + WORLD->xOffset;
+			destY = INPUT->mouse.cy - 3 + WORLD->yOffset;
+
+			path.compute(mapPosition.x, mapPosition.y, destX, destY);
 		}
 
 		interestDecayClock.tickUp();
 		for (int i = 1; i <= interestDecayClock.numCalls; interestDecayClock.numCalls--)
 		{
-			GUI->logWindow->pushMessage(LogWindow::Message(std::to_string(interest), LogWindow::Message::MessageLevel::LOW));
-
 			if (interest - interestDecay < 0)
 			{
 				interest = 0;
@@ -114,7 +127,10 @@ void AICreature::update() //ai and behavior attributes update here
 
 			if (interest > .5f)
 			{
-				path.compute(mapPosition.x, mapPosition.y, sound->soundSource.x, sound->soundSource.y); //will compute multiple times?
+				destX = sound->soundSource.x;
+				destY = sound->soundSource.y;
+
+				path.compute(mapPosition.x, mapPosition.y, destX, destY); //will compute multiple times?
 			}
 		}
 
@@ -125,6 +141,8 @@ void AICreature::update() //ai and behavior attributes update here
 		else debugBGColor = TCODColor::black;
 
 		move();
+
+		updateTools();
 	}
 
 	if (!(health > 0)) //if not "alive"
@@ -144,6 +162,6 @@ void AICreature::render(const std::shared_ptr<Pane>& pane) const
 
 	if (health > 0)
 	{
-		//selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
+		selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
 	}
 }

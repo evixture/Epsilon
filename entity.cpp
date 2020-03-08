@@ -21,6 +21,7 @@ Creature::Creature(Position4 position, int ch, std::string name, TCODColor color
 	:Entity(position, ch, name, color), health(health), equippedArmor(armor), angle(0), containerIndex(0), itemIndex(0),
 	nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), moveClock(0), moveSpeed(0), baseMoveTime(0.0f)
 {
+	selectedMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 }
 
 void Creature::move()
@@ -110,8 +111,6 @@ Player::Player(Position4 position)
 	{
 		selectedItem = nullptr;
 	}
-
-	selectedMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 }
 
 void Player::move()
@@ -430,12 +429,12 @@ void Player::updateTools()
 			if (itemIndex == -1 && containerIndex == i) //if container is the held item
 			{
 				//special update the held container
-				inventory[i]->containerItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
+				inventory[i]->containerItem->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, true); //uses the map position of the mouse
 			}
 			else
 			{
 				//normal update the container
-				inventory[i]->containerItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
+				inventory[i]->containerItem->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, false);
 			}
 
 			for (int j = 0; j < inventory[i]->itemList.size(); j++) //stops when i gets to empty container list
@@ -443,19 +442,19 @@ void Player::updateTools()
 				if (itemIndex == j && containerIndex == i)
 				{
 					//special update held item
-					inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
+					inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, true);
 				}
 				else
 				{
 					//normal update the item
-					inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, false);
+					inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, false);
 				}
 			}
 		}
 	}
 	else
 	{
-		selectedItem->updateTool(mapPosition, INPUT->mouse.cx - 1, INPUT->mouse.cy - 3, angle, true);
+		selectedItem->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3, true);
 	}
 }
 

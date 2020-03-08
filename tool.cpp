@@ -23,13 +23,15 @@ void Tool::useMelee()
 {
 }
 
-void Tool::updateToolPosition(double angle)
+void Tool::updateToolPosition(int targetX, int targetY)
 {
-	double absAngle = abs(angle);
+	//double absAngle = abs(angle);
+
+	angle = abs(getAngle(sourcePosition.x, sourcePosition.y, targetX, targetY));
 
 	if (isnan(angle)) return;
 
-	if (absAngle < 22.5f)
+	if (angle < 22.5f)
 	{
 		if (dx <= 0)
 		{
@@ -44,7 +46,7 @@ void Tool::updateToolPosition(double angle)
 				return;
 		}
 	}
-	else if (absAngle > 65.7f)
+	else if (angle > 65.7f)
 	{
 		if (dy <= 0)
 		{
@@ -102,24 +104,32 @@ void Tool::equip(Armor& armor)
 {
 }
 
-void Tool::updatePositions(Position4& sourcePosition, int& mx, int& my, double& angle)
+void Tool::updatePositions(Position4& sourcePosition, int& targetX, int& targetY)
 {
 	this->sourcePosition = sourcePosition;
 	mapPosition.height = sourcePosition.height;
 	mapPosition.floor = sourcePosition.floor;
 
-	dx = mx - sourcePosition.x + WORLD->xOffset; //takes mouse input, applies to all creatures, but only useful for player
-	dy = my - sourcePosition.y + WORLD->yOffset;
+	if (!((targetX - sourcePosition.x == 0) && (targetY - sourcePosition.y == 0))) //if cursor is at source position
+	{
+		dx = targetX - sourcePosition.x; //takes mouse input, applies to all creatures, but only useful for player
+		dy = targetY - sourcePosition.y;
+	}
+	else
+	{
+		mapPosition.x = sourcePosition.x + dx;
+		mapPosition.y = sourcePosition.y + dy;
+	}
 
-	updateToolPosition(angle);
+	updateToolPosition(targetX, targetY);
 
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset); // has to be after update tool position
 }
 
-void Tool::update(Position4& sourcePosition, int& mx, int& my, double& angle, bool& isHeld)
+void Tool::update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld)
 {
 	this->isHeld = isHeld;
-	updatePositions(sourcePosition, mx, my, angle);
+	updatePositions(sourcePosition, targetX, targetY);
 
 	if (this->isHeld)
 	{
@@ -180,10 +190,10 @@ void Melee::doMeleeDamage(std::shared_ptr<Creature>& creature)
 	}
 }
 
-void Melee::update(Position4& sourcePosition, int& mx, int& my, double& angle, bool& isHeld)
+void Melee::update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld)
 {
 	this->isHeld = isHeld;
-	updatePositions(sourcePosition, mx, my, angle);
+	updatePositions(sourcePosition, targetX, targetY);
 
 	if (this->isHeld)
 	{
@@ -383,7 +393,7 @@ Firearm::Firearm(std::string name, TCODColor color, int shotsPerSecond, float re
 	selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), fireClock(1.0f / shotsPerSecond), reloadClock(reloadSpeed)//, fireNumCalls(0), reloadNumCalls(0)
 {}
 
-void Firearm::updateToolPosition(double angle)
+void Firearm::updateToolPosition(int targetX, int targetY)
 {
 	/*
 	02|01
@@ -391,11 +401,16 @@ void Firearm::updateToolPosition(double angle)
 	03|04
 	*/
 	
-	double absAngle = abs(angle);
+	//double absAngle = abs(angle);
 
-	if (isnan(angle)) return;
+	angle = abs(getAngle(sourcePosition.x, sourcePosition.y, targetX, targetY));
 
-	if (absAngle < 22.5f) //left / right
+	if (isnan(angle) || (dx == 0 && dy == 0))
+	{
+		return;
+	}
+
+	if (angle < 22.5f) //left / right
 	{
 		if (dx <= 0) //left
 		{
@@ -418,7 +433,7 @@ void Firearm::updateToolPosition(double angle)
 			ch = TCOD_CHAR_HLINE;
 		}
 	}
-	else if (absAngle > 65.7f) //up / down
+	else if (angle > 65.7f) //up / down
 	{
 		if (dy <= 0) //up
 		{
@@ -621,10 +636,10 @@ void Firearm::changeBarColor(TCODColor& color)
 	}
 }
 
-void Firearm::update(Position4& sourcePosition, int& mx, int& my, double& angle, bool& isHeld)
+void Firearm::update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld)
 {
 	this->isHeld = isHeld;
-	updatePositions(sourcePosition, mx, my, angle);
+	updatePositions(sourcePosition, targetX, targetY);
 	
 	if (this->isHeld)
 	{

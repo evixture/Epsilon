@@ -11,6 +11,8 @@
 #include <string>
 #include <math.h>
 #include <functional>
+#include <list>
+#include <iostream>
 
 
 //Libraries

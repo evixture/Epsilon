@@ -6,6 +6,11 @@ struct AICreature : public Creature
 
 	//pathfinding and movement
 	TCODPath path;
+	int pathStep;
+
+	int destX;
+	int destY;
+
 	int moveSpeedMode;
 
 	//interest

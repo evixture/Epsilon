@@ -16,6 +16,7 @@ struct Tool //base class for the holdable component to items
 
 	int dx; //the delta x of the player and the mouse
 	int dy; //the delta y of the player and the mouse
+	double angle;
 
 	std::string name; //string name of tool
 
@@ -24,10 +25,10 @@ struct Tool //base class for the holdable component to items
 	Tool(std::string name, TCODColor color, int ch); //constuctor used for generic tool that takes string name, color, and character
 	Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag); 
 
-	virtual void updateToolPosition(double angle); //takes angle and updates tool position
-	virtual void updatePositions(Position4& sourcePosition, int& mx, int& my, double& angle); //updates the position of the tool
+	virtual void updateToolPosition(int targetX, int targetY); //updates tool position
+	virtual void updatePositions(Position4& sourcePosition, int& targetX, int& targetY); //updates the position of the tool
 
-	virtual void update(Position4& sourcePosition, int& mx, int& my, double& angle, bool& isHeld); //virtual updates tool
+	virtual void update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld); //virtual updates tool
 	virtual void render(const std::shared_ptr<Pane>& pane) const; //virtual renders tool
 
 	virtual std::shared_ptr<MagazineData> getMagData();				//returns the magazine component, only useful for magazines
@@ -51,7 +52,7 @@ struct Melee : public Tool
 
 	void useMelee(); //use the melee weapon
 	
-	virtual void update(Position4& sourcePosition, int& mx, int& my, double& angle, bool& isHeld);
+	virtual void update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld);
 	virtual void render(const std::shared_ptr<Pane>& pane) const;
 
 private:
@@ -108,9 +109,9 @@ struct Firearm : public Melee //firearm that fires bullets that interact with th
 
 	void changeBarColor(TCODColor& color); //changes the bar color; red on no magazine, green when reloaded
 
-	void updateToolPosition(double angle); //updates the weapon character //replace with derived updateposition from tool
+	void updateToolPosition(int targetX, int targetY); //updates the weapon character //replace with derived updateposition from tool
 
-	void update(Position4& sourcePosition, int& mx, int& my, double& angle, bool& isHeld); //updates firearm
+	void update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld); //updates firearm
 	void render(const std::shared_ptr<Pane>& pane) const; //renders firearm
 
 private:

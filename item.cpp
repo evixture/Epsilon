@@ -129,9 +129,9 @@ void Item::changeBarColor()
 	tool->changeBarColor(barColor);
 }
 
-void Item::updateTool(Position4& mapPosition, int mx, int my, double angle, bool isHeld)
+void Item::updateTool(Position4& mapPosition, int mx, int my, bool isHeld)
 {
-	tool->update(mapPosition, mx, my, angle, isHeld);
+	tool->update(mapPosition, mx, my, isHeld);
 	actionManager->update();
 
 	changeBarColor();
