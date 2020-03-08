@@ -43,6 +43,7 @@ struct World //world struct that deals with rendering and updating the map
 	std::vector<std::shared_ptr<TCODMap>> fovMapList; //the part of the map used to calculate the fov
 
 	std::vector<std::shared_ptr<Sound>> soundList;
+	std::vector<std::shared_ptr<Sound>> soundBuffer;
 
 	World(); //world contructor that takes nothing
 

@@ -2,11 +2,21 @@
 
 struct AICreature : public Creature
 {
-	TCODPath path;
+	TCODColor debugBGColor;
 
+	//pathfinding and movement
+	TCODPath path;
 	int moveSpeedMode;
 
-	TCODColor debugBGColor;
+	//interest
+	float interest;
+	float interestChange;
+	float interestDecay;
+
+	//caution
+	//aggression
+	//fear
+	//stealth
 
 	AICreature(Creature creature, TCODMap* fovMap);
 
@@ -29,4 +39,7 @@ struct AICreature : public Creature
 	void update(); //virtual updates the creature
 	void render(const std::shared_ptr<Pane>& pane) const; // virtual renders the creature
 
+private:
+
+	Clock interestDecayClock;
 };

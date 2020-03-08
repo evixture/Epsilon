@@ -538,6 +538,8 @@ void Firearm::fireBullet()
 
 			}
 			selectedMagazine->availableAmmo--;
+
+			WORLD->soundBuffer.push_back(std::make_shared<Sound>(mapPosition, 120, 100));
 		}
 
 	}

@@ -510,7 +510,7 @@ void World::updateBlock(Position3 blockPosition)
 	{
 		position = Position4(blockPosition.x, blockPosition.y, h + 1, blockPosition.floor);
 
-		fovMapList[h]->setProperties(position.x, position.y, getTransparency(position), getWalkability(position, true));
+		fovMapList[h]->setProperties(position.x, position.y, getTransparency(position), getWalkability(position, false));
 	}
 }
 
@@ -678,6 +678,11 @@ void World::updateEntities()
 
 void World::update()
 {
+	if (soundBuffer.size() > 0)
+	{
+		soundBuffer.clear();
+	}
+
 	xOffset = getOffset(debugmap->player->mapPosition.x, debugmap->width, MAPPANE->drawWindow->consoleWidth);
 	yOffset = getOffset(debugmap->player->mapPosition.y, debugmap->height, MAPPANE->drawWindow->consoleHeight);
 
@@ -703,8 +708,11 @@ void World::update()
 		container->containerItem->updateTile();
 	}
 
-	//WHEN TO CLEAR SOUND LIST
-
+	if (soundList.size() > 0)
+	{
+		soundList.clear();
+	}
+	soundList = soundBuffer; //move all sounds from the buffer to the list so that creatures updated before the sound creation can react
 }
 
 //--------------------------------------------------------------------------------------------
