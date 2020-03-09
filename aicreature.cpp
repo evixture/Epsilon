@@ -3,7 +3,11 @@
 AICreature::AICreature(Creature creature, TCODMap* fovMap)
 	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), interest(0.0f), interestDecay(.025f), interestDecayClock(1.0f), pathStep(0)
 {
-	selectedItem = ITEM_SIP45(0, 0, 0, this);
+	inventory.push_back(CONTAINER_SmallBackpack(0, 0, 0, this));
+	inventory[0]->addItem(ITEM_SIP45(0, 0, 0, this));
+	inventory[0]->addItem(std::make_shared<Item>(ITEM_45Magazine7(0, 0, 0, this)));
+
+	selectedItem = inventory[0]->itemList[0];
 }
 
 void AICreature::move()
