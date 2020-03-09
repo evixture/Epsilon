@@ -187,7 +187,7 @@ void Player::move()
 
 			for (int i = 1; i <= moveClock.numCalls; moveClock.numCalls--)
 			{
-				WORLD->updateBlock(mapPosition, false); 
+				WORLD->updateBlock(mapPosition, false); //clear old position's map properties
 
 				if (WORLD->getWalkability(Position4(mapPosition.x + xMoveDist, mapPosition.y, mapPosition.height, mapPosition.floor), true))
 				{
@@ -200,7 +200,7 @@ void Player::move()
 					yMoveDist = 0;
 				}
 
-				WORLD->updateBlock(mapPosition, true);
+				WORLD->updateBlock(mapPosition, true); //update new position property
 			}
 		}
 	}

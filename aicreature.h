@@ -46,5 +46,7 @@ struct AICreature : public Creature
 
 private:
 
+	void reactToSounds();
+
 	Clock interestDecayClock;
 };

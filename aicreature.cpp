@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 AICreature::AICreature(Creature creature, TCODMap* fovMap)
-	:Creature(creature), path(TCODPath(fovMap, 0.0f)), moveSpeedMode(1), debugBGColor(TCODColor::black), interest(0.0f), interestDecay(.025f), interestDecayClock(1.0f), pathStep(0)
+	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), interest(0.0f), interestDecay(.025f), interestDecayClock(1.0f), pathStep(0)
 {
 	selectedItem = ITEM_SIP45(0, 0, 0, this);
 }
@@ -21,21 +21,11 @@ void AICreature::move()
 	{
 		if (!path.isEmpty()) //has path to walk on
 		{
-			//if (pathStep + 1 > path.size())
-			//{
-			//	pathStep = path.size();
-			//}
-			//else
-			//{
-			//	pathStep++;
-			//}
+			WORLD->updateBlock(mapPosition, false);
 
 			path.walk(&mapPosition.x, &mapPosition.y, true);
 
-			//call on move
-			//path.get(pathStep, &destX, &destY);
-
-			//WORLD->updateBlock(mapPosition);		
+			WORLD->updateBlock(mapPosition, true);		
 		}
 	}
 }
@@ -71,6 +61,45 @@ void AICreature::updateTools()
 	selectedItem->updateTool(mapPosition, destX, destY, true);
 }
 
+void AICreature::reactToSounds()
+{
+	for (auto& sound : WORLD->soundList)
+	{
+		if (sound->soundSource.floor == mapPosition.floor)
+		{
+			double distance = getDistance(mapPosition.x, mapPosition.y, sound->soundSource.x, sound->soundSource.y);
+
+			if (distance > 0.0f)
+			{
+				//interestChange = (4.0f / (distance - 3.0f)); OLD VOLUME EQUATION
+				interestChange = ((15.0f / (distance + 30.0f)) * (sound->worldVolume / 50.f));
+			}
+			else
+			{
+				interestChange = 0.0f;
+			}
+
+			if (interest + interestChange > 1)
+			{
+				interest = 1;
+			}
+			else
+			{
+				interest += interestChange;
+				interestChange = 0;
+			}
+		}
+
+		if (interest > .5f)
+		{
+			destX = sound->soundSource.x;
+			destY = sound->soundSource.y;
+
+			path.compute(mapPosition.x, mapPosition.y, destX, destY); //will compute multiple times?
+		}
+	}
+}
+
 void AICreature::update() //ai and behavior attributes update here
 {
 	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
@@ -86,6 +115,7 @@ void AICreature::update() //ai and behavior attributes update here
 		}
 
 		interestDecayClock.tickUp();
+
 		for (int i = 1; i <= interestDecayClock.numCalls; interestDecayClock.numCalls--)
 		{
 			if (interest - interestDecay < 0)
@@ -98,41 +128,7 @@ void AICreature::update() //ai and behavior attributes update here
 			}
 		}
 
-		for (auto& sound : WORLD->soundList)
-		{
-			if (sound->soundSource.floor == mapPosition.floor)
-			{
-				double distance = getDistance(mapPosition.x, mapPosition.y, sound->soundSource.x, sound->soundSource.y);
-
-				if (distance > 0.0f)
-				{
-					//interestChange = (4.0f / (distance - 3.0f)); OLD VOLUME EQUATION
-					interestChange = ((15.0f / (distance + 30.0f)) * (sound->worldVolume / 50.f));
-				}
-				else
-				{
-					interestChange = 0.0f;
-				}
-
-				if (interest + interestChange > 1)
-				{
-					interest = 1;
-				}
-				else
-				{
-					interest += interestChange;
-					interestChange = 0;
-				}
-			}
-
-			if (interest > .5f)
-			{
-				destX = sound->soundSource.x;
-				destY = sound->soundSource.y;
-
-				path.compute(mapPosition.x, mapPosition.y, destX, destY); //will compute multiple times?
-			}
-		}
+		reactToSounds();
 
 		if (WORLD->isInPlayerFov(mapPosition)) //should it check for all creatures if they are in its fov? if so, need to find out how to make individual fov maps
 		{
@@ -165,3 +161,5 @@ void AICreature::render(const std::shared_ptr<Pane>& pane) const
 		selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
 	}
 }
+
+
