@@ -294,7 +294,7 @@ void Bullet::update()
 						if (WORLD->getTile(mapPosition)->tag == Block::Tag::DESTRUCTIBLE)
 						{
 							WORLD->getTile(mapPosition)->destroy(mass);
-							WORLD->updateBlock(mapPosition); //check if pos needs to be reassigned before
+							WORLD->updateBlock(mapPosition, false); //check if pos needs to be reassigned before
 
 						}
 

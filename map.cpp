@@ -502,7 +502,7 @@ bool World::isExplored(Position3& position) const
  	return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]->explored;
 }
 
-void World::updateBlock(Position3 blockPosition)
+void World::updateBlock(Position3 blockPosition, bool checkCreatures)
 {
 	Position4 position;
 
@@ -510,7 +510,7 @@ void World::updateBlock(Position3 blockPosition)
 	{
 		position = Position4(blockPosition.x, blockPosition.y, h + 1, blockPosition.floor);
 
-		fovMapList[h]->setProperties(position.x, position.y, getTransparency(position), getWalkability(position, false));
+		fovMapList[h]->setProperties(position.x, position.y, getTransparency(position), getWalkability(position, checkCreatures));
 	}
 }
 
