@@ -166,7 +166,9 @@ bool Map::createBlockMap(pugi::xml_node& dataNode)
 				code = s_tileCodeList[tileLocation];
 				code += s_tileCodeList[tileLocation + 1];
 
-				levelList[floor].push_back(getTileFromCode(code));
+				levelList[floor].push_back(std::make_shared<Block>(getTileFromCode(code)));
+				
+				//levelList[floor].push_back(std::make_shared<Block>(Destructible::wall));
 			}
 		}
 		if (levelList.size() == totalFloors && levelList[totalFloors - 1].size() == width * height)
@@ -341,7 +343,7 @@ bool Map::getContainers(pugi::xml_node& dataNode)
 	return false;
 }
 
-std::shared_ptr<Block> Map::getTileFromCode(std::string code)
+Block Map::getTileFromCode(std::string code)
 {
 	static TCODRandom* RNG = TCODRandom::getInstance();
 	if (!RNG)
@@ -360,37 +362,46 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 
 				if (grassRand == 0)
 				{
-					return TILE_Grass0;
+					return Block::grass0;
+					//return TILE_Grass0;
 				}
 				else if (grassRand == 1)
 				{
-					return TILE_Grass1;
+					return Block::grass1;
+					//return TILE_Grass1;
 				}
 				else if (grassRand == 2)
 				{
-					return TILE_Grass2;
+					return Block::grass2;
+					//return TILE_Grass2;
 				}
 				else if (grassRand == 3)
 				{
-					return TILE_Grass3;
+					return Block::grass3;
+					//return TILE_Grass3;
 				}
-				else return TILE_error;
+				else return Block::error;//return TILE_error; 
 				break;
 			}
 			case '_':
-				return TILE_BasicFloor;
+				return Block::floor;
+				//return TILE_BasicFloor;
 				break;
 			case '!':
-				return TILE_BasicConcrete;
+				return Block::concrete;
+				//return TILE_BasicConcrete;
 				break;
 			case '*':
-				return TILE_BasicFlower;
+				return Block::flower;
+				//return TILE_BasicFlower;
 				break;
 			case '3':
-				return TILE_BasicShingle;
+				return Block::shingle;
+				//return TILE_BasicShingle;
 				break;
 			default:
-				return TILE_error;
+				return Block::error;
+				//return TILE_error;
 				break;
 		}
 		break;
@@ -399,13 +410,16 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case '=':
-				return DESTRUCTIBLE_BasicWall;
+				return Destructible::wall;
+				//return DESTRUCTIBLE_BasicWall;
 				break;
 			case 'O':
-				return DESTRUCTIBLE_BasicWindow;
+				return Destructible::window;
+				//return DESTRUCTIBLE_BasicWindow;
 				break;
 			default:
-				return TILE_error;
+				return Block::error;
+				//return TILE_error;
 				break;
 		}
 		break;
@@ -414,10 +428,12 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case '#':
-				return TILE_BasicDoor;
+				return Block::door;
+				//return TILE_BasicDoor;
 				break;
 			default:
-				return TILE_error;
+				return Block::error;
+				//return TILE_error;
 				break;
 		}
 		break;
@@ -426,10 +442,12 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case '`':
-				return TILE_BasicSky;
+				return Block::sky;
+				//return TILE_BasicSky;
 				break;
 			default:
-				return TILE_error;
+				return Block::error;
+				//return TILE_error;
 				break;
 		}
 		break;
@@ -438,13 +456,16 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case 'n':
-				return TILE_BasicTableTop;
+				return Destructible::tableTop;
+				//return TILE_BasicTableTop;
 				break;
 			case 'l':
-				return TILE_BasicTableLeg;
+				return Destructible::tableLeg;
+				//return TILE_BasicTableLeg;
 				break;
 			default:
-				return TILE_error;
+				return Block::error;
+				//return TILE_error;
 				break;
 		}
 		break;
@@ -452,19 +473,23 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case '/':
-				return STAIR_UpStair;
+				return Stair::upStair;
+				//return STAIR_UpStair;
 				break;
 			case '\\':
-				return STAIR_DownStair;
+				return Stair::downStair;
+				//return STAIR_DownStair;
 				break;
 			default:
-				return TILE_error;
+				return Block::error;
+				//return TILE_error;
 				break;
 		}
 		break;
 
 	default: //error tile
-		return TILE_error;
+		return Block::error;
+		//return TILE_error;
 		break;
 	}
 }
@@ -474,7 +499,7 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 World::World()
 	:xOffset(0), yOffset(0)
 {
-	debugmap = std::make_shared<Map>("data/maps/debugmap.xml");
+	debugmap = std::make_shared<Map>("data/maps/debugmap.xml"); //constructed right, but falls out of scope?
 
 	for (int i = 0; i < 3; i++)
 	{

@@ -16,13 +16,11 @@ struct Block //tile class used for the map and items
 	enum TileHeights {FLOOR = 0x01, PRONE = 0x02, CROUCH = 0x04, STAND = 0x08, FULL = 0x16} tileHeights; //if tile is solid at the flag's height
 	unsigned char transparentFlag; //bit flag for transparency at different heights
 	unsigned char walkableFlag; //bit flag for walkability at different heights
+	bool explored; //if the tile has been explored yet
 
 	std::vector<std::shared_ptr<Tile>> tileList; //list [5] of tiles that holds data at different heights
 
-	bool explored; //if the tile has been explored yet
-
 	Block(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag); //generic constructor that take character, foreground and background color, height, and if it is walkable
-
 	Block(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, Tag tag); //constructor that take character, foreground and background color, height, if it is walkable, and the tile type
 
 	std::shared_ptr<Tile> getTileData(int height) const;
@@ -33,6 +31,9 @@ struct Block //tile class used for the map and items
 
 	virtual void destroy(int); //does nothing in block
 	virtual void interact(); //virtual behaves differently depending on tile type, does nothing in tile
+
+	static Block	grass0, grass1, grass2, grass3, flower, 
+					floor, concrete, shingle, door, sky, error;
 };
 
 struct Destructible : public Block //destructible type of tile that can be destroyed by various items
@@ -44,6 +45,8 @@ struct Destructible : public Block //destructible type of tile that can be destr
 
 	void destroy(int damage);
 	bool getDestroyed(); //returns true if the tile has been destroyed
+
+	static Destructible wall, window, tableLeg, tableTop;
 };
 
 struct Stair : public Block //stair type of tile that allows travel between floors
@@ -53,8 +56,9 @@ struct Stair : public Block //stair type of tile that allows travel between floo
 	Stair(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance); //constructor for stair that takes character, colors, height, walkability, and move distance
 
 	void interact(); //moves player the move distance
-};
 
+	static Stair upStair, downStair;
+};
 
 //map sections
 /*
@@ -139,3 +143,23 @@ SECTION 2
 	}
 
 */
+
+//TILE DEFS
+
+//Block			Block::grass0 =				Block		(DATA_Grass0,			OOOOI,	OOOOI);
+//Block			Block::grass1 =				Block		(DATA_Grass1,			OOOOI,	OOOOI);
+//Block			Block::grass2 =				Block		(DATA_Grass2,			OOOOI,	OOOOI);
+//Block			Block::grass3 =				Block		(DATA_Grass3,			OOOOI,	OOOOI);
+//Block			Block::flower =				Block		(DATA_BasicFlower,		OOIII,	OOOOI);
+//Block			Block::floor =				Block		(DATA_BasicFloor,		OOOOI,	OOOOI);
+//Block			Block::concrete =			Block		(DATA_BasicConcrete,	OOOOI,	OOOOI);
+//Block			Block::shingle =			Block		(DATA_BasicShingle,		OOOOI,	OOOOI);
+//Block			Block::door =				Block		(DATA_BasicDoor,		IIIII,	OOOOI);
+//Destructible	Destructible::wall =		Destructible(DATA_BasicWall,		IIIII,	IIIII,	1000);
+//Destructible	Destructible::window =		Destructible(DATA_BasicWindow,		OOIII,	IIIII,	100);
+//Destructible	Destructible::tableLeg =	Destructible(DATA_BasicTableLeg,	OOIII,	OOIII,	500);
+//Destructible	Destructible::tableTop =	Destructible(DATA_BasicTableTop,	OOIOI,	OOIOI,	500);
+//Stair			Stair::upStair =			Stair		(DATA_UpStair,			OOOOI,	OOIII,	1);
+//Stair			Stair::downStair =			Stair		(DATA_DownStair,		OOOOI,	OOIII,	-1);
+//Block			Block::sky =				Block		(DATA_BasicSky,			OOOOO,	OOOOO);
+//Block			Block::error =				Block		(DATA_Error,			IIIII,	IIIII);

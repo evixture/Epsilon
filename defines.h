@@ -416,18 +416,17 @@ ITEM SIZES
 */
 
 //DEFAULTS
-			#define DEFAULT_ITEM_TILE								std::make_shared<Block>				(DATA_BasicDoor, OOOOI, OOOOI)
+			#define DEFAULT_ITEM_TILE									std::make_shared<Block>			(DATA_BasicDoor, OOOOI, OOOOI)
 
 //CONTAINERS
 	//SMALL BACKPACK
-				#define TILE_SmallBackpack							std::make_shared<Block>				(DATA_Backpack, OOOOI, OOOOI)
-				#define TOOL_SmallBackpack							std::make_shared<Tool>				("Small Backpack",							ITEMCOLOR_SMALLBACKPACKFG,													CHAR_Backpack)
-			#define ITEM_SmallBackpack(x, y, level, owner)			std::make_shared<Item>				(2,											TILE_SmallBackpack,															TOOL_SmallBackpack,				Position4(x, y, 0, level),		owner,										Item::ItemType::NORMAL)
-		#define CONTAINER_SmallBackpack(x, y, level, owner)			std::make_shared<Container>			(5,											ITEM_SmallBackpack(x, y, level, owner))
+				#define TILE_SmallBackpack								std::make_shared<Block>			(DATA_Backpack, OOOOI, OOOOI)
+				#define TOOL_SmallBackpack								std::make_shared<Tool>			("Small Backpack",							ITEMCOLOR_SMALLBACKPACKFG,													CHAR_Backpack)
+			#define ITEM_SmallBackpack(x, y, level, owner)				std::make_shared<Item>			(2,											TILE_SmallBackpack,															TOOL_SmallBackpack,				Position4(x, y, 0, level),		owner,										Item::ItemType::NORMAL)
+		#define CONTAINER_SmallBackpack(x, y, level, owner)				std::make_shared<Container>		(5,											ITEM_SmallBackpack(x, y, level, owner))
 
 //ITEMS
 	//HANDS
-		//	#define TOOL_Hands											std::make_shared<Tool>			("Hands",									ITEMCOLOR_HANDFG,															TCOD_CHAR_UMLAUT)
 			#define MELEE_Hands											std::make_shared<Melee>			(Tool("Hands",								ITEMCOLOR_HANDFG,															TCOD_CHAR_UMLAUT),								30,																			20)
 		#define ITEM_Hands(x, y, level, owner)							std::make_shared<Item>			(1,											DEFAULT_ITEM_TILE,															MELEE_Hands,						Position4(x, y, 0, level),		owner,										Item::ItemType::HAND)
 

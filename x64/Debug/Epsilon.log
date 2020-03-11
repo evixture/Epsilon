@@ -1,3 +1,2 @@
 ﻿  aicreature.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\aicreature.cpp(79,52): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

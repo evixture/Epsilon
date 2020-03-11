@@ -76,7 +76,7 @@ void AICreature::reactToSounds()
 			if (distance > 0.0f)
 			{
 				//interestChange = (4.0f / (distance - 3.0f)); OLD VOLUME EQUATION
-				interestChange = ((15.0f / (distance + 30.0f)) * (sound->worldVolume / 50.f));
+				interestChange = (float)((15.0f / (distance + 30.0f)) * (sound->worldVolume / 50.f));
 			}
 			else
 			{

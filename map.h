@@ -31,7 +31,7 @@ private:
 	bool getItems(pugi::xml_node& dataNode);
 	bool getContainers(pugi::xml_node& dataNode);
 
-	std::shared_ptr<Block> getTileFromCode(std::string code);
+	Block getTileFromCode(std::string code);
 };
 
 struct World //world struct that deals with rendering and updating the map

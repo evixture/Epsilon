@@ -9,10 +9,10 @@
 #include <vector>
 #include <algorithm>
 #include <string>
-#include <math.h>
+//#include <cmath>
 #include <functional>
-#include <list>
-#include <iostream>
+//#include <list>
+//#include <iostream>
 
 
 //Libraries
