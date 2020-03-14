@@ -1,25 +1,5 @@
 #include "main.hpp"
 
-//blocks still not constructed right
-//std::shared_ptr<Block		>	grass0 =	std::make_shared<Block>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, OOOOI, OOOOI);
-//std::shared_ptr<Block		>	grass1 =	std::make_shared<Block>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, OOOOI, OOOOI);
-//std::shared_ptr<Block		>	grass2 =	std::make_shared<Block>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, OOOOI, OOOOI);
-//std::shared_ptr<Block		>	grass3 =	std::make_shared<Block>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, OOOOI, OOOOI);
-//std::shared_ptr<Block		>	flower =	std::make_shared<Block>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, OOIII, OOOOI);
-//std::shared_ptr<Block		>	floor =	std::make_shared<Block>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, OOOOI, OOOOI);
-//std::shared_ptr<Block		>	concrete =	std::make_shared<Block>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, OOOOI, OOOOI);
-//std::shared_ptr<Block		>	shingle =	std::make_shared<Block>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, OOOOI, OOOOI);
-//std::shared_ptr<Block		>	door =		std::make_shared<Block>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, IIIII, OOOOI);
-//std::shared_ptr<Block		>	sky =		std::make_shared<Block>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, OOOOO, OOOOO);
-//std::shared_ptr<Block		>	error =		std::make_shared<Block>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, IIIII, IIIII);
-//std::shared_ptr<Destructible>	wall =		std::make_shared<Destructible>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, IIIII, IIIII, 1000);
-//std::shared_ptr<Destructible>	window =	std::make_shared<Destructible>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, OOIII, IIIII, 100);
-//std::shared_ptr<Destructible>	tableLeg =	std::make_shared<Destructible>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, OOIII, OOIII, 500);
-//std::shared_ptr<Destructible>	tableTop =	std::make_shared<Destructible>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, OOIOI, OOIOI, 500);
-//std::shared_ptr<Stair		>	upStair =	std::make_shared<Stair>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, OOOOI, OOIII, 1);
-//std::shared_ptr<Stair		>	downStair = std::make_shared<Stair>(std::vector<std::shared_ptr<Tile>>{std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999), std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)}, OOOOI, OOIII, -1);
-
-
 Map::Map(std::string filePath)
 	:filePath(filePath), height(NULL), width(NULL), totalFloors(NULL)
 {
@@ -383,46 +363,37 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 				if (grassRand == 0)
 				{
 					return std::make_shared<Block>(ep::block::grass0);
-					//return std::make_shared<Block>(grass0); //is not returning the data, block does not have it?
-					//return TILE_Grass0;
 				}
 				else if (grassRand == 1)
 				{
-					//return std::make_shared<Block>(grass1);
-					return TILE_Grass1;
+					return std::make_shared<Block>(ep::block::grass1);
 				}
 				else if (grassRand == 2)
 				{
-					//return grass2;
-					return TILE_Grass2;
+					return std::make_shared<Block>(ep::block::grass2);
 				}
 				else if (grassRand == 3)
 				{
-					//return grass3;
-					return TILE_Grass3;
+					return std::make_shared<Block>(ep::block::grass3);
+
 				}
-				return TILE_error; //else return error;
+				return std::make_shared<Block>(ep::block::error);
 				break;
 			}
 			case '_':
-				//return floor;
-				return TILE_BasicFloor;
+				return std::make_shared<Block>(ep::block::floor);
 				break;
 			case '!':
-				//return concrete;
-				return TILE_BasicConcrete;
+				return std::make_shared<Block>(ep::block::concrete);
 				break;
 			case '*':
-				//return flower;
-				return TILE_BasicFlower;
+				return std::make_shared<Block>(ep::block::flower);
 				break;
 			case '3':
-				//return shingle;
-				return TILE_BasicShingle;
+				return std::make_shared<Block>(ep::block::shingle);
 				break;
 			default:
-				//return error;
-				return TILE_error;
+				return std::make_shared<Block>(ep::block::error);
 				break;
 		}
 		break;
@@ -432,16 +403,12 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 		{
 			case '=':
 				return std::make_shared<Destructible>(ep::block::wall);
-				//return wall;
-				//return DESTRUCTIBLE_BasicWall;
 				break;
 			case 'O':
-				//return window;
-				return DESTRUCTIBLE_BasicWindow;
+				return std::make_shared<Destructible>(ep::block::window);
 				break;
 			default:
-				//return error;
-				return TILE_error;
+				return std::make_shared<Block>(ep::block::error);
 				break;
 		}
 		break;
@@ -450,12 +417,10 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case '#':
-				//return door;
-				return TILE_BasicDoor;
+				return std::make_shared<Block>(ep::block::door);
 				break;
 			default:
-				//return error;
-				return TILE_error;
+				return std::make_shared<Block>(ep::block::error);
 				break;
 		}
 		break;
@@ -464,12 +429,10 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case '`':
-				//return sky;
-				return TILE_BasicSky;
+				return std::make_shared<Block>(ep::block::sky);
 				break;
 			default:
-				//return error;
-				return TILE_error;
+				return std::make_shared<Block>(ep::block::error);
 				break;
 		}
 		break;
@@ -478,16 +441,13 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case 'n':
-				//return tableTop;
-				return TILE_BasicTableTop;
+				return std::make_shared<Destructible>(ep::block::tableTop);
 				break;
 			case 'l':
-				//return tableLeg;
-				return TILE_BasicTableLeg;
+				return std::make_shared<Destructible>(ep::block::tableLeg);
 				break;
 			default:
-				//return error;
-				return TILE_error;
+				return std::make_shared<Block>(ep::block::error);
 				break;
 		}
 		break;
@@ -495,23 +455,19 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case '/':
-				//return upStair;
-				return STAIR_UpStair;
+				return std::make_shared<Stair>(ep::block::upStair);
 				break;
 			case '\\':
-				//return downStair;
-				return STAIR_DownStair;
+				return std::make_shared<Stair>(ep::block::downStair);
 				break;
 			default:
-				//return error;
-				return TILE_error;
+				return std::make_shared<Block>(ep::block::error);
 				break;
 		}
 		break;
 
-	default: //error tile
-		//return error;
-		return TILE_error;
+	default:
+		return std::make_shared<Block>(ep::block::error);
 		break;
 	}
 }
@@ -540,7 +496,7 @@ std::shared_ptr<Block> World::getBlock(Position3 position) const
 	}
 	else
 	{
-		return TILE_error;
+		return std::make_shared<Block>(ep::block::error);
 	}
 }
 
@@ -583,10 +539,12 @@ void World::addContainer(std::shared_ptr<Container> container)
 
 bool World::inMapBounds(Position3& position) const
 {
-	if (position.floor < 0 || position.floor >= debugmap->totalFloors) return false;
-	if (position.x < 0 || position.x >= debugmap->width) return false;
-	if (position.y < 0 || position.y >= debugmap->height) return false;
-	return true;
+	if ((position.floor >= 0 && position.floor < debugmap->totalFloors) && (position.x >= 0 && position.x < debugmap->width) && (position.y >= 0 && position.y < debugmap->height)) return true;
+	return false;
+	//if (position.floor < 0 || position.floor >= debugmap->totalFloors) return false;
+	//if (position.x < 0 || position.x >= debugmap->width) return false;
+	//if (position.y < 0 || position.y >= debugmap->height) return false;
+	//return true;
 }
 
 int World::getOffset(int playerx, int mapw, int renderw)

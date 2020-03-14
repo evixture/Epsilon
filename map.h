@@ -37,8 +37,6 @@ private:
 	std::shared_ptr<Block> getTileFromCode(std::string code);
 };
 
-//const Block Map::grass0 = Block(DATA_Grass0, OOOOI, OOOOI);
-
 struct World //world struct that deals with rendering and updating the map
 {
 	int xOffset; //CHECK the x offset of the rendered portion of the map

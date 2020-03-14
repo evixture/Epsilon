@@ -550,9 +550,6 @@ void Player::update()
 
 void Player::render(const std::shared_ptr<Pane>& pane) const
 {
-	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
-
 	if (backgroundColor != TCODColor::pink)
 	{
 		pane->console->setCharBackground(renderPosition.x, renderPosition.y, backgroundColor);
@@ -562,5 +559,8 @@ void Player::render(const std::shared_ptr<Pane>& pane) const
 	{
 		selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
 	}
+
+	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
 }
 

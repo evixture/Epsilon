@@ -367,34 +367,34 @@ constexpr auto PI = 3.14159265;
 //TILES
 	//GROUND
 		//GRASS PATTERNS
-			#define TILE_Grass0				std::make_shared<Block>			(DATA_Grass0,			OOOOI,	OOOOI)
-			#define TILE_Grass1				std::make_shared<Block>			(DATA_Grass1,			OOOOI,	OOOOI)
-			#define TILE_Grass2				std::make_shared<Block>			(DATA_Grass2,			OOOOI,	OOOOI)
-			#define TILE_Grass3				std::make_shared<Block>			(DATA_Grass3,			OOOOI,	OOOOI)
+//			#define TILE_Grass0				std::make_shared<Block>			(DATA_Grass0,			OOOOI,	OOOOI)
+//			#define TILE_Grass1				std::make_shared<Block>			(DATA_Grass1,			OOOOI,	OOOOI)
+//			#define TILE_Grass2				std::make_shared<Block>			(DATA_Grass2,			OOOOI,	OOOOI)
+//			#define TILE_Grass3				std::make_shared<Block>			(DATA_Grass3,			OOOOI,	OOOOI)
 
-	#define TILE_BasicFlower				std::make_shared<Block>			(DATA_BasicFlower,		OOIII,	OOOOI)
-	#define TILE_BasicFloor					std::make_shared<Block>			(DATA_BasicFloor,		OOOOI,	OOOOI)
-	#define TILE_BasicConcrete				std::make_shared<Block>			(DATA_BasicConcrete,	OOOOI,	OOOOI)
-	#define TILE_BasicShingle				std::make_shared<Block>			(DATA_BasicShingle,		OOOOI,	OOOOI)
+//	#define TILE_BasicFlower				std::make_shared<Block>			(DATA_BasicFlower,		OOIII,	OOOOI)
+//	#define TILE_BasicFloor					std::make_shared<Block>			(DATA_BasicFloor,		OOOOI,	OOOOI)
+//	#define TILE_BasicConcrete				std::make_shared<Block>			(DATA_BasicConcrete,	OOOOI,	OOOOI)
+//	#define TILE_BasicShingle				std::make_shared<Block>			(DATA_BasicShingle,		OOOOI,	OOOOI)
 
 	//WALL
-	#define TILE_BasicDoor					std::make_shared<Block>			(DATA_BasicDoor,		IIIII,	OOOOI)
-	#define DESTRUCTIBLE_BasicWall			std::make_shared<Destructible>	(DATA_BasicWall,		IIIII,	IIIII,	1000)
-	#define DESTRUCTIBLE_BasicWindow		std::make_shared<Destructible>	(DATA_BasicWindow,		OOIII,	IIIII,	100)
+//	#define TILE_BasicDoor					std::make_shared<Block>			(DATA_BasicDoor,		IIIII,	OOOOI)
+//	#define DESTRUCTIBLE_BasicWall			std::make_shared<Destructible>	(DATA_BasicWall,		IIIII,	IIIII,	1000)
+//	#define DESTRUCTIBLE_BasicWindow		std::make_shared<Destructible>	(DATA_BasicWindow,		OOIII,	IIIII,	100)
 
 	//PART HEIGHT
-	#define TILE_BasicTableLeg				std::make_shared<Destructible>	(DATA_BasicTableLeg,	OOIII,	OOIII,	500)
-	#define TILE_BasicTableTop				std::make_shared<Destructible>	(DATA_BasicTableTop,	OOIOI,	OOIOI,	500)
+//	#define TILE_BasicTableLeg				std::make_shared<Destructible>	(DATA_BasicTableLeg,	OOIII,	OOIII,	500)
+//	#define TILE_BasicTableTop				std::make_shared<Destructible>	(DATA_BasicTableTop,	OOIOI,	OOIOI,	500)
 
 	//STAIR
-	#define STAIR_UpStair					std::make_shared<Stair>			(DATA_UpStair,			OOOOI,	OOIII,	1)
-	#define STAIR_DownStair					std::make_shared<Stair>			(DATA_DownStair,		OOOOI,	OOIII, -1)
+//	#define STAIR_UpStair					std::make_shared<Stair>			(DATA_UpStair,			OOOOI,	OOIII,	1)
+//	#define STAIR_DownStair					std::make_shared<Stair>			(DATA_DownStair,		OOOOI,	OOIII, -1)
 
 	//SKY
-	#define TILE_BasicSky					std::make_shared<Block>			(DATA_BasicSky,			OOOOO,	OOOOO)
+//	#define TILE_BasicSky					std::make_shared<Block>			(DATA_BasicSky,			OOOOO,	OOOOO)
 
 	//ERROR
-	#define TILE_error						std::make_shared<Block>			(DATA_Error,			IIIII,	IIIII)
+//	#define TILE_error						std::make_shared<Block>			(DATA_Error,			IIIII,	IIIII)
 
 	//----------------------------------------------------------------------------------------------------
 

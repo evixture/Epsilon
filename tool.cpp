@@ -377,10 +377,13 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 			}
 			else
 			{
-				if (WORLD->getBlock(mapPosition)->getTileData(mapPosition.height)->ch != 0)
-				{
-					WORLD->getBlock(mapPosition)->getTileData(mapPosition.height)->ch = ch; //move to update
-				}
+				pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+				pane->console->setCharForeground(renderPosition.x, renderPosition.y, WORLD->getBlock(mapPosition)->tileList[0]->foregroundColor);
+
+				//if (WORLD->getBlock(mapPosition)->getTileData(mapPosition.height)->ch != 0) //if the bullet is on the ground and the char is not the bullet
+				//{
+				//	WORLD->getBlock(mapPosition)->getTileData(mapPosition.height)->ch = ch; //move to update
+				//}
 			}
 		}
 	}
@@ -660,7 +663,7 @@ void Firearm::update(Position4& sourcePosition, int& targetX, int& targetY, bool
 		}
 	}
 
-	if (bulletList.size() > selectedMagazine->ammoCapacity) //clean up extra bullets
+	if (bulletList.size() > selectedMagazine->ammoCapacity * 5) //clean up extra bullets if there are more than 5 magazines worth of bullets on the map
 	{
 		bulletList.pop_back();
 	}
