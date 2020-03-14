@@ -291,20 +291,20 @@ void Bullet::update()
 				{
 					if (WORLD->getSolidity(mapPosition) == true) //if hit a wall
 					{
-						if (WORLD->getTile(mapPosition)->tag == Block::Tag::DESTRUCTIBLE)
+						if (WORLD->getBlock(mapPosition)->tag == Block::Tag::DESTRUCTIBLE)
 						{
-							WORLD->getTile(mapPosition)->destroy(mass);
+							WORLD->getBlock(mapPosition)->destroy(mass);
 							WORLD->updateBlock(mapPosition, false); //check if pos needs to be reassigned before
 
 						}
 
-						if (currentVelocity - WORLD->getTile(mapPosition)->getTileData(mapPosition.height)->deceleration <= 0)
+						if (currentVelocity - WORLD->getBlock(mapPosition)->getTileData(mapPosition.height)->deceleration <= 0)
 						{
 							currentVelocity = 0;
 						}
 						else
 						{
-							currentVelocity -= WORLD->getTile(mapPosition)->getTileData(mapPosition.height)->deceleration;
+							currentVelocity -= WORLD->getBlock(mapPosition)->getTileData(mapPosition.height)->deceleration;
 						}
 
 						GUI->logWindow->pushMessage(LogWindow::Message("You hit a wall!", LogWindow::Message::MessageLevel::HIGH));
@@ -377,9 +377,9 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 			}
 			else
 			{
-				if (WORLD->getTile(mapPosition)->getTileData(mapPosition.height)->ch != 0)
+				if (WORLD->getBlock(mapPosition)->getTileData(mapPosition.height)->ch != 0)
 				{
-					WORLD->getTile(mapPosition)->getTileData(mapPosition.height)->ch = ch; //move to update
+					WORLD->getBlock(mapPosition)->getTileData(mapPosition.height)->ch = ch; //move to update
 				}
 			}
 		}

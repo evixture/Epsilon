@@ -19,6 +19,9 @@ struct Map //map class deals with the map and creatures and the data used for th
 
 	Map(std::string filePath); //map constructor that takes a string file path
 
+	//BLOCK GLOBALS
+	//inline static const Block grass0 = Block(DATA_Grass0, OOOOI, OOOOI);
+
 private:
 	bool getMapName(pugi::xml_node& dataNode);
 	bool getMapLevels(pugi::xml_node& dataNode);
@@ -31,8 +34,10 @@ private:
 	bool getItems(pugi::xml_node& dataNode);
 	bool getContainers(pugi::xml_node& dataNode);
 
-	Block getTileFromCode(std::string code);
+	std::shared_ptr<Block> getTileFromCode(std::string code);
 };
+
+//const Block Map::grass0 = Block(DATA_Grass0, OOOOI, OOOOI);
 
 struct World //world struct that deals with rendering and updating the map
 {
@@ -47,14 +52,14 @@ struct World //world struct that deals with rendering and updating the map
 
 	World(); //world contructor that takes nothing
 
-	std::shared_ptr<Block> getTile	(Position3 position) const; //returns the tile at specific coordinates
+	std::shared_ptr<Block> getBlock	(Position3 position) const; //returns the tile at specific coordinates
 	TCODColor getBgColor			(Position3& position) const; //gets the background color of the tile at specific coordinates
 
 	bool    getTransparency			(Position4& position) const; //gets the transparency of a tile
 	bool    getWalkability			(Position4 position, bool checkCreatures) const; //gets the walkability of a tile
 	bool	getSolidity				(Position4& position) const;
 	bool	inMapBounds				(Position3& position) const; //checks if the coordinates are in the map bounds
-	bool	isInPlayerFov					(Position4 position) const; //returns true if the coordinates are in fov
+	bool	isInPlayerFov			(Position4 position) const; //returns true if the coordinates are in fov
 	bool	isExplored				(Position3& position) const; //checks if a tile has been explored previously
 
 	void updateBlock(Position3 blockPosition, bool checkCreatures);

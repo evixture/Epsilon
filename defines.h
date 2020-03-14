@@ -175,7 +175,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>('.', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG	, 999),					\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),					\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),					\
-			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),					\
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0)					\
 		}																								\
 																										
 #define DATA_Grass1																						\
@@ -183,7 +183,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>('"', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG	, 999),					\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),					\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),					\
-			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),					\
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0)					\
 		}																								\
 																										
 #define DATA_Grass2																						\
@@ -191,7 +191,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>('`', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG	, 999),					\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),					\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),					\
-			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),					\
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0)					\
 		}																								\
 																										
 #define DATA_Grass3																						\
@@ -199,7 +199,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(',', WORLDCOLOR_GrassFG, WORLDCOLOR_GrassBG	, 999),					\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),					\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),					\
-			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),					\
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0)					\
 		}																								\
 																										
 #define DATA_BasicFlower																				\
@@ -207,7 +207,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(CHAR_Flower, WORLDCOLOR_FlowerFG,	WORLDCOLOR_FlowerBG	, 10),		\
 			std::make_shared<Tile>(CHAR_Flower, WORLDCOLOR_FlowerFG,	WORLDCOLOR_FlowerBG	, 10),		\
 			std::make_shared<Tile>(CHAR_Flower, WORLDCOLOR_FlowerFG,	WORLDCOLOR_FlowerBG	, 10),		\
-			std::make_shared<Tile>(0,			TCODColor::pink,		TCODColor::pink		, 0),		\
+			std::make_shared<Tile>(0,			TCODColor::pink,		TCODColor::pink		, 0)		\
 		}																								\
 																										
 #define DATA_BasicFloor																					\
@@ -215,7 +215,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(' ', WORLDCOLOR_FloorFG, WORLDCOLOR_FloorBG	, 999),					\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),					\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),					\
-			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),					\
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0)					\
 		}																								\
 																										
 #define DATA_BasicConcrete																				\
@@ -223,7 +223,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>('`', WORLDCOLOR_ConcreteFG,	WORLDCOLOR_ConcreteBG	, 999),			\
 			std::make_shared<Tile>(0,	TCODColor::pink,		TCODColor::pink			, 0),			\
 			std::make_shared<Tile>(0,	TCODColor::pink,		TCODColor::pink			, 0),			\
-			std::make_shared<Tile>(0,	TCODColor::pink,		TCODColor::pink			, 0),			\
+			std::make_shared<Tile>(0,	TCODColor::pink,		TCODColor::pink			, 0)			\
 		}																								\
 																										
 #define DATA_BasicShingle																				\
@@ -231,7 +231,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(240, WORLDCOLOR_ShingleFG,	WORLDCOLOR_ShingleBG, 999),				\
 			std::make_shared<Tile>(0,	TCODColor::pink,		TCODColor::pink		, 0),				\
 			std::make_shared<Tile>(0,	TCODColor::pink,		TCODColor::pink		, 0),				\
-			std::make_shared<Tile>(0,	TCODColor::pink,		TCODColor::pink		, 0),				\
+			std::make_shared<Tile>(0,	TCODColor::pink,		TCODColor::pink		, 0)				\
 		}																								\
 																										
 #define DATA_BasicDoor																					\
@@ -239,7 +239,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(CHAR_Door, WORLDCOLOR_DoorFG, WORLDCOLOR_WallBG, 25),				\
 			std::make_shared<Tile>(CHAR_Door, WORLDCOLOR_DoorFG, WORLDCOLOR_WallBG, 25),				\
 			std::make_shared<Tile>(CHAR_Door, WORLDCOLOR_DoorFG, WORLDCOLOR_WallBG, 25),				\
-			std::make_shared<Tile>(CHAR_Door, WORLDCOLOR_DoorFG, WORLDCOLOR_WallBG, 25),				\
+			std::make_shared<Tile>(CHAR_Door, WORLDCOLOR_DoorFG, WORLDCOLOR_WallBG, 25)				\
 		}																								\
 																										
 #define DATA_BasicWall																					\
@@ -247,7 +247,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>('#', WORLDCOLOR_WallFG, WORLDCOLOR_WallBG, 50),						\
 			std::make_shared<Tile>('#', WORLDCOLOR_WallFG, WORLDCOLOR_WallBG, 50),						\
 			std::make_shared<Tile>('#', WORLDCOLOR_WallFG, WORLDCOLOR_WallBG, 50),						\
-			std::make_shared<Tile>('#', WORLDCOLOR_WallFG, WORLDCOLOR_WallBG, 50),						\
+			std::make_shared<Tile>('#', WORLDCOLOR_WallFG, WORLDCOLOR_WallBG, 50)						\
 		}																								\
 																										
 #define DATA_BasicWindow																				\
@@ -255,7 +255,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>('#',			WORLDCOLOR_WallFG,		WORLDCOLOR_WallBG	, 50),		\
 			std::make_shared<Tile>('#',			WORLDCOLOR_WallFG,		WORLDCOLOR_WallBG	, 50),		\
 			std::make_shared<Tile>('#',			WORLDCOLOR_WallFG,		WORLDCOLOR_WallBG	, 50),		\
-			std::make_shared<Tile>(CHAR_Window, WORLDCOLOR_WindowFG,	WORLDCOLOR_WindowBG	, 0),		\
+			std::make_shared<Tile>(CHAR_Window, WORLDCOLOR_WindowFG,	WORLDCOLOR_WindowBG	, 0)		\
 		}																								\
 																										
 #define DATA_BasicTableLeg																				\
@@ -263,7 +263,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(' ',			WORLDCOLOR_FloorFG, WORLDCOLOR_FloorBG	,999),			\
 			std::make_shared<Tile>('!',			WORLDCOLOR_TableFG, WORLDCOLOR_FloorBG	,25),			\
 			std::make_shared<Tile>(CHAR_Table,	WORLDCOLOR_TableFG, WORLDCOLOR_FloorBG	,25),			\
-			std::make_shared<Tile>(0,			TCODColor::pink,	TCODColor::pink		,0),			\
+			std::make_shared<Tile>(0,			TCODColor::pink,	TCODColor::pink		,0)			\
 		}																								\
 																										
 #define DATA_BasicTableTop																				\
@@ -271,7 +271,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(' ',			WORLDCOLOR_FloorFG, WORLDCOLOR_FloorBG	, 999),			\
 			std::make_shared<Tile>(0,			TCODColor::pink,	TCODColor::pink		, 0),			\
 			std::make_shared<Tile>(CHAR_Table,	WORLDCOLOR_TableFG, WORLDCOLOR_FloorBG	, 25),			\
-			std::make_shared<Tile>(0,			TCODColor::pink,	TCODColor::pink		, 0),			\
+			std::make_shared<Tile>(0,			TCODColor::pink,	TCODColor::pink		, 0)			\
 		}																								\
 																										
 #define DATA_UpStair																					\
@@ -279,7 +279,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(CHAR_UpStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG	, 50),			\
 			std::make_shared<Tile>(CHAR_UpStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG	, 50),			\
 			std::make_shared<Tile>(CHAR_UpStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG	, 50),			\
-			std::make_shared<Tile>(CHAR_UpStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG	, 50),			\
+			std::make_shared<Tile>(CHAR_UpStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG	, 50)			\
 		}																								\
 																										
 #define DATA_DownStair																					\
@@ -287,7 +287,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(CHAR_DownStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG, 50),			\
 			std::make_shared<Tile>(CHAR_DownStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG, 50),			\
 			std::make_shared<Tile>(CHAR_DownStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG, 50),			\
-			std::make_shared<Tile>(CHAR_DownStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG, 50),			\
+			std::make_shared<Tile>(CHAR_DownStair, WORLDCOLOR_DoorFG, WORLDCOLOR_FloorBG, 50)			\
 		}																								\
 																										
 #define DATA_BasicSky																					\
@@ -295,7 +295,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(' ', WORLDCOLOR_WindowBG, WORLDCOLOR_WindowBG, 0),					\
 			std::make_shared<Tile>(' ', WORLDCOLOR_WindowBG, WORLDCOLOR_WindowBG, 0),					\
 			std::make_shared<Tile>(' ', WORLDCOLOR_WindowBG, WORLDCOLOR_WindowBG, 0),					\
-			std::make_shared<Tile>(' ', WORLDCOLOR_WindowBG, WORLDCOLOR_WindowBG, 0),					\
+			std::make_shared<Tile>(' ', WORLDCOLOR_WindowBG, WORLDCOLOR_WindowBG, 0)					\
 		}																								\
 																										
 #define DATA_Error																						\
@@ -303,7 +303,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999),							\
 			std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999),							\
 			std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999),							\
-			std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999),							\
+			std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)							\
 		}																								\
 																										
 //TOOL TILE DATA																						
@@ -312,7 +312,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(CHAR_Pistol, ITEMCOLOR_PISTOLFG, ITEMCOLOR_ITEMBG, 0),				\
 			std::make_shared<Tile>(0,			TCODColor::pink,	TCODColor::pink	, 0),				\
 			std::make_shared<Tile>(0,			TCODColor::pink,	TCODColor::pink	, 0),				\
-			std::make_shared<Tile>(0,			TCODColor::pink,	TCODColor::pink	, 0),				\
+			std::make_shared<Tile>(0,			TCODColor::pink,	TCODColor::pink	, 0)				\
 		}																								\
 																										
 #define DATA_PistolMagazine																				\
@@ -320,7 +320,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(CHAR_PistolMagazine, ITEMCOLOR_PISTOLFG, ITEMCOLOR_ITEMBG, 0),		\
 			std::make_shared<Tile>(0,					TCODColor::pink,	TCODColor::pink	, 0),		\
 			std::make_shared<Tile>(0,					TCODColor::pink,	TCODColor::pink	, 0),		\
-			std::make_shared<Tile>(0,					TCODColor::pink,	TCODColor::pink	, 0),		\
+			std::make_shared<Tile>(0,					TCODColor::pink,	TCODColor::pink	, 0)		\
 		}																								\
 																										
 #define DATA_Rifle																						\
@@ -328,7 +328,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(CHAR_Rifle,	ITEMCOLOR_RIFLEFG,	ITEMCOLOR_ITEMBG, 0),				\
 			std::make_shared<Tile>(0,			TCODColor::pink,	TCODColor::pink	, 0),				\
 			std::make_shared<Tile>(0,			TCODColor::pink,	TCODColor::pink	, 0),				\
-			std::make_shared<Tile>(0,			TCODColor::pink,	TCODColor::pink	, 0),				\
+			std::make_shared<Tile>(0,			TCODColor::pink,	TCODColor::pink	, 0)				\
 		}																								\
 																										
 #define DATA_RifleMagazine																				\
@@ -336,7 +336,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(CHAR_RifleMagazine,	ITEMCOLOR_RIFLEFG,	ITEMCOLOR_ITEMBG, 0),		\
 			std::make_shared<Tile>(0,					TCODColor::pink,	TCODColor::pink	, 0),		\
 			std::make_shared<Tile>(0,					TCODColor::pink,	TCODColor::pink	, 0),		\
-			std::make_shared<Tile>(0,					TCODColor::pink,	TCODColor::pink	, 0),		\
+			std::make_shared<Tile>(0,					TCODColor::pink,	TCODColor::pink	, 0)		\
 		}																								\
 																										
 #define DATA_Backpack																					\
@@ -344,7 +344,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(CHAR_Backpack,	ITEMCOLOR_SMALLBACKPACKFG,	ITEMCOLOR_ITEMBG, 0),	\
 			std::make_shared<Tile>(0,				TCODColor::pink,			TCODColor::pink	, 0),	\
 			std::make_shared<Tile>(0,				TCODColor::pink,			TCODColor::pink	, 0),	\
-			std::make_shared<Tile>(0,				TCODColor::pink,			TCODColor::pink	, 0),	\
+			std::make_shared<Tile>(0,				TCODColor::pink,			TCODColor::pink	, 0)	\
 		}																								\
 
 #define DATA_L1R3Armor																					\
@@ -352,7 +352,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(CHAR_BallisticVest,	TCODColor::black,	ITEMCOLOR_ITEMBG, 0),		\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
-			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0)						\
 		}																								\
 
 #define DATA_Knife																						\
@@ -360,7 +360,7 @@ constexpr auto PI = 3.14159265;
 			std::make_shared<Tile>(CHAR_Knife,	TCODColor::silver,		ITEMCOLOR_ITEMBG, 0),			\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
 			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
-			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0),						\
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink	, 0)						\
 		}																								\
 
 
