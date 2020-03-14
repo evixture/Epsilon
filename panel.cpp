@@ -4,7 +4,7 @@ MapWindow::MapWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 	:Window(consoleWidth, consoleHeight, "World", rx, ry)
 {
 	//actual map dims should be 60x60
-	mapSidePanel = std::make_shared<Pane>(1, 61, UICOLOR_Panel_Ribbon_BG, UICOLOR_Panel_Ribbon_FG);
+	mapSidePanel = std::make_shared<Pane>(1, 61, ep::color::ribbonBG, ep::color::ribbonFG);
 	world = std::make_shared<World>();
 }
 
@@ -90,9 +90,9 @@ void PlayerWindow::update()
 
 void PlayerWindow::renderSpeedAndStance() const
 {
-	drawWindow->console->setChar(0, 8, CHAR_Table);
-	drawWindow->console->setChar(0, 7, CHAR_BottomSquareBrace);
-	drawWindow->console->setChar(0, 0, CHAR_TopSquareBrace);
+	drawWindow->console->setChar(0, 8, ep::character::table);
+	drawWindow->console->setChar(0, 7, ep::character::bottomSquareBrace);
+	drawWindow->console->setChar(0, 0, ep::character::topSquareBrace);
 
 	drawWindow->console->setChar(1, 8, '[');
 	drawWindow->console->setChar(8, 8, ']');
@@ -106,7 +106,7 @@ void PlayerWindow::renderSpeedAndStance() const
 
 	for (int y = 0; y < playerStance * 2; y++) //draw height graph
 	{
-		drawWindow->console->setChar(0, (6 - y), CHAR_VerticalEquals);
+		drawWindow->console->setChar(0, (6 - y), ep::character::verticalEquals);
 		drawWindow->console->setCharForeground(0, (6 - y), TCODColor::blue);
 	}
 
@@ -160,7 +160,7 @@ void InventoryWindow::render() const
 				if (container == WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex] && WORLD->debugmap->player->itemIndex == -1)
 				{
 					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name.c_str());
-					drawWindow->console->setCharForeground(1, drawLineStart, UICOLOR_Selector); //color the cursor
+					drawWindow->console->setCharForeground(1, drawLineStart, ep::color::selector); //color the cursor
 					drawWindow->console->setCharForeground(0, drawLineStart, WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex]->containerItem->barColor); //color the bar
 				}
 				else
@@ -185,7 +185,7 @@ void InventoryWindow::render() const
 					if (item == WORLD->debugmap->player->selectedItem)
 					{
 						drawWindow->console->printf(0, drawLine, "|>  %s", item->tool->name.c_str());
-						drawWindow->console->setCharForeground(1, drawLine, UICOLOR_Selector);
+						drawWindow->console->setCharForeground(1, drawLine, ep::color::selector);
 						drawWindow->console->setCharForeground(0, drawLine, item->barColor); //color the bar
 					}
 					else
@@ -370,7 +370,7 @@ void InventoryFullWindow::render() const
 				if (container == WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex] && WORLD->debugmap->player->itemIndex == -1)
 				{
 					drawWindow->console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name.c_str());
-					drawWindow->console->setCharForeground(1, drawLineStart, UICOLOR_Selector);
+					drawWindow->console->setCharForeground(1, drawLineStart, ep::color::selector);
 				}
 				else
 				{
@@ -394,7 +394,7 @@ void InventoryFullWindow::render() const
 					if (item == WORLD->debugmap->player->selectedItem)
 					{
 						drawWindow->console->printf(0, drawLine, "|>  %s", item->tool->name.c_str());
-						drawWindow->console->setCharForeground(1, drawLine, UICOLOR_Selector);
+						drawWindow->console->setCharForeground(1, drawLine, ep::color::selector);
 					}
 					else
 					{
@@ -422,9 +422,9 @@ void InventoryFullWindow::render() const
 LogWindow::Message::Message(std::string message, MessageLevel messageLevel)
 	:message(message), messageLevel(messageLevel)
 {
-	if (messageLevel == Message::MessageLevel::HIGH) color = UICOLOR_MessageHigh;
-	else if (messageLevel == Message::MessageLevel::MEDIUM) color = UICOLOR_MessageMedium;
-	else color = UICOLOR_MessageLow;
+	if (messageLevel == Message::MessageLevel::HIGH) color = ep::color::messageHigh;
+	else if (messageLevel == Message::MessageLevel::MEDIUM) color = ep::color::messageMed;
+	else color = ep::color::messageLow;
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -461,7 +461,7 @@ void LogWindow::render() const
 		{
 			if (i == 0 && j == 1)
 			{
-				drawWindow->console->setCharForeground(j, line, UICOLOR_Selector);
+				drawWindow->console->setCharForeground(j, line, ep::color::selector);
 			}
 			else
 			{
@@ -556,7 +556,7 @@ void ActionWindow::render() const
 				if (action == actionManager->selectedAction)
 				{
 					drawWindow->console->printf(0, line, "|>%s", action->name.c_str());
-					drawWindow->console->setCharForeground(1, line, UICOLOR_Selector);
+					drawWindow->console->setCharForeground(1, line, ep::color::selector);
 				}
 				else
 				{

@@ -203,7 +203,7 @@ void Menu::render(const std::shared_ptr<Pane>& pane, const int rx, const int ry)
 		if (i == menuIndex)
 		{
 			pane->console->printf(rx, ry + i, "|> %s", menuList[i].c_str());
-			pane->console->setCharForeground(rx + 1, ry + i, UICOLOR_Selector);
+			pane->console->setCharForeground(rx + 1, ry + i, ep::color::selector);
 		}
 		else
 		{
