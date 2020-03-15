@@ -172,8 +172,8 @@ void Melee::useMelee()
 
 void Melee::doMeleeDamage(std::shared_ptr<Creature>& creature)
 {
-	if (creature->health >= 0) //if creature is alive
-	{																				//HOW TO CHECK IF NOT HOLDING CREATURE
+	if (creature->health > 0) //if creature is alive //HOW TO CHECK IF NOT HOLDING CREATURE
+	{																				
 		float sharpDamageResult = sharpDamage * (1.0f - (creature->equippedArmor.defense / 400.0f));
 		float bluntDamageResult = bluntDamage * 1.0f; //should bluntdamage do less damage at higher armor?
 
@@ -187,6 +187,8 @@ void Melee::doMeleeDamage(std::shared_ptr<Creature>& creature)
 		{
 			creature->health -= totalDamage;
 		}
+
+		GUI->logWindow->pushMessage(LogWindow::Message((creature->name + " was hit for " + std::to_string(totalDamage) + " damage!"), LogWindow::Message::MessageLevel::MEDIUM));
 	}
 }
 

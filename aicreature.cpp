@@ -4,10 +4,10 @@ AICreature::AICreature(Creature creature, TCODMap* fovMap)
 	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), interest(0.0f), interestDecay(.025f), interestDecayClock(1.0f), pathStep(0)
 {
 	inventory.push_back(std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, this)));
-	inventory[0]->addItem(std::make_shared<Item>(ep::item::sip45(0, 0, 0, this)));
-	inventory[0]->addItem(std::make_shared<Item>(ep::item::cal45Magazine7(0, 0, 0, this)));
+	inventory[1]->addItem(std::make_shared<Item>(ep::item::sip45(0, 0, 0, this)));
+	inventory[1]->addItem(std::make_shared<Item>(ep::item::cal45Magazine7(0, 0, 0, this)));
 
-	selectedItem = inventory[0]->itemList[0];
+	selectedItem = inventory[1]->itemList[0];
 }
 
 void AICreature::move()

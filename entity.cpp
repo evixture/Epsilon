@@ -21,6 +21,9 @@ Creature::Creature(Position4 position, int ch, std::string name, TCODColor color
 	:Entity(position, ch, name, color), health(health), equippedArmor(armor), angle(0), containerIndex(0), itemIndex(0),
 	nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), moveClock(0), moveSpeed(0), baseMoveTime(0.0f)
 {
+	inventory.push_back(std::make_shared<Container>(ep::container::hands(0, 0, 0, this)));
+	selectedItem = inventory[0]->containerItem;
+
 	selectedMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 }
 
@@ -95,9 +98,9 @@ Player::Player(Position4 position)
 	:Creature(position, '@', "player", ep::color::player, 100, Armor("", TCODColor::pink, 0, 0)), xMoveDist(0), yMoveDist(0), backgroundColor(TCODColor::pink)
 {
 	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, this)));
-	inventory[0]->addItem(	std::make_shared<Item>(ep::item::sip45(0, 0, 0, this)));
-	inventory[0]->addItem(	std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(0, 0, 0, this)));
-	inventory[0]->addItem(	std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(0, 0, 0, this)));
+	inventory[1]->addItem(	std::make_shared<Item>(ep::item::sip45(0, 0, 0, this)));
+	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(0, 0, 0, this)));
+	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(0, 0, 0, this)));
 	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, this)));
 
 	if (inventory.size() > 0)
@@ -317,11 +320,14 @@ void Player::dropItem()
 		}
 		else if (itemIndex <= -1)
 		{
-			GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->containerItem->tool->name, LogWindow::Message::MessageLevel::LOW));
+			if (selectedItem->type != Item::ItemType::HAND)
+			{
+				GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->containerItem->tool->name, LogWindow::Message::MessageLevel::LOW));
 			
-			WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
+				WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
 
-			inventory.erase(inventory.begin() + containerIndex);
+				inventory.erase(inventory.begin() + containerIndex);
+			}
 		}
 	}
 }
@@ -362,16 +368,6 @@ void Player::filterIndexes()
 				selectedItem = inventory[containerIndex]->containerItem;
 			}
 		}
-		else
-		{
-			//selectedItem = ITEM_Hands(0, 0, 0, this);
-			selectedItem = std::make_shared<Item>(ep::item::hands(0, 0, 0, this));
-		}
-	}
-	else
-	{
-		//selectedItem = ITEM_Hands(0, 0, 0, this);
-		selectedItem = std::make_shared<Item>(ep::item::hands(0, 0, 0, this));
 	}
 }
 

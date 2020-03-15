@@ -156,6 +156,10 @@ ITEM SIZES
 			return Container(5, std::make_shared<Item>(ep::item::smallBackpack(x, y, level, owner)));
 		}
 
+		inline static Container hands(int x, int y, int level, Creature* owner)
+		{
+			return Container(0, std::make_shared<Item>(ep::item::hands(x, y, level, owner)));
+		}
 	};
 
 	struct magazine
