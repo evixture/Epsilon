@@ -325,7 +325,6 @@ void Bullet::update()
 								{
 									doBulletDamage(creature);
 								}
-								//GUI->logWindow->pushMessage(LogWindow::Message("You hit a creature!", LogWindow::Message::MessageLevel::HIGH));
 							}
 						}
 					}
