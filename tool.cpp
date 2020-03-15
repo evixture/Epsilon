@@ -548,12 +548,11 @@ void Firearm::fireBullet()
 		{
 			if (ammoType == MagazineData::AmmoType::FIVEPOINTFIVESIX)
 			{
-				bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, 300, 55));
+				bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ep::bullet::cal556(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height)));
 			}
 			else
 			{
-				bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, 80, 230));
-
+				bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ep::bullet::cal45(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height)));
 			}
 			selectedMagazine->availableAmmo--;
 

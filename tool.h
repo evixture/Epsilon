@@ -146,4 +146,17 @@ namespace ep
 		inline static const Firearm sir556 =		Firearm("SIR556", ep::color::rifleFG, 10, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Firearm::FireType::FULL, Firearm::FireType::FULL | Firearm::FireType::SEMI | Firearm::FireType::SAFE);
 		inline static const Armor L1R3Armor =		Armor("test armor", TCODColor::black, 100, 300);
 	};
+
+	struct bullet
+	{
+		inline static Bullet cal45(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound)
+		{
+			return Bullet(ch, startPosition, dx, dy, xbound, ybound, 80, 230);
+		}
+
+		inline static Bullet cal556(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound)
+		{
+			return Bullet(ch, startPosition, dx, dy, xbound, ybound, 300, 55);
+		}
+	};
 }
