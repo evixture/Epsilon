@@ -93,8 +93,8 @@ void Destructible::destroy(int damage)
 			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 
-		walkableFlag = OOOOI;
-		transparentFlag = OOOOI;
+		walkableFlag =		ep::tileFlag::OOOOI;
+		transparentFlag =	ep::tileFlag::OOOOI;
 		destroyed = true;
 	}
 }
@@ -107,7 +107,7 @@ bool Destructible::getDestroyed()
 //----------------------------------------------------------------------------------------------------
 
 Stair::Stair(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance)
-	:Block(tileList, transparentFlag, Block::FLOOR, Block::Tag::STAIR), moveDistance(moveDistance)
+	:Block(tileList, transparentFlag, ep::tileFlag::OOOOI, Block::Tag::STAIR), moveDistance(moveDistance)
 {}
 
 void Stair::interact()

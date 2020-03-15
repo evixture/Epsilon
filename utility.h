@@ -1,5 +1,14 @@
 #include "main.hpp"
 
+constexpr auto PI = 3.14159265;
+
+#define ENGINE		engine
+#define SETTINGS	engine->settings
+#define GUI			engine->gui
+#define INPUT		engine->settings->input
+#define MAPPANE		engine->gui->worldWindow
+#define WORLD		engine->gui->worldWindow->world
+
 struct Position3 //position struct with x, y, and z dimensions
 {
 	int x; //x coordinate
@@ -85,6 +94,16 @@ private:
 
 namespace ep
 {
+	struct tileFlag
+	{
+		inline static const unsigned char OOOOO = 0x0;
+		inline static const unsigned char OOOOI = 0x01;
+		inline static const unsigned char OOOII = 0x01 | 0x02;
+		inline static const unsigned char OOIII = 0x01 | 0x02 |	0x04;
+		inline static const unsigned char IIIII = 0x01 | 0x02 |	0x04 | 0x08 | 0x16;
+		inline static const unsigned char OOIOI = 0x01 | 0x04;
+	};
+
 	struct character
 	{
 /*
@@ -152,58 +171,6 @@ namespace ep
 
 	struct color
 	{
-		//#define UICOLOR_Panel_Ribbon_BG		TCODColor(45, 45, 206)
-		//#define UICOLOR_Panel_Ribbon_FG		TCODColor(220, 220, 220)
-		//#define UICOLOR_Panel_Draw_BG		TCODColor(30, 30, 30)
-		//#define UICOLOR_Panel_Draw_FG		TCODColor(220, 220, 220)
-		//#define UICOLOR_Player_Color		TCODColor(0, 127, 255)
-		//#define UICOLOR_Root_BG				TCODColor(0, 0, 0)
-		//#define UICOLOR_Root_FG				TCODColor(220, 220, 220)
-		//#define UICOLOR_OutFOV_BG			TCODColor(0, 0, 0)
-		//#define UICOLOR_OutFOV_FG			TCODColor(30, 30, 30)
-		//#define UICOLOR_Selector			TCODColor(168, 13, 224)
-		//
-		//#define UICOLOR_MessageLow			TCODColor(220, 220, 220)
-		//#define UICOLOR_MessageMedium			TCODColor(178, 179, 236)
-		//#define UICOLOR_MessageHigh			TCODColor(223, 166, 243)
-		//
-		//
-		//#define WORLDCOLOR_GrassBG			TCODColor(32, 70, 19)
-		//#define WORLDCOLOR_GrassFG			TCODColor(119, 161, 63)
-		//
-		//#define WORLDCOLOR_FlowerBG			TCODColor(45, 39, 39)
-		//#define WORLDCOLOR_FlowerFG			TCODColor(254, 212, 16)
-		//
-		//#define WORLDCOLOR_FloorBG			TCODColor(98, 72, 49)
-		//#define WORLDCOLOR_FloorFG			TCODColor(98, 72, 49)
-		//
-		//#define WORLDCOLOR_ShingleBG			TCODColor(33, 35, 32)
-		//#define WORLDCOLOR_ShingleFG			TCODColor(105, 111, 109)
-		//
-		//#define WORLDCOLOR_ConcreteBG			TCODColor(114, 115, 119)
-		//#define WORLDCOLOR_ConcreteFG			TCODColor(150, 151, 153)
-		//
-		//#define WORLDCOLOR_DoorFG				TCODColor(63, 50, 31)
-		//
-		//#define WORLDCOLOR_WallBG				TCODColor(145, 128, 118)
-		//#define WORLDCOLOR_WallFG				TCODColor(112, 96, 83)
-		//
-		//#define WORLDCOLOR_WindowBG			TCODColor(68, 180, 246)
-		//#define WORLDCOLOR_WindowFG			TCODColor(237, 237, 237)
-		//
-		//#define WORLDCOLOR_TableFG			TCODColor(150, 123, 104)
-		//
-		//
-		//#define ITEMCOLOR_ITEMBG				TCODColor(254, 77, 0)
-		//
-		//#define ITEMCOLOR_HANDFG				TCODColor(243, 198, 165)
-		//
-		//#define ITEMCOLOR_SMALLBACKPACKFG		TCODColor(182, 34, 46)
-		//
-		//#define ITEMCOLOR_RIFLEFG				TCODColor(79, 83, 84)
-		//
-		//#define ITEMCOLOR_PISTOLFG			TCODColor(94, 93, 91)
-
 		inline static const TCODColor ribbonBG =		TCODColor(45, 45, 206);
 		inline static const TCODColor ribbonFG =		TCODColor(220, 220, 220);
 

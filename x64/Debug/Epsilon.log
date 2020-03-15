@@ -1,2 +1,5 @@
-﻿  entity.cpp
+﻿  tile.cpp
+  tool.cpp
+  window.cpp
+  Generating Code...
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

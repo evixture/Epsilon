@@ -89,17 +89,25 @@ struct Container //container, used to hold items in the inventory
 
 namespace ep
 {
+	/*
+ITEM SIZES
+	1 UNIT
+		COMPACT PISTOLS
+	2 UNITS
+		COMPACT SMGS
+		PISTOLS
+	3 UNITS
+		STANDARD RIFLES
+		LARGE SMGS
+	4 UNITS
+		MACHINE GUNS
+		LARGE RIFLES
+	5 UNITS
+		SNIPER RIFLES
+*/
+
 	struct item
 	{
-////ITEM_SmallBackpack(x, y, level, owner)std::make_shared<Item>(2,ep::block::item::smallBackpack,TOOL_SmallBackpack,Position4(x, y, 0, level),owner,Item::ItemType::NORMAL)
-////ITEM_Hands(x, y, level, owner)std::make_shared<Item>(1,DEFAULT_ITEM_TILE,MELEE_Hands,Position4(x, y, 0, level),owner,Item::ItemType::HAND)
-////ITEM_L1R3Armor(x, y, level, owner)std::make_shared<Item>(2,TILE_L1R3Armor,ARMOR_L1R3Armor,Position4(x, y, 0, level),owner,Item::ItemType::ARMOR)
-////ITEM_SIP45(x, y, level, owner)std::make_shared<Item>(2,TILE_SIP45,WEAPON_SIP45,Position4(x, y, 0, level),owner,Item::ItemType::FIREARM)
-////ITEM_45Magazine7(x, y, level, owner)Item(1, TILE_45Magazine7,TOOL_45Magazine7,Position4(x, y, 0, level),owner,Item::ItemType::NORMAL)
-////ITEM_SIR556(x, y, level, owner)std::make_shared<Item>(3,TILE_SIR556,WEAPON_SIR556,Position4(x, y, 0, level),owner,Item::ItemType::FIREARM)
-////ITEM_556Magazine30(x, y, level, owner)Item(1,TILE_556Magazine30,TOOL_556Magazine30,Position4(x, y, 0, level),owner,Item::ItemType::NORMAL)
-////ITEM_Knife(x, y, level, owner)std::make_shared<Item>(1,TILE_Knife,MELEE_Knife,Position4(x, y, 0, level),owner,Item::ItemType::MELEE)
-
 		inline static Item smallBackpack(int x, int y, int level, Creature* owner)
 		{
 			return Item(2, std::make_shared<Block>(ep::block::item::smallBackpack), std::make_shared<Tool>(ep::tool::smallBackpack), Position4(x, y, 0, level), owner, Item::ItemType::NORMAL);
@@ -143,8 +151,6 @@ namespace ep
 
 	struct container
 	{
-//CONTAINER_SmallBackpack(x, y, level, owner)std::make_shared<Container>(5,ITEM_SmallBackpack(x, y, level, owner))
-
 		inline static Container smallBackpack(int x, int y, int level, Creature* owner)
 		{
 			return Container(5, std::make_shared<Item>(ep::item::smallBackpack(x, y, level, owner)));
@@ -154,10 +160,6 @@ namespace ep
 
 	struct magazine
 	{
-//MAGAZINE_45Magazine7(x, y, level, owner)std::make_shared<MagazineItem>(ITEM_45Magazine7(x, y, level, owner),std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP,7,7))
-//MAGAZINE_556Magazine30(x, y, level, owner)std::make_shared<MagazineItem>(ITEM_556Magazine30(x, y, level, owner),std::make_shared<MagazineData>(MagazineData::AmmoType::FIVEPOINTFIVESIX,30,30))
-//MAGAZINE_556Magazine30(x, y, level, owner)std::make_shared<MagazineItem>(ITEM_556Magazine30(x, y, level, owner),std::make_shared<MagazineData>(MagazineData::AmmoType::FIVEPOINTFIVESIX,30,30))
-
 		inline static MagazineItem cal45Magazine7(int x, int y, int level, Creature* owner)
 		{
 			return MagazineItem(ep::item::cal45Magazine7(x, y, level, owner), std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7));

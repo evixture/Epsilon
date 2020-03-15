@@ -13,7 +13,6 @@ struct Tile
 struct Block //tile class used for the map and items
 {
 	enum class Tag {STATIC, DESTRUCTIBLE, STAIR} tag; //type and functionality of the tile
-	enum TileHeights {FLOOR = 0x01, PRONE = 0x02, CROUCH = 0x04, STAND = 0x08, FULL = 0x16} tileHeights; //if tile is solid at the flag's height
 	unsigned char transparentFlag; //bit flag for transparency at different heights
 	unsigned char walkableFlag; //bit flag for walkability at different heights
 	bool explored; //if the tile has been explored yet
@@ -31,10 +30,6 @@ struct Block //tile class used for the map and items
 
 	virtual void destroy(int); //does nothing in block
 	virtual void interact(); //virtual behaves differently depending on tile type, does nothing in tile
-
-	//static Block	grass0, grass1, grass2, grass3, flower, 
-	//				floor, concrete, shingle, door, sky, error;
-
 };
 
 struct Destructible : public Block //destructible type of tile that can be destroyed by various items
@@ -46,8 +41,6 @@ struct Destructible : public Block //destructible type of tile that can be destr
 
 	void destroy(int damage);
 	bool getDestroyed(); //returns true if the tile has been destroyed
-
-	//static Destructible wall, window, tableLeg, tableTop;
 };
 
 struct Stair : public Block //stair type of tile that allows travel between floors
@@ -57,14 +50,36 @@ struct Stair : public Block //stair type of tile that allows travel between floo
 	Stair(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance); //constructor for stair that takes character, colors, height, walkability, and move distance
 
 	void interact(); //moves player the move distance
-
-	//static Stair upStair, downStair;
 };
 
 namespace ep
 {
 	struct tileList
 	{
+		/*
+			FLOOR HEIGHTS
+		
+			4 :: Top    ^
+			3 :: Stand  ^
+			2 :: Crouch ^
+			1 :: Prone  ^
+			0 :: Floor & Window  ^
+		
+			if player height > floor height , visibility is true, else set to default vis
+			stand can see over crouch
+		
+		
+			TILE
+		
+			|	8 ft (ceiling)
+			| o	6 ft (stand)
+			| T	4 ft (crouch)
+			| ^	2 ft (prone)
+			 __ 0 ft (ground)
+			/_/ 2 ft
+			  2 ft
+		*/
+
 		inline static const std::vector<std::shared_ptr<Tile>> grass0 = 
 		{
 			std::make_shared<Tile>('.', ep::color::grassFG, ep::color::grassBG	, 999),
@@ -260,36 +275,36 @@ namespace ep
 
 	struct block
 	{
-		inline static const Block			grass0 =	Block(tileList::grass0, OOOOI, OOOOI);
-		inline static const Block			grass1 =	Block(tileList::grass1, OOOOI, OOOOI);
-		inline static const Block			grass2 =	Block(tileList::grass2, OOOOI, OOOOI);
-		inline static const Block			grass3 =	Block(tileList::grass3, OOOOI, OOOOI);
-		inline static const Block			flower =	Block(tileList::flower, OOIII, OOOOI);
-		inline static const Block			floor =		Block(tileList::floor, OOOOI, OOOOI);
-		inline static const Block			concrete =	Block(tileList::concrete, OOOOI, OOOOI);
-		inline static const Block			shingle =	Block(tileList::shingle, OOOOI, OOOOI);
-		inline static const Block			door =		Block(tileList::door, IIIII, OOOOI);
-		inline static const Block			sky = 		Block(tileList::sky, OOOOO, OOOOO);
-		inline static const Block			error =		Block(tileList::error, IIIII, IIIII);
+		inline static const Block			grass0 =	Block(tileList::grass0,		ep::tileFlag::OOOOI, ep::tileFlag::OOOOI);
+		inline static const Block			grass1 =	Block(tileList::grass1,		ep::tileFlag::OOOOI, ep::tileFlag::OOOOI);
+		inline static const Block			grass2 =	Block(tileList::grass2,		ep::tileFlag::OOOOI, ep::tileFlag::OOOOI);
+		inline static const Block			grass3 =	Block(tileList::grass3,		ep::tileFlag::OOOOI, ep::tileFlag::OOOOI);
+		inline static const Block			flower =	Block(tileList::flower,		ep::tileFlag::OOIII, ep::tileFlag::OOOOI);
+		inline static const Block			floor =		Block(tileList::floor,		ep::tileFlag::OOOOI, ep::tileFlag::OOOOI);
+		inline static const Block			concrete =	Block(tileList::concrete,	ep::tileFlag::OOOOI, ep::tileFlag::OOOOI);
+		inline static const Block			shingle =	Block(tileList::shingle,	ep::tileFlag::OOOOI, ep::tileFlag::OOOOI);
+		inline static const Block			door =		Block(tileList::door,		ep::tileFlag::IIIII, ep::tileFlag::OOOOI);
+		inline static const Block			sky = 		Block(tileList::sky,		ep::tileFlag::OOOOO, ep::tileFlag::OOOOO);
+		inline static const Block			error =		Block(tileList::error,		ep::tileFlag::IIIII, ep::tileFlag::IIIII);
 
-		inline static const Destructible	wall =		Destructible(tileList::wall, IIIII, IIIII, 1000);
-		inline static const Destructible	window =	Destructible(tileList::window, OOIII, IIIII, 100);
-		inline static const Destructible	tableLeg =	Destructible(tileList::tableLeg, OOIII, OOIII, 500);
-		inline static const Destructible	tableTop =	Destructible(tileList::tableTop, OOIOI, OOIOI, 500);
+		inline static const Destructible	wall =		Destructible(tileList::wall,		ep::tileFlag::IIIII, ep::tileFlag::IIIII, 1000);
+		inline static const Destructible	window =	Destructible(tileList::window,		ep::tileFlag::OOIII, ep::tileFlag::IIIII, 100);
+		inline static const Destructible	tableLeg =	Destructible(tileList::tableLeg,	ep::tileFlag::OOIII, ep::tileFlag::OOIII, 500);
+		inline static const Destructible	tableTop =	Destructible(tileList::tableTop,	ep::tileFlag::OOIOI, ep::tileFlag::OOIOI, 500);
 
-		inline static const Stair			upStair =	Stair(tileList::upStair, OOOOI, OOIII, 1);
-		inline static const Stair			downStair = Stair(tileList::downStair, OOOOI, OOIII, -1);
+		inline static const Stair			upStair =	Stair(tileList::upStair,	ep::tileFlag::OOOOI, ep::tileFlag::OOIII, 1);
+		inline static const Stair			downStair = Stair(tileList::downStair,	ep::tileFlag::OOOOI, ep::tileFlag::OOIII, -1);
 
 		struct item
 		{
-			inline static const Block defBlock =			Block(ep::tileList::door, OOOOI, OOOOI);
-			inline static const Block smallBackpack =		Block(ep::tileList::smallBackpack, OOOOI, OOOOI);
-			inline static const Block L1R3Armor =			Block(ep::tileList::L1R3Armor, OOOOI, OOOOI);
-			inline static const Block sip45 =				Block(ep::tileList::pistol, OOOOI, OOOOI);
-			inline static const Block cal45Magazine7 =		Block(ep::tileList::pistolMagazine, OOOOI, OOOOI);
-			inline static const Block sir556 =				Block(ep::tileList::rifle, OOOOI, OOOOI);
-			inline static const Block cal556Magazine30 =	Block(ep::tileList::rifleMagazine, OOOOI, OOOOI);
-			inline static const Block knife =				Block(ep::tileList::knife, OOOOI, OOOOI);
+			inline static const Block defBlock =			Block(ep::tileList::door,			ep::tileFlag::OOOOI, ep::tileFlag::OOOOI);
+			inline static const Block smallBackpack =		Block(ep::tileList::smallBackpack,	ep::tileFlag::OOOOI, ep::tileFlag::OOOOI);
+			inline static const Block L1R3Armor =			Block(ep::tileList::L1R3Armor,		ep::tileFlag::OOOOI, ep::tileFlag::OOOOI);
+			inline static const Block sip45 =				Block(ep::tileList::pistol,			ep::tileFlag::OOOOI, ep::tileFlag::OOOOI);
+			inline static const Block cal45Magazine7 =		Block(ep::tileList::pistolMagazine, ep::tileFlag::OOOOI, ep::tileFlag::OOOOI);
+			inline static const Block sir556 =				Block(ep::tileList::rifle,			ep::tileFlag::OOOOI, ep::tileFlag::OOOOI);
+			inline static const Block cal556Magazine30 =	Block(ep::tileList::rifleMagazine,	ep::tileFlag::OOOOI, ep::tileFlag::OOOOI);
+			inline static const Block knife =				Block(ep::tileList::knife,			ep::tileFlag::OOOOI, ep::tileFlag::OOOOI);
 		};
 	};
 }
@@ -378,4 +393,3 @@ SECTION 2
 	}
 
 */
-

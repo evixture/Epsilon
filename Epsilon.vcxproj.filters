@@ -99,9 +99,6 @@
     <ClInclude Include="tool.h">
       <Filter>Source\Tool</Filter>
     </ClInclude>
-    <ClInclude Include="defines.h">
-      <Filter>Source\Defines</Filter>
-    </ClInclude>
     <ClInclude Include="item.h">
       <Filter>Source\Item</Filter>
     </ClInclude>

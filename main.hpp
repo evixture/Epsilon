@@ -9,11 +9,7 @@
 #include <vector>
 #include <algorithm>
 #include <string>
-//#include <cmath>
 #include <functional>
-//#include <list>
-//#include <iostream>
-
 
 //Libraries
 #include <libtcod.hpp>

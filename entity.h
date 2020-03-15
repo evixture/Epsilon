@@ -93,6 +93,4 @@ private:
 	void moveSelectorUp(); //moves the selector up on the inventory
 	void moveSelectorDown(); //moves the selector down on the inventory
 	void filterIndexes(); //filters the container and item indexes to make sure they are in range
-
-
 };

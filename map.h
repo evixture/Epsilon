@@ -19,9 +19,6 @@ struct Map //map class deals with the map and creatures and the data used for th
 
 	Map(std::string filePath); //map constructor that takes a string file path
 
-	//BLOCK GLOBALS
-	//inline static const Block grass0 = Block(DATA_Grass0, OOOOI, OOOOI);
-
 private:
 	bool getMapName(pugi::xml_node& dataNode);
 	bool getMapLevels(pugi::xml_node& dataNode);
