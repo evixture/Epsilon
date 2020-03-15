@@ -240,6 +240,8 @@ Bullet::Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int 
 
 void Bullet::doBulletDamage(std::shared_ptr<Creature>& creature)
 {
+	int damage;
+
 	if (creature->health > 0)
 	{
 		if (creature->equippedArmor.durability > 0) //if the armor durability is high enough
@@ -249,7 +251,8 @@ void Bullet::doBulletDamage(std::shared_ptr<Creature>& creature)
 				creature->equippedArmor.durability -= currentVelocity; //should happen before taking damage to prevent high damage
 				currentVelocity -= creature->equippedArmor.defense;
 
-				creature->health -= int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //2.0f can be changed to manage ttk and bullet damage
+				damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //2.0f can be changed to manage ttk and bullet damage
+				creature->health -= damage;
 
 				currentVelocity -= 100; //slowdown after going through body
 			}
@@ -266,12 +269,14 @@ void Bullet::doBulletDamage(std::shared_ptr<Creature>& creature)
 		}
 		else
 		{
-			int damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass);
+			damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass);
 			creature->health -= damage;
 
 			currentVelocity -= 100; //slowdown after going through body
 		}
 	}
+
+	GUI->logWindow->pushMessage(LogWindow::Message((WORLD->debugmap->player->name + " shot " + creature->name + " for " + std::to_string(damage) + " damage!"), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
 
 	if (creature->health < 0)
 	{
@@ -320,7 +325,7 @@ void Bullet::update()
 								{
 									doBulletDamage(creature);
 								}
-								GUI->logWindow->pushMessage(LogWindow::Message("You hit a creature!", LogWindow::Message::MessageLevel::HIGH));
+								//GUI->logWindow->pushMessage(LogWindow::Message("You hit a creature!", LogWindow::Message::MessageLevel::HIGH));
 							}
 						}
 					}
