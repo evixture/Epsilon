@@ -1,5 +1,31 @@
-﻿  tile.cpp
+﻿  aicreature.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.hpp(3,10): fatal error C1083: Cannot open include file: 'defines.h': No such file or directory
+  engine.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.hpp(3,10): fatal error C1083: Cannot open include file: 'defines.h': No such file or directory
+  entity.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.hpp(3,10): fatal error C1083: Cannot open include file: 'defines.h': No such file or directory
+  gui.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.hpp(3,10): fatal error C1083: Cannot open include file: 'defines.h': No such file or directory
+  input.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.hpp(3,10): fatal error C1083: Cannot open include file: 'defines.h': No such file or directory
+  item.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.hpp(3,10): fatal error C1083: Cannot open include file: 'defines.h': No such file or directory
+  main.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.hpp(3,10): fatal error C1083: Cannot open include file: 'defines.h': No such file or directory
+  map.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.hpp(3,10): fatal error C1083: Cannot open include file: 'defines.h': No such file or directory
+  panel.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.hpp(3,10): fatal error C1083: Cannot open include file: 'defines.h': No such file or directory
+  settings.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.hpp(3,10): fatal error C1083: Cannot open include file: 'defines.h': No such file or directory
+  sound.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.hpp(3,10): fatal error C1083: Cannot open include file: 'defines.h': No such file or directory
+  tile.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.hpp(3,10): fatal error C1083: Cannot open include file: 'defines.h': No such file or directory
   tool.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.hpp(3,10): fatal error C1083: Cannot open include file: 'defines.h': No such file or directory
+  utility.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.hpp(3,10): fatal error C1083: Cannot open include file: 'defines.h': No such file or directory
   window.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.hpp(3,10): fatal error C1083: Cannot open include file: 'defines.h': No such file or directory
   Generating Code...
-  Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "defines.h"
-
 //STD
 #include <fstream>
 #include <sstream>
