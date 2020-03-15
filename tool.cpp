@@ -291,20 +291,20 @@ void Bullet::update()
 				{
 					if (WORLD->getSolidity(mapPosition) == true) //if hit a wall
 					{
-						if (WORLD->getBlock(mapPosition)->tag == Block::Tag::DESTRUCTIBLE)
+						if (WORLD->debugmap->getBlock(mapPosition)->tag == Block::Tag::DESTRUCTIBLE)
 						{
-							WORLD->getBlock(mapPosition)->destroy(mass);
+							WORLD->debugmap->getBlock(mapPosition)->destroy(mass);
 							WORLD->updateBlock(mapPosition, false); //check if pos needs to be reassigned before
 
 						}
 
-						if (currentVelocity - WORLD->getBlock(mapPosition)->getTileData(mapPosition.height)->deceleration <= 0)
+						if (currentVelocity - WORLD->debugmap->getBlock(mapPosition)->getTileData(mapPosition.height)->deceleration <= 0)
 						{
 							currentVelocity = 0;
 						}
 						else
 						{
-							currentVelocity -= WORLD->getBlock(mapPosition)->getTileData(mapPosition.height)->deceleration;
+							currentVelocity -= WORLD->debugmap->getBlock(mapPosition)->getTileData(mapPosition.height)->deceleration;
 						}
 
 						GUI->logWindow->pushMessage(LogWindow::Message("You hit a wall!", LogWindow::Message::MessageLevel::HIGH));
@@ -378,7 +378,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 			else
 			{
 				pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-				pane->console->setCharForeground(renderPosition.x, renderPosition.y, WORLD->getBlock(mapPosition)->tileList[0]->foregroundColor);
+				pane->console->setCharForeground(renderPosition.x, renderPosition.y, WORLD->debugmap->getBlock(mapPosition)->tileList[0]->foregroundColor);
 
 				//if (WORLD->getBlock(mapPosition)->getTileData(mapPosition.height)->ch != 0) //if the bullet is on the ground and the char is not the bullet
 				//{

@@ -528,9 +528,9 @@ void Player::update()
 		
 		if (INPUT->worldInteractKey->isSwitched)
 		{
-			if (WORLD->getBlock(mapPosition)->tag == Block::Tag::STAIR)
+			if (WORLD->debugmap->getBlock(mapPosition)->tag == Block::Tag::STAIR)
 			{
-				WORLD->getBlock(mapPosition)->interact();
+				WORLD->debugmap->getBlock(mapPosition)->interact();
 			}
 		}
 

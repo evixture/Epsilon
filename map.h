@@ -19,6 +19,12 @@ struct Map //map class deals with the map and creatures and the data used for th
 
 	Map(std::string filePath); //map constructor that takes a string file path
 
+	void addCreature(std::shared_ptr<Creature> creature); //adds a creature to the current map				
+	void addItem(std::shared_ptr<Item> item); //adds an item to the current map							
+	void addContainer(std::shared_ptr<Container> container); //adds a container to the current map			
+
+	std::shared_ptr<Block> getBlock(Position3 position) const; //returns the tile at specific coordinates
+
 private:
 	bool getMapName(pugi::xml_node& dataNode);
 	bool getMapLevels(pugi::xml_node& dataNode);
@@ -47,7 +53,7 @@ struct World //world struct that deals with rendering and updating the map
 
 	World(); //world contructor that takes nothing
 
-	std::shared_ptr<Block> getBlock	(Position3 position) const; //returns the tile at specific coordinates
+	
 	TCODColor getBgColor			(Position3& position) const; //gets the background color of the tile at specific coordinates
 
 	bool    getTransparency			(Position4& position) const; //gets the transparency of a tile
@@ -57,11 +63,7 @@ struct World //world struct that deals with rendering and updating the map
 	bool	isInPlayerFov			(Position4 position) const; //returns true if the coordinates are in fov
 	bool	isExplored				(Position3& position) const; //checks if a tile has been explored previously
 
-	void updateBlock(Position3 blockPosition, bool checkCreatures);
-
-	void addCreature(std::shared_ptr<Creature> creature); //adds a creature to the current map										
-	void addItem(std::shared_ptr<Item> item); //adds an item to the current map							
-	void addContainer(std::shared_ptr<Container> container); //adds a container to the current map			
+	void updateBlock(Position3 blockPosition, bool checkCreatures);	
 
 	void update(); //updates the map
 

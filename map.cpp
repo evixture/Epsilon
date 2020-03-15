@@ -76,6 +76,21 @@ Map::Map(std::string filePath)
 	}
 }
 
+void Map::addCreature(std::shared_ptr<Creature> creature)
+{
+	creatureList.push_back(creature);
+}
+
+void Map::addItem(std::shared_ptr<Item> item)
+{
+	mapItemList.push_back(item);
+}
+
+void Map::addContainer(std::shared_ptr<Container> container)
+{
+	mapContainerList.push_back(container);
+}
+
 bool Map::getMapName(pugi::xml_node& dataNode)
 {
 	std::string testName = dataNode.name();
@@ -488,11 +503,11 @@ World::World()
 	createFovMap();
 }
 
-std::shared_ptr<Block> World::getBlock(Position3 position) const
+std::shared_ptr<Block> Map::getBlock(Position3 position) const
 {
-	if (inMapBounds(position))
+	if ((position.floor >= 0 && position.floor < totalFloors) && (position.x >= 0 && position.x < width) && (position.y >= 0 && position.y < height))
 	{
-		return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]; //returns bad blocks
+		return levelList[position.floor][position.x + position.y * width]; //returns bad blocks
 	}
 	else
 	{
@@ -520,21 +535,6 @@ void World::updateBlock(Position3 blockPosition, bool checkCreatures)
 TCODColor World::getBgColor(Position3& position) const
 {
 	return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]->tileList[0]->backgroundColor;
-}
-
-void World::addCreature(std::shared_ptr<Creature> creature)
-{
-	debugmap->creatureList.push_back(creature);
-}
-
-void World::addItem(std::shared_ptr<Item> item)
-{
-	debugmap->mapItemList.push_back(item);
-}
-
-void World::addContainer(std::shared_ptr<Container> container)
-{
-	debugmap->mapContainerList.push_back(container);
 }
 
 bool World::inMapBounds(Position3& position) const
@@ -609,7 +609,7 @@ bool World::getWalkability(Position4 position, bool checkCreatures) const
 	}
 
 	bool walkableBool = true;
-	unsigned char walkableFlag = getBlock(position)->walkableFlag;
+	unsigned char walkableFlag = debugmap->getBlock(position)->walkableFlag;
 
 	for (int i = 0; i < position.height; ++i)
 	{
@@ -628,7 +628,7 @@ bool World::getWalkability(Position4 position, bool checkCreatures) const
 
 bool World::getSolidity(Position4& position) const
 {
-	if (getBlock(position)->walkableFlag & heightToBitFlag(position.height))
+	if (debugmap->getBlock(position)->walkableFlag & heightToBitFlag(position.height))
 	{
 		return true;
 	}
@@ -637,7 +637,7 @@ bool World::getSolidity(Position4& position) const
 
 bool World::getTransparency(Position4& position) const
 {
-	if (!(getBlock(position)->transparentFlag & heightToBitFlag(position.height)))
+	if (!(debugmap->getBlock(position)->transparentFlag & heightToBitFlag(position.height)))
 	{
 		return true;
 	}
@@ -665,7 +665,7 @@ bool World::isInPlayerFov(Position4 position) const
 
 	if (fovMapList[position.height - 1]->isInFov(position.x, position.y) && position.floor == debugmap->player->mapPosition.floor)
 	{
-		getBlock(position)->explored = true;
+		debugmap->getBlock(position)->explored = true;
 		return true;
 	}
 	return false;
@@ -728,7 +728,7 @@ void World::renderTiles(const std::shared_ptr<Pane>& pane) const
 	{
 		for (int x = xOffset; x < pane->consoleWidth + xOffset; ++x)
 		{
-			std::shared_ptr<Block> block = getBlock(Position3(x, y, debugmap->player->mapPosition.floor));
+			std::shared_ptr<Block> block = debugmap->getBlock(Position3(x, y, debugmap->player->mapPosition.floor));
 			block->render(Position4(x - xOffset, y - yOffset, debugmap->player->mapPosition.height, debugmap->player->mapPosition.floor), pane);
 		}
 	}
