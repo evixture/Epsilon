@@ -94,11 +94,11 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 Player::Player(Position4 position)
 	:Creature(position, '@', "player", ep::color::player, 100, Armor("", TCODColor::pink, 0, 0)), xMoveDist(0), yMoveDist(0), backgroundColor(TCODColor::pink)
 {
-	inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
-	inventory[0]->addItem(	ITEM_SIP45(0, 0, 0, this));
-	inventory[0]->addItem(	MAGAZINE_45Magazine7(0, 0, 0, this));
-	inventory[0]->addItem(	MAGAZINE_45Magazine7(0, 0, 0, this));
-	inventory.push_back(	CONTAINER_SmallBackpack(0, 0, 0, this));
+	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, this)));
+	inventory[0]->addItem(	std::make_shared<Item>(ep::item::sip45(0, 0, 0, this)));
+	inventory[0]->addItem(	std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(0, 0, 0, this)));
+	inventory[0]->addItem(	std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(0, 0, 0, this)));
+	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, this)));
 
 	if (inventory.size() > 0)
 	{
@@ -364,36 +364,38 @@ void Player::filterIndexes()
 		}
 		else
 		{
-			selectedItem = ITEM_Hands(0, 0, 0, this);
+			//selectedItem = ITEM_Hands(0, 0, 0, this);
+			selectedItem = std::make_shared<Item>(ep::item::hands(0, 0, 0, this));
 		}
 	}
 	else
 	{
-		selectedItem = ITEM_Hands(0, 0, 0, this);
+		//selectedItem = ITEM_Hands(0, 0, 0, this);
+		selectedItem = std::make_shared<Item>(ep::item::hands(0, 0, 0, this));
 	}
 }
 
 void Player::reload()
 {
-	for (int i = 0; i < inventory.size(); ++i)
+	for (auto& container : inventory)
 	{
-		for (int j = 0; j < inventory[i]->itemList.size(); ++j)
+		for (auto& item : container->itemList)
 		{
-			if (inventory[i]->itemList[j]->getMagazineData()->isValid == true) // if it is actually a magazine
+			if (item->getMagazineData()->isValid == true) // if it is actually a magazine
 			{
-				if (inventory[i]->itemList[j]->getMagazineData()->ammoType == selectedItem->tool->ammoType) // if it has the same type of ammo as the current weapon
+				if (item->getMagazineData()->ammoType == selectedItem->tool->ammoType) // if it has the same type of ammo as the current weapon
 				{
-					if (inventory[i]->itemList[j]->getMagazineData()->availableAmmo != 0) // if the magazine is not empty
+					if (item->getMagazineData()->availableAmmo != 0) // if the magazine is not empty
 					{
-						if (inventory[i]->itemList[j]->getMagazineData()->availableAmmo > selectedMagazine->availableAmmo)
+						if (item->getMagazineData()->availableAmmo > selectedMagazine->availableAmmo)
 						{
-							selectedMagazine = inventory[i]->itemList[j]->getMagazineData();
+							selectedMagazine = item->getMagazineData();
 							selectedItem->tool->reload(selectedMagazine);
 							return;
 						}
 						else
 						{
-							selectedMagazine = inventory[i]->itemList[j]->getMagazineData();
+							selectedMagazine = item->getMagazineData();
 							selectedItem->tool->reload(selectedMagazine);
 						}
 					}

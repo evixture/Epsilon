@@ -296,11 +296,11 @@ bool Map::getItems(pugi::xml_node& dataNode)
 			if (!(item.child("floor").empty())) floor = item.child("floor").text().as_int();
 			else return false;
 
-			if		(name == "SIR556")			mapItemList.push_back(ITEM_SIR556(x, y, floor, player.get()));			
-			else if (name == "556Magazine30")	mapItemList.push_back(MAGAZINE_556Magazine30(x, y, floor, player.get()));			
-			else if (name == "45Magazine7")		mapItemList.push_back(MAGAZINE_45Magazine7(x, y, floor, player.get()));
-			else if (name == "L1R3Armor")		mapItemList.push_back(ITEM_L1R3Armor(x, y, floor, player.get()));
-			else if (name == "Knife")			mapItemList.push_back(ITEM_Knife(x, y, floor, player.get()));
+			if		(name == "SIR556")			mapItemList.push_back(std::make_shared<Item>(ep::item::sir556(x, y, floor, player.get())));			
+			else if (name == "556Magazine30")	mapItemList.push_back(std::make_shared<MagazineItem>(ep::magazine::cal556Magazine30(x, y, floor, player.get())));			
+			else if (name == "45Magazine7")		mapItemList.push_back(std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(x, y, floor, player.get())));
+			else if (name == "L1R3Armor")		mapItemList.push_back(std::make_shared<Item>(ep::item::L1R3Armor(x, y, floor, player.get())));
+			else if (name == "Knife")			mapItemList.push_back(std::make_shared<Item>(ep::item::knife(x, y, floor, player.get())));
 		}
 		return true;
 	}
@@ -335,7 +335,7 @@ bool Map::getContainers(pugi::xml_node& dataNode)
 
 			if (name == "SmallBackpack")
 			{
-				mapContainerList.push_back(CONTAINER_SmallBackpack(x, y, floor, player.get()));
+				mapContainerList.push_back(std::make_shared<Container>(ep::container::smallBackpack(x, y, floor, player.get())));
 			}
 		}
 		return true;

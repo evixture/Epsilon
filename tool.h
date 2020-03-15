@@ -132,3 +132,18 @@ struct Armor : public Tool
 
 	void equip(Armor& armor); //applies the armor to the player
 };
+
+namespace ep
+{
+	struct tool
+	{
+		inline static const Tool smallBackpack =	Tool("Small Backpack", ep::color::smallBackpackFG, ep::character::backpack);
+		inline static const Tool cal45magazine7 =	Tool("45 Magazine -7-", ep::color::pistolFG, ep::character::pistolMagazine);
+		inline static const Tool cal556magazine30 = Tool("5.56 Magazine -30-", ep::color::rifleFG, ep::character::rifleMagazine);
+		inline static const Melee hands =			Melee(Tool("Hands", ep::color::handFG, TCOD_CHAR_UMLAUT), 30, 20);
+		inline static const Melee knife =			Melee(Tool("-Test Knife 34 damage-", TCODColor::silver, ep::character::knife), 0, 34);
+		inline static const Firearm sip45 =			Firearm("SIP45", ep::color::pistolFG, 2, 1.0f, MagazineData::AmmoType::FOURTYFIVEACP, Firearm::FireType::SEMI, Firearm::FireType::SEMI | Firearm::FireType::SAFE);
+		inline static const Firearm sir556 =		Firearm("SIR556", ep::color::rifleFG, 10, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Firearm::FireType::FULL, Firearm::FireType::FULL | Firearm::FireType::SEMI | Firearm::FireType::SAFE);
+		inline static const Armor L1R3Armor =		Armor("test armor", TCODColor::black, 100, 300);
+	};
+}
