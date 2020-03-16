@@ -25,14 +25,18 @@ void AICreature::move()
 	{
 		if (!path.isEmpty()) //has path to walk on
 		{
-			WORLD->updateBlock(mapPosition, false);
+			if (interest >= 0.5f) //invert nest?
+			{
+				WORLD->updateBlock(mapPosition, false);
 
-			path.walk(&mapPosition.x, &mapPosition.y, true);
+				path.walk(&mapPosition.x, &mapPosition.y, true);
 
-			WORLD->updateBlock(mapPosition, true);		
+				WORLD->updateBlock(mapPosition, true);
+			}
 		}
 	}
 }
+
 
 void AICreature::pickUpItem()
 {
@@ -83,24 +87,54 @@ void AICreature::reactToSounds()
 				interestChange = 0.0f;
 			}
 
-			if (interest + interestChange > 1)
+			/*
+			
+				if the sound interest is greater than .5, creature pays attention to it and pathfinds
+					interest += sound interest
+
+				creature moves, so long as interest is greater than .5
+			
+			*/
+
+			if (interestChange >= 0.5f)
 			{
-				interest = 1;
+				if (interest + interestChange >= 1.0f)
+				{
+					interest = 1;
+				}
+				else
+				{
+					interest += interestChange;
+				}
 			}
-			else
-			{
-				interest += interestChange;
-				interestChange = 0;
-			}
+
+
+			//if (interest + interestChange > 1)
+			//{
+			//	interest = 1;
+			//}
+			//else
+			//{
+			//	interest += interestChange;
+			//	interestChange = 0;
+			//}
 		}
 
-		if (interest > .5f)
+		if (interestChange >= 0.5f)
 		{
 			destX = sound->soundSource.x;
 			destY = sound->soundSource.y;
-
-			path.compute(mapPosition.x, mapPosition.y, destX, destY); //will compute multiple times?
+		
+			path.compute(mapPosition.x, mapPosition.y, destX, destY);
 		}
+
+		//if (interest > .5f)
+		//{
+		//	destX = sound->soundSource.x;
+		//	destY = sound->soundSource.y;
+		//
+		//	path.compute(mapPosition.x, mapPosition.y, destX, destY); //will compute multiple times?
+		//}
 	}
 }
 

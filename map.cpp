@@ -492,7 +492,7 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 World::World()
 	:xOffset(0), yOffset(0)
 {
-	debugmap = std::make_shared<Map>("data/maps/debugmap.xml"); //constructed right, but falls out of scope?
+	debugmap = std::make_shared<Map>("data/maps/debugmap.emp"); //constructed right, but falls out of scope?
 
 	for (int i = 0; i < 3; i++)
 	{

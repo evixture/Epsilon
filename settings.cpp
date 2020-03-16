@@ -65,6 +65,11 @@ void Settings::update()
 	lastFrameTime = systemClock.restart();
 	input->update();
 
+	//if (input->worldInteractKey->isDown) slows down time FUN
+	//{
+	//	lastFrameTime = lastFrameTime / 4.0f;
+	//}
+
 	if (INPUT->fullscreenKey->isSwitched)
 	{
 		setFullscreen();

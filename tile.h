@@ -8,7 +8,7 @@ struct Tile
 	unsigned short int deceleration; //the amount that a bullet is slowed down by when it passes through it
 	int strength;
 
-	Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int deceleration, int strength);
+	Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int deceleration, int strength = -1);
 };
 
 struct Block //tile class used for the map and items
@@ -83,74 +83,74 @@ namespace ep
 
 		inline static const std::vector<std::shared_ptr<Tile>> grass0 = 
 		{
-			std::make_shared<Tile>('.', ep::color::grassFG, ep::color::grassBG	, 999, -1),
-			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0, -1),
-			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0, -1),
-			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0, -1)
+			std::make_shared<Tile>('.', ep::color::grassFG, ep::color::grassBG	, 999),
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> grass1 = 
 		{ 
-			std::make_shared<Tile>('"', ep::color::grassFG, ep::color::grassBG	, 999, -1),
-			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0, -1),
-			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0, -1),
-			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0, -1)
+			std::make_shared<Tile>('"', ep::color::grassFG, ep::color::grassBG	, 999),
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0),
+			std::make_shared<Tile>(0,	TCODColor::pink,	TCODColor::pink		, 0)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> grass2 = 
 		{
-			std::make_shared<Tile>('`', ep::color::grassFG, ep::color::grassBG, 999, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1)
+			std::make_shared<Tile>('`', ep::color::grassFG, ep::color::grassBG, 999),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> grass3 = 
 		{
-			std::make_shared<Tile>(',', ep::color::grassFG, ep::color::grassBG, 999, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1)
+			std::make_shared<Tile>(',', ep::color::grassFG, ep::color::grassBG, 999),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> flower = 
 		{
-			std::make_shared<Tile>(ep::character::flower, ep::color::flowerFG, ep::color::flowerBG, 10, -1),
-			std::make_shared<Tile>(ep::character::flower, ep::color::flowerFG, ep::color::flowerBG, 10, -1),
-			std::make_shared<Tile>(ep::character::flower, ep::color::flowerFG, ep::color::flowerBG, 10, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1)
+			std::make_shared<Tile>(ep::character::flower, ep::color::flowerFG, ep::color::flowerBG, 10),
+			std::make_shared<Tile>(ep::character::flower, ep::color::flowerFG, ep::color::flowerBG, 10),
+			std::make_shared<Tile>(ep::character::flower, ep::color::flowerFG, ep::color::flowerBG, 10),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> floor = 
 		{
-			std::make_shared<Tile>(' ', ep::color::floorFG, ep::color::floorBG, 999, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1)
+			std::make_shared<Tile>(' ', ep::color::floorFG, ep::color::floorBG, 999),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> concrete = 
 		{
-			std::make_shared<Tile>('`', ep::color::concreteFG, ep::color::concreteBG, 999, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1)
+			std::make_shared<Tile>('`', ep::color::concreteFG, ep::color::concreteBG, 999),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> shingle = 
 		{
-			std::make_shared<Tile>(240, ep::color::shingleFG, ep::color::shingleBG, 999, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1)
+			std::make_shared<Tile>(240, ep::color::shingleFG, ep::color::shingleBG, 999),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> door = 
 		{
-			std::make_shared<Tile>(ep::character::door, ep::color::doorFG, ep::color::wallBG, 25, -1),
-			std::make_shared<Tile>(ep::character::door, ep::color::doorFG, ep::color::wallBG, 25, -1),
-			std::make_shared<Tile>(ep::character::door, ep::color::doorFG, ep::color::wallBG, 25, -1),
-			std::make_shared<Tile>(ep::character::door, ep::color::doorFG, ep::color::wallBG, 25, -1)
+			std::make_shared<Tile>(ep::character::door, ep::color::doorFG, ep::color::wallBG, 25),
+			std::make_shared<Tile>(ep::character::door, ep::color::doorFG, ep::color::wallBG, 25),
+			std::make_shared<Tile>(ep::character::door, ep::color::doorFG, ep::color::wallBG, 25),
+			std::make_shared<Tile>(ep::character::door, ep::color::doorFG, ep::color::wallBG, 25)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> wall = 
@@ -187,90 +187,90 @@ namespace ep
 	
 		inline static const std::vector<std::shared_ptr<Tile>> upStair = 
 		{
-			std::make_shared<Tile>(ep::character::upStair, ep::color::doorFG, ep::color::floorBG, 50, -1),
-			std::make_shared<Tile>(ep::character::upStair, ep::color::doorFG, ep::color::floorBG, 50, -1),
-			std::make_shared<Tile>(ep::character::upStair, ep::color::doorFG, ep::color::floorBG, 50, -1),
-			std::make_shared<Tile>(ep::character::upStair, ep::color::doorFG, ep::color::floorBG, 50, -1)
+			std::make_shared<Tile>(ep::character::upStair, ep::color::doorFG, ep::color::floorBG, 50),
+			std::make_shared<Tile>(ep::character::upStair, ep::color::doorFG, ep::color::floorBG, 50),
+			std::make_shared<Tile>(ep::character::upStair, ep::color::doorFG, ep::color::floorBG, 50),
+			std::make_shared<Tile>(ep::character::upStair, ep::color::doorFG, ep::color::floorBG, 50)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> downStair = 
 		{
-			std::make_shared<Tile>(ep::character::downStair, ep::color::doorFG, ep::color::floorBG, 50, -1),
-			std::make_shared<Tile>(ep::character::downStair, ep::color::doorFG, ep::color::floorBG, 50, -1),
-			std::make_shared<Tile>(ep::character::downStair, ep::color::doorFG, ep::color::floorBG, 50, -1),
-			std::make_shared<Tile>(ep::character::downStair, ep::color::doorFG, ep::color::floorBG, 50, -1)
+			std::make_shared<Tile>(ep::character::downStair, ep::color::doorFG, ep::color::floorBG, 50),
+			std::make_shared<Tile>(ep::character::downStair, ep::color::doorFG, ep::color::floorBG, 50),
+			std::make_shared<Tile>(ep::character::downStair, ep::color::doorFG, ep::color::floorBG, 50),
+			std::make_shared<Tile>(ep::character::downStair, ep::color::doorFG, ep::color::floorBG, 50)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> sky = 
 		{
-			std::make_shared<Tile>(' ', ep::color::windowFG, ep::color::windowBG, 0, -1),
-			std::make_shared<Tile>(' ', ep::color::windowFG, ep::color::windowBG, 0, -1),
-			std::make_shared<Tile>(' ', ep::color::windowFG, ep::color::windowBG, 0, -1),
-			std::make_shared<Tile>(' ', ep::color::windowFG, ep::color::windowBG, 0, -1)
+			std::make_shared<Tile>(' ', ep::color::windowFG, ep::color::windowBG, 0),
+			std::make_shared<Tile>(' ', ep::color::windowFG, ep::color::windowBG, 0),
+			std::make_shared<Tile>(' ', ep::color::windowFG, ep::color::windowBG, 0),
+			std::make_shared<Tile>(' ', ep::color::windowFG, ep::color::windowBG, 0)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> error = 
 		{
-			std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999, -1),
-			std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999, -1),
-			std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999, -1),
-			std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999, -1)
+			std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999),
+			std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999),
+			std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999),
+			std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999)
 		};
 																					
 		inline static const std::vector<std::shared_ptr<Tile>> pistol = 
 		{
-			std::make_shared<Tile>(ep::character::pistol, ep::color::pistolFG, ep::color::itemBG, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1)
+			std::make_shared<Tile>(ep::character::pistol, ep::color::pistolFG, ep::color::itemBG, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> pistolMagazine = 
 		{
-			std::make_shared<Tile>(ep::character::pistolMagazine, ep::color::pistolFG, ep::color::itemBG, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1)
+			std::make_shared<Tile>(ep::character::pistolMagazine, ep::color::pistolFG, ep::color::itemBG, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> rifle = 
 		{
-			std::make_shared<Tile>(ep::character::rifle, ep::color::rifleFG, ep::color::itemBG, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1)
+			std::make_shared<Tile>(ep::character::rifle, ep::color::rifleFG, ep::color::itemBG, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> rifleMagazine = 
 		{
-			std::make_shared<Tile>(ep::character::rifleMagazine, ep::color::rifleFG, ep::color::itemBG, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1)
+			std::make_shared<Tile>(ep::character::rifleMagazine, ep::color::rifleFG, ep::color::itemBG, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> smallBackpack = 
 		{
-			std::make_shared<Tile>(ep::character::backpack, ep::color::smallBackpackFG, ep::color::itemBG, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1)
+			std::make_shared<Tile>(ep::character::backpack, ep::color::smallBackpackFG, ep::color::itemBG, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> L1R3Armor = 
 		{
-			std::make_shared<Tile>(ep::character::ballisticVest, TCODColor::black, ep::color::itemBG, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1)
+			std::make_shared<Tile>(ep::character::ballisticVest, TCODColor::black, ep::color::itemBG, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 	
 		inline static const std::vector<std::shared_ptr<Tile>> knife = 
 		{
-			std::make_shared<Tile>(ep::character::knife, TCODColor::silver, ep::color::itemBG, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1)
+			std::make_shared<Tile>(ep::character::knife, TCODColor::silver, ep::color::itemBG, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 	};
 

@@ -103,10 +103,10 @@ void Destructible::destroy(int damage, int height)
 	{
 		tileList = std::vector<std::shared_ptr<Tile>>
 		{
-			std::make_shared<Tile>('%', tileList[0]->foregroundColor * TCODColor::lightGrey, tileList[0]->backgroundColor * TCODColor::darkGrey, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1)
+			std::make_shared<Tile>('%', tileList[0]->foregroundColor * TCODColor::lightGrey, tileList[0]->backgroundColor * TCODColor::darkGrey, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
 		};
 
 		walkableFlag = ep::tileFlag::OOOOI;

@@ -166,6 +166,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="data\maps\debugmap.xml" />
+    <Xml Include="data\maps\debugmap.emp" />
   </ItemGroup>
 </Project>
