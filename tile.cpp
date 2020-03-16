@@ -1,5 +1,11 @@
 #include "main.hpp"
 
+Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int deceleration, int strength)
+	:ch(ch), foregroundColor(foregroundColor), backgroundColor(backgroundColor), deceleration(deceleration), strength(strength)
+{}
+
+//----------------------------------------------------------------------------------------------------
+
 Block::Block(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag)
 	:tileList(tileList), transparentFlag(transparentFlag), walkableFlag(walkableFlag), explored(false), tag(Block::Tag::STATIC)
 {}
@@ -24,7 +30,7 @@ std::shared_ptr<Tile> Block::getTileData(int height) const
 			}
 		}
 	}
-	return std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999);
+	return std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999, -1);
 }
 
 bool Block::getDestroyed()
@@ -32,7 +38,7 @@ bool Block::getDestroyed()
 	return false;
 }
 
-void Block::destroy(int)
+void Block::destroy(int, int)
 {
 }
 
@@ -67,35 +73,44 @@ void Block::render(Position4 renderPosition, const std::shared_ptr<Pane>& pane) 
 
 //----------------------------------------------------------------------------------------------------
 
-Destructible::Destructible(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int strength)
-	:Block(tileList, transparentFlag, walkableFlag, Block::Tag::DESTRUCTIBLE), strength(strength), destroyed(false)
+Destructible::Destructible(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag)
+	:Block(tileList, transparentFlag, walkableFlag, Block::Tag::DESTRUCTIBLE), destroyed(false)
 {}
 
-void Destructible::destroy(int damage)
+void Destructible::destroy(int damage, int height)
 {
-	if (strength - damage >= 0)
+	if (tileList[height]->strength != -1) //if can be damaged
 	{
-		strength -= damage;
-	}
-	else
-	{
-		strength = 0;
+		if (tileList[height]->strength - damage >= 0)
+		{
+			tileList[height]->strength -= damage;
+		}
+		else
+		{
+			tileList[height]->strength = 0;
+		}
 	}
 
+	for (auto& tile : tileList)
+	{
+		if (tile->strength == 0) //if it has no strength left
+		{
+			destroyed = true;
+		}
+	}
 
-	if (strength <= 0) //if it has no strength left
+	if (destroyed)
 	{
 		tileList = std::vector<std::shared_ptr<Tile>>
 		{
-			std::make_shared<Tile>('%', tileList[0]->foregroundColor * TCODColor::lightGrey, tileList[0]->backgroundColor * TCODColor::darkGrey, 0),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
+			std::make_shared<Tile>('%', tileList[0]->foregroundColor * TCODColor::lightGrey, tileList[0]->backgroundColor * TCODColor::darkGrey, 0, -1),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1),
+			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0, -1)
 		};
 
-		walkableFlag =		ep::tileFlag::OOOOI;
-		transparentFlag =	ep::tileFlag::OOOOI;
-		destroyed = true;
+		walkableFlag = ep::tileFlag::OOOOI;
+		transparentFlag = ep::tileFlag::OOOOI;
 	}
 }
 
@@ -115,6 +130,3 @@ void Stair::interact()
 	WORLD->debugmap->player->mapPosition.floor += moveDistance;
 }
 
-Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int deceleration)
-	:ch(ch), foregroundColor(foregroundColor), backgroundColor(backgroundColor), deceleration(deceleration)
-{}

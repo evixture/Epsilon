@@ -276,9 +276,10 @@ void Bullet::doBulletDamage(std::shared_ptr<Creature>& creature)
 
 			currentVelocity -= 100; //slowdown after going through body
 		}
+
+		GUI->logWindow->pushMessage(LogWindow::Message((WORLD->debugmap->player->name + " shot " + creature->name + " for " + std::to_string(damage) + " damage!"), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
 	}
 
-	GUI->logWindow->pushMessage(LogWindow::Message((WORLD->debugmap->player->name + " shot " + creature->name + " for " + std::to_string(damage) + " damage!"), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
 
 	if (creature->health < 0)
 	{
@@ -288,72 +289,71 @@ void Bullet::doBulletDamage(std::shared_ptr<Creature>& creature)
 
 void Bullet::update()
 {
-		if (currentVelocity > 0 && mapPosition.height > 0)
+	if (currentVelocity > 0 && mapPosition.height > 0)
+	{
+		moveClock.tickUp();
+
+		for (int i = 1; i < moveClock.numCalls; moveClock.numCalls--)
 		{
-			moveClock.tickUp();
-
-			for (int i = 1; i < moveClock.numCalls; moveClock.numCalls--)
+			if (WORLD->inMapBounds(mapPosition))
 			{
-				if (WORLD->inMapBounds(mapPosition))
+				if (WORLD->getSolidity(mapPosition) == true) //if hit a wall
 				{
-					if (WORLD->getSolidity(mapPosition) == true) //if hit a wall
+					if (WORLD->debugmap->getBlock(mapPosition)->tag == Block::Tag::DESTRUCTIBLE)
 					{
-						if (WORLD->debugmap->getBlock(mapPosition)->tag == Block::Tag::DESTRUCTIBLE)
-						{
-							WORLD->debugmap->getBlock(mapPosition)->destroy(mass);
-							WORLD->updateBlock(mapPosition, false); //check if pos needs to be reassigned before
-
-						}
-
-						if (currentVelocity - WORLD->debugmap->getBlock(mapPosition)->getTileData(mapPosition.height)->deceleration <= 0)
-						{
-							currentVelocity = 0;
-						}
-						else
-						{
-							currentVelocity -= WORLD->debugmap->getBlock(mapPosition)->getTileData(mapPosition.height)->deceleration;
-						}
-
-						GUI->logWindow->pushMessage(LogWindow::Message("You hit a wall!", LogWindow::Message::MessageLevel::HIGH));
-
+						WORLD->debugmap->getBlock(mapPosition)->destroy(mass, mapPosition.height);
+						WORLD->updateBlock(mapPosition, false); //check if pos needs to be reassigned before
 					}
-					else if (WORLD->getSolidity(mapPosition) == false)
+
+					if (currentVelocity - WORLD->debugmap->getBlock(mapPosition)->getTileData(mapPosition.height)->deceleration <= 0)
 					{
-						for (auto& creature : WORLD->debugmap->creatureList) //if hit a creature
+						currentVelocity = 0;
+					}
+					else
+					{
+						currentVelocity -= WORLD->debugmap->getBlock(mapPosition)->getTileData(mapPosition.height)->deceleration;
+					}
+
+					GUI->logWindow->pushMessage(LogWindow::Message("You hit a wall!", LogWindow::Message::MessageLevel::HIGH));
+
+				}
+				else if (WORLD->getSolidity(mapPosition) == false)
+				{
+					for (auto& creature : WORLD->debugmap->creatureList) //if hit a creature
+					{
+						if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.floor == mapPosition.floor) //also checks height, may give bad results
 						{
-							if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.floor == mapPosition.floor) //also checks height, may give bad results
+							if (creature->health > 0)
 							{
-								if (creature->health > 0)
-								{
-									doBulletDamage(creature);
-								}
+								doBulletDamage(creature);
 							}
 						}
 					}
-					travel.step();
 				}
-				else
-				{
-					currentVelocity = 0;
-					mapPosition.height = 0;
-				}
-
-				mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.floor);
-
+				travel.step();
 			}
-		}
-	
-		if (currentVelocity > 0 && mapPosition.height > 0)
-		{
-			fallClock.timeBetweenUpdates = (getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1));
-			fallClock.tickUp();
-
-			for (int i = 1; i < fallClock.numCalls; fallClock.numCalls--)
+			else
 			{
-				mapPosition.height--;
+				currentVelocity = 0;
+				mapPosition.height = 0;
 			}
+
 			mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.floor);
+
 		}
+	}
+
+	if (currentVelocity > 0 && mapPosition.height > 0)
+	{
+		fallClock.timeBetweenUpdates = (getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1));
+		fallClock.tickUp();
+
+		for (int i = 1; i < fallClock.numCalls; fallClock.numCalls--)
+		{
+			mapPosition.height--;
+		}
+		mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.floor);
+	}
 
 	mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.floor); //needed??
 
