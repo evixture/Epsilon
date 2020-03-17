@@ -417,10 +417,10 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case '=':
-				return std::make_shared<Destructible>(ep::block::wall);
+				return std::make_shared<Block>(ep::block::wall);
 				break;
 			case 'O':
-				return std::make_shared<Destructible>(ep::block::window);
+				return std::make_shared<Block>(ep::block::window);
 				break;
 			default:
 				return std::make_shared<Block>(ep::block::error);
@@ -456,10 +456,10 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 		switch (code[1])
 		{
 			case 'n':
-				return std::make_shared<Destructible>(ep::block::tableTop);
+				return std::make_shared<Block>(ep::block::tableTop);
 				break;
 			case 'l':
-				return std::make_shared<Destructible>(ep::block::tableLeg);
+				return std::make_shared<Block>(ep::block::tableLeg);
 				break;
 			default:
 				return std::make_shared<Block>(ep::block::error);
@@ -534,7 +534,7 @@ void World::updateBlock(Position3 blockPosition, bool checkCreatures)
 
 TCODColor World::getBgColor(Position3& position) const
 {
-	return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]->tileList[0]->backgroundColor;
+	return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]->tileList[0].backgroundColor;
 }
 
 bool World::inMapBounds(Position3& position) const

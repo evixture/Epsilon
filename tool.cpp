@@ -165,9 +165,16 @@ void Melee::useMelee()
 			if (creature != WORLD->debugmap->player)
 			{
 				doMeleeDamage(creature);
+				return;
 			}
 		}
 	}
+
+	//if it cannot find a creature
+
+	WORLD->debugmap->getBlock(mapPosition)->destroy((bluntDamage + sharpDamage), mapPosition.height);
+
+	WORLD->updateBlock(mapPosition, false);
 }
 
 void Melee::doMeleeDamage(std::shared_ptr<Creature>& creature)
@@ -297,39 +304,31 @@ void Bullet::update()
 		{
 			if (WORLD->inMapBounds(mapPosition))
 			{
-				if (WORLD->getSolidity(mapPosition) == true) //if hit a wall
+				WORLD->debugmap->getBlock(mapPosition)->destroy(mass, mapPosition.height);
+				WORLD->updateBlock(mapPosition, false); //check if pos needs to be reassigned before
+
+				int decel = WORLD->debugmap->getBlock(mapPosition)->tileList[mapPosition.height].deceleration;
+
+				if (currentVelocity - decel < 0)
 				{
-					if (WORLD->debugmap->getBlock(mapPosition)->tag == Block::Tag::DESTRUCTIBLE)
-					{
-						WORLD->debugmap->getBlock(mapPosition)->destroy(mass, mapPosition.height);
-						WORLD->updateBlock(mapPosition, false); //check if pos needs to be reassigned before
-					}
-
-					if (currentVelocity - WORLD->debugmap->getBlock(mapPosition)->getTileData(mapPosition.height)->deceleration <= 0)
-					{
-						currentVelocity = 0;
-					}
-					else
-					{
-						currentVelocity -= WORLD->debugmap->getBlock(mapPosition)->getTileData(mapPosition.height)->deceleration;
-					}
-
-					GUI->logWindow->pushMessage(LogWindow::Message("You hit a wall!", LogWindow::Message::MessageLevel::HIGH));
-
+					currentVelocity = 0;
 				}
-				else if (WORLD->getSolidity(mapPosition) == false)
+				else
 				{
-					for (auto& creature : WORLD->debugmap->creatureList) //if hit a creature
+					currentVelocity -= WORLD->debugmap->getBlock(mapPosition)->tileList[mapPosition.height].deceleration;
+				}			
+			
+				for (auto& creature : WORLD->debugmap->creatureList) //if hit a creature
+				{
+					if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.floor == mapPosition.floor) //also checks height, may give bad results
 					{
-						if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.floor == mapPosition.floor) //also checks height, may give bad results
+						if (creature->health > 0)
 						{
-							if (creature->health > 0)
-							{
-								doBulletDamage(creature);
-							}
+							doBulletDamage(creature);
 						}
 					}
 				}
+				
 				travel.step();
 			}
 			else
@@ -384,7 +383,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 			else
 			{
 				pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-				pane->console->setCharForeground(renderPosition.x, renderPosition.y, WORLD->debugmap->getBlock(mapPosition)->tileList[0]->foregroundColor);
+				pane->console->setCharForeground(renderPosition.x, renderPosition.y, WORLD->debugmap->getBlock(mapPosition)->tileList[0].foregroundColor);
 
 				//if (WORLD->getBlock(mapPosition)->getTileData(mapPosition.height)->ch != 0) //if the bullet is on the ground and the char is not the bullet
 				//{

@@ -6,21 +6,21 @@ Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int dec
 
 //----------------------------------------------------------------------------------------------------
 
-Block::Block(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag)
+Block::Block(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned char walkableFlag)
 	:tileList(tileList), transparentFlag(transparentFlag), walkableFlag(walkableFlag), explored(false), tag(Block::Tag::STATIC)
 {}
 
-Block::Block(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, Tag tag)
+Block::Block(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned char walkableFlag, Tag tag)
 	:tileList(tileList), transparentFlag(transparentFlag), walkableFlag(walkableFlag), tag(tag), explored(false)
 {}
 
-std::shared_ptr<Tile> Block::getTileData(int height) const
+Tile Block::getTileData(int height) const
 {
-	if (tileList[height]->ch != 0) //no tiles in tileList
+	if (tileList[height].ch != 0) //no tiles in tileList
 	{
 		return tileList[height];
 	}
-	else if (tileList[height]->ch == 0)
+	else if (tileList[height].ch == 0)
 	{
 		for (int i = 0; i <= height; ++i) //start at player height, then move down the property list to 
 		{
@@ -30,16 +30,47 @@ std::shared_ptr<Tile> Block::getTileData(int height) const
 			}
 		}
 	}
-	return std::make_shared<Tile>('%', TCODColor::pink, TCODColor::pink, 999, -1);
+	return Tile('%', TCODColor::pink, TCODColor::pink, 999, -1);
 }
 
-bool Block::getDestroyed()
+void Block::destroy(int damage, int height)
 {
-	return false;
-}
+	if (!destroyed)
+	{
+		if (tileList[height].strength != -1) //if can be damaged
+		{
+			if (tileList[height].strength - damage >= 0)
+			{
+				tileList[height].strength -= damage;
+			}
+			else
+			{
+				tileList[height].strength = 0;
+			}
+		}
 
-void Block::destroy(int, int)
-{
+		for (auto& tile : tileList)
+		{
+			if (tile.strength == 0) //if it has no strength left
+			{
+				destroyed = true;
+			}
+		}
+
+		if (destroyed)
+		{
+			tileList = std::vector<Tile>
+			{
+				Tile('%', tileList[0].foregroundColor * TCODColor::lightGrey, tileList[0].backgroundColor * TCODColor::darkGrey, 0),
+				Tile(0, TCODColor::pink, TCODColor::pink, 0),
+				Tile(0, TCODColor::pink, TCODColor::pink, 0),
+				Tile(0, TCODColor::pink, TCODColor::pink, 0)
+			};
+
+			walkableFlag = ep::tileFlag::OOOOI;
+			transparentFlag = ep::tileFlag::OOOOI;
+		}
+	}
 }
 
 void Block::interact()
@@ -50,19 +81,19 @@ void Block::render(Position4 renderPosition, const std::shared_ptr<Pane>& pane) 
 {
 	//if player height it greater than tallest nontransparent tile, render the tallest tile's data, else render tile on player's floor
 	Position4 position = Position4(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.height, renderPosition.floor);
-	std::shared_ptr<Tile> tile = getTileData(renderPosition.height);
+	Tile tile = getTileData(renderPosition.height);
 
 		if (WORLD->isInPlayerFov(position))
 		{
-			pane->console->setCharBackground(renderPosition.x,					renderPosition.y,					tile->backgroundColor);
-			pane->console->setCharForeground(renderPosition.x,					renderPosition.y,					tile->foregroundColor);
-			pane->console->setChar          (renderPosition.x,					renderPosition.y,					tile->ch);
+			pane->console->setCharBackground(renderPosition.x,					renderPosition.y,					tile.backgroundColor);
+			pane->console->setCharForeground(renderPosition.x,					renderPosition.y,					tile.foregroundColor);
+			pane->console->setChar          (renderPosition.x,					renderPosition.y,					tile.ch);
 		}
 		else if (WORLD->isExplored(position))
 		{
 			pane->console->setCharBackground(renderPosition.x,					renderPosition.y,					TCODColor::black);
 			pane->console->setCharForeground(renderPosition.x,					renderPosition.y,					TCODColor::darkestGrey);
-			pane->console->setChar			(renderPosition.x,					renderPosition.y,					tile->ch);
+			pane->console->setChar			(renderPosition.x,					renderPosition.y,					tile.ch);
 		}
 		else
 		{
@@ -73,55 +104,23 @@ void Block::render(Position4 renderPosition, const std::shared_ptr<Pane>& pane) 
 
 //----------------------------------------------------------------------------------------------------
 
-Destructible::Destructible(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag)
-	:Block(tileList, transparentFlag, walkableFlag, Block::Tag::DESTRUCTIBLE), destroyed(false)
-{}
-
-void Destructible::destroy(int damage, int height)
-{
-	if (tileList[height]->strength != -1) //if can be damaged
-	{
-		if (tileList[height]->strength - damage >= 0)
-		{
-			tileList[height]->strength -= damage;
-		}
-		else
-		{
-			tileList[height]->strength = 0;
-		}
-	}
-
-	for (auto& tile : tileList)
-	{
-		if (tile->strength == 0) //if it has no strength left
-		{
-			destroyed = true;
-		}
-	}
-
-	if (destroyed)
-	{
-		tileList = std::vector<std::shared_ptr<Tile>>
-		{
-			std::make_shared<Tile>('%', tileList[0]->foregroundColor * TCODColor::lightGrey, tileList[0]->backgroundColor * TCODColor::darkGrey, 0),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0),
-			std::make_shared<Tile>(0, TCODColor::pink, TCODColor::pink, 0)
-		};
-
-		walkableFlag = ep::tileFlag::OOOOI;
-		transparentFlag = ep::tileFlag::OOOOI;
-	}
-}
-
-bool Destructible::getDestroyed()
-{
-	return destroyed;
-}
+//Destructible::Destructible(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned char walkableFlag)
+//	:Block(tileList, transparentFlag, walkableFlag, Block::Tag::DESTRUCTIBLE), destroyed(false)
+//{}
+//
+//void Destructible::destroy(int damage, int height)
+//{
+//	
+//}
+//
+//bool Destructible::getDestroyed()
+//{
+//	return destroyed;
+//}
 
 //----------------------------------------------------------------------------------------------------
 
-Stair::Stair(std::vector<std::shared_ptr<Tile>> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance)
+Stair::Stair(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance)
 	:Block(tileList, transparentFlag, ep::tileFlag::OOOOI, Block::Tag::STAIR), moveDistance(moveDistance)
 {}
 
