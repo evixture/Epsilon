@@ -48,6 +48,8 @@ struct Creature : public Entity //creature base used for player and other beings
 	virtual void pickUpItem(); //should eventually chenge to pure
 	virtual void dropItem();
 
+	virtual void takeDamage(int damage);
+
 	//actions
 	virtual void reload();
 	virtual void changeFireMode();
@@ -67,6 +69,8 @@ struct Player : public Creature //player derived creature that the player intera
 	char xMoveDist; //the amount that the player moves in the x dimension
 	char yMoveDist; //the amount that the player moves in the y dimension
 
+	bool hasSecondChance;
+
 	TCODColor backgroundColor;
 
 	Player(Position4 pos); //player constructor that takes a position
@@ -77,6 +81,8 @@ struct Player : public Creature //player derived creature that the player intera
 	//world interact
 	void pickUpItem(); //picks up the item on the ground
 	void dropItem(); //drops the selected item
+
+	void takeDamage(int damage);
 
 	//actions
 	void reload(); //reloads the selected item

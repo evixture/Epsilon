@@ -8,8 +8,8 @@ struct StatusWindow : public Window //player status pane derived window that ren
 	void render() const; //renders the window
 
 private:
-	unsigned short int displayHealth; //the health that is displayed
-	unsigned short int displayArmor; //the armor that is displayed
+	short int displayHealth; //the health that is displayed
+	short int displayArmor; //the armor that is displayed
 };
 
 struct MapWindow : public Window //map pane derived window that handles the world

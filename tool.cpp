@@ -186,14 +186,7 @@ void Melee::doMeleeDamage(std::shared_ptr<Creature>& creature)
 
 		int totalDamage = int(sharpDamageResult + bluntDamageResult);
 
-		if (creature->health - totalDamage < 0)
-		{
-			creature->health = 0;
-		}
-		else
-		{
-			creature->health -= totalDamage;
-		}
+		creature->takeDamage(totalDamage);
 
 		GUI->logWindow->pushMessage(LogWindow::Message((creature->name + " was hit for " + std::to_string(totalDamage) + " damage!"), LogWindow::Message::MessageLevel::MEDIUM));
 	}
@@ -251,7 +244,7 @@ void Bullet::doBulletDamage(std::shared_ptr<Creature>& creature)
 {
 	int damage;
 
-	if (creature->health > 0)
+	if (creature->health != 0)
 	{
 		if (creature->equippedArmor.durability > 0) //if the armor durability is high enough
 		{
@@ -261,7 +254,8 @@ void Bullet::doBulletDamage(std::shared_ptr<Creature>& creature)
 				currentVelocity -= creature->equippedArmor.defense;
 
 				damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //2.0f can be changed to manage ttk and bullet damage
-				creature->health -= damage;
+
+				creature->takeDamage(damage);
 
 				currentVelocity -= 100; //slowdown after going through body
 			}
@@ -279,18 +273,13 @@ void Bullet::doBulletDamage(std::shared_ptr<Creature>& creature)
 		else
 		{
 			damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass);
-			creature->health -= damage;
+			
+			creature->takeDamage(damage);
 
 			currentVelocity -= 100; //slowdown after going through body
 		}
 
 		GUI->logWindow->pushMessage(LogWindow::Message((WORLD->debugmap->player->name + " shot " + creature->name + " for " + std::to_string(damage) + " damage!"), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
-	}
-
-
-	if (creature->health < 0)
-	{
-		creature->health = 0;
 	}
 }
 
@@ -322,7 +311,7 @@ void Bullet::update()
 				{
 					if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.floor == mapPosition.floor) //also checks height, may give bad results
 					{
-						if (creature->health > 0)
+						if (creature->health != 0)
 						{
 							doBulletDamage(creature);
 						}

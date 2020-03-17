@@ -50,9 +50,17 @@ void StatusWindow::render() const
 	drawWindow->console->printf(0, 0, "Health : [");
 	for (int i = 0; i < 20; ++i)
 	{
-		if (i * 5 < displayHealth)
+		if (displayHealth != -1)
 		{
-			drawWindow->console->printf(i + 10, 0, "=");
+			if (i * 5 < displayHealth)
+			{
+				drawWindow->console->printf(i + 10, 0, "=");
+				drawWindow->console->setCharForeground(i + 10, 0, TCODColor::red);
+			}
+		}
+		else
+		{
+			drawWindow->console->printf(i + 10, 0, "!");
 			drawWindow->console->setCharForeground(i + 10, 0, TCODColor::red);
 		}
 	}

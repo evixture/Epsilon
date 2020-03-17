@@ -144,7 +144,7 @@ Input::Input()
 
 	buttonList.push_back(stanceDownKey =			std::make_shared<KeyboardButton>(sf::Keyboard::Z));
 	buttonList.push_back(stanceUpKey =			std::make_shared<KeyboardButton>(sf::Keyboard::X));
-	buttonList.push_back(standKey =				std::make_shared<KeyboardButton>(sf::Keyboard::C));
+	buttonList.push_back(debug3Key =				std::make_shared<KeyboardButton>(sf::Keyboard::C));
 
 	buttonList.push_back(pickUpKey =			std::make_shared<KeyboardButton>(sf::Keyboard::E));
 	buttonList.push_back(dropKey =				std::make_shared<KeyboardButton>(sf::Keyboard::Q));

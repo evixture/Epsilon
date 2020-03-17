@@ -55,6 +55,19 @@ void Creature::dropItem()
 {
 }
 
+void Creature::takeDamage(int damage)
+{
+	if (health - damage > 0) //take normal damage
+	{
+		health -= damage;
+	}
+	else //if damage taken would have resulted in death
+	{
+		health = 0;
+	}
+}
+	
+
 void Creature::reload()
 {
 }
@@ -81,9 +94,8 @@ void Creature::update()
 
 	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
 
-	if (!(health > 0)) //if not "alive"
+	if (health == 0) //if dead
 	{
-		health = 0; //prevent from taking further damage
 		ch = '$'; //set char to dead symbol
 		color = TCODColor::red;
 	}
@@ -101,8 +113,10 @@ void Creature::render(const std::shared_ptr<Pane>& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Player::Player(Position4 position)
-	:Creature(position, '@', "player", ep::color::player, 100, Armor("", TCODColor::pink, 0, 0)), xMoveDist(0), yMoveDist(0), backgroundColor(TCODColor::pink)
+	:Creature(position, '@', "player", ep::color::player, 100, Armor("", TCODColor::pink, 0, 0)), xMoveDist(0), yMoveDist(0), backgroundColor(TCODColor::pink), hasSecondChance(true)
 {
+	hasSecondChance = true;
+
 	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, this)));
 	inventory[1]->addItem(	std::make_shared<Item>(ep::item::sip45(0, 0, 0, this)));
 	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(0, 0, 0, this)));
@@ -301,6 +315,33 @@ void Player::dropItem()
 	}
 }
 
+void Player::takeDamage(int damage)
+{
+	if (health != -1) //if player not currently in second chance
+	{
+		if (health - damage > 0) //take normal damage
+		{
+			health -= damage;
+		}
+		else //if damage taken would have resulted in death
+		{
+			if (hasSecondChance) //will be saved from instant death
+			{
+				hasSecondChance = false; //should be reset after heal
+				health = -1;
+			}
+			else
+			{
+				health = 0;
+			}
+		}
+	}
+	else
+	{
+		health = 0;
+	}
+}
+
 void Player::filterIndexes()
 {
 	//INDEX FILTERING
@@ -431,7 +472,7 @@ void Player::update()
 {
 	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
 
-	if (health > 0) //if player is alive
+	if (health != 0) //if player is alive
 	{
 		if (INPUT->highlightKey->isDown)
 		{
@@ -504,14 +545,14 @@ void Player::update()
 	}
 	else //if dead
 	{
-		health = 0; //prevent from taking further damage
+		//health = 0; //prevent from taking further damage
 		ch = '&'; //set char to dead symbol
 		color = TCODColor::red;
 	}
 
-	if (INPUT->debug2Key->isSwitched)
+	if (INPUT->debug3Key->isSwitched)
 	{
-		//health -= 25;
+		takeDamage(25);
 	}
 }
 
@@ -522,7 +563,7 @@ void Player::render(const std::shared_ptr<Pane>& pane) const
 		pane->console->setCharBackground(renderPosition.x, renderPosition.y, backgroundColor);
 	}
 
-	if (health > 0)
+	if (health != 0)
 	{
 		selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
 	}

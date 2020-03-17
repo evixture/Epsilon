@@ -142,7 +142,7 @@ void AICreature::update() //ai and behavior attributes update here
 {
 	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
 
-	if (health > 0)
+	if (health != 0)
 	{
 		if (INPUT->debug2Key->isSwitched) //debug pathfinding
 		{	
@@ -178,14 +178,12 @@ void AICreature::update() //ai and behavior attributes update here
 
 		updateTools();
 	}
-
-	if (!(health > 0)) //if not "alive"
+	else
 	{
 		health = 0; //prevent from taking further damage
 		ch = '$'; //set char to dead symbol
 		color = TCODColor::red;
 	}
-
 }
 
 void AICreature::render(const std::shared_ptr<Pane>& pane) const
@@ -194,7 +192,7 @@ void AICreature::render(const std::shared_ptr<Pane>& pane) const
 	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
 	pane->console->setCharBackground(renderPosition.x, renderPosition.y, debugBGColor);
 
-	if (health > 0)
+	if (health != 0)
 	{
 		selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
 	}
