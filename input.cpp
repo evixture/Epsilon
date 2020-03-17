@@ -142,8 +142,8 @@ Input::Input()
 	buttonList.push_back(moveSlowKey =			std::make_shared<KeyboardButton>(sf::Keyboard::LControl));
 	buttonList.push_back(moveFastKey =			std::make_shared<KeyboardButton>(sf::Keyboard::LShift));
 
-	buttonList.push_back(proneKey =				std::make_shared<KeyboardButton>(sf::Keyboard::Z));
-	buttonList.push_back(crouchKey =			std::make_shared<KeyboardButton>(sf::Keyboard::X));
+	buttonList.push_back(stanceDownKey =			std::make_shared<KeyboardButton>(sf::Keyboard::Z));
+	buttonList.push_back(stanceUpKey =			std::make_shared<KeyboardButton>(sf::Keyboard::X));
 	buttonList.push_back(standKey =				std::make_shared<KeyboardButton>(sf::Keyboard::C));
 
 	buttonList.push_back(pickUpKey =			std::make_shared<KeyboardButton>(sf::Keyboard::E));

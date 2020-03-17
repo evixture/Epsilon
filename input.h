@@ -47,8 +47,8 @@ struct Input //handles all of the mouse and keyboard input
 	std::shared_ptr<KeyboardButton> moveSlowKey; //key to make the player move slower
 	std::shared_ptr<KeyboardButton> moveFastKey; //key to make the player move faster
 
-	std::shared_ptr<KeyboardButton> proneKey; //key to make the player go prone
-	std::shared_ptr<KeyboardButton> crouchKey; //key to make the player crouch
+	std::shared_ptr<KeyboardButton> stanceDownKey; //key to make the player go prone
+	std::shared_ptr<KeyboardButton> stanceUpKey; //key to make the player crouch
 	std::shared_ptr<KeyboardButton> standKey; //key to make the player stand up
 
 	std::shared_ptr<KeyboardButton> pickUpKey; //key for the player to pick up an item on the ground

@@ -33,12 +33,18 @@ void Creature::move()
 
 void Creature::changeStanceUp()
 {
-	if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height + 1, mapPosition.floor), false)) mapPosition.height += 1;
+	if (mapPosition.height + 1 <= 3)
+	{
+		if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height + 1, mapPosition.floor), false)) mapPosition.height += 1;
+	}
 }
 
 void Creature::changeStanceDown()
 {
-	if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height - 1, mapPosition.floor), false)) mapPosition.height -= 1;
+	if (mapPosition.height - 1 >= 1)
+	{
+		if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height - 1, mapPosition.floor), false)) mapPosition.height -= 1;
+	}
 }
 
 void Creature::pickUpItem()
@@ -127,51 +133,14 @@ void Player::move()
 		xMoveDist = 0;
 		yMoveDist = 0;
 
-		if (INPUT->proneKey->isSwitched)
-			{
-				int testHeight = mapPosition.height;
-				for (int i = 0; i < int(abs(testHeight - 1)); ++i)
-				{
-					if (testHeight - 1 > 0)
-					{
-						changeStanceDown();
-					}
-					else if (testHeight - 1 < 0)
-					{
-						changeStanceUp();
-					}
-				}
-			}
-		if (INPUT->crouchKey->isSwitched)
-			{
-				int testHeight = mapPosition.height;
-				for (int i = 0; i < int(abs(testHeight - 2)); ++i)
-				{
-					if (testHeight - 2 > 0)
-					{
-						changeStanceDown();
-					}
-					else if (testHeight - 2 < 0)
-					{
-						changeStanceUp();
-					}
-				}
-			}
-		if (INPUT->standKey->isSwitched)
-			{
-				int testHeight = mapPosition.height;
-				for (int i = 0; i < int(abs(testHeight - 3)); ++i)
-				{
-					if (testHeight - 3 > 0)
-					{
-						changeStanceDown();
-					}
-					else if (testHeight - 3 < 0)
-					{
-						changeStanceUp();
-					}
-				}
-			}
+		if (INPUT->stanceDownKey->isSwitched)
+		{
+			changeStanceDown();
+		}
+		if (INPUT->stanceUpKey->isSwitched)
+		{
+			changeStanceUp();
+		}
 
 		moveSpeed = baseMoveTime / mapPosition.height;
 
