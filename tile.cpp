@@ -83,40 +83,23 @@ void Block::render(Position4 renderPosition, const std::shared_ptr<Pane>& pane) 
 	Position4 position = Position4(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.height, renderPosition.floor);
 	Tile tile = getTileData(renderPosition.height);
 
-		if (WORLD->isInPlayerFov(position))
-		{
-			pane->console->setCharBackground(renderPosition.x,					renderPosition.y,					tile.backgroundColor);
-			pane->console->setCharForeground(renderPosition.x,					renderPosition.y,					tile.foregroundColor);
-			pane->console->setChar          (renderPosition.x,					renderPosition.y,					tile.ch);
-		}
-		else if (WORLD->isExplored(position))
-		{
-			pane->console->setCharBackground(renderPosition.x,					renderPosition.y,					TCODColor::black);
-			pane->console->setCharForeground(renderPosition.x,					renderPosition.y,					TCODColor::darkestGrey);
-			pane->console->setChar			(renderPosition.x,					renderPosition.y,					tile.ch);
-		}
-		else
-		{
-			pane->console->setCharBackground(renderPosition.x,					renderPosition.y,					TCODColor::black);
-		}
+	if (WORLD->isInPlayerFov(position))
+	{
+		pane->console->setCharBackground(renderPosition.x,					renderPosition.y,					tile.backgroundColor);
+		pane->console->setCharForeground(renderPosition.x,					renderPosition.y,					tile.foregroundColor);
+		pane->console->setChar          (renderPosition.x,					renderPosition.y,					tile.ch);
 	}
-	
-
-//----------------------------------------------------------------------------------------------------
-
-//Destructible::Destructible(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned char walkableFlag)
-//	:Block(tileList, transparentFlag, walkableFlag, Block::Tag::DESTRUCTIBLE), destroyed(false)
-//{}
-//
-//void Destructible::destroy(int damage, int height)
-//{
-//	
-//}
-//
-//bool Destructible::getDestroyed()
-//{
-//	return destroyed;
-//}
+	else if (WORLD->isExplored(position))
+	{
+		pane->console->setCharBackground(renderPosition.x,					renderPosition.y,					TCODColor::black);
+		pane->console->setCharForeground(renderPosition.x,					renderPosition.y,					TCODColor::darkestGrey);
+		pane->console->setChar			(renderPosition.x,					renderPosition.y,					tile.ch);
+	}
+	else
+	{
+		pane->console->setCharBackground(renderPosition.x,					renderPosition.y,					TCODColor::black);
+	}
+}
 
 //----------------------------------------------------------------------------------------------------
 

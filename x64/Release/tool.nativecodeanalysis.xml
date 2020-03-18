@@ -335,119 +335,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>tool.cpp</FILENAME>
-      <LINE>279</LINE>
-      <COLUMN>134</COLUMN>
-    </SFA>
-    <DEFECTCODE>6001</DEFECTCODE>
-    <DESCRIPTION>Using uninitialized memory 'damage'.</DESCRIPTION>
-    <FUNCTION>Bullet::doBulletDamage</FUNCTION>
-    <DECORATED>?doBulletDamage@Bullet@@QEAAXAEAV?$shared_ptr@UCreature@@@std@@@Z</DECORATED>
-    <FUNCLINE>241</FUNCLINE>
-    <PATH>
-      <SFA>
-        <FILEPATH>e:\projects\visual studio\libtcod development\epsilon\</FILEPATH>
-        <FILENAME>tool.cpp</FILENAME>
-        <LINE>243</LINE>
-        <COLUMN>5</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>e:\projects\visual studio\libtcod development\epsilon\</FILEPATH>
-        <FILENAME>tool.cpp</FILENAME>
-        <LINE>245</LINE>
-        <COLUMN>22</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>e:\projects\visual studio\libtcod development\epsilon\</FILEPATH>
-        <FILENAME>tool.cpp</FILENAME>
-        <LINE>279</LINE>
-        <COLUMN>124</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>e:\projects\visual studio\libtcod development\epsilon\</FILEPATH>
-        <FILENAME>tool.cpp</FILENAME>
-        <LINE>279</LINE>
-        <COLUMN>79</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>e:\projects\visual studio\libtcod development\epsilon\</FILEPATH>
-        <FILENAME>tool.cpp</FILENAME>
-        <LINE>279</LINE>
-        <COLUMN>28</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>e:\projects\visual studio\libtcod development\epsilon\</FILEPATH>
-        <FILENAME>tool.cpp</FILENAME>
-        <LINE>279</LINE>
-        <COLUMN>90</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>e:\projects\visual studio\libtcod development\epsilon\</FILEPATH>
-        <FILENAME>tool.cpp</FILENAME>
-        <LINE>279</LINE>
-        <COLUMN>28</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>e:\projects\visual studio\libtcod development\epsilon\</FILEPATH>
-        <FILENAME>tool.cpp</FILENAME>
-        <LINE>279</LINE>
-        <COLUMN>107</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>e:\projects\visual studio\libtcod development\epsilon\</FILEPATH>
-        <FILENAME>tool.cpp</FILENAME>
-        <LINE>279</LINE>
-        <COLUMN>28</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>e:\projects\visual studio\libtcod development\epsilon\</FILEPATH>
-        <FILENAME>tool.cpp</FILENAME>
-        <LINE>279</LINE>
-        <COLUMN>117</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>e:\projects\visual studio\libtcod development\epsilon\</FILEPATH>
-        <FILENAME>tool.cpp</FILENAME>
-        <LINE>279</LINE>
-        <COLUMN>28</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>e:\projects\visual studio\libtcod development\epsilon\</FILEPATH>
-        <FILENAME>tool.cpp</FILENAME>
-        <LINE>279</LINE>
-        <COLUMN>142</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>e:\projects\visual studio\libtcod development\epsilon\</FILEPATH>
-        <FILENAME>tool.cpp</FILENAME>
-        <LINE>279</LINE>
-        <COLUMN>28</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>e:\projects\visual studio\libtcod development\epsilon\</FILEPATH>
-        <FILENAME>tool.cpp</FILENAME>
-        <LINE>279</LINE>
-        <COLUMN>47</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>e:\projects\visual studio\libtcod development\epsilon\</FILEPATH>
-        <FILENAME>tool.cpp</FILENAME>
-        <LINE>279</LINE>
-        <COLUMN>28</COLUMN>
-      </SFA>
-    </PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>tool.cpp</FILENAME>
-      <LINE>670</LINE>
+      <LINE>654</LINE>
       <COLUMN>56</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Firearm::update</FUNCTION>
     <DECORATED>?update@Firearm@@UEAAXAEAUPosition4@@AEAH1AEA_N@Z</DECORATED>
-    <FUNCLINE>646</FUNCLINE>
+    <FUNCLINE>630</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

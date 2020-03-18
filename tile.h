@@ -34,16 +34,6 @@ struct Block //tile class used for the map and items
 	virtual void interact(); //virtual behaves differently depending on tile type, does nothing in tile
 };
 
-//struct Destructible : public Block //destructible type of tile that can be destroyed by various items
-//{
-//	bool destroyed; //if the tile has been destroyed of not
-//
-//	Destructible(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned char walkableFlag); //constructor for destructible that takes character, colors, height, walkability, and strength
-//
-//	void destroy(int damage, int height);
-//	bool getDestroyed(); //returns true if the tile has been destroyed
-//};
-
 struct Stair : public Block //stair type of tile that allows travel between floors
 {
 	char moveDistance; //number of floors that the stair moves up or down

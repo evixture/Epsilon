@@ -675,10 +675,8 @@ void InfoWindow::setTileDetails()
 {
 	if (INPUT->mouse.cx >= 1 && INPUT->mouse.cx <= 60 && INPUT->mouse.cy >= 3 && INPUT->mouse.cy <= 62) //if in map window
 	{
-		std::string name = WORLD->debugmap->getBlock(Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.floor))->
+		tileDetail = WORLD->debugmap->getBlock(Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.floor))->
 			getTileData(WORLD->debugmap->player->mapPosition.height).name;
-
-		tileDetail = name;
 	}
 	else
 	{
@@ -710,9 +708,9 @@ void InfoWindow::setItemDetails()
 void InfoWindow::update()
 {
 	setTileDetails();
-
+	
 	setCreatureDetails();
-
+	
 	setItemDetails();
 }
 

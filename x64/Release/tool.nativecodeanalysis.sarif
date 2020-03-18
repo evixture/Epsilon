@@ -496,261 +496,6 @@
           }
         },
         {
-          "ruleId": "6001",
-          "message": {
-            "text": "Using uninitialized memory 'damage'."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "fileLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/tool.cpp"
-                },
-                "region": {
-                  "startLine": 279,
-                  "startColumn": 135
-                }
-              },
-              "fullyQualifiedLogicalName": "public: void __cdecl Bullet::doBulletDamage(class std::shared_ptr<struct Creature> &)"
-            }
-          ],
-          "codeFlows": [
-            {
-              "threadFlows": [
-                {
-                  "locations": [
-                    {
-                      "step": 0,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp"
-                          },
-                          "region": {
-                            "startLine": 243,
-                            "startColumn": 6
-                          }
-                        }
-                      },
-                      "importance": "important"
-                    },
-                    {
-                      "step": 1,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp"
-                          },
-                          "region": {
-                            "startLine": 245,
-                            "startColumn": 23
-                          }
-                        }
-                      },
-                      "importance": "important"
-                    },
-                    {
-                      "step": 2,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp"
-                          },
-                          "region": {
-                            "startLine": 279,
-                            "startColumn": 125
-                          }
-                        }
-                      },
-                      "importance": "important"
-                    },
-                    {
-                      "step": 3,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp"
-                          },
-                          "region": {
-                            "startLine": 279,
-                            "startColumn": 80
-                          }
-                        }
-                      },
-                      "importance": "important"
-                    },
-                    {
-                      "step": 4,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp"
-                          },
-                          "region": {
-                            "startLine": 279,
-                            "startColumn": 29
-                          }
-                        }
-                      },
-                      "importance": "important"
-                    },
-                    {
-                      "step": 5,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp"
-                          },
-                          "region": {
-                            "startLine": 279,
-                            "startColumn": 91
-                          }
-                        }
-                      },
-                      "importance": "important"
-                    },
-                    {
-                      "step": 6,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp"
-                          },
-                          "region": {
-                            "startLine": 279,
-                            "startColumn": 29
-                          }
-                        }
-                      },
-                      "importance": "important"
-                    },
-                    {
-                      "step": 7,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp"
-                          },
-                          "region": {
-                            "startLine": 279,
-                            "startColumn": 108
-                          }
-                        }
-                      },
-                      "importance": "important"
-                    },
-                    {
-                      "step": 8,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp"
-                          },
-                          "region": {
-                            "startLine": 279,
-                            "startColumn": 29
-                          }
-                        }
-                      },
-                      "importance": "important"
-                    },
-                    {
-                      "step": 9,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp"
-                          },
-                          "region": {
-                            "startLine": 279,
-                            "startColumn": 118
-                          }
-                        }
-                      },
-                      "importance": "important"
-                    },
-                    {
-                      "step": 10,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp"
-                          },
-                          "region": {
-                            "startLine": 279,
-                            "startColumn": 29
-                          }
-                        }
-                      },
-                      "importance": "important"
-                    },
-                    {
-                      "step": 11,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp"
-                          },
-                          "region": {
-                            "startLine": 279,
-                            "startColumn": 143
-                          }
-                        }
-                      },
-                      "importance": "important"
-                    },
-                    {
-                      "step": 12,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp"
-                          },
-                          "region": {
-                            "startLine": 279,
-                            "startColumn": 29
-                          }
-                        }
-                      },
-                      "importance": "important"
-                    },
-                    {
-                      "step": 13,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp"
-                          },
-                          "region": {
-                            "startLine": 279,
-                            "startColumn": 48
-                          }
-                        }
-                      },
-                      "importance": "important"
-                    },
-                    {
-                      "step": 14,
-                      "location": {
-                        "physicalLocation": {
-                          "fileLocation": {
-                            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp"
-                          },
-                          "region": {
-                            "startLine": 279,
-                            "startColumn": 29
-                          }
-                        }
-                      },
-                      "importance": "important"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
           "ruleId": "26451",
           "message": {
             "text": "Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2)."
@@ -762,9 +507,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/tool.cpp"
                 },
                 "region": {
-                  "startLine": 670,
+                  "startLine": 654,
                   "startColumn": 26,
-                  "endLine": 670,
+                  "endLine": 654,
                   "endColumn": 59
                 }
               },
@@ -781,10 +526,26 @@
       },
       "invocations": [
         {
-          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x00423170 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_82e06a5east -typedil -f tool.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1924 -D_MSC_FULL_VER=192428319 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Og -Ot -Oy -Oi -ltcg -DCODE_ANALYSIS -DNDEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -std:c++17 -Fox64\\Release\\tool.obj -Fdx64\\Release\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeMinimumRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
+          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x00E13170 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_9ab1df98ast -typedil -f tool.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1924 -D_MSC_FULL_VER=192428319 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Og -Ot -Oy -Oi -ltcg -DCODE_ANALYSIS -DNDEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -std:c++17 -Fox64\\Release\\tool.obj -Fdx64\\Release\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeMinimumRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.24.28314\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um"
         }
       ],
       "files": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/sys.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/window.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/sfml/sfml-2.5.1/include/sfml/window.hpp": {
+          "roles": [
+            "resultFile"
+          ]
+        },
         "file:///e:/libtcod/custom-libtcod-master/src/libtcod/color.hpp": {
           "roles": [
             "resultFile"
@@ -792,17 +553,6 @@
         },
         "file:///e:/projects/visual studio/libtcod development/epsilon/main.hpp": {
           "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/path.h": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp": {
-          "roles": [
-            "analysisTarget",
             "resultFile"
           ]
         },
@@ -1066,12 +816,18 @@
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/parser.h": {
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/path.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/sys.h": {
+        "file:///e:/projects/visual studio/libtcod development/epsilon/tool.cpp": {
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ]
+        },
+        "file:///e:/libtcod/custom-libtcod-master/src/libtcod/parser.h": {
           "roles": [
             "resultFile"
           ]
@@ -1147,11 +903,6 @@
           ]
         },
         "file:///e:/libtcod/custom-libtcod-master/src/libtcod/zip.hpp": {
-          "roles": [
-            "resultFile"
-          ]
-        },
-        "file:///e:/sfml/sfml-2.5.1/include/sfml/window.hpp": {
           "roles": [
             "resultFile"
           ]
@@ -1418,6 +1169,12 @@
         },
         "file:///e:/projects/visual studio/libtcod development/epsilon/engine.h": {
           "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///e:/projects/visual studio/libtcod development/epsilon/utility.cpp": {
+          "roles": [
+            "analysisTarget",
             "resultFile"
           ]
         }

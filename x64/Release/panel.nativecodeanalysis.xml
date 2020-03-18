@@ -301,28 +301,28 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>panel.cpp</FILENAME>
-      <LINE>253</LINE>
+      <LINE>261</LINE>
       <COLUMN>13</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>SplashWindow::update</FUNCTION>
     <DECORATED>?update@SplashWindow@@UEAAXXZ</DECORATED>
-    <FUNCLINE>238</FUNCLINE>
+    <FUNCLINE>246</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>panel.cpp</FILENAME>
-      <LINE>313</LINE>
+      <LINE>321</LINE>
       <COLUMN>25</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>SplashWindow::render</FUNCTION>
     <DECORATED>?render@SplashWindow@@UEBAXXZ</DECORATED>
-    <FUNCLINE>298</FUNCLINE>
+    <FUNCLINE>306</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

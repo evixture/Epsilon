@@ -541,10 +541,6 @@ bool World::inMapBounds(Position3& position) const
 {
 	if ((position.floor >= 0 && position.floor < debugmap->totalFloors) && (position.x >= 0 && position.x < debugmap->width) && (position.y >= 0 && position.y < debugmap->height)) return true;
 	return false;
-	//if (position.floor < 0 || position.floor >= debugmap->totalFloors) return false;
-	//if (position.x < 0 || position.x >= debugmap->width) return false;
-	//if (position.y < 0 || position.y >= debugmap->height) return false;
-	//return true;
 }
 
 int World::getOffset(int playerx, int mapw, int renderw)
