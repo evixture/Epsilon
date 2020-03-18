@@ -156,6 +156,7 @@ Input::Input()
 
 	buttonList.push_back(inventoryKey =			std::make_shared < KeyboardButton>(sf::Keyboard::I));
 	buttonList.push_back(fullscreenKey =		std::make_shared < KeyboardButton>(sf::Keyboard::F11));
+	buttonList.push_back(infoKey =				std::make_shared < KeyboardButton>(sf::Keyboard::N));
 	buttonList.push_back(menuKey =				std::make_shared < KeyboardButton>(sf::Keyboard::Escape));
 
 	buttonList.push_back(highlightKey =			std::make_shared < KeyboardButton>(sf::Keyboard::H));
@@ -195,6 +196,17 @@ void Input::update()
 		{
 			GUI->activeWindow = Gui::ActiveWindow::PAUSE;
 			INPUT->menuKey->isSwitched = false;
+		}
+	}
+	if (infoKey->isSwitched)
+	{
+		if (GUI->activeLogWindow == Gui::ActiveLogWindow::LOG)
+		{
+			GUI->activeLogWindow = Gui::ActiveLogWindow::INFO;
+		}
+		else if (GUI->activeLogWindow == Gui::ActiveLogWindow::INFO)
+		{
+			GUI->activeLogWindow = Gui::ActiveLogWindow::LOG;
 		}
 	}
 }

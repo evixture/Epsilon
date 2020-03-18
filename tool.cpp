@@ -319,15 +319,14 @@ void Bullet::update()
 				}
 				
 				travel.step();
+				mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.floor);
+
 			}
 			else
 			{
 				currentVelocity = 0;
 				mapPosition.height = 0;
 			}
-
-			mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.floor);
-
 		}
 	}
 
@@ -342,10 +341,6 @@ void Bullet::update()
 		}
 		mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.floor);
 	}
-
-	mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.floor); //needed??
-
-	//WORLD->updateBlock(mapPosition); //check if pos needs to be reassigned before
 
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }

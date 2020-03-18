@@ -664,3 +664,65 @@ void PauseWindow::render() const
 
 	pushWindow();
 }
+
+InfoWindow::InfoWindow(int consoleWidth, int consoleHeight, int rx, int ry)
+	: Window(consoleWidth, consoleHeight, "Information", rx, ry), tileDetail(""), creatureDetail(""), itemDetail("")
+
+{
+}
+
+void InfoWindow::setTileDetails()
+{
+	if (INPUT->mouse.cx >= 1 && INPUT->mouse.cx <= 60 && INPUT->mouse.cy >= 3 && INPUT->mouse.cy <= 62) //if in map window
+	{
+		std::string name = WORLD->debugmap->getBlock(Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.floor))->
+			getTileData(WORLD->debugmap->player->mapPosition.height).name;
+
+		tileDetail = name;
+	}
+	else
+	{
+		tileDetail = "---";
+	}
+}
+
+void InfoWindow::setCreatureDetails()
+{
+	creatureDetail = "---";
+
+	for (auto& creature : WORLD->debugmap->creatureList)
+	{
+		if (creature->mapPosition.floor == WORLD->debugmap->player->mapPosition.floor)
+		{
+			if (creature->mapPosition.x == INPUT->mouse.cx + WORLD->xOffset - 1 && creature->mapPosition.y == INPUT->mouse.cy + WORLD->yOffset - 3)
+			{
+				creatureDetail = creature->name;
+			}
+		}
+	}
+}
+
+void InfoWindow::setItemDetails()
+{
+	itemDetail = WORLD->debugmap->player->selectedItem->tool->name;
+}
+
+void InfoWindow::update()
+{
+	setTileDetails();
+
+	setCreatureDetails();
+
+	setItemDetails();
+}
+
+void InfoWindow::render() const
+{
+	clearWindow();
+
+	drawWindow->console->printf(0, 0, "Tile : %s", tileDetail.c_str());
+	drawWindow->console->printf(0, 1, "Creature : %s", creatureDetail.c_str());
+	drawWindow->console->printf(0, 2, "Item : %s", itemDetail.c_str()); //will use later to show in depth description of held item
+
+	pushWindow();
+}

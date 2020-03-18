@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 Gui::Gui(int windowX, int windowY)
-	:activeWindow(Gui::ActiveWindow::STARTUPSPLASH)
+	:activeWindow(Gui::ActiveWindow::STARTUPSPLASH), activeLogWindow(Gui::ActiveLogWindow::LOG)
 {
 	windowList.push_back(worldWindow		= std::make_shared<MapWindow>		(60, 61, 1, 2));
 	windowList.push_back(playerWindow		= std::make_shared<PlayerWindow>	(10, 10, 63, 2));
@@ -10,6 +10,7 @@ Gui::Gui(int windowX, int windowY)
 	windowList.push_back(logWindow			= std::make_shared<LogWindow>		(56, 24, 63, 39));
 	windowList.push_back(proximityWindow	= std::make_shared<ProximityWindow>	(30, 12, 89, 26));
 	windowList.push_back(actionWindow		= std::make_shared<ActionWindow>	(30, 12, 89, 13));
+	windowList.push_back(infoWindow			= std::make_shared<InfoWindow>		(56, 24, 63, 39));
 
 	pauseWindow =			std::make_shared<PauseWindow>			(118, 61, 1, 2);
 	startupSplashWindow =	std::make_shared<SplashWindow>			(118, 61, 1, 2);
@@ -33,9 +34,20 @@ void Gui::update()
 
 	if (activeWindow == Gui::ActiveWindow::NONE)
 	{
-		for (auto& window : windowList)
+		worldWindow->update();
+		playerWindow->update();
+		statusWindow->update();
+		inventoryWindow->update();
+		proximityWindow->update();
+		actionWindow->update();
+
+		if (activeLogWindow == Gui::ActiveLogWindow::LOG)
 		{
-			window->update();
+			logWindow->update();
+		}
+		else if (activeLogWindow == Gui::ActiveLogWindow::INFO)
+		{
+			infoWindow->update();
 		}
 	}
 	else if (activeWindow == Gui::ActiveWindow::STARTUPSPLASH)
@@ -73,9 +85,20 @@ void Gui::render() const
 {
 	if (activeWindow == Gui::ActiveWindow::NONE)
 	{
-		for (auto& window : windowList)
+		worldWindow->render();
+		playerWindow->render();
+		statusWindow->render();
+		inventoryWindow->render();
+		proximityWindow->render();
+		actionWindow->render();
+
+		if (activeLogWindow == Gui::ActiveLogWindow::LOG)
 		{
-			window->render();
+			logWindow->render();
+		}
+		else if (activeLogWindow == Gui::ActiveLogWindow::INFO)
+		{
+			infoWindow->render();
 		}
 	}
 	else if (activeWindow == Gui::ActiveWindow::STARTUPSPLASH)

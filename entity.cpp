@@ -550,10 +550,10 @@ void Player::update()
 		color = TCODColor::red;
 	}
 
-	if (INPUT->debug3Key->isSwitched)
-	{
-		takeDamage(25);
-	}
+	//if (INPUT->debug3Key->isSwitched)
+	//{
+	//	takeDamage(25);
+	//}
 }
 
 void Player::render(const std::shared_ptr<Pane>& pane) const

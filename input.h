@@ -61,6 +61,7 @@ struct Input //handles all of the mouse and keyboard input
 
 	std::shared_ptr<KeyboardButton> inventoryKey; //key to open the full menu
 	std::shared_ptr<KeyboardButton> fullscreenKey; //key to put the window in full screen
+	std::shared_ptr<KeyboardButton> infoKey;
 	std::shared_ptr<KeyboardButton> menuKey; //key to open the pause menu
 
 	std::shared_ptr<KeyboardButton> highlightKey;

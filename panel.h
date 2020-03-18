@@ -140,3 +140,20 @@ private:
 	bool baseMenuActive;
 	bool settingsMenuActive;
 };
+
+struct InfoWindow : public Window //shows details of tile and creatures under cursor, and selected item
+{
+	InfoWindow(int consoleWidth, int consoleHeight, int rx, int ry);
+
+	std::string tileDetail;
+	std::string creatureDetail;
+	std::string itemDetail;
+
+	void update();
+	void render() const;
+
+private:
+	void setTileDetails();
+	void setCreatureDetails();
+	void setItemDetails();
+};

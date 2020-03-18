@@ -1,7 +1,7 @@
 #include "main.hpp"
 
-Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int deceleration, int strength)
-	:ch(ch), foregroundColor(foregroundColor), backgroundColor(backgroundColor), deceleration(deceleration), strength(strength)
+Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int deceleration, std::string name, int strength)
+	:ch(ch), foregroundColor(foregroundColor), backgroundColor(backgroundColor), deceleration(deceleration), strength(strength), name(name)
 {}
 
 //----------------------------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ Tile Block::getTileData(int height) const
 			}
 		}
 	}
-	return Tile('%', TCODColor::pink, TCODColor::pink, 999, -1);
+	return Tile('%', TCODColor::pink, TCODColor::pink, 999, "ERROR", -1);
 }
 
 void Block::destroy(int damage, int height)
@@ -61,10 +61,10 @@ void Block::destroy(int damage, int height)
 		{
 			tileList = std::vector<Tile>
 			{
-				Tile('%', tileList[0].foregroundColor * TCODColor::lightGrey, tileList[0].backgroundColor * TCODColor::darkGrey, 0),
-				Tile(0, TCODColor::pink, TCODColor::pink, 0),
-				Tile(0, TCODColor::pink, TCODColor::pink, 0),
-				Tile(0, TCODColor::pink, TCODColor::pink, 0)
+				Tile('%', tileList[0].foregroundColor * TCODColor::lightGrey, tileList[0].backgroundColor * TCODColor::darkGrey, 0, "Rubble"),
+				Tile(0, TCODColor::pink, TCODColor::pink, 0, "Rubble"),
+				Tile(0, TCODColor::pink, TCODColor::pink, 0, "Rubble"),
+				Tile(0, TCODColor::pink, TCODColor::pink, 0, "Rubble")
 			};
 
 			walkableFlag = ep::tileFlag::OOOOI;
