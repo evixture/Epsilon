@@ -145,17 +145,17 @@ void AICreature::update() //ai and behavior attributes update here
 			//path.compute(mapPosition.x, mapPosition.y, pathfindPosition.x, pathfindPosition.y);
 
 			//fire / reload
-			if (selectedMagazine->isValid == false)
-			{
-				std::shared_ptr<MagazineData> mag = std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true);
-				selectedMagazine = mag;
-
-				selectedItem->tool->reload(mag);
-			}
-			else
-			{
-				selectedItem->tool->use(false, true);
-			}
+			//if (selectedMagazine->isValid == false)
+			//{
+			//	std::shared_ptr<MagazineData> mag = std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true);
+			//	selectedMagazine = mag;
+			//
+			//	selectedItem->tool->reload(mag);
+			//}
+			//else
+			//{
+			//	selectedItem->tool->use(false, true);
+			//}
 		}
 
 		decayInterest();
@@ -166,8 +166,18 @@ void AICreature::update() //ai and behavior attributes update here
 		{
 			interest = 1.0f; //set interest to max if player in fov
 
+			//if focus position != player map position //creature's last frame of reference for player has changed, reacts with confusion? or other
 			focusPosition = WORLD->debugmap->player->mapPosition;
+
 			lookPosition = WORLD->debugmap->player->mapPosition; //add random coords (1, -1) for inaccuracy
+
+			//static TCODRandom* RNG = TCODRandom::getInstance();
+			//if (!RNG)
+			//{
+			//	RNG->setDistribution(TCOD_DISTRIBUTION_LINEAR);
+			//}
+			//
+			//lookPosition = Position3(WORLD->debugmap->player->mapPosition.x + RNG->getInt(-1, 1), WORLD->debugmap->player->mapPosition.y + RNG->getInt(-1, 1), WORLD->debugmap->player->mapPosition.floor);
 			debugBGColor = TCODColor::yellow;
 
 			//---
@@ -180,6 +190,8 @@ void AICreature::update() //ai and behavior attributes update here
 		}
 		else //if player not in fov
 		{
+			path.compute(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y); //change later to not update every frame
+
 			debugBGColor = TCODColor::black;
 		}
 
