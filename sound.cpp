@@ -1,6 +1,6 @@
 #include "main.hpp"
 
-Sound::Sound(Position4 soundSource, int worldVol, int playVol)
-	: soundSource(soundSource), worldVolume(worldVol), playbackVolume(playVol)
+Sound::Sound(Position4 sourcePosition, int worldVol, int playVol)
+	: sourcePosition(sourcePosition), worldVolume(worldVol), playbackVolume(playVol)
 {
 }

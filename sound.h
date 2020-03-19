@@ -2,7 +2,7 @@
 
 struct Sound //deals with world sounds and playback
 {
-	Position4 soundSource;
+	Position4 sourcePosition;
 
 	//sound file
 
@@ -11,7 +11,7 @@ struct Sound //deals with world sounds and playback
 
 	//effects properties
 
-	Sound(Position4 soundSource, int worldVol, int playVol);
+	Sound(Position4 sourcePosition, int worldVol, int playVol);
 };
 
 /*

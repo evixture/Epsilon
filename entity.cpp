@@ -516,6 +516,11 @@ void Player::update()
 			dropItem();
 		}
 		
+		if (INPUT->primaryUseButton->isDown)
+		{
+			selectedItem->tool->use(INPUT->primaryUseButton->isDown, INPUT->primaryUseButton->isSwitched);
+		}
+
 		if (INPUT->alternateUseButton->isSwitched)
 		{
 			selectedItem->actionManager->doAction();

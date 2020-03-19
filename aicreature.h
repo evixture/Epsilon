@@ -8,6 +8,10 @@ struct AICreature : public Creature
 	TCODPath path;
 	int pathStep;
 
+	Position3 pathfindPosition; //end point of the path
+	Position3 lookPosition; //where the ai looks, will also be used for aiming
+	Position3 focusPosition; //last known location of the player
+
 	int destX;
 	int destY;
 
@@ -46,7 +50,9 @@ struct AICreature : public Creature
 
 private:
 
+	void decayInterest();
 	void reactToSounds();
 
 	Clock interestDecayClock;
+	Clock reactionFireClock;
 };

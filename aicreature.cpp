@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 AICreature::AICreature(Creature creature, TCODMap* fovMap)
-	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), interest(0.0f), interestDecay(.025f), interestDecayClock(1.0f), pathStep(0)
+	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), interest(0.0f), interestDecay(.05f), interestDecayClock(1.0f), pathStep(0), reactionFireClock(0.5f)
 {
 	inventory.push_back(std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, this)));
 	inventory[1]->addItem(std::make_shared<Item>(ep::item::sip45(0, 0, 0, this)));
@@ -25,7 +25,7 @@ void AICreature::move()
 	{
 		if (!path.isEmpty()) //has path to walk on
 		{
-			if (interest >= 0.5f) //invert nest?
+			if (interest >= 0.5f && !WORLD->isInPlayerFov(mapPosition)) //change not in fov for more context, to allow movement in combat, etc, replace with if not in weapon effective range
 			{
 				WORLD->updateBlock(mapPosition, false);
 
@@ -64,77 +64,69 @@ void AICreature::useMelee()
 
 void AICreature::updateTools()
 {
-	angle = getAngle(mapPosition.x, mapPosition.y, destX, destY);
+	angle = getAngle(mapPosition.x, mapPosition.y, lookPosition.x, lookPosition.y);
 
-	selectedItem->updateTool(mapPosition, destX, destY, true);
+	selectedItem->updateTool(mapPosition, lookPosition.x, lookPosition.y, true);
+}
+
+void AICreature::decayInterest()
+{
+	interestDecayClock.tickUp();
+
+	for (int i = 1; i <= interestDecayClock.numCalls; interestDecayClock.numCalls--)
+	{
+		if (interest - interestDecay < 0)
+		{
+			interest = 0;
+		}
+		else
+		{
+			interest -= interestDecay;
+		}
+	}
 }
 
 void AICreature::reactToSounds()
 {
-	for (auto& sound : WORLD->soundList)
+	if (!WORLD->isInPlayerFov(mapPosition))
 	{
-		if (sound->soundSource.floor == mapPosition.floor)
+		for (auto& sound : WORLD->soundList)
 		{
-			double distance = getDistance(mapPosition.x, mapPosition.y, sound->soundSource.x, sound->soundSource.y);
-
-			if (distance > 0.0f)
+			if (sound->sourcePosition.floor == mapPosition.floor)
 			{
-				//interestChange = (4.0f / (distance - 3.0f)); OLD VOLUME EQUATION
-				interestChange = (float)((15.0f / (distance + 30.0f)) * (sound->worldVolume / 50.f));
-			}
-			else
-			{
-				interestChange = 0.0f;
-			}
+				double distance = getDistance(mapPosition.x, mapPosition.y, sound->sourcePosition.x, sound->sourcePosition.y);
 
-			/*
-			
-				if the sound interest is greater than .5, creature pays attention to it and pathfinds
-					interest += sound interest
-
-				creature moves, so long as interest is greater than .5
-			
-			*/
-
-			if (interestChange >= 0.5f)
-			{
-				if (interest + interestChange >= 1.0f)
+				if (distance > 0.0f)
 				{
-					interest = 1;
+					//interestChange = (4.0f / (distance - 3.0f)); OLD VOLUME EQUATION
+					interestChange = (float)((15.0f / (distance + 30.0f)) * (sound->worldVolume / 50.f));
 				}
 				else
 				{
-					interest += interestChange;
+					interestChange = 0.0f;
+				}
+
+				if (interestChange >= 0.5f)
+				{
+					if (interest + interestChange >= 1.0f)
+					{
+						interest = 1;
+					}
+					else
+					{
+						interest += interestChange;
+					}
 				}
 			}
 
+			if (interestChange >= 0.5f)
+			{
+				pathfindPosition = sound->sourcePosition;
+				lookPosition = sound->sourcePosition;
 
-			//if (interest + interestChange > 1)
-			//{
-			//	interest = 1;
-			//}
-			//else
-			//{
-			//	interest += interestChange;
-			//	interestChange = 0;
-			//}
+				path.compute(mapPosition.x, mapPosition.y, pathfindPosition.x, pathfindPosition.y);
+			}
 		}
-
-		if (interestChange >= 0.5f)
-		{
-			destX = sound->soundSource.x;
-			destY = sound->soundSource.y;
-		
-			path.compute(mapPosition.x, mapPosition.y, destX, destY);
-		}
-
-		//if (interest > .5f)
-		//{
-		//	destX = sound->soundSource.x;
-		//	destY = sound->soundSource.y;
-		//
-		//	path.compute(mapPosition.x, mapPosition.y, destX, destY); //will compute multiple times?
-		//}
 	}
 }
 
@@ -142,41 +134,67 @@ void AICreature::update() //ai and behavior attributes update here
 {
 	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
 
-	if (health != 0)
+	if (health != 0) //if alive
 	{
 		if (INPUT->debug2Key->isSwitched) //debug pathfinding
 		{	
-			destX = INPUT->mouse.cx - 1 + WORLD->xOffset;
-			destY = INPUT->mouse.cy - 3 + WORLD->yOffset;
+			//interest = 1.0f;
+			//pathfindPosition = (Position3(INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, mapPosition.floor));
+			//lookPosition = (Position3(INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, mapPosition.floor));
+			//
+			//path.compute(mapPosition.x, mapPosition.y, pathfindPosition.x, pathfindPosition.y);
 
-			path.compute(mapPosition.x, mapPosition.y, destX, destY);
-		}
-
-		interestDecayClock.tickUp();
-
-		for (int i = 1; i <= interestDecayClock.numCalls; interestDecayClock.numCalls--)
-		{
-			if (interest - interestDecay < 0)
+			//fire / reload
+			if (selectedMagazine->isValid == false)
 			{
-				interest = 0;
+				std::shared_ptr<MagazineData> mag = std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true);
+				selectedMagazine = mag;
+
+				selectedItem->tool->reload(mag);
 			}
 			else
 			{
-				interest -= interestDecay;
+				selectedItem->tool->use(false, true);
 			}
 		}
 
+		decayInterest();
 		reactToSounds();
 
-		if (WORLD->isInPlayerFov(mapPosition)) //should it check for all creatures if they are in its fov? if so, need to find out how to make individual fov maps
+		//should it check for all creatures if they are in its fov? if so, need to find out how to make individual fov maps
+		if (WORLD->isInPlayerFov(mapPosition)) //if the player is in fov
 		{
-			debugBGColor = TCODColor::yellow;
-		}
-		else debugBGColor = TCODColor::black;
+			interest = 1.0f; //set interest to max if player in fov
 
-		move();
+			focusPosition = WORLD->debugmap->player->mapPosition;
+			lookPosition = WORLD->debugmap->player->mapPosition; //add random coords (1, -1) for inaccuracy
+			debugBGColor = TCODColor::yellow;
+
+			//---
+
+			reactionFireClock.tickUp(); //replace later with something with more discretion
+			for (int i = 1; i <= reactionFireClock.numCalls; reactionFireClock.numCalls--)
+			{
+				selectedItem->tool->use(false, true); //put on clock
+			}
+		}
+		else //if player not in fov
+		{
+			debugBGColor = TCODColor::black;
+		}
 
 		updateTools();
+
+		//reload on empty mag
+		if (selectedMagazine->isValid == false)
+		{
+			std::shared_ptr<MagazineData> mag = std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true); //later check for mag in inventory
+			selectedMagazine = mag;
+			
+			selectedItem->tool->reload(mag);
+		}
+
+		move();
 	}
 	else
 	{

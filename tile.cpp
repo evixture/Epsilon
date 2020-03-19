@@ -16,11 +16,7 @@ Block::Block(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned
 
 Tile Block::getTileData(int height) const
 {
-	if (tileList[height].ch != 0) //no tiles in tileList
-	{
-		return tileList[height];
-	}
-	else if (tileList[height].ch == 0)
+	if (tileList[height].ch == 0)
 	{
 		for (int i = 0; i <= height; ++i) //start at player height, then move down the property list to 
 		{
@@ -29,6 +25,10 @@ Tile Block::getTileData(int height) const
 				return tileList[height - i];
 			}
 		}
+	}
+	else if (tileList[height].ch != 0) //no tiles in tileList
+	{
+		return tileList[height];
 	}
 	return Tile('%', TCODColor::pink, TCODColor::pink, 999, "ERROR", -1);
 }

@@ -652,14 +652,14 @@ void World::computeFov(Position4 mapPosition) //calculate the fov from the point
 
 bool World::isInPlayerFov(Position4 position) const
 {
-	if (!inMapBounds(position))
+	if (!inMapBounds(position) || position.height < 1)
 	{
 		return false;
 	}
 
-	if (position.height < 1) return false;
+	//if (position.height < 1) return false;
 
-	if (fovMapList[position.height - 1]->isInFov(position.x, position.y) && position.floor == debugmap->player->mapPosition.floor)
+	if (position.floor == debugmap->player->mapPosition.floor && fovMapList[position.height - 1]->isInFov(position.x, position.y))
 	{
 		debugmap->getBlock(position)->explored = true;
 		return true;
@@ -724,8 +724,11 @@ void World::renderTiles(const std::shared_ptr<Pane>& pane) const
 	{
 		for (int x = xOffset; x < pane->consoleWidth + xOffset; ++x)
 		{
-			std::shared_ptr<Block> block = debugmap->getBlock(Position3(x, y, debugmap->player->mapPosition.floor));
-			block->render(Position4(x - xOffset, y - yOffset, debugmap->player->mapPosition.height, debugmap->player->mapPosition.floor), pane);
+			//same perf
+			//std::shared_ptr<Block> block = debugmap->getBlock(Position3(x, y, debugmap->player->mapPosition.floor));
+			//block->render(Position4(x - xOffset, y - yOffset, debugmap->player->mapPosition.height, debugmap->player->mapPosition.floor), pane);
+
+			debugmap->getBlock(Position3(x, y, debugmap->player->mapPosition.floor))->render(Position4(x - xOffset, y - yOffset, debugmap->player->mapPosition.height, debugmap->player->mapPosition.floor), pane);
 		}
 	}
 }

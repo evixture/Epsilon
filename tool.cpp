@@ -1,11 +1,13 @@
 #include "main.hpp"
 
 Tool::Tool(std::string name, TCODColor color, int ch)
-	:name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), ammoType(MagazineData::AmmoType::NONE), fireMode(SAFE), availibleFireMode(0), isHeld(false)
+	:name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), 
+	ammoType(MagazineData::AmmoType::NONE), fireMode(SAFE), availibleFireMode(0), isHeld(false), type(Tool::Type::TOOL)
 {}
 
 Tool::Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
-	: name(name), color(color), ch(NULL), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), ammoType(ammoType), fireMode(fireMode), availibleFireMode(availibleFireModeFlag), isHeld(false)
+	: name(name), color(color), ch(NULL), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), 
+	ammoType(ammoType), fireMode(fireMode), availibleFireMode(availibleFireModeFlag), isHeld(false), type(Tool::Type::TOOL)
 {}
 
 std::shared_ptr<MagazineData> Tool::getMagData()
@@ -104,6 +106,10 @@ void Tool::equip(Armor& armor)
 {
 }
 
+void Tool::use(bool hold, bool swtch)
+{
+}
+
 void Tool::updatePositions(Position4& sourcePosition, int& targetX, int& targetY)
 {
 	this->sourcePosition = sourcePosition;
@@ -152,6 +158,7 @@ void Tool::render(const std::shared_ptr<Pane>& pane) const
 Melee::Melee(Tool tool, int bluntDamage, int sharpDamage)
 	: Tool(tool), bluntDamage(bluntDamage), sharpDamage(sharpDamage)
 {
+	type = Tool::Type::MELEE;
 }
 
 void Melee::useMelee()
@@ -383,7 +390,9 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 Firearm::Firearm(std::string name, TCODColor color, int shotsPerSecond, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
 	:Melee(Tool(name, color, ammoType, fireMode, availibleFireModeFlag), /* MELEE DAMAGE */ 25, 0), fireRPS(shotsPerSecond), reloadTime(reloadSpeed),
 	selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), fireClock(1.0f / shotsPerSecond), reloadClock(reloadSpeed)//, fireNumCalls(0), reloadNumCalls(0)
-{}
+{
+	type = Tool::Type::FIREARM;
+}
 
 void Firearm::updateToolPosition(int targetX, int targetY)
 {
@@ -553,7 +562,7 @@ void Firearm::fireBullet()
 
 void Firearm::reload(std::shared_ptr<MagazineData>& magazine)
 {
-	if (isHeld)
+	if (this->isHeld)
 	{
 		if (magazine->isValid != false)
 		{
@@ -627,20 +636,17 @@ void Firearm::changeBarColor(TCODColor& color)
 	}
 }
 
-void Firearm::update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld)
+void Firearm::use(bool hold, bool swtch)
 {
-	this->isHeld = isHeld;
-	updatePositions(sourcePosition, targetX, targetY);
-	
-	if (this->isHeld)
+	if (isHeld)
 	{
 		if (fireClock.numCalls >= 0.0f && selectedMagazine->availableAmmo != 0 && reloadClock.numCalls >= 0.0f) //fires bullet
 		{
-			if (fireMode == FireType::FULL && INPUT->primaryUseButton->isDown)
+			if (fireMode == FireType::FULL && (hold || swtch))// && INPUT->primaryUseButton->isDown)
 			{
 				fireBullet();
 			}
-			else if (fireMode == FireType::SEMI && INPUT->primaryUseButton->isSwitched)
+			else if (fireMode == FireType::SEMI && swtch)// && INPUT->primaryUseButton->isSwitched)
 			{
 				fireBullet();
 			}
@@ -649,6 +655,31 @@ void Firearm::update(Position4& sourcePosition, int& targetX, int& targetY, bool
 
 			}
 		}
+	}
+}
+
+void Firearm::update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld)
+{
+	this->isHeld = isHeld;
+	updatePositions(sourcePosition, targetX, targetY);
+	
+	if (this->isHeld)
+	{
+		//if (fireClock.numCalls >= 0.0f && selectedMagazine->availableAmmo != 0 && reloadClock.numCalls >= 0.0f) //fires bullet
+		//{
+		//	if (fireMode == FireType::FULL && INPUT->primaryUseButton->isDown)
+		//	{
+		//		fireBullet();
+		//	}
+		//	else if (fireMode == FireType::SEMI && INPUT->primaryUseButton->isSwitched)
+		//	{
+		//		fireBullet();
+		//	}
+		//	else if (fireMode == FireType::SAFE)
+		//	{
+		//
+		//	}
+		//}
 	}
 
 	if (bulletList.size() > selectedMagazine->ammoCapacity * 5) //clean up extra bullets if there are more than 5 magazines worth of bullets on the map
@@ -691,6 +722,7 @@ void Firearm::render(const std::shared_ptr<Pane>& pane) const
 Armor::Armor(std::string name, TCODColor color, int defense, int durability)
 	:Tool(name, color, ep::character::ballisticVest), defense(defense), durability(durability)
 {
+	type = Tool::Type::ARMOR;
 }
 
 void Armor::equip(Armor& armor) //if the passed armor is not equal to the armor of this, then replace passed armor with this armor

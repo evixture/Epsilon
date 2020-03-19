@@ -38,12 +38,12 @@
       <COLUMN>2</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'pugi::impl::`anonymous-namespace'::xml_buffered_writer::buffer' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <DESCRIPTION>Variable 'pugi::impl::`anonymous-namespace'::xml_buffered_writer::scratch' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>pugi::impl::`anonymous-namespace'::xml_buffered_writer::{ctor}</FUNCTION>
     <DECORATED>??0xml_buffered_writer@?A0x186f9f63@impl@pugi@@QEAA@AEAVxml_writer@3@W4xml_encoding@3@@Z</DECORATED>
     <FUNCLINE>3698</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>pugi::impl::`anonymous-namespace'::xml_buffered_writer::buffer</targetSymbol>
+      <targetSymbol>pugi::impl::`anonymous-namespace'::xml_buffered_writer::scratch</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT><DEFECT>
@@ -752,14 +752,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>666</LINE>
-      <COLUMN>32</COLUMN>
+      <LINE>662</LINE>
+      <COLUMN>89</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::isInPlayerFov</FUNCTION>
     <DECORATED>?isInPlayerFov@World@@QEBA_NUPosition4@@@Z</DECORATED>
-    <FUNCLINE>657</FUNCLINE>
+    <FUNCLINE>653</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
@@ -823,7 +823,7 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>tile.cpp</FILENAME>
-      <LINE>29</LINE>
+      <LINE>25</LINE>
       <COLUMN>27</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>

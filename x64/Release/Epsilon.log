@@ -1,4 +1,5 @@
-﻿  aicreature.cpp
+﻿  pugixml.cpp
+  aicreature.cpp
   engine.cpp
   entity.cpp
   gui.cpp
@@ -15,14 +16,13 @@
   window.cpp
   Compiling...
   Generating code
-  794 of 2785 functions (28.5%) were compiled, the rest were copied from previous compilation.
-    174 functions were new in current compilation
-    217 functions had inline decision re-evaluated but remain unchanged
+  Compiler version has changed, fall back to full compilation.
+  All 2789 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Release\Epsilon.exe
 E:\pugixml-1.10\src\pugixml.cpp(1096): warning C26495: Variable 'pugi::xml_attribute_struct::header' is uninitialized. Always initialize a member variable (type.6).
 E:\pugixml-1.10\src\pugixml.cpp(1112): warning C26495: Variable 'pugi::xml_node_struct::header' is uninitialized. Always initialize a member variable (type.6).
-E:\pugixml-1.10\src\pugixml.cpp(3698): warning C26495: Variable 'pugi::impl::`anonymous-namespace'::xml_buffered_writer::buffer' is uninitialized. Always initialize a member variable (type.6).
+E:\pugixml-1.10\src\pugixml.cpp(3698): warning C26495: Variable 'pugi::impl::`anonymous-namespace'::xml_buffered_writer::scratch' is uninitialized. Always initialize a member variable (type.6).
 E:\pugixml-1.10\src\pugixml.cpp(4466): warning C28182: Dereferencing NULL pointer. 'dit' contains the same NULL value as 'copy' did. 
 E:\pugixml-1.10\src\pugixml.cpp(8551): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
 E:\pugixml-1.10\src\pugixml.cpp(8572): warning C26495: Variable 'pugi::impl::`anonymous-namespace'::xpath_variable_boolean::name' is uninitialized. Always initialize a member variable (type.6).
@@ -62,12 +62,12 @@ E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(189): warning C264
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(510): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(520): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(537): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(666): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(662): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(261): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(321): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\tile.cpp(9): warning C26495: Variable 'Block::destroyed' is uninitialized. Always initialize a member variable (type.6).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\tile.cpp(13): warning C26495: Variable 'Block::destroyed' is uninitialized. Always initialize a member variable (type.6).
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\tile.cpp(29): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tile.cpp(25): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(3): warning C26495: Variable 'Tool::angle' is uninitialized. Always initialize a member variable (type.6).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(7): warning C26495: Variable 'Tool::angle' is uninitialized. Always initialize a member variable (type.6).
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(654): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).

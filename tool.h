@@ -4,6 +4,8 @@ struct Armor;
 
 struct Tool //base class for the holdable component to items
 {
+	enum class Type { TOOL, MELEE, FIREARM, ARMOR } type;
+
 	TCODColor color; //foreground color of tool
 	unsigned char ch; //character representation of tool
 
@@ -37,6 +39,7 @@ struct Tool //base class for the holdable component to items
 	virtual void useMelee();										//does nothing in tool
 	virtual void changeBarColor(TCODColor& color);					//does nothing in tool
 	virtual void equip(Armor& armor);								//does nothing in tool
+	virtual void use(bool hold, bool swtch);										//does nothing in tool
 
 protected: //derived has access
 	Position4 renderPosition; //the position of the tool in the render window
@@ -51,7 +54,8 @@ struct Melee : public Tool
 	Melee(Tool tool, int bluntDamage, int sharpDamage);
 
 	void useMelee(); //use the melee weapon
-	
+	//void use
+
 	virtual void update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld);
 	virtual void render(const std::shared_ptr<Pane>& pane) const;
 
@@ -106,6 +110,7 @@ struct Firearm : public Melee //firearm that fires bullets that interact with th
 
 	void reload(std::shared_ptr<MagazineData>& magazine); //reloads firearm, use from player
 	void changeFireMode(); //switches the fire mode
+	void use(bool hold, bool swtch); //fires a bullet
 
 	void changeBarColor(TCODColor& color); //changes the bar color; red on no magazine, green when reloaded
 
@@ -130,6 +135,8 @@ struct Armor : public Tool
 
 	Armor(std::string name, TCODColor color, int defense, int durability);
 
+	//void use()
+
 	void equip(Armor& armor); //applies the armor to the player
 };
 
@@ -137,14 +144,14 @@ namespace ep
 {
 	struct tool
 	{
-		inline static const Tool smallBackpack =	Tool("Small Backpack", ep::color::smallBackpackFG, ep::character::backpack);
-		inline static const Tool cal45magazine7 =	Tool("45 Magazine -7-", ep::color::pistolFG, ep::character::pistolMagazine);
-		inline static const Tool cal556magazine30 = Tool("5.56 Magazine -30-", ep::color::rifleFG, ep::character::rifleMagazine);
-		inline static const Melee hands =			Melee(Tool("Hands", ep::color::handFG, TCOD_CHAR_UMLAUT), 30, 20);
+		inline static const Tool smallBackpack =	Tool("Small Backpack",		ep::color::smallBackpackFG, ep::character::backpack);
+		inline static const Tool cal45magazine7 =	Tool("45 Magazine -7-",		ep::color::pistolFG, ep::character::pistolMagazine);
+		inline static const Tool cal556magazine30 = Tool("5.56 Magazine -30-",	ep::color::rifleFG, ep::character::rifleMagazine);
+		inline static const Melee hands =			Melee(Tool("Hands",			ep::color::handFG, TCOD_CHAR_UMLAUT), 30, 20);
 		inline static const Melee knife =			Melee(Tool("-Test Knife 34 damage-", TCODColor::silver, ep::character::knife), 0, 34);
-		inline static const Firearm sip45 =			Firearm("SIP45", ep::color::pistolFG, 2, 1.0f, MagazineData::AmmoType::FOURTYFIVEACP, Firearm::FireType::SEMI, Firearm::FireType::SEMI | Firearm::FireType::SAFE);
-		inline static const Firearm sir556 =		Firearm("SIR556", ep::color::rifleFG, 10, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Firearm::FireType::FULL, Firearm::FireType::FULL | Firearm::FireType::SEMI | Firearm::FireType::SAFE);
-		inline static const Armor L1R3Armor =		Armor("test armor", TCODColor::black, 100, 300);
+		inline static const Firearm sip45 =			Firearm("SIP45",			ep::color::pistolFG, 2, 1.0f, MagazineData::AmmoType::FOURTYFIVEACP, Firearm::FireType::SEMI, Firearm::FireType::SEMI | Firearm::FireType::SAFE);
+		inline static const Firearm sir556 =		Firearm("SIR556",			ep::color::rifleFG, 10, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Firearm::FireType::FULL, Firearm::FireType::FULL | Firearm::FireType::SEMI | Firearm::FireType::SAFE);
+		inline static const Armor L1R3Armor =		Armor("test armor",			TCODColor::black, 100, 300);
 	};
 
 	struct bullet

@@ -1,0 +1,2 @@
+E:\Projects\Visual Studio\Libtcod Development\x64\Release\Epsilon.exe.lastcodeanalysissucceeded
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\x64\Release\NativeCodeAnalysis.read.1.tlog
