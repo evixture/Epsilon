@@ -523,7 +523,7 @@ void Player::update()
 
 		if (INPUT->alternateUseButton->isSwitched)
 		{
-			selectedItem->actionManager->doAction();
+			selectedItem->actionManager->doAction(this);
 		}
 		
 		filterIndexes();

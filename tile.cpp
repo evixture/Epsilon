@@ -47,28 +47,28 @@ void Block::destroy(int damage, int height)
 			{
 				tileList[height].strength = 0;
 			}
-		}
 
-		for (auto& tile : tileList)
-		{
-			if (tile.strength == 0) //if it has no strength left
+			for (auto& tile : tileList)
 			{
-				destroyed = true;
+				if (tile.strength == 0) //if it has no strength left
+				{
+					destroyed = true;
+				}
 			}
-		}
 
-		if (destroyed)
-		{
-			tileList = std::vector<Tile>
+			if (destroyed)
 			{
-				Tile('%', tileList[0].foregroundColor * TCODColor::lightGrey, tileList[0].backgroundColor * TCODColor::darkGrey, 0, "Rubble"),
-				Tile(0, TCODColor::pink, TCODColor::pink, 0, "Rubble"),
-				Tile(0, TCODColor::pink, TCODColor::pink, 0, "Rubble"),
-				Tile(0, TCODColor::pink, TCODColor::pink, 0, "Rubble")
-			};
+				tileList = std::vector<Tile>
+				{
+					Tile('%', tileList[0].foregroundColor * TCODColor::lightGrey, tileList[0].backgroundColor * TCODColor::darkGrey, 0, "Rubble"),
+					Tile(0, TCODColor::pink, TCODColor::pink, 0, "Rubble"),
+					Tile(0, TCODColor::pink, TCODColor::pink, 0, "Rubble"),
+					Tile(0, TCODColor::pink, TCODColor::pink, 0, "Rubble")
+				};
 
-			walkableFlag = ep::tileFlag::OOOOI;
-			transparentFlag = ep::tileFlag::OOOOI;
+				walkableFlag = ep::tileFlag::OOOOI;
+				transparentFlag = ep::tileFlag::OOOOI;
+			}
 		}
 	}
 }

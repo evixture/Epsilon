@@ -360,7 +360,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 		{
 			if (mapPosition.height > 0)
 			{
-				pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::brass);
+				pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::brass * WORLD->debugmap->getBlock(mapPosition)->getTileData(mapPosition.height).foregroundColor); //check later
 
 				if ((startPosition.x == travel.x && startPosition.y == travel.y))
 				{

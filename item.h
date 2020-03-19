@@ -5,9 +5,9 @@ struct Action //handles item actions
 	enum class Type {DROP, RELOAD, CHANGEFIREMODE, EQUIP, MELEE} type; //main type of action, enum for easy comparison
 
 	std::string name; //the string name of the action so it can be rendered in action pane
-	std::function<void()> action; //the function that is called when activated
+	//std::function<void()> action; //the function that is called when activated
 
-	Action(std::string name, std::function<void()> action, Type actionType); //action constructor that takes string name, function, and action type
+	Action(std::string name, Type actionType); //action constructor that takes string name, function, and action type
 
 	void update();
 };
@@ -25,7 +25,7 @@ struct ActionManager //manages all of the actions of an item
 	void moveSelectorUp(); //moves the action index down in value
 	void moveSelectorDown(); //moves the action index up in value
 
-	void doAction(); //calls the action of the selected action
+	void doAction(Creature* newOwner); //calls the action of the selected action
 };
 
 struct Item //an item that a creature can hold and interact with
