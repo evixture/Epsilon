@@ -425,7 +425,7 @@ void Firearm::updateToolPosition(int targetX, int targetY)
 			mapPosition.y = sourcePosition.y;
 		}
 
-		if (!(reloadClock.numCalls >= 0)) //if reloading
+		if ((reloadClock.numCalls < 1)) //if reloading
 		{
 			ch = '/';
 		}
@@ -447,7 +447,7 @@ void Firearm::updateToolPosition(int targetX, int targetY)
 			mapPosition.y = sourcePosition.y + 1;
 		}
 
-		if (!(reloadClock.numCalls >= 0)) //if reloading
+		if ((reloadClock.numCalls < 1)) //if reloading
 		{
 			ch = '\\';
 		}
@@ -465,7 +465,7 @@ void Firearm::updateToolPosition(int targetX, int targetY)
 				mapPosition.x = sourcePosition.x - 1;
 				mapPosition.y = sourcePosition.y - 1;
 
-				if (!(reloadClock.numCalls >= 0)) //if reloading
+				if ((reloadClock.numCalls < 1)) //if reloading
 				{
 					ch = TCOD_CHAR_HLINE;
 				}
@@ -479,7 +479,7 @@ void Firearm::updateToolPosition(int targetX, int targetY)
 				mapPosition.x = sourcePosition.x - 1;
 				mapPosition.y = sourcePosition.y + 1;
 
-				if (!(reloadClock.numCalls >= 0)) //if reloading
+				if ((reloadClock.numCalls < 1)) //if reloading
 				{
 					ch = TCOD_CHAR_VLINE;
 				}
@@ -497,7 +497,7 @@ void Firearm::updateToolPosition(int targetX, int targetY)
 				mapPosition.x = sourcePosition.x + 1;
 				mapPosition.y = sourcePosition.y - 1;
 
-				if (!(reloadClock.numCalls >= 0)) //if reloading
+				if ((reloadClock.numCalls < 1)) //if reloading
 				{
 					ch = TCOD_CHAR_VLINE;
 				}
@@ -511,7 +511,7 @@ void Firearm::updateToolPosition(int targetX, int targetY)
 				mapPosition.x = sourcePosition.x + 1;
 				mapPosition.y = sourcePosition.y + 1;
 
-				if (!(reloadClock.numCalls >= 0)) //if reloading
+				if ((reloadClock.numCalls < 1)) //if reloading
 				{
 					ch = TCOD_CHAR_HLINE;
 				}
@@ -533,14 +533,16 @@ void Firearm::fireBullet()
 {
 	if (!(mapPosition.x == dx + mapPosition.x && mapPosition.y == dy + mapPosition.y))
 	{
-		if (fireMode == FireType::SEMI)
-		{
-			fireClock.numCalls = 1; //check later to see if it prevents overfireing
-		}
-		else
-		{
-			fireClock.tickUp();
-		}
+		//if (fireMode == FireType::SEMI)
+		//{
+		//	fireClock.numCalls = 1; //check later to see if it prevents overfireing
+		//}
+		//else
+		//{
+		//	fireClock.tickUp();
+		//}
+
+		//fireClock.tickUp(); //move up to other fire command
 
 		for (float i = 1.0f; i <= fireClock.numCalls; fireClock.numCalls--)
 		{
@@ -566,7 +568,7 @@ void Firearm::reload(std::shared_ptr<MagazineData>& magazine)
 	{
 		if (magazine->isValid != false)
 		{
-			if (reloadClock.numCalls >= 0.0f) //if it can reload
+			if (reloadClock.numCalls >= 1.0f) //if it can reload
 			{
 				selectedMagazine = magazine;
 				reloadClock.addTime(reloadTime);
@@ -640,7 +642,7 @@ void Firearm::use(bool hold, bool swtch)
 {
 	if (isHeld)
 	{
-		if (fireClock.numCalls >= 0.0f && selectedMagazine->availableAmmo != 0 && reloadClock.numCalls >= 0.0f) //fires bullet
+		if (fireClock.numCalls >= 1.0f && selectedMagazine->availableAmmo > 0 && reloadClock.numCalls >= 1.0f) //fires bullet
 		{
 			if (fireMode == FireType::FULL && (hold || swtch))// && INPUT->primaryUseButton->isDown)
 			{
@@ -665,21 +667,7 @@ void Firearm::update(Position4& sourcePosition, int& targetX, int& targetY, bool
 	
 	if (this->isHeld)
 	{
-		//if (fireClock.numCalls >= 0.0f && selectedMagazine->availableAmmo != 0 && reloadClock.numCalls >= 0.0f) //fires bullet
-		//{
-		//	if (fireMode == FireType::FULL && INPUT->primaryUseButton->isDown)
-		//	{
-		//		fireBullet();
-		//	}
-		//	else if (fireMode == FireType::SEMI && INPUT->primaryUseButton->isSwitched)
-		//	{
-		//		fireBullet();
-		//	}
-		//	else if (fireMode == FireType::SAFE)
-		//	{
-		//
-		//	}
-		//}
+		//GUI->logWindow->pushMessage(LogWindow::Message(std::string("reload : " + std::to_string(reloadClock.numCalls) + " fire : " + std::to_string(fireClock.numCalls)), LogWindow::Message::MessageLevel::MEDIUM));
 	}
 
 	if (bulletList.size() > selectedMagazine->ammoCapacity * 5) //clean up extra bullets if there are more than 5 magazines worth of bullets on the map
@@ -699,7 +687,12 @@ void Firearm::update(Position4& sourcePosition, int& targetX, int& targetY, bool
 		}
 	}
 
-	if (reloadClock.numCalls < 0.0f)
+	if (fireClock.numCalls < 1.0f)
+	{
+		fireClock.tickUp();
+	}
+
+	if (reloadClock.numCalls < 1.0f)
 	{
 		reloadClock.tickUp();
 	}

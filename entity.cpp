@@ -480,6 +480,7 @@ void Player::update()
 		}
 		else backgroundColor = TCODColor::pink;
 
+		//items
 		if (INPUT->mouse.wheel_up || INPUT->mouse.wheel_down)
 		{
 			if (!INPUT->deepInteractKey->isDown)
@@ -516,6 +517,11 @@ void Player::update()
 			dropItem();
 		}
 		
+		if (INPUT->reloadKey->isSwitched)
+		{
+			reload();
+		}
+
 		if (INPUT->primaryUseButton->isDown)
 		{
 			selectedItem->tool->use(INPUT->primaryUseButton->isDown, INPUT->primaryUseButton->isSwitched);
@@ -532,11 +538,7 @@ void Player::update()
 		
 		updateTools();
 		
-		if (INPUT->reloadKey->isSwitched)
-		{
-			reload();
-		}
-		
+		//world
 		if (INPUT->worldInteractKey->isSwitched)
 		{
 			if (WORLD->debugmap->getBlock(mapPosition)->tag == Block::Tag::STAIR)
@@ -546,19 +548,12 @@ void Player::update()
 		}
 
 		move();
-
 	}
 	else //if dead
 	{
-		//health = 0; //prevent from taking further damage
-		ch = '&'; //set char to dead symbol
+		ch = '&';
 		color = TCODColor::red;
 	}
-
-	//if (INPUT->debug3Key->isSwitched)
-	//{
-	//	takeDamage(25);
-	//}
 }
 
 void Player::render(const std::shared_ptr<Pane>& pane) const
@@ -570,7 +565,7 @@ void Player::render(const std::shared_ptr<Pane>& pane) const
 
 	if (health != 0)
 	{
-		selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
+		selectedItem->renderTool(pane);
 	}
 
 	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
