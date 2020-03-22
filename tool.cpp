@@ -392,6 +392,9 @@ Firearm::Firearm(std::string name, TCODColor color, int shotsPerSecond, float re
 	selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), fireClock(1.0f / shotsPerSecond), reloadClock(reloadSpeed)//, fireNumCalls(0), reloadNumCalls(0)
 {
 	type = Tool::Type::FIREARM;
+
+	reloadClock.numCalls = 1.0f;
+	fireClock.numCalls = 1.0f;
 }
 
 void Firearm::updateToolPosition(int targetX, int targetY)

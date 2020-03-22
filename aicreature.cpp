@@ -198,7 +198,7 @@ void AICreature::update() //ai and behavior attributes update here
 		updateTools();
 
 		//reload on empty mag
-		if (selectedMagazine->isValid == false)
+		if (selectedMagazine->isValid == false || selectedMagazine->availableAmmo <= 0)
 		{
 			std::shared_ptr<MagazineData> mag = std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true); //later check for mag in inventory
 			selectedMagazine = mag;

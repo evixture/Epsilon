@@ -1,5 +1,10 @@
 #include "main.hpp"
 
+Position3::Position3()
+	:x(0), y(0), floor(0)
+{
+}
+
 Position3::Position3(int x, int y, int floor)
 	:x(x), y(y), floor(floor)
 {}
@@ -19,6 +24,11 @@ Position4 offsetPosition(Position4 mapPosition, int xOffset, int yOffset)
 }
 
 //----------------------------------------------------------------------------------------------------
+
+Position4::Position4()
+	:Position3(0, 0, 0), height(0)
+{
+}
 
 Position4::Position4(int x, int y, int height, int floor)
 	:Position3(x, y, floor), height(height)

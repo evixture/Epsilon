@@ -15,7 +15,7 @@ struct Position3 //position struct with x, y, and z dimensions
 	int y; //y coordinate
 	int floor; //z / height coordinate
 
-	Position3() {}
+	Position3();
 	Position3(int x, int y, int floor); //position constructor that takes x, y, and floor ints
 
 	bool operator == (const Position3& compPosition);
@@ -25,7 +25,7 @@ struct Position4 : public Position3
 {
 	char height; //the height of the creature's view (NOT THE FLOOR)
 
-	Position4() {}
+	Position4();
 	Position4(int x, int y, int height, int floor); //position constructor that takes x, y, and floor ints
 
 	bool operator == (const Position4& compPosition);
