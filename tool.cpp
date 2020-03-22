@@ -172,7 +172,7 @@ void Melee::useMelee()
 			if (creature != WORLD->debugmap->player)
 			{
 				doMeleeDamage(creature);
-				return;
+				break;
 			}
 		}
 	}

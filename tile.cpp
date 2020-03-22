@@ -53,6 +53,7 @@ void Block::destroy(int damage, int height)
 				if (tile.strength == 0) //if it has no strength left
 				{
 					destroyed = true;
+					break;
 				}
 			}
 

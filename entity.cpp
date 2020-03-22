@@ -399,11 +399,11 @@ void Player::reload()
 							selectedItem->tool->reload(selectedMagazine);
 							return;
 						}
-						else
-						{
-							selectedMagazine = item->getMagazineData();
-							selectedItem->tool->reload(selectedMagazine);
-						}
+						//else //if it should be able to reload a mag with less ammo
+						//{
+						//	selectedMagazine = item->getMagazineData();
+						//	selectedItem->tool->reload(selectedMagazine);
+						//}
 					}
 				}
 			}
