@@ -249,7 +249,7 @@ Bullet::Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int 
 
 void Bullet::doBulletDamage(std::shared_ptr<Creature>& creature)
 {
-	int damage;
+	int damage = 0;
 
 	if (creature->health != 0)
 	{
@@ -266,7 +266,7 @@ void Bullet::doBulletDamage(std::shared_ptr<Creature>& creature)
 
 				currentVelocity -= 100; //slowdown after going through body
 			}
-			else if (currentVelocity - creature->equippedArmor.defense <= 0) //if the bullet is stopped by the armor
+			else //if the bullet is stopped by the armor
 			{
 				creature->equippedArmor.durability -= currentVelocity;
 				currentVelocity = 0;
@@ -286,7 +286,14 @@ void Bullet::doBulletDamage(std::shared_ptr<Creature>& creature)
 			currentVelocity -= 100; //slowdown after going through body
 		}
 
-		GUI->logWindow->pushMessage(LogWindow::Message((WORLD->debugmap->player->name + " shot " + creature->name + " for " + std::to_string(damage) + " damage!"), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
+		if (damage > 0)
+		{
+			GUI->logWindow->pushMessage(LogWindow::Message((creature->name + " shot for " + std::to_string(damage) + " damage!"), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
+		}
+		else
+		{
+			GUI->logWindow->pushMessage(LogWindow::Message(("Bullet was blocked!"), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
+		}
 	}
 }
 
@@ -298,7 +305,7 @@ void Bullet::update()
 
 		for (int i = 1; i < moveClock.numCalls; moveClock.numCalls--)
 		{
-			if (WORLD->inMapBounds(mapPosition))
+			if (WORLD->debugmap->inMapBounds(mapPosition))
 			{
 				WORLD->debugmap->getBlock(mapPosition)->destroy(mass, mapPosition.height);
 				WORLD->updateBlock(mapPosition, false); //check if pos needs to be reassigned before
@@ -316,11 +323,14 @@ void Bullet::update()
 			
 				for (auto& creature : WORLD->debugmap->creatureList) //if hit a creature
 				{
-					if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.floor == mapPosition.floor) //also checks height, may give bad results
+					if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.floor == mapPosition.floor && mapPosition.height <= creature->mapPosition.height)
 					{
-						if (creature->health != 0)
+						if (!(mapPosition == startPosition))
 						{
-							doBulletDamage(creature);
+							if (creature->health != 0) //check for later
+							{
+								doBulletDamage(creature);
+							}
 						}
 					}
 				}
@@ -358,27 +368,28 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 	{
 		if (currentVelocity > 0)
 		{
-			if (mapPosition.height > 0)
+			if (mapPosition.height > 0) //in the air
 			{
-				pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::brass * WORLD->debugmap->getBlock(mapPosition)->getTileData(mapPosition.height).foregroundColor); //check later
-
-				if ((startPosition.x == travel.x && startPosition.y == travel.y))
-				{
-					pane->console->setChar(renderPosition.x, renderPosition.y, '*'); //muzzle flash
-				}
-				else
-				{
-					pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-				}
-			}
-			else
-			{
-				pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-				pane->console->setCharForeground(renderPosition.x, renderPosition.y, WORLD->debugmap->getBlock(mapPosition)->tileList[0].foregroundColor);
-
-				//if (WORLD->getBlock(mapPosition)->getTileData(mapPosition.height)->ch != 0) //if the bullet is on the ground and the char is not the bullet
+				//if (WORLD->isInPlayerFov(mapPosition))
 				//{
-				//	WORLD->getBlock(mapPosition)->getTileData(mapPosition.height)->ch = ch; //move to update
+					pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::brass); //check later
+
+					if ((startPosition.x == travel.x && startPosition.y == travel.y))
+					{
+						pane->console->setChar(renderPosition.x, renderPosition.y, '*'); //muzzle flash
+					}
+					else
+					{
+						pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+					}
+				//}
+			}
+			else //on the ground
+			{
+				//if (WORLD->isInPlayerFov(mapPosition)) //not in fov when on ground
+				//{
+					pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+					pane->console->setCharForeground(renderPosition.x, renderPosition.y, WORLD->debugmap->getBlock(mapPosition)->tileList[0].foregroundColor);
 				//}
 			}
 		}

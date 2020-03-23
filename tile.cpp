@@ -111,5 +111,6 @@ Stair::Stair(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned
 void Stair::interact()
 {
 	WORLD->debugmap->player->mapPosition.floor += moveDistance;
+	WORLD->debugmap->refreshFOV(WORLD->debugmap->player->mapPosition.floor);
 }
 

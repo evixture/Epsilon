@@ -673,14 +673,15 @@ InfoWindow::InfoWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 
 void InfoWindow::setTileDetails()
 {
+	tileDetail = "---";
+
 	if (INPUT->mouse.cx >= 1 && INPUT->mouse.cx <= 60 && INPUT->mouse.cy >= 3 && INPUT->mouse.cy <= 62) //if in map window
 	{
-		tileDetail = WORLD->debugmap->getBlock(Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.floor))->
-			getTileData(WORLD->debugmap->player->mapPosition.height).name;
-	}
-	else
-	{
-		tileDetail = "---";
+		if (WORLD->debugmap->getBlock(Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.floor))->explored)
+		{
+			tileDetail = WORLD->debugmap->getBlock(Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.floor))->
+				getTileData(WORLD->debugmap->player->mapPosition.height).name;
+		}
 	}
 }
 
@@ -694,7 +695,10 @@ void InfoWindow::setCreatureDetails()
 		{
 			if (creature->mapPosition.x == INPUT->mouse.cx + WORLD->xOffset - 1 && creature->mapPosition.y == INPUT->mouse.cy + WORLD->yOffset - 3)
 			{
-				creatureDetail = creature->name;
+				if (WORLD->isInPlayerFov(creature->mapPosition))
+				{
+					creatureDetail = creature->name;
+				}
 			}
 		}
 	}

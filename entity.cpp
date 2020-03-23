@@ -35,7 +35,7 @@ void Creature::changeStanceUp()
 {
 	if (mapPosition.height + 1 <= 3)
 	{
-		if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height + 1, mapPosition.floor), false)) mapPosition.height += 1;
+		if (WORLD->debugmap->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height + 1, mapPosition.floor), false)) mapPosition.height += 1;
 	}
 }
 
@@ -43,7 +43,7 @@ void Creature::changeStanceDown()
 {
 	if (mapPosition.height - 1 >= 1)
 	{
-		if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height - 1, mapPosition.floor), false)) mapPosition.height -= 1;
+		if (WORLD->debugmap->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height - 1, mapPosition.floor), false)) mapPosition.height -= 1;
 	}
 }
 
@@ -175,12 +175,12 @@ void Player::move()
 			{
 				WORLD->updateBlock(mapPosition, false); //clear old position's map properties
 
-				if (WORLD->getWalkability(Position4(mapPosition.x + xMoveDist, mapPosition.y, mapPosition.height, mapPosition.floor), true))
+				if (WORLD->debugmap->getWalkability(Position4(mapPosition.x + xMoveDist, mapPosition.y, mapPosition.height, mapPosition.floor), true))
 				{
 					mapPosition.x += xMoveDist;
 					xMoveDist = 0;
 				} 
-				if (WORLD->getWalkability(Position4(mapPosition.x, mapPosition.y + yMoveDist, mapPosition.height, mapPosition.floor), true))
+				if (WORLD->debugmap->getWalkability(Position4(mapPosition.x, mapPosition.y + yMoveDist, mapPosition.height, mapPosition.floor), true))
 				{
 					mapPosition.y += yMoveDist;
 					yMoveDist = 0;

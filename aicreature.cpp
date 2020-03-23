@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 AICreature::AICreature(Creature creature, TCODMap* fovMap)
-	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), interest(0.0f), interestDecay(.05f), interestDecayClock(1.0f), pathStep(0), reactionFireClock(0.5f)
+	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), interest(0.0f), interestDecay(.05f), interestDecayClock(1.0f), pathStep(0), reactionFireClock(1.0f), test(false)
 {
 	inventory.push_back(std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, this)));
 	inventory[1]->addItem(std::make_shared<Item>(ep::item::sip45(0, 0, 0, this)));
@@ -218,13 +218,16 @@ void AICreature::update() //ai and behavior attributes update here
 
 void AICreature::render(const std::shared_ptr<Pane>& pane) const
 {
-	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
-	pane->console->setCharBackground(renderPosition.x, renderPosition.y, debugBGColor);
-
-	if (health != 0)
+	if (WORLD->debugmap->player->mapPosition.floor == mapPosition.floor)
 	{
-		selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
+		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+		pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
+		//pane->console->setCharBackground(renderPosition.x, renderPosition.y, debugBGColor);
+
+		if (health != 0)
+		{
+			selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
+		}
 	}
 }
 

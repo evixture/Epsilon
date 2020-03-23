@@ -91,6 +91,24 @@ void Map::addContainer(std::shared_ptr<Container> container)
 	mapContainerList.push_back(container);
 }
 
+void Map::refreshFOV(int floor)
+{
+	Position4 position;
+
+	for (int h = 0; h < 3; h++)
+	{
+		for (int y = 0; y < height; ++y)
+		{
+			for (int x = 0; x < width; ++x)
+			{
+				position = Position4(x, y, h + 1, floor); //updates with floor??
+
+				fovMapList[h]->setProperties(x, y, getTransparency(position), getWalkability(position, true)); //very very big bottleneck
+			}
+		}
+	}
+}
+
 bool Map::getMapName(pugi::xml_node& dataNode)
 {
 	std::string testName = dataNode.name();
@@ -102,8 +120,6 @@ bool Map::getMapName(pugi::xml_node& dataNode)
 			name = dataNode.text().as_string();
 			return true;
 		}
-		//else throw "Could not get map name!";
-		//return false;
 	}
 	return false;
 }
@@ -117,7 +133,7 @@ bool Map::getMapLevels(pugi::xml_node& dataNode)
 		if (!dataNode.text().empty())
 		{
 			totalFloors = dataNode.text().as_int();
-			levelList = std::vector < std::vector < std::shared_ptr < Block >>>(totalFloors);
+			levelList = std::vector<std::vector<std::shared_ptr<Block>>>(totalFloors);
 			return true;
 		}
 		//else throw "Could not get the number of map levels!";
@@ -188,6 +204,26 @@ bool Map::createBlockMap(pugi::xml_node& dataNode)
 		}
 		if (levelList.size() == totalFloors && levelList[totalFloors - 1].size() == width * height)
 		{
+			for (int i = 0; i < 3; i++)
+			{
+				fovMapList.push_back(std::make_shared<TCODMap>(width, height));
+			}
+
+			Position4 position;
+
+			for (int h = 0; h < 3; h++)
+			{
+				for (int y = 0; y < height; ++y)
+				{
+					for (int x = 0; x < width; ++x)
+					{
+						position = Position4(x, y, h + 1, 0);
+
+						//how to unitize for optimization for bigger maps??
+						fovMapList[h]->setProperties(x, y, getTransparency(position), getWalkability(position, true)); //very very big bottleneck
+					}
+				}
+			}
 			return true;
 		}
 	}
@@ -277,7 +313,8 @@ bool Map::getCreatures(pugi::xml_node& dataNode)
 						armorColor = TCODColor::pink;
 					}
 				}
-				creatureList.push_back(std::make_shared<Creature>(Position4(x, y, level, floor), ch, name, color, health, Armor("TEMP", armorColor, armorDefense, armorDurability))); //missing armor name in file
+				Creature creature = Creature(Position4(x, y, level, floor), ch, name, color, health, Armor("TEMP", armorColor, armorDefense, armorDurability)); //missing armor name in file
+				creatureList.push_back(std::make_shared<AICreature>(creature, fovMapList[creature.mapPosition.height - 1].get()));
 			}	
 		}
 		return true;
@@ -487,20 +524,67 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 	}
 }
 
-//----------------------------------------------------------------------------------------------------
-
-World::World()
-	:xOffset(0), yOffset(0)
+bool Map::inMapBounds(Position3& position) const
 {
-	debugmap = std::make_shared<Map>("data/maps/debugmap.emp"); //constructed right, but falls out of scope?
+	if ((position.floor >= 0 && position.floor < totalFloors) && (position.x >= 0 && position.x < width) && (position.y >= 0 && position.y < height)) return true;
+	return false;
+}
 
-	for (int i = 0; i < 3; i++)
+bool Map::getWalkability(Position4 position, bool checkCreatures) const
+{
+	if (!inMapBounds(position)) //should never be called??
 	{
-		fovMapList.push_back(std::make_shared<TCODMap>(debugmap->width, debugmap->height)); //71 * 70 = 4970 * 3 = 14910 total tiles to update each cycle
-		//fovMapList = std::make_shared<TCODMap>(debugmap->width, debugmap->height);
+		return false;
 	}
 
-	createFovMap();
+	if (checkCreatures)
+	{
+		for (auto& creature : creatureList)
+		{
+			if (position.floor == creature->mapPosition.floor && position.x == creature->mapPosition.x && position.y == creature->mapPosition.y)
+			{
+				if (creature->health > 0)
+				{
+					return false;
+				}
+			}
+		}
+	}
+
+	bool walkableBool = true;
+	unsigned char walkableFlag = getBlock(position)->walkableFlag;
+
+	for (int i = 0; i < position.height; ++i)
+	{
+		if (walkableFlag & heightToBitFlag(position.height - i))
+		{
+			walkableBool = false;
+		}
+	}
+
+	if (walkableBool == true && walkableFlag & heightToBitFlag(0))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool Map::getSolidity(Position4& position) const
+{
+	if (getBlock(position)->walkableFlag & heightToBitFlag(position.height))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool Map::getTransparency(Position4& position) const
+{
+	if (!(getBlock(position)->transparentFlag & heightToBitFlag(position.height)))
+	{
+		return true;
+	}
+	return false;
 }
 
 std::shared_ptr<Block> Map::getBlock(Position3 position) const
@@ -513,6 +597,20 @@ std::shared_ptr<Block> Map::getBlock(Position3 position) const
 	{
 		return std::make_shared<Block>(ep::block::error);
 	}
+}
+
+//----------------------------------------------------------------------------------------------------
+
+World::World()
+	:xOffset(0), yOffset(0)
+{
+	debugmap = std::make_shared<Map>("data/maps/debugmap.emp");
+
+	/*for (int i = 0; i < 3; i++)
+	{
+		fovMapList.push_back(std::make_shared<TCODMap>(debugmap->width, debugmap->height));
+	}*/
+	//createFovMap();
 }
 
 bool World::isExplored(Position3& position) const
@@ -528,19 +626,13 @@ void World::updateBlock(Position3 blockPosition, bool checkCreatures)
 	{
 		position = Position4(blockPosition.x, blockPosition.y, h + 1, blockPosition.floor);
 
-		fovMapList[h]->setProperties(position.x, position.y, getTransparency(position), getWalkability(position, checkCreatures));
+		debugmap->fovMapList[h]->setProperties(position.x, position.y, debugmap->getTransparency(position), debugmap->getWalkability(position, checkCreatures));
 	}
 }
 
 TCODColor World::getBgColor(Position3& position) const
 {
 	return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]->tileList[0].backgroundColor;
-}
-
-bool World::inMapBounds(Position3& position) const
-{
-	if ((position.floor >= 0 && position.floor < debugmap->totalFloors) && (position.x >= 0 && position.x < debugmap->width) && (position.y >= 0 && position.y < debugmap->height)) return true;
-	return false;
 }
 
 int World::getOffset(int playerx, int mapw, int renderw)
@@ -563,83 +655,6 @@ int World::getOffset(int playerx, int mapw, int renderw)
 	}
 }
 
-void World::createFovMap()
-{
-	Position4 position;
-
-	for (int h = 0; h < 3; h++)
-	{
-		for (int y = 0; y < debugmap->height; ++y)
-		{
-			for (int x = 0; x < debugmap->width; ++x)
-			{
-				position = Position4(x, y, h + 1, debugmap->player->mapPosition.floor);
-
-				//what if each creature has its own 60 by 60 personal fov map (BAD IDEA)
-				//how to unitize for optimization for bigger maps??
-				fovMapList[h]->setProperties(x, y, getTransparency(position), getWalkability(position, true)); //very very big bottleneck
-			}
-		}
-	}
-}
-
-bool World::getWalkability(Position4 position, bool checkCreatures) const
-{
-	if (!inMapBounds(position)) //should never be called??
-	{
-		return false;
-	}
-
-	if (checkCreatures)
-	{
-		for (auto& creature : debugmap->creatureList)
-		{
-			if (position.floor == creature->mapPosition.floor && position.x == creature->mapPosition.x && position.y == creature->mapPosition.y)
-			{
-				if (creature->health > 0)
-				{
-					return false;
-				}
-			}
-		}
-	}
-
-	bool walkableBool = true;
-	unsigned char walkableFlag = debugmap->getBlock(position)->walkableFlag;
-
-	for (int i = 0; i < position.height; ++i)
-	{
-		if (walkableFlag & heightToBitFlag(position.height - i))
-		{
-			walkableBool = false;
-		}
-	}
-
-	if (walkableBool == true && walkableFlag & heightToBitFlag(0))
-	{
-		return true;
-	}
-	return false;
-}
-
-bool World::getSolidity(Position4& position) const
-{
-	if (debugmap->getBlock(position)->walkableFlag & heightToBitFlag(position.height))
-	{
-		return true;
-	}
-	return false;
-}
-
-bool World::getTransparency(Position4& position) const
-{
-	if (!(debugmap->getBlock(position)->transparentFlag & heightToBitFlag(position.height)))
-	{
-		return true;
-	}
-	return false;
-}
-
 void World::computeFov(Position4 mapPosition) //calculate the fov from the point of view of the map position
 {
 	int height;
@@ -647,19 +662,17 @@ void World::computeFov(Position4 mapPosition) //calculate the fov from the point
 	if (mapPosition.height < 1) height = 0;
 	else height = mapPosition.height - 1;
 
-	fovMapList[height]->computeFov(mapPosition.x, mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
+	debugmap->fovMapList[height]->computeFov(mapPosition.x, mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
 }
 
 bool World::isInPlayerFov(Position4 position) const
 {
-	if (!inMapBounds(position) || position.height < 1)
+	if (!debugmap->inMapBounds(position) || position.height < 1)
 	{
 		return false;
 	}
 
-	//if (position.height < 1) return false;
-
-	if (position.floor == debugmap->player->mapPosition.floor && fovMapList[position.height - 1]->isInFov(position.x, position.y))
+	if (position.floor == debugmap->player->mapPosition.floor && debugmap->fovMapList[position.height - 1]->isInFov(position.x, position.y))
 	{
 		debugmap->getBlock(position)->explored = true;
 		return true;
@@ -693,7 +706,7 @@ void World::update()
 		//addCreature(std::make_shared<AICreature>(Creature(Position4(30, 8, 3, 0), 'I', "AI Creature", TCODColor::white, 100, Armor("", TCODColor::pink, 0, 0))));
 		Creature creature = Creature(Position4(30, 8, 3, 0), 'I', "AI Creature", TCODColor::white, 100, Armor("", TCODColor::pink, 0, 0));
 
-		debugmap->creatureList.push_back(std::make_shared<AICreature>(creature, fovMapList[2].get())); //use whole map list
+		debugmap->creatureList.push_back(std::make_shared<AICreature>(creature, debugmap->fovMapList[2].get())); //use whole map list
 	}
 
 	updateEntities(); //needs to be first to prevent bad fov checks

@@ -4,6 +4,8 @@ struct AICreature : public Creature
 {
 	TCODColor debugBGColor;
 
+	bool test;
+
 	//pathfinding and movement
 	TCODPath path;
 	int pathStep;

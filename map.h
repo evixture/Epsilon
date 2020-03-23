@@ -16,12 +16,20 @@ struct Map //map class deals with the map and creatures and the data used for th
 	std::vector<std::shared_ptr<Container>> mapContainerList; //list of all containers on the map	
 
 	std::vector<std::vector< std::shared_ptr<Block >>> levelList; //list of list of tiles, list of floors->list of tiles
+	std::vector<std::shared_ptr<TCODMap>> fovMapList; //the part of the map used to calculate the fov
 
 	Map(std::string filePath); //map constructor that takes a string file path
 
 	void addCreature(std::shared_ptr<Creature> creature); //adds a creature to the current map				
 	void addItem(std::shared_ptr<Item> item); //adds an item to the current map							
-	void addContainer(std::shared_ptr<Container> container); //adds a container to the current map			
+	void addContainer(std::shared_ptr<Container> container); //adds a container to the current map	
+
+	void refreshFOV(int floor);
+
+	bool    getTransparency			(Position4& position) const; //gets the transparency of a tile
+	bool    getWalkability			(Position4 position, bool checkCreatures) const; //gets the walkability of a tile
+	bool	getSolidity				(Position4& position) const;
+	bool	inMapBounds				(Position3& position) const; //checks if the coordinates are in the map bounds
 
 	std::shared_ptr<Block> getBlock(Position3 position) const; //returns the tile at specific coordinates
 
@@ -46,7 +54,6 @@ struct World //world struct that deals with rendering and updating the map
 	int yOffset; //CHECK the y offset of the rendered portion of the map
 
 	std::shared_ptr<Map> debugmap; //main map used for debugging
-	std::vector<std::shared_ptr<TCODMap>> fovMapList; //the part of the map used to calculate the fov
 
 	std::vector<std::shared_ptr<Sound>> soundList;
 	std::vector<std::shared_ptr<Sound>> soundBuffer;
@@ -56,10 +63,6 @@ struct World //world struct that deals with rendering and updating the map
 	
 	TCODColor getBgColor			(Position3& position) const; //gets the background color of the tile at specific coordinates
 
-	bool    getTransparency			(Position4& position) const; //gets the transparency of a tile
-	bool    getWalkability			(Position4 position, bool checkCreatures) const; //gets the walkability of a tile
-	bool	getSolidity				(Position4& position) const;
-	bool	inMapBounds			(Position3& position) const; //checks if the coordinates are in the map bounds
 	bool	isInPlayerFov			(Position4 position) const; //returns true if the coordinates are in fov
 	bool	isExplored				(Position3& position) const; //checks if a tile has been explored previously
 
@@ -71,8 +74,6 @@ struct World //world struct that deals with rendering and updating the map
 
 private:
 	int getOffset		(int playerx, int mapw, int renderw); //returns the map offset
-
-	void createFovMap();
 
 	void computeFov(Position4 mapPosition);  //computes the fov map
 
