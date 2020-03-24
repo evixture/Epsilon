@@ -162,7 +162,23 @@ float getFallTime(int height)
 
 MagazineData::MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid)
 	:isValid(isValid), ammoType(ammoType), ammoCapacity(ammoCapacity), availableAmmo(availableAmmo)
-{}
+{
+	switch (ammoType)
+	{
+	case AmmoType::FIVEPOINTFIVESIX:
+		mass = 55;
+		velocity = 300;
+		break;
+	case AmmoType::FOURTYFIVEACP:
+		mass = 230;
+		velocity = 80;
+		break;
+	default:
+		mass = 0;
+		velocity = 0;
+		break;
+	}
+}
 
 Clock::Clock(float timeBetweenUpdates)
 	:numCalls(0), timeBetweenUpdates(timeBetweenUpdates)

@@ -4,8 +4,6 @@ struct AICreature : public Creature
 {
 	TCODColor debugBGColor;
 
-	bool test;
-
 	//pathfinding and movement
 	TCODPath path;
 	int pathStep;
@@ -51,6 +49,8 @@ struct AICreature : public Creature
 	void render(const std::shared_ptr<Pane>& pane) const; // virtual renders the creature
 
 private:
+
+	bool inEffectiveRange();
 
 	void decayInterest();
 	void reactToSounds();

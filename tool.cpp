@@ -2,12 +2,12 @@
 
 Tool::Tool(std::string name, TCODColor color, int ch)
 	:name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), 
-	ammoType(MagazineData::AmmoType::NONE), fireMode(SAFE), availibleFireMode(0), isHeld(false), type(Tool::Type::TOOL)
+	ammoType(MagazineData::AmmoType::NONE), fireMode(SAFE), availibleFireMode(0), isHeld(false), type(Tool::Type::TOOL), angle(0.0f)
 {}
 
 Tool::Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
 	: name(name), color(color), ch(NULL), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), 
-	ammoType(ammoType), fireMode(fireMode), availibleFireMode(availibleFireModeFlag), isHeld(false), type(Tool::Type::TOOL)
+	ammoType(ammoType), fireMode(fireMode), availibleFireMode(availibleFireModeFlag), isHeld(false), type(Tool::Type::TOOL), angle(0.0f)
 {}
 
 std::shared_ptr<MagazineData> Tool::getMagData()
@@ -560,19 +560,22 @@ void Firearm::fireBullet()
 
 		for (float i = 1.0f; i <= fireClock.numCalls; fireClock.numCalls--)
 		{
-			if (ammoType == MagazineData::AmmoType::FIVEPOINTFIVESIX)
-			{
-				bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ep::bullet::cal556(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height)));
-			}
-			else
-			{
-				bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ep::bullet::cal45(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height)));
-			}
+			//if (ammoType == MagazineData::AmmoType::FIVEPOINTFIVESIX)
+			//{
+			//	//bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ep::bullet::cal556(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height)));
+			//}
+			//else
+			//{
+			//	//bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ep::bullet::cal45(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height)));
+			//}
+
+			//Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
+			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, getMagData()->velocity, getMagData()->mass));
+
 			selectedMagazine->availableAmmo--;
 
 			WORLD->soundBuffer.push_back(std::make_shared<Sound>(mapPosition, 120, 100));
 		}
-
 	}
 }
 

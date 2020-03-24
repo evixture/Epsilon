@@ -205,8 +205,8 @@ s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
 				<color>pink</color>
 			</armor>
 		</creature>
-
-		<creature name = "Creature1"> <!-- "creature" is name -->
+<!--
+		<creature name = "Creature1">
 			<x>13</x>
 			<y>38</y>
 			<level>3</level>
@@ -217,12 +217,11 @@ s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
 			<armor>
 				<defense>100</defense>
 				<durability>200</durability>
-				<color>pink</color> <!-- need? -->
+				<color>pink</color>
 			</armor>
 		</creature>
 
 		<creature name = "Creature2">
-			<!-- "creature" is name -->
 			<x>64</x>
 			<y>21</y>
 			<level>3</level>
@@ -236,7 +235,7 @@ s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
 				<color>pink</color>
 			</armor>
 		</creature>
-		
+		-->
 	</creatures>
 	<!-- = = = = = = = = = = = = = = = = = -->
 	<items>

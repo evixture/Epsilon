@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 AICreature::AICreature(Creature creature, TCODMap* fovMap)
-	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), interest(0.0f), interestDecay(.05f), interestDecayClock(1.0f), pathStep(0), reactionFireClock(1.0f), test(false)
+	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), interest(0.0f), interestDecay(.05f), interestDecayClock(1.0f), pathStep(0), reactionFireClock(1.0f)
 {
 	inventory.push_back(std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, this)));
 	inventory[1]->addItem(std::make_shared<Item>(ep::item::sip45(0, 0, 0, this)));
@@ -23,17 +23,35 @@ void AICreature::move()
 
 	for (int i = 1; i <= moveClock.numCalls; moveClock.numCalls--)
 	{
-		if (!path.isEmpty()) //has path to walk on
-		{
-			if (interest >= 0.5f && !WORLD->isInPlayerFov(mapPosition)) //change not in fov for more context, to allow movement in combat, etc, replace with if not in weapon effective range
+		//if (!path.isEmpty()) //has path to walk on
+		//{
+			if (interest >= 0.5f) //change not in fov for more context, to allow movement in combat, etc, replace with if not in weapon effective range
 			{
-				WORLD->updateBlock(mapPosition, false);
+				if (WORLD->isInPlayerFov(mapPosition))
+				{
+					if (!inEffectiveRange())
+					{
+						WORLD->updateBlock(mapPosition, false);
 
-				path.walk(&mapPosition.x, &mapPosition.y, true);
+						path.walk(&mapPosition.x, &mapPosition.y, true);
 
-				WORLD->updateBlock(mapPosition, true);
+						WORLD->updateBlock(mapPosition, true);
+
+						debugBGColor = TCODColor::orange;
+					}
+				}
+				else
+				{
+					WORLD->updateBlock(mapPosition, false);
+
+					path.walk(&mapPosition.x, &mapPosition.y, true);
+
+					WORLD->updateBlock(mapPosition, true);
+
+					debugBGColor = TCODColor::red;
+				}
 			}
-		}
+		//}
 	}
 }
 
@@ -67,6 +85,15 @@ void AICreature::updateTools()
 	angle = getAngle(mapPosition.x, mapPosition.y, lookPosition.x, lookPosition.y);
 
 	selectedItem->updateTool(mapPosition, lookPosition.x, lookPosition.y, true);
+}
+
+bool AICreature::inEffectiveRange()
+{
+	if (getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y) <= selectedMagazine->velocity * 0.15f) //change to take into account melee weapons
+	{
+		return true;
+	}
+	return false;
 }
 
 void AICreature::decayInterest()
@@ -132,6 +159,16 @@ void AICreature::reactToSounds()
 
 void AICreature::update() //ai and behavior attributes update here
 {
+
+	/*
+	
+	bullet with 80 speed travels 30 tiles before falling (0.35)
+
+	range is the max distance from a creature that the selected weapon is effective
+	range for weapon = velocity x .35
+	
+	
+	*/
 	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
 
 	if (health != 0) //if alive
@@ -171,6 +208,13 @@ void AICreature::update() //ai and behavior attributes update here
 
 			lookPosition = WORLD->debugmap->player->mapPosition; //add random coords (1, -1) for inaccuracy
 
+			/*if (path.size() == 0)
+			{
+				pathfindPosition = focusPosition;
+
+				path.compute(mapPosition.x, mapPosition.y, pathfindPosition.x, pathfindPosition.y);
+			}*/
+
 			//static TCODRandom* RNG = TCODRandom::getInstance();
 			//if (!RNG)
 			//{
@@ -178,21 +222,21 @@ void AICreature::update() //ai and behavior attributes update here
 			//}
 			//
 			//lookPosition = Position3(WORLD->debugmap->player->mapPosition.x + RNG->getInt(-1, 1), WORLD->debugmap->player->mapPosition.y + RNG->getInt(-1, 1), WORLD->debugmap->player->mapPosition.floor);
-			debugBGColor = TCODColor::yellow;
+			//debugBGColor = TCODColor::yellow;
 
 			//---
 
 			reactionFireClock.tickUp(); //replace later with something with more discretion
 			for (int i = 1; i <= reactionFireClock.numCalls; reactionFireClock.numCalls--)
 			{
-				selectedItem->tool->use(false, true); //put on clock
+				//selectedItem->tool->use(false, true); //put on clock
 			}
 		}
 		else //if player not in fov
 		{
 			path.compute(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y); //change later to not update every frame
 
-			debugBGColor = TCODColor::black;
+			//debugBGColor = TCODColor::black;
 		}
 
 		updateTools();
@@ -204,6 +248,13 @@ void AICreature::update() //ai and behavior attributes update here
 			selectedMagazine = mag;
 			
 			selectedItem->tool->reload(mag);
+		}
+
+		if (path.isEmpty() || path.size() == 0)
+		{
+			debugBGColor = TCODColor::purple;
+
+			path.compute(mapPosition.x, mapPosition.y, lookPosition.x, lookPosition.y); // problem does not work??
 		}
 
 		move();
@@ -222,7 +273,7 @@ void AICreature::render(const std::shared_ptr<Pane>& pane) const
 	{
 		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
 		pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
-		//pane->console->setCharBackground(renderPosition.x, renderPosition.y, debugBGColor);
+		pane->console->setCharBackground(renderPosition.x, renderPosition.y, debugBGColor);
 
 		if (health != 0)
 		{
