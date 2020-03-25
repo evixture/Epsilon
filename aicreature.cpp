@@ -37,7 +37,7 @@ void AICreature::move()
 
 						WORLD->updateBlock(mapPosition, true);
 
-						debugBGColor = TCODColor::orange;
+						debugBGColor = TCODColor::green;
 					}
 				}
 				else
@@ -48,7 +48,7 @@ void AICreature::move()
 
 					WORLD->updateBlock(mapPosition, true);
 
-					debugBGColor = TCODColor::red;
+					debugBGColor = TCODColor::blue;
 				}
 			}
 		//}
@@ -151,6 +151,7 @@ void AICreature::reactToSounds()
 				pathfindPosition = sound->sourcePosition;
 				lookPosition = sound->sourcePosition;
 
+				//pathfind to sound source
 				path.compute(mapPosition.x, mapPosition.y, pathfindPosition.x, pathfindPosition.y);
 			}
 		}
@@ -159,7 +160,6 @@ void AICreature::reactToSounds()
 
 void AICreature::update() //ai and behavior attributes update here
 {
-
 	/*
 	
 	bullet with 80 speed travels 30 tiles before falling (0.35)
@@ -208,32 +208,15 @@ void AICreature::update() //ai and behavior attributes update here
 
 			lookPosition = WORLD->debugmap->player->mapPosition; //add random coords (1, -1) for inaccuracy
 
-			/*if (path.size() == 0)
-			{
-				pathfindPosition = focusPosition;
-
-				path.compute(mapPosition.x, mapPosition.y, pathfindPosition.x, pathfindPosition.y);
-			}*/
-
-			//static TCODRandom* RNG = TCODRandom::getInstance();
-			//if (!RNG)
+			//reactionFireClock.tickUp(); //replace later with something with more discretion
+			//for (int i = 1; i <= reactionFireClock.numCalls; reactionFireClock.numCalls--)
 			//{
-			//	RNG->setDistribution(TCOD_DISTRIBUTION_LINEAR);
+			//	//selectedItem->tool->use(false, true); //put on clock
 			//}
-			//
-			//lookPosition = Position3(WORLD->debugmap->player->mapPosition.x + RNG->getInt(-1, 1), WORLD->debugmap->player->mapPosition.y + RNG->getInt(-1, 1), WORLD->debugmap->player->mapPosition.floor);
-			//debugBGColor = TCODColor::yellow;
-
-			//---
-
-			reactionFireClock.tickUp(); //replace later with something with more discretion
-			for (int i = 1; i <= reactionFireClock.numCalls; reactionFireClock.numCalls--)
-			{
-				//selectedItem->tool->use(false, true); //put on clock
-			}
 		}
 		else //if player not in fov
 		{
+			//pathfind to last known player positiom
 			path.compute(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y); //change later to not update every frame
 
 			//debugBGColor = TCODColor::black;
@@ -252,10 +235,10 @@ void AICreature::update() //ai and behavior attributes update here
 
 		if (path.isEmpty() || path.size() == 0)
 		{
-			debugBGColor = TCODColor::purple;
+			debugBGColor = TCODColor::red;
 
-			path.compute(mapPosition.x, mapPosition.y, lookPosition.x, lookPosition.y); // problem does not work??
 		}
+			path.compute(mapPosition.x, mapPosition.y, lookPosition.x - 1, lookPosition.y); // problem does not work??
 
 		move();
 	}
@@ -274,6 +257,19 @@ void AICreature::render(const std::shared_ptr<Pane>& pane) const
 		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
 		pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
 		pane->console->setCharBackground(renderPosition.x, renderPosition.y, debugBGColor);
+
+		//render interest points
+		pane->console->setCharBackground(lookPosition.x - WORLD->xOffset, lookPosition.y - WORLD->yOffset, TCODColor::white);
+		pane->console->setCharBackground(focusPosition.x - WORLD->xOffset, focusPosition.y - WORLD->yOffset - 1, TCODColor::flame);
+		pane->console->setCharBackground(pathfindPosition.x - WORLD->xOffset, pathfindPosition.y - WORLD->yOffset - 2, TCODColor::purple);
+
+		int x, y;
+		for (int i = 0; i < path.size(); i++)
+		{
+			path.get(i, &x, &y);
+
+			pane->console->setCharBackground(x - WORLD->xOffset, y - WORLD->yOffset, TCODColor::pink);
+		}
 
 		if (health != 0)
 		{
