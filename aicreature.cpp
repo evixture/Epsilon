@@ -270,8 +270,16 @@ void AICreature::render(const std::shared_ptr<Pane>& pane) const
 {
 	if (WORLD->debugmap->player->mapPosition.floor == mapPosition.floor)
 	{
-		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-		pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
+		if (WORLD->isInPlayerFov(mapPosition))
+		{
+			pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+			pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
+		}
+		else
+		{
+			//pane->console->setChar(renderPosition.x, renderPosition.y, '?'); //should render char out of fov??
+			pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
+		}
 
 		if (false) //_DEBUG
 		{
@@ -292,10 +300,12 @@ void AICreature::render(const std::shared_ptr<Pane>& pane) const
 			}
 		}
 	
-
 		if (health != 0)
 		{
-			selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
+			if (WORLD->isInPlayerFov(mapPosition))
+			{
+				selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
+			}
 		}
 	}
 }

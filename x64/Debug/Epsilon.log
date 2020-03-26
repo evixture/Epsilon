@@ -1,23 +1,7 @@
 ﻿  aicreature.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\aicreature.cpp(207,47): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\aicreature.cpp(202,47): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
           with
           [
               _Ty=float
           ]
-  engine.cpp
-  entity.cpp
-  gui.cpp
-  input.cpp
-  item.cpp
-  main.cpp
-  map.cpp
-  panel.cpp
-  settings.cpp
-  sound.cpp
-  tile.cpp
-  tool.cpp
-  utility.cpp
-  window.cpp
-  Generating Code...
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(184): warning C4715: 'getWalkableArea': not all control paths return a value
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe
