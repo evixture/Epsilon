@@ -65,6 +65,7 @@ unsigned char	heightToBitFlag(int height); //translates the height of a creature
 double			getAngle(int ix, int iy, int tx, int ty); //gets the angle from 2 sets of coordinates
 double			getDistance(int ix, int iy, int tx, int ty); //gets the distance from 2 sets of coordinates
 float			getFallTime(int height); //used to get the time to fall for a bullet
+Position4		getWalkableArea(Position4 mapPosition);
 
 struct MagazineData //contains all of the important data for magazines
 {

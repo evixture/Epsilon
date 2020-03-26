@@ -18,9 +18,13 @@ struct AICreature : public Creature
 	int moveSpeedMode;
 
 	//interest
-	float interest;
-	float interestChange;
+	float AAA;
+	float BBB;
+
 	float interestDecay;
+	float visualInterest;
+	float soundInterest;
+	float soundInterestChange;
 
 	//caution
 	//aggression
@@ -49,6 +53,9 @@ struct AICreature : public Creature
 	void render(const std::shared_ptr<Pane>& pane) const; // virtual renders the creature
 
 private:
+
+	void behave();
+	void act();
 
 	bool inEffectiveRange();
 

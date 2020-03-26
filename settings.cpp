@@ -45,18 +45,13 @@ void Settings::printLogo() const
 
 void Settings::printDebugStats() const
 {
-	TCODConsole::root->printf(10, 0, "FPS>%i | Mouse %i, %i | Player %i, %i, %i | winfoc>%i | lft>%f | ii %i | ci %i | angle %f",
+	TCODConsole::root->printf(10, 0, "FPS>%i | Mouse %i, %i | Player %i, %i, %i",
 		fpsCount,
 		SETTINGS->input->mouse.cx,
 		SETTINGS->input->mouse.cy,
 		WORLD->debugmap->player->mapPosition.x,
 		WORLD->debugmap->player->mapPosition.y,
-		WORLD->debugmap->player->mapPosition.floor,
-		TCODConsole::hasMouseFocus(),
-		lastFrameTime.asSeconds(),
-		WORLD->debugmap->player->itemIndex,
-		WORLD->debugmap->player->containerIndex,
-		WORLD->debugmap->player->angle);
+		WORLD->debugmap->player->mapPosition.floor);
 }
 
 void Settings::update()
@@ -82,5 +77,9 @@ void Settings::render() const
 	{
 		printLogo();
 	}
-	printDebugStats();
+
+	if (_DEBUG) //if vs is in debug mode
+	{
+		printDebugStats();
+	}
 }

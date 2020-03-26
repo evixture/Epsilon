@@ -447,7 +447,12 @@ void LogWindow::pushMessage(Message message)
 }
 
 void LogWindow::update()
-{}
+{
+	while (messageList.size() > consoleHeight)
+	{
+		messageList.erase(messageList.begin() + messageList.size() - 1);
+	}
+}
 
 void LogWindow::render() const
 {
