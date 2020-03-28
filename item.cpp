@@ -55,39 +55,39 @@ void ActionManager::moveSelectorDown()
 	}
 }
 
-void ActionManager::doAction(Creature* newOwner)
+void ActionManager::doAction(Creature* currentOwner)
 {
 	if (selectedAction->type == Action::Type::DROP)
 	{
-		std::bind(&Creature::dropItem, newOwner)();
+		std::bind(&Creature::dropItem, currentOwner)();
 	}
 	else if (selectedAction->type == Action::Type::RELOAD)
 	{
-		std::bind(&Creature::reload, newOwner)();
+		std::bind(&Creature::reload, currentOwner)();
 	}
 	else if (selectedAction->type == Action::Type::CHANGEFIREMODE)
 	{
-		std::bind(&Creature::changeFireMode, newOwner)();
+		std::bind(&Creature::changeFireMode, currentOwner)();
 	}
 	else if (selectedAction->type == Action::Type::EQUIP)
 	{
-		std::bind(&Creature::equipArmor, newOwner)();
+		std::bind(&Creature::equipArmor, currentOwner)();
 	}
 	else if (selectedAction->type == Action::Type::MELEE)
 	{
-		std::bind(&Creature::useMelee, newOwner)();
+		std::bind(&Creature::useMelee, currentOwner)();
 	}
 }
 
 //----------------------------------------------------------------------------------------------------
 
-Item::Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, Creature* owner, ItemType type)
-	:size(size), tile(tile), tool(tool), mapPosition(position), tileRenderPosition(position), distToEnt(5), owner(owner), type(type), barColor(TCODColor::white)
+Item::Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, ItemType type)
+	:size(size), tile(tile), tool(tool), mapPosition(position), tileRenderPosition(position), distToEnt(5), type(type), barColor(TCODColor::white)
 {
-	createActionManager(owner);
+	createActionManager();
 }
 
-void Item::createActionManager(Creature* owner)
+void Item::createActionManager()
 {
 	if (type == ItemType::NORMAL)
 	{
@@ -208,7 +208,7 @@ bool Container::addItem(std::shared_ptr<Item> item)
 MagazineItem::MagazineItem(Item item, std::shared_ptr<MagazineData> magazineData)
 	:Item(item), magazineData(magazineData)
 {
-	createActionManager(item.owner);
+	createActionManager();
 }
 
 std::shared_ptr<MagazineData> MagazineItem::getMagazineData()

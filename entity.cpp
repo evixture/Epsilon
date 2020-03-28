@@ -21,7 +21,7 @@ Creature::Creature(Position4 position, int ch, std::string name, TCODColor color
 	:Entity(position, ch, name, color), health(health), equippedArmor(armor), angle(0), containerIndex(0), itemIndex(0),
 	nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), moveClock(0), moveSpeed(0), baseMoveTime(0.0f)
 {
-	inventory.push_back(std::make_shared<Container>(ep::container::hands(0, 0, 0, this)));
+	inventory.push_back(std::make_shared<Container>(ep::container::hands(0, 0, 0)));
 	selectedItem = inventory[0]->containerItem;
 
 	selectedMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
@@ -117,11 +117,11 @@ Player::Player(Position4 position)
 {
 	hasSecondChance = true;
 
-	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, this)));
-	inventory[1]->addItem(	std::make_shared<Item>(ep::item::sip45(0, 0, 0, this)));
-	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(0, 0, 0, this)));
-	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(0, 0, 0, this)));
-	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, this)));
+	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0)));
+	inventory[1]->addItem(	std::make_shared<Item>(ep::item::sip45(0, 0, 0)));
+	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(0, 0, 0)));
+	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(0, 0, 0)));
+	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0)));
 
 	if (inventory.size() > 0)
 	{
