@@ -2,7 +2,7 @@
 
 AICreature::AICreature(Creature creature, TCODMap* fovMap)
 	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), soundInterest(0.0f), visualInterest(0.0f), interestDecay(.05f), interestDecayClock(1.0f), 
-	pathStep(0), reactionFireClock(1.0f), aggression(0.0f)
+	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false)
 {
 	inventory.push_back(std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, this)));
 	inventory[1]->addItem(std::make_shared<Item>(ep::item::sip45(0, 0, 0, this)));
@@ -26,7 +26,7 @@ void AICreature::move()
 	{
 		if (soundInterest >= 0.5f || visualInterest >= 0.5f) //change not in fov for more context, to allow movement in combat, etc, replace with if not in weapon effective range
 		{
-			if (WORLD->isInPlayerFov(mapPosition)) //move check to act(), and allow move to be called around in infov and outfov
+			if (inFov) //move check to act(), and allow move to be called around in infov and outfov
 			{
 				if (!inEffectiveRange())
 				{
@@ -138,7 +138,7 @@ void AICreature::decayInterest()
 
 void AICreature::reactToSounds()
 {
-	if (!WORLD->isInPlayerFov(mapPosition))
+	if (!inFov)
 	{
 		for (auto& sound : WORLD->soundList)
 		{
@@ -212,7 +212,7 @@ void AICreature::behave()
 	decayInterest();
 	reactToSounds();
 
-	if (WORLD->isInPlayerFov(mapPosition))
+	if (inFov)
 	{
 		float calcVisInt = std::clamp<float>((15.0f / (float)getDistance(mapPosition.x, mapPosition.y, WORLD->debugmap->player->mapPosition.x, WORLD->debugmap->player->mapPosition.y)), 0.0f, 1.0f);
 		if (calcVisInt > visualInterest)
@@ -235,7 +235,7 @@ void AICreature::act()
 {
 	updateTools();
 
-	if (WORLD->isInPlayerFov(mapPosition))
+	if (inFov)
 	{
 		reactionFireClock.tickUp(); //replace later with something with more discretion
 		for (int i = 1; i <= reactionFireClock.numCalls; reactionFireClock.numCalls--)
@@ -266,6 +266,7 @@ void AICreature::act()
 
 void AICreature::update() //ai and behavior attributes update here
 {
+	inFov = WORLD->isInPlayerFov(mapPosition);
 	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
 
 	if (health != 0) //if alive
@@ -288,7 +289,7 @@ void AICreature::render(const std::shared_ptr<Pane>& pane) const
 {
 	if (WORLD->debugmap->player->mapPosition.floor == mapPosition.floor)
 	{
-		if (WORLD->isInPlayerFov(mapPosition))
+		if (inFov)
 		{
 			pane->console->setChar(renderPosition.x, renderPosition.y, ch);
 			pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
@@ -321,7 +322,7 @@ void AICreature::render(const std::shared_ptr<Pane>& pane) const
 	
 		if (health != 0)
 		{
-			if (WORLD->isInPlayerFov(mapPosition))
+			if (inFov)
 			{
 				selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
 			}

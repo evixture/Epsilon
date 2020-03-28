@@ -50,6 +50,8 @@ struct AICreature : public Creature
 
 private:
 
+	bool inFov;
+
 	void behave();
 	void act();
 

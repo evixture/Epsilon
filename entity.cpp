@@ -565,8 +565,17 @@ void Player::render(const std::shared_ptr<Pane>& pane) const
 
 	if (health != 0)
 	{
-		selectedItem->renderTool(pane);
+		for (auto& container : inventory)
+		{
+			container->containerItem->renderTool(pane);
+
+			for (auto& tool : container->itemList)
+			{
+				tool->renderTool(pane);
+			}
+		}
 	}
+		//selectedItem->renderTool(pane);
 
 	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
 	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
