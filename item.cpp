@@ -138,9 +138,9 @@ void Item::createActionManager(Creature* owner)
 	}
 }
 
-std::shared_ptr<MagazineData> Item::getMagazineData()
+MagazineData Item::getMagazineData()
 {
-	return std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
+	return MagazineData(MagazineData::AmmoType::NONE, 0, 0, false);
 }
 
 void Item::changeBarColor()
@@ -205,18 +205,32 @@ bool Container::addItem(std::shared_ptr<Item> item)
 	return false;
 }
 
-MagazineItem::MagazineItem(Item item, std::shared_ptr<MagazineData> magazineData)
+MagazineItem::MagazineItem(Item item, MagazineData magazineData)
 	:Item(item), magazineData(magazineData)
 {
 	createActionManager(item.owner);
 }
 
-std::shared_ptr<MagazineData> MagazineItem::getMagazineData()
+MagazineData MagazineItem::getMagazineData()
 {
 	return magazineData;
 }
 
 void MagazineItem::changeBarColor()
 {
-	barColor = TCODColor::lerp(TCODColor::red, TCODColor::darkerGreen, (float(magazineData->availableAmmo) / float(magazineData->ammoCapacity)));
+	if (magazineData.isUsed == true)
+	{
+		if (magazineData.availableAmmo > 0)
+		{
+			barColor = TCODColor::orange;
+		}
+		else
+		{
+			barColor = TCODColor::red;
+		}
+	}
+	else
+	{
+		barColor = TCODColor::lerp(TCODColor::red, TCODColor::darkerGreen, (float(magazineData.availableAmmo) / float(magazineData.ammoCapacity)));
+	}
 }

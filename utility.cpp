@@ -185,8 +185,13 @@ Position4 getWalkableArea(Position4 mapPosition)
 
 //----------------------------------------------------------------------------------------------------
 
+MagazineData::MagazineData()
+	:ammoType(AmmoType::NONE), ammoCapacity(0), availableAmmo(0), isValid(false), isUsed(false)
+{
+}
+
 MagazineData::MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid)
-	:isValid(isValid), ammoType(ammoType), ammoCapacity(ammoCapacity), availableAmmo(availableAmmo)
+	:isValid(isValid), ammoType(ammoType), ammoCapacity(ammoCapacity), availableAmmo(availableAmmo), isUsed(false)
 {
 	switch (ammoType)
 	{
@@ -203,6 +208,15 @@ MagazineData::MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmm
 		velocity = 0;
 		break;
 	}
+}
+
+bool MagazineData::operator==(const MagazineData& compMag)
+{
+	if (this->ammoType == compMag.ammoType && ammoCapacity == compMag.ammoCapacity && availableAmmo == compMag.availableAmmo && isValid == compMag.isValid && isUsed == compMag.isUsed)
+	{
+		return true;
+	}
+	return false;
 }
 
 Clock::Clock(float timeBetweenUpdates)

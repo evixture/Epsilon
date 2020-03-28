@@ -33,8 +33,8 @@ struct Tool //base class for the holdable component to items
 	virtual void update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld); //virtual updates tool
 	virtual void render(const std::shared_ptr<Pane>& pane) const; //virtual renders tool
 
-	virtual std::shared_ptr<MagazineData> getMagData();				//returns the magazine component, only useful for magazines
-	virtual void reload(std::shared_ptr<MagazineData>& magazine);	//does nothing in tool
+	virtual MagazineData getMagData();				//returns the magazine component, only useful for magazines
+	virtual void reload(MagazineData& magazine);	//does nothing in tool
 	virtual void changeFireMode();									//does nothing in tool
 	virtual void useMelee();										//does nothing in tool
 	virtual void changeBarColor(TCODColor& color);					//does nothing in tool
@@ -100,15 +100,16 @@ private:
 struct Firearm : public Melee //firearm that fires bullets that interact with the world
 {
 	std::shared_ptr<MagazineData> selectedMagazine; //the magazine that is currently in the firearm, is a generic mag if no mag is in firearm
+	MagazineData magazine;
 
 	int fireRPS; //maximum time in seconds that it takes for the next bullet to fire
 	float reloadTime; //maximum time in seconds it takes to reload the magazine
 
 	Firearm(std::string name, TCODColor color, int fireRPS, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag); //constructor of firearm that takes string name, foreground color, fire rate, reload speed, ammo type, and fire type
 
-	std::shared_ptr<MagazineData> getMagData(); //returns the important data of the selected magazine
+	MagazineData getMagData(); //returns the important data of the selected magazine
 
-	void reload(std::shared_ptr<MagazineData>& magazine); //reloads firearm, use from player
+	void reload(MagazineData& magazine); //reloads firearm, use from player
 	void changeFireMode(); //switches the fire mode
 	void use(bool hold, bool swtch); //fires a bullet
 

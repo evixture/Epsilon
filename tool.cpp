@@ -10,12 +10,12 @@ Tool::Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, F
 	ammoType(ammoType), fireMode(fireMode), availibleFireMode(availibleFireModeFlag), isHeld(false), type(Tool::Type::TOOL), angle(0.0f)
 {}
 
-std::shared_ptr<MagazineData> Tool::getMagData()
+MagazineData Tool::getMagData()
 {
-	return std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
+	return MagazineData(MagazineData::AmmoType::NONE, 0, 0, false);
 }
 
-void Tool::reload(std::shared_ptr<MagazineData>& magazine)
+void Tool::reload(MagazineData& magazine)
 {}
 
 void Tool::changeFireMode()
@@ -400,7 +400,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 
 Firearm::Firearm(std::string name, TCODColor color, int shotsPerSecond, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
 	:Melee(Tool(name, color, ammoType, fireMode, availibleFireModeFlag), /* MELEE DAMAGE */ 25, 0), fireRPS(shotsPerSecond), reloadTime(reloadSpeed),
-	selectedMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), fireClock(1.0f / shotsPerSecond), reloadClock(reloadSpeed)//, fireNumCalls(0), reloadNumCalls(0)
+	magazine(MagazineData(ammoType, 0, 0, true)), fireClock(1.0f / shotsPerSecond), reloadClock(reloadSpeed)//, fireNumCalls(0), reloadNumCalls(0)
 {
 	type = Tool::Type::FIREARM;
 
@@ -538,9 +538,9 @@ void Firearm::updateToolPosition(int targetX, int targetY)
 	}
 }
 
-std::shared_ptr<MagazineData> Firearm::getMagData()
+MagazineData Firearm::getMagData()
 {
-	return selectedMagazine;
+	return magazine;
 }
 
 void Firearm::fireBullet()
@@ -570,28 +570,32 @@ void Firearm::fireBullet()
 			//}
 
 			//Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
-			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, getMagData()->velocity, getMagData()->mass));
+			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, getMagData().velocity, getMagData().mass));
 
-			selectedMagazine->availableAmmo--;
+			magazine.availableAmmo--;
 
 			WORLD->soundBuffer.push_back(std::make_shared<Sound>(mapPosition, 120, 100));
 		}
 	}
 }
 
-void Firearm::reload(std::shared_ptr<MagazineData>& magazine)
+void Firearm::reload(MagazineData& magazine)
 {
 	if (this->isHeld)
 	{
-		if (magazine->isValid != false)
+		if (magazine.isValid != false)
 		{
 			if (reloadClock.numCalls >= 1.0f) //if it can reload
 			{
-				selectedMagazine = magazine;
+				std::swap<MagazineData>(this->magazine, magazine);
+
+				this->magazine.isUsed = true;
+				magazine.isUsed = false;
+
 				reloadClock.addTime(reloadTime);
 			}
 		}
-	//	else selectedMagazine = magazine;
+	
 	}
 }
 
@@ -637,12 +641,12 @@ void Firearm::changeFireMode()
 }
 
 void Firearm::changeBarColor(TCODColor& color)
-{
-	if (selectedMagazine->isValid == true)
+{	
+	if (magazine.isUsed == true)
 	{
-		if (selectedMagazine->availableAmmo > 0)
+		if (magazine.ammoCapacity > 0)
 		{
-			color = TCODColor::darkerGreen;
+			color = TCODColor::lerp(TCODColor::red, TCODColor::darkerGreen, (float(magazine.availableAmmo) / float(magazine.ammoCapacity)));	
 		}
 		else
 		{
@@ -651,7 +655,7 @@ void Firearm::changeBarColor(TCODColor& color)
 	}
 	else
 	{
-		color = TCODColor::darkFlame;
+		color = TCODColor::orange;
 	}
 }
 
@@ -659,7 +663,7 @@ void Firearm::use(bool hold, bool swtch)
 {
 	if (isHeld)
 	{
-		if (fireClock.numCalls >= 1.0f && selectedMagazine->availableAmmo > 0 && reloadClock.numCalls >= 1.0f) //fires bullet
+		if (fireClock.numCalls >= 1.0f && magazine.availableAmmo > 0 && reloadClock.numCalls >= 1.0f) //fires bullet
 		{
 			if (fireMode == FireType::FULL && (hold || swtch))// && INPUT->primaryUseButton->isDown)
 			{
@@ -687,7 +691,7 @@ void Firearm::update(Position4& sourcePosition, int& targetX, int& targetY, bool
 		//GUI->logWindow->pushMessage(LogWindow::Message(std::string("reload : " + std::to_string(reloadClock.numCalls) + " fire : " + std::to_string(fireClock.numCalls)), LogWindow::Message::MessageLevel::MEDIUM));
 	}
 
-	if (bulletList.size() > selectedMagazine->ammoCapacity * 5) //clean up extra bullets if there are more than 5 magazines worth of bullets on the map
+	if (bulletList.size() > magazine.ammoCapacity * 5) //clean up extra bullets if there are more than 5 magazines worth of bullets on the map
 	{
 		bulletList.pop_back();
 	}

@@ -33,9 +33,9 @@ struct Creature : public Entity //creature base used for player and other beings
 	std::vector<std::shared_ptr<Container>> inventory; //contains all of the items and containers of the creature
 
 	std::shared_ptr<Item> selectedItem; //the item that is currently selected
-	std::shared_ptr<MagazineData> selectedMagazine; //the selected magazine of the selected item
+	MagazineData selectedMagazine; //the selected magazine of the selected item
 
-	std::shared_ptr<MagazineData> nullMagazine; //a generic magazine that is used then a firearm has no actual magazine
+	//MagazineData nullMagazine; //a generic magazine that is used then a firearm has no actual magazine
 
 	Creature(Position4 pos, int ch, std::string name, TCODColor color, int health, Armor armor); //creature constructor that takes a position, character, string name, color, health, and armor
 
