@@ -2,7 +2,7 @@
 
 AICreature::AICreature(Creature creature, TCODMap* fovMap)
 	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), soundInterest(0.0f), visualInterest(0.0f), interestDecay(.05f), interestDecayClock(1.0f), 
-	pathStep(0), reactionFireClock(1.0f)
+	pathStep(0), reactionFireClock(1.0f), aggression(0.0f)
 {
 	inventory.push_back(std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, this)));
 	inventory[1]->addItem(std::make_shared<Item>(ep::item::sip45(0, 0, 0, this)));
@@ -77,6 +77,21 @@ void AICreature::equipArmor()
 
 void AICreature::useMelee()
 {
+}
+
+void AICreature::takeDamage(int damage)
+{
+	if (health - damage > 0) //take normal damage
+	{
+		health -= damage;
+	}
+	else //if damage taken would have resulted in death
+	{
+		health = 0;
+	}
+
+	aggression += damage / 100.0f;
+	aggression = std::clamp<float>(aggression, -1.0f, 1.0f);
 }
 
 void AICreature::updateTools()
@@ -199,7 +214,7 @@ void AICreature::behave()
 
 	if (WORLD->isInPlayerFov(mapPosition))
 	{
-		float calcVisInt = std::clamp<float>((15.0f / getDistance(mapPosition.x, mapPosition.y, WORLD->debugmap->player->mapPosition.x, WORLD->debugmap->player->mapPosition.y)), 0.0f, 1.0f);
+		float calcVisInt = std::clamp<float>((15.0f / (float)getDistance(mapPosition.x, mapPosition.y, WORLD->debugmap->player->mapPosition.x, WORLD->debugmap->player->mapPosition.y)), 0.0f, 1.0f);
 		if (calcVisInt > visualInterest)
 		{
 			visualInterest = calcVisInt; //update visual interest with the greater value
@@ -222,11 +237,14 @@ void AICreature::act()
 
 	if (WORLD->isInPlayerFov(mapPosition))
 	{
-		//reactionFireClock.tickUp(); //replace later with something with more discretion
-		//for (int i = 1; i <= reactionFireClock.numCalls; reactionFireClock.numCalls--)
-		//{
-		//	//selectedItem->tool->use(false, true); //put on clock
-		//}
+		reactionFireClock.tickUp(); //replace later with something with more discretion
+		for (int i = 1; i <= reactionFireClock.numCalls; reactionFireClock.numCalls--)
+		{
+			if (aggression >= 0.5f)
+			{
+				selectedItem->tool->use(false, true); //put on clock
+			}
+		}
 	}
 
 	//reload on empty mag
@@ -277,6 +295,7 @@ void AICreature::render(const std::shared_ptr<Pane>& pane) const
 		}
 		else
 		{
+			//pane->console->setChar(renderPosition.x, renderPosition.y, '?'); //should render char out of fov??
 			//pane->console->setChar(renderPosition.x, renderPosition.y, '?'); //should render char out of fov??
 			pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
 		}

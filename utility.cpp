@@ -165,22 +165,22 @@ Position4 getWalkableArea(Position4 mapPosition)
 	{
 		return mapPosition;
 	}
-	else //search the surrounding area for walkable block
+
+	//search the surrounding area for walkable block
+	for (int y = -1; y <= 1; y++)
 	{
-		for (int y = -1; y <= 1; y++)
+		for (int x = -1; x <= 1; x++)
 		{
-			for (int x = -1; x <= 1; x++)
+			if (x != 0 && y != 0)
 			{
-				if (x != 0 && y != 0)
+				if (WORLD->debugmap->getWalkability(Position4(mapPosition.x + x, mapPosition.y + y, mapPosition.height, mapPosition.floor), true) == true)
 				{
-					if (WORLD->debugmap->getWalkability(Position4(mapPosition.x + x, mapPosition.y + y, mapPosition.height, mapPosition.floor), true) == true)
-					{
-						return Position4(mapPosition.x + x, mapPosition.y + y, mapPosition.height, mapPosition.floor);
-					}
+					return Position4(mapPosition.x + x, mapPosition.y + y, mapPosition.height, mapPosition.floor);
 				}
 			}
 		}
 	}
+	return Position4(0, 0, 0, 0);
 }
 
 //----------------------------------------------------------------------------------------------------

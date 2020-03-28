@@ -12,22 +12,17 @@ struct AICreature : public Creature
 	Position3 lookPosition; //where the ai looks, will also be used for aiming
 	Position3 focusPosition; //last known location of the player
 
-	int destX;
-	int destY;
-
 	int moveSpeedMode;
 
 	//interest
-	float AAA;
-	float BBB;
-
 	float interestDecay;
 	float visualInterest;
 	float soundInterest;
 	float soundInterestChange;
 
-	//caution
 	//aggression
+	float aggression;
+	//caution
 	//fear
 	//stealth
 
@@ -44,6 +39,7 @@ struct AICreature : public Creature
 	void changeFireMode();
 	void equipArmor();
 	void useMelee();
+	void takeDamage(int damage);
 
 	void updateTools();
 

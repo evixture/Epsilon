@@ -1,7 +1,2 @@
 ﻿  aicreature.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\aicreature.cpp(202,47): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe
