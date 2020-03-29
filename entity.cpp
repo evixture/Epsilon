@@ -282,20 +282,20 @@ void Player::dropItem()
 	{
 		if (itemIndex >= 0)
 		{
-			if (inventory[containerIndex]->itemList[itemIndex]->getMagazineData().isValid)
-			{
-				for (auto& container : inventory)
-				{
-					for (auto& item : container->itemList)
-					{
-						if (item->tool->getMagazine() == inventory[containerIndex]->itemList[itemIndex]->getMagazineData())
-						{
-							//MagazineData tempMag = std::make_unique<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
-							//item->tool->reload(tempMag);
-						}
-					}
-				}
-			}
+			//if (inventory[containerIndex]->itemList[itemIndex]->getMagazineData().isValid)
+			//{
+			//	for (auto& container : inventory)
+			//	{
+			//		for (auto& item : container->itemList)
+			//		{
+			//			if (item->tool->getMagazine() == inventory[containerIndex]->itemList[itemIndex]->getMagazineData())
+			//			{
+			//				//MagazineData tempMag = std::make_unique<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
+			//				//item->tool->reload(tempMag);
+			//			}
+			//		}
+			//	}
+			//}
 			GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->itemList[itemIndex]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 
 			WORLD->debugmap->mapItemList.push_back(selectedItem);

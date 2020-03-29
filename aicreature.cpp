@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 AICreature::AICreature(Creature creature, TCODMap* fovMap)
-	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), soundInterest(0.0f), visualInterest(0.0f), interestDecay(.05f), interestDecayClock(1.0f), 
+	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), soundInterest(0.0f), visualInterest(0.0f), interestDecay(.1f), interestDecayClock(0.5f), 
 	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false)
 {
 	inventory.push_back(std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0)));
@@ -103,7 +103,7 @@ void AICreature::updateTools()
 
 bool AICreature::inEffectiveRange()
 {
-	if ((getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y) <= selectedItem->getMagazineData().velocity * 0.15f) && selectedItem->getMagazineData().isValid) //change to take into account melee weapons
+	if ((getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y) <= selectedItem->tool->getMagazine().velocity * 0.15f) && selectedItem->tool->getMagazine().isValid) //change to take into account melee weapons
 	{
 		return true;
 	}
@@ -113,6 +113,8 @@ bool AICreature::inEffectiveRange()
 void AICreature::decayInterest()
 {
 	interestDecayClock.tickUp();
+
+	calcVisInt = std::clamp<float>((30.0f / (float)getDistance(mapPosition.x, mapPosition.y, WORLD->debugmap->player->mapPosition.x, WORLD->debugmap->player->mapPosition.y)), 0.0f, 1.0f);
 
 	for (int i = 1; i <= interestDecayClock.numCalls; interestDecayClock.numCalls--)
 	{
@@ -125,13 +127,27 @@ void AICreature::decayInterest()
 			soundInterest -= interestDecay;
 		}
 
-		if (visualInterest - interestDecay < 0)
+		if (!inFov) //decay out of fov
 		{
-			visualInterest = 0;
+			if (visualInterest - interestDecay < 0)
+			{
+				visualInterest = 0;
+			}
+			else
+			{
+				visualInterest -= interestDecay;
+			}
 		}
 		else
 		{
-			visualInterest -= interestDecay;
+			if (visualInterest + .125f > calcVisInt)
+			{
+				visualInterest = calcVisInt;
+			}
+			else
+			{
+				visualInterest += 0.25f;
+			}
 		}
 	}
 }
@@ -214,11 +230,11 @@ void AICreature::behave()
 
 	if (inFov)
 	{
-		float calcVisInt = std::clamp<float>((15.0f / (float)getDistance(mapPosition.x, mapPosition.y, WORLD->debugmap->player->mapPosition.x, WORLD->debugmap->player->mapPosition.y)), 0.0f, 1.0f);
-		if (calcVisInt > visualInterest)
-		{
-			visualInterest = calcVisInt; //update visual interest with the greater value
-		}
+		
+		//if (calcVisInt > visualInterest)
+		//{
+		//	visualInterest = calcVisInt; //update visual interest with the greater value
+		//}
 
 		focusPosition = WORLD->debugmap->player->mapPosition;
 		lookPosition = WORLD->debugmap->player->mapPosition; //add random coords (1, -1) for inaccuracy

@@ -60,6 +60,8 @@ private:
 	void decayInterest();
 	void reactToSounds();
 
+	float calcVisInt;
+
 	Clock interestDecayClock;
 	Clock reactionFireClock;
 };
