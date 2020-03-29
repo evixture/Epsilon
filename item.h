@@ -64,7 +64,7 @@ struct Item //an item that a creature can hold and interact with
 
 	Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, ItemType type); //item constructor that takes a size, tile, too, position, and a player used for action manager
 
-	virtual std::shared_ptr<MagazineData> getMagazineData(); //used to get the important data of the magazine, returns generic magazine when called from item
+	virtual MagazineData& getMagazineData(); //used to get the important data of the magazine, returns generic magazine when called from item
 	virtual void changeBarColor(); //updates the inventory bar color
 
 	void updateTool(Position4& mapPosition, int mx, int my, bool isHeld); //updates tool, used when in player inventory
@@ -79,11 +79,11 @@ private:
 
 struct MagazineItem : public Item //magazine derived class of base item
 {
-	std::shared_ptr<MagazineData> magazineData; //contains all of the important data of the magazine
+	MagazineData magazineData; //contains all of the important data of the magazine
 
-	MagazineItem(Item item, std::shared_ptr<MagazineData> magazineData); //magazine item constructor that takes an item and magazine data
+	MagazineItem(Item item, MagazineData magazineData); //magazine item constructor that takes an item and magazine data
 
-	std::shared_ptr<MagazineData> getMagazineData(); //returns the magazine data of this class
+	MagazineData& getMagazineData(); //returns the magazine data of this class
 
 	void changeBarColor();
 };
@@ -181,12 +181,12 @@ ITEM SIZES
 	{
 		inline static MagazineItem cal45Magazine7(int x, int y, int level)
 		{
-			return MagazineItem(ep::item::cal45Magazine7(x, y, level), std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7));
+			return MagazineItem(ep::item::cal45Magazine7(x, y, level), MagazineData(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7));
 		}
 
 		inline static MagazineItem cal556Magazine30(int x, int y, int level)
 		{
-			return MagazineItem(ep::item::cal556Magazine30(x, y, level), std::make_shared<MagazineData>(MagazineData::AmmoType::FIVEPOINTFIVESIX, 30, 30));
+			return MagazineItem(ep::item::cal556Magazine30(x, y, level), MagazineData(MagazineData::AmmoType::FIVEPOINTFIVESIX, 30, 30));
 		}
 	};
 }

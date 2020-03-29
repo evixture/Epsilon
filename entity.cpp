@@ -19,12 +19,12 @@ void Entity::render(const std::shared_ptr<Pane>& pane) const
 
 Creature::Creature(Position4 position, int ch, std::string name, TCODColor color, int health, Armor armor)
 	:Entity(position, ch, name, color), health(health), equippedArmor(armor), angle(0), containerIndex(0), itemIndex(0),
-	nullMagazine(std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false)), moveClock(0), moveSpeed(0), baseMoveTime(0.0f)
+	moveClock(0), moveSpeed(0), baseMoveTime(0.0f)
 {
 	inventory.push_back(std::make_shared<Container>(ep::container::hands(0, 0, 0)));
 	selectedItem = inventory[0]->containerItem;
 
-	selectedMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
+	//selectedMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 }
 
 void Creature::move()
@@ -282,7 +282,7 @@ void Player::dropItem()
 	{
 		if (itemIndex >= 0)
 		{
-			if (inventory[containerIndex]->itemList[itemIndex]->getMagazineData()->isValid)
+			if (inventory[containerIndex]->itemList[itemIndex]->getMagazineData().isValid)
 			{
 				for (auto& container : inventory)
 				{
@@ -290,7 +290,8 @@ void Player::dropItem()
 					{
 						if (item->tool->getMagData() == inventory[containerIndex]->itemList[itemIndex]->getMagazineData())
 						{
-							item->tool->reload(nullMagazine);
+							//MagazineData tempMag = std::make_unique<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
+							//item->tool->reload(tempMag);
 						}
 					}
 				}
@@ -387,18 +388,19 @@ void Player::reload()
 	{
 		for (auto& item : container->itemList)
 		{
-			if (item->getMagazineData()->isValid == true) // if it is actually a magazine
+			if (item->getMagazineData().isValid == true) // if it is actually a magazine
 			{
-				if (item->getMagazineData()->ammoType == selectedItem->tool->ammoType) // if it has the same type of ammo as the current weapon
+				if (item->getMagazineData().ammoType == selectedItem->tool->ammoType) // if it has the same type of ammo as the current weapon
 				{
-					if (item->getMagazineData()->availableAmmo != 0) // if the magazine is not empty
+					if (item->getMagazineData().availableAmmo != 0) // if the magazine is not empty
 					{
-						if (item->getMagazineData()->availableAmmo > selectedMagazine->availableAmmo)
-						{
-							selectedMagazine = item->getMagazineData();
-							selectedItem->tool->reload(selectedMagazine);
-							return;
-						}
+						selectedItem->tool->reload(item->getMagazineData());
+						//if (item->getMagazineData()->availableAmmo > selectedMagazine->availableAmmo)
+						//{
+						//	selectedMagazine = item->getMagazineData();
+						//	selectedItem->tool->reload(selectedMagazine);
+						//	return;
+						//}
 						//else //if it should be able to reload a mag with less ammo
 						//{
 						//	selectedMagazine = item->getMagazineData();
@@ -407,10 +409,10 @@ void Player::reload()
 					}
 				}
 			}
-			else if (selectedMagazine->isValid == false)
-			{
-				selectedMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
-			}
+			//else if (selectedMagazine->isValid == false)
+			//{
+			//	selectedMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
+			//}
 		}
 	}
 }

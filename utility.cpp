@@ -205,6 +205,15 @@ MagazineData::MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmm
 	}
 }
 
+bool MagazineData::operator==(const MagazineData& compMag)
+{
+	if (this->ammoType == compMag.ammoType && ammoCapacity == compMag.ammoCapacity && availableAmmo == compMag.availableAmmo && isValid == compMag.isValid)
+	{
+		return true;
+	}
+	return false;
+}
+
 Clock::Clock(float timeBetweenUpdates)
 	:numCalls(0), timeBetweenUpdates(timeBetweenUpdates)
 {

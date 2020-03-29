@@ -80,6 +80,8 @@ struct MagazineData //contains all of the important data for magazines
 	bool isValid; //if the magazine is valid - actually contains ammo
 
 	MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid = true); //magazine data constructor that takes ammo type, capacity, availible ammo, and validity
+
+	bool operator == (const MagazineData& compMag);
 };
 
 struct Menu
