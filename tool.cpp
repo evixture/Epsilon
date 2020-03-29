@@ -10,7 +10,7 @@ Tool::Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, F
 	ammoType(ammoType), fireMode(fireMode), availibleFireMode(availibleFireModeFlag), isHeld(false), type(Tool::Type::TOOL), angle(0.0f)
 {}
 
-MagazineData& Tool::getMagData()
+MagazineData& Tool::getMagazine()
 {
 	auto nullMag = MagazineData(MagazineData::AmmoType::NONE, 0, 0, false);
 	return nullMag;
@@ -401,7 +401,7 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 
 Firearm::Firearm(std::string name, TCODColor color, int shotsPerSecond, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
 	:Melee(Tool(name, color, ammoType, fireMode, availibleFireModeFlag), /* MELEE DAMAGE */ 25, 0), fireRPS(shotsPerSecond), reloadTime(reloadSpeed),
-	usedMag(MagazineData(ammoType, 0, 0, false)), fireClock(1.0f / shotsPerSecond), reloadClock(reloadSpeed)//, fireNumCalls(0), reloadNumCalls(0)
+	usedMag(MagazineData(ammoType, 0, 0, true)), fireClock(1.0f / shotsPerSecond), reloadClock(reloadSpeed)//, fireNumCalls(0), reloadNumCalls(0)
 {
 	type = Tool::Type::FIREARM;
 
@@ -539,7 +539,7 @@ void Firearm::updateToolPosition(int targetX, int targetY)
 	}
 }
 
-MagazineData& Firearm::getMagData()
+MagazineData& Firearm::getMagazine()
 {
 	return usedMag;
 }
@@ -571,7 +571,7 @@ void Firearm::fireBullet()
 			//}
 
 			//Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
-			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, getMagData().velocity, getMagData().mass));
+			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, getMagazine().velocity, getMagazine().mass));
 
 			usedMag.availableAmmo--;
 

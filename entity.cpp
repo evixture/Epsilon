@@ -288,7 +288,7 @@ void Player::dropItem()
 				{
 					for (auto& item : container->itemList)
 					{
-						if (item->tool->getMagData() == inventory[containerIndex]->itemList[itemIndex]->getMagazineData())
+						if (item->tool->getMagazine() == inventory[containerIndex]->itemList[itemIndex]->getMagazineData())
 						{
 							//MagazineData tempMag = std::make_unique<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 							//item->tool->reload(tempMag);

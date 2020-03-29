@@ -103,10 +103,10 @@ void AICreature::updateTools()
 
 bool AICreature::inEffectiveRange()
 {
-	//if (getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y) <= selectedMagazine->velocity * 0.15f) //change to take into account melee weapons
-	//{
-	//	return true;
-	//}
+	if ((getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y) <= selectedItem->getMagazineData().velocity * 0.15f) && selectedItem->getMagazineData().isValid) //change to take into account melee weapons
+	{
+		return true;
+	}
 	return false;
 }
 
@@ -248,13 +248,15 @@ void AICreature::act()
 	}
 
 	//reload on empty mag
-	//if (selectedMagazine->isValid == false || selectedMagazine->availableAmmo <= 0)
-	//{
-	//	std::shared_ptr<MagazineData> mag = std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true); //later check for mag in inventory
-	//	selectedMagazine = mag;
-	//
-	//	selectedItem->tool->reload(mag);
-	//}
+	if (selectedItem->tool->getMagazine().availableAmmo <= 0)
+	{
+		//std::shared_ptr<MagazineData> mag = std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true); //later check for mag in inventory
+		//selectedMagazine = mag;
+		auto reloadMag = MagazineData(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true);
+		
+		selectedItem->tool->reload(reloadMag);
+		//selectedItem->getMagazineData() = MagazineData(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true);
+	}
 
 	if (path.isEmpty() || path.size() == 0)
 	{
