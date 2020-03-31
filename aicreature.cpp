@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 AICreature::AICreature(Creature creature, TCODMap* fovMap)
-	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), soundInterest(0.0f), visualInterest(0.0f), interestDecay(.1f), interestDecayClock(0.5f), 
+	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), soundInterest(0.0f), visualInterest(0.0f), interestDecay(.05f), interestDecayClock(0.5f), 
 	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false)
 {
 	inventory.push_back(std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0)));
@@ -140,7 +140,7 @@ void AICreature::decayInterest()
 		}
 		else
 		{
-			if (visualInterest + .125f > calcVisInt)
+			if (visualInterest + .25f > calcVisInt)
 			{
 				visualInterest = calcVisInt;
 			}
