@@ -233,48 +233,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>tool.cpp</FILENAME>
-      <LINE>3</LINE>
-      <COLUMN>6</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Tool::angle' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Tool::{ctor}</FUNCTION>
-    <DECORATED>??0Tool@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VTCODColor@@H@Z</DECORATED>
-    <FUNCLINE>3</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>Tool::angle</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>tool.cpp</FILENAME>
-      <LINE>8</LINE>
-      <COLUMN>6</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Tool::angle' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Tool::{ctor}</FUNCTION>
-    <DECORATED>??0Tool@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VTCODColor@@W4AmmoType@MagazineData@@W4FireType@0@D@Z</DECORATED>
-    <FUNCLINE>8</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>Tool::angle</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>tool.cpp</FILENAME>
-      <LINE>686</LINE>
-      <COLUMN>56</COLUMN>
+      <LINE>687</LINE>
+      <COLUMN>46</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Firearm::update</FUNCTION>
     <DECORATED>?update@Firearm@@UEAAXAEAUPosition4@@AEAH1AEA_N@Z</DECORATED>
-    <FUNCLINE>676</FUNCLINE>
+    <FUNCLINE>677</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

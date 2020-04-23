@@ -42,12 +42,12 @@
       <COLUMN>2</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'pugi::impl::`anonymous-namespace'::xml_buffered_writer::scratch' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <DESCRIPTION>Variable 'pugi::impl::`anonymous-namespace'::xml_buffered_writer::buffer' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>pugi::impl::`anonymous-namespace'::xml_buffered_writer::{ctor}</FUNCTION>
     <DECORATED>??0xml_buffered_writer@?A0x186f9f63@impl@pugi@@QEAA@AEAVxml_writer@3@W4xml_encoding@3@@Z</DECORATED>
     <FUNCLINE>3698</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>pugi::impl::`anonymous-namespace'::xml_buffered_writer::scratch</targetSymbol>
+      <targetSymbol>pugi::impl::`anonymous-namespace'::xml_buffered_writer::buffer</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -59,12 +59,12 @@
       <COLUMN>2</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'pugi::impl::`anonymous-namespace'::xml_buffered_writer::buffer' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <DESCRIPTION>Variable 'pugi::impl::`anonymous-namespace'::xml_buffered_writer::scratch' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>pugi::impl::`anonymous-namespace'::xml_buffered_writer::{ctor}</FUNCTION>
     <DECORATED>??0xml_buffered_writer@?A0x186f9f63@impl@pugi@@QEAA@AEAVxml_writer@3@W4xml_encoding@3@@Z</DECORATED>
     <FUNCLINE>3698</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>pugi::impl::`anonymous-namespace'::xml_buffered_writer::buffer</targetSymbol>
+      <targetSymbol>pugi::impl::`anonymous-namespace'::xml_buffered_writer::scratch</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>

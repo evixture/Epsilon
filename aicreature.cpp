@@ -319,7 +319,7 @@ void AICreature::render(const std::shared_ptr<Pane>& pane) const
 			pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
 		}
 
-		if (false) //_DEBUG
+		if (false) //NDEBUG
 		{
 			pane->console->setCharBackground(renderPosition.x, renderPosition.y, debugBGColor);
 

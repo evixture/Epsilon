@@ -78,7 +78,7 @@ void Settings::render() const
 		printLogo();
 	}
 
-	if (_DEBUG) //if vs is in debug mode
+	if (NDEBUG) //if vs is in debug mode
 	{
 		printDebugStats();
 	}

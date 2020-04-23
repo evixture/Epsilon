@@ -1,0 +1,6 @@
+﻿  pugixml.cpp
+  main.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.cpp(5,12): error C2731: 'WinMain': function cannot be overloaded
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.cpp(5): message : see declaration of 'WinMain'
+  Compiling...
+  Generating Code...
