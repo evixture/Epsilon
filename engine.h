@@ -6,7 +6,7 @@ struct Engine //engine class that contains everything
 
 	std::shared_ptr<Settings> settings; //contains all of the settings and mainly non-graphical things
 	std::shared_ptr<Gui> gui; //contains nearly all of the things that need to be rendered to the screen
-	std::shared_ptr<SoLoud::Soloud> audio;
+	//std::shared_ptr<SoLoud::Soloud> audio;
 
 	Engine(int screenCharWidth, int screenCharHeight); //engine constructor that takes screen width in characters and screen height in characters
 	~Engine();

@@ -708,13 +708,15 @@ void World::update()
 		//SoLoud::Soloud soloud;
 		//soloud.init();
 
-		SoLoud::Speech speech;
-		speech.setText("This is a test");
-		ENGINE->audio->play(speech);
+		//SoLoud::Speech speech;
+		//speech.setText("This is a test");
+		//ENGINE->audio->play(speech);
 
 		//ENGINE->audio->play3d(speech, 0.0f, 0.0f, 0.0f);
 
 		//ENGINE->audio->play(speech);
+
+		Sound sound = Sound(Position4(0, 0, 0, 0), 100, 100);
 	}
 
 	updateEntities(); //needs to be first to prevent bad fov checks
