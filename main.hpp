@@ -15,8 +15,11 @@
 #include <SFML/System.hpp>
 #include <E:/pugixml-1.10/src/pugixml.hpp>
 #include <soloud.h>
+
 #include <soloud_thread.h> //need later??
 #include <soloud_speech.h>
+#include <soloud_wav.h>
+#include <soloud_audiosource.h>
 
 struct Pane;
 struct Creature;

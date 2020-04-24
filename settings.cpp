@@ -45,7 +45,7 @@ void Settings::printLogo() const
 
 void Settings::printDebugStats() const
 {
-	TCODConsole::root->printf(10, 0, "FPS>%i | Mouse %i, %i | Player %i, %i, %i",
+	TCODConsole::root->printf(10, 0, "FPS>%i | Mouse %i, %i | Player %i, %i, %i | sn %i",
 		fpsCount,
 		SETTINGS->input->mouse.cx,
 		SETTINGS->input->mouse.cy,
@@ -78,8 +78,8 @@ void Settings::render() const
 		printLogo();
 	}
 
-	if (NDEBUG) //if vs is in debug mode
-	{
+	//if (NDEBUG) //if vs is in debug mode
+	//{
 		printDebugStats();
-	}
+	//}
 }

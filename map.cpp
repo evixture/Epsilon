@@ -692,21 +692,29 @@ void World::updateEntities()
 
 void World::update()
 {
-	if (soundBuffer.size() > 0)
-	{
-		soundBuffer.clear();
-	}
+	//if (soundBuffer.size() > 0)
+	//{
+	//	soundBuffer.clear();
+	//}
 
 	xOffset = getOffset(debugmap->player->mapPosition.x, debugmap->width, MAPPANE->drawWindow->consoleWidth);
 	yOffset = getOffset(debugmap->player->mapPosition.y, debugmap->height, MAPPANE->drawWindow->consoleHeight);
 
 	if (INPUT->debug1Key->isSwitched) // repeatable create live creature
 	{
-		//addCreature(std::make_shared<Creature>(Position4(30, 8, 3, 0), '0', "Creature", TCODColor::white, 100, Armor("", TCODColor::pink, 0, 0)));
-		//addCreature(std::make_shared<AICreature>(Creature(Position4(30, 8, 3, 0), 'I', "AI Creature", TCODColor::white, 100, Armor("", TCODColor::pink, 0, 0))));
-		Creature creature = Creature(Position4(30, 8, 3, 0), 'I', "AI Creature", TCODColor::white, 100, Armor("", TCODColor::pink, 0, 0));
+		//Creature creature = Creature(Position4(30, 8, 3, 0), 'I', "AI Creature", TCODColor::white, 100, Armor("", TCODColor::pink, 0, 0));
+		//debugmap->creatureList.push_back(std::make_shared<AICreature>(creature, debugmap->fovMapList[2].get())); //use whole map list
 
-		debugmap->creatureList.push_back(std::make_shared<AICreature>(creature, debugmap->fovMapList[2].get())); //use whole map list
+		//SoLoud::Soloud soloud;
+		//soloud.init();
+
+		SoLoud::Speech speech;
+		speech.setText("This is a test");
+		ENGINE->audio->play(speech);
+
+		//ENGINE->audio->play3d(speech, 0.0f, 0.0f, 0.0f);
+
+		//ENGINE->audio->play(speech);
 	}
 
 	updateEntities(); //needs to be first to prevent bad fov checks
@@ -722,11 +730,59 @@ void World::update()
 		container->containerItem->updateTile();
 	}
 
-	if (soundList.size() > 0)
+	//AUDIO
+	soundList = soundBuffer;
+
+	if (soundBuffer.size() > 0)
 	{
-		soundList.clear();
+		soundBuffer.clear();
 	}
-	soundList = soundBuffer; //move all sounds from the buffer to the list so that creatures updated before the sound creation can react
+
+	for (int i = 0; i < soundList.size(); i++)
+	{
+		if (soundList[i]->reactable)
+		{
+			//int handle = ENGINE->audio->playClocked(SETTINGS->lastFrameTime.asSeconds(), soundList[i]->speech); //sound cuts/doesnt play; falls out of scope or deleted or speech? COULD JUST PLAY IN INITIALIZER
+			soundList[i]->reactable = false; //within one frame?? bad!
+			//how to check if sound is still playing?
+		}
+	}
+
+	//if (soundList.size() > 0)
+	//{
+	//	soundList.clear();
+	//}
+	//soundList = soundBuffer; //move all sounds from the buffer to the list so that creatures updated before the sound creation can react
+	//
+	//for (auto sound : soundList) //sound cut off when list clears
+	//{
+	//	ENGINE->audio->play(sound->speech);
+	//}
+
+	/*
+	BETTER AUDIO LIST
+
+	creatures push sounds to sound buffer, and react to the sound buffer
+
+	RUN 1:
+		creature 1 push sound buffer
+		creature 2 push sound buffer
+
+		sound list set equal to sound buffer
+		buffer cleared
+
+		sound list plays sound for each in list, then clears
+		
+		sound has react bool that is set false after first frame
+
+	RUN 2:
+		creature 1 react to both sounds
+		creature 2 react to both sounds
+
+		list set to buffer
+		buffer cleared
+	
+	*/
 }
 
 //--------------------------------------------------------------------------------------------
