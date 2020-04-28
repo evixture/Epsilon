@@ -602,10 +602,11 @@ std::shared_ptr<Block> Map::getBlock(Position3 position) const
 //----------------------------------------------------------------------------------------------------
 
 World::World()
-	:xOffset(0), yOffset(0)
+	:xOffset(0), yOffset(0), soundManager(std::make_shared<SoundManager>())
 {
 	debugmap = std::make_shared<Map>("data/maps/debugmap.emp");
 
+	//testSound = Sound(Position4(0, 0, 0, 0), 100, 100);
 	/*for (int i = 0; i < 3; i++)
 	{
 		fovMapList.push_back(std::make_shared<TCODMap>(debugmap->width, debugmap->height));
@@ -616,6 +617,12 @@ World::World()
 bool World::isExplored(Position3& position) const
 {
  	return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]->explored;
+}
+
+void World::addSound() //need params
+{
+	soundBuffer.push_back(std::make_shared<Sound>(Position4(0, 0, 0, 0), 100, 100));
+	soundManager->playSound();
 }
 
 void World::updateBlock(Position3 blockPosition, bool checkCreatures)
@@ -716,8 +723,14 @@ void World::update()
 
 		//ENGINE->audio->play(speech);
 
-		Sound sound = Sound(Position4(0, 0, 0, 0), 100, 100);
+		//testSound = Sound(Position4(0, 0, 0, 0), 100, 100);
+
+		addSound();
 	}
+
+	soundManager->update();
+
+	//testSound.update();
 
 	updateEntities(); //needs to be first to prevent bad fov checks
 	computeFov(debugmap->player->mapPosition);
@@ -784,6 +797,14 @@ void World::update()
 		list set to buffer
 		buffer cleared
 	
+	NEW IDEA:
+
+	play sound function in map
+		adds "sound" to world sound list, only uses for ai reaction
+		also adds sound to sound manager
+
+
+
 	*/
 }
 

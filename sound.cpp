@@ -1,34 +1,42 @@
 #include "main.hpp"
 
 Sound::Sound(Position4 sourcePosition, int worldVol, int playVol)
-	: sourcePosition(sourcePosition), worldVolume(worldVol), playbackVolume(playVol), reactable(true)
+	: sourcePosition(sourcePosition), worldVolume(worldVol), playbackVolume(playVol), reactable(true), completed(false)
 {
-	//speech.setText("123 123 this is a test");
-	//
-	//sound.load("E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\data\\audio\\beep - 03.wav");
-	//
-	//ENGINE->audio->play(speech);
+	
+}
 
-	//// Define a couple of variables
-	SoLoud::Soloud soloud;  // SoLoud engine core
-	//SoLoud::Speech speech;  // A sound source (speech, in this case)
+Sound::~Sound()
+{
+}
 
-	// Configure sound source
-	speech.setText("1 2 3   1 2 3   Hello world. Welcome to So-Loud.");
+void Sound::update()
+{
+}
 
-	// initialize SoLoud.
-	soloud.init();
+SoundManager::SoundManager()
+{
+	soLoud = std::make_shared<SoLoud::Soloud>();
+	soLoud->init(SoLoud::Soloud::CLIP_ROUNDOFF | SoLoud::Soloud::ENABLE_VISUALIZATION, SoLoud::Soloud::SDL2);
+}
 
-	// Play the sound source (we could do this several times if we wanted)
-	soloud.play(speech);
+SoundManager::~SoundManager()
+{
+	soLoud->deinit();
+}
 
-	// Wait until sounds have finished
-	while (soloud.getActiveVoiceCount() > 0) //needed to play sound but acts weird
-	{
-		// Still going, sleep for a bit
-		SoLoud::Thread::sleep(100);
-	}
+void SoundManager::update()
+{
+}
 
-	// Clean up SoLoud
-	soloud.deinit();
+void SoundManager::playSound()
+{
+	std::shared_ptr<SoLoud::Speech> speech = std::make_shared<SoLoud::Speech>();
+	speech->setText("testing testing");
+	soLoud->play(*speech);
+
+	soundList.push_back(speech);
+
+	//plays sound
+	//adds sound to list?? no need
 }
