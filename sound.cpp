@@ -16,27 +16,25 @@ void Sound::update()
 
 SoundManager::SoundManager()
 {
-	soLoud = std::make_shared<SoLoud::Soloud>();
-	soLoud->init(SoLoud::Soloud::CLIP_ROUNDOFF | SoLoud::Soloud::ENABLE_VISUALIZATION, SoLoud::Soloud::SDL2);
+	soLoud = SoLoud::Soloud();
+	soLoud.init(SoLoud::Soloud::CLIP_ROUNDOFF | SoLoud::Soloud::ENABLE_VISUALIZATION, SoLoud::Soloud::SDL2);
 }
 
 SoundManager::~SoundManager()
 {
-	soLoud->deinit();
+	soLoud.deinit(); //crashes on exit, even if removed | WORKS AS VAR INSTEAD OF POINTER
 }
 
 void SoundManager::update()
 {
+	//update 3d sound eventually
 }
 
 void SoundManager::playSound()
 {
 	std::shared_ptr<SoLoud::Speech> speech = std::make_shared<SoLoud::Speech>();
 	speech->setText("testing testing");
-	soLoud->play(*speech);
+	soLoud.play(*speech);
 
-	soundList.push_back(speech);
-
-	//plays sound
-	//adds sound to list?? no need
+	soundList.push_back(speech); //should find a way to clean up
 }

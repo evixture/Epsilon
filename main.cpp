@@ -18,6 +18,7 @@ int main() //should switch to winmain later if ready for the headache
 	
 	////soloud->deinit();
 	TCOD_quit(); //does proper cleanup on exit
+	engine->~Engine();
 	//
 	//// Define a couple of variables
 	//SoLoud::Soloud soloud;  // SoLoud engine core

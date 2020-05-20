@@ -709,28 +709,10 @@ void World::update()
 
 	if (INPUT->debug1Key->isSwitched) // repeatable create live creature
 	{
-		//Creature creature = Creature(Position4(30, 8, 3, 0), 'I', "AI Creature", TCODColor::white, 100, Armor("", TCODColor::pink, 0, 0));
-		//debugmap->creatureList.push_back(std::make_shared<AICreature>(creature, debugmap->fovMapList[2].get())); //use whole map list
-
-		//SoLoud::Soloud soloud;
-		//soloud.init();
-
-		//SoLoud::Speech speech;
-		//speech.setText("This is a test");
-		//ENGINE->audio->play(speech);
-
-		//ENGINE->audio->play3d(speech, 0.0f, 0.0f, 0.0f);
-
-		//ENGINE->audio->play(speech);
-
-		//testSound = Sound(Position4(0, 0, 0, 0), 100, 100);
-
 		addSound();
 	}
 
 	soundManager->update();
-
-	//testSound.update();
 
 	updateEntities(); //needs to be first to prevent bad fov checks
 	computeFov(debugmap->player->mapPosition);
@@ -802,9 +784,6 @@ void World::update()
 	play sound function in map
 		adds "sound" to world sound list, only uses for ai reaction
 		also adds sound to sound manager
-
-
-
 	*/
 }
 

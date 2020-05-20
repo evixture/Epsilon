@@ -1,5 +1,19 @@
 #include "main.hpp"
 
+/*
+
+SOUND CLASS
+	Sound class contains the soloud audio thing
+	can be derived for other forms and control
+
+	Sound manager takes the sound soloud audio and plays it after pushing
+
+HOW TO GET SOLOUD TO WORK
+	SoLoud core needs to be normal var
+	sounds in current form needs to be pointer so it stays
+*/
+
+
 struct Sound //deals with world sounds and playback
 {
 	Position4 sourcePosition;
@@ -34,9 +48,9 @@ DECIBEL VOLUME TABLE
 
 struct SoundManager
 {
-	std::vector<std::shared_ptr<SoLoud::Speech>> soundList; //make pointer? need?
+	std::vector<std::shared_ptr<SoLoud::Speech>> soundList; //Speech needs to be pointer
 
-	std::shared_ptr<SoLoud::Soloud> soLoud;
+	SoLoud::Soloud soLoud; //trying as not pointer
 
 	SoundManager();
 	~SoundManager();
