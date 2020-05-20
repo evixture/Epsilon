@@ -1,9 +1,10 @@
 #include "main.hpp"
 
-Sound::Sound(Position4 sourcePosition, int worldVol, int playVol)
+Sound::Sound(std::string speechText, Position4 sourcePosition, int worldVol, int playVol)
 	: sourcePosition(sourcePosition), worldVolume(worldVol), playbackVolume(playVol), reactable(true), completed(false)
 {
-	
+	speech = std::make_shared<SoLoud::Speech>();
+	speech->setText(speechText.c_str());
 }
 
 Sound::~Sound()
@@ -30,11 +31,12 @@ void SoundManager::update()
 	//update 3d sound eventually
 }
 
-void SoundManager::playSound()
+int SoundManager::playSound(Sound sound)
 {
-	std::shared_ptr<SoLoud::Speech> speech = std::make_shared<SoLoud::Speech>();
-	speech->setText("testing testing");
-	soLoud.play(*speech);
+	int handle = soLoud.play(*sound.speech);
 
-	soundList.push_back(speech); //should find a way to clean up
+	soLoud.setVolume(handle, sound.playbackVolume);
+	soundList.push_back(sound.speech); //should find a way to clean up
+
+	return handle;
 }

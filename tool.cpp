@@ -575,7 +575,8 @@ void Firearm::fireBullet()
 
 			usedMag.availableAmmo--;
 
-			WORLD->soundBuffer.push_back(std::make_shared<Sound>(mapPosition, 120, 100));
+			//WORLD->soundBuffer.push_back(std::make_shared<Sound>(mapPosition, 120, 100)); reimplement
+			WORLD->addSound(Sound(("kap"), mapPosition, 120, 100));
 		}
 	}
 }

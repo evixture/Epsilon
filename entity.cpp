@@ -186,6 +186,8 @@ void Player::move()
 					yMoveDist = 0;
 				}
 
+				//WORLD->addSound(Sound(("fip"), Position4(0, 0, 0, 0), 120, 100));
+
 				WORLD->updateBlock(mapPosition, true); //update new position property
 			}
 		}
@@ -395,6 +397,8 @@ void Player::reload()
 					if (item->getMagazineData().availableAmmo != 0) // if the magazine is not empty
 					{
 						selectedItem->tool->reload(item->getMagazineData());
+
+						WORLD->addSound(Sound(("chuck chick"), mapPosition, 120, 100));
 						//if (item->getMagazineData()->availableAmmo > selectedMagazine->availableAmmo)
 						//{
 						//	selectedMagazine = item->getMagazineData();

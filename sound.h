@@ -16,11 +16,10 @@ HOW TO GET SOLOUD TO WORK
 
 struct Sound //deals with world sounds and playback
 {
-	Position4 sourcePosition;
+	Position4 sourcePosition; //later move to derived class
 
 	//testing
-	SoLoud::Soloud audio;
-	SoLoud::Speech speech;
+	std::shared_ptr<SoLoud::Speech> speech;
 
 	//
 	bool reactable;
@@ -31,10 +30,15 @@ struct Sound //deals with world sounds and playback
 
 	//effects properties
 
-	Sound(Position4 sourcePosition, int worldVol, int playVol);
+	Sound(std::string speechText, Position4 sourcePosition, int worldVol, int playVol);
 	~Sound();
 
 	void update();
+};
+
+struct PositionalSound : public Sound
+{
+	Position4 sourcePosition; //later move to derived class
 };
 
 /*
@@ -57,5 +61,5 @@ struct SoundManager
 	
 	void update();
 
-	void playSound();  //make return handle??
+	int playSound(Sound sound);
 };

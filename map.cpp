@@ -619,10 +619,10 @@ bool World::isExplored(Position3& position) const
  	return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]->explored;
 }
 
-void World::addSound() //need params
+int World::addSound(Sound sound) //need params
 {
-	soundBuffer.push_back(std::make_shared<Sound>(Position4(0, 0, 0, 0), 100, 100));
-	soundManager->playSound();
+	soundBuffer.push_back(std::make_shared<Sound>(sound));
+	return soundManager->playSound(sound); //returns the sound handle
 }
 
 void World::updateBlock(Position3 blockPosition, bool checkCreatures)
@@ -709,7 +709,7 @@ void World::update()
 
 	if (INPUT->debug1Key->isSwitched) // repeatable create live creature
 	{
-		addSound();
+		addSound(Sound("Testing", Position4(0, 0, 0, 0), 100, 100));
 	}
 
 	soundManager->update();
