@@ -40,6 +40,11 @@ void Audio::update()
 
 int Audio::playSound(Sound sound)
 {
+	if (GUI->activeWindow == Gui::ActiveWindow::NONE || GUI->activeWindow == Gui::ActiveWindow::INVENTORYFULL) //map active
+	{
+		WORLD->addSound(sound); //put sound in world so ai can react
+	}
+
 	int handle = 0;
 
 	if (sound.positional) //3d sound
