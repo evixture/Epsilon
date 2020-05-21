@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <string>
 #include <functional>
+#include <utility>
 
 //Libraries
 #include <libtcod.hpp>

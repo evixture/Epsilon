@@ -158,36 +158,39 @@ void AICreature::reactToSounds()
 	{
 		for (auto& sound : WORLD->soundList)
 		{
-			if (sound->sourcePosition.floor == mapPosition.floor)
+			if (sound->getPosition().first == true) //is 3d sound
 			{
-				float soundInterestChange;
-				double distance = getDistance(mapPosition.x, mapPosition.y, sound->sourcePosition.x, sound->sourcePosition.y);
+				if (sound->getPosition().second.floor == mapPosition.floor)
+				{
+					float soundInterestChange;
+					double distance = getDistance(mapPosition.x, mapPosition.y, sound->getPosition().second.x, sound->getPosition().second.y);
 
-				if (distance > 0.0f)
-				{
-					soundInterestChange = (float)((15.0f / (distance + 30.0f)) * (sound->worldVolume / 50.f));
-				}
-				else
-				{
-					soundInterestChange = 0.0f;
-				}
-
-				if (soundInterestChange >= 0.5f)
-				{
-					if (soundInterest + soundInterestChange >= 1.0f)
+					if (distance > 0.0f)
 					{
-						soundInterest = 1.0f;
+						soundInterestChange = (float)((15.0f / (distance + 30.0f)) * (sound->worldVolume / 50.f));
 					}
 					else
 					{
-						soundInterest += soundInterestChange;
+						soundInterestChange = 0.0f;
 					}
 
-					pathfindPosition = sound->sourcePosition;
-					lookPosition = sound->sourcePosition;
+					if (soundInterestChange >= 0.5f)
+					{
+						if (soundInterest + soundInterestChange >= 1.0f)
+						{
+							soundInterest = 1.0f;
+						}
+						else
+						{
+							soundInterest += soundInterestChange;
+						}
 
-					//pathfind to sound source
-					path.compute(mapPosition.x, mapPosition.y, pathfindPosition.x, pathfindPosition.y);
+						pathfindPosition = sound->getPosition().second;
+						lookPosition = sound->getPosition().second;
+
+						//pathfind to sound source
+						path.compute(mapPosition.x, mapPosition.y, pathfindPosition.x, pathfindPosition.y);
+					}
 				}
 			}
 		}

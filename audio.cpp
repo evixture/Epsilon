@@ -1,19 +1,42 @@
 #include "main.hpp"
 
 //SOUND BASE
-Sound::Sound(std::string speechText, bool positional, Position4 sourcePosition, float worldVol, float playVol)
-	: sourcePosition(sourcePosition), positional(positional), worldVolume(worldVol), playbackVolume(playVol), reactable(true), completed(false)
+Sound::Sound(std::string speechText, float worldVol, float playVol)
+	: worldVolume(worldVol), playbackVolume(playVol)
 {
 	speech = std::make_shared<SoLoud::Speech>();
 	speech->setText(speechText.c_str());
 }
 
-Sound::~Sound()
+std::pair<bool, Position4> Sound::getPosition() //not getting passed on to derived classes?
 {
+	return std::pair<bool, Position4>(false, Position4(0, 0, 0, 0));
 }
 
-void Sound::update()
+//POSITIONAL SOUND THAT DOES NOT TRACK
+PositionalStaticSound::PositionalStaticSound(std::string speechText, Position4 sourcePosition, float worldVol, float playVol)
+	: Sound(speechText, worldVol, playVol), sourcePosition(sourcePosition)
 {
+	speech = std::make_shared<SoLoud::Speech>();
+	speech->setText(speechText.c_str());
+}
+
+std::pair<bool, Position4> PositionalStaticSound::getPosition()
+{
+	return std::pair<bool, Position4>(true, sourcePosition);
+}
+
+//POSITIONAL SOUND THAT TRACKS COORDS
+PositionalTrackedSound::PositionalTrackedSound(std::string speechText, Position4* sourcePosition, float worldVol, float playVol)
+	: Sound(speechText, worldVol, playVol), sourcePosition(sourcePosition)
+{
+	speech = std::make_shared<SoLoud::Speech>();
+	speech->setText(speechText.c_str());
+}
+
+std::pair<bool, Position4> PositionalTrackedSound::getPosition()
+{
+	return std::pair<bool, Position4>(true, *sourcePosition);
 }
 
 //SOUND MANAGER
@@ -35,22 +58,30 @@ void Audio::update()
 	//update 3d sound eventually
 	//soLoud.set3dListenerPosition((float)WORLD->debugmap->player->mapPosition.x, (float)WORLD->debugmap->player->mapPosition.height, (float)WORLD->debugmap->player->mapPosition.y);
 
+	for (auto& sound : soundList)
+	{
+		if (sound.second.getPosition().first == true) //if sound of the sound list is 3d
+		{
+			soLoud.set3dSourcePosition(sound.first, (float)sound.second.getPosition().second.x, (float)sound.second.getPosition().second.height, (float)sound.second.getPosition().second.y); //should update tracked sounds
+		}
+	}
+
 	soLoud.update3dAudio();
 }
 
 int Audio::playSound(Sound sound)
 {
-	if (GUI->activeWindow == Gui::ActiveWindow::NONE || GUI->activeWindow == Gui::ActiveWindow::INVENTORYFULL) //map active
-	{
-		WORLD->addSound(sound); //put sound in world so ai can react
-	}
-
 	int handle = 0;
 
-	if (sound.positional) //3d sound
+	if (sound.getPosition().first == true) //3d sound
 	{
-		handle = soLoud.play3d(*sound.speech, (float)sound.sourcePosition.x, (float)sound.sourcePosition.height, (float)sound.sourcePosition.y); //is it able to be moved to play function in sound?
+		handle = soLoud.play3d(*sound.speech, (float)sound.getPosition().second.x, (float)sound.getPosition().second.height, (float)sound.getPosition().second.y);
 		soLoud.set3dSourceAttenuation(handle, SoLoud::AudioSource::ATTENUATION_MODELS::EXPONENTIAL_DISTANCE, .5f); //sound distance decay
+
+		if (GUI->activeWindow == Gui::ActiveWindow::NONE || GUI->activeWindow == Gui::ActiveWindow::INVENTORYFULL) //map active
+		{
+			WORLD->addSound(sound); //put sound in world so ai can react
+		}
 	}
 	else //2d sound
 	{
@@ -58,7 +89,8 @@ int Audio::playSound(Sound sound)
 	}
 
 	soLoud.setVolume(handle, sound.playbackVolume);
-	soundList.push_back(sound.speech); //should find a way to clean up
+	soundList.push_back(std::pair<int, Sound>(handle, sound)); //should find a way to clean up
 
 	return handle;
 }
+

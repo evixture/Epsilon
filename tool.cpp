@@ -575,8 +575,7 @@ void Firearm::fireBullet()
 
 			usedMag.availableAmmo--;
 
-			//WORLD->soundBuffer.push_back(std::make_shared<Sound>(mapPosition, 120, 100)); reimplement
-			AUDIO->playSound(Sound(("kap"), false, mapPosition, 120.0f, 100.0f));
+			AUDIO->playSound(PositionalTrackedSound(("kap"), &mapPosition, 120.0f, 100.0f));
 		}
 	}
 }

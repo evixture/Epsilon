@@ -699,18 +699,13 @@ void World::updateEntities()
 
 void World::update()
 {
-	//if (soundBuffer.size() > 0)
-	//{
-	//	soundBuffer.clear();
-	//}
-
 	xOffset = getOffset(debugmap->player->mapPosition.x, debugmap->width, MAPPANE->drawWindow->consoleWidth);
 	yOffset = getOffset(debugmap->player->mapPosition.y, debugmap->height, MAPPANE->drawWindow->consoleHeight);
 
 	if (INPUT->debug1Key->isSwitched)
 	{
 		//addSound(Sound("Testing", true, Position4(20, 10, 3, 0), 100.0f, 100.0f));
-		AUDIO->playSound(Sound("Testing", true, Position4(20, 10, 3, 0), 100.0f, 100.0f));
+		AUDIO->playSound(PositionalStaticSound("Testing", Position4(0, 0, 0, 0), 100.0f, 100.0f)); //2d sound
 	}
 
 	//soundManager->update();
@@ -734,16 +729,6 @@ void World::update()
 	if (soundBuffer.size() > 0)
 	{
 		soundBuffer.clear();
-	}
-
-	for (int i = 0; i < soundList.size(); i++)
-	{
-		if (soundList[i]->reactable)
-		{
-			//int handle = ENGINE->audio->playClocked(SETTINGS->lastFrameTime.asSeconds(), soundList[i]->speech); //sound cuts/doesnt play; falls out of scope or deleted or speech? COULD JUST PLAY IN INITIALIZER
-			soundList[i]->reactable = false; //within one frame?? bad!
-			//how to check if sound is still playing?
-		}
 	}
 
 	//if (soundList.size() > 0)
