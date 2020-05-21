@@ -1,20 +1,2 @@
-﻿  aicreature.cpp
-  engine.cpp
-  entity.cpp
-  gui.cpp
-  input.cpp
-  item.cpp
-  main.cpp
-  map.cpp
-  panel.cpp
-  settings.cpp
-  sound.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\sound.cpp(38,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  tile.cpp
-  tool.cpp
-  utility.cpp
-  window.cpp
-  Generating Code...
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(16): warning C4172: returning address of local variable or temporary: nullMag
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\item.cpp(144): warning C4172: returning address of local variable or temporary: nullMag
+﻿  entity.cpp
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

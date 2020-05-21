@@ -19,6 +19,7 @@ SoundManager::SoundManager()
 {
 	soLoud = SoLoud::Soloud();
 	soLoud.init(SoLoud::Soloud::CLIP_ROUNDOFF | SoLoud::Soloud::ENABLE_VISUALIZATION, SoLoud::Soloud::SDL2);
+	soLoud.setGlobalVolume(.006f); //so your ears don't get blown out
 }
 
 SoundManager::~SoundManager()

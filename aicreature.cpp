@@ -205,11 +205,11 @@ AUDIO FIELD
   ---
 
 VISUAL FIELD
-      ++
-    ++++
-E ++++++
-    ++++
-	  ++
+     ++
+   ++++
+E++++++
+   ++++
+	 ++
 
 COMBINED
   ---   ++
@@ -319,7 +319,7 @@ void AICreature::render(const std::shared_ptr<Pane>& pane) const
 			pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
 		}
 
-		if (false) //NDEBUG
+		if (true) //show pathfinding information
 		{
 			pane->console->setCharBackground(renderPosition.x, renderPosition.y, debugBGColor);
 

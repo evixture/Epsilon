@@ -11,6 +11,9 @@ SOUND CLASS
 HOW TO GET SOLOUD TO WORK
 	SoLoud core needs to be normal var
 	sounds in current form needs to be pointer so it stays
+
+PROBLEMS
+	How to get rid of source position with base sound class?
 */
 
 

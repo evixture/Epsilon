@@ -398,7 +398,7 @@ void Player::reload()
 					{
 						selectedItem->tool->reload(item->getMagazineData());
 
-						WORLD->addSound(Sound(("chuck chick"), mapPosition, 120, 100));
+						WORLD->addSound(Sound(("chuck check"), mapPosition, 120, 100));
 						//if (item->getMagazineData()->availableAmmo > selectedMagazine->availableAmmo)
 						//{
 						//	selectedMagazine = item->getMagazineData();
