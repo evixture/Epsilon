@@ -5,9 +5,11 @@ constexpr auto PI = 3.14159265;
 #define ENGINE		engine
 #define SETTINGS	engine->settings
 #define GUI			engine->gui
+#define AUDIO		engine->audio
 #define INPUT		engine->settings->input
 #define MAPPANE		engine->gui->worldWindow
 #define WORLD		engine->gui->worldWindow->world
+
 
 struct Position3 //position struct with x, y, and z dimensions
 {

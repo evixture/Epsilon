@@ -26,6 +26,7 @@ struct Sound //deals with world sounds and playback
 
 	//
 	bool reactable;
+	bool positional; //later move to derived class
 	bool completed;
 
 	float worldVolume; //the volume of the sound to other creatures in decibels
@@ -33,7 +34,7 @@ struct Sound //deals with world sounds and playback
 
 	//effects properties
 
-	Sound(std::string speechText, Position4 sourcePosition, float worldVol, float playVol);
+	Sound(std::string speechText, bool positional, Position4 sourcePosition, float worldVol, float playVol);
 	~Sound();
 
 	void update();
@@ -53,16 +54,31 @@ DECIBEL VOLUME TABLE
 
 */
 
-struct SoundManager
+struct Audio
 {
 	std::vector<std::shared_ptr<SoLoud::Speech>> soundList; //Speech needs to be pointer
 
-	SoLoud::Soloud soLoud; //trying as not pointer
-
-	SoundManager();
-	~SoundManager();
+	Audio();
+	~Audio();
 	
 	void update();
 
 	int playSound(Sound sound);
+
+private:
+	SoLoud::Soloud soLoud; //trying as not pointer
 };
+
+/*
+
+STRUCTURE
+	Engine
+		Settings
+		Gui
+		Audio
+
+			Sound Types
+				2d sound
+				3d static
+				3d tracked
+*/

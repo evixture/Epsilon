@@ -28,11 +28,11 @@ struct Player;
 //Class File Imports
 #include "utility.h"
 
-	#include "sound.h"
+#include "audio.h"
+
 	#include "tile.h"
 	#include "tool.h"
 #include "item.h"
-
 
 	#include "entity.h"
 	#include "aicreature.h"

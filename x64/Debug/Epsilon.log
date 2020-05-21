@@ -1,6 +1,5 @@
-﻿  sound.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\sound.cpp(36,152): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\sound.cpp(36,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\sound.cpp(44,117): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\sound.cpp(44,64): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  map.cpp
+  panel.cpp
+  window.cpp
+  Generating Code...
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

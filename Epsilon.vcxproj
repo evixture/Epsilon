@@ -30,7 +30,7 @@
     <ClCompile Include="map.cpp" />
     <ClCompile Include="panel.cpp" />
     <ClCompile Include="settings.cpp" />
-    <ClCompile Include="sound.cpp" />
+    <ClCompile Include="audio.cpp" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="tool.cpp" />
     <ClCompile Include="utility.cpp" />
@@ -48,7 +48,7 @@
     <ClInclude Include="panel.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="settings.h" />
-    <ClInclude Include="sound.h" />
+    <ClInclude Include="audio.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="tool.h" />
     <ClInclude Include="utility.h" />

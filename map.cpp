@@ -602,7 +602,7 @@ std::shared_ptr<Block> Map::getBlock(Position3 position) const
 //----------------------------------------------------------------------------------------------------
 
 World::World()
-	:xOffset(0), yOffset(0), soundManager(std::make_shared<SoundManager>())
+	:xOffset(0), yOffset(0)//, soundManager(std::make_shared<Audio>())
 {
 	debugmap = std::make_shared<Map>("data/maps/debugmap.emp");
 
@@ -619,11 +619,11 @@ bool World::isExplored(Position3& position) const
  	return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]->explored;
 }
 
-int World::addSound(Sound sound) //need params
-{
-	soundBuffer.push_back(std::make_shared<Sound>(sound));
-	return soundManager->playSound(sound); //returns the sound handle
-}
+//int World::addSound(Sound sound) //need params
+//{
+//	soundBuffer.push_back(std::make_shared<Sound>(sound));
+//	return soundManager->playSound(sound); //returns the sound handle
+//}
 
 void World::updateBlock(Position3 blockPosition, bool checkCreatures)
 {
@@ -709,10 +709,11 @@ void World::update()
 
 	if (INPUT->debug1Key->isSwitched) // repeatable create live creature
 	{
-		addSound(Sound("Testing", Position4(20, 10, 3, 0), 100.0f, 100.0f));
+		//addSound(Sound("Testing", true, Position4(20, 10, 3, 0), 100.0f, 100.0f));
+		AUDIO->playSound(Sound("Testing", true, Position4(20, 10, 3, 0), 100.0f, 100.0f));
 	}
 
-	soundManager->update();
+	//soundManager->update();
 
 	updateEntities(); //needs to be first to prevent bad fov checks
 	computeFov(debugmap->player->mapPosition);

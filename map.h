@@ -66,7 +66,7 @@ struct World //world struct that deals with rendering and updating the map
 	bool	isInPlayerFov			(Position4 position) const; //returns true if the coordinates are in fov
 	bool	isExplored				(Position3& position) const; //checks if a tile has been explored previously
 
-	int addSound(Sound sound); //should eventually give params
+	//int addSound(Sound sound); //should eventually give params
 	void updateBlock(Position3 blockPosition, bool checkCreatures);	
 
 	void update(); //updates the map
@@ -74,7 +74,7 @@ struct World //world struct that deals with rendering and updating the map
 	void render(const std::shared_ptr<Pane> &pane) const; //renders the map
 
 private:
-	std::shared_ptr<SoundManager> soundManager;
+	//std::shared_ptr<Audio> soundManager;
 
 	int getOffset		(int playerx, int mapw, int renderw); //returns the map offset
 

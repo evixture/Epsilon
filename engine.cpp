@@ -1,9 +1,8 @@
 #include "main.hpp"
 
 Engine::Engine(int screenCharWidth, int screenCharHeight)
-	:gamestate(Gamestate::MAIN), settings(std::make_shared<Settings>(screenCharWidth, screenCharHeight)), gui(std::make_shared<Gui>(screenCharWidth, screenCharHeight))//, audio(std::make_shared<SoLoud::Soloud>())
+	:gamestate(Gamestate::MAIN), settings(std::make_shared<Settings>(screenCharWidth, screenCharHeight)), gui(std::make_shared<Gui>(screenCharWidth, screenCharHeight)), audio(std::make_shared<Audio>())
 {
-	//audio->init(SoLoud::Soloud::CLIP_ROUNDOFF, SoLoud::Soloud::AUTO);
 	TCODConsole::root->setDefaultBackground(ep::color::rootBG);
 }
 
@@ -16,7 +15,7 @@ void Engine::update()
 {
 	settings->update();
 	gui->update();
-	//audio->update3dAudio();
+	audio->update();
 }
 
 void Engine::render() const
