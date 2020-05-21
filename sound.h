@@ -28,12 +28,12 @@ struct Sound //deals with world sounds and playback
 	bool reactable;
 	bool completed;
 
-	int worldVolume; //the volume of the sound to other creatures in decibels
-	int playbackVolume; //the volume of the sound to the player
+	float worldVolume; //the volume of the sound to other creatures in decibels
+	float playbackVolume; //the volume of the sound to the player
 
 	//effects properties
 
-	Sound(std::string speechText, Position4 sourcePosition, int worldVol, int playVol);
+	Sound(std::string speechText, Position4 sourcePosition, float worldVol, float playVol);
 	~Sound();
 
 	void update();

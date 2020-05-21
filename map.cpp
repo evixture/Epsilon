@@ -709,7 +709,7 @@ void World::update()
 
 	if (INPUT->debug1Key->isSwitched) // repeatable create live creature
 	{
-		addSound(Sound("Testing", Position4(0, 0, 0, 0), 100, 100));
+		addSound(Sound("Testing", Position4(20, 10, 3, 0), 100.0f, 100.0f));
 	}
 
 	soundManager->update();
