@@ -398,7 +398,7 @@ void Player::reload()
 					{
 						selectedItem->tool->reload(item->getMagazineData());
 
-						AUDIO->playSound(PositionalTrackedSound(("chuck cheek"), &mapPosition, 120.0f, 100.0f));
+						AUDIO->playSound(PositionalTrackedSound(("ch ch"), &mapPosition, 120.0f, 100.0f));
 						//if (item->getMagazineData()->availableAmmo > selectedMagazine->availableAmmo)
 						//{
 						//	selectedMagazine = item->getMagazineData();
