@@ -11,12 +11,15 @@ SOUND CLASS
 HOW TO GET SOLOUD TO WORK
 	SoLoud core needs to be normal var
 	sounds in current form needs to be pointer so it stays, can be in a class
-*/
 
+POSITION
+	
+*/
 
 struct Sound //deals with world sounds and playback
 {
 	std::shared_ptr<SoLoud::Speech> speech;
+
 
 	virtual std::pair<bool, Position4> getPosition(); //returns if sound is 3d and its position
 
@@ -24,13 +27,14 @@ struct Sound //deals with world sounds and playback
 	float playbackVolume; //the volume of the sound to the player
 
 	Sound(std::string speechText, float worldVol, float playVol);
+
+protected:
+	std::pair<bool, Position4> position;
 };
 
 struct PositionalStaticSound : public Sound
 {
 	Position4 sourcePosition; //later move to derived class
-
-	std::pair<bool, Position4> getPosition(); //returns if sound is 3d and its position
 
 	PositionalStaticSound(std::string speechText, Position4 sourcePosition, float worldVol, float playVol);
 };
@@ -38,8 +42,6 @@ struct PositionalStaticSound : public Sound
 struct PositionalTrackedSound : public Sound
 {
 	Position4* sourcePosition; //pointer to position so location is always accurate
-
-	std::pair<bool, Position4> getPosition(); //returns if sound is 3d and its position
 
 	PositionalTrackedSound(std::string speechText, Position4* sourcePosition, float worldVol, float playVol);
 };

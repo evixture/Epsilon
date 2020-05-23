@@ -2,7 +2,7 @@
 
 //SOUND BASE
 Sound::Sound(std::string speechText, float worldVol, float playVol)
-	: worldVolume(worldVol), playbackVolume(playVol)
+	: worldVolume(worldVol), playbackVolume(playVol), position(std::pair<bool, Position4>(false, Position4(0, 0, 0, 0)))
 {
 	speech = std::make_shared<SoLoud::Speech>();
 	speech->setText(speechText.c_str());
@@ -10,7 +10,8 @@ Sound::Sound(std::string speechText, float worldVol, float playVol)
 
 std::pair<bool, Position4> Sound::getPosition() //not getting passed on to derived classes?
 {
-	return std::pair<bool, Position4>(false, Position4(0, 0, 0, 0));
+	//return std::pair<bool, Position4>(false, Position4(0, 0, 0, 0));
+	return position;
 }
 
 //POSITIONAL SOUND THAT DOES NOT TRACK
@@ -19,11 +20,7 @@ PositionalStaticSound::PositionalStaticSound(std::string speechText, Position4 s
 {
 	speech = std::make_shared<SoLoud::Speech>();
 	speech->setText(speechText.c_str());
-}
-
-std::pair<bool, Position4> PositionalStaticSound::getPosition()
-{
-	return std::pair<bool, Position4>(true, sourcePosition);
+	position = std::pair<bool, Position4>(true, sourcePosition);
 }
 
 //POSITIONAL SOUND THAT TRACKS COORDS
@@ -32,11 +29,7 @@ PositionalTrackedSound::PositionalTrackedSound(std::string speechText, Position4
 {
 	speech = std::make_shared<SoLoud::Speech>();
 	speech->setText(speechText.c_str());
-}
-
-std::pair<bool, Position4> PositionalTrackedSound::getPosition()
-{
-	return std::pair<bool, Position4>(true, *sourcePosition);
+	position = std::pair<bool, Position4>(true, *sourcePosition);
 }
 
 //SOUND MANAGER
