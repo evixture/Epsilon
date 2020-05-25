@@ -45,13 +45,15 @@ void Settings::printLogo() const
 
 void Settings::printDebugStats() const
 {
-	TCODConsole::root->printf(10, 0, "FPS>%i | Mouse %i, %i | Player %i, %i, %i",
+	TCODConsole::root->printf(10, 0, "FPS>%i | Mouse %i, %i | Player %i, %i, %i | a %i | s %i",
 		fpsCount,
 		SETTINGS->input->mouse.cx,
 		SETTINGS->input->mouse.cy,
 		WORLD->debugmap->player->mapPosition.x,
 		WORLD->debugmap->player->mapPosition.y,
-		WORLD->debugmap->player->mapPosition.floor);
+		WORLD->debugmap->player->mapPosition.floor,
+		AUDIO->soundList.size(),
+		AUDIO->soLoud.getActiveVoiceCount());
 }
 
 void Settings::update()

@@ -43,7 +43,7 @@ void AICreature::move()
 					//play footstep sound
 					if (stepSound >= 1)
 					{
-						AUDIO->playSound(PositionalTrackedSound(("step"), &mapPosition, 40.0f, 100.0f));
+						AUDIO->playSound(PositionalTrackedSound(("top"), &mapPosition, 70.0f, 100.0f));
 						stepSound = 0;
 					}
 					else
@@ -65,7 +65,7 @@ void AICreature::move()
 				//play footstep sound
 				if (stepSound >= 1)
 				{
-					AUDIO->playSound(PositionalTrackedSound(("step"), &mapPosition, 40.0f, 100.0f));
+					AUDIO->playSound(PositionalTrackedSound(("top"), &mapPosition, 70.0f, 100.0f));
 					stepSound = 0;
 				}
 				else
@@ -109,13 +109,13 @@ void AICreature::takeDamage(int damage)
 	{
 		health -= damage;
 
-		AUDIO->playSound(PositionalTrackedSound(("hoop"), &mapPosition, 40.0f, 120.0f));
+		AUDIO->playSound(PositionalTrackedSound(("hoop"), &mapPosition, 75.0f, 120.0f));
 	}
 	else //if damage taken would have resulted in death
 	{
 		health = 0;
 
-		AUDIO->playSound(PositionalTrackedSound(("jaw"), &mapPosition, 40.0f, 170.0f));
+		AUDIO->playSound(PositionalTrackedSound(("jaw"), &mapPosition, 80.0f, 170.0f));
 	}
 
 	aggression += damage / 100.0f;
@@ -182,48 +182,51 @@ void AICreature::decayInterest()
 
 void AICreature::reactToSounds()
 {
-	if (!inFov)
+	for (auto& sound : WORLD->soundList)
 	{
-		for (auto& sound : WORLD->soundList)
+		if (sound->getPosition().first == true && !(sound->getPosition().second.x == mapPosition.x && sound->getPosition().second.y == mapPosition.x)) //is 3d sound and not from itself
 		{
-			if (sound->getPosition().first == true && !(sound->getPosition().second.x == mapPosition.x && sound->getPosition().second.y == mapPosition.x)) //is 3d sound and not from itself
+			if (sound->getPosition().second.floor == mapPosition.floor)
 			{
-				if (sound->getPosition().second.floor == mapPosition.floor)
+				float soundInterestChange;
+				double distance = getDistance(mapPosition.x, mapPosition.y, sound->getPosition().second.x, sound->getPosition().second.y);
+
+				if (distance > 0.0f)
 				{
-					float soundInterestChange;
-					double distance = getDistance(mapPosition.x, mapPosition.y, sound->getPosition().second.x, sound->getPosition().second.y);
+					soundInterestChange = (float)((15.0f / (distance + 30.0f)) * (sound->worldVolume / 50.f));
+				}
+				else
+				{
+					soundInterestChange = 0.0f;
+				}
 
-					if (distance > 0.0f)
+				if (soundInterestChange >= 0.5f)
+				{
+					//if (soundInterest + soundInterestChange >= 1.0f)
+					//{
+					//	soundInterest = 1.0f;
+					//}
+					//else
+					//{
+					//	soundInterest += soundInterestChange;
+					//}
+
+					if (soundInterest < soundInterestChange)
 					{
-						soundInterestChange = (float)((15.0f / (distance + 30.0f)) * (sound->worldVolume / 50.f));
-					}
-					else
-					{
-						soundInterestChange = 0.0f;
+						soundInterest = soundInterestChange;
 					}
 
-					if (soundInterestChange >= 0.5f)
-					{
-						if (soundInterest + soundInterestChange >= 1.0f)
-						{
-							soundInterest = 1.0f;
-						}
-						else
-						{
-							soundInterest += soundInterestChange;
-						}
+					pathfindPosition = sound->getPosition().second;
+					lookPosition = sound->getPosition().second;
 
-						pathfindPosition = sound->getPosition().second;
-						lookPosition = sound->getPosition().second;
-
-						//pathfind to sound source
-						path.compute(mapPosition.x, mapPosition.y, pathfindPosition.x, pathfindPosition.y);
-					}
+					//pathfind to sound source
+					path.compute(mapPosition.x, mapPosition.y, pathfindPosition.x, pathfindPosition.y);
 				}
 			}
 		}
 	}
 }
+
 
 /*
 (NOT ENTIRELY ACCURATE)

@@ -57,6 +57,7 @@ DECIBEL VOLUME TABLE
 
 struct Audio
 {
+	SoLoud::Soloud soLoud; //trying as not pointer
 	std::vector<std::pair<int, Sound>> soundList; //list of sounds with their handles
 
 	Audio();
@@ -67,7 +68,6 @@ struct Audio
 	int playSound(Sound sound);
 
 private:
-	SoLoud::Soloud soLoud; //trying as not pointer
 };
 
 /*

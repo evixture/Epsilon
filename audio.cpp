@@ -48,13 +48,22 @@ Audio::~Audio()
 
 void Audio::update()
 {
-	soLoud.set3dListenerPosition((float)WORLD->debugmap->player->mapPosition.x, (float)WORLD->debugmap->player->mapPosition.height, (float)WORLD->debugmap->player->mapPosition.y);
-
-	for (auto& sound : soundList)
+	if (soLoud.getActiveVoiceCount() < soundList.size()) //if more sounds are in the list than are actually playing
 	{
-		if (sound.second.getPosition().first == true) //if sound of the sound list is 3d
+		int excessSounds = soundList.size() - soLoud.getActiveVoiceCount();
+
+		for (int e = 0; e < excessSounds; e++)
 		{
-			soLoud.set3dSourcePosition(sound.first, (float)sound.second.getPosition().second.x, (float)sound.second.getPosition().second.height, (float)sound.second.getPosition().second.y); //should update tracked sounds
+			soundList.erase(soundList.begin()); //delete the front (oldest) sound until all old sounds are gone //may delete old long playing sounds?
+		}
+	}
+
+	soLoud.set3dListenerPosition((float)WORLD->debugmap->player->mapPosition.x, (float)WORLD->debugmap->player->mapPosition.height, (float)WORLD->debugmap->player->mapPosition.y);
+	for (int i = 0; i < soundList.size(); i++)
+	{
+		if (soundList[i].second.getPosition().first == true) //if sound of the sound list is 3d
+		{
+			soLoud.set3dSourcePosition(soundList[i].first, (float)soundList[i].second.getPosition().second.x, (float)soundList[i].second.getPosition().second.height, (float)soundList[i].second.getPosition().second.y); //should update tracked sounds
 		}
 	}
 

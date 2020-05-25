@@ -191,7 +191,7 @@ void Player::move()
 				//play footstep sound
 				if (stepSound >= 1)
 				{
-					AUDIO->playSound(PositionalTrackedSound(("step"), &mapPosition, 40.0f, 10.0f));
+					AUDIO->playSound(PositionalTrackedSound(("top"), &mapPosition, 70.0f, 10.0f));
 					stepSound = 0;
 				}
 				else
@@ -213,7 +213,7 @@ void Player::moveSelectorUp()
 		{
 			itemIndex--;
 
-			AUDIO->playSound(Sound(("tick"), 40.0f, 5.0f));
+			AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
 		}
 		else if (itemIndex == -1)
 		{
@@ -222,7 +222,7 @@ void Player::moveSelectorUp()
 				containerIndex--;
 				itemIndex = (int)(inventory[containerIndex]->itemList.size() - 1);
 
-				AUDIO->playSound(Sound(("tick"), 40.0f, 5.0f));
+				AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
 			}
 		}
 		else if (itemIndex == -2)
@@ -231,7 +231,7 @@ void Player::moveSelectorUp()
 			{
 				++itemIndex;
 
-				AUDIO->playSound(Sound(("tick"), 40.0f, 5.0f));
+				AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
 			}
 		}
 	}
@@ -245,7 +245,7 @@ void Player::moveSelectorDown()
 		{
 			++itemIndex;
 
-			AUDIO->playSound(Sound(("tick"), 40.0f, 10.0f));
+			AUDIO->playSound(Sound(("tick"), 0.0f, 10.0f));
 		}
 		else if (itemIndex + 1 >= inventory[containerIndex]->itemList.size())
 		{
@@ -254,7 +254,7 @@ void Player::moveSelectorDown()
 				++containerIndex;
 				itemIndex = -1;
 
-				AUDIO->playSound(Sound(("tick"), 40.0f, 5.0f));
+				AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
 			}
 			else if (itemIndex == -1)
 			{
@@ -262,7 +262,7 @@ void Player::moveSelectorDown()
 				{
 					++itemIndex;
 
-					AUDIO->playSound(Sound(("tick"), 40.0f, 5.0f));
+					AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
 				}
 			}
 		}
@@ -283,7 +283,7 @@ void Player::pickUpItem()
 
 					WORLD->debugmap->mapItemList.erase(WORLD->debugmap->mapItemList.begin() + i);
 
-					AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition,40.0f, 30.0f));
+					AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
 
 					return;
 				}
@@ -300,7 +300,7 @@ void Player::pickUpItem()
 			inventory.push_back(WORLD->debugmap->mapContainerList[i]);
 			WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
 
-			AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 40.0f, 30.0f));
+			AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
 
 			return;
 		}
@@ -333,7 +333,7 @@ void Player::dropItem()
 
 			inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
 
-			AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 40.0f, 30.0f));
+			AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
 		}
 		else if (itemIndex <= -1)
 		{
@@ -345,7 +345,7 @@ void Player::dropItem()
 
 				inventory.erase(inventory.begin() + containerIndex);
 
-				AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 40.0f, 30.0f));
+				AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
 			}
 		}
 	}
@@ -359,7 +359,7 @@ void Player::takeDamage(int damage)
 		{
 			health -= damage;
 
-			AUDIO->playSound(PositionalTrackedSound(("hoop"), &mapPosition, 40.0f, 40.0f));
+			AUDIO->playSound(PositionalTrackedSound(("hoop"), &mapPosition, 75.0f, 40.0f));
 		}
 		else //if damage taken would have resulted in death
 		{
@@ -433,7 +433,7 @@ void Player::reload()
 					{
 						selectedItem->tool->reload(item->getMagazineData());
 
-						AUDIO->playSound(PositionalTrackedSound(("check chick"), &mapPosition, 50.0f, 40.0f));
+						AUDIO->playSound(PositionalTrackedSound(("check chick"), &mapPosition, 65.0f, 40.0f));
 						//if (item->getMagazineData()->availableAmmo > selectedMagazine->availableAmmo)
 						//{
 						//	selectedMagazine = item->getMagazineData();
