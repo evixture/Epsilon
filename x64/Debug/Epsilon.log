@@ -1,2 +1,6 @@
-﻿  audio.cpp
+﻿  aicreature.cpp
+  entity.cpp
+  tool.cpp
+  Generating Code...
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(16): warning C4172: returning address of local variable or temporary: nullMag
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

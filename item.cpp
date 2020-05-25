@@ -43,6 +43,8 @@ void ActionManager::moveSelectorUp()
 	{
 		actionIndex--;
 		selectedAction = actionList[actionIndex];
+
+		AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
 	}
 }
 
@@ -52,6 +54,8 @@ void ActionManager::moveSelectorDown()
 	{
 		++actionIndex;
 		selectedAction = actionList[actionIndex];
+
+		AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
 	}
 }
 

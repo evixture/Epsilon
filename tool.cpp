@@ -173,6 +173,9 @@ void Melee::useMelee()
 			if (creature != WORLD->debugmap->player)
 			{
 				doMeleeDamage(creature);
+
+				AUDIO->playSound(Sound(("hit"), 50.0f, 90.0f)); //tracked?
+
 				break;
 			}
 		}
@@ -180,7 +183,10 @@ void Melee::useMelee()
 
 	//if it cannot find a creature
 
-	WORLD->debugmap->getBlock(mapPosition)->destroy((bluntDamage + sharpDamage), mapPosition.height);
+	if (WORLD->debugmap->getBlock(mapPosition)->destroy((bluntDamage + sharpDamage), mapPosition.height))
+	{
+		AUDIO->playSound(PositionalStaticSound(("crash"), mapPosition, 70.0f, 100.0f));
+	}
 
 	WORLD->updateBlock(mapPosition, false);
 }
@@ -308,8 +314,11 @@ void Bullet::update()
 		{
 			if (WORLD->debugmap->inMapBounds(mapPosition))
 			{
-				WORLD->debugmap->getBlock(mapPosition)->destroy(mass, mapPosition.height);
-				WORLD->updateBlock(mapPosition, false); //check if pos needs to be reassigned before
+				if (WORLD->debugmap->getBlock(mapPosition)->destroy(mass, mapPosition.height))
+				{
+					WORLD->updateBlock(mapPosition, false); //check if pos needs to be reassigned before
+					AUDIO->playSound(PositionalStaticSound(("crash"), mapPosition, 70.0f, 100.0f));
+				}
 
 				int decel = WORLD->debugmap->getBlock(mapPosition)->tileList[mapPosition.height].deceleration;
 
@@ -575,7 +584,7 @@ void Firearm::fireBullet()
 
 			usedMag.availableAmmo--;
 
-			AUDIO->playSound(PositionalTrackedSound(("kap"), &mapPosition, 120.0f, 100.0f));
+			AUDIO->playSound(PositionalTrackedSound(("cop"), &mapPosition, 120.0f, 80.0f));
 		}
 	}
 }
@@ -637,6 +646,8 @@ void Firearm::changeFireMode()
 				fireMode = FireType::SAFE;
 			}
 		}
+
+		AUDIO->playSound(Sound(("tip"), 10.0f, 50.0f));
 	}
 }
 
@@ -743,6 +754,8 @@ void Armor::equip(Armor& armor) //if the passed armor is not equal to the armor 
 		else
 		{
 			armor = Armor(this->name, this->color, this->defense, this->durability);
+
+			AUDIO->playSound(Sound(("full ip"), 30.0f, 100.0f));
 		}
 	}
 }

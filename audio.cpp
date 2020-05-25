@@ -48,8 +48,7 @@ Audio::~Audio()
 
 void Audio::update()
 {
-	//update 3d sound eventually
-	//soLoud.set3dListenerPosition((float)WORLD->debugmap->player->mapPosition.x, (float)WORLD->debugmap->player->mapPosition.height, (float)WORLD->debugmap->player->mapPosition.y);
+	soLoud.set3dListenerPosition((float)WORLD->debugmap->player->mapPosition.x, (float)WORLD->debugmap->player->mapPosition.height, (float)WORLD->debugmap->player->mapPosition.y);
 
 	for (auto& sound : soundList)
 	{
@@ -78,7 +77,7 @@ int Audio::playSound(Sound sound)
 	}
 	else //2d sound
 	{
-		handle = soLoud.play(*sound.speech);
+		handle = soLoud.play(*sound.speech, sound.playbackVolume);
 	}
 
 	soLoud.setVolume(handle, sound.playbackVolume);

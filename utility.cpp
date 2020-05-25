@@ -244,6 +244,8 @@ void Menu::update()
 		if (menuIndex > 0)
 		{
 			menuIndex--;
+
+			AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
 		}
 	}
 
@@ -252,6 +254,8 @@ void Menu::update()
 		if (menuIndex < menuList.size() - 1)
 		{
 			++menuIndex;
+
+			AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
 		}
 	}
 }

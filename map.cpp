@@ -705,7 +705,7 @@ void World::update()
 	if (INPUT->debug1Key->isSwitched)
 	{
 		//addSound(Sound("Testing", true, Position4(20, 10, 3, 0), 100.0f, 100.0f));
-		AUDIO->playSound(PositionalStaticSound("Testing", Position4(20, 10, 0, 0), 100.0f, 100.0f)); //2d sound
+		AUDIO->playSound(PositionalStaticSound("Testing", Position4(20, 10, 0, 0), 0.0f, 100.0f)); //2d sound
 	}
 
 	//soundManager->update();

@@ -13,6 +13,8 @@ AICreature::AICreature(Creature creature, TCODMap* fovMap)
 
 void AICreature::move()
 {
+	static int stepSound;
+
 	if (moveSpeedMode == 2)			baseMoveTime = .25f; //sprint
 	else if (moveSpeedMode == 0)	baseMoveTime = 1.0f; //creep
 	else							baseMoveTime = .5f;	 //walk
@@ -37,6 +39,17 @@ void AICreature::move()
 					WORLD->updateBlock(mapPosition, true);
 
 					debugBGColor = TCODColor::green;
+
+					//play footstep sound
+					if (stepSound >= 1)
+					{
+						AUDIO->playSound(PositionalTrackedSound(("step"), &mapPosition, 40.0f, 100.0f));
+						stepSound = 0;
+					}
+					else
+					{
+						stepSound++;
+					}
 				}
 			}
 			else
@@ -48,6 +61,17 @@ void AICreature::move()
 				WORLD->updateBlock(mapPosition, true);
 
 				debugBGColor = TCODColor::blue;
+
+				//play footstep sound
+				if (stepSound >= 1)
+				{
+					AUDIO->playSound(PositionalTrackedSound(("step"), &mapPosition, 40.0f, 100.0f));
+					stepSound = 0;
+				}
+				else
+				{
+					stepSound++;
+				}
 			}
 		}
 		//else nav idly around the map?
@@ -84,10 +108,14 @@ void AICreature::takeDamage(int damage)
 	if (health - damage > 0) //take normal damage
 	{
 		health -= damage;
+
+		AUDIO->playSound(PositionalTrackedSound(("hoop"), &mapPosition, 40.0f, 120.0f));
 	}
 	else //if damage taken would have resulted in death
 	{
 		health = 0;
+
+		AUDIO->playSound(PositionalTrackedSound(("jaw"), &mapPosition, 40.0f, 170.0f));
 	}
 
 	aggression += damage / 100.0f;
@@ -158,7 +186,7 @@ void AICreature::reactToSounds()
 	{
 		for (auto& sound : WORLD->soundList)
 		{
-			if (sound->getPosition().first == true) //is 3d sound
+			if (sound->getPosition().first == true && !(sound->getPosition().second.x == mapPosition.x && sound->getPosition().second.y == mapPosition.x)) //is 3d sound and not from itself
 			{
 				if (sound->getPosition().second.floor == mapPosition.floor)
 				{

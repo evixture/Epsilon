@@ -66,7 +66,7 @@ struct World //world struct that deals with rendering and updating the map
 	bool	isInPlayerFov			(Position4 position) const; //returns true if the coordinates are in fov
 	bool	isExplored				(Position3& position) const; //checks if a tile has been explored previously
 
-	void addSound(Sound sound); //should eventually give params
+	void addSound(Sound sound);
 	void updateBlock(Position3 blockPosition, bool checkCreatures);	
 
 	void update(); //updates the map

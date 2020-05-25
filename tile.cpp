@@ -33,7 +33,7 @@ Tile Block::getTileData(int height) const
 	return Tile('%', TCODColor::pink, TCODColor::pink, 999, "ERROR", -1);
 }
 
-void Block::destroy(int damage, int height)
+bool Block::destroy(int damage, int height)
 {
 	if (!destroyed)
 	{
@@ -69,9 +69,13 @@ void Block::destroy(int damage, int height)
 
 				walkableFlag = ep::tileFlag::OOOOI;
 				transparentFlag = ep::tileFlag::OOOOI;
+
+				return true;
 			}
 		}
 	}
+
+	return false;
 }
 
 void Block::interact()
