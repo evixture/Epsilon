@@ -786,16 +786,16 @@ void World::renderTiles(const std::shared_ptr<Pane>& pane) const
 			//block->render(Position4(x - xOffset, y - yOffset, debugmap->player->mapPosition.height, debugmap->player->mapPosition.floor), pane);
 
 			//render walkability
-			//if (debugmap->getWalkability(Position4(x, y, debugmap->player->mapPosition.height, 0), true) == true)
-			//{
-			//	pane->console->setCharBackground(x - xOffset, y - yOffset, TCODColor::green);
-			//}
-			//else
-			//{
-			//	pane->console->setCharBackground(x - xOffset, y - yOffset, TCODColor::red);
-			//}
+			if (debugmap->getWalkability(Position4(x, y, debugmap->player->mapPosition.height, 0), true) == true)
+			{
+				pane->console->setCharBackground(x - xOffset, y - yOffset, TCODColor::green);
+			}
+			else
+			{
+				pane->console->setCharBackground(x - xOffset, y - yOffset, TCODColor::red);
+			}
 
-			debugmap->getBlock(Position3(x, y, debugmap->player->mapPosition.floor))->render(Position4(x - xOffset, y - yOffset, debugmap->player->mapPosition.height, debugmap->player->mapPosition.floor), pane);
+			//debugmap->getBlock(Position3(x, y, debugmap->player->mapPosition.floor))->render(Position4(x - xOffset, y - yOffset, debugmap->player->mapPosition.height, debugmap->player->mapPosition.floor), pane);
 		}
 	}
 }

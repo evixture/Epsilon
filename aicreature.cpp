@@ -215,8 +215,8 @@ void AICreature::reactToSounds()
 					{
 						soundInterest = soundInterestChange;
 					}
-
-					pathfindPosition = sound->getPosition().second;
+					
+					pathfindPosition = getWalkableArea(sound->getPosition().second);
 					lookPosition = sound->getPosition().second;
 
 					//pathfind to sound source
@@ -355,13 +355,6 @@ void AICreature::render(const std::shared_ptr<Pane>& pane) const
 
 		if (true) //show pathfinding information
 		{
-			pane->console->setCharBackground(renderPosition.x, renderPosition.y, debugBGColor);
-
-			//render interest points
-			pane->console->setCharBackground(lookPosition.x - WORLD->xOffset, lookPosition.y - WORLD->yOffset, TCODColor::white);
-			pane->console->setCharBackground(focusPosition.x - WORLD->xOffset, focusPosition.y - WORLD->yOffset - 1, TCODColor::flame);
-			pane->console->setCharBackground(pathfindPosition.x - WORLD->xOffset, pathfindPosition.y - WORLD->yOffset - 2, TCODColor::purple);
-
 			//render path
 			int x, y;
 			for (int i = 0; i < path.size(); i++)
@@ -370,6 +363,12 @@ void AICreature::render(const std::shared_ptr<Pane>& pane) const
 
 				pane->console->setCharBackground(x - WORLD->xOffset, y - WORLD->yOffset, TCODColor::pink);
 			}
+			pane->console->setCharBackground(renderPosition.x, renderPosition.y, debugBGColor);
+
+			//render interest points
+			//pane->console->setCharBackground(lookPosition.x - WORLD->xOffset, lookPosition.y - WORLD->yOffset, TCODColor::white);
+			//pane->console->setCharBackground(focusPosition.x - WORLD->xOffset, focusPosition.y - WORLD->yOffset - 1, TCODColor::flame);
+			pane->console->setCharBackground(pathfindPosition.x - WORLD->xOffset, pathfindPosition.y - WORLD->yOffset, TCODColor::purple);
 		}
 	
 		if (health != 0)

@@ -10,7 +10,6 @@ constexpr auto PI = 3.14159265;
 #define MAPPANE		engine->gui->worldWindow
 #define WORLD		engine->gui->worldWindow->world
 
-
 struct Position3 //position struct with x, y, and z dimensions
 {
 	int x; //x coordinate
@@ -32,8 +31,6 @@ struct Position4 : public Position3
 
 	bool operator == (const Position4& compPosition);
 };
-
-Position4 offsetPosition(Position4 mapPosition, int xOffset, int yOffset); //used to calculate render position from map offsets
 
 struct BLine //line algorithm used for bullet paths
 {
@@ -63,11 +60,6 @@ struct Clock
 	void addTime(float seconds); //adds time by decreasing the numCalls
 };
 
-unsigned char	heightToBitFlag(int height); //translates the height of a creature to be used for a block's enum flag
-double			getAngle(int ix, int iy, int tx, int ty); //gets the angle from 2 sets of coordinates
-double			getDistance(int ix, int iy, int tx, int ty); //gets the distance from 2 sets of coordinates
-float			getFallTime(int height); //used to get the time to fall for a bullet
-Position4		getWalkableArea(Position4 mapPosition);
 
 struct MagazineData //contains all of the important data for magazines
 {
@@ -99,6 +91,13 @@ private:
 	unsigned int menuIndex; //the index of the menu selection in the menu list
 	std::vector<std::string> menuList; //the list of all of the posible menu entries
 };
+
+unsigned char	heightToBitFlag(int height); //translates the height of a creature to be used for a block's enum flag
+double			getAngle(int ix, int iy, int tx, int ty); //gets the angle from 2 sets of coordinates
+double			getDistance(int ix, int iy, int tx, int ty); //gets the distance from 2 sets of coordinates
+float			getFallTime(int height); //used to get the time to fall for a bullet
+Position4		offsetPosition(Position4 mapPosition, int xOffset, int yOffset); //used to calculate render position from map offsets
+Position4		getWalkableArea(Position4 mapPosition);
 
 namespace ep
 {

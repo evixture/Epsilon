@@ -160,18 +160,25 @@ float getFallTime(int height)
 
 Position4 getWalkableArea(Position4 mapPosition)
 {
-	//if initial position is walkable
+	//if center position is valid
 	if (WORLD->debugmap->getWalkability(mapPosition, true) == true)
 	{
 		return mapPosition;
 	}
+
+	/*
+	CHECK ORDER:
+	1 2 3
+	4 0 5
+	6 7 8
+	*/
 
 	//search the surrounding area for walkable block
 	for (int y = -1; y <= 1; y++)
 	{
 		for (int x = -1; x <= 1; x++)
 		{
-			if (x != 0 && y != 0)
+			if (x != 0 && y != 0) // do not check center position
 			{
 				if (WORLD->debugmap->getWalkability(Position4(mapPosition.x + x, mapPosition.y + y, mapPosition.height, mapPosition.floor), true) == true)
 				{
@@ -180,7 +187,7 @@ Position4 getWalkableArea(Position4 mapPosition)
 			}
 		}
 	}
-	return Position4(0, 0, 0, 0);
+	return Position4(0, 0, 0, 0); //need better return
 }
 
 //----------------------------------------------------------------------------------------------------

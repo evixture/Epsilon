@@ -602,6 +602,8 @@ void Firearm::reload(MagazineData& magazine)
 
 				//selectedMagazine = magazine;
 				reloadClock.addTime(reloadTime);
+
+				AUDIO->playSound(PositionalTrackedSound(("check chick"), &mapPosition, 65.0f, 40.0f));
 			}
 		//}
 	//	else selectedMagazine = magazine;
