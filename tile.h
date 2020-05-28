@@ -28,7 +28,7 @@ struct Block //tile class used for the map and items
 
 	Tile getTileData(int height) const;
 
-	void render(Position4 renderPosition, const std::shared_ptr<Pane>& pane) const; //renders tile
+	void render(Position4 renderPosition, const Pane& pane) const; //renders tile
 
 	virtual bool destroy(int damage, int height); //does nothing in block
 	virtual void interact(); //virtual behaves differently depending on tile type, does nothing in tile

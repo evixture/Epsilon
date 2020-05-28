@@ -146,6 +146,7 @@ MagazineData& Item::getMagazineData()
 {
 	auto nullMag = MagazineData(MagazineData::AmmoType::NONE, 0, 0, false);
 	return nullMag;
+	//return ep::magazineData::nullMagazine();
 }
 
 void Item::changeBarColor()
@@ -164,7 +165,7 @@ void Item::updateTool(Position4& mapPosition, int mx, int my, bool isHeld)
 	tileRenderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
-void Item::renderTool(const std::shared_ptr<Pane>& pane) const
+void Item::renderTool(const Pane& pane) const
 {
 	tool->render(pane);
 }
@@ -176,13 +177,13 @@ void Item::updateTile()
 	tileRenderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
-void Item::renderTile(const std::shared_ptr<Pane>& pane) const
+void Item::renderTile(const Pane& pane) const
 {
 	tile->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.height, tileRenderPosition.floor), pane);
 
 	if (distToEnt < 5 && WORLD->isInPlayerFov(mapPosition))
 	{
-		pane->console->setCharBackground(tileRenderPosition.x, tileRenderPosition.y, tile->tileList[0].backgroundColor + TCODColor::darkGrey);
+		pane.console->setCharBackground(tileRenderPosition.x, tileRenderPosition.y, tile->tileList[0].backgroundColor + TCODColor::darkGrey);
 	}
 }
 

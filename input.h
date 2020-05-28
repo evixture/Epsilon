@@ -1,5 +1,12 @@
 #include "main.hpp"
 
+/*
+	Input
+	|	Button
+	|	L	KeyboardButton
+	|	L	MouseButton
+*/
+
 struct Button
 {
 	Button();
@@ -7,7 +14,7 @@ struct Button
 	bool isDown; //if the button is currently down
 	bool isSwitched; //if the button has been pressed down (lasts one cycle)
 
-	virtual void update();
+	virtual void update() = 0;
 	
 protected:
 	bool buttonSwitch;
@@ -15,28 +22,28 @@ protected:
 
 struct KeyboardButton : public Button
 {
-	sf::Keyboard::Key button; //the keyboard button
-
 	KeyboardButton(sf::Keyboard::Key key);
 	KeyboardButton() {}
 
 	void update();
+
+private:
+	sf::Keyboard::Key button; //the keyboard button
 };
 
 struct MouseButton : public Button
 {
-	sf::Mouse::Button button; //the mouse button
-
 	MouseButton(sf::Mouse::Button button);
 	MouseButton() {}
 
 	void update();
+
+private:
+	sf::Mouse::Button button; //the mouse button
 };
 
 struct Input //handles all of the mouse and keyboard input
 {
-	TCOD_event_t keyEvent; //handles tcod events
-	TCOD_key_t keyboard; //handles tcod key events
 	TCOD_mouse_t mouse; //handles tcod mouse events
 
 	std::shared_ptr<KeyboardButton> moveUpKey; //key to move the player / menu selector up
@@ -77,5 +84,8 @@ struct Input //handles all of the mouse and keyboard input
 	void update(); //updates all of the buttons and events that takes player
 
 private:
+	TCOD_event_t keyEvent; //handles tcod events
+	TCOD_key_t keyboard; //handles tcod key events
+
 	std::vector<std::shared_ptr<Button>> buttonList; //list of all keys availible for input
 };

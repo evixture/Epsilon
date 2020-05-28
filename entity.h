@@ -10,7 +10,7 @@ struct Entity //generic entity base for use on map
 	Entity(Position4 pos, int ch, std::string name, TCODColor color); //entity constructor that takes position, character, string name, and color
 
 	virtual void update(); //virtual update entity
-	virtual void render(const std::shared_ptr<Pane> &pane) const; //virtual render entity
+	virtual void render(const Pane& pane) const; //virtual render entity
 
 protected:
 	Position3 renderPosition; //position of the entity on the map pane
@@ -61,7 +61,7 @@ struct Creature : public Entity //creature base used for player and other beings
 	//need to include functions that only calls from selected item?
 
 	virtual void update(); //virtual updates the creature
-	virtual void render(const std::shared_ptr<Pane>& pane) const; // virtual renders the creature
+	virtual void render(const Pane& pane) const; // virtual renders the creature
 };
 
 struct Player : public Creature //player derived creature that the player interacts through
@@ -93,7 +93,7 @@ struct Player : public Creature //player derived creature that the player intera
 	void updateTools();
 
 	void update(); //updates the player
-	void render(const std::shared_ptr<Pane>& pane) const; //renders the player
+	void render(const Pane& pane) const; //renders the player
 
 private:
 	void moveSelectorUp(); //moves the selector up on the inventory

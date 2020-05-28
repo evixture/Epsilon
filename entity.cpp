@@ -9,10 +9,10 @@ void Entity::update()
 	return;
 }
 
-void Entity::render(const std::shared_ptr<Pane>& pane) const
+void Entity::render(const Pane& pane) const
 {
-	pane->console->setChar(mapPosition.x, mapPosition.y, ch);
-	pane->console->setCharForeground(mapPosition.x, mapPosition.y, color);
+	pane.console->setChar(mapPosition.x, mapPosition.y, ch);
+	pane.console->setCharForeground(mapPosition.x, mapPosition.y, color);
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -101,12 +101,12 @@ void Creature::update()
 	}
 }
 
-void Creature::render(const std::shared_ptr<Pane>& pane) const
+void Creature::render(const Pane& pane) const
 {
 	if (WORLD->debugmap->player->mapPosition.floor == mapPosition.floor)
 	{
-		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-		pane->console->setCharForeground(renderPosition.x, renderPosition.y, (WORLD->isInPlayerFov(mapPosition))? color : TCODColor::darkerGrey); //out of fov creatures rendered with one step above normal fov grey to be more noticible
+		pane.console->setChar(renderPosition.x, renderPosition.y, ch);
+		pane.console->setCharForeground(renderPosition.x, renderPosition.y, (WORLD->isInPlayerFov(mapPosition))? color : TCODColor::darkerGrey); //out of fov creatures rendered with one step above normal fov grey to be more noticible
 	}
 }
 
@@ -597,11 +597,11 @@ void Player::update()
 	}
 }
 
-void Player::render(const std::shared_ptr<Pane>& pane) const
+void Player::render(const Pane& pane) const
 {
 	if (backgroundColor != TCODColor::pink)
 	{
-		pane->console->setCharBackground(renderPosition.x, renderPosition.y, backgroundColor);
+		pane.console->setCharBackground(renderPosition.x, renderPosition.y, backgroundColor);
 	}
 
 	if (health != 0)
@@ -618,7 +618,7 @@ void Player::render(const std::shared_ptr<Pane>& pane) const
 	}
 		//selectedItem->renderTool(pane);
 
-	pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-	pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
+	pane.console->setChar(renderPosition.x, renderPosition.y, ch);
+	pane.console->setCharForeground(renderPosition.x, renderPosition.y, color);
 }
 

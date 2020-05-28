@@ -337,20 +337,20 @@ void AICreature::update() //ai and behavior attributes update here
 	}
 }
 
-void AICreature::render(const std::shared_ptr<Pane>& pane) const
+void AICreature::render(const Pane& pane) const
 {
 	if (WORLD->debugmap->player->mapPosition.floor == mapPosition.floor)
 	{
 		if (inFov)
 		{
-			pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-			pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
+			pane.console->setChar(renderPosition.x, renderPosition.y, ch);
+			pane.console->setCharForeground(renderPosition.x, renderPosition.y, color);
 		}
 		else
 		{
-			//pane->console->setChar(renderPosition.x, renderPosition.y, '?'); //should render char out of fov??
-			//pane->console->setChar(renderPosition.x, renderPosition.y, '?'); //should render char out of fov??
-			pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
+			//pane.console->setChar(renderPosition.x, renderPosition.y, '?'); //should render char out of fov??
+			//pane.console->setChar(renderPosition.x, renderPosition.y, '?'); //should render char out of fov??
+			pane.console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
 		}
 
 		if (true) //show pathfinding information
@@ -361,14 +361,14 @@ void AICreature::render(const std::shared_ptr<Pane>& pane) const
 			{
 				path.get(i, &x, &y);
 
-				pane->console->setCharBackground(x - WORLD->xOffset, y - WORLD->yOffset, TCODColor::pink);
+				pane.console->setCharBackground(x - WORLD->xOffset, y - WORLD->yOffset, TCODColor::pink);
 			}
-			pane->console->setCharBackground(renderPosition.x, renderPosition.y, debugBGColor);
+			pane.console->setCharBackground(renderPosition.x, renderPosition.y, debugBGColor);
 
 			//render interest points
-			//pane->console->setCharBackground(lookPosition.x - WORLD->xOffset, lookPosition.y - WORLD->yOffset, TCODColor::white);
-			//pane->console->setCharBackground(focusPosition.x - WORLD->xOffset, focusPosition.y - WORLD->yOffset - 1, TCODColor::flame);
-			pane->console->setCharBackground(pathfindPosition.x - WORLD->xOffset, pathfindPosition.y - WORLD->yOffset, TCODColor::purple);
+			//pane.console->setCharBackground(lookPosition.x - WORLD->xOffset, lookPosition.y - WORLD->yOffset, TCODColor::white);
+			//pane.console->setCharBackground(focusPosition.x - WORLD->xOffset, focusPosition.y - WORLD->yOffset - 1, TCODColor::flame);
+			pane.console->setCharBackground(pathfindPosition.x - WORLD->xOffset, pathfindPosition.y - WORLD->yOffset, TCODColor::purple);
 		}
 	
 		if (health != 0)

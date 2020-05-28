@@ -14,7 +14,7 @@ struct Position3 //position struct with x, y, and z dimensions
 {
 	int x; //x coordinate
 	int y; //y coordinate
-	int floor; //z / height coordinate
+	int floor; //z or height coordinate
 
 	Position3();
 	Position3(int x, int y, int floor); //position constructor that takes x, y, and floor ints
@@ -37,7 +37,7 @@ struct BLine //line algorithm used for bullet paths
 	int x; //x position on the line
 	int y; //y position on the line
 
-	BLine(int ix, int iy, int tx, int ty); //bline constructor that takes start x and y, and target x and y
+	BLine(int startx, int starty, int targetx, int targety); //bline constructor that takes start x and y, and target x and y
 
 	void step(); //steps forward on the line
 
@@ -85,11 +85,11 @@ struct Menu
 	Menu(std::vector<std::string> menuList);
 
 	void update(); //updates the menu selection
-	void render(const std::shared_ptr<Pane>& pane, const int rx, const int ry) const; //renders the menu on a pane at render coords
+	void render(const Pane& pane, const int rx, const int ry) const; //renders the menu on a pane at render coords
 
 private:
 	unsigned int menuIndex; //the index of the menu selection in the menu list
-	std::vector<std::string> menuList; //the list of all of the posible menu entries
+	std::vector<std::string> menuList; //the list of all of the posible menu entries //need a better system, maybe pair?
 };
 
 unsigned char	heightToBitFlag(int height); //translates the height of a creature to be used for a block's enum flag
@@ -232,5 +232,13 @@ namespace ep
 		inline static const TCODColor rifleFG =			TCODColor(79, 83, 84);
 
 		inline static const TCODColor pistolFG =		TCODColor(94, 93, 91);
+	};
+
+	struct magazineData
+	{
+		//inline static MagazineData* nullMagazine()
+		//{
+		//	return new MagazineData(MagazineData::AmmoType::NONE, 0, 0, false); //fix return new later
+		//}
 	};
 }

@@ -18,48 +18,38 @@ void Pane::render() const
 
 //----------------------------------------------------------------------------------------------------
 
-Ribon::Ribon(std::string windowName, int consoleWidth)
-	: windowName(windowName), consoleWidth(consoleWidth)
+Ribbon::Ribbon(std::string windowName, int consoleWidth)
+	: windowName(windowName), consoleWidth(consoleWidth), ribonWindow(Pane(consoleWidth, 1, ep::color::ribbonBG, ep::color::ribbonFG))
 {
-	ribonWindow = std::make_shared<Pane>(consoleWidth, 1, ep::color::ribbonBG, ep::color::ribbonFG);
 }
 
-void Ribon::render() const
+void Ribbon::render() const
 {
-	ribonWindow->render();
-	ribonWindow->console->printf(0, 0, "|%s|", windowName.c_str());
+	ribonWindow.render();
+	ribonWindow.console->printf(0, 0, "|%s|", windowName.c_str());
 }
 
 //----------------------------------------------------------------------------------------------------
 
 Window::Window(int consoleWidth, int consoleHeight, std::string panelName, int rx, int ry)
-	:consoleWidth(consoleWidth), consoleHeight(consoleHeight), panelName(panelName), renderpos(Position3(rx, ry, NULL))
+	:consoleWidth(consoleWidth), consoleHeight(consoleHeight), renderpos(Position3(rx, ry, NULL)), 
+	mainPane(Pane(consoleWidth, consoleHeight, ep::color::rootBG, ep::color::rootFG)), ribbon(Ribbon(panelName, consoleWidth)), drawPane(Pane(consoleWidth, consoleHeight - 1, ep::color::drawBG, ep::color::drawFG))
 {
-	mainWindow = std::make_shared<Pane>(consoleWidth, consoleHeight, ep::color::rootBG, ep::color::rootFG);
-	ribon = std::make_shared<Ribon>(panelName, consoleWidth);
-	drawWindow = std::make_shared<Pane>(consoleWidth, consoleHeight - 1, ep::color::drawBG, ep::color::drawFG);
-}
-
-void Window::update()
-{
-	return;
+	//mainPane = std::make_shared<Pane>(consoleWidth, consoleHeight, ep::color::rootBG, ep::color::rootFG);
+	//ribbon = std::make_shared<Ribbon>(panelName, consoleWidth);
+	//drawPane = std::make_shared<Pane>(consoleWidth, consoleHeight - 1, ep::color::drawBG, ep::color::drawFG);
 }
 
 void Window::clearWindow() const
 {
-	ribon->render();
-	drawWindow->render();
+	ribbon.render();
+	drawPane.render();
 }
 
 void Window::pushWindow() const
 {
-	ribon->ribonWindow->console->blit(ribon->ribonWindow->console, 0, 0, ribon->ribonWindow->consoleWidth, ribon->ribonWindow->consoleHeight, mainWindow->console, 0, 0, 1, 1);
-	drawWindow->console->blit(drawWindow->console, 0, 0, drawWindow->consoleWidth, drawWindow->consoleHeight, mainWindow->console, 0, 1, 1, 1);
-	mainWindow->console->blit(mainWindow->console, 0, 0, consoleWidth, consoleHeight, TCODConsole::root, renderpos.x, renderpos.y, 1, 1);
+	ribbon.ribonWindow.console->blit(ribbon.ribonWindow.console, 0, 0, ribbon.ribonWindow.consoleWidth, ribbon.ribonWindow.consoleHeight, mainPane.console, 0, 0, 1, 1);
+	drawPane.console->blit(drawPane.console, 0, 0, drawPane.consoleWidth, drawPane.consoleHeight, mainPane.console, 0, 1, 1, 1);
+	mainPane.console->blit(mainPane.console, 0, 0, consoleWidth, consoleHeight, TCODConsole::root, renderpos.x, renderpos.y, 1, 1);
 }
 
-void Window::render() const
-{
-	clearWindow(); 
-	pushWindow();
-}

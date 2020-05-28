@@ -82,7 +82,7 @@ void Block::interact()
 {
 }
 
-void Block::render(Position4 renderPosition, const std::shared_ptr<Pane>& pane) const
+void Block::render(Position4 renderPosition, const Pane& pane) const
 {
 	//if player height it greater than tallest nontransparent tile, render the tallest tile's data, else render tile on player's floor
 	Position4 position = Position4(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.height, renderPosition.floor);
@@ -90,19 +90,19 @@ void Block::render(Position4 renderPosition, const std::shared_ptr<Pane>& pane) 
 
 	if (WORLD->isInPlayerFov(position))
 	{
-		pane->console->setCharBackground(renderPosition.x,					renderPosition.y,					tile.backgroundColor);
-		pane->console->setCharForeground(renderPosition.x,					renderPosition.y,					tile.foregroundColor);
-		pane->console->setChar          (renderPosition.x,					renderPosition.y,					tile.ch);
+		pane.console->setCharBackground(renderPosition.x,					renderPosition.y,					tile.backgroundColor);
+		pane.console->setCharForeground(renderPosition.x,					renderPosition.y,					tile.foregroundColor);
+		pane.console->setChar          (renderPosition.x,					renderPosition.y,					tile.ch);
 	}
 	else if (WORLD->isExplored(position))
 	{
-		pane->console->setCharBackground(renderPosition.x,					renderPosition.y,					TCODColor::black);
-		pane->console->setCharForeground(renderPosition.x,					renderPosition.y,					TCODColor::darkestGrey);
-		pane->console->setChar			(renderPosition.x,					renderPosition.y,					tile.ch);
+		pane.console->setCharBackground(renderPosition.x,					renderPosition.y,					TCODColor::black);
+		pane.console->setCharForeground(renderPosition.x,					renderPosition.y,					TCODColor::darkestGrey);
+		pane.console->setChar			(renderPosition.x,					renderPosition.y,					tile.ch);
 	}
 	else
 	{
-		pane->console->setCharBackground(renderPosition.x,					renderPosition.y,					TCODColor::black);
+		pane.console->setCharBackground(renderPosition.x,					renderPosition.y,					TCODColor::black);
 	}
 }
 

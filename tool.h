@@ -31,7 +31,7 @@ struct Tool //base class for the holdable component to items
 	virtual void updatePositions(Position4& sourcePosition, int& targetX, int& targetY); //updates the position of the tool
 
 	virtual void update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld); //virtual updates tool
-	virtual void render(const std::shared_ptr<Pane>& pane) const; //virtual renders tool
+	virtual void render(const Pane& pane) const; //virtual renders tool
 
 	virtual MagazineData& getMagazine();				//returns the magazine component, only useful for magazines
 	virtual void reload(MagazineData& magazine);	//does nothing in tool
@@ -57,7 +57,7 @@ struct Melee : public Tool
 	//void use
 
 	virtual void update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld);
-	virtual void render(const std::shared_ptr<Pane>& pane) const;
+	virtual void render(const Pane& pane) const;
 
 private:
 	void doMeleeDamage(std::shared_ptr<Creature>& creature); //deals damage against a creature based on the blunt and sharp damage
@@ -80,7 +80,7 @@ struct Bullet //bullet that is fired from firearm
 	void doBulletDamage(std::shared_ptr<Creature>& creature); //deals damage to a creature based on the armor, mass, and velocity of the bullet
 
 	void update(); //updates bullet
-	void render(const std::shared_ptr<Pane>& pane) const; //renders bullet
+	void render(const Pane& pane) const; //renders bullet
 
 private:
 	short int tox; //x destination of bullet
@@ -117,7 +117,7 @@ struct Firearm : public Melee //firearm that fires bullets that interact with th
 	void updateToolPosition(int targetX, int targetY); //updates the weapon character //replace with derived updateposition from tool
 
 	void update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld); //updates firearm
-	void render(const std::shared_ptr<Pane>& pane) const; //renders firearm
+	void render(const Pane& pane) const; //renders firearm
 
 private:
 	std::vector<std::shared_ptr<Bullet>> bulletList; //private list of bullets that the fire owns

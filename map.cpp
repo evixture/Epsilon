@@ -699,8 +699,8 @@ void World::updateEntities()
 
 void World::update()
 {
-	xOffset = getOffset(debugmap->player->mapPosition.x, debugmap->width, MAPPANE->drawWindow->consoleWidth);
-	yOffset = getOffset(debugmap->player->mapPosition.y, debugmap->height, MAPPANE->drawWindow->consoleHeight);
+	xOffset = getOffset(debugmap->player->mapPosition.x, debugmap->width, MAPPANE->drawPane.consoleWidth);
+	yOffset = getOffset(debugmap->player->mapPosition.y, debugmap->height, MAPPANE->drawPane.consoleHeight);
 
 	if (INPUT->debug1Key->isSwitched)
 	{
@@ -775,32 +775,32 @@ void World::update()
 
 //--------------------------------------------------------------------------------------------
 
-void World::renderTiles(const std::shared_ptr<Pane>& pane) const
+void World::renderTiles(const Pane& pane) const
 {
-	for (int y = yOffset; y < pane->consoleHeight + yOffset; ++y)
+	for (int y = yOffset; y < pane.consoleHeight + yOffset; ++y)
 	{
-		for (int x = xOffset; x < pane->consoleWidth + xOffset; ++x)
+		for (int x = xOffset; x < pane.consoleWidth + xOffset; ++x)
 		{
 			//same perf
 			//std::shared_ptr<Block> block = debugmap->getBlock(Position3(x, y, debugmap->player->mapPosition.floor));
 			//block->render(Position4(x - xOffset, y - yOffset, debugmap->player->mapPosition.height, debugmap->player->mapPosition.floor), pane);
 
-			//render walkability
-			if (debugmap->getWalkability(Position4(x, y, debugmap->player->mapPosition.height, 0), true) == true)
-			{
-				pane->console->setCharBackground(x - xOffset, y - yOffset, TCODColor::green);
-			}
-			else
-			{
-				pane->console->setCharBackground(x - xOffset, y - yOffset, TCODColor::red);
-			}
+			////render walkability
+			//if (debugmap->getWalkability(Position4(x, y, debugmap->player->mapPosition.height, 0), true) == true)
+			//{
+			//	pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::green);
+			//}
+			//else
+			//{
+			//	pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::red);
+			//}
 
-			//debugmap->getBlock(Position3(x, y, debugmap->player->mapPosition.floor))->render(Position4(x - xOffset, y - yOffset, debugmap->player->mapPosition.height, debugmap->player->mapPosition.floor), pane);
+			debugmap->getBlock(Position3(x, y, debugmap->player->mapPosition.floor))->render(Position4(x - xOffset, y - yOffset, debugmap->player->mapPosition.height, debugmap->player->mapPosition.floor), pane);
 		}
 	}
 }
 
-void World::renderCreatures(const std::shared_ptr<Pane>& pane) const
+void World::renderCreatures(const Pane& pane) const
 {
 	for (auto& creature : debugmap->creatureList)
 	{
@@ -808,7 +808,7 @@ void World::renderCreatures(const std::shared_ptr<Pane>& pane) const
 	}
 }
 
-void World::render(const std::shared_ptr<Pane>& pane) const
+void World::render(const Pane& pane) const
 {
 	renderTiles(pane);
 

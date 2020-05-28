@@ -145,12 +145,12 @@ void Tool::update(Position4& sourcePosition, int& targetX, int& targetY, bool& i
 
 }
 
-void Tool::render(const std::shared_ptr<Pane>& pane) const
+void Tool::render(const Pane& pane) const
 {
 	if (this->isHeld)
 	{
-		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-		pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
+		pane.console->setChar(renderPosition.x, renderPosition.y, ch);
+		pane.console->setCharForeground(renderPosition.x, renderPosition.y, color);
 	}
 }
 
@@ -221,12 +221,12 @@ void Melee::update(Position4& sourcePosition, int& targetX, int& targetY, bool& 
 
 }
 
-void Melee::render(const std::shared_ptr<Pane>& pane) const
+void Melee::render(const Pane& pane) const
 {
 	if (this->isHeld)
 	{
-		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-		pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
+		pane.console->setChar(renderPosition.x, renderPosition.y, ch);
+		pane.console->setCharForeground(renderPosition.x, renderPosition.y, color);
 	}
 }
 
@@ -372,7 +372,7 @@ void Bullet::update()
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
-void Bullet::render(const std::shared_ptr<Pane>& pane) const
+void Bullet::render(const Pane& pane) const
 {
 	if (WORLD->debugmap->player->mapPosition.floor == startPosition.floor)
 	{
@@ -382,15 +382,15 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 			{
 				//if (WORLD->isInPlayerFov(mapPosition))
 				//{
-					pane->console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::brass); //check later
+					pane.console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::brass); //check later
 
 					if ((startPosition.x == travel.x && startPosition.y == travel.y))
 					{
-						pane->console->setChar(renderPosition.x, renderPosition.y, '*'); //muzzle flash
+						pane.console->setChar(renderPosition.x, renderPosition.y, '*'); //muzzle flash
 					}
 					else
 					{
-						pane->console->setChar(renderPosition.x, renderPosition.y, ch);
+						pane.console->setChar(renderPosition.x, renderPosition.y, ch);
 					}
 				//}
 			}
@@ -398,8 +398,8 @@ void Bullet::render(const std::shared_ptr<Pane>& pane) const
 			{
 				//if (WORLD->isInPlayerFov(mapPosition)) //not in fov when on ground
 				//{
-					pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-					pane->console->setCharForeground(renderPosition.x, renderPosition.y, WORLD->debugmap->getBlock(mapPosition)->tileList[0].foregroundColor);
+					pane.console->setChar(renderPosition.x, renderPosition.y, ch);
+					pane.console->setCharForeground(renderPosition.x, renderPosition.y, WORLD->debugmap->getBlock(mapPosition)->tileList[0].foregroundColor);
 				//}
 			}
 		}
@@ -725,12 +725,12 @@ void Firearm::update(Position4& sourcePosition, int& targetX, int& targetY, bool
 	}
 }
 
-void Firearm::render(const std::shared_ptr<Pane>& pane) const
+void Firearm::render(const Pane& pane) const
 {
 	if (this->isHeld)
 	{
-		pane->console->setChar(renderPosition.x, renderPosition.y, ch);
-		pane->console->setCharForeground(renderPosition.x, renderPosition.y, color);
+		pane.console->setChar(renderPosition.x, renderPosition.y, ch);
+		pane.console->setCharForeground(renderPosition.x, renderPosition.y, color);
 	}
 
 	for (auto& bullet : bulletList)

@@ -50,7 +50,7 @@ void Audio::update()
 {
 	if (soLoud.getActiveVoiceCount() < soundList.size()) //if more sounds are in the list than are actually playing
 	{
-		int excessSounds = soundList.size() - soLoud.getActiveVoiceCount();
+		int excessSounds = (int)soundList.size() - soLoud.getActiveVoiceCount();
 
 		for (int e = 0; e < excessSounds; e++)
 		{

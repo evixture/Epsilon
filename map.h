@@ -71,7 +71,7 @@ struct World //world struct that deals with rendering and updating the map
 
 	void update(); //updates the map
 
-	void render(const std::shared_ptr<Pane> &pane) const; //renders the map
+	void render(const Pane& pane) const; //renders the map
 
 private:
 	//std::shared_ptr<Audio> soundManager;
@@ -82,6 +82,6 @@ private:
 
 	void updateEntities(); //updates all entities
 
-	void renderTiles(const std::shared_ptr<Pane>& pane) const; //renderes all of the tiles
-	void renderCreatures(const std::shared_ptr<Pane>& pane) const; //renders all of the entities
+	void renderTiles(const Pane& pane) const; //renderes all of the tiles
+	void renderCreatures(const Pane& pane) const; //renders all of the entities
 };

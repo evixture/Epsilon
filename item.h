@@ -68,10 +68,10 @@ struct Item //an item that a creature can hold and interact with
 	virtual void changeBarColor(); //updates the inventory bar color
 
 	void updateTool(Position4& mapPosition, int mx, int my, bool isHeld); //updates tool, used when in player inventory
-	void renderTool(const std::shared_ptr<Pane>& pane) const; //renders tool, used then in player inventory
+	void renderTool(const Pane& pane) const; //renders tool, used then in player inventory
 
 	void updateTile(); //used to update tile, used when on the map
-	void renderTile(const std::shared_ptr<Pane>& pane) const; //renders the tile, used when on the map
+	void renderTile(const Pane& pane) const; //renders the tile, used when on the map
 
 private:
 	Position4 tileRenderPosition; //the position of the item on the map window

@@ -1,21 +1,18 @@
 #include "main.hpp"
 
 Position3::Position3()
-	:x(0), y(0), floor(0)
+	: x(0), y(0), floor(0)
 {
 }
 
 Position3::Position3(int x, int y, int floor)
-	:x(x), y(y), floor(floor)
-{}
+	: x(x), y(y), floor(floor)
+{
+}
 
 bool Position3::operator==(const Position3 & compPosition)
 {
-	if (this->x == compPosition.x && this->y == compPosition.y && this->floor == compPosition.floor)
-	{
-		return true;
-	}
-	return false;
+	return (this->x == compPosition.x && this->y == compPosition.y && this->floor == compPosition.floor);
 }
 
 Position4 offsetPosition(Position4 mapPosition, int xOffset, int yOffset)
@@ -37,17 +34,13 @@ Position4::Position4(int x, int y, int height, int floor)
 
 bool Position4::operator==(const Position4& compPosition)
 {
-	if (this->x == compPosition.x && this->y == compPosition.y && this->height == compPosition.height && this->floor == compPosition.floor)
-	{
-		return true;
-	}
-	return false;
+	return (this->x == compPosition.x && this->y == compPosition.y && this->height == compPosition.height && this->floor == compPosition.floor);
 }
 
 //----------------------------------------------------------------------------------------------------
 
-BLine::BLine(int ix, int iy, int tx, int ty)
-	:origx(ix), origy(iy), destx(tx), desty(ty), x(ix), y(iy)
+BLine::BLine(int xStart, int yStart, int xTarget, int yTarget)
+	:origx(xStart), origy(yStart), destx(xTarget), desty(yTarget), x(xStart), y(yStart)
 {
 	deltax = destx - origx;
 	deltay = desty - origy;
@@ -140,16 +133,16 @@ unsigned char heightToBitFlag(int height)
 	return 1 << height;
 }
 
-double getAngle(int ix, int iy, int tx, int ty)
+double getAngle(int xStart, int yStart, int xTarget, int yTarget)
 {
-	double itan = (double)(ty - iy) / (double)(tx - ix);
+	double itan = (double)(yTarget - yStart) / (double)(xTarget - xStart);
 	return atan(itan) * 180.0 / PI;
 }
 
-double getDistance(int ix, int iy, int tx, int ty)
+double getDistance(int xStart, int yStart, int xTarget, int yTarget)
 {
-	double xLength = pow(tx - ix, 2);
-	double yLength = pow(ty - iy, 2);
+	double xLength = pow(xTarget - xStart, 2);
+	double yLength = pow(yTarget - yStart, 2);
 	return sqrt(xLength + yLength);
 }
 
@@ -158,20 +151,20 @@ float getFallTime(int height)
 	return sqrt((2.0f * height) / 16);
 }
 
-Position4 getWalkableArea(Position4 mapPosition)
+Position4 getWalkableArea(Position4 centerPosition)
 {
-	//if center position is valid
-	if (WORLD->debugmap->getWalkability(mapPosition, true) == true)
-	{
-		return mapPosition;
-	}
-
 	/*
 	CHECK ORDER:
 	1 2 3
 	4 0 5
 	6 7 8
 	*/
+
+	//if center position is valid
+	if (WORLD->debugmap->getWalkability(centerPosition, true) == true)
+	{
+		return centerPosition;
+	}
 
 	//search the surrounding area for walkable block
 	for (int y = -1; y <= 1; y++)
@@ -180,9 +173,9 @@ Position4 getWalkableArea(Position4 mapPosition)
 		{
 			if (x != 0 && y != 0) // do not check center position
 			{
-				if (WORLD->debugmap->getWalkability(Position4(mapPosition.x + x, mapPosition.y + y, mapPosition.height, mapPosition.floor), true) == true)
+				if (WORLD->debugmap->getWalkability(Position4(centerPosition.x + x, centerPosition.y + y, centerPosition.height, centerPosition.floor), true) == true)
 				{
-					return Position4(mapPosition.x + x, mapPosition.y + y, mapPosition.height, mapPosition.floor);
+					return Position4(centerPosition.x + x, centerPosition.y + y, centerPosition.height, centerPosition.floor);
 				}
 			}
 		}
@@ -214,10 +207,7 @@ MagazineData::MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmm
 
 bool MagazineData::operator==(const MagazineData& compMag)
 {
-	if (this->ammoType == compMag.ammoType && ammoCapacity == compMag.ammoCapacity && availableAmmo == compMag.availableAmmo && isValid == compMag.isValid)
-	{
-		return true;
-	}
+	if (this->ammoType == compMag.ammoType && ammoCapacity == compMag.ammoCapacity && availableAmmo == compMag.availableAmmo && isValid == compMag.isValid) return true;
 	return false;
 }
 
@@ -246,39 +236,31 @@ void Menu::update()
 {
 	menuSelection = menuList[menuIndex];
 
-	if (INPUT->moveUpKey->isSwitched)
+	if (INPUT->moveUpKey->isSwitched && menuIndex > 0)
 	{
-		if (menuIndex > 0)
-		{
-			menuIndex--;
-
-			AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
-		}
+		menuIndex--;
+		AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
 	}
 
-	if (INPUT->moveDownKey->isSwitched)
-	{
-		if (menuIndex < menuList.size() - 1)
-		{
-			++menuIndex;
-
-			AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
-		}
+	if (INPUT->moveDownKey->isSwitched && (menuIndex < menuList.size() - 1))
+	{	
+		++menuIndex;
+		AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));	
 	}
 }
 
-void Menu::render(const std::shared_ptr<Pane>& pane, const int rx, const int ry) const
+void Menu::render(const Pane& pane, const int xRender, const int yRender) const
 {
 	for (int i = 0; i < menuList.size(); ++i)
 	{
 		if (i == menuIndex)
 		{
-			pane->console->printf(rx, ry + i, "|> %s", menuList[i].c_str());
-			pane->console->setCharForeground(rx + 1, ry + i, ep::color::selector);
+			pane.console->printf(xRender, yRender + i, "|> %s", menuList[i].c_str());
+			pane.console->setCharForeground(xRender + 1, yRender + i, ep::color::selector);
 		}
 		else
 		{
-			pane->console->printf(rx, ry + i, "|  %s", menuList[i].c_str());
+			pane.console->printf(xRender, yRender + i, "|  %s", menuList[i].c_str());
 		}
 	}
 }
