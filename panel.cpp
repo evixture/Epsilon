@@ -167,14 +167,14 @@ void InventoryWindow::render() const
 			{
 				if (container == WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex] && WORLD->debugmap->player->itemIndex == -1)
 				{
-					drawPane.console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name.c_str());
+					drawPane.console->printf(0, drawLineStart, "|>%s", container->item->tool->name.c_str());
 					drawPane.console->setCharForeground(1, drawLineStart, ep::color::selector); //color the cursor
-					drawPane.console->setCharForeground(0, drawLineStart, WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex]->containerItem->barColor); //color the bar
+					drawPane.console->setCharForeground(0, drawLineStart, WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex]->item->barColor); //color the bar
 				}
 				else
 				{
-					drawPane.console->printf(0, drawLineStart, "| %s", container->containerItem->tool->name.c_str());
-					drawPane.console->setCharForeground(0, drawLineStart, WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex]->containerItem->barColor); //color the bar
+					drawPane.console->printf(0, drawLineStart, "| %s", container->item->tool->name.c_str());
+					drawPane.console->setCharForeground(0, drawLineStart, WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex]->item->barColor); //color the bar
 				}
 				++drawLine;
 			}
@@ -377,12 +377,12 @@ void InventoryFullWindow::render() const
 			{
 				if (container == WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex] && WORLD->debugmap->player->itemIndex == -1)
 				{
-					drawPane.console->printf(0, drawLineStart, "|>%s", container->containerItem->tool->name.c_str());
+					drawPane.console->printf(0, drawLineStart, "|>%s", container->item->tool->name.c_str());
 					drawPane.console->setCharForeground(1, drawLineStart, ep::color::selector);
 				}
 				else
 				{
-					drawPane.console->printf(0, drawLineStart, "| %s", container->containerItem->tool->name.c_str());
+					drawPane.console->printf(0, drawLineStart, "| %s", container->item->tool->name.c_str());
 
 				}
 				++drawLine;
@@ -514,11 +514,11 @@ void ProximityWindow::render() const
 
 	for (auto& container : proximityContainerList)
 	{
-		if (container->containerItem->mapPosition.floor == WORLD->debugmap->player->mapPosition.floor)
+		if (container->item->mapPosition.floor == WORLD->debugmap->player->mapPosition.floor)
 		{
-			if (container->containerItem->distToEnt < 5 && WORLD->isInPlayerFov(container->containerItem->mapPosition))
+			if (container->item->distToEnt < 5 && WORLD->isInPlayerFov(container->item->mapPosition))
 			{
-				drawPane.console->printf(0, line, "|%s", container->containerItem->tool->name.c_str());
+				drawPane.console->printf(0, line, "|%s", container->item->tool->name.c_str());
 				++line;
 			}
 		}
@@ -568,12 +568,12 @@ void ActionWindow::render() const
 			{
 				if (action == actionManager->selectedAction)
 				{
-					drawPane.console->printf(0, line, "|>%s", action->name.c_str());
+					drawPane.console->printf(0, line, "|>%s", action.name.c_str());
 					drawPane.console->setCharForeground(1, line, ep::color::selector);
 				}
 				else
 				{
-					drawPane.console->printf(0, line, "| %s", action->name.c_str());
+					drawPane.console->printf(0, line, "| %s", action.name.c_str());
 				}
 
 				++line;

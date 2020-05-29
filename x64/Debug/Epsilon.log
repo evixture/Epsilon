@@ -1,5 +1,8 @@
-﻿  map.cpp
-  panel.cpp
+﻿  gui.cpp
+  input.cpp
+  item.cpp
+  utility.cpp
   window.cpp
   Generating Code...
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\item.cpp(127): warning C4172: returning address of local variable or temporary: nullMag
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 Pane::Pane(int consoleWidth, int consoleHeight, TCODColor backgroundColor, TCODColor foregroundColor)
-	:consoleWidth(consoleWidth), consoleHeight(consoleHeight), backgroundColor(backgroundColor), foregroundColor(foregroundColor)
+	: consoleWidth(consoleWidth), consoleHeight(consoleHeight), backgroundColor(backgroundColor), foregroundColor(foregroundColor)
 {
 	console = new TCODConsole(consoleWidth, consoleHeight);
 }
@@ -32,12 +32,9 @@ void Ribbon::render() const
 //----------------------------------------------------------------------------------------------------
 
 Window::Window(int consoleWidth, int consoleHeight, std::string panelName, int rx, int ry)
-	:consoleWidth(consoleWidth), consoleHeight(consoleHeight), renderpos(Position3(rx, ry, NULL)), 
+	: consoleWidth(consoleWidth), consoleHeight(consoleHeight), renderpos(Position3(rx, ry, NULL)), 
 	mainPane(Pane(consoleWidth, consoleHeight, ep::color::rootBG, ep::color::rootFG)), ribbon(Ribbon(panelName, consoleWidth)), drawPane(Pane(consoleWidth, consoleHeight - 1, ep::color::drawBG, ep::color::drawFG))
 {
-	//mainPane = std::make_shared<Pane>(consoleWidth, consoleHeight, ep::color::rootBG, ep::color::rootFG);
-	//ribbon = std::make_shared<Ribbon>(panelName, consoleWidth);
-	//drawPane = std::make_shared<Pane>(consoleWidth, consoleHeight - 1, ep::color::drawBG, ep::color::drawFG);
 }
 
 void Window::clearWindow() const

@@ -720,7 +720,7 @@ void World::update()
 
 	for (auto& container : debugmap->mapContainerList)
 	{
-		container->containerItem->updateTile();
+		container->item->updateTile();
 	}
 
 	//AUDIO
@@ -822,9 +822,9 @@ void World::render(const Pane& pane) const
 
 	for (auto& container : debugmap->mapContainerList)
 	{
-		if (container->containerItem->mapPosition.floor == debugmap->player->mapPosition.floor)
+		if (container->item->mapPosition.floor == debugmap->player->mapPosition.floor)
 		{
-			container->containerItem->renderTile(pane);
+			container->item->renderTile(pane);
 		}
 	}
 

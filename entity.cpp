@@ -22,7 +22,7 @@ Creature::Creature(Position4 position, int ch, std::string name, TCODColor color
 	moveClock(0), moveSpeed(0), baseMoveTime(0.0f)
 {
 	inventory.push_back(std::make_shared<Container>(ep::container::hands(0, 0, 0)));
-	selectedItem = inventory[0]->containerItem;
+	selectedItem = inventory[0]->item;
 
 	//selectedMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 }
@@ -293,9 +293,9 @@ void Player::pickUpItem()
 
 	for (int i = 0; i < WORLD->debugmap->mapContainerList.size(); ++i)
 	{
-		if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->containerItem->mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->containerItem->mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->containerItem->mapPosition.floor == mapPosition.floor)
+		if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->item->mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->item->mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->item->mapPosition.floor == mapPosition.floor)
 		{
-			GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapContainerList[i]->containerItem->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
+			GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapContainerList[i]->item->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 
 			inventory.push_back(WORLD->debugmap->mapContainerList[i]);
 			WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
@@ -339,7 +339,7 @@ void Player::dropItem()
 		{
 			if (selectedItem->type != Item::ItemType::HAND)
 			{
-				GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->containerItem->tool->name, LogWindow::Message::MessageLevel::LOW));
+				GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->item->tool->name, LogWindow::Message::MessageLevel::LOW));
 			
 				WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
 
@@ -413,7 +413,7 @@ void Player::filterIndexes()
 			}
 			else if (itemIndex == -1)
 			{
-				selectedItem = inventory[containerIndex]->containerItem;
+				selectedItem = inventory[containerIndex]->item;
 			}
 		}
 	}
@@ -480,12 +480,12 @@ void Player::updateTools()
 			if (itemIndex == -1 && containerIndex == i) //if container is the held item
 			{
 				//special update the held container
-				inventory[i]->containerItem->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, true); //uses the map position of the mouse
+				inventory[i]->item->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, true); //uses the map position of the mouse
 			}
 			else
 			{
 				//normal update the container
-				inventory[i]->containerItem->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, false);
+				inventory[i]->item->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, false);
 			}
 
 			for (int j = 0; j < inventory[i]->itemList.size(); j++) //stops when i gets to empty container list
@@ -608,7 +608,7 @@ void Player::render(const Pane& pane) const
 	{
 		for (auto& container : inventory)
 		{
-			container->containerItem->renderTool(pane);
+			container->item->renderTool(pane);
 
 			for (auto& tool : container->itemList)
 			{

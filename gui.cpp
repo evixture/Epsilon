@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 Gui::Gui(int windowX, int windowY)
-	:activeWindow(Gui::ActiveWindow::STARTUPSPLASH), activeLogWindow(Gui::ActiveLogWindow::LOG)
+	: activeWindow(Gui::ActiveWindow::STARTUPSPLASH), activeLogWindow(Gui::ActiveLogWindow::LOG)
 {
 	windowList.push_back(worldWindow		= std::make_shared<MapWindow>		(60, 61, 1, 2));
 	windowList.push_back(playerWindow		= std::make_shared<PlayerWindow>	(10, 10, 63, 2));
@@ -12,24 +12,17 @@ Gui::Gui(int windowX, int windowY)
 	windowList.push_back(actionWindow		= std::make_shared<ActionWindow>	(30, 12, 89, 13));
 	windowList.push_back(infoWindow			= std::make_shared<InfoWindow>		(56, 24, 63, 39));
 
-	pauseWindow =			std::make_shared<PauseWindow>			(118, 61, 1, 2);
+	pauseWindow			=	std::make_shared<PauseWindow>			(118, 61, 1, 2);
 	startupSplashWindow =	std::make_shared<SplashWindow>			(118, 61, 1, 2);
 	inventoryFullWindow =	std::make_shared<InventoryFullWindow>	(55, 61, 64, 2);
 }
 
-
 void Gui::update()
 {
-	if (INPUT->inventoryKey->isSwitched)
+	if (INPUT->inventoryKey->isSwitched) //move to input?
 	{
-		if (activeWindow == Gui::ActiveWindow::INVENTORYFULL)
-		{
-			activeWindow = Gui::ActiveWindow::NONE;
-		}
-		else if (activeWindow != Gui::ActiveWindow::INVENTORYFULL && activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
-		{
-			activeWindow = Gui::ActiveWindow::INVENTORYFULL;
-		}
+		if (activeWindow == Gui::ActiveWindow::INVENTORYFULL)															activeWindow = Gui::ActiveWindow::NONE;
+		else if (activeWindow != Gui::ActiveWindow::INVENTORYFULL && activeWindow != Gui::ActiveWindow::STARTUPSPLASH)	activeWindow = Gui::ActiveWindow::INVENTORYFULL;
 	}
 
 	if (activeWindow == Gui::ActiveWindow::NONE)
@@ -41,14 +34,8 @@ void Gui::update()
 		proximityWindow->update();
 		actionWindow->update();
 
-		if (activeLogWindow == Gui::ActiveLogWindow::LOG)
-		{
-			logWindow->update();
-		}
-		else if (activeLogWindow == Gui::ActiveLogWindow::INFO)
-		{
-			infoWindow->update();
-		}
+		if		(activeLogWindow == Gui::ActiveLogWindow::LOG)	logWindow->update();
+		else if (activeLogWindow == Gui::ActiveLogWindow::INFO) infoWindow->update();
 	}
 	else if (activeWindow == Gui::ActiveWindow::STARTUPSPLASH)
 	{
@@ -72,12 +59,13 @@ void Gui::renderMouse() const
 		if (INPUT->mouse.cx >= 1 && INPUT->mouse.cx <= 60)
 		{
 			if (INPUT->mouse.cy >= 3 && INPUT->mouse.cy <= 60)
-			TCODConsole::root->setCharBackground(INPUT->mouse.cx, INPUT->mouse.cy, 
-				worldWindow->world->debugmap->getBlock(Position3(INPUT->mouse.cx - 1 + worldWindow->world->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, WORLD->debugmap->player->mapPosition.floor))
-				->tileList[0].backgroundColor - TCODColor::darkestGrey);  //get bg color of the tile
+			{
+				Position3 position = Position3(INPUT->mouse.cx + worldWindow->world->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.floor);
+				TCODColor color = worldWindow->world->debugmap->getBlock(position)->tileList[0].backgroundColor;
+				TCODConsole::root->setCharBackground(INPUT->mouse.cx, INPUT->mouse.cy, color - TCODColor::darkestGrey);
+			}
 		}
 	}
-
 	TCODConsole::root->setChar(INPUT->mouse.cx, INPUT->mouse.cy, '+');
 }
 
@@ -92,14 +80,8 @@ void Gui::render() const
 		proximityWindow->render();
 		actionWindow->render();
 
-		if (activeLogWindow == Gui::ActiveLogWindow::LOG)
-		{
-			logWindow->render();
-		}
-		else if (activeLogWindow == Gui::ActiveLogWindow::INFO)
-		{
-			infoWindow->render();
-		}
+		if		(activeLogWindow == Gui::ActiveLogWindow::LOG)	logWindow->render();
+		else if (activeLogWindow == Gui::ActiveLogWindow::INFO) infoWindow->render();
 	}
 	else if (activeWindow == Gui::ActiveWindow::STARTUPSPLASH)
 	{

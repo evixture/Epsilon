@@ -28,7 +28,7 @@ Position4::Position4()
 }
 
 Position4::Position4(int x, int y, int height, int floor)
-	:Position3(x, y, floor), height(height)
+	: Position3(x, y, floor), height(height)
 {
 }
 
@@ -40,7 +40,7 @@ bool Position4::operator==(const Position4& compPosition)
 //----------------------------------------------------------------------------------------------------
 
 BLine::BLine(int xStart, int yStart, int xTarget, int yTarget)
-	:origx(xStart), origy(yStart), destx(xTarget), desty(yTarget), x(xStart), y(yStart)
+	: origx(xStart), origy(yStart), destx(xTarget), desty(yTarget), x(xStart), y(yStart)
 {
 	deltax = destx - origx;
 	deltay = desty - origy;
@@ -212,7 +212,7 @@ bool MagazineData::operator==(const MagazineData& compMag)
 }
 
 Clock::Clock(float timeBetweenUpdates)
-	:numCalls(0), timeBetweenUpdates(timeBetweenUpdates)
+	: numCalls(0), timeBetweenUpdates(timeBetweenUpdates)
 {
 }
 
@@ -227,7 +227,7 @@ void Clock::addTime(float seconds)
 }
 
 Menu::Menu(std::vector<std::string> menuList)
-	:menuList(menuList), menuIndex(0)
+	: menuList(menuList), menuIndex(0)
 {
 	menuSelection = menuList[menuIndex];
 }
