@@ -7,92 +7,92 @@
 	|		|	Action Manager
 	|		|	L	Action
 */
-struct Action //handles item actions
+struct Action
 {
-	enum class Type {DROP, RELOAD, CHANGEFIREMODE, EQUIP, MELEE} type; //main type of action, enum for easy comparison
+	enum class Type {DROP, RELOAD, CHANGEFIREMODE, EQUIP, MELEE} type;
 
-	std::string name; //the string name of the action so it can be rendered in action pane
+	std::string name;
 
-	Action(std::string name, Type actionType); //action constructor that takes string name, function, and action type
+	Action(std::string name, Type actionType);
 
 	void update();
 
 	bool operator == (const Action& compAction);
 };
 
-struct ActionManager //manages all of the actions of an item
+struct ActionManager
 {
-	std::vector<Action> actionList; //list of actions for an item
-	Action selectedAction; //the selected action of the item
+	std::vector<Action> actionList;
+	Action selectedAction;
 
-	ActionManager(std::vector<Action> actionList); //constructor of action manager that takes a list of actions
+	ActionManager(std::vector<Action> actionList);
 
 	void update();
 
-	void moveSelectorUp(); //moves the action index down in value
-	void moveSelectorDown(); //moves the action index up in value
+	void moveSelectorUp();
+	void moveSelectorDown();
 
-	void doAction(Creature* newOwner); //calls the action of the selected action
+	void doAction(Creature* newOwner);
 
 private:
-	unsigned char actionIndex; //the index of the selected item in the action list
+	unsigned char actionIndex;
 };
 
-struct Item //an item that a creature can hold and interact with
+struct Item
 {
 	enum class ItemType {HAND, NORMAL, FIREARM, MAGAZINE, ARMOR, MELEE} type;
 
-	unsigned char size; //size that the item tekes up in the inventory
-	double distToEnt; //the distance from the player to the item, used to highlight the item when the player is in proximity
+	unsigned char size;
+	double distToEnt;
 	
-	TCODColor barColor; //color of the bar to render on the side of the inventory
+	TCODColor barColor;
 
-	Position4 mapPosition; //the position of the item on the map
+	Position4 mapPosition;
 
-	std::shared_ptr<Block> tile; //the tile component used when the item is on the map, needs to be pointer
-	std::shared_ptr<Tool> tool; //the tool component used when the item is in the player's inventory, need to be pointer
+	std::shared_ptr<Block> tile;
+	std::shared_ptr<Tool> tool;
 
-	std::shared_ptr<ActionManager> actionManager; //used to activate more advanced interactions with the item, needs to be pointer
+	std::shared_ptr<ActionManager> actionManager;
 
-	Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, ItemType type); //item constructor that takes a size, tile, too, position, and a player used for action manager
+	Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, ItemType type);
 
-	virtual MagazineData& getMagazineData(); //used to get the important data of the magazine, returns generic magazine when called from item
-	virtual void changeBarColor(); //updates the inventory bar color
+	virtual MagazineData& getMagazineData();
+	virtual void changeBarColor();
 
-	void updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHeld); //updates tool, used when in player inventory
-	void renderTool(const Pane& pane) const; //renders tool, used then in player inventory
+	void updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHeld);
+	void renderTool(const Pane& pane) const;
 
-	void updateTile(); //used to update tile, used when on the map
-	void renderTile(const Pane& pane) const; //renders the tile, used when on the map
+	void updateTile();
+	void renderTile(const Pane& pane) const;
 
 private:
-	void createActionManager(); //makes an action manager action list based on the item type
-	Position4 tileRenderPosition; //the position of the item on the map window
+	void createActionManager();
+	Position4 tileRenderPosition;
 };
 
-struct MagazineItem : public Item //magazine derived class of base item
+struct MagazineItem : public Item
 {
-	MagazineData magazineData; //contains all of the important data of the magazine
+	MagazineData magazineData;
 
-	MagazineItem(Item item, MagazineData magazineData); //magazine item constructor that takes an item and magazine data
+	MagazineItem(Item item, MagazineData magazineData);
 
-	MagazineData& getMagazineData(); //returns the magazine data of this class
+	MagazineData& getMagazineData();
 
 	void changeBarColor();
 };
 
-struct Container //container, used to hold items in the inventory
+struct Container
 {
-	unsigned char itemCapacity; //the maximum units of items the container can hold 
-	unsigned char currentSize; //the current size used up of all of the items in the container
+	unsigned char itemCapacity;
+	unsigned char currentSize;
 
-	std::shared_ptr<Item> item; //item representation of the container
+	std::shared_ptr<Item> item;
 
-	std::vector<std::shared_ptr<Item>> itemList; //the list of all of the items in the container
+	std::vector<std::shared_ptr<Item>> itemList;
 
-	Container(int itemCapacity, std::shared_ptr<Item> item); //container constructor that takes a capacity and a container item
+	Container(int itemCapacity, std::shared_ptr<Item> item);
 
-	bool addItem(std::shared_ptr<Item> item); //adds an item to the container
+	bool addItem(std::shared_ptr<Item> item);
 };
 
 namespace ep

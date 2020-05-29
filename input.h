@@ -11,8 +11,8 @@ struct Button
 {
 	Button();
 
-	bool isDown; //if the button is currently down
-	bool isSwitched; //if the button has been pressed down (lasts one cycle)
+	bool isDown;
+	bool isSwitched;
 
 	virtual void update() = 0;
 	
@@ -23,28 +23,28 @@ protected:
 struct KeyboardButton : public Button
 {
 	KeyboardButton(sf::Keyboard::Key key);
-	KeyboardButton() {}
+	KeyboardButton();
 
 	void update();
 
 private:
-	sf::Keyboard::Key button; //the keyboard button
+	sf::Keyboard::Key button;
 };
 
 struct MouseButton : public Button
 {
 	MouseButton(sf::Mouse::Button button);
-	MouseButton() {}
+	MouseButton();
 
 	void update();
 
 private:
-	sf::Mouse::Button button; //the mouse button
+	sf::Mouse::Button button;
 };
 
-struct Input //handles all of the mouse and keyboard input
+struct Input
 {
-	TCOD_mouse_t mouse; //handles tcod mouse events
+	TCOD_mouse_t mouse;
 
 	std::shared_ptr<KeyboardButton> moveUpKey; //key to move the player / menu selector up
 	std::shared_ptr<KeyboardButton> moveDownKey; //key to move the player / menu selector down
@@ -79,13 +79,13 @@ struct Input //handles all of the mouse and keyboard input
 	std::shared_ptr<MouseButton> primaryUseButton; //key to use the primary action of the selected item
 	std::shared_ptr<MouseButton> alternateUseButton; //key to use the alternate use of the selected item
 
-	Input(); //input constructor that takes no arguments
+	Input();
 
-	void update(); //updates all of the buttons and events that takes player
+	void update();
 
 private:
 	TCOD_event_t keyEvent; //handles tcod events
 	TCOD_key_t keyboard; //handles tcod key events
 
-	std::vector<std::shared_ptr<Button>> buttonList; //list of all keys availible for input
+	std::vector<std::shared_ptr<Button>> buttonList;
 };

@@ -10,93 +10,93 @@ constexpr auto PI = 3.14159265;
 #define MAPPANE		engine->gui->worldWindow
 #define WORLD		engine->gui->worldWindow->world
 
-struct Position3 //position struct with x, y, and z dimensions
+struct Position3
 {
-	int x; //x coordinate
-	int y; //y coordinate
-	int floor; //z or height coordinate
+	int x;
+	int y;
+	int floor;
 
 	Position3();
-	Position3(int x, int y, int floor); //position constructor that takes x, y, and floor ints
+	Position3(int x, int y, int floor);
 
 	bool operator == (const Position3& compPosition);
 };
 
 struct Position4 : public Position3
 {
-	char height; //the height of the creature's view (NOT THE FLOOR)
+	char height;
 
 	Position4();
-	Position4(int x, int y, int height, int floor); //position constructor that takes x, y, and floor ints
+	Position4(int x, int y, int height, int floor);
 
 	bool operator == (const Position4& compPosition);
 };
 
-struct BLine //line algorithm used for bullet paths
+struct BLine
 {
-	int x; //x position on the line
-	int y; //y position on the line
+	int x;
+	int y;
 
-	BLine(int startx, int starty, int targetx, int targety); //bline constructor that takes start x and y, and target x and y
+	BLine(int startx, int starty, int targetx, int targety);
 
-	void step(); //steps forward on the line
+	void step();
 
-	bool end(); //checks if the line step has reached the end
+	bool end();
 
 private:
-	int stepx,  stepy,  e, //used for line calculations
+	int stepx,  stepy,  e,
 		deltax, deltay, origx,
 		origy,  destx,  desty;
 };
 
 struct Clock
 {
-	float numCalls; //the number of calls for the function that uses the clock; is greater than 1 if a function needs to be called multiple times for low fps
-	float timeBetweenUpdates; //the time that should be between each call
+	float numCalls;
+	float timeBetweenUpdates;
 
 	Clock(float timeBetweenUpdates);
 
-	void tickUp(); //tick up the clock based on the last frame time
-	void addTime(float seconds); //adds time by decreasing the numCalls
+	void tickUp();
+	void addTime(float seconds);
 };
 
 
-struct MagazineData //contains all of the important data for magazines
+struct MagazineData
 {
-	enum class AmmoType { NONE, FOURTYFIVEACP, FIVEPOINTFIVESIX } ammoType; //the type of ammo that the magazine uses
+	enum class AmmoType { NONE, FOURTYFIVEACP, FIVEPOINTFIVESIX } ammoType;
 
-	unsigned short int ammoCapacity; //the total capacity of the magazine
-	int availableAmmo; //how much ammo is availible for use in the magazine
+	unsigned short int ammoCapacity;
+	int availableAmmo;
 
 	int velocity;
 	int mass;
 
-	bool isValid; //if the magazine is valid - actually contains ammo
+	bool isValid;
 
-	MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid = true); //magazine data constructor that takes ammo type, capacity, availible ammo, and validity
+	MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid = true);
 
 	bool operator == (const MagazineData& compMag);
 };
 
 struct Menu
 {
-	std::string menuSelection; //the name of the menu item that is selected
+	std::string menuSelection;
 
 	Menu(std::vector<std::string> menuList);
 
-	void update(); //updates the menu selection
-	void render(const Pane& pane, const int rx, const int ry) const; //renders the menu on a pane at render coords
+	void update();
+	void render(const Pane& pane, const int rx, const int ry) const;
 
 private:
-	unsigned int menuIndex; //the index of the menu selection in the menu list
-	std::vector<std::string> menuList; //the list of all of the posible menu entries //need a better system, maybe pair?
+	unsigned int menuIndex;
+	std::vector<std::string> menuList;
 };
 
-unsigned char	heightToBitFlag(int height); //translates the height of a creature to be used for a block's enum flag
-double			getAngle(int ix, int iy, int tx, int ty); //gets the angle from 2 sets of coordinates
-double			getDistance(int ix, int iy, int tx, int ty); //gets the distance from 2 sets of coordinates
-float			getFallTime(int height); //used to get the time to fall for a bullet
-Position4		offsetPosition(Position4 mapPosition, int xOffset, int yOffset); //used to calculate render position from map offsets
+unsigned char	heightToBitFlag(int height);
+double			getAngle(int ix, int iy, int tx, int ty);
+double			getDistance(int ix, int iy, int tx, int ty);
+float			getFallTime(int height);
+Position4		offsetPosition(Position4 mapPosition, int xOffset, int yOffset);
 Position4		getWalkableArea(Position4 mapPosition);
 
 namespace ep

@@ -1,14 +1,20 @@
 #include "main.hpp"
 
+/*
+	Settings
+	|	Font
+*/
+
 struct Font //font class that holds the needed data to set the tcod font
 {
-	std::string filePath; //string file path to the font
 	std::string name; //name of the font
 
+	std::string filePath; //string file path to the font
 	unsigned char format; //bit mask format of the font
 
 	unsigned char charH; //height of font in characters
 	unsigned char charW; //width of font in characters
+
 	std::string xDim; //x dimension of font
 	std::string yDim; //y dimension of font
 
@@ -20,7 +26,6 @@ struct Settings //settings class that hold most of the settings for the game and
 	int screenCharWidth; //total width of root window in characters
 	int screenCharHeight; //total height of root window in characters
 
-	sf::Clock systemClock; //sytem clock used to get the last frame time
 	sf::Time lastFrameTime; //the time between the last frame and the current frame
 
 	unsigned int fpsCount; //the amount of frames pushed in the last second increment
@@ -42,7 +47,7 @@ struct Settings //settings class that hold most of the settings for the game and
 	void render() const; //renders settings to root
 
 private:
-	unsigned int maxFps; //fps cap for tcod
+	sf::Clock systemClock; //sytem clock used to get the last frame time
 
 	TCOD_renderer_t renderer; //type of library used to render the window
 	std::string windowTitle; //string title of the main window

@@ -7,7 +7,8 @@ Pane::Pane(int consoleWidth, int consoleHeight, TCODColor backgroundColor, TCODC
 }
 
 Pane::~Pane()
-{}
+{
+}
 
 void Pane::render() const
 {

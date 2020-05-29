@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 MapWindow::MapWindow(int consoleWidth, int consoleHeight, int rx, int ry)
-	:Window(consoleWidth, consoleHeight, "World", rx, ry)
+	: Window(consoleWidth, consoleHeight, "World", rx, ry)
 {
 	//actual map dims should be 60x60
 	mapSidePanel = std::make_shared<Pane>(1, 61, ep::color::ribbonBG, ep::color::ribbonFG);
@@ -27,20 +27,14 @@ void MapWindow::render() const
 //----------------------------------------------------------------------------------------------------
 
 StatusWindow::StatusWindow(int consoleWidth, int consoleHeight, int rx, int ry)
-	:Window(consoleWidth, consoleHeight, "Status", rx, ry), displayHealth(0), displayArmor(0)
-{}
+	: Window(consoleWidth, consoleHeight, "Status", rx, ry), displayHealth(0), displayArmor(0)
+{
+}
 
 void StatusWindow::update()
 {
-	if (displayHealth != WORLD->debugmap->player->health)
-	{
-		displayHealth = WORLD->debugmap->player->health;
-	}
-
-	if (displayArmor != WORLD->debugmap->player->equippedArmor.defense)
-	{
-		displayArmor =  WORLD->debugmap->player->equippedArmor.defense;
-	}
+	if (displayHealth != WORLD->debugmap->player->health) displayHealth					= WORLD->debugmap->player->health;
+	if (displayArmor != WORLD->debugmap->player->equippedArmor.defense) displayArmor	= WORLD->debugmap->player->equippedArmor.defense;
 }
 
 void StatusWindow::render() const
@@ -83,8 +77,9 @@ void StatusWindow::render() const
 //----------------------------------------------------------------------------------------------------
 
 PlayerWindow::PlayerWindow(int consoleWidth, int consoleHeight, int rx, int ry)
-	:Window(consoleWidth, consoleHeight, "Player", rx, ry), playerSpeed(0), playerStance(0)
-{}
+	: Window(consoleWidth, consoleHeight, "Player", rx, ry), playerSpeed(0), playerStance(0)
+{
+}
 
 void PlayerWindow::update()
 {
@@ -92,7 +87,7 @@ void PlayerWindow::update()
 
 	if (!(INPUT->moveUpKey->isDown) && !(INPUT->moveDownKey->isDown) && !(INPUT->moveLeftKey->isDown) && !(INPUT->moveRightKey->isDown)) playerSpeed = 0;
 	else if (WORLD->debugmap->player->baseMoveTime == .25f) playerSpeed = 3;
-	else if (WORLD->debugmap->player->baseMoveTime == .5f) playerSpeed = 2;
+	else if (WORLD->debugmap->player->baseMoveTime == .5f)	playerSpeed = 2;
 	else if (WORLD->debugmap->player->baseMoveTime == 1.0f) playerSpeed = 1;
 }
 
@@ -104,7 +99,6 @@ void PlayerWindow::renderSpeedAndStance() const
 
 	drawPane.console->setChar(1, 8, '[');
 	drawPane.console->setChar(8, 8, ']');
-
 
 	for (int x = 0; x < playerSpeed * 2; x++) //draw speed graph
 	{
@@ -141,15 +135,13 @@ void PlayerWindow::render() const
 //----------------------------------------------------------------------------------------------------
 
 InventoryWindow::InventoryWindow(int consoleWidth, int consoleHeight, int rx, int ry)
-	:Window(consoleWidth, consoleHeight, "Inventory", rx, ry)
-{}
+	: Window(consoleWidth, consoleHeight, "Inventory", rx, ry)
+{
+}
 
 void InventoryWindow::update()
 {
-	if (inventoryItemList != WORLD->debugmap->player->inventory)
-	{
-		inventoryItemList = WORLD->debugmap->player->inventory;
-	}
+	if (inventoryItemList != WORLD->debugmap->player->inventory) inventoryItemList = WORLD->debugmap->player->inventory;
 }
 
 void InventoryWindow::render() const
@@ -210,7 +202,6 @@ void InventoryWindow::render() const
 				}
 			}
 		}
-
 		drawLineStart += container->itemCapacity + 1;
 		drawLine = drawLineStart;
 	}
@@ -221,23 +212,16 @@ void InventoryWindow::render() const
 //----------------------------------------------------------------------------------------------------
 
 SplashWindow::SplashWindow(int consoleWidth, int consoleHeight, int rx, int ry)
-	:Window(consoleWidth, consoleHeight, "EPSILON", rx, ry), menu(Menu(std::vector<std::string>{"Start", "Exit"})), slashClock(Clock(.03f)), numSlashIndexes(57) //best at higher numbers
+	: Window(consoleWidth, consoleHeight, "EPSILON", rx, ry), menu(Menu(std::vector<std::string>{"Start", "Exit"})), slashClock(Clock(.03f)), numSlashIndexes(57) //best at higher numbers
 {
-	for (int i = 0; i < (drawPane.consoleWidth * drawPane.consoleHeight) / 4; i++)
-	{
-		slashList.push_back(0);
-	}
-
+	for (int i = 0; i < (drawPane.consoleWidth * drawPane.consoleHeight) / 4; i++) slashList.push_back(0);
 	
 	for (int i = 0; i < numSlashIndexes; i++)
 	{
 		int val;
 
 		if (i == 0) val = 0;
-		else
-		{
-			val = (int)(slashList.size() / numSlashIndexes) * i;
-		}
+		else		val = (int)(slashList.size() / numSlashIndexes) * i;
 
 		slashIndexList.push_back(val);
 	}
@@ -253,19 +237,10 @@ void SplashWindow::update()
 		{
 			slashList[index]++;
 
-			if (slashList[index] > 3)
-			{
-				slashList[index] = 0;
-			}
+			if (slashList[index] > 3) slashList[index] = 0;
 		
-			if (index + 1 < slashList.size())
-			{
-				index++;
-			}
-			else
-			{
-				index = 0;
-			}
+			if (index + 1 < slashList.size())	index++;
+			else								index = 0;
 		}
 	}
 
@@ -273,14 +248,8 @@ void SplashWindow::update()
 
 	if (INPUT->worldInteractKey->isSwitched)
 	{
-		if (menu.menuSelection == "Start")
-		{
-			GUI->activeWindow = Gui::ActiveWindow::NONE;
-		}
-		else if (menu.menuSelection == "Exit")
-		{
-			engine->gamestate = Engine::Gamestate::EXIT;
-		}
+		if		(menu.menuSelection == "Start") GUI->activeWindow = Gui::ActiveWindow::NONE;
+		else if (menu.menuSelection == "Exit")	engine->gamestate = Engine::Gamestate::EXIT;
 	}
 }
 
@@ -299,7 +268,6 @@ void SplashWindow::renderLargeLogo() const
 
 void SplashWindow::renderMenuOptions() const
 {
-	//menu render
 	menu.render(drawPane, 50, 50);
 }
 
@@ -307,7 +275,7 @@ void SplashWindow::render() const
 {
 	clearWindow();
 
-	int slashWidth = ((drawPane.consoleWidth / 2) - (drawPane.consoleWidth % 2));
+	int slashWidth	= ((drawPane.consoleWidth / 2)	- (drawPane.consoleWidth % 2));
 	int slashHeight = ((drawPane.consoleHeight / 2) - (drawPane.consoleHeight % 2));
 
 	for (int y = 0; y < slashHeight; y++)
@@ -351,15 +319,13 @@ void SplashWindow::render() const
 //----------------------------------------------------------------------------------------------------
 
 InventoryFullWindow::InventoryFullWindow(int consoleWidth, int consoleHeight, int rx, int ry)
-	:Window(consoleWidth, consoleHeight, "Inventory", rx, ry)
-{}
+	: Window(consoleWidth, consoleHeight, "Inventory", rx, ry)
+{
+}
 
 void InventoryFullWindow::update()
-{
-	if (inventoryItemList != WORLD->debugmap->player->inventory)
-	{
-		inventoryItemList = WORLD->debugmap->player->inventory;
-	}
+{ 
+	if (inventoryItemList != WORLD->debugmap->player->inventory) inventoryItemList = WORLD->debugmap->player->inventory;
 }
 
 void InventoryFullWindow::render() const
@@ -383,7 +349,6 @@ void InventoryFullWindow::render() const
 				else
 				{
 					drawPane.console->printf(0, drawLineStart, "| %s", container->item->tool->name.c_str());
-
 				}
 				++drawLine;
 			}
@@ -417,7 +382,6 @@ void InventoryFullWindow::render() const
 				}
 			}
 		}
-
 		drawLineStart += container->itemCapacity + 1;
 		drawLine = drawLineStart;
 	}
@@ -428,18 +392,19 @@ void InventoryFullWindow::render() const
 //----------------------------------------------------------------------------------------------------
 
 LogWindow::Message::Message(std::string message, MessageLevel messageLevel)
-	:message(message), messageLevel(messageLevel)
+	: message(message), messageLevel(messageLevel)
 {
-	if (messageLevel == Message::MessageLevel::HIGH) color = ep::color::messageHigh;
+	if		(messageLevel == Message::MessageLevel::HIGH)	color = ep::color::messageHigh;
 	else if (messageLevel == Message::MessageLevel::MEDIUM) color = ep::color::messageMed;
-	else color = ep::color::messageLow;
+	else													color = ep::color::messageLow;
 }
 
 //----------------------------------------------------------------------------------------------------
 
 LogWindow::LogWindow(int consoleWidth, int consoleHeight, int rx, int ry)
-	:Window(consoleWidth, consoleHeight, "Log", rx, ry)
-{}
+	: Window(consoleWidth, consoleHeight, "Log", rx, ry)
+{
+}
 
 void LogWindow::pushMessage(Message message)
 {
@@ -448,10 +413,7 @@ void LogWindow::pushMessage(Message message)
 
 void LogWindow::update()
 {
-	while (messageList.size() > consoleHeight)
-	{
-		messageList.erase(messageList.begin() + messageList.size() - 1);
-	}
+	while (messageList.size() > consoleHeight) messageList.erase(messageList.begin() + messageList.size() - 1);
 }
 
 void LogWindow::render() const
@@ -461,25 +423,13 @@ void LogWindow::render() const
 	int line = 0;
 	for (int i = 0; i < messageList.size(); ++i)
 	{
-		if (i == 0)
-		{
-			drawPane.console->printf(0, line, "|>%s", messageList[i].message.c_str());
-		}
-		else
-		{
-			drawPane.console->printf(0, line, "| %s",  messageList[i].message.c_str());
-		}
+		if (i == 0) drawPane.console->printf(0, line, "|>%s", messageList[i].message.c_str());
+		else		drawPane.console->printf(0, line, "| %s", messageList[i].message.c_str());
 
 		for (int j = 0; j < drawPane.consoleWidth; ++j) //set string message color
 		{
-			if (i == 0 && j == 1)
-			{
-				drawPane.console->setCharForeground(j, line, ep::color::selector);
-			}
-			else
-			{
-				drawPane.console->setCharForeground(j, line, messageList[i].color);
-			}
+			if (i == 0 && j == 1)	drawPane.console->setCharForeground(j, line, ep::color::selector);
+			else					drawPane.console->setCharForeground(j, line, messageList[i].color);
 		}
 		++line;
 	}
@@ -490,20 +440,14 @@ void LogWindow::render() const
 //----------------------------------------------------------------------------------------------------
 
 ProximityWindow::ProximityWindow(int consoleWidth, int consoleHeight, int rx, int ry)
-	:Window(consoleWidth, consoleHeight, "Proximity", rx, ry)
-{}
+	: Window(consoleWidth, consoleHeight, "Proximity", rx, ry)
+{
+}
 
 void ProximityWindow::update()
 {
-	if (proximityItemList != WORLD->debugmap->mapItemList)
-	{
-		proximityItemList = WORLD->debugmap->mapItemList; //can be optimized later
-	}
-
-	if (proximityContainerList != WORLD->debugmap->mapContainerList)
-	{
-		proximityContainerList = WORLD->debugmap->mapContainerList;
-	}
+	if (proximityItemList != WORLD->debugmap->mapItemList) proximityItemList = WORLD->debugmap->mapItemList; //can be optimized later
+	if (proximityContainerList != WORLD->debugmap->mapContainerList) proximityContainerList = WORLD->debugmap->mapContainerList;
 }
 
 void ProximityWindow::render() const
@@ -542,17 +486,15 @@ void ProximityWindow::render() const
 //----------------------------------------------------------------------------------------------------
 
 ActionWindow::ActionWindow(int consoleWidth, int consoleHeight, int rx, int ry)
-	:Window(consoleWidth, consoleHeight, "Actions", rx, ry)
-{}
+	: Window(consoleWidth, consoleHeight, "Actions", rx, ry)
+{
+}
 
 void ActionWindow::update()
 {
 	if (WORLD->debugmap->player->selectedItem->actionManager)
 	{
-		if (actionManager != WORLD->debugmap->player->selectedItem->actionManager)
-		{
-			actionManager = WORLD->debugmap->player->selectedItem->actionManager;
-		}
+		if (actionManager != WORLD->debugmap->player->selectedItem->actionManager) actionManager = WORLD->debugmap->player->selectedItem->actionManager;
 	}
 }
 
@@ -575,7 +517,6 @@ void ActionWindow::render() const
 				{
 					drawPane.console->printf(0, line, "| %s", action.name.c_str());
 				}
-
 				++line;
 			}
 		}
@@ -587,7 +528,7 @@ void ActionWindow::render() const
 //----------------------------------------------------------------------------------------------------
 
 PauseWindow::PauseWindow(int consoleWidth, int consoleHeight, int rx, int ry)
-	:Window(consoleWidth, consoleHeight, "Paused", rx, ry), 
+	: Window(consoleWidth, consoleHeight, "Paused", rx, ry), 
 	baseMenu(std::vector<std::string>{"Return", "Settings", "Exit"}), settingsMenu(std::vector<std::string>{"Input", "Video", "Back"}), 
 	baseMenuActive(true), settingsMenuActive(false)
 {
@@ -595,14 +536,8 @@ PauseWindow::PauseWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 
 void PauseWindow::update()
 {
-	if (baseMenuActive)
-	{
-		baseMenu.update();
-	}
-	else if (settingsMenuActive)
-	{
-		settingsMenu.update();
-	}
+	if		(baseMenuActive)		baseMenu.update();
+	else if (settingsMenuActive)	settingsMenu.update();
 
 	if (INPUT->worldInteractKey->isSwitched)
 	{
@@ -658,21 +593,14 @@ void PauseWindow::render() const
 {
 	clearWindow();
 
-	if (baseMenuActive)
-	{
-		baseMenu.render(drawPane, 50, 50);
-	}
-	else if (settingsMenuActive)
-	{
-		settingsMenu.render(drawPane, 50, 50);
-	}
+	if		(baseMenuActive)		baseMenu.render(drawPane, 50, 50);
+	else if (settingsMenuActive)	settingsMenu.render(drawPane, 50, 50);
 
 	pushWindow();
 }
 
 InfoWindow::InfoWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 	: Window(consoleWidth, consoleHeight, "Information", rx, ry), tileDetail(""), creatureDetail(""), itemDetail("")
-
 {
 }
 
@@ -684,8 +612,8 @@ void InfoWindow::setTileDetails()
 	{
 		if (WORLD->debugmap->getBlock(Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.floor))->explored)
 		{
-			tileDetail = WORLD->debugmap->getBlock(Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.floor))->
-				getTileData(WORLD->debugmap->player->mapPosition.height).name;
+			static Position3 position = Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.floor);
+			tileDetail = WORLD->debugmap->getBlock(position)->getTileData(WORLD->debugmap->player->mapPosition.height).name;
 		}
 	}
 }
@@ -700,10 +628,7 @@ void InfoWindow::setCreatureDetails()
 		{
 			if (creature->mapPosition.x == INPUT->mouse.cx + WORLD->xOffset - 1 && creature->mapPosition.y == INPUT->mouse.cy + WORLD->yOffset - 3)
 			{
-				if (WORLD->isInPlayerFov(creature->mapPosition))
-				{
-					creatureDetail = creature->name;
-				}
+				if (WORLD->isInPlayerFov(creature->mapPosition)) creatureDetail = creature->name;
 			}
 		}
 	}

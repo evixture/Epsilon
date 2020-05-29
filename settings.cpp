@@ -1,8 +1,9 @@
 #include "main.hpp"
 
 Font::Font(std::string name, std::string xdim, std::string ydim, std::string filePath, int format, int charW, int charH)
-	:name(name), xDim(xdim), yDim(ydim), filePath(filePath), format(format), charW(charW), charH(charH)
-{}
+	: name(name), xDim(xdim), yDim(ydim), filePath(filePath), format(format), charW(charW), charH(charH)
+{
+}
 
 //----------------------------------------------------------------------------------------------------
 
@@ -62,26 +63,12 @@ void Settings::update()
 	lastFrameTime = systemClock.restart();
 	input->update();
 
-	//if (input->worldInteractKey->isDown) slows down time FUN
-	//{
-	//	lastFrameTime = lastFrameTime / 4.0f;
-	//}
-
-	if (INPUT->fullscreenKey->isSwitched)
-	{
-		setFullscreen();
-	}
+	if (INPUT->fullscreenKey->isSwitched) setFullscreen();
 }
 
 void Settings::render() const
 {
-	if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
-	{
-		printLogo();
-	}
+	if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH) printLogo();
 
-	//if (NDEBUG) //if vs is in debug mode
-	//{
-		printDebugStats();
-	//}
+	printDebugStats();
 }

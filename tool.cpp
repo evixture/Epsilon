@@ -28,8 +28,6 @@ void Tool::useMelee()
 
 void Tool::updateToolPosition(int targetX, int targetY)
 {
-	//double absAngle = abs(angle);
-
 	angle = abs(getAngle(sourcePosition.x, sourcePosition.y, targetX, targetY));
 
 	if (isnan(angle)) return;
@@ -38,15 +36,15 @@ void Tool::updateToolPosition(int targetX, int targetY)
 	{
 		if (dx <= 0)
 		{
-				mapPosition.x = sourcePosition.x - 1;
-				mapPosition.y = sourcePosition.y;
-				return;
+			mapPosition.x = sourcePosition.x - 1;
+			mapPosition.y = sourcePosition.y;
+			return;
 		}
 		else
 		{
-				mapPosition.x = sourcePosition.x + 1;
-				mapPosition.y = sourcePosition.y;
-				return;
+			mapPosition.x = sourcePosition.x + 1;
+			mapPosition.y = sourcePosition.y;
+			return;
 		}
 	}
 	else if (angle > 65.7f)
@@ -89,7 +87,7 @@ void Tool::updateToolPosition(int targetX, int targetY)
 				mapPosition.y = sourcePosition.y - 1;
 				return;
 			}
-			else //bottom rigth
+			else //bottom right
 			{
 				mapPosition.x = sourcePosition.x + 1;
 				mapPosition.y = sourcePosition.y + 1;
@@ -137,12 +135,6 @@ void Tool::update(Position4& sourcePosition, int& targetX, int& targetY, bool& i
 {
 	this->isHeld = isHeld;
 	updatePositions(sourcePosition, targetX, targetY);
-
-	if (this->isHeld)
-	{
-		//behavior if it is held
-	}
-
 }
 
 void Tool::render(const Pane& pane) const
