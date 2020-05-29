@@ -8,10 +8,10 @@
 
 struct Tile
 {
-	unsigned char ch; //the character to render on the map
-	TCODColor foregroundColor; //foreground color of the tile
-	TCODColor backgroundColor; //background color of the tile
-	unsigned short int deceleration; //the amount that a bullet is slowed down by when it passes through it
+	unsigned char ch;
+	TCODColor foregroundColor;
+	TCODColor backgroundColor;
+	unsigned short int deceleration;
 	int strength;
 
 	std::string name;
@@ -19,33 +19,33 @@ struct Tile
 	Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int deceleration, std::string name = "", int strength = -1);
 };
 
-struct Block //tile class used for the map and items
+struct Block
 {
-	enum class Tag {STATIC, STAIR} tag; //type and functionality of the tile
-	unsigned char transparentFlag; //bit flag for transparency at different heights
-	unsigned char walkableFlag; //bit flag for walkability at different heights
-	bool explored; //if the tile has been explored yet
+	enum class Tag {STATIC, STAIR} tag;
+	unsigned char transparentFlag;
+	unsigned char walkableFlag;
+	bool explored;
 	bool destroyed;
 
-	std::vector<Tile> tileList; //list [5] of tiles that holds data at different heights
+	std::vector<Tile> tileList;
 
-	Block(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned char walkableFlag, Tag tag = Tag::STATIC); //constructor that take character, foreground and background color, height, if it is walkable, and the tile type
+	Block(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned char walkableFlag, Tag tag = Tag::STATIC);
 
 	Tile getTileData(int height) const;
 
-	void render(Position4 renderPosition, const Pane& pane) const; //renders tile
+	void render(Position4 renderPosition, const Pane& pane) const;
 
-	virtual bool destroy(int damage, int height); //does nothing in block
-	virtual void interact(); //virtual behaves differently depending on tile type, does nothing in tile
+	virtual bool destroy(int damage, int height);
+	virtual void interact();
 };
 
-struct Stair : public Block //stair type of tile that allows travel between floors
+struct Stair : public Block
 {
-	char moveDistance; //number of floors that the stair moves up or down
+	char moveDistance;
 	
-	Stair(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance); //constructor for stair that takes character, colors, height, walkability, and move distance
+	Stair(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance);
 
-	void interact(); //moves player the move distance
+	void interact();
 };
 
 namespace ep

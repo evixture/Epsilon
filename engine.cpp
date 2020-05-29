@@ -8,7 +8,6 @@ Engine::Engine(int screenCharWidth, int screenCharHeight)
 
 Engine::~Engine()
 {
-	//audio->deinit();
 }
 
 void Engine::update()

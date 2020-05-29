@@ -1,14 +1,16 @@
 #include "main.hpp"
 
 Tool::Tool(std::string name, TCODColor color, int ch)
-	:name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), 
+	: name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), 
 	ammoType(MagazineData::AmmoType::NONE), fireMode(SAFE), availibleFireMode(0), isHeld(false), type(Tool::Type::TOOL), angle(0.0f)
-{}
+{
+}
 
 Tool::Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
 	: name(name), color(color), ch(NULL), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), 
 	ammoType(ammoType), fireMode(fireMode), availibleFireMode(availibleFireModeFlag), isHeld(false), type(Tool::Type::TOOL), angle(0.0f)
-{}
+{
+}
 
 MagazineData& Tool::getMagazine()
 {
@@ -17,13 +19,18 @@ MagazineData& Tool::getMagazine()
 }
 
 void Tool::reload(MagazineData& magazine)
-{}
+{
+	return;
+}
 
 void Tool::changeFireMode()
-{}
+{
+	return;
+}
 
 void Tool::useMelee()
 {
+	return;
 }
 
 void Tool::updateToolPosition(int targetX, int targetY)
@@ -158,8 +165,6 @@ void Melee::useMelee()
 {
 	for (auto& creature : WORLD->debugmap->creatureList)
 	{
-		//if ((sourcePosition.x == creature->mapPosition.x && sourcePosition.y == creature->mapPosition.y && sourcePosition.floor == creature->mapPosition.floor) || //if the creature is on top of the creature
-		//	(mapPosition.x == creature->mapPosition.x && mapPosition.y == creature->mapPosition.y && mapPosition.floor == creature->mapPosition.floor)) //if the melee tool is on top of the creature
 		if (mapPosition.x == creature->mapPosition.x && mapPosition.y == creature->mapPosition.y)
 		{
 			if (creature != WORLD->debugmap->player)
@@ -172,8 +177,6 @@ void Melee::useMelee()
 			}
 		}
 	}
-
-	//if it cannot find a creature
 
 	if (WORLD->debugmap->getBlock(mapPosition)->destroy((bluntDamage + sharpDamage), mapPosition.height))
 	{
@@ -203,14 +206,7 @@ void Melee::update(Position4& sourcePosition, int& targetX, int& targetY, bool& 
 	this->isHeld = isHeld;
 	updatePositions(sourcePosition, targetX, targetY);
 
-	if (this->isHeld)
-	{
-		if (INPUT->primaryUseButton->isSwitched)
-		{
-			useMelee();
-		}
-	}
-
+	if (INPUT->primaryUseButton->isSwitched && this->isHeld) useMelee();
 }
 
 void Melee::render(const Pane& pane) const
@@ -230,14 +226,8 @@ Bullet::Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int 
 {
 	do
 	{
-		if (tox != 0)
-		{
-			tox *= 2;
-		}
-		if (toy != 0)
-		{
-			toy *= 2;
-		}
+		if (tox != 0) tox *= 2;
+		if (toy != 0) toy *= 2;
 	} while (((tox + startPosition.x < xbound && tox + startPosition.x > 0) && tox != 0) || ((toy + startPosition.y < ybound && toy + startPosition.y > 0) && toy != 0));
 
 	tox += startPosition.x;
@@ -354,10 +344,7 @@ void Bullet::update()
 		fallClock.timeBetweenUpdates = (getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1));
 		fallClock.tickUp();
 
-		for (int i = 1; i < fallClock.numCalls; fallClock.numCalls--)
-		{
-			mapPosition.height--;
-		}
+		for (int i = 1; i < fallClock.numCalls; fallClock.numCalls--) mapPosition.height--;
 		mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.floor);
 	}
 
@@ -372,27 +359,21 @@ void Bullet::render(const Pane& pane) const
 		{
 			if (mapPosition.height > 0) //in the air
 			{
-				//if (WORLD->isInPlayerFov(mapPosition))
-				//{
-					pane.console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::brass); //check later
+				pane.console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::brass); //check later
 
-					if ((startPosition.x == travel.x && startPosition.y == travel.y))
-					{
-						pane.console->setChar(renderPosition.x, renderPosition.y, '*'); //muzzle flash
-					}
-					else
-					{
-						pane.console->setChar(renderPosition.x, renderPosition.y, ch);
-					}
-				//}
+				if ((startPosition.x == travel.x && startPosition.y == travel.y))
+				{
+					pane.console->setChar(renderPosition.x, renderPosition.y, '*'); //muzzle flash
+				}
+				else
+				{
+					pane.console->setChar(renderPosition.x, renderPosition.y, ch);
+				}
 			}
 			else //on the ground
 			{
-				//if (WORLD->isInPlayerFov(mapPosition)) //not in fov when on ground
-				//{
-					pane.console->setChar(renderPosition.x, renderPosition.y, ch);
-					pane.console->setCharForeground(renderPosition.x, renderPosition.y, WORLD->debugmap->getBlock(mapPosition)->tileList[0].foregroundColor);
-				//}
+				pane.console->setChar(renderPosition.x, renderPosition.y, ch);
+				pane.console->setCharForeground(renderPosition.x, renderPosition.y, WORLD->debugmap->getBlock(mapPosition)->tileList[0].foregroundColor);
 			}
 		}
 	}
@@ -417,15 +398,10 @@ void Firearm::updateToolPosition(int targetX, int targetY)
 	--|--
 	03|04
 	*/
-	
-	//double absAngle = abs(angle);
 
 	angle = abs(getAngle(sourcePosition.x, sourcePosition.y, targetX, targetY));
 
-	if (isnan(angle) || (dx == 0 && dy == 0))
-	{
-		return;
-	}
+	if (isnan(angle) || (dx == 0 && dy == 0)) return;
 
 	if (angle < 22.5f) //left / right
 	{
@@ -549,29 +525,8 @@ void Firearm::fireBullet()
 {
 	if (!(mapPosition.x == dx + mapPosition.x && mapPosition.y == dy + mapPosition.y))
 	{
-		//if (fireMode == FireType::SEMI)
-		//{
-		//	fireClock.numCalls = 1; //check later to see if it prevents overfireing
-		//}
-		//else
-		//{
-		//	fireClock.tickUp();
-		//}
-
-		//fireClock.tickUp(); //move up to other fire command
-
 		for (float i = 1.0f; i <= fireClock.numCalls; fireClock.numCalls--)
 		{
-			//if (ammoType == MagazineData::AmmoType::FIVEPOINTFIVESIX)
-			//{
-			//	//bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ep::bullet::cal556(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height)));
-			//}
-			//else
-			//{
-			//	//bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ep::bullet::cal45(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height)));
-			//}
-
-			//Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
 			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, getMagazine().velocity, getMagazine().mass));
 
 			usedMag.availableAmmo--;
@@ -585,20 +540,14 @@ void Firearm::reload(MagazineData& magazine)
 {
 	if (this->isHeld)
 	{
-		//if (magazine.isValid != false)
-		//{
+		if (reloadClock.numCalls >= 1.0f) //if it can reload
+		{
+			std::swap(this->usedMag, magazine);
 
-			if (reloadClock.numCalls >= 1.0f) //if it can reload
-			{
-				std::swap(this->usedMag, magazine);
+			reloadClock.addTime(reloadTime);
 
-				//selectedMagazine = magazine;
-				reloadClock.addTime(reloadTime);
-
-				AUDIO->playSound(PositionalTrackedSound(("check chick"), &mapPosition, 65.0f, 40.0f));
-			}
-		//}
-	//	else selectedMagazine = magazine;
+			AUDIO->playSound(PositionalTrackedSound(("check chick"), &mapPosition, 65.0f, 40.0f));
+		}
 	}
 }
 
@@ -640,21 +589,14 @@ void Firearm::changeFireMode()
 				fireMode = FireType::SAFE;
 			}
 		}
-
 		AUDIO->playSound(Sound(("tip"), 55.0f, 50.0f));
 	}
 }
 
 void Firearm::changeBarColor(TCODColor& color)
 {
-	if (usedMag.ammoCapacity != 0)
-	{
-		color = TCODColor::lerp(TCODColor::red, TCODColor::darkerGreen, (float(usedMag.availableAmmo) / float(usedMag.ammoCapacity)));
-	}
-	else
-	{
-		color = TCODColor::orange;
-	}
+	if (usedMag.ammoCapacity != 0) color = TCODColor::lerp(TCODColor::red, TCODColor::darkerGreen, (float(usedMag.availableAmmo) / float(usedMag.ammoCapacity)));
+	else color = TCODColor::orange;
 }
 
 void Firearm::use(bool hold, bool swtch)
@@ -663,18 +605,8 @@ void Firearm::use(bool hold, bool swtch)
 	{
 		if (fireClock.numCalls >= 1.0f && usedMag.availableAmmo > 0 && reloadClock.numCalls >= 1.0f) //fires bullet
 		{
-			if (fireMode == FireType::FULL && (hold || swtch))// && INPUT->primaryUseButton->isDown)
-			{
-				fireBullet();
-			}
-			else if (fireMode == FireType::SEMI && swtch)// && INPUT->primaryUseButton->isSwitched)
-			{
-				fireBullet();
-			}
-			else if (fireMode == FireType::SAFE)
-			{
-
-			}
+			if		(fireMode == FireType::FULL && (hold || swtch)) fireBullet();
+			else if (fireMode == FireType::SEMI && swtch)			fireBullet();
 		}
 	}
 }
@@ -683,38 +615,17 @@ void Firearm::update(Position4& sourcePosition, int& targetX, int& targetY, bool
 {
 	this->isHeld = isHeld;
 	updatePositions(sourcePosition, targetX, targetY);
-	
-	if (this->isHeld)
-	{
-		//GUI->logWindow->pushMessage(LogWindow::Message(std::string("reload : " + std::to_string(reloadClock.numCalls) + " fire : " + std::to_string(fireClock.numCalls)), LogWindow::Message::MessageLevel::MEDIUM));
-	}
 
-	if (bulletList.size() > usedMag.ammoCapacity * 5) //clean up extra bullets if there are more than 5 magazines worth of bullets on the map
-	{
-		bulletList.pop_back();
-	}
+	if (bulletList.size() > usedMag.ammoCapacity * 5) bulletList.pop_back(); //clean up extra bullets if there are more than 5 magazines worth of bullets on the map
 
 	for (int i = 0; i < bulletList.size(); ++i) //update bullets
 	{
-		if (bulletList[i]->currentVelocity <= 0)
-		{
-			bulletList.erase(bulletList.begin() + i);
-		}
-		else
-		{
-			bulletList[i]->update();
-		}
+		if (bulletList[i]->currentVelocity <= 0) bulletList.erase(bulletList.begin() + i);
+		else bulletList[i]->update();
 	}
 
-	if (fireClock.numCalls < 1.0f)
-	{
-		fireClock.tickUp();
-	}
-
-	if (reloadClock.numCalls < 1.0f)
-	{
-		reloadClock.tickUp();
-	}
+	if (fireClock.numCalls < 1.0f) fireClock.tickUp();
+	if (reloadClock.numCalls < 1.0f) reloadClock.tickUp();
 }
 
 void Firearm::render(const Pane& pane) const
@@ -732,7 +643,7 @@ void Firearm::render(const Pane& pane) const
 }
 
 Armor::Armor(std::string name, TCODColor color, int defense, int durability)
-	:Tool(name, color, ep::character::ballisticVest), defense(defense), durability(durability)
+	: Tool(name, color, ep::character::ballisticVest), defense(defense), durability(durability)
 {
 	type = Tool::Type::ARMOR;
 }

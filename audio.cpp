@@ -10,7 +10,6 @@ Sound::Sound(std::string speechText, float worldVol, float playVol)
 
 std::pair<bool, Position4> Sound::getPosition() //not getting passed on to derived classes?
 {
-	//return std::pair<bool, Position4>(false, Position4(0, 0, 0, 0));
 	return position;
 }
 

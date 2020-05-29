@@ -66,12 +66,13 @@ bool Block::destroy(int damage, int height)
 
 void Block::interact()
 {
+	return;
 }
 
 void Block::render(Position4 renderPosition, const Pane& pane) const
 {
-	static Position4 position = Position4(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.height, renderPosition.floor);
-	static Tile tile = getTileData(renderPosition.height);
+	Position4 position = Position4(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.height, renderPosition.floor);
+	Tile tile = getTileData(renderPosition.height);
 
 	if (WORLD->isInPlayerFov(position))
 	{

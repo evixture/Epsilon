@@ -1,60 +1,60 @@
 #include "main.hpp"
 
-struct StatusWindow : public Window //player status pane derived window that renders player attributes
+struct StatusWindow : public Window
 {
-	StatusWindow(int consoleWidth, int consoleHeight, int rx, int ry); //window constructor that takes console width and heightm and render coordinates
+	StatusWindow(int consoleWidth, int consoleHeight, int rx, int ry);
 
-	void update(); //updates the window
-	void render() const; //renders the window
+	void update();
+	void render() const;
 
 private:
-	short int displayHealth; //the health that is displayed
-	short int displayArmor; //the armor that is displayed
+	short int displayHealth;
+	short int displayArmor;
 };
 
-struct MapWindow : public Window //map pane derived window that handles the world
+struct MapWindow : public Window
 {
-	std::shared_ptr<Pane> mapSidePanel; //the side bar on the map window
-	std::shared_ptr<World> world; //the world
+	std::shared_ptr<Pane> mapSidePanel;
+	std::shared_ptr<World> world;
 
-	MapWindow(int consoleWidth, int consoleHeight, int rx, int ry); //window constructor that takes console width and heightm and render coordinates
+	MapWindow(int consoleWidth, int consoleHeight, int rx, int ry);
 
-	void update(); //updates the window
-	void render() const; //renders the window
+	void update();
+	void render() const;
 };
 
-struct PlayerWindow : public Window //player pane that renders player speed and stance
+struct PlayerWindow : public Window
 {
-	PlayerWindow(int consoleWidth, int consoleHeight, int rx, int ry); //window constructor that takes console width and heightm and render coordinates
+	PlayerWindow(int consoleWidth, int consoleHeight, int rx, int ry);
 
-	void update(); //updates the window
-	void render() const; //renders the window
+	void update();
+	void render() const;
 
 private:
 	void renderSpeedAndStance() const;
 
-	int playerSpeed; //string of player's speed
-	int playerStance; //string of player's stance
+	int playerSpeed;
+	int playerStance;
 };
 
-struct InventoryWindow : public Window //inventory pane that renders what is in the player's inventory
+struct InventoryWindow : public Window
 {
-	InventoryWindow(int consoleWidth, int consoleHeight, int rx, int ry); //window constructor that takes console width and heightm and render coordinates
+	InventoryWindow(int consoleWidth, int consoleHeight, int rx, int ry);
 
-	void update(); //updates the window
-	void render() const; //renders the window
+	void update();
+	void render() const;
 
 private:
-	std::vector<std::shared_ptr<Container>> inventoryItemList; //inventory
+	std::vector<std::shared_ptr<Container>> inventoryItemList;
 };
 
-struct SplashWindow : public Window //the startup window
+struct SplashWindow : public Window
 {
 
-	SplashWindow(int consoleWidth, int consoleHeight, int rx, int ry); //window constructor that takes console width and heightm and render coordinates
+	SplashWindow(int consoleWidth, int consoleHeight, int rx, int ry);
 
-	void update(); //updates the window
-	void render() const; //renders the window
+	void update();
+	void render() const;
 
 private:
 	Menu menu;
@@ -70,18 +70,18 @@ private:
 	void renderMenuOptions() const;
 };
 
-struct InventoryFullWindow : public Window //full size inventory window
+struct InventoryFullWindow : public Window
 {
-	InventoryFullWindow(int consoleWidth, int consoleHeight, int rx, int ry); //window constructor that takes console width and height and render coordinates
+	InventoryFullWindow(int consoleWidth, int consoleHeight, int rx, int ry);
 
-	void update(); //updates the window
-	void render() const; //renders the window
+	void update();
+	void render() const;
 
 private:
-	std::vector<std::shared_ptr<Container>> inventoryItemList; //inventory
+	std::vector<std::shared_ptr<Container>> inventoryItemList;
 };
 
-struct LogWindow : public Window //log event window
+struct LogWindow : public Window
 {
 	struct Message
 	{
@@ -92,38 +92,38 @@ struct LogWindow : public Window //log event window
 		Message(std::string message, MessageLevel messageLevel);
 	};
 
-	LogWindow(int consoleWidth, int consoleHeight, int rx, int ry); //window constructor that takes console width and heightm and render coordinates
+	LogWindow(int consoleWidth, int consoleHeight, int rx, int ry);
 
-	void pushMessage(Message message); //pushes a string message to the log window
+	void pushMessage(Message message);
 
-	void update(); //updates the window
-	void render() const; //renders the window
+	void update();
+	void render() const;
 
 private:
-	std::vector<Message> messageList; //list of string messages to be displayed
+	std::vector<Message> messageList;
 };
 
-struct ProximityWindow : public Window //shows the items in the player's proximity
+struct ProximityWindow : public Window
 {
-	ProximityWindow(int consoleWidth, int consoleHeight, int rx, int ry); //window constructor that takes console width and heightm and render coordinates
+	ProximityWindow(int consoleWidth, int consoleHeight, int rx, int ry);
 
-	void update(); //updates the window
-	void render() const; //renders the window
+	void update();
+	void render() const;
 
 private:
-	std::vector<std::shared_ptr<Container>> proximityContainerList; //containers in the player's proximity
-	std::vector<std::shared_ptr<Item>> proximityItemList; //items in the player's proximity
+	std::vector<std::shared_ptr<Container>> proximityContainerList;
+	std::vector<std::shared_ptr<Item>> proximityItemList;
 };
 
-struct ActionWindow : public Window //shows the availible actions for the player's selected tool
+struct ActionWindow : public Window
 {
-	ActionWindow(int consoleWidth, int consoleHeight, int rx, int ry); //window constructor that takes console width and heightm and render coordinates
+	ActionWindow(int consoleWidth, int consoleHeight, int rx, int ry);
 
-	void update(); //updates the window
-	void render() const; //renders the window
+	void update();
+	void render() const;
 
 private:
-	std::shared_ptr<ActionManager> actionManager; //the list of availible actions
+	std::shared_ptr<ActionManager> actionManager;
 };
 
 struct PauseWindow : public Window
@@ -131,7 +131,7 @@ struct PauseWindow : public Window
 	PauseWindow(int consoleWidth, int consoleHeight, int rx, int ry);
 
 	void update();
-	void render() const; //renders the window
+	void render() const;
 
 private:
 	Menu baseMenu;
@@ -141,7 +141,7 @@ private:
 	bool settingsMenuActive;
 };
 
-struct InfoWindow : public Window //shows details of tile and creatures under cursor, and selected item
+struct InfoWindow : public Window
 {
 	InfoWindow(int consoleWidth, int consoleHeight, int rx, int ry);
 

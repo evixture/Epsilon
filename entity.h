@@ -1,43 +1,40 @@
 #include "main.hpp"
 
-struct Entity //generic entity base for use on map
+struct Entity
 {
-	Position4 mapPosition; //the position of the entity on the map
-	unsigned char ch; //character representation of the character
-	TCODColor color; //foreground color of the entity
-	std::string name; //string name of entity
+	Position4 mapPosition;
+	unsigned char ch;
+	TCODColor color;
+	std::string name;
 
-	Entity(Position4 pos, int ch, std::string name, TCODColor color); //entity constructor that takes position, character, string name, and color
+	Entity(Position4 pos, int ch, std::string name, TCODColor color);
 
-	virtual void update(); //virtual update entity
-	virtual void render(const Pane& pane) const; //virtual render entity
+	virtual void update();
+	virtual void render(const Pane& pane) const;
 
 protected:
-	Position3 renderPosition; //position of the entity on the map pane
+	Position3 renderPosition;
 };
 
-struct Creature : public Entity //creature base used for player and other beings
+struct Creature : public Entity
 {
-	float baseMoveTime; //time before the player moves a unit
+	float baseMoveTime;
 	float moveSpeed;
 	Clock moveClock;
 
-	double angle; //angle that the creature us facing
+	double angle;
 
-	short int health; //the health of the creature
-	Armor equippedArmor; //the armor of the creature
+	short int health;
+	Armor equippedArmor;
 
-	int containerIndex; //the index of the selected item's container in the inventory
-	int itemIndex; //the index of the selected item in the inventory
+	int containerIndex;
+	int itemIndex;
 
-	std::vector<std::shared_ptr<Container>> inventory; //contains all of the items and containers of the creature
+	std::vector<std::shared_ptr<Container>> inventory;
 
-	std::shared_ptr<Item> selectedItem; //the item that is currently selected
-	//std::shared_ptr<MagazineData> selectedMagazine; //the selected magazine of the selected item
+	std::shared_ptr<Item> selectedItem;
 
-	//std::shared_ptr<MagazineData> nullMagazine; //a generic magazine that is used then a firearm has no actual magazine
-
-	Creature(Position4 pos, int ch, std::string name, TCODColor color, int health, Armor armor); //creature constructor that takes a position, character, string name, color, health, and armor
+	Creature(Position4 pos, int ch, std::string name, TCODColor color, int health, Armor armor);
 
 	//movement
 	virtual void move();
@@ -60,15 +57,12 @@ struct Creature : public Entity //creature base used for player and other beings
 
 	//need to include functions that only calls from selected item?
 
-	virtual void update(); //virtual updates the creature
-	virtual void render(const Pane& pane) const; // virtual renders the creature
+	virtual void update();
+	virtual void render(const Pane& pane) const;
 };
 
-struct Player : public Creature //player derived creature that the player interacts through
+struct Player : public Creature
 {
-	char xMoveDist; //the amount that the player moves in the x dimension
-	char yMoveDist; //the amount that the player moves in the y dimension
-
 	bool hasSecondChance;
 
 	TCODColor backgroundColor;

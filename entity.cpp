@@ -23,8 +23,6 @@ Creature::Creature(Position4 position, int ch, std::string name, TCODColor color
 {
 	inventory.push_back(std::make_shared<Container>(ep::container::hands(0, 0, 0)));
 	selectedItem = inventory[0]->item;
-
-	//selectedMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
 }
 
 void Creature::move()
@@ -113,7 +111,7 @@ void Creature::render(const Pane& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Player::Player(Position4 position)
-	:Creature(position, '@', "player", ep::color::player, 100, Armor("", TCODColor::pink, 0, 0)), xMoveDist(0), yMoveDist(0), backgroundColor(TCODColor::pink), hasSecondChance(true)
+	:Creature(position, '@', "player", ep::color::player, 100, Armor("", TCODColor::pink, 0, 0)), backgroundColor(TCODColor::pink), hasSecondChance(true)
 {
 	hasSecondChance = true;
 
@@ -146,17 +144,11 @@ void Player::move()
 		else if (INPUT->moveSlowKey->isDown)	baseMoveTime = 1.0f;
 		else									baseMoveTime = .5f;
 
-		xMoveDist = 0;
-		yMoveDist = 0;
+		int xMoveDist = 0;
+		int yMoveDist = 0;
 
-		if (INPUT->stanceDownKey->isSwitched)
-		{
-			changeStanceDown();
-		}
-		if (INPUT->stanceUpKey->isSwitched)
-		{
-			changeStanceUp();
-		}
+		if (INPUT->stanceDownKey->isSwitched) changeStanceDown();
+		if (INPUT->stanceUpKey->isSwitched) changeStanceUp();
 
 		moveSpeed = baseMoveTime / mapPosition.height;
 
@@ -313,20 +305,6 @@ void Player::dropItem()
 	{
 		if (itemIndex >= 0)
 		{
-			//if (inventory[containerIndex]->itemList[itemIndex]->getMagazineData().isValid)
-			//{
-			//	for (auto& container : inventory)
-			//	{
-			//		for (auto& item : container->itemList)
-			//		{
-			//			if (item->tool->getMagazine() == inventory[containerIndex]->itemList[itemIndex]->getMagazineData())
-			//			{
-			//				//MagazineData tempMag = std::make_unique<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
-			//				//item->tool->reload(tempMag);
-			//			}
-			//		}
-			//	}
-			//}
 			GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->itemList[itemIndex]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 
 			WORLD->debugmap->mapItemList.push_back(selectedItem);
@@ -432,26 +410,9 @@ void Player::reload()
 					if (item->getMagazineData().availableAmmo != 0) // if the magazine is not empty
 					{
 						selectedItem->tool->reload(item->getMagazineData());
-
-						//AUDIO->playSound(PositionalTrackedSound(("check chick"), &mapPosition, 65.0f, 40.0f));
-						//if (item->getMagazineData()->availableAmmo > selectedMagazine->availableAmmo)
-						//{
-						//	selectedMagazine = item->getMagazineData();
-						//	selectedItem->tool->reload(selectedMagazine);
-						//	return;
-						//}
-						//else //if it should be able to reload a mag with less ammo
-						//{
-						//	selectedMagazine = item->getMagazineData();
-						//	selectedItem->tool->reload(selectedMagazine);
-						//}
 					}
 				}
 			}
-			//else if (selectedMagazine->isValid == false)
-			//{
-			//	selectedMagazine = std::make_shared<MagazineData>(MagazineData::AmmoType::NONE, 0, 0, false);
-			//}
 		}
 	}
 }
@@ -616,7 +577,6 @@ void Player::render(const Pane& pane) const
 			}
 		}
 	}
-		//selectedItem->renderTool(pane);
 
 	pane.console->setChar(renderPosition.x, renderPosition.y, ch);
 	pane.console->setCharForeground(renderPosition.x, renderPosition.y, color);

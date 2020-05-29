@@ -8,7 +8,7 @@ Font::Font(std::string name, std::string xdim, std::string ydim, std::string fil
 //----------------------------------------------------------------------------------------------------
 
 Settings::Settings(int screenCharWidth, int screenCharHeight)
-	:screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 9"), fullscreen(false), maxFps(0), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_OPENGL2), //USE SDL2/ opengl2 TO RENDER, OTHERS WILL LOCK OR LOWER FPS
+	:screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 9"), fullscreen(false), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_OPENGL2), //USE SDL2/ opengl2 TO RENDER, OTHERS WILL LOCK OR LOWER FPS
 	fovRad(60), lightWalls(true), fpsCount(60)
 {
 	TCODSystem::setFps(0);

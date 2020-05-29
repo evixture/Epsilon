@@ -108,13 +108,11 @@ void AICreature::takeDamage(int damage)
 	if (health - damage > 0) //take normal damage
 	{
 		health -= damage;
-
 		AUDIO->playSound(PositionalTrackedSound(("hoop"), &mapPosition, 75.0f, 120.0f));
 	}
 	else //if damage taken would have resulted in death
 	{
 		health = 0;
-
 		AUDIO->playSound(PositionalTrackedSound(("jaw"), &mapPosition, 80.0f, 170.0f));
 	}
 
@@ -125,17 +123,12 @@ void AICreature::takeDamage(int damage)
 void AICreature::updateTools()
 {
 	angle = getAngle(mapPosition.x, mapPosition.y, lookPosition.x, lookPosition.y);
-
 	selectedItem->updateTool(mapPosition, lookPosition.x, lookPosition.y, true);
 }
 
 bool AICreature::inEffectiveRange()
 {
-	if ((getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y) <= selectedItem->tool->getMagazine().velocity * 0.15f) && selectedItem->tool->getMagazine().isValid) //change to take into account melee weapons
-	{
-		return true;
-	}
-	return false;
+	return ((getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y) <= selectedItem->tool->getMagazine().velocity * 0.15f) && selectedItem->tool->getMagazine().isValid); //change to take into account melee weapons
 }
 
 void AICreature::decayInterest()
@@ -202,15 +195,6 @@ void AICreature::reactToSounds()
 
 				if (soundInterestChange >= 0.5f)
 				{
-					//if (soundInterest + soundInterestChange >= 1.0f)
-					//{
-					//	soundInterest = 1.0f;
-					//}
-					//else
-					//{
-					//	soundInterest += soundInterestChange;
-					//}
-
 					if (soundInterest < soundInterestChange)
 					{
 						soundInterest = soundInterestChange;
@@ -229,8 +213,6 @@ void AICreature::reactToSounds()
 
 
 /*
-(NOT ENTIRELY ACCURATE)
-
 AUDIO FIELD
   ---
  -----
@@ -255,21 +237,11 @@ COMBINED
 
 void AICreature::behave()
 {
-	if (INPUT->debug2Key->isSwitched) //debug
-	{
-	}
-
 	decayInterest();
 	reactToSounds();
 
 	if (inFov)
 	{
-		
-		//if (calcVisInt > visualInterest)
-		//{
-		//	visualInterest = calcVisInt; //update visual interest with the greater value
-		//}
-
 		focusPosition = WORLD->debugmap->player->mapPosition;
 		lookPosition = WORLD->debugmap->player->mapPosition; //add random coords (1, -1) for inaccuracy
 		pathfindPosition = getWalkableArea(WORLD->debugmap->player->mapPosition); //player tile is not walkable
@@ -290,28 +262,19 @@ void AICreature::act()
 		reactionFireClock.tickUp(); //replace later with something with more discretion
 		for (int i = 1; i <= reactionFireClock.numCalls; reactionFireClock.numCalls--)
 		{
-			if (aggression >= 0.5f)
-			{
-				selectedItem->tool->use(false, true); //put on clock
-			}
+			if (aggression >= 0.5f) selectedItem->tool->use(false, true);
 		}
 	}
 
 	//reload on empty mag
 	if (selectedItem->tool->getMagazine().availableAmmo <= 0)
 	{
-		//std::shared_ptr<MagazineData> mag = std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true); //later check for mag in inventory
-		//selectedMagazine = mag;
 		auto reloadMag = MagazineData(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true);
 		
 		selectedItem->tool->reload(reloadMag);
-		//selectedItem->getMagazineData() = MagazineData(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true);
 	}
 
-	if (path.isEmpty() || path.size() == 0)
-	{
-		debugBGColor = TCODColor::red;
-	}
+	if (path.isEmpty() || path.size() == 0) debugBGColor = TCODColor::red;
 
 	move();
 }
@@ -348,12 +311,10 @@ void AICreature::render(const Pane& pane) const
 		}
 		else
 		{
-			//pane.console->setChar(renderPosition.x, renderPosition.y, '?'); //should render char out of fov??
-			//pane.console->setChar(renderPosition.x, renderPosition.y, '?'); //should render char out of fov??
 			pane.console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
 		}
 
-		if (true) //show pathfinding information
+		if (false) //show pathfinding information
 		{
 			//render path
 			int x, y;
@@ -380,29 +341,3 @@ void AICreature::render(const Pane& pane) const
 		}
 	}
 }
-
-//NOTES
-
-//distance of 30 at 45 degrees is ~20x and y
-
-//interest = 1.0f;
-//pathfindPosition = (Position3(INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, mapPosition.floor));
-//lookPosition = (Position3(INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, mapPosition.floor));
-//
-//path.compute(mapPosition.x, mapPosition.y, pathfindPosition.x, pathfindPosition.y);
-
-//fire / reload
-//if (selectedMagazine->isValid == false)
-//{
-//	std::shared_ptr<MagazineData> mag = std::make_shared<MagazineData>(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true);
-//	selectedMagazine = mag;
-//
-//	selectedItem->tool->reload(mag);
-//}
-//else
-//{
-//	selectedItem->tool->use(false, true);
-//}
-
-//should it check for all creatures if they are in its fov? if so, need to find out how to make individual fov maps
-//recalculate fov for each creature update??

@@ -1,25 +1,17 @@
 #include "main.hpp"
 
 /*
-
-SOUND CLASS
-	Sound class contains the soloud audio thing
-	can be derived for other forms and control
-
-	Sound manager takes the sound soloud audio and plays it after pushing
-
-HOW TO GET SOLOUD TO WORK
-	SoLoud core needs to be normal var
-	sounds in current form needs to be pointer so it stays, can be in a class
-
-POSITION
-	
+	Audio
+	|	PositionalTrackedSound
+	|	L	Sound
+	|	PositionalStaticSound
+	|	L	Sound
+	|	Sound
 */
 
 struct Sound //deals with world sounds and playback
 {
 	std::shared_ptr<SoLoud::Speech> speech;
-
 
 	virtual std::pair<bool, Position4> getPosition(); //returns if sound is 3d and its position
 
@@ -34,30 +26,30 @@ protected:
 
 struct PositionalStaticSound : public Sound
 {
-	Position4 sourcePosition; //later move to derived class
-
 	PositionalStaticSound(std::string speechText, Position4 sourcePosition, float worldVol, float playVol);
+
+private:
+	Position4 sourcePosition; //later move to derived class
 };
 
 struct PositionalTrackedSound : public Sound
 {
-	Position4* sourcePosition; //pointer to position so location is always accurate
-
 	PositionalTrackedSound(std::string speechText, Position4* sourcePosition, float worldVol, float playVol);
+
+private:
+	Position4* sourcePosition; //pointer to position so location is always accurate
 };
 
 /*
-
 DECIBEL VOLUME TABLE
 
 	120 : gunshot
 	060 : conversation
-
 */
 
 struct Audio
 {
-	SoLoud::Soloud soLoud; //trying as not pointer
+	SoLoud::Soloud soLoud;
 	std::vector<std::pair<int, Sound>> soundList; //list of sounds with their handles
 
 	Audio();
@@ -66,20 +58,4 @@ struct Audio
 	void update();
 
 	int playSound(Sound sound);
-
-private:
 };
-
-/*
-
-STRUCTURE
-	Engine
-		Settings
-		Gui
-		Audio
-
-			Sound Types
-				2d sound, not reactable
-				3d static, reactable
-				3d tracked, reactable
-*/

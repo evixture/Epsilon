@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 Map::Map(std::string filePath)
-	:filePath(filePath), height(NULL), width(NULL), totalFloors(NULL)
+	: filePath(filePath), height(NULL), width(NULL), totalFloors(NULL)
 {
 	TCODRandom* RNG = TCODRandom::getInstance();
 	RNG->setDistribution(TCOD_DISTRIBUTION_LINEAR);
@@ -47,27 +47,15 @@ Map::Map(std::string filePath)
 					
 					if (hasName && hasLevels && hasWidth && hasHeight) //if the map has gotten all of the map data properly
 					{
-						if (!hasMap)
-						{
-							hasMap = createBlockMap(mapDataNode);
-						}
+						if (!hasMap) hasMap = createBlockMap(mapDataNode);
 
 						if (hasMap)
 						{
-							if (!hasCreatures)
-							{
-								hasCreatures = getCreatures(mapDataNode);
-							}
+							if (!hasCreatures)	hasCreatures = getCreatures(mapDataNode);
 
-							if (!hasItems)
-							{
-								hasItems = getItems(mapDataNode);
-							}
+							if (!hasItems)		hasItems = getItems(mapDataNode);
 
-							if (!hasContainers)
-							{
-								hasContainers = getContainers(mapDataNode);
-							}
+							if (!hasContainers) hasContainers = getContainers(mapDataNode);
 						}
 					}
 				}
@@ -136,7 +124,6 @@ bool Map::getMapLevels(pugi::xml_node& dataNode)
 			levelList = std::vector<std::vector<std::shared_ptr<Block>>>(totalFloors);
 			return true;
 		}
-		//else throw "Could not get the number of map levels!";
 	}
 	return false;
 }
@@ -152,7 +139,6 @@ bool Map::getMapHeight(pugi::xml_node& dataNode)
 			height = dataNode.text().as_int();
 			return true;
 		}
-		//else throw "Could not get the map height!";
 	}
 	return false;
 }
@@ -168,7 +154,6 @@ bool Map::getMapWidth(pugi::xml_node& dataNode)
 			width = dataNode.text().as_int();
 			return true;
 		}
-		//else throw "Coild not get the map width!";
 	}
 	return false;
 }
@@ -198,16 +183,11 @@ bool Map::createBlockMap(pugi::xml_node& dataNode)
 				code += s_tileCodeList[tileLocation + 1];
 
 				levelList[floor].push_back((getTileFromCode(code)));
-				
-				//levelList[floor].push_back(std::make_shared<Block>(Destructible::wall));
 			}
 		}
 		if (levelList.size() == totalFloors && levelList[totalFloors - 1].size() == width * height)
 		{
-			for (int i = 0; i < 3; i++)
-			{
-				fovMapList.push_back(std::make_shared<TCODMap>(width, height));
-			}
+			for (int i = 0; i < 3; i++) fovMapList.push_back(std::make_shared<TCODMap>(width, height));
 
 			Position4 position;
 
@@ -302,7 +282,6 @@ bool Map::getCreatures(pugi::xml_node& dataNode)
 					if (!(creature.child("armor").child("durability").empty())) armorDurability = armorData.child("durability").text().as_int();
 					else return false;
 
-
 					std::string armorColorName;
 
 					if (!(creature.child("armor").child("color").empty())) armorColorName = armorData.child("color").text().as_string();
@@ -367,9 +346,7 @@ bool Map::getContainers(pugi::xml_node& dataNode)
 	{
 		for (auto& container : dataNode.children())
 		{
-			int x;
-			int y;
-			int floor;
+			int x, y, floor;
 
 			std::string name;
 
@@ -385,10 +362,7 @@ bool Map::getContainers(pugi::xml_node& dataNode)
 			if (!(container.child("type").empty()))		name = container.attribute("type").as_string();
 			else return false;
 
-			if (name == "SmallBackpack")
-			{
-				mapContainerList.push_back(std::make_shared<Container>(ep::container::smallBackpack(x, y, floor)));
-			}
+			if (name == "SmallBackpack") mapContainerList.push_back(std::make_shared<Container>(ep::container::smallBackpack(x, y, floor)));
 		}
 		return true;
 	}
@@ -398,10 +372,7 @@ bool Map::getContainers(pugi::xml_node& dataNode)
 std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 {
 	static TCODRandom* RNG = TCODRandom::getInstance();
-	if (!RNG)
-	{
-		RNG->setDistribution(TCOD_DISTRIBUTION_LINEAR);
-	}
+	if (!RNG) RNG->setDistribution(TCOD_DISTRIBUTION_LINEAR);
 
 	switch (code[0])
 	{
@@ -526,16 +497,12 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 
 bool Map::inMapBounds(Position3& position) const
 {
-	if ((position.floor >= 0 && position.floor < totalFloors) && (position.x >= 0 && position.x < width) && (position.y >= 0 && position.y < height)) return true;
-	return false;
+	return ((position.floor >= 0 && position.floor < totalFloors) && (position.x >= 0 && position.x < width) && (position.y >= 0 && position.y < height));
 }
 
 bool Map::getWalkability(Position4 position, bool checkCreatures) const
 {
-	if (!inMapBounds(position)) //should never be called??
-	{
-		return false;
-	}
+	if (!inMapBounds(position)) return false;
 
 	if (checkCreatures)
 	{
@@ -543,10 +510,7 @@ bool Map::getWalkability(Position4 position, bool checkCreatures) const
 		{
 			if (position.floor == creature->mapPosition.floor && position.x == creature->mapPosition.x && position.y == creature->mapPosition.y)
 			{
-				if (creature->health > 0)
-				{
-					return false;
-				}
+				if (creature->health > 0) return false;
 			}
 		}
 	}
@@ -556,35 +520,21 @@ bool Map::getWalkability(Position4 position, bool checkCreatures) const
 
 	for (int i = 0; i < position.height; ++i)
 	{
-		if (walkableFlag & heightToBitFlag(position.height - i))
-		{
-			walkableBool = false;
-		}
+		if (walkableFlag & heightToBitFlag(position.height - i)) walkableBool = false;
 	}
 
-	if (walkableBool == true && walkableFlag & heightToBitFlag(0))
-	{
-		return true;
-	}
+	if (walkableBool == true && walkableFlag & heightToBitFlag(0)) return true;
 	return false;
 }
 
 bool Map::getSolidity(Position4& position) const
 {
-	if (getBlock(position)->walkableFlag & heightToBitFlag(position.height))
-	{
-		return true;
-	}
-	return false;
+	return (getBlock(position)->walkableFlag & heightToBitFlag(position.height));
 }
 
 bool Map::getTransparency(Position4& position) const
 {
-	if (!(getBlock(position)->transparentFlag & heightToBitFlag(position.height)))
-	{
-		return true;
-	}
-	return false;
+	return (!(getBlock(position)->transparentFlag & heightToBitFlag(position.height)));
 }
 
 std::shared_ptr<Block> Map::getBlock(Position3 position) const
@@ -602,16 +552,9 @@ std::shared_ptr<Block> Map::getBlock(Position3 position) const
 //----------------------------------------------------------------------------------------------------
 
 World::World()
-	:xOffset(0), yOffset(0)//, soundManager(std::make_shared<Audio>())
+	: xOffset(0), yOffset(0)
 {
 	debugmap = std::make_shared<Map>("data/maps/debugmap.emp");
-
-	//testSound = Sound(Position4(0, 0, 0, 0), 100, 100);
-	/*for (int i = 0; i < 3; i++)
-	{
-		fovMapList.push_back(std::make_shared<TCODMap>(debugmap->width, debugmap->height));
-	}*/
-	//createFovMap();
 }
 
 bool World::isExplored(Position3& position) const
@@ -619,10 +562,9 @@ bool World::isExplored(Position3& position) const
  	return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]->explored;
 }
 
-void World::addSound(Sound sound) //need params
+void World::addSound(Sound sound)
 {
 	soundBuffer.push_back(std::make_shared<Sound>(sound));
-	//return soundManager->playSound(sound); //returns the sound handle
 }
 
 void World::updateBlock(Position3 blockPosition, bool checkCreatures)
@@ -704,11 +646,8 @@ void World::update()
 
 	if (INPUT->debug1Key->isSwitched)
 	{
-		//addSound(Sound("Testing", true, Position4(20, 10, 3, 0), 100.0f, 100.0f));
 		AUDIO->playSound(PositionalStaticSound("Testing", Position4(20, 10, 0, 0), 0.0f, 100.0f)); //2d sound
 	}
-
-	//soundManager->update();
 
 	updateEntities(); //needs to be first to prevent bad fov checks
 	computeFov(debugmap->player->mapPosition);
@@ -730,47 +669,6 @@ void World::update()
 	{
 		soundBuffer.clear();
 	}
-
-	//if (soundList.size() > 0)
-	//{
-	//	soundList.clear();
-	//}
-	//soundList = soundBuffer; //move all sounds from the buffer to the list so that creatures updated before the sound creation can react
-	//
-	//for (auto sound : soundList) //sound cut off when list clears
-	//{
-	//	ENGINE->audio->play(sound->speech);
-	//}
-
-	/*
-	BETTER AUDIO LIST
-
-	creatures push sounds to sound buffer, and react to the sound buffer
-
-	RUN 1:
-		creature 1 push sound buffer
-		creature 2 push sound buffer
-
-		sound list set equal to sound buffer
-		buffer cleared
-
-		sound list plays sound for each in list, then clears
-		
-		sound has react bool that is set false after first frame
-
-	RUN 2:
-		creature 1 react to both sounds
-		creature 2 react to both sounds
-
-		list set to buffer
-		buffer cleared
-	
-	NEW IDEA:
-
-	play sound function in map
-		adds "sound" to world sound list, only uses for ai reaction
-		also adds sound to sound manager
-	*/
 }
 
 //--------------------------------------------------------------------------------------------
@@ -781,21 +679,18 @@ void World::renderTiles(const Pane& pane) const
 	{
 		for (int x = xOffset; x < pane.consoleWidth + xOffset; ++x)
 		{
-			//same perf
-			//std::shared_ptr<Block> block = debugmap->getBlock(Position3(x, y, debugmap->player->mapPosition.floor));
-			//block->render(Position4(x - xOffset, y - yOffset, debugmap->player->mapPosition.height, debugmap->player->mapPosition.floor), pane);
-
-			////render walkability
-			//if (debugmap->getWalkability(Position4(x, y, debugmap->player->mapPosition.height, 0), true) == true)
-			//{
-			//	pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::green);
-			//}
-			//else
-			//{
-			//	pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::red);
-			//}
-
-			debugmap->getBlock(Position3(x, y, debugmap->player->mapPosition.floor))->render(Position4(x - xOffset, y - yOffset, debugmap->player->mapPosition.height, debugmap->player->mapPosition.floor), pane);
+			if (false)//render walkability
+			{
+				if (debugmap->getWalkability(Position4(x, y, debugmap->player->mapPosition.height, 0), true) == true)
+				{
+					pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::green);
+				}
+				else
+				{
+					pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::red);
+				}
+			}
+			else debugmap->getBlock(Position3(x, y, debugmap->player->mapPosition.floor))->render(Position4(x - xOffset, y - yOffset, debugmap->player->mapPosition.height, debugmap->player->mapPosition.floor), pane);
 		}
 	}
 }

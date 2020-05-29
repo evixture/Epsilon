@@ -2,6 +2,7 @@
 
 /*
 	Firearm
+	|	Bullet
 	L	Melee
 		L	Tool
 

@@ -5,55 +5,55 @@
 	|	Font
 */
 
-struct Font //font class that holds the needed data to set the tcod font
+struct Font
 {
-	std::string name; //name of the font
+	std::string name;
 
-	std::string filePath; //string file path to the font
-	unsigned char format; //bit mask format of the font
+	std::string filePath;
+	unsigned char format;
 
-	unsigned char charH; //height of font in characters
-	unsigned char charW; //width of font in characters
+	unsigned char charH;
+	unsigned char charW;
 
-	std::string xDim; //x dimension of font
-	std::string yDim; //y dimension of font
+	std::string xDim;
+	std::string yDim;
 
-	Font(std::string name, std::string xdim, std::string ydim, std::string filePath, int format, int charW, int charH); //font constructor that takes string name, x and y dimension, file path, bitmask format, and char width and height
+	Font(std::string name, std::string xdim, std::string ydim, std::string filePath, int format, int charW, int charH);
 };
 
-struct Settings //settings class that hold most of the settings for the game and tcod
+struct Settings
 {
-	int screenCharWidth; //total width of root window in characters
-	int screenCharHeight; //total height of root window in characters
+	int screenCharWidth;
+	int screenCharHeight;
 
-	sf::Time lastFrameTime; //the time between the last frame and the current frame
+	sf::Time lastFrameTime;
 
-	unsigned int fpsCount; //the amount of frames pushed in the last second increment
+	unsigned int fpsCount;
 
-	TCOD_fov_algorithm_t fovtype; //the type of fov algorithm used for the map
-	unsigned int fovRad; //the radius of tiles that the fov is calculated for
-	bool lightWalls; //if the fov algorithm lights the tiles
+	TCOD_fov_algorithm_t fovtype;
+	unsigned int fovRad;
+	bool lightWalls;
 
-	std::shared_ptr<Input> input; //input component for keyboard and mouse
+	std::shared_ptr<Input> input;
 
-	std::shared_ptr<Font> terminal16x16; //default font
-	std::vector<std::shared_ptr<Font>> fontList; //list of fonts availible for selection
+	std::shared_ptr<Font> terminal16x16;
+	std::vector<std::shared_ptr<Font>> fontList;
 
-	Settings(int screenCharWidth, int screenCharHeight); //settings constructor that takes width and height
+	Settings(int screenCharWidth, int screenCharHeight);
 
-	void setFullscreen(); //sets window fullscreen on or off
+	void setFullscreen();
 
-	void update(); //updates settings
-	void render() const; //renders settings to root
+	void update();
+	void render() const;
 
 private:
-	sf::Clock systemClock; //sytem clock used to get the last frame time
+	sf::Clock systemClock;
 
-	TCOD_renderer_t renderer; //type of library used to render the window
-	std::string windowTitle; //string title of the main window
-	bool fullscreen; // if the main window is fullscreen
+	TCOD_renderer_t renderer;
+	std::string windowTitle;
+	bool fullscreen;
 
-	void setfont(std::shared_ptr<Font> font); //sets the font used
-	void printLogo() const; //prints epsilon to the top left corner
-	void printDebugStats() const; //prints debug data to the top of the screen
+	void setfont(std::shared_ptr<Font> font);
+	void printLogo() const;
+	void printDebugStats() const;
 };

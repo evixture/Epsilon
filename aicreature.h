@@ -20,7 +20,6 @@ struct AICreature : public Creature
 	float soundInterest;
 	float soundInterestChange;
 
-	//aggression
 	float aggression;
 	//caution
 	//fear
@@ -31,7 +30,7 @@ struct AICreature : public Creature
 	void move();
 
 	//world interact
-	void pickUpItem(); //should eventually chenge to pure
+	void pickUpItem(); //should eventually change to pure
 	void dropItem();
 
 	//actions
