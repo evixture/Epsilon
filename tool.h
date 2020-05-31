@@ -10,6 +10,21 @@
 	L	Tool
 */
 
+/*
+	TOOL RANGES
+	Melee	: 0
+	Firearm	: Depends on ammo type
+
+	General rule, depends on ammo and aggression :
+		Pistols : 10
+		SMG		: 15
+		Rifle	: 20
+		DMR		: 25
+		Sniper	: 30
+
+		in general, neutral range ~15??
+*/
+
 struct Armor;
 
 struct Tool																		
@@ -21,7 +36,8 @@ struct Tool
 
 	bool isHeld;																
 
-	MagazineData::AmmoType ammoType;											
+	MagazineData::AmmoType ammoType;
+	int effectiveRange;
 	
 	Position4 mapPosition;														
 	Position4 sourcePosition;													

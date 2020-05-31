@@ -2,13 +2,13 @@
 
 Tool::Tool(std::string name, TCODColor color, int ch)
 	: name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), 
-	ammoType(MagazineData::AmmoType::NONE), fireMode(SAFE), availibleFireMode(0), isHeld(false), type(Tool::Type::TOOL), angle(0.0f)
+	ammoType(MagazineData::AmmoType::NONE), fireMode(SAFE), availibleFireMode(0), isHeld(false), type(Tool::Type::TOOL), angle(0.0f), effectiveRange(0)
 {
 }
 
 Tool::Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
 	: name(name), color(color), ch(NULL), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), 
-	ammoType(ammoType), fireMode(fireMode), availibleFireMode(availibleFireModeFlag), isHeld(false), type(Tool::Type::TOOL), angle(0.0f)
+	ammoType(ammoType), fireMode(fireMode), availibleFireMode(availibleFireModeFlag), isHeld(false), type(Tool::Type::TOOL), angle(0.0f), effectiveRange(0)
 {
 }
 
@@ -159,6 +159,7 @@ Melee::Melee(Tool tool, int bluntDamage, int sharpDamage)
 	: Tool(tool), bluntDamage(bluntDamage), sharpDamage(sharpDamage)
 {
 	type = Tool::Type::MELEE;
+	effectiveRange = 0;
 }
 
 void Melee::useMelee()
@@ -383,9 +384,19 @@ void Bullet::render(const Pane& pane) const
 
 Firearm::Firearm(std::string name, TCODColor color, int shotsPerSecond, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
 	:Melee(Tool(name, color, ammoType, fireMode, availibleFireModeFlag), /* MELEE DAMAGE */ 25, 0), fireRPS(shotsPerSecond), reloadTime(reloadSpeed),
-	usedMag(MagazineData(ammoType, 0, 0, true)), fireClock(1.0f / shotsPerSecond), reloadClock(reloadSpeed)//, fireNumCalls(0), reloadNumCalls(0)
+	usedMag(MagazineData(ammoType, 0, 0, true)), fireClock(1.0f / shotsPerSecond), reloadClock(reloadSpeed)
 {
 	type = Tool::Type::FIREARM;
+
+	switch (ammoType)
+	{
+	case MagazineData::AmmoType::FOURTYFIVEACP:
+		effectiveRange = 10;
+		break;
+	case MagazineData::AmmoType::FIVEPOINTFIVESIX:
+		effectiveRange = 20;
+		break;
+	}
 
 	reloadClock.numCalls = 1.0f;
 	fireClock.numCalls = 1.0f;

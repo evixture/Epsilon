@@ -21,11 +21,31 @@ struct AICreature : public Creature
 	float soundInterestChange;
 
 	float aggression;
-	//caution
-	//fear
-	//stealth
+	//caution	: effects allowable distance and agression floor, range from -1 to 1
+	//	attitude, opinion
+	//fear		: effects fleeing battle, needs node system set up, range from 0 to 1
+	//stealth	: prob not needed but need for stances??
 
 	AICreature(Creature creature, TCODMap* fovMap);
+
+	void takeDamage(int damage);
+
+	//need to include functions that only calls from selected item?
+
+	void update(); //virtual updates the creature
+	void render(const Pane& pane) const; // virtual renders the creature
+
+private:
+	bool inFov;
+
+	void behave();
+	void act();
+
+	bool inEffectiveRange();
+
+	float calcVisInt;
+	void decayInterest();
+	void reactToSounds();
 
 	void move();
 
@@ -38,29 +58,11 @@ struct AICreature : public Creature
 	void changeFireMode();
 	void equipArmor();
 	void useMelee();
-	void takeDamage(int damage);
 
 	void updateTools();
 
-	//need to include functions that only calls from selected item?
-
-	void update(); //virtual updates the creature
-	void render(const Pane& pane) const; // virtual renders the creature
-
-private:
-
-	bool inFov;
-
-	void behave();
-	void act();
-
-	bool inEffectiveRange();
-
-	void decayInterest();
-	void reactToSounds();
-
-	float calcVisInt;
-
 	Clock interestDecayClock;
 	Clock reactionFireClock;
+
+	friend struct ActionManager;
 };

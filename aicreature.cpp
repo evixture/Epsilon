@@ -5,14 +5,20 @@ AICreature::AICreature(Creature creature, TCODMap* fovMap)
 	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false)
 {
 	inventory.push_back(std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0)));
-	inventory[1]->addItem(std::make_shared<Item>(ep::item::sip45(0, 0, 0)));
-	inventory[1]->addItem(std::make_shared<Item>(ep::item::cal45Magazine7(0, 0, 0)));
+	inventory[1]->addItem(std::make_shared<Item>(ep::item::knife(0, 0, 0)));
+	inventory[1]->addItem(std::make_shared<Item>(ep::item::cal556Magazine30(0, 0, 0)));
 
 	selectedItem = inventory[1]->itemList[0];
 }
 
 void AICreature::move()
 {
+	/*
+		STANCE AND SPEED  WITH ATTRIBUTES:
+			default movement is walking, but sprint active if far from effective range and creep active if stealth
+			default stance is standing, but lower if stealth
+	*/
+
 	static int stepSound;
 	static int stepSpeed;
 
@@ -27,7 +33,7 @@ void AICreature::move()
 
 	for (int i = 1; i <= moveClock.numCalls; moveClock.numCalls--)
 	{
-		if (!inEffectiveRange() && (soundInterest >= 0.5f || visualInterest >= 0.5f)) //need to change order if want to change move behavior
+		if (((!inEffectiveRange() && inFov) || !inFov) && (soundInterest >= 0.5f || visualInterest >= 0.5f)) //need to change order if want to change move behavior
 		{
 			WORLD->updateBlock(mapPosition, false);
 			path.walk(&mapPosition.x, &mapPosition.y, true);
@@ -99,7 +105,8 @@ void AICreature::updateTools()
 
 bool AICreature::inEffectiveRange()
 {
-	return ((getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y) <= selectedItem->tool->getMagazine().velocity * 0.15f) && selectedItem->tool->getMagazine().isValid); //change to take into account melee weapons
+	return ((getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y) <= selectedItem->tool->effectiveRange) && selectedItem->tool->getMagazine().isValid); //change to take into account melee weapons
+	//getMagazine().velocity * 0.15f
 }
 
 void AICreature::decayInterest()
@@ -285,7 +292,7 @@ void AICreature::render(const Pane& pane) const
 			pane.console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
 		}
 
-		if (false) //show pathfinding information
+		if (true) //show pathfinding information
 		{
 			//render path
 			int x, y;
