@@ -14,6 +14,7 @@ AICreature::AICreature(Creature creature, TCODMap* fovMap)
 void AICreature::move()
 {
 	static int stepSound;
+	static int stepSpeed;
 
 	if (moveSpeedMode == 2)			baseMoveTime = .25f; //sprint
 	else if (moveSpeedMode == 0)	baseMoveTime = 1.0f; //creep
@@ -26,55 +27,24 @@ void AICreature::move()
 
 	for (int i = 1; i <= moveClock.numCalls; moveClock.numCalls--)
 	{
-		if (soundInterest >= 0.5f || visualInterest >= 0.5f) //change not in fov for more context, to allow movement in combat, etc, replace with if not in weapon effective range
+		if (!inEffectiveRange() && (soundInterest >= 0.5f || visualInterest >= 0.5f)) //need to change order if want to change move behavior
 		{
-			if (inFov) //move check to act(), and allow move to be called around in infov and outfov
+			WORLD->updateBlock(mapPosition, false);
+			path.walk(&mapPosition.x, &mapPosition.y, true);
+			WORLD->updateBlock(mapPosition, true);
+
+			//play footstep sound
+			stepSpeed = mapPosition.height - (baseMoveTime == .25f)? 0 : 1;
+			if (stepSound >= stepSpeed)
 			{
-				if (!inEffectiveRange())
-				{
-					WORLD->updateBlock(mapPosition, false);
-
-					path.walk(&mapPosition.x, &mapPosition.y, true);
-
-					WORLD->updateBlock(mapPosition, true);
-
-					debugBGColor = TCODColor::green;
-
-					//play footstep sound
-					if (stepSound >= 1)
-					{
-						AUDIO->playSound(PositionalTrackedSound(("top"), &mapPosition, 70.0f, 100.0f));
-						stepSound = 0;
-					}
-					else
-					{
-						stepSound++;
-					}
-				}
+				AUDIO->playSound(PositionalTrackedSound(("top"), &mapPosition, 70.0f, 10.0f));
+				stepSound = 0;
 			}
 			else
 			{
-				WORLD->updateBlock(mapPosition, false);
-
-				path.walk(&mapPosition.x, &mapPosition.y, true);
-
-				WORLD->updateBlock(mapPosition, true);
-
-				debugBGColor = TCODColor::blue;
-
-				//play footstep sound
-				if (stepSound >= 1)
-				{
-					AUDIO->playSound(PositionalTrackedSound(("top"), &mapPosition, 70.0f, 100.0f));
-					stepSound = 0;
-				}
-				else
-				{
-					stepSound++;
-				}
+				stepSound++;
 			}
 		}
-		//else nav idly around the map?
 	}
 }
 

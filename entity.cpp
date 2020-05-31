@@ -137,6 +137,7 @@ Player::Player(Position4 position)
 void Player::move()
 {
 	static int stepSound;
+	static int stepSpeed;
 
 	if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
 	{
@@ -179,9 +180,12 @@ void Player::move()
 					mapPosition.y += yMoveDist;
 					yMoveDist = 0;
 				}
+				WORLD->updateBlock(mapPosition, true); //update new position property
 
 				//play footstep sound
-				if (stepSound >= 1)
+				if (baseMoveTime == .25f) stepSpeed = mapPosition.height;
+				else stepSpeed = mapPosition.height - 1;
+				if (stepSound >= stepSpeed)
 				{
 					AUDIO->playSound(PositionalTrackedSound(("top"), &mapPosition, 70.0f, 10.0f));
 					stepSound = 0;
@@ -190,8 +194,6 @@ void Player::move()
 				{
 					stepSound++;
 				}
-
-				WORLD->updateBlock(mapPosition, true); //update new position property
 			}
 		}
 	}
