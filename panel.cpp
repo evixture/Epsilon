@@ -27,49 +27,22 @@ void MapWindow::render() const
 //----------------------------------------------------------------------------------------------------
 
 StatusWindow::StatusWindow(int consoleWidth, int consoleHeight, int rx, int ry)
-	: Window(consoleWidth, consoleHeight, "Status", rx, ry), displayHealth(0), displayArmor(0)
+	: Window(consoleWidth, consoleHeight, "Status", rx, ry), healthBar(Bar("Health", TCODColor::red, 20, 100, 0, Position3(0, 0, 0))), armorBar(Bar("Armor ", TCODColor::blue, 20, 100, 0, Position3(0, 1, 0)))
 {
 }
 
 void StatusWindow::update()
 {
-	if (displayHealth != WORLD->debugmap->player->health) displayHealth					= WORLD->debugmap->player->health;
-	if (displayArmor != WORLD->debugmap->player->equippedArmor.defense) displayArmor	= WORLD->debugmap->player->equippedArmor.defense;
+	healthBar.setBarValue(WORLD->debugmap->player->health);
+	armorBar.setBarValue(WORLD->debugmap->player->equippedArmor.defense);
 }
 
 void StatusWindow::render() const
 {
 	clearWindow();
 
-	drawPane.console->printf(0, 0, "Health : [");
-	for (int i = 0; i < 20; ++i)
-	{
-		if (displayHealth != -1)
-		{
-			if (i * 5 < displayHealth)
-			{
-				drawPane.console->printf(i + 10, 0, "=");
-				drawPane.console->setCharForeground(i + 10, 0, TCODColor::red);
-			}
-		}
-		else
-		{
-			drawPane.console->printf(i + 10, 0, "!");
-			drawPane.console->setCharForeground(i + 10, 0, TCODColor::red);
-		}
-	}
-	drawPane.console->printf(30, 0, "]");
-
-	drawPane.console->printf(0, 1, "Armor  : [");
-	for (int i = 0; i < 20; ++i)
-	{
-		if (i * 5 < displayArmor)
-		{
-			drawPane.console->printf(i + 10, 1, "=");
-			drawPane.console->setCharForeground(i + 10, 1, TCODColor::blue);
-		}
-	}
-	drawPane.console->printf(30, 1, "]");
+	healthBar.render(drawPane);
+	armorBar.render(drawPane);
 
 	pushWindow();
 }

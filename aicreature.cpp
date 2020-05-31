@@ -34,7 +34,8 @@ void AICreature::move()
 			WORLD->updateBlock(mapPosition, true);
 
 			//play footstep sound
-			stepSpeed = mapPosition.height - (baseMoveTime == .25f)? 0 : 1;
+			if (baseMoveTime == .25f) stepSpeed = mapPosition.height;
+			else stepSpeed = mapPosition.height - 1;
 			if (stepSound >= stepSpeed)
 			{
 				AUDIO->playSound(PositionalTrackedSound(("top"), &mapPosition, 70.0f, 10.0f));

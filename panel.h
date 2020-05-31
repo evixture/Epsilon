@@ -8,8 +8,8 @@ struct StatusWindow : public Window
 	void render() const;
 
 private:
-	short int displayHealth;
-	short int displayArmor;
+	Bar healthBar;
+	Bar armorBar;
 };
 
 struct MapWindow : public Window

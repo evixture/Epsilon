@@ -92,6 +92,47 @@ private:
 	std::vector<std::string> menuList;
 };
 
+struct Bar
+{
+	std::string label;
+	TCODColor color;
+	int width;
+
+	int maxValue;
+	int currentValue;
+
+	Position3 renderPosition;
+
+	Bar(std::string label, TCODColor color, int width, int maxValue, int currentValue, Position3 renderPosition);
+
+	void setBarValue(int value);
+	void render(const Pane& pane) const;
+
+private:
+	int pad;
+};
+
+/*
+drawPane.console->printf(0, 0, "Health : [");
+for (int i = 0; i < 20; ++i)
+{
+	if (displayHealth != -1)
+	{
+		if (i * 5 < displayHealth)
+		{
+			drawPane.console->printf(i + 10, 0, "=");
+			drawPane.console->setCharForeground(i + 10, 0, TCODColor::red);
+		}
+	}
+	else
+	{
+		drawPane.console->printf(i + 10, 0, "!");
+		drawPane.console->setCharForeground(i + 10, 0, TCODColor::red);
+	}
+}
+drawPane.console->printf(30, 0, "]");
+*/
+
 unsigned char	heightToBitFlag(int height);
 double			getAngle(int ix, int iy, int tx, int ty);
 double			getDistance(int ix, int iy, int tx, int ty);

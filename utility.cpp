@@ -264,3 +264,36 @@ void Menu::render(const Pane& pane, const int xRender, const int yRender) const
 		}
 	}
 }
+
+Bar::Bar(std::string label, TCODColor color, int width, int maxValue, int currentValue, Position3 renderPosition)
+	: label(label), color(color), width(width), maxValue(maxValue), currentValue(currentValue), renderPosition(renderPosition)
+{
+	pad = (int)label.length() + 4; //position of the start of the bar
+}
+
+void Bar::setBarValue(int value)
+{
+	currentValue = value;
+}
+
+void Bar::render(const Pane& pane) const
+{
+	pane.console->printf(renderPosition.x, renderPosition.y, "%s : [", label.c_str());
+	for (int i = 0; i < width; ++i)
+	{
+		if (currentValue != -1)
+		{
+			if (i * (maxValue / width) < currentValue)
+			{
+				pane.console->printf(i + pad + renderPosition.x, renderPosition.y, "=");
+				pane.console->setCharForeground(i + pad + renderPosition.x, renderPosition.y, color);
+			}
+		}
+		else
+		{
+			pane.console->printf(i + pad + renderPosition.x, renderPosition.y, "!");
+			pane.console->setCharForeground(i + pad + renderPosition.x, renderPosition.y, color);
+		}
+	}
+	pane.console->printf(pad + width, renderPosition.y, "]");
+}
