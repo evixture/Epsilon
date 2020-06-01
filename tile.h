@@ -31,11 +31,11 @@ struct Block
 
 	Block(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned char walkableFlag, Tag tag = Tag::STATIC);
 
-	Tile getTileData(int height) const;
+	Tile getTileData(int h) const;
 
 	void render(Position4 renderPosition, const Pane& pane) const;
 
-	virtual bool destroy(int damage, int height);
+	virtual bool destroy(int damage, int h);
 	virtual void interact();
 };
 

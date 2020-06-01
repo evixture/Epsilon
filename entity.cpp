@@ -31,17 +31,17 @@ void Creature::move()
 
 void Creature::changeStanceUp()
 {
-	if (mapPosition.height + 1 <= 3)
+	if (mapPosition.h + 1 <= 3)
 	{
-		if (WORLD->debugmap->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height + 1, mapPosition.floor), false)) mapPosition.height += 1;
+		if (WORLD->debugmap->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.h + 1, mapPosition.z), false)) mapPosition.h += 1;
 	}
 }
 
 void Creature::changeStanceDown()
 {
-	if (mapPosition.height - 1 >= 1)
+	if (mapPosition.h - 1 >= 1)
 	{
-		if (WORLD->debugmap->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height - 1, mapPosition.floor), false)) mapPosition.height -= 1;
+		if (WORLD->debugmap->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.h - 1, mapPosition.z), false)) mapPosition.h -= 1;
 	}
 }
 
@@ -101,7 +101,7 @@ void Creature::update()
 
 void Creature::render(const Pane& pane) const
 {
-	if (WORLD->debugmap->player->mapPosition.floor == mapPosition.floor)
+	if (WORLD->debugmap->player->mapPosition.z == mapPosition.z)
 	{
 		pane.console->setChar(renderPosition.x, renderPosition.y, ch);
 		pane.console->setCharForeground(renderPosition.x, renderPosition.y, (WORLD->isInPlayerFov(mapPosition))? color : TCODColor::darkerGrey); //out of fov creatures rendered with one step above normal fov grey to be more noticible
@@ -151,7 +151,7 @@ void Player::move()
 		if (INPUT->stanceDownKey->isSwitched) changeStanceDown();
 		if (INPUT->stanceUpKey->isSwitched) changeStanceUp();
 
-		moveSpeed = baseMoveTime / mapPosition.height;
+		moveSpeed = baseMoveTime / mapPosition.h;
 
 		if (INPUT->moveUpKey->isDown && INPUT->moveDownKey->isDown) yMoveDist = 0;
 		else if (INPUT->moveUpKey->isDown && !INPUT->moveDownKey->isDown) yMoveDist = -1;
@@ -170,12 +170,12 @@ void Player::move()
 			{
 				WORLD->updateBlock(mapPosition, false); //clear old position's map properties
 
-				if (WORLD->debugmap->getWalkability(Position4(mapPosition.x + xMoveDist, mapPosition.y, mapPosition.height, mapPosition.floor), true))
+				if (WORLD->debugmap->getWalkability(Position4(mapPosition.x + xMoveDist, mapPosition.y, mapPosition.h, mapPosition.z), true))
 				{
 					mapPosition.x += xMoveDist;
 					xMoveDist = 0;
 				} 
-				if (WORLD->debugmap->getWalkability(Position4(mapPosition.x, mapPosition.y + yMoveDist, mapPosition.height, mapPosition.floor), true))
+				if (WORLD->debugmap->getWalkability(Position4(mapPosition.x, mapPosition.y + yMoveDist, mapPosition.h, mapPosition.z), true))
 				{
 					mapPosition.y += yMoveDist;
 					yMoveDist = 0;
@@ -183,8 +183,8 @@ void Player::move()
 				WORLD->updateBlock(mapPosition, true); //update new position property
 
 				//play footstep sound
-				if (baseMoveTime == .25f) stepSpeed = mapPosition.height;
-				else stepSpeed = mapPosition.height - 1;
+				if (baseMoveTime == .25f) stepSpeed = mapPosition.h;
+				else stepSpeed = mapPosition.h - 1;
 				if (stepSound >= stepSpeed)
 				{
 					AUDIO->playSound(PositionalTrackedSound(("top"), &mapPosition, 70.0f, 10.0f));
@@ -267,7 +267,7 @@ void Player::pickUpItem()
 {
 	for (int i = 0; i < WORLD->debugmap->mapItemList.size(); ++i)
 	{
-		if (WORLD->debugmap->mapItemList[i] != nullptr && WORLD->debugmap->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->debugmap->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->debugmap->mapItemList[i]->mapPosition.floor == mapPosition.floor)
+		if (WORLD->debugmap->mapItemList[i] != nullptr && WORLD->debugmap->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->debugmap->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->debugmap->mapItemList[i]->mapPosition.z == mapPosition.z)
 		{
 			if (containerIndex != -1)
 			{
@@ -287,7 +287,7 @@ void Player::pickUpItem()
 
 	for (int i = 0; i < WORLD->debugmap->mapContainerList.size(); ++i)
 	{
-		if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->item->mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->item->mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->item->mapPosition.floor == mapPosition.floor)
+		if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->item->mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->item->mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->item->mapPosition.z == mapPosition.z)
 		{
 			GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapContainerList[i]->item->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 

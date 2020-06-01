@@ -26,8 +26,8 @@ struct Creature : public Entity
 	int containerIndex;
 	int itemIndex;
 
-	std::vector<std::shared_ptr<Container>> inventory;
-	std::shared_ptr<Item> selectedItem;
+	std::vector<std::shared_ptr<Container>> inventory; //needs to be pointer
+	std::shared_ptr<Item> selectedItem; //needs to be pointer
 
 	Creature(Position4 pos, int ch, std::string name, TCODColor color, int health, Armor armor);
 

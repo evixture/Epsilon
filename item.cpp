@@ -139,7 +139,7 @@ void Item::updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHel
 
 	changeBarColor();
 
-	this->mapPosition = Position4(tool->sourcePosition.x, tool->sourcePosition.y, mapPosition.height, mapPosition.floor);
+	this->mapPosition = Position4(tool->sourcePosition.x, tool->sourcePosition.y, mapPosition.h, mapPosition.z);
 	tileRenderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
@@ -156,7 +156,7 @@ void Item::updateTile()
 
 void Item::renderTile(const Pane& pane) const
 {
-	tile->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.height, tileRenderPosition.floor), pane);
+	tile->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.h, tileRenderPosition.z), pane);
 
 	if (distToEnt < 5 && WORLD->isInPlayerFov(mapPosition))
 	{

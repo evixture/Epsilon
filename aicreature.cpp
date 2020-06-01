@@ -26,7 +26,7 @@ void AICreature::move()
 	else if (moveSpeedMode == 0)	baseMoveTime = 1.0f; //creep
 	else							baseMoveTime = .5f;	 //walk
 
-	moveSpeed = baseMoveTime / mapPosition.height;
+	moveSpeed = baseMoveTime / mapPosition.h;
 
 	moveClock.timeBetweenUpdates = moveSpeed;
 	moveClock.tickUp();
@@ -40,8 +40,8 @@ void AICreature::move()
 			WORLD->updateBlock(mapPosition, true);
 
 			//play footstep sound
-			if (baseMoveTime == .25f) stepSpeed = mapPosition.height;
-			else stepSpeed = mapPosition.height - 1;
+			if (baseMoveTime == .25f) stepSpeed = mapPosition.h;
+			else stepSpeed = mapPosition.h - 1;
 			if (stepSound >= stepSpeed)
 			{
 				AUDIO->playSound(PositionalTrackedSound(("top"), &mapPosition, 70.0f, 10.0f));
@@ -157,7 +157,7 @@ void AICreature::reactToSounds()
 	{
 		if (sound->getPosition().first == true && !(sound->getPosition().second.x == mapPosition.x && sound->getPosition().second.y == mapPosition.x)) //is 3d sound and not from itself
 		{
-			if (sound->getPosition().second.floor == mapPosition.floor)
+			if (sound->getPosition().second.z == mapPosition.z)
 			{
 				float soundInterestChange;
 				double distance = getDistance(mapPosition.x, mapPosition.y, sound->getPosition().second.x, sound->getPosition().second.y);
@@ -280,7 +280,7 @@ void AICreature::update() //ai and behavior attributes update here
 
 void AICreature::render(const Pane& pane) const
 {
-	if (WORLD->debugmap->player->mapPosition.floor == mapPosition.floor)
+	if (WORLD->debugmap->player->mapPosition.z == mapPosition.z)
 	{
 		if (inFov)
 		{

@@ -56,7 +56,7 @@ PlayerWindow::PlayerWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 
 void PlayerWindow::update()
 {
-	playerStance = WORLD->debugmap->player->mapPosition.height;
+	playerStance = WORLD->debugmap->player->mapPosition.h;
 
 	if (!(INPUT->moveUpKey->isDown) && !(INPUT->moveDownKey->isDown) && !(INPUT->moveLeftKey->isDown) && !(INPUT->moveRightKey->isDown)) playerSpeed = 0;
 	else if (WORLD->debugmap->player->baseMoveTime == .25f) playerSpeed = 3;
@@ -431,7 +431,7 @@ void ProximityWindow::render() const
 
 	for (auto& container : proximityContainerList)
 	{
-		if (container->item->mapPosition.floor == WORLD->debugmap->player->mapPosition.floor)
+		if (container->item->mapPosition.z == WORLD->debugmap->player->mapPosition.z)
 		{
 			if (container->item->distToEnt < 5 && WORLD->isInPlayerFov(container->item->mapPosition))
 			{
@@ -443,7 +443,7 @@ void ProximityWindow::render() const
 
 	for (auto& item : proximityItemList)
 	{
-		if (item->mapPosition.floor == WORLD->debugmap->player->mapPosition.floor)
+		if (item->mapPosition.z == WORLD->debugmap->player->mapPosition.z)
 		{
 			if (item->distToEnt < 5 && WORLD->isInPlayerFov(item->mapPosition))
 			{
@@ -583,10 +583,10 @@ void InfoWindow::setTileDetails()
 
 	if (INPUT->mouse.cx >= 1 && INPUT->mouse.cx <= 60 && INPUT->mouse.cy >= 3 && INPUT->mouse.cy <= 62) //if in map window
 	{
-		if (WORLD->debugmap->getBlock(Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.floor))->explored)
+		if (WORLD->debugmap->getBlock(Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.z))->explored)
 		{
-			static Position3 position = Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.floor);
-			tileDetail = WORLD->debugmap->getBlock(position)->getTileData(WORLD->debugmap->player->mapPosition.height).name;
+			static Position3 position = Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.z);
+			tileDetail = WORLD->debugmap->getBlock(position)->getTileData(WORLD->debugmap->player->mapPosition.h).name;
 		}
 	}
 }
@@ -597,7 +597,7 @@ void InfoWindow::setCreatureDetails()
 
 	for (auto& creature : WORLD->debugmap->creatureList)
 	{
-		if (creature->mapPosition.floor == WORLD->debugmap->player->mapPosition.floor)
+		if (creature->mapPosition.z == WORLD->debugmap->player->mapPosition.z)
 		{
 			if (creature->mapPosition.x == INPUT->mouse.cx + WORLD->xOffset - 1 && creature->mapPosition.y == INPUT->mouse.cy + WORLD->yOffset - 3)
 			{

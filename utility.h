@@ -14,20 +14,20 @@ struct Position3
 {
 	int x;
 	int y;
-	int floor;
+	int z; //floor when used as position
 
 	Position3();
-	Position3(int x, int y, int floor);
+	Position3(int x, int y, int z);
 
 	bool operator == (const Position3& compPosition);
 };
 
 struct Position4 : public Position3
 {
-	char height;
+	char h;
 
 	Position4();
-	Position4(int x, int y, int height, int floor);
+	Position4(int x, int y, int h, int z);
 
 	bool operator == (const Position4& compPosition);
 };
@@ -133,10 +133,10 @@ for (int i = 0; i < 20; ++i)
 drawPane.console->printf(30, 0, "]");
 */
 
-unsigned char	heightToBitFlag(int height);
+unsigned char	heightToBitFlag(int h);
 double			getAngle(int ix, int iy, int tx, int ty);
 double			getDistance(int ix, int iy, int tx, int ty);
-float			getFallTime(int height);
+float			getFallTime(int h);
 Position4		offsetPosition(Position4 mapPosition, int xOffset, int yOffset);
 Position4		getWalkableArea(Position4 mapPosition);
 

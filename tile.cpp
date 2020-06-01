@@ -12,28 +12,28 @@ Block::Block(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned
 {
 }
 
-Tile Block::getTileData(int height) const
+Tile Block::getTileData(int h) const
 {
-	if (tileList[height].ch == 0)
+	if (tileList[h].ch == 0)
 	{
-		for (int i = 0; i <= height; ++i) //start at player height, then move down the property list to 
+		for (int i = 0; i <= h; ++i) //start at player height, then move down the property list to 
 		{
-			if (walkableFlag & heightToBitFlag(height - i)) return tileList[height - i];
+			if (walkableFlag & heightToBitFlag(h - i)) return tileList[h - i];
 		}
 	}
-	else if (tileList[height].ch != 0) return tileList[height]; //no tiles in tileList
+	else if (tileList[h].ch != 0) return tileList[h]; //no tiles in tileList
 
 	return Tile('%', TCODColor::pink, TCODColor::pink, 999, "ERROR", -1);
 }
 
-bool Block::destroy(int damage, int height)
+bool Block::destroy(int damage, int h)
 {
 	if (!destroyed)
 	{
-		if (tileList[height].strength != -1) //if can be damaged
+		if (tileList[h].strength != -1) //if can be damaged
 		{
-			if	(tileList[height].strength - damage >= 0) tileList[height].strength -= damage;
-			else tileList[height].strength = 0;
+			if	(tileList[h].strength - damage >= 0) tileList[h].strength -= damage;
+			else tileList[h].strength = 0;
 
 			for (auto& tile : tileList)
 			{
@@ -71,8 +71,8 @@ void Block::interact()
 
 void Block::render(Position4 renderPosition, const Pane& pane) const
 {
-	Position4 position = Position4(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.height, renderPosition.floor);
-	Tile tile = getTileData(renderPosition.height);
+	Position4 position = Position4(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.h, renderPosition.z);
+	Tile tile = getTileData(renderPosition.h);
 
 	if (WORLD->isInPlayerFov(position))
 	{
@@ -101,7 +101,7 @@ Stair::Stair(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned
 
 void Stair::interact()
 {
-	WORLD->debugmap->player->mapPosition.floor += moveDistance;
-	WORLD->debugmap->refreshFOV(WORLD->debugmap->player->mapPosition.floor);
+	WORLD->debugmap->player->mapPosition.z += moveDistance;
+	WORLD->debugmap->refreshFOV(WORLD->debugmap->player->mapPosition.z);
 }
 

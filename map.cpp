@@ -293,7 +293,7 @@ bool Map::getCreatures(pugi::xml_node& dataNode)
 					}
 				}
 				Creature creature = Creature(Position4(x, y, level, floor), ch, name, color, health, Armor("TEMP", armorColor, armorDefense, armorDurability)); //missing armor name in file
-				creatureList.push_back(std::make_shared<AICreature>(creature, fovMapList[creature.mapPosition.height - 1].get()));
+				creatureList.push_back(std::make_shared<AICreature>(creature, fovMapList[creature.mapPosition.h - 1].get()));
 			}	
 		}
 		return true;
@@ -497,7 +497,7 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 
 bool Map::inMapBounds(Position3& position) const
 {
-	return ((position.floor >= 0 && position.floor < totalFloors) && (position.x >= 0 && position.x < width) && (position.y >= 0 && position.y < height));
+	return ((position.z >= 0 && position.z < totalFloors) && (position.x >= 0 && position.x < width) && (position.y >= 0 && position.y < height));
 }
 
 bool Map::getWalkability(Position4 position, bool checkCreatures) const
@@ -508,7 +508,7 @@ bool Map::getWalkability(Position4 position, bool checkCreatures) const
 	{
 		for (auto& creature : creatureList)
 		{
-			if (position.floor == creature->mapPosition.floor && position.x == creature->mapPosition.x && position.y == creature->mapPosition.y)
+			if (position.z == creature->mapPosition.z && position.x == creature->mapPosition.x && position.y == creature->mapPosition.y)
 			{
 				if (creature->health > 0) return false;
 			}
@@ -518,9 +518,9 @@ bool Map::getWalkability(Position4 position, bool checkCreatures) const
 	bool walkableBool = true;
 	unsigned char walkableFlag = getBlock(position)->walkableFlag;
 
-	for (int i = 0; i < position.height; ++i)
+	for (int i = 0; i < position.h; ++i)
 	{
-		if (walkableFlag & heightToBitFlag(position.height - i)) walkableBool = false;
+		if (walkableFlag & heightToBitFlag(position.h - i)) walkableBool = false;
 	}
 
 	if (walkableBool == true && walkableFlag & heightToBitFlag(0)) return true;
@@ -529,19 +529,19 @@ bool Map::getWalkability(Position4 position, bool checkCreatures) const
 
 bool Map::getSolidity(Position4& position) const
 {
-	return (getBlock(position)->walkableFlag & heightToBitFlag(position.height));
+	return (getBlock(position)->walkableFlag & heightToBitFlag(position.h));
 }
 
 bool Map::getTransparency(Position4& position) const
 {
-	return (!(getBlock(position)->transparentFlag & heightToBitFlag(position.height)));
+	return (!(getBlock(position)->transparentFlag & heightToBitFlag(position.h)));
 }
 
 std::shared_ptr<Block> Map::getBlock(Position3 position) const
 {
-	if ((position.floor >= 0 && position.floor < totalFloors) && (position.x >= 0 && position.x < width) && (position.y >= 0 && position.y < height))
+	if ((position.z >= 0 && position.z < totalFloors) && (position.x >= 0 && position.x < width) && (position.y >= 0 && position.y < height))
 	{
-		return levelList[position.floor][position.x + position.y * width]; //returns bad blocks
+		return levelList[position.z][position.x + position.y * width]; //returns bad blocks
 	}
 	else
 	{
@@ -559,7 +559,7 @@ World::World()
 
 bool World::isExplored(Position3& position) const
 {
- 	return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]->explored;
+ 	return debugmap->levelList[position.z][position.x + position.y * debugmap->width]->explored;
 }
 
 void World::addSound(Sound sound)
@@ -573,7 +573,7 @@ void World::updateBlock(Position3 blockPosition, bool checkCreatures)
 
 	for (int h = 0; h < 3; h++)
 	{
-		position = Position4(blockPosition.x, blockPosition.y, h + 1, blockPosition.floor);
+		position = Position4(blockPosition.x, blockPosition.y, h + 1, blockPosition.z);
 
 		debugmap->fovMapList[h]->setProperties(position.x, position.y, debugmap->getTransparency(position), debugmap->getWalkability(position, checkCreatures));
 	}
@@ -581,7 +581,7 @@ void World::updateBlock(Position3 blockPosition, bool checkCreatures)
 
 TCODColor World::getBgColor(Position3& position) const
 {
-	return debugmap->levelList[position.floor][position.x + position.y * debugmap->width]->tileList[0].backgroundColor;
+	return debugmap->levelList[position.z][position.x + position.y * debugmap->width]->tileList[0].backgroundColor;
 }
 
 int World::getOffset(int playerx, int mapw, int renderw)
@@ -608,20 +608,20 @@ void World::computeFov(Position4 mapPosition) //calculate the fov from the point
 {
 	int height;
 
-	if (mapPosition.height < 1) height = 0;
-	else height = mapPosition.height - 1;
+	if (mapPosition.h < 1) height = 0;
+	else height = mapPosition.h - 1;
 
 	debugmap->fovMapList[height]->computeFov(mapPosition.x, mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
 }
 
 bool World::isInPlayerFov(Position4 position) const
 {
-	if (!debugmap->inMapBounds(position) || position.height < 1)
+	if (!debugmap->inMapBounds(position) || position.h < 1)
 	{
 		return false;
 	}
 
-	if (position.floor == debugmap->player->mapPosition.floor && debugmap->fovMapList[position.height - 1]->isInFov(position.x, position.y))
+	if (position.z == debugmap->player->mapPosition.z && debugmap->fovMapList[position.h - 1]->isInFov(position.x, position.y))
 	{
 		debugmap->getBlock(position)->explored = true;
 		return true;
@@ -681,7 +681,7 @@ void World::renderTiles(const Pane& pane) const
 		{
 			if (false)//render walkability
 			{
-				if (debugmap->getWalkability(Position4(x, y, debugmap->player->mapPosition.height, 0), true) == true)
+				if (debugmap->getWalkability(Position4(x, y, debugmap->player->mapPosition.h, 0), true) == true)
 				{
 					pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::green);
 				}
@@ -690,7 +690,7 @@ void World::renderTiles(const Pane& pane) const
 					pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::red);
 				}
 			}
-			else debugmap->getBlock(Position3(x, y, debugmap->player->mapPosition.floor))->render(Position4(x - xOffset, y - yOffset, debugmap->player->mapPosition.height, debugmap->player->mapPosition.floor), pane);
+			else debugmap->getBlock(Position3(x, y, debugmap->player->mapPosition.z))->render(Position4(x - xOffset, y - yOffset, debugmap->player->mapPosition.h, debugmap->player->mapPosition.z), pane);
 		}
 	}
 }
@@ -709,7 +709,7 @@ void World::render(const Pane& pane) const
 
 	for (auto& item : debugmap->mapItemList)
 	{
-		if (item->mapPosition.floor == debugmap->player->mapPosition.floor)
+		if (item->mapPosition.z == debugmap->player->mapPosition.z)
 		{
 			item->renderTile(pane);
 		}
@@ -717,7 +717,7 @@ void World::render(const Pane& pane) const
 
 	for (auto& container : debugmap->mapContainerList)
 	{
-		if (container->item->mapPosition.floor == debugmap->player->mapPosition.floor)
+		if (container->item->mapPosition.z == debugmap->player->mapPosition.z)
 		{
 			container->item->renderTile(pane);
 		}
