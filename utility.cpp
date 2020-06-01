@@ -1,40 +1,40 @@
 #include "main.hpp"
 
 Position3::Position3()
-	: x(0), y(0), floor(0)
+	: x(0), y(0), z(0)
 {
 }
 
-Position3::Position3(int x, int y, int floor)
-	: x(x), y(y), floor(floor)
+Position3::Position3(int x, int y, int z)
+	: x(x), y(y), z(z)
 {
 }
 
 bool Position3::operator==(const Position3 & compPosition)
 {
-	return (this->x == compPosition.x && this->y == compPosition.y && this->floor == compPosition.floor);
+	return (this->x == compPosition.x && this->y == compPosition.y && this->z == compPosition.z);
 }
 
 Position4 offsetPosition(Position4 mapPosition, int xOffset, int yOffset)
 {
-	return Position4(mapPosition.x - xOffset, mapPosition.y - yOffset, mapPosition.height, mapPosition.floor);
+	return Position4(mapPosition.x - xOffset, mapPosition.y - yOffset, mapPosition.h, mapPosition.z);
 }
 
 //----------------------------------------------------------------------------------------------------
 
 Position4::Position4()
-	:Position3(0, 0, 0), height(0)
+	:Position3(0, 0, 0), h(0)
 {
 }
 
-Position4::Position4(int x, int y, int height, int floor)
-	: Position3(x, y, floor), height(height)
+Position4::Position4(int x, int y, int h, int z)
+	: Position3(x, y, z), h(h)
 {
 }
 
 bool Position4::operator==(const Position4& compPosition)
 {
-	return (this->x == compPosition.x && this->y == compPosition.y && this->height == compPosition.height && this->floor == compPosition.floor);
+	return (this->x == compPosition.x && this->y == compPosition.y && this->h == compPosition.h && this->z == compPosition.z);
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -128,9 +128,9 @@ bool BLine::end()
 
 //----------------------------------------------------------------------------------------------------
 
-unsigned char heightToBitFlag(int height)
+unsigned char heightToBitFlag(int h)
 {
-	return 1 << height;
+	return 1 << h;
 }
 
 double getAngle(int xStart, int yStart, int xTarget, int yTarget)
@@ -146,9 +146,9 @@ double getDistance(int xStart, int yStart, int xTarget, int yTarget)
 	return sqrt(xLength + yLength);
 }
 
-float getFallTime(int height)
+float getFallTime(int h)
 {
-	return sqrt((2.0f * height) / 16);
+	return sqrt((2.0f * h) / 16);
 }
 
 Position4 getWalkableArea(Position4 centerPosition)
@@ -173,9 +173,9 @@ Position4 getWalkableArea(Position4 centerPosition)
 		{
 			if (x != 0 && y != 0) // do not check center position
 			{
-				if (WORLD->debugmap->getWalkability(Position4(centerPosition.x + x, centerPosition.y + y, centerPosition.height, centerPosition.floor), true) == true)
+				if (WORLD->debugmap->getWalkability(Position4(centerPosition.x + x, centerPosition.y + y, centerPosition.h, centerPosition.z), true) == true)
 				{
-					return Position4(centerPosition.x + x, centerPosition.y + y, centerPosition.height, centerPosition.floor);
+					return Position4(centerPosition.x + x, centerPosition.y + y, centerPosition.h, centerPosition.z);
 				}
 			}
 		}

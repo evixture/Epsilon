@@ -57,12 +57,12 @@ void Audio::update()
 		}
 	}
 
-	soLoud.set3dListenerPosition((float)WORLD->debugmap->player->mapPosition.x, (float)WORLD->debugmap->player->mapPosition.height, (float)WORLD->debugmap->player->mapPosition.y);
+	soLoud.set3dListenerPosition((float)WORLD->debugmap->player->mapPosition.x, (float)WORLD->debugmap->player->mapPosition.h, (float)WORLD->debugmap->player->mapPosition.y);
 	for (int i = 0; i < soundList.size(); i++)
 	{
 		if (soundList[i].second.getPosition().first == true) //if sound of the sound list is 3d
 		{
-			soLoud.set3dSourcePosition(soundList[i].first, (float)soundList[i].second.getPosition().second.x, (float)soundList[i].second.getPosition().second.height, (float)soundList[i].second.getPosition().second.y); //should update tracked sounds
+			soLoud.set3dSourcePosition(soundList[i].first, (float)soundList[i].second.getPosition().second.x, (float)soundList[i].second.getPosition().second.h, (float)soundList[i].second.getPosition().second.y); //should update tracked sounds
 		}
 	}
 
@@ -75,7 +75,7 @@ int Audio::playSound(Sound sound)
 
 	if (sound.getPosition().first == true) //3d sound
 	{
-		handle = soLoud.play3d(*sound.speech, (float)sound.getPosition().second.x, (float)sound.getPosition().second.height, (float)sound.getPosition().second.y);
+		handle = soLoud.play3d(*sound.speech, (float)sound.getPosition().second.x, (float)sound.getPosition().second.h, (float)sound.getPosition().second.y);
 		soLoud.set3dSourceAttenuation(handle, SoLoud::AudioSource::ATTENUATION_MODELS::EXPONENTIAL_DISTANCE, .5f); //sound distance decay
 
 		if (GUI->activeWindow == Gui::ActiveWindow::NONE || GUI->activeWindow == Gui::ActiveWindow::INVENTORYFULL) //map active

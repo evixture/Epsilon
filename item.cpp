@@ -8,9 +8,9 @@ void Action::update()
 {
 	if (type == Type::CHANGEFIREMODE)
 	{
-		if		(WORLD->debugmap->player->selectedItem->tool->fireMode == Tool::SAFE) name = "Change Fire Mode : SAFE";
-		else if (WORLD->debugmap->player->selectedItem->tool->fireMode == Tool::SEMI) name = "Change Fire Mode : SEMI";
-		else if (WORLD->debugmap->player->selectedItem->tool->fireMode == Tool::FULL) name = "Change Fire Mode : FULL";
+		if		(WORLD->debugmap->player->selectedItem.tool->fireMode == Tool::SAFE) name = "Change Fire Mode : SAFE";
+		else if (WORLD->debugmap->player->selectedItem.tool->fireMode == Tool::SEMI) name = "Change Fire Mode : SEMI";
+		else if (WORLD->debugmap->player->selectedItem.tool->fireMode == Tool::FULL) name = "Change Fire Mode : FULL";
 	}
 }
 
@@ -63,6 +63,10 @@ void ActionManager::doAction(Creature* currentOwner)
 }
 
 //----------------------------------------------------------------------------------------------------
+
+Item::Item()
+{
+}
 
 Item::Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, ItemType type)
 	: size(size), tile(tile), tool(tool), mapPosition(position), tileRenderPosition(position), distToEnt(5), type(type), barColor(TCODColor::white)
@@ -139,7 +143,7 @@ void Item::updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHel
 
 	changeBarColor();
 
-	this->mapPosition = Position4(tool->sourcePosition.x, tool->sourcePosition.y, mapPosition.height, mapPosition.floor);
+	this->mapPosition = Position4(tool->sourcePosition.x, tool->sourcePosition.y, mapPosition.h, mapPosition.z);
 	tileRenderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }
 
@@ -156,12 +160,17 @@ void Item::updateTile()
 
 void Item::renderTile(const Pane& pane) const
 {
-	tile->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.height, tileRenderPosition.floor), pane);
+	tile->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.h, tileRenderPosition.z), pane);
 
 	if (distToEnt < 5 && WORLD->isInPlayerFov(mapPosition))
 	{
 		pane.console->setCharBackground(tileRenderPosition.x, tileRenderPosition.y, tile->tileList[0].backgroundColor + TCODColor::darkGrey); //look into color later
 	}
+}
+
+bool Item::operator==(const Item& compItem)
+{
+	return (this->size == compItem.size && this->distToEnt == compItem.distToEnt && this->mapPosition == compItem.mapPosition && this->tool == compItem.tool && this->tile == compItem.tile);
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -184,18 +193,18 @@ void MagazineItem::changeBarColor()
 
 //----------------------------------------------------------------------------------------------------
 
-Container::Container(int itemCapacity, std::shared_ptr<Item> item)
+Container::Container(int itemCapacity, Item item)
 	: itemCapacity(itemCapacity), item(item), currentSize(0)
 {
 }
 
-bool Container::addItem(std::shared_ptr<Item> item)
+bool Container::addItem(Item item)
 {
 	int spaceUsed = 0;
 
-	for (auto& i : itemList) spaceUsed += i->size;
+	for (auto& i : itemList) spaceUsed += i.size;
 
-	if (spaceUsed + item->size <= itemCapacity)
+	if (spaceUsed + item.size <= itemCapacity)
 	{
 		itemList.push_back(item);
 		return true;

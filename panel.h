@@ -112,7 +112,7 @@ struct ProximityWindow : public Window
 
 private:
 	std::vector<std::shared_ptr<Container>> proximityContainerList;
-	std::vector<std::shared_ptr<Item>> proximityItemList;
+	std::vector<Item> proximityItemList;
 };
 
 struct ActionWindow : public Window

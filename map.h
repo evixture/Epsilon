@@ -16,8 +16,8 @@ struct Map
 
 	std::shared_ptr<Player> player;												
 																									
-	std::vector<std::shared_ptr<Creature>> creatureList;			
-	std::vector<std::shared_ptr<Item>> mapItemList;				
+	std::vector<std::shared_ptr<Creature>>	creatureList;			
+	std::vector<Item>						mapItemList;				
 	std::vector<std::shared_ptr<Container>> mapContainerList;	
 
 	std::vector<std::vector< std::shared_ptr<Block >>> levelList;
@@ -26,9 +26,9 @@ struct Map
 	Map(std::string filePath);
 
 	void addCreature	(std::shared_ptr<Creature> creature);			
-	void addItem		(std::shared_ptr<Item> item);						
+	void addItem		(Item item);						
 	void addContainer	(std::shared_ptr<Container> container);
-	void refreshFOV		(int floor);
+	void refreshFOV		(int z);
 
 	bool getTransparency			(Position4& position) const;
 	bool getWalkability				(Position4 position, bool checkCreatures) const;

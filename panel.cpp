@@ -56,7 +56,7 @@ PlayerWindow::PlayerWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 
 void PlayerWindow::update()
 {
-	playerStance = WORLD->debugmap->player->mapPosition.height;
+	playerStance = WORLD->debugmap->player->mapPosition.h;
 
 	if (!(INPUT->moveUpKey->isDown) && !(INPUT->moveDownKey->isDown) && !(INPUT->moveLeftKey->isDown) && !(INPUT->moveRightKey->isDown)) playerSpeed = 0;
 	else if (WORLD->debugmap->player->baseMoveTime == .25f) playerSpeed = 3;
@@ -132,14 +132,14 @@ void InventoryWindow::render() const
 			{
 				if (container == WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex] && WORLD->debugmap->player->itemIndex == -1)
 				{
-					drawPane.console->printf(0, drawLineStart, "|>%s", container->item->tool->name.c_str());
+					drawPane.console->printf(0, drawLineStart, "|>%s", container->item.tool->name.c_str());
 					drawPane.console->setCharForeground(1, drawLineStart, ep::color::selector); //color the cursor
-					drawPane.console->setCharForeground(0, drawLineStart, WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex]->item->barColor); //color the bar
+					drawPane.console->setCharForeground(0, drawLineStart, WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex]->item.barColor); //color the bar
 				}
 				else
 				{
-					drawPane.console->printf(0, drawLineStart, "| %s", container->item->tool->name.c_str());
-					drawPane.console->setCharForeground(0, drawLineStart, WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex]->item->barColor); //color the bar
+					drawPane.console->printf(0, drawLineStart, "| %s", container->item.tool->name.c_str());
+					drawPane.console->setCharForeground(0, drawLineStart, WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex]->item.barColor); //color the bar
 				}
 				++drawLine;
 			}
@@ -151,20 +151,20 @@ void InventoryWindow::render() const
 
 		for (auto& item : container->itemList)
 		{
-			for (int j = 0; j < item->size; ++j)
+			for (int j = 0; j < item.size; ++j)
 			{
 				if (j == 0)
 				{
 					if (item == WORLD->debugmap->player->selectedItem)
 					{
-						drawPane.console->printf(0, drawLine, "|>  %s", item->tool->name.c_str());
+						drawPane.console->printf(0, drawLine, "|>  %s", item.tool->name.c_str());
 						drawPane.console->setCharForeground(1, drawLine, ep::color::selector);
-						drawPane.console->setCharForeground(0, drawLine, item->barColor); //color the bar
+						drawPane.console->setCharForeground(0, drawLine, item.barColor); //color the bar
 					}
 					else
 					{
-						drawPane.console->printf(0, drawLine, "|   %s", item->tool->name.c_str());
-						drawPane.console->setCharForeground(0, drawLine, item->barColor); //color the bar
+						drawPane.console->printf(0, drawLine, "|   %s", item.tool->name.c_str());
+						drawPane.console->setCharForeground(0, drawLine, item.barColor); //color the bar
 					}
 					++drawLine;
 				}
@@ -316,12 +316,12 @@ void InventoryFullWindow::render() const
 			{
 				if (container == WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex] && WORLD->debugmap->player->itemIndex == -1)
 				{
-					drawPane.console->printf(0, drawLineStart, "|>%s", container->item->tool->name.c_str());
+					drawPane.console->printf(0, drawLineStart, "|>%s", container->item.tool->name.c_str());
 					drawPane.console->setCharForeground(1, drawLineStart, ep::color::selector);
 				}
 				else
 				{
-					drawPane.console->printf(0, drawLineStart, "| %s", container->item->tool->name.c_str());
+					drawPane.console->printf(0, drawLineStart, "| %s", container->item.tool->name.c_str());
 				}
 				++drawLine;
 			}
@@ -333,18 +333,18 @@ void InventoryFullWindow::render() const
 
 		for (auto& item : container->itemList)
 		{
-			for (int j = 0; j < item->size; ++j)
+			for (int j = 0; j < item.size; ++j)
 			{
 				if (j == 0)
 				{
 					if (item == WORLD->debugmap->player->selectedItem)
 					{
-						drawPane.console->printf(0, drawLine, "|>  %s", item->tool->name.c_str());
+						drawPane.console->printf(0, drawLine, "|>  %s", item.tool->name.c_str());
 						drawPane.console->setCharForeground(1, drawLine, ep::color::selector);
 					}
 					else
 					{
-						drawPane.console->printf(0, drawLine, "|   %s", item->tool->name.c_str());
+						drawPane.console->printf(0, drawLine, "|   %s", item.tool->name.c_str());
 					}
 					++drawLine;
 				}
@@ -419,7 +419,8 @@ ProximityWindow::ProximityWindow(int consoleWidth, int consoleHeight, int rx, in
 
 void ProximityWindow::update()
 {
-	if (proximityItemList != WORLD->debugmap->mapItemList) proximityItemList = WORLD->debugmap->mapItemList; //can be optimized later
+	//if (proximityItemList == WORLD->debugmap->mapItemList) proximityItemList = WORLD->debugmap->mapItemList; //gives error
+	proximityItemList = WORLD->debugmap->mapItemList;
 	if (proximityContainerList != WORLD->debugmap->mapContainerList) proximityContainerList = WORLD->debugmap->mapContainerList;
 }
 
@@ -431,11 +432,11 @@ void ProximityWindow::render() const
 
 	for (auto& container : proximityContainerList)
 	{
-		if (container->item->mapPosition.floor == WORLD->debugmap->player->mapPosition.floor)
+		if (container->item.mapPosition.z == WORLD->debugmap->player->mapPosition.z)
 		{
-			if (container->item->distToEnt < 5 && WORLD->isInPlayerFov(container->item->mapPosition))
+			if (container->item.distToEnt < 5 && WORLD->isInPlayerFov(container->item.mapPosition))
 			{
-				drawPane.console->printf(0, line, "|%s", container->item->tool->name.c_str());
+				drawPane.console->printf(0, line, "|%s", container->item.tool->name.c_str());
 				++line;
 			}
 		}
@@ -443,11 +444,11 @@ void ProximityWindow::render() const
 
 	for (auto& item : proximityItemList)
 	{
-		if (item->mapPosition.floor == WORLD->debugmap->player->mapPosition.floor)
+		if (item.mapPosition.z == WORLD->debugmap->player->mapPosition.z)
 		{
-			if (item->distToEnt < 5 && WORLD->isInPlayerFov(item->mapPosition))
+			if (item.distToEnt < 5 && WORLD->isInPlayerFov(item.mapPosition))
 			{
-				drawPane.console->printf(0, line, "|%s", item->tool->name.c_str());
+				drawPane.console->printf(0, line, "|%s", item.tool->name.c_str());
 				++line;
 			}
 		}
@@ -465,9 +466,9 @@ ActionWindow::ActionWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 
 void ActionWindow::update()
 {
-	if (WORLD->debugmap->player->selectedItem->actionManager)
+	if (WORLD->debugmap->player->selectedItem.actionManager)
 	{
-		if (actionManager != WORLD->debugmap->player->selectedItem->actionManager) actionManager = WORLD->debugmap->player->selectedItem->actionManager;
+		if (actionManager != WORLD->debugmap->player->selectedItem.actionManager) actionManager = WORLD->debugmap->player->selectedItem.actionManager;
 	}
 }
 
@@ -583,10 +584,10 @@ void InfoWindow::setTileDetails()
 
 	if (INPUT->mouse.cx >= 1 && INPUT->mouse.cx <= 60 && INPUT->mouse.cy >= 3 && INPUT->mouse.cy <= 62) //if in map window
 	{
-		if (WORLD->debugmap->getBlock(Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.floor))->explored)
+		if (WORLD->debugmap->getBlock(Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.z))->explored)
 		{
-			static Position3 position = Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.floor);
-			tileDetail = WORLD->debugmap->getBlock(position)->getTileData(WORLD->debugmap->player->mapPosition.height).name;
+			static Position3 position = Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.z);
+			tileDetail = WORLD->debugmap->getBlock(position)->getTileData(WORLD->debugmap->player->mapPosition.h).name;
 		}
 	}
 }
@@ -597,7 +598,7 @@ void InfoWindow::setCreatureDetails()
 
 	for (auto& creature : WORLD->debugmap->creatureList)
 	{
-		if (creature->mapPosition.floor == WORLD->debugmap->player->mapPosition.floor)
+		if (creature->mapPosition.z == WORLD->debugmap->player->mapPosition.z)
 		{
 			if (creature->mapPosition.x == INPUT->mouse.cx + WORLD->xOffset - 1 && creature->mapPosition.y == INPUT->mouse.cy + WORLD->yOffset - 3)
 			{
@@ -609,7 +610,7 @@ void InfoWindow::setCreatureDetails()
 
 void InfoWindow::setItemDetails()
 {
-	itemDetail = WORLD->debugmap->player->selectedItem->tool->name;
+	itemDetail = WORLD->debugmap->player->selectedItem.tool->name;
 }
 
 void InfoWindow::update()

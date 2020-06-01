@@ -60,7 +60,7 @@ void Gui::renderMouse() const
 		{
 			if (INPUT->mouse.cy >= 3 && INPUT->mouse.cy <= 60)
 			{
-				Position3 position = Position3(INPUT->mouse.cx + worldWindow->world->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.floor);
+				Position3 position = Position3(INPUT->mouse.cx + worldWindow->world->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.z);
 				TCODColor color = worldWindow->world->debugmap->getBlock(position)->tileList[0].backgroundColor;
 				TCODConsole::root->setCharBackground(INPUT->mouse.cx, INPUT->mouse.cy, color - TCODColor::darkestGrey);
 			}

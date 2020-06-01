@@ -27,7 +27,7 @@ struct Creature : public Entity
 	int itemIndex;
 
 	std::vector<std::shared_ptr<Container>> inventory;
-	std::shared_ptr<Item> selectedItem;
+	Item selectedItem;
 
 	Creature(Position4 pos, int ch, std::string name, TCODColor color, int health, Armor armor);
 
@@ -97,3 +97,14 @@ private:
 
 	friend struct ActionManager;
 };
+
+//namespace ep
+//{
+//	struct inventory
+//	{
+//		inline static std::vector<std::shared_ptr<Container>> testInventory()
+//		{
+//
+//		}
+//	};
+//}

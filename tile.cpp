@@ -71,8 +71,8 @@ void Block::interact()
 
 void Block::render(Position4 renderPosition, const Pane& pane) const
 {
-	Position4 position = Position4(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.height, renderPosition.floor);
-	Tile tile = getTileData(renderPosition.height);
+	Position4 position = Position4(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.h, renderPosition.z);
+	Tile tile = getTileData(renderPosition.h);
 
 	if (WORLD->isInPlayerFov(position))
 	{
@@ -101,7 +101,7 @@ Stair::Stair(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned
 
 void Stair::interact()
 {
-	WORLD->debugmap->player->mapPosition.floor += moveDistance;
-	WORLD->debugmap->refreshFOV(WORLD->debugmap->player->mapPosition.floor);
+	WORLD->debugmap->player->mapPosition.z += moveDistance;
+	WORLD->debugmap->refreshFOV(WORLD->debugmap->player->mapPosition.z);
 }
 

@@ -31,17 +31,17 @@ void Creature::move()
 
 void Creature::changeStanceUp()
 {
-	if (mapPosition.height + 1 <= 3)
+	if (mapPosition.h + 1 <= 3)
 	{
-		if (WORLD->debugmap->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height + 1, mapPosition.floor), false)) mapPosition.height += 1;
+		if (WORLD->debugmap->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.h + 1, mapPosition.z), false)) mapPosition.h += 1;
 	}
 }
 
 void Creature::changeStanceDown()
 {
-	if (mapPosition.height - 1 >= 1)
+	if (mapPosition.h - 1 >= 1)
 	{
-		if (WORLD->debugmap->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.height - 1, mapPosition.floor), false)) mapPosition.height -= 1;
+		if (WORLD->debugmap->getWalkability(Position4(mapPosition.x, mapPosition.y, mapPosition.h - 1, mapPosition.z), false)) mapPosition.h -= 1;
 	}
 }
 
@@ -101,7 +101,7 @@ void Creature::update()
 
 void Creature::render(const Pane& pane) const
 {
-	if (WORLD->debugmap->player->mapPosition.floor == mapPosition.floor)
+	if (WORLD->debugmap->player->mapPosition.z == mapPosition.z)
 	{
 		pane.console->setChar(renderPosition.x, renderPosition.y, ch);
 		pane.console->setCharForeground(renderPosition.x, renderPosition.y, (WORLD->isInPlayerFov(mapPosition))? color : TCODColor::darkerGrey); //out of fov creatures rendered with one step above normal fov grey to be more noticible
@@ -116,9 +116,9 @@ Player::Player(Position4 position)
 	hasSecondChance = true;
 
 	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0)));
-	inventory[1]->addItem(	std::make_shared<Item>(ep::item::sip45(0, 0, 0)));
-	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(0, 0, 0)));
-	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(0, 0, 0)));
+	inventory[1]->addItem(	Item(ep::item::sip45(0, 0, 0)));
+	inventory[1]->addItem(	MagazineItem(ep::magazine::cal45Magazine7(0, 0, 0)));
+	inventory[1]->addItem(	MagazineItem(ep::magazine::cal45Magazine7(0, 0, 0)));
 	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0)));
 
 	if (inventory.size() > 0)
@@ -128,10 +128,10 @@ Player::Player(Position4 position)
 			selectedItem = inventory[containerIndex]->itemList[itemIndex];
 		}
 	}
-	else
-	{
-		selectedItem = nullptr;
-	}
+	//else
+	//{
+	//	selectedItem = Item();
+	//}
 }
 
 void Player::move()
@@ -151,7 +151,7 @@ void Player::move()
 		if (INPUT->stanceDownKey->isSwitched) changeStanceDown();
 		if (INPUT->stanceUpKey->isSwitched) changeStanceUp();
 
-		moveSpeed = baseMoveTime / mapPosition.height;
+		moveSpeed = baseMoveTime / mapPosition.h;
 
 		if (INPUT->moveUpKey->isDown && INPUT->moveDownKey->isDown) yMoveDist = 0;
 		else if (INPUT->moveUpKey->isDown && !INPUT->moveDownKey->isDown) yMoveDist = -1;
@@ -170,12 +170,12 @@ void Player::move()
 			{
 				WORLD->updateBlock(mapPosition, false); //clear old position's map properties
 
-				if (WORLD->debugmap->getWalkability(Position4(mapPosition.x + xMoveDist, mapPosition.y, mapPosition.height, mapPosition.floor), true))
+				if (WORLD->debugmap->getWalkability(Position4(mapPosition.x + xMoveDist, mapPosition.y, mapPosition.h, mapPosition.z), true))
 				{
 					mapPosition.x += xMoveDist;
 					xMoveDist = 0;
 				} 
-				if (WORLD->debugmap->getWalkability(Position4(mapPosition.x, mapPosition.y + yMoveDist, mapPosition.height, mapPosition.floor), true))
+				if (WORLD->debugmap->getWalkability(Position4(mapPosition.x, mapPosition.y + yMoveDist, mapPosition.h, mapPosition.z), true))
 				{
 					mapPosition.y += yMoveDist;
 					yMoveDist = 0;
@@ -183,8 +183,8 @@ void Player::move()
 				WORLD->updateBlock(mapPosition, true); //update new position property
 
 				//play footstep sound
-				if (baseMoveTime == .25f) stepSpeed = mapPosition.height;
-				else stepSpeed = mapPosition.height - 1;
+				if (baseMoveTime == .25f) stepSpeed = mapPosition.h;
+				else stepSpeed = mapPosition.h - 1;
 				if (stepSound >= stepSpeed)
 				{
 					AUDIO->playSound(PositionalTrackedSound(("top"), &mapPosition, 70.0f, 10.0f));
@@ -267,13 +267,13 @@ void Player::pickUpItem()
 {
 	for (int i = 0; i < WORLD->debugmap->mapItemList.size(); ++i)
 	{
-		if (WORLD->debugmap->mapItemList[i] != nullptr && WORLD->debugmap->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->debugmap->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->debugmap->mapItemList[i]->mapPosition.floor == mapPosition.floor)
+		if (WORLD->debugmap->mapItemList[i].mapPosition.x == mapPosition.x && WORLD->debugmap->mapItemList[i].mapPosition.y == mapPosition.y && WORLD->debugmap->mapItemList[i].mapPosition.z == mapPosition.z) //WORLD->debugmap->mapItemList[i] == Item() && 
 		{
 			if (containerIndex != -1)
 			{
 				if (inventory[containerIndex]->addItem(WORLD->debugmap->mapItemList[i]))
 				{
-					GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapItemList[i]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
+					GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapItemList[i].tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 
 					WORLD->debugmap->mapItemList.erase(WORLD->debugmap->mapItemList.begin() + i);
 
@@ -287,9 +287,9 @@ void Player::pickUpItem()
 
 	for (int i = 0; i < WORLD->debugmap->mapContainerList.size(); ++i)
 	{
-		if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->item->mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->item->mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->item->mapPosition.floor == mapPosition.floor)
+		if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->item.mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->item.mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->item.mapPosition.z == mapPosition.z)
 		{
-			GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapContainerList[i]->item->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
+			GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapContainerList[i]->item.tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 
 			inventory.push_back(WORLD->debugmap->mapContainerList[i]);
 			WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
@@ -307,7 +307,7 @@ void Player::dropItem()
 	{
 		if (itemIndex >= 0)
 		{
-			GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->itemList[itemIndex]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
+			GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->itemList[itemIndex].tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 
 			WORLD->debugmap->mapItemList.push_back(selectedItem);
 
@@ -317,9 +317,9 @@ void Player::dropItem()
 		}
 		else if (itemIndex <= -1)
 		{
-			if (selectedItem->type != Item::ItemType::HAND)
+			if (selectedItem.type != Item::ItemType::HAND)
 			{
-				GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->item->tool->name, LogWindow::Message::MessageLevel::LOW));
+				GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->item.tool->name, LogWindow::Message::MessageLevel::LOW));
 			
 				WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
 
@@ -405,13 +405,13 @@ void Player::reload()
 	{
 		for (auto& item : container->itemList)
 		{
-			if (item->getMagazineData().isValid == true) // if it is actually a magazine
+			if (item.getMagazineData().isValid == true) // if it is actually a magazine
 			{
-				if (item->getMagazineData().ammoType == selectedItem->tool->ammoType) // if it has the same type of ammo as the current weapon
+				if (item.getMagazineData().ammoType == selectedItem.tool->ammoType) // if it has the same type of ammo as the current weapon
 				{
-					if (item->getMagazineData().availableAmmo != 0) // if the magazine is not empty
+					if (item.getMagazineData().availableAmmo != 0) // if the magazine is not empty
 					{
-						selectedItem->tool->reload(item->getMagazineData());
+						selectedItem.tool->reload(item.getMagazineData());
 					}
 				}
 			}
@@ -421,17 +421,17 @@ void Player::reload()
 
 void Player::changeFireMode()
 {
-	selectedItem->tool->changeFireMode();
+	selectedItem.tool->changeFireMode();
 }
 
 void Player::equipArmor()
 {
-	selectedItem->tool->equip(equippedArmor);
+	selectedItem.tool->equip(equippedArmor);
 }
 
 void Player::useMelee()
 {
-	selectedItem->tool->useMelee();
+	selectedItem.tool->useMelee();
 }
 
 void Player::updateTools()
@@ -440,15 +440,16 @@ void Player::updateTools()
 	{
 		for (int i = 0; i < inventory.size(); i++)
 		{
+			//clean up
 			if (itemIndex == -1 && containerIndex == i) //if container is the held item
 			{
 				//special update the held container
-				inventory[i]->item->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, true); //uses the map position of the mouse
+				inventory[i]->item.updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, true); //uses the map position of the mouse
 			}
 			else
 			{
 				//normal update the container
-				inventory[i]->item->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, false);
+				inventory[i]->item.updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, false);
 			}
 
 			for (int j = 0; j < inventory[i]->itemList.size(); j++) //stops when i gets to empty container list
@@ -456,19 +457,19 @@ void Player::updateTools()
 				if (itemIndex == j && containerIndex == i)
 				{
 					//special update held item
-					inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, true);
+					inventory[i]->itemList[j].updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, true);
 				}
 				else
 				{
 					//normal update the item
-					inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, false);
+					inventory[i]->itemList[j].updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, false);
 				}
 			}
 		}
 	}
 	else
 	{
-		selectedItem->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3, true);
+		selectedItem.updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3, true);
 	}
 }
 
@@ -502,11 +503,11 @@ void Player::update()
 			{
 				if (INPUT->mouse.wheel_up)
 				{
-					selectedItem->actionManager->moveSelectorUp();
+					selectedItem.actionManager->moveSelectorUp();
 				}
 				else if (INPUT->mouse.wheel_down)
 				{
-					selectedItem->actionManager->moveSelectorDown();
+					selectedItem.actionManager->moveSelectorDown();
 				}
 			}
 		}
@@ -528,12 +529,12 @@ void Player::update()
 
 		if (INPUT->primaryUseButton->isDown)
 		{
-			selectedItem->tool->use(INPUT->primaryUseButton->isDown, INPUT->primaryUseButton->isSwitched);
+			selectedItem.tool->use(INPUT->primaryUseButton->isDown, INPUT->primaryUseButton->isSwitched);
 		}
 
 		if (INPUT->alternateUseButton->isSwitched)
 		{
-			selectedItem->actionManager->doAction(this);
+			selectedItem.actionManager->doAction(this);
 		}
 		
 		filterIndexes();
@@ -571,11 +572,11 @@ void Player::render(const Pane& pane) const
 	{
 		for (auto& container : inventory)
 		{
-			container->item->renderTool(pane);
+			container->item.renderTool(pane);
 
 			for (auto& tool : container->itemList)
 			{
-				tool->renderTool(pane);
+				tool.renderTool(pane);
 			}
 		}
 	}
