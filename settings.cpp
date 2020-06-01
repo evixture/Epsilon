@@ -52,7 +52,7 @@ void Settings::printDebugStats() const
 		SETTINGS->input->mouse.cy,
 		WORLD->debugmap->player->mapPosition.x,
 		WORLD->debugmap->player->mapPosition.y,
-		WORLD->debugmap->player->mapPosition.z,
+		WORLD->debugmap->player->mapPosition.floor,
 		AUDIO->soundList.size(),
 		AUDIO->soLoud.getActiveVoiceCount());
 }

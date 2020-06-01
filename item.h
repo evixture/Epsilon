@@ -49,12 +49,11 @@ struct Item
 
 	Position4 mapPosition;
 
-	std::shared_ptr<Block> tile; //needs to be pointer
-	std::shared_ptr<Tool> tool;	 //needs to be pointer
+	std::shared_ptr<Block> tile;
+	std::shared_ptr<Tool> tool;
 
-	std::shared_ptr<ActionManager> actionManager; //needs to be pointer
+	std::shared_ptr<ActionManager> actionManager;
 
-	Item();
 	Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, ItemType type);
 
 	virtual MagazineData& getMagazineData();
@@ -65,8 +64,6 @@ struct Item
 
 	void updateTile();
 	void renderTile(const Pane& pane) const;
-
-	bool operator == (const Item& compItem);
 
 private:
 	void createActionManager();
@@ -89,13 +86,13 @@ struct Container
 	unsigned char itemCapacity;
 	unsigned char currentSize;
 
-	Item item;
+	std::shared_ptr<Item> item;
 
-	std::vector<Item> itemList;
+	std::vector<std::shared_ptr<Item>> itemList;
 
-	Container(int itemCapacity, Item item);
+	Container(int itemCapacity, std::shared_ptr<Item> item);
 
-	bool addItem(Item item);
+	bool addItem(std::shared_ptr<Item> item);
 };
 
 namespace ep
@@ -164,12 +161,12 @@ ITEM SIZES
 	{
 		inline static Container smallBackpack(int x, int y, int level)
 		{
-			return Container(5, Item(ep::item::smallBackpack(x, y, level)));
+			return Container(5, std::make_shared<Item>(ep::item::smallBackpack(x, y, level)));
 		}
 
 		inline static Container hands(int x, int y, int level)
 		{
-			return Container(0, Item(ep::item::hands(x, y, level)));
+			return Container(0, std::make_shared<Item>(ep::item::hands(x, y, level)));
 		}
 	};
 

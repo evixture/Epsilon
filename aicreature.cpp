@@ -5,8 +5,8 @@ AICreature::AICreature(Creature creature, TCODMap* fovMap)
 	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false)
 {
 	inventory.push_back(std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0)));
-	inventory[1]->addItem(Item(ep::item::knife(0, 0, 0)));
-	inventory[1]->addItem(Item(ep::item::cal556Magazine30(0, 0, 0)));
+	inventory[1]->addItem(std::make_shared<Item>(ep::item::knife(0, 0, 0)));
+	inventory[1]->addItem(std::make_shared<Item>(ep::item::cal556Magazine30(0, 0, 0)));
 
 	selectedItem = inventory[1]->itemList[0];
 }
@@ -26,7 +26,7 @@ void AICreature::move()
 	else if (moveSpeedMode == 0)	baseMoveTime = 1.0f; //creep
 	else							baseMoveTime = .5f;	 //walk
 
-	moveSpeed = baseMoveTime / mapPosition.h;
+	moveSpeed = baseMoveTime / mapPosition.height;
 
 	moveClock.timeBetweenUpdates = moveSpeed;
 	moveClock.tickUp();
@@ -40,8 +40,8 @@ void AICreature::move()
 			WORLD->updateBlock(mapPosition, true);
 
 			//play footstep sound
-			if (baseMoveTime == .25f) stepSpeed = mapPosition.h;
-			else stepSpeed = mapPosition.h - 1;
+			if (baseMoveTime == .25f) stepSpeed = mapPosition.height;
+			else stepSpeed = mapPosition.height - 1;
 			if (stepSound >= stepSpeed)
 			{
 				AUDIO->playSound(PositionalTrackedSound(("top"), &mapPosition, 70.0f, 10.0f));
@@ -100,12 +100,12 @@ void AICreature::takeDamage(int damage)
 void AICreature::updateTools()
 {
 	angle = getAngle(mapPosition.x, mapPosition.y, lookPosition.x, lookPosition.y);
-	selectedItem.updateTool(mapPosition, lookPosition.x, lookPosition.y, true);
+	selectedItem->updateTool(mapPosition, lookPosition.x, lookPosition.y, true);
 }
 
 bool AICreature::inEffectiveRange()
 {
-	return ((getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y) <= selectedItem.tool->effectiveRange) && selectedItem.tool->getMagazine().isValid); //change to take into account melee weapons
+	return ((getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y) <= selectedItem->tool->effectiveRange) && selectedItem->tool->getMagazine().isValid); //change to take into account melee weapons
 	//getMagazine().velocity * 0.15f
 }
 
@@ -157,7 +157,7 @@ void AICreature::reactToSounds()
 	{
 		if (sound->getPosition().first == true && !(sound->getPosition().second.x == mapPosition.x && sound->getPosition().second.y == mapPosition.x)) //is 3d sound and not from itself
 		{
-			if (sound->getPosition().second.z == mapPosition.z)
+			if (sound->getPosition().second.floor == mapPosition.floor)
 			{
 				float soundInterestChange;
 				double distance = getDistance(mapPosition.x, mapPosition.y, sound->getPosition().second.x, sound->getPosition().second.y);
@@ -240,16 +240,16 @@ void AICreature::act()
 		reactionFireClock.tickUp(); //replace later with something with more discretion
 		for (int i = 1; i <= reactionFireClock.numCalls; reactionFireClock.numCalls--)
 		{
-			if (aggression >= 0.5f) selectedItem.tool->use(false, true);
+			if (aggression >= 0.5f) selectedItem->tool->use(false, true);
 		}
 	}
 
 	//reload on empty mag
-	if (selectedItem.tool->getMagazine().availableAmmo <= 0)
+	if (selectedItem->tool->getMagazine().availableAmmo <= 0)
 	{
 		auto reloadMag = MagazineData(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true);
 		
-		selectedItem.tool->reload(reloadMag);
+		selectedItem->tool->reload(reloadMag);
 	}
 
 	if (path.isEmpty() || path.size() == 0) debugBGColor = TCODColor::red;
@@ -280,7 +280,7 @@ void AICreature::update() //ai and behavior attributes update here
 
 void AICreature::render(const Pane& pane) const
 {
-	if (WORLD->debugmap->player->mapPosition.z == mapPosition.z)
+	if (WORLD->debugmap->player->mapPosition.floor == mapPosition.floor)
 	{
 		if (inFov)
 		{
@@ -314,7 +314,7 @@ void AICreature::render(const Pane& pane) const
 		{
 			if (inFov)
 			{
-				selectedItem.renderTool(pane); //want to fix, selected item is still rendered when dead
+				selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
 			}
 		}
 	}

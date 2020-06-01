@@ -119,8 +119,8 @@ void Tool::use(bool hold, bool swtch)
 void Tool::updatePositions(Position4& sourcePosition, int& targetX, int& targetY)
 {
 	this->sourcePosition = sourcePosition;
-	mapPosition.h = sourcePosition.h;
-	mapPosition.z = sourcePosition.z;
+	mapPosition.height = sourcePosition.height;
+	mapPosition.floor = sourcePosition.floor;
 
 	if (!((targetX - sourcePosition.x == 0) && (targetY - sourcePosition.y == 0))) //if cursor is at source position
 	{
@@ -179,7 +179,7 @@ void Melee::useMelee()
 		}
 	}
 
-	if (WORLD->debugmap->getBlock(mapPosition)->destroy((bluntDamage + sharpDamage), mapPosition.h))
+	if (WORLD->debugmap->getBlock(mapPosition)->destroy((bluntDamage + sharpDamage), mapPosition.height))
 	{
 		AUDIO->playSound(PositionalStaticSound(("crash"), mapPosition, 85.0f, 100.0f));
 	}
@@ -289,7 +289,7 @@ void Bullet::doBulletDamage(std::shared_ptr<Creature>& creature)
 
 void Bullet::update()
 {
-	if (currentVelocity > 0 && mapPosition.h > 0)
+	if (currentVelocity > 0 && mapPosition.height > 0)
 	{
 		moveClock.tickUp();
 
@@ -297,13 +297,13 @@ void Bullet::update()
 		{
 			if (WORLD->debugmap->inMapBounds(mapPosition))
 			{
-				if (WORLD->debugmap->getBlock(mapPosition)->destroy(mass, mapPosition.h))
+				if (WORLD->debugmap->getBlock(mapPosition)->destroy(mass, mapPosition.height))
 				{
 					WORLD->updateBlock(mapPosition, false); //check if pos needs to be reassigned before
 					AUDIO->playSound(PositionalStaticSound(("crash"), mapPosition, 85.0f, 100.0f));
 				}
 
-				int decel = WORLD->debugmap->getBlock(mapPosition)->tileList[mapPosition.h].deceleration;
+				int decel = WORLD->debugmap->getBlock(mapPosition)->tileList[mapPosition.height].deceleration;
 
 				if (currentVelocity - decel < 0)
 				{
@@ -311,12 +311,12 @@ void Bullet::update()
 				}
 				else
 				{
-					currentVelocity -= WORLD->debugmap->getBlock(mapPosition)->tileList[mapPosition.h].deceleration;
+					currentVelocity -= WORLD->debugmap->getBlock(mapPosition)->tileList[mapPosition.height].deceleration;
 				}			
 			
 				for (auto& creature : WORLD->debugmap->creatureList) //if hit a creature
 				{
-					if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.z == mapPosition.z && mapPosition.h <= creature->mapPosition.h)
+					if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.floor == mapPosition.floor && mapPosition.height <= creature->mapPosition.height)
 					{
 						if (!(mapPosition == startPosition))
 						{
@@ -329,24 +329,24 @@ void Bullet::update()
 				}
 				
 				travel.step();
-				mapPosition = Position4(travel.x, travel.y, mapPosition.h, startPosition.z);
+				mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.floor);
 
 			}
 			else
 			{
 				currentVelocity = 0;
-				mapPosition.h = 0;
+				mapPosition.height = 0;
 			}
 		}
 	}
 
-	if (currentVelocity > 0 && mapPosition.h > 0)
+	if (currentVelocity > 0 && mapPosition.height > 0)
 	{
-		fallClock.timeBetweenUpdates = (getFallTime(mapPosition.h) - getFallTime(mapPosition.h - 1));
+		fallClock.timeBetweenUpdates = (getFallTime(mapPosition.height) - getFallTime(mapPosition.height - 1));
 		fallClock.tickUp();
 
-		for (int i = 1; i < fallClock.numCalls; fallClock.numCalls--) mapPosition.h--;
-		mapPosition = Position4(travel.x, travel.y, mapPosition.h, startPosition.z);
+		for (int i = 1; i < fallClock.numCalls; fallClock.numCalls--) mapPosition.height--;
+		mapPosition = Position4(travel.x, travel.y, mapPosition.height, startPosition.floor);
 	}
 
 	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
@@ -354,11 +354,11 @@ void Bullet::update()
 
 void Bullet::render(const Pane& pane) const
 {
-	if (WORLD->debugmap->player->mapPosition.z == startPosition.z)
+	if (WORLD->debugmap->player->mapPosition.floor == startPosition.floor)
 	{
 		if (currentVelocity > 0)
 		{
-			if (mapPosition.h > 0) //in the air
+			if (mapPosition.height > 0) //in the air
 			{
 				pane.console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::brass); //check later
 
