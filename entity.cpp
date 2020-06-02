@@ -17,9 +17,9 @@ void Entity::render(const Pane& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Creature::Creature(Position4 position, int ch, std::string name, TCODColor color, int health, Armor armor)
-	:Entity(position, ch, name, color), health(health), equippedArmor(armor), angle(0), containerIndex(0), itemIndex(0),
-	moveClock(0), moveSpeed(0), baseMoveTime(0.0f)
+Creature::Creature(Position4 pos, int ch, std::string name, Position3 stance, int health, Armor armor)
+	:Entity(pos, ch, name, TCODColor(stance.x, stance.y, stance.z)), health(health), equippedArmor(armor), angle(0), containerIndex(0), itemIndex(0),
+	moveClock(0), moveSpeed(0), baseMoveTime(0.0f), stance(stance)
 {
 	inventory.push_back(std::make_shared<Container>(ep::container::hands(0, 0, 0)));
 	selectedItem = inventory[0]->item;
@@ -111,7 +111,7 @@ void Creature::render(const Pane& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Player::Player(Position4 position)
-	:Creature(position, '@', "player", ep::color::player, 100, Armor("", TCODColor::pink, 0, 0)), backgroundColor(TCODColor::pink), hasSecondChance(true)
+	:Creature(position, '@', "player", Position3(128, 0, 0), 100, Armor("", TCODColor::pink, 0, 0)), backgroundColor(TCODColor::pink), hasSecondChance(true)
 {
 	hasSecondChance = true;
 

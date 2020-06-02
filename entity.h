@@ -30,7 +30,9 @@ struct Creature : public Entity
 	std::vector<std::shared_ptr<Container>> inventory; //needs to be pointer
 	std::shared_ptr<Item> selectedItem; //needs to be pointer
 
-	Creature(Position4 pos, int ch, std::string name, TCODColor color, int health, Armor armor);
+	Position3 stance; //used for faction alliances
+
+	Creature(Position4 pos, int ch, std::string name, Position3 stance, int health, Armor armor);
 	virtual ~Creature() {};
 
 	virtual void takeDamage(int damage);
