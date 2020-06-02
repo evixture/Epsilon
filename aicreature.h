@@ -23,6 +23,7 @@ struct AICreature : public Creature
 	float aggression;
 	//caution	: effects allowable distance and agression floor, range from -1 to 1
 	//	attitude, opinion
+	float attitude;
 	//fear		: effects fleeing battle, needs node system set up, range from 0 to 1
 	//stealth	: prob not needed but need for stances??
 
@@ -63,6 +64,9 @@ private:
 
 	Clock interestDecayClock;
 	Clock reactionFireClock;
+
+	int actionIndex;
+	Clock actionClock;
 
 	friend struct ActionManager;
 };

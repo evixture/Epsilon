@@ -2,7 +2,7 @@
 
 AICreature::AICreature(Creature creature, TCODMap* fovMap)
 	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), soundInterest(0.0f), visualInterest(0.0f), interestDecay(.05f), interestDecayClock(0.5f), 
-	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false)
+	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false), attitude(0), actionClock(Clock(1.0f)), actionIndex(0)
 {
 	inventory.push_back(std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0)));
 	inventory[1]->addItem(std::make_shared<Item>(ep::item::knife(0, 0, 0)));
@@ -93,8 +93,8 @@ void AICreature::takeDamage(int damage)
 		AUDIO->playSound(PositionalTrackedSound(("jaw"), &mapPosition, 80.0f, 170.0f));
 	}
 
-	aggression += damage / 100.0f;
-	aggression = std::clamp<float>(aggression, -1.0f, 1.0f);
+	aggression += damage / 200.0f;
+	aggression = std::clamp<float>(aggression, attitude, 1.0f); //possible to kill friendlies (0 att), can almost kill neutrals (64 att)
 }
 
 void AICreature::updateTools()
@@ -235,24 +235,51 @@ void AICreature::act()
 {
 	updateTools();
 
+	/*
+		this	player	diff	attitude	result
+	x	0		128		-128	.0			
+	y	64		0		64		.25
+	z	128		0		128		.5			.5
+	if diff is >= 128, auto aggression
+	ignores all values lower than max
+
+	if at 0 stance, 128 is aggressive
+	if at 128 stance, nothing is aggressive
+	*/
+
+	Position3 deltaStance = this->stance - WORLD->debugmap->player->stance;
+	if (deltaStance.x >= 0) if (attitude < deltaStance.x / 255) attitude = deltaStance.x / 255.0f;
+	if (deltaStance.y >= 0) if (attitude < deltaStance.y / 255) attitude = deltaStance.y / 255.0f;
+	if (deltaStance.z >= 0) if (attitude < deltaStance.z / 255) attitude = deltaStance.z / 255.0f;
+
 	if (inFov)
 	{
 		reactionFireClock.tickUp(); //replace later with something with more discretion
 		for (int i = 1; i <= reactionFireClock.numCalls; reactionFireClock.numCalls--)
 		{
-			if (aggression >= 0.5f) selectedItem->tool->use(false, true);
+			if (aggression >= 0.5f) selectedItem->tool->use(false, true); //attack
 		}
 	}
 
 	//reload on empty mag
 	if (selectedItem->tool->getMagazine().availableAmmo <= 0)
 	{
-		auto reloadMag = MagazineData(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true);
+		auto reloadMag = MagazineData(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true); //reload
 		
 		selectedItem->tool->reload(reloadMag);
 	}
 
 	if (path.isEmpty() || path.size() == 0) debugBGColor = TCODColor::red;
+
+	actionClock.tickUp();
+	for (int i = 1; i <= actionClock.numCalls; actionClock.numCalls--)
+	{
+		//do stuff
+		//if (actionIndex % 2 == 0) //every 2 cycles
+
+		if (actionIndex > 9) actionIndex = 0; //tick up every second, reset after 9
+		else actionIndex++;
+	}
 
 	move();
 }
@@ -292,7 +319,7 @@ void AICreature::render(const Pane& pane) const
 			pane.console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
 		}
 
-		if (true) //show pathfinding information
+		if (false) //show pathfinding information
 		{
 			//render path
 			int x, y;
