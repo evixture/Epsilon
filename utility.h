@@ -18,6 +18,7 @@ struct Position3
 
 	Position3();
 	Position3(int x, int y, int z);
+	virtual ~Position3() {};
 
 	bool operator == (const Position3& compPosition);
 };

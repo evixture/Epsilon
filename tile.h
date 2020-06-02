@@ -30,6 +30,7 @@ struct Block
 	std::vector<Tile> tileList;
 
 	Block(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned char walkableFlag, Tag tag = Tag::STATIC);
+	virtual ~Block() {};
 
 	Tile getTileData(int h) const;
 

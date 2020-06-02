@@ -19,6 +19,7 @@ struct Sound //deals with world sounds and playback
 	float playbackVolume; //the volume of the sound to the player
 
 	Sound(std::string speechText, float worldVol, float playVol);
+	virtual ~Sound() {};
 
 protected:
 	std::pair<bool, Position4> position;

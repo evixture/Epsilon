@@ -8,6 +8,7 @@ struct Entity
 	std::string name;
 
 	Entity(Position4 pos, int ch, std::string name, TCODColor color);
+	virtual ~Entity() {};
 
 	virtual void update();
 	virtual void render(const Pane& pane) const;
@@ -30,6 +31,7 @@ struct Creature : public Entity
 	std::shared_ptr<Item> selectedItem; //needs to be pointer
 
 	Creature(Position4 pos, int ch, std::string name, TCODColor color, int health, Armor armor);
+	virtual ~Creature() {};
 
 	virtual void takeDamage(int damage);
 

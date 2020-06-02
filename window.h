@@ -43,6 +43,7 @@ struct Window
 	Pane drawPane;
 
 	Window(int consoleWidth, int consoleHeight, std::string panelName, int rx, int ry);
+	virtual ~Window() {};
 
 	virtual void update() = 0;
 	virtual void render() const = 0;

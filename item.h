@@ -55,6 +55,7 @@ struct Item
 	std::shared_ptr<ActionManager> actionManager;
 
 	Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, ItemType type);
+	virtual ~Item() {};
 
 	virtual MagazineData& getMagazineData();
 	virtual void changeBarColor();

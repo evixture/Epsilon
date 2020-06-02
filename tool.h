@@ -51,7 +51,8 @@ struct Tool
 	enum FireType { SAFE = 0x01, SEMI = 0x02, FULL = 0x04 } fireMode;			
 
 	Tool(std::string name, TCODColor color, int ch);							
-	Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag); 
+	Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag);
+	virtual ~Tool() {};
 
 	virtual void update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld);
 	virtual void render(const Pane& pane) const;								
@@ -80,6 +81,7 @@ struct Melee : public Tool
 	int sharpDamage;														
 
 	Melee(Tool tool, int bluntDamage, int sharpDamage);
+	virtual ~Melee() {};
 
 	void useMelee();														
 
