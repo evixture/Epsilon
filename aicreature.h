@@ -51,11 +51,11 @@ private:
 	void move();
 
 	//world interact
-	void pickUpItem(); //should eventually change to pure
+	void pickUpItem();
 	void dropItem();
 
 	//actions
-	void reload();
+	bool reload();
 	void changeFireMode();
 	void equipArmor();
 	void useMelee();

@@ -65,8 +65,25 @@ void AICreature::dropItem()
 {
 }
 
-void AICreature::reload()
+bool AICreature::reload()
 {
+	for (auto& container : inventory)
+	{
+		for (auto& item : container->itemList)
+		{
+			if (item->getMagazineData().isValid == true) // if it is actually a magazine
+			{
+				if (item->getMagazineData().ammoType == selectedItem->tool->ammoType) // if it has the same type of ammo as the current weapon
+				{
+					if (item->getMagazineData().availableAmmo != 0) // if the magazine is not empty
+					{
+						return selectedItem->tool->reload(item->getMagazineData()); //returns true on a proper reload
+					}
+				}
+			}
+		}
+	}
+	return false;
 }
 
 void AICreature::changeFireMode()
@@ -249,9 +266,10 @@ void AICreature::act()
 	*/
 
 	Position3 deltaStance = this->stance - WORLD->debugmap->player->stance;
-	if (deltaStance.x >= 0) if (attitude < deltaStance.x / 255) attitude = deltaStance.x / 255.0f;
-	if (deltaStance.y >= 0) if (attitude < deltaStance.y / 255) attitude = deltaStance.y / 255.0f;
-	if (deltaStance.z >= 0) if (attitude < deltaStance.z / 255) attitude = deltaStance.z / 255.0f;
+	if (deltaStance.x >= 0) if (attitude < deltaStance.x / 255.0f) attitude = deltaStance.x / 255.0f;
+	if (deltaStance.y >= 0) if (attitude < deltaStance.y / 255.0f) attitude = deltaStance.y / 255.0f;
+	if (deltaStance.z >= 0) if (attitude < deltaStance.z / 255.0f) attitude = deltaStance.z / 255.0f;
+	if (aggression < attitude) aggression = attitude; //keep aggression updated
 
 	if (inFov)
 	{
@@ -262,14 +280,6 @@ void AICreature::act()
 		}
 	}
 
-	//reload on empty mag
-	if (selectedItem->tool->getMagazine().availableAmmo <= 0)
-	{
-		auto reloadMag = MagazineData(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7, true); //reload
-		
-		selectedItem->tool->reload(reloadMag);
-	}
-
 	if (path.isEmpty() || path.size() == 0) debugBGColor = TCODColor::red;
 
 	actionClock.tickUp();
@@ -277,6 +287,14 @@ void AICreature::act()
 	{
 		//do stuff
 		//if (actionIndex % 2 == 0) //every 2 cycles
+		//reload on empty mag
+
+		if (selectedItem->tool->getMagazine().availableAmmo <= 0)
+		{
+			reload();
+			//if (reload()) //if can reload
+			//else //switch weapons 
+		}
 
 		if (actionIndex > 9) actionIndex = 0; //tick up every second, reset after 9
 		else actionIndex++;
@@ -320,7 +338,7 @@ void AICreature::render(const Pane& pane) const
 			pane.console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
 		}
 
-		if (true) //show pathfinding information
+		if (false) //show pathfinding information
 		{
 			//render path
 			int x, y;

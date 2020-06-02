@@ -58,7 +58,7 @@ struct Tool
 	virtual void render(const Pane& pane) const;								
 
 	virtual	MagazineData&	getMagazine();										
-	virtual void			reload(MagazineData& magazine);						
+	virtual bool			reload(MagazineData& magazine);						
 	virtual void			changeFireMode();									
 	virtual void			useMelee();											
 	virtual void			changeBarColor(TCODColor& color);					
@@ -137,7 +137,7 @@ struct Firearm : public Melee
 
 	MagazineData& getMagazine();												
 
-	void reload(MagazineData& magazine);										
+	bool reload(MagazineData& magazine);										
 	void changeFireMode();														
 	void use(bool hold, bool swtch);											
 

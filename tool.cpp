@@ -18,9 +18,9 @@ MagazineData& Tool::getMagazine()
 	return nullMag;
 }
 
-void Tool::reload(MagazineData& magazine)
+bool Tool::reload(MagazineData& magazine)
 {
-	return;
+	return false;
 }
 
 void Tool::changeFireMode()
@@ -547,19 +547,20 @@ void Firearm::fireBullet()
 	}
 }
 
-void Firearm::reload(MagazineData& magazine)
+bool Firearm::reload(MagazineData& magazine)
 {
 	if (this->isHeld)
 	{
 		if (reloadClock.numCalls >= 1.0f) //if it can reload
 		{
 			std::swap(this->usedMag, magazine);
-
 			reloadClock.addTime(reloadTime);
-
 			AUDIO->playSound(PositionalTrackedSound(("check chick"), &mapPosition, 65.0f, 40.0f));
+
+			return true;
 		}
 	}
+	return false;
 }
 
 void Firearm::changeFireMode()

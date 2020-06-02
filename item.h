@@ -182,7 +182,7 @@ ITEM SIZES
 		}
 	};
 
-	struct magazine
+	struct magazineItem
 	{
 		inline static MagazineItem cal45Magazine7(int x, int y, int level)
 		{

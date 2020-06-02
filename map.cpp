@@ -328,8 +328,8 @@ bool Map::getItems(pugi::xml_node& dataNode)
 			else return false;
 
 			if		(name == "SIR556")			mapItemList.push_back(std::make_shared<Item>(ep::item::sir556(x, y, floor)));			
-			else if (name == "556Magazine30")	mapItemList.push_back(std::make_shared<MagazineItem>(ep::magazine::cal556Magazine30(x, y, floor)));			
-			else if (name == "45Magazine7")		mapItemList.push_back(std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(x, y, floor)));
+			else if (name == "556Magazine30")	mapItemList.push_back(std::make_shared<MagazineItem>(ep::magazineItem::cal556Magazine30(x, y, floor)));			
+			else if (name == "45Magazine7")		mapItemList.push_back(std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(x, y, floor)));
 			else if (name == "L1R3Armor")		mapItemList.push_back(std::make_shared<Item>(ep::item::L1R3Armor(x, y, floor)));
 			else if (name == "Knife")			mapItemList.push_back(std::make_shared<Item>(ep::item::knife(x, y, floor)));
 		}

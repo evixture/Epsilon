@@ -66,8 +66,9 @@ void Creature::takeDamage(int damage)
 }
 	
 
-void Creature::reload()
+bool Creature::reload()
 {
+	return false;
 }
 
 void Creature::changeFireMode()
@@ -117,8 +118,8 @@ Player::Player(Position4 position)
 
 	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0)));
 	inventory[1]->addItem(	std::make_shared<Item>(ep::item::sip45(0, 0, 0)));
-	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(0, 0, 0)));
-	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazine::cal45Magazine7(0, 0, 0)));
+	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(0, 0, 0)));
+	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(0, 0, 0)));
 	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0)));
 
 	if (inventory.size() > 0)
@@ -399,7 +400,7 @@ void Player::filterIndexes()
 	}
 }
 
-void Player::reload()
+bool Player::reload()
 {
 	for (auto& container : inventory)
 	{
@@ -412,11 +413,13 @@ void Player::reload()
 					if (item->getMagazineData().availableAmmo != 0) // if the magazine is not empty
 					{
 						selectedItem->tool->reload(item->getMagazineData());
+						return true;
 					}
 				}
 			}
 		}
 	}
+	return false;
 }
 
 void Player::changeFireMode()

@@ -56,7 +56,7 @@ protected:
 	virtual void dropItem();
 
 	//actions
-	virtual void reload();
+	virtual bool reload();
 	virtual void changeFireMode();
 	virtual void equipArmor();
 	virtual void useMelee();
@@ -88,7 +88,7 @@ private:
 	void dropItem();
 
 	//actions
-	void reload();
+	bool reload();
 	void changeFireMode();
 	void equipArmor();
 	void useMelee();
@@ -110,10 +110,10 @@ namespace ep
 		{
 			std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, 
 			{
-				std::make_shared<Item>(ep::item::knife(0, 0, 0)),
 				std::make_shared<Item>(ep::item::sip45(0, 0, 0)),
-				std::make_shared<Item>(ep::item::cal45Magazine7(0, 0, 0)),
-				std::make_shared<Item>(ep::item::cal45Magazine7(0, 0, 0))
+				std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(0, 0, 0)),
+				std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(0, 0, 0)),
+				std::make_shared<Item>(ep::item::knife(0, 0, 0))
 			}))
 		};
 	};

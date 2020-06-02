@@ -17,7 +17,7 @@ bool Position3::operator==(const Position3 & compPosition)
 
 Position3 Position3::operator-(const Position3& compPosition)
 {
-	return Position3(compPosition.x - this->x, compPosition.y - this->y, compPosition.z - this->z);
+	return Position3(this->x - compPosition.x, this->y - compPosition.y, this->z - compPosition.z);
 }
 
 Position4 offsetPosition(Position4 mapPosition, int xOffset, int yOffset)
