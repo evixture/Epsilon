@@ -92,6 +92,7 @@ struct Container
 	std::vector<std::shared_ptr<Item>> itemList;
 
 	Container(int itemCapacity, std::shared_ptr<Item> item);
+	Container(int itemCapacity, std::shared_ptr<Item> item, std::vector<std::shared_ptr<Item>> itemList);
 
 	bool addItem(std::shared_ptr<Item> item);
 };
@@ -165,9 +166,19 @@ ITEM SIZES
 			return Container(5, std::make_shared<Item>(ep::item::smallBackpack(x, y, level)));
 		}
 
+		inline static Container smallBackpack(int x, int y, int level, std::vector<std::shared_ptr<Item>> itemList)
+		{
+			return Container(5, std::make_shared<Item>(ep::item::smallBackpack(x, y, level)), itemList);
+		}
+
 		inline static Container hands(int x, int y, int level)
 		{
 			return Container(0, std::make_shared<Item>(ep::item::hands(x, y, level)));
+		}
+
+		inline static Container hands(int x, int y, int level, std::vector<std::shared_ptr<Item>> itemList)
+		{
+			return Container(0, std::make_shared<Item>(ep::item::hands(x, y, level)), itemList);
 		}
 	};
 

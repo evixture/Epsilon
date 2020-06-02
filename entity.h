@@ -101,3 +101,20 @@ private:
 
 	friend struct ActionManager;
 };
+
+namespace ep
+{
+	struct inventory
+	{
+		inline static const std::vector<std::shared_ptr<Container>> testInventory = 
+		{
+			std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, 
+			{
+				std::make_shared<Item>(ep::item::knife(0, 0, 0)),
+				std::make_shared<Item>(ep::item::sip45(0, 0, 0)),
+				std::make_shared<Item>(ep::item::cal45Magazine7(0, 0, 0)),
+				std::make_shared<Item>(ep::item::cal45Magazine7(0, 0, 0))
+			}))
+		};
+	};
+}

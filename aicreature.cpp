@@ -4,11 +4,12 @@ AICreature::AICreature(Creature creature, TCODMap* fovMap)
 	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), soundInterest(0.0f), visualInterest(0.0f), interestDecay(.05f), interestDecayClock(0.5f), 
 	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false), attitude(0), actionClock(Clock(1.0f)), actionIndex(0)
 {
-	inventory.push_back(std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0)));
-	inventory[1]->addItem(std::make_shared<Item>(ep::item::knife(0, 0, 0)));
-	inventory[1]->addItem(std::make_shared<Item>(ep::item::cal556Magazine30(0, 0, 0)));
+	//inventory.push_back(std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0)));
+	//inventory[1]->addItem(std::make_shared<Item>(ep::item::knife(0, 0, 0)));
+	//inventory[1]->addItem(std::make_shared<Item>(ep::item::cal556Magazine30(0, 0, 0)));
+	inventory = ep::inventory::testInventory;
 
-	selectedItem = inventory[1]->itemList[0];
+	selectedItem = inventory[0]->itemList[0];
 }
 
 void AICreature::move()
@@ -319,7 +320,7 @@ void AICreature::render(const Pane& pane) const
 			pane.console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
 		}
 
-		if (false) //show pathfinding information
+		if (true) //show pathfinding information
 		{
 			//render path
 			int x, y;

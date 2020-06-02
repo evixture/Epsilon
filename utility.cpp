@@ -176,7 +176,7 @@ Position4 getWalkableArea(Position4 centerPosition)
 	{
 		for (int x = -1; x <= 1; x++)
 		{
-			if (x != 0 && y != 0) // do not check center position
+			if (!(x == 0 && y == 0)) // do not check center position
 			{
 				if (WORLD->debugmap->getWalkability(Position4(centerPosition.x + x, centerPosition.y + y, centerPosition.h, centerPosition.z), true) == true)
 				{

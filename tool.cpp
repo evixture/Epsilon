@@ -159,7 +159,7 @@ Melee::Melee(Tool tool, int bluntDamage, int sharpDamage)
 	: Tool(tool), bluntDamage(bluntDamage), sharpDamage(sharpDamage)
 {
 	type = Tool::Type::MELEE;
-	effectiveRange = 0;
+	effectiveRange = 1;
 }
 
 void Melee::useMelee()

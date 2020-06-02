@@ -189,6 +189,11 @@ Container::Container(int itemCapacity, std::shared_ptr<Item> item)
 {
 }
 
+Container::Container(int itemCapacity, std::shared_ptr<Item> item, std::vector<std::shared_ptr<Item>> itemList)
+	: itemCapacity(itemCapacity), item(item), currentSize(0), itemList(itemList)
+{
+}
+
 bool Container::addItem(std::shared_ptr<Item> item)
 {
 	int spaceUsed = 0;
