@@ -309,13 +309,10 @@ bool Map::getItems(pugi::xml_node& dataNode)
 	{
 		for (auto& item : dataNode.children())
 		{
-			int x;
-			int y;
-			int floor;
+			int x, y, floor;
+			std::string type;
 
-			std::string name;
-
-			if (!(item.attribute("type").empty()))	name = item.attribute("type").as_string();
+			if (!(item.attribute("type").empty()))	type = item.attribute("type").as_string();
 			else return false;
 
 			if (!(item.child("x").empty()))		x = item.child("x").text().as_int();
@@ -327,11 +324,11 @@ bool Map::getItems(pugi::xml_node& dataNode)
 			if (!(item.child("floor").empty())) floor = item.child("floor").text().as_int();
 			else return false;
 
-			if		(name == "SIR556")			mapItemList.push_back(std::make_shared<Item>(ep::item::sir556(x, y, floor)));			
-			else if (name == "556Magazine30")	mapItemList.push_back(std::make_shared<MagazineItem>(ep::magazineItem::cal556Magazine30(x, y, floor)));			
-			else if (name == "45Magazine7")		mapItemList.push_back(std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(x, y, floor)));
-			else if (name == "L1R3Armor")		mapItemList.push_back(std::make_shared<Item>(ep::item::L1R3Armor(x, y, floor)));
-			else if (name == "Knife")			mapItemList.push_back(std::make_shared<Item>(ep::item::knife(x, y, floor)));
+			if		(type == "SIR556")			mapItemList.push_back(std::make_shared<Item>(ep::item::sir556(x, y, floor)));			
+			else if (type == "556Magazine30")	mapItemList.push_back(std::make_shared<MagazineItem>(ep::magazineItem::cal556Magazine30(x, y, floor)));			
+			else if (type == "45Magazine7")		mapItemList.push_back(std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(x, y, floor)));
+			else if (type == "L1R3Armor")		mapItemList.push_back(std::make_shared<Item>(ep::item::L1R3Armor(x, y, floor)));
+			else if (type == "Knife")			mapItemList.push_back(std::make_shared<Item>(ep::item::knife(x, y, floor)));
 		}
 		return true;
 	}
@@ -347,8 +344,10 @@ bool Map::getContainers(pugi::xml_node& dataNode)
 		for (auto& container : dataNode.children())
 		{
 			int x, y, floor;
+			std::string type;
 
-			std::string name;
+			if (!(container.attribute("type").empty()))	type = container.attribute("type").as_string();
+			else return false;
 
 			if (!(container.child("x").empty()))		x = container.child("x").text().as_int();
 			else return false;
@@ -359,10 +358,7 @@ bool Map::getContainers(pugi::xml_node& dataNode)
 			if (!(container.child("floor").empty()))	floor = container.child("floor").text().as_int();
 			else return false;
 
-			if (!(container.child("type").empty()))		name = container.attribute("type").as_string();
-			else return false;
-
-			if (name == "SmallBackpack") mapContainerList.push_back(std::make_shared<Container>(ep::container::smallBackpack(x, y, floor)));
+			if (type == "SmallBackpack") mapContainerList.push_back(std::make_shared<Container>(ep::container::smallBackpack(x, y, floor)));
 		}
 		return true;
 	}

@@ -1,3 +1,2 @@
-﻿  item.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\item.cpp(127): warning C4172: returning address of local variable or temporary: nullMag
+﻿  panel.cpp
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

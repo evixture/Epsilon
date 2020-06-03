@@ -317,8 +317,8 @@ s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
 	<containers>
 
 		<container type = "SmallBackpack">
-			<x>35</x>
-			<y>235</y>
+			<x>20</x>
+			<y>10</y>
 			<floor>0</floor>
 		</container>
 		
