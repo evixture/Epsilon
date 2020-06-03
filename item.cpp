@@ -150,6 +150,7 @@ void Item::renderTool(const Pane& pane) const
 
 void Item::updateTile()
 {
+	mapPosition.h = WORLD->debugmap->player->mapPosition.h;
 	distToEnt = getDistance(WORLD->debugmap->player->mapPosition.x, WORLD->debugmap->player->mapPosition.y, mapPosition.x, mapPosition.y);
 	tileRenderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 }

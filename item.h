@@ -120,42 +120,42 @@ ITEM SIZES
 	{
 		inline static Item smallBackpack(int x, int y, int level)
 		{
-			return Item(2, std::make_shared<Block>(ep::block::item::smallBackpack), std::make_shared<Tool>(ep::tool::smallBackpack), Position4(x, y, 0, level), Item::ItemType::NORMAL);
+			return Item(2, std::make_shared<Block>(ep::block::item::smallBackpack), std::make_shared<Tool>(ep::tool::smallBackpack), Position4(x, y, 3, level), Item::ItemType::NORMAL);
 		}
 
 		inline static Item hands(int x, int y, int level)
 		{
-			return Item(1, std::make_shared<Block>(ep::block::item::defBlock), std::make_shared<Melee>(ep::tool::hands), Position4(x, y, 0, level), Item::ItemType::HAND);
+			return Item(1, std::make_shared<Block>(ep::block::item::defBlock), std::make_shared<Melee>(ep::tool::hands), Position4(x, y, 3, level), Item::ItemType::HAND);
 		}
 
 		inline static Item L1R3Armor(int x, int y, int level)
 		{
-			return Item(2, std::make_shared<Block>(ep::block::item::L1R3Armor), std::make_shared<Armor>(ep::tool::L1R3Armor), Position4(x, y, 0, level), Item::ItemType::ARMOR);
+			return Item(2, std::make_shared<Block>(ep::block::item::L1R3Armor), std::make_shared<Armor>(ep::tool::L1R3Armor), Position4(x, y, 3, level), Item::ItemType::ARMOR);
 		}
 
 		inline static Item sip45(int x, int y, int level)
 		{
-			return Item(2, std::make_shared<Block>(ep::block::item::sip45), std::make_shared<Firearm>(ep::tool::sip45), Position4(x, y, 0, level), Item::ItemType::FIREARM);
+			return Item(2, std::make_shared<Block>(ep::block::item::sip45), std::make_shared<Firearm>(ep::tool::sip45), Position4(x, y, 3, level), Item::ItemType::FIREARM);
 		}
 
 		inline static Item cal45Magazine7(int x, int y, int level)
 		{
-			return Item(1, std::make_shared<Block>(ep::block::item::cal45Magazine7), std::make_shared<Tool>(ep::tool::cal45magazine7), Position4(x, y, 0, level), Item::ItemType::NORMAL);
+			return Item(1, std::make_shared<Block>(ep::block::item::cal45Magazine7), std::make_shared<Tool>(ep::tool::cal45magazine7), Position4(x, y, 3, level), Item::ItemType::NORMAL);
 		}
 
 		inline static Item sir556(int x, int y, int level)
 		{
-			return Item(3, std::make_shared<Block>(ep::block::item::sir556), std::make_shared<Firearm>(ep::tool::sir556), Position4(x, y, 0, level), Item::ItemType::FIREARM);
+			return Item(3, std::make_shared<Block>(ep::block::item::sir556), std::make_shared<Firearm>(ep::tool::sir556), Position4(x, y, 3, level), Item::ItemType::FIREARM);
 		}
 
 		inline static Item cal556Magazine30(int x, int y, int level)
 		{
-			return Item(1, std::make_shared<Block>(ep::block::item::cal556Magazine30), std::make_shared<Tool>(ep::tool::cal556magazine30), Position4(x, y, 0, level), Item::ItemType::NORMAL);
+			return Item(1, std::make_shared<Block>(ep::block::item::cal556Magazine30), std::make_shared<Tool>(ep::tool::cal556magazine30), Position4(x, y, 3, level), Item::ItemType::NORMAL);
 		}
 
 		inline static Item knife(int x, int y, int level)
 		{
-			return Item(1, std::make_shared<Block>(ep::block::item::knife), std::make_shared<Melee>(ep::tool::knife), Position4(x, y, 0, level), Item::ItemType::MELEE);
+			return Item(1, std::make_shared<Block>(ep::block::item::knife), std::make_shared<Melee>(ep::tool::knife), Position4(x, y, 3, level), Item::ItemType::MELEE);
 		}
 	};
 

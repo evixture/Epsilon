@@ -497,7 +497,7 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 
 bool Map::inMapBounds(Position3& position) const
 {
-	return ((position.z >= 0 && position.z < totalFloors) && (position.x >= 0 && position.x < width) && (position.y >= 0 && position.y < height));
+	return ((position.z >= 0 && position.z < totalFloors) && (position.x >= 0 && position.x < width) && (position.y >= 0 && position.y < height)); //can optimize by checking opposite
 }
 
 bool Map::getWalkability(Position4 position, bool checkCreatures) const
@@ -621,10 +621,13 @@ bool World::isInPlayerFov(Position4 position) const
 		return false;
 	}
 
-	if (position.z == debugmap->player->mapPosition.z && debugmap->fovMapList[position.h - 1]->isInFov(position.x, position.y))
+	if (position.z == debugmap->player->mapPosition.z) //condense back
 	{
-		debugmap->getBlock(position)->explored = true;
-		return true;
+		if (debugmap->fovMapList[position.h - 1]->isInFov(position.x, position.y))
+		{
+			debugmap->getBlock(position)->explored = true;
+			return true;
+		}
 	}
 	return false;
 }

@@ -459,10 +459,13 @@ void ProximityWindow::render() const
 	{
 		if (item->mapPosition.z == WORLD->debugmap->player->mapPosition.z)
 		{
-			if (item->distToEnt < 5 && WORLD->isInPlayerFov(item->mapPosition))
+			if (item->distToEnt < 5) //condense back when fixed
 			{
-				drawPane.console->printf(0, line, "|%s", item->tool->name.c_str());
-				++line;
+				if (WORLD->isInPlayerFov(item->mapPosition))
+				{
+					drawPane.console->printf(0, line, "|%s", item->tool->name.c_str());
+					++line;
+				}
 			}
 		}
 	}
