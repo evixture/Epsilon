@@ -51,7 +51,7 @@ private:
 	void move();
 
 	//world interact
-	void pickUpItem();
+	bool pickUpItem();
 	void dropItem();
 
 	//actions
@@ -61,6 +61,11 @@ private:
 	void useMelee();
 
 	void updateTools();
+
+	void moveSelectorUp();
+	void moveSelectorDown();
+	void filterIndexes();
+	void selectAccordingToRange(float range);
 
 	Clock interestDecayClock;
 	Clock reactionFireClock;

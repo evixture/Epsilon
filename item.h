@@ -175,11 +175,6 @@ ITEM SIZES
 		{
 			return Container(0, std::make_shared<Item>(ep::item::hands(x, y, level)));
 		}
-
-		inline static Container hands(int x, int y, int level, std::vector<std::shared_ptr<Item>> itemList)
-		{
-			return Container(0, std::make_shared<Item>(ep::item::hands(x, y, level)), itemList);
-		}
 	};
 
 	struct magazineItem

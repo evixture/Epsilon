@@ -45,8 +45,9 @@ void Creature::changeStanceDown()
 	}
 }
 
-void Creature::pickUpItem()
+bool Creature::pickUpItem()
 {
+	return false;
 }
 
 void Creature::dropItem()
@@ -264,8 +265,9 @@ void Player::moveSelectorDown()
 	}
 }
 
-void Player::pickUpItem()
+bool Player::pickUpItem()
 {
+	//for items
 	for (int i = 0; i < WORLD->debugmap->mapItemList.size(); ++i)
 	{
 		if (WORLD->debugmap->mapItemList[i] != nullptr && WORLD->debugmap->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->debugmap->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->debugmap->mapItemList[i]->mapPosition.z == mapPosition.z)
@@ -274,32 +276,32 @@ void Player::pickUpItem()
 			{
 				if (inventory[containerIndex]->addItem(WORLD->debugmap->mapItemList[i]))
 				{
-					GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapItemList[i]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
-
 					WORLD->debugmap->mapItemList.erase(WORLD->debugmap->mapItemList.begin() + i);
 
+					GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapItemList[i]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 					AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
 
-					return;
+					return true;
 				}
 			}
 		}
 	}
 
+	//for containers
 	for (int i = 0; i < WORLD->debugmap->mapContainerList.size(); ++i)
 	{
 		if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->item->mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->item->mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->item->mapPosition.z == mapPosition.z)
 		{
-			GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapContainerList[i]->item->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
-
 			inventory.push_back(WORLD->debugmap->mapContainerList[i]);
 			WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
 
+			GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapContainerList[i]->item->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 			AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
 
-			return;
+			return true;
 		}
 	}
+	return false;
 }
 
 void Player::dropItem()
@@ -309,24 +311,20 @@ void Player::dropItem()
 		if (itemIndex >= 0)
 		{
 			GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->itemList[itemIndex]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
+			AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
 
 			WORLD->debugmap->mapItemList.push_back(selectedItem);
-
 			inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
-
-			AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
 		}
 		else if (itemIndex <= -1)
 		{
 			if (selectedItem->type != Item::ItemType::HAND)
 			{
 				GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->item->tool->name, LogWindow::Message::MessageLevel::LOW));
-			
-				WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
-
-				inventory.erase(inventory.begin() + containerIndex);
-
 				AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
+
+				WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
+				inventory.erase(inventory.begin() + containerIndex);
 			}
 		}
 	}
@@ -379,20 +377,20 @@ void Player::filterIndexes()
 		containerIndex = 0;
 	}
 
-	if (containerIndex != -1)
+	if (containerIndex != -1) //selected an item, not a container
 	{
-		if (itemIndex != -2)
+		if (itemIndex != -2) //an item is selected
 		{
-			if (itemIndex + 1 > inventory[containerIndex]->itemList.size())
+			if (itemIndex + 1 > inventory[containerIndex]->itemList.size()) //selected item is out of range
 			{
 				itemIndex = (int)(inventory[containerIndex]->itemList.size() - 1);
 			}
 
-			if (itemIndex != -1)
+			if (itemIndex != -1) //item index is in range
 			{
 				selectedItem = inventory[containerIndex]->itemList[itemIndex];
 			}
-			else if (itemIndex == -1)
+			else if (itemIndex == -1) //no items in the container
 			{
 				selectedItem = inventory[containerIndex]->item;
 			}

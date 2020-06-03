@@ -9,7 +9,7 @@ AICreature::AICreature(Creature creature, TCODMap* fovMap)
 	//inventory[1]->addItem(std::make_shared<Item>(ep::item::cal556Magazine30(0, 0, 0)));
 	inventory = ep::inventory::testInventory;
 
-	selectedItem = inventory[0]->itemList[0];
+	selectedItem = inventory[0]->item; //select hands
 }
 
 void AICreature::move()
@@ -57,12 +57,65 @@ void AICreature::move()
 }
 
 
-void AICreature::pickUpItem()
+bool AICreature::pickUpItem()
 {
+	//for items
+	for (int i = 0; i < WORLD->debugmap->mapItemList.size(); ++i)
+	{
+		if (WORLD->debugmap->mapItemList[i] != nullptr && WORLD->debugmap->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->debugmap->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->debugmap->mapItemList[i]->mapPosition.z == mapPosition.z)
+		{
+			if (containerIndex != -1)
+			{
+				if (inventory[containerIndex]->addItem(WORLD->debugmap->mapItemList[i]))
+				{
+					WORLD->debugmap->mapItemList.erase(WORLD->debugmap->mapItemList.begin() + i);
+
+					AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
+
+					return true;
+				}
+			}
+		}
+	}
+
+	//for containers
+	for (int i = 0; i < WORLD->debugmap->mapContainerList.size(); ++i)
+	{
+		if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->item->mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->item->mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->item->mapPosition.z == mapPosition.z)
+		{
+			inventory.push_back(WORLD->debugmap->mapContainerList[i]);
+			WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
+
+			AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
+
+			return true;
+		}
+	}
+	return false;
 }
 
-void AICreature::dropItem()
+void AICreature::dropItem() //prob here
 {
+	if (containerIndex != -1)
+	{
+		if (itemIndex >= 0)
+		{
+			WORLD->debugmap->mapItemList.push_back(selectedItem);
+			inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
+
+			AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
+		}
+		else if (itemIndex <= -1)
+		{
+			if (selectedItem->type != Item::ItemType::HAND)
+			{
+				WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
+				inventory.erase(inventory.begin() + containerIndex);
+
+				AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
+			}
+		}
+	}
 }
 
 bool AICreature::reload()
@@ -88,14 +141,17 @@ bool AICreature::reload()
 
 void AICreature::changeFireMode()
 {
+	selectedItem->tool->changeFireMode();
 }
 
 void AICreature::equipArmor()
 {
+	selectedItem->tool->equip(equippedArmor); //bool return??
 }
 
 void AICreature::useMelee()
 {
+	selectedItem->tool->useMelee();
 }
 
 void AICreature::takeDamage(int damage)
@@ -119,6 +175,141 @@ void AICreature::updateTools()
 {
 	angle = getAngle(mapPosition.x, mapPosition.y, lookPosition.x, lookPosition.y);
 	selectedItem->updateTool(mapPosition, lookPosition.x, lookPosition.y, true);
+}
+
+void AICreature::moveSelectorUp()
+{
+	if (!(itemIndex == -1 && containerIndex == -1)) // if not hands
+	{
+		if (itemIndex > -1)
+		{
+			itemIndex--;
+		}
+		else if (itemIndex == -1)
+		{
+			if (containerIndex > 0)
+			{
+				containerIndex--;
+				itemIndex = (int)(inventory[containerIndex]->itemList.size() - 1);
+			}
+		}
+		else if (itemIndex == -2)
+		{
+			if (itemIndex + 3 <= inventory[containerIndex]->itemList.size())
+			{
+				++itemIndex;
+			}
+		}
+	}
+}
+
+void AICreature::moveSelectorDown()
+{
+	if (!(itemIndex == -1 && containerIndex == -1)) //if not hands
+	{
+		if (itemIndex + 1 < inventory[containerIndex]->itemList.size())
+		{
+			++itemIndex;
+		}
+		else if (itemIndex + 1 >= inventory[containerIndex]->itemList.size())
+		{
+			if (containerIndex < inventory.size() - 1)
+			{
+				++containerIndex;
+				itemIndex = -1;
+			}
+			else if (itemIndex == -1)
+			{
+				if (itemIndex + 2 <= inventory[containerIndex]->itemList.size())
+				{
+					++itemIndex;
+				}
+			}
+		}
+	}
+}
+
+void AICreature::filterIndexes()
+{
+	//INDEX FILTERING
+	//
+	//ITEM INDEXES
+	//	-2 : no item selected
+	//	-1 : container selected
+	//	0+ : item in vector
+
+	if (containerIndex + 1 > (inventory.size()))
+	{
+		containerIndex = (int)(inventory.size() - 1);
+	}
+	else if (containerIndex == -1 && inventory.size() > 0)
+	{
+		containerIndex = 0;
+	}
+
+	if (containerIndex != -1)
+	{
+		if (itemIndex != -2)
+		{
+			if (itemIndex + 1 > inventory[containerIndex]->itemList.size())
+			{
+				itemIndex = (int)(inventory[containerIndex]->itemList.size() - 1);
+			}
+
+			if (itemIndex != -1)
+			{
+				selectedItem = inventory[containerIndex]->itemList[itemIndex];
+			}
+			else if (itemIndex == -1)
+			{
+				selectedItem = inventory[containerIndex]->item;
+			}
+		}
+	}
+}
+
+void AICreature::selectAccordingToRange(float range)
+{
+	float deltaRange = 100;
+	int cInd = 999;
+	int iInd = 999;
+
+	for (int c = 0; c < inventory.size(); c++)
+	{
+		for (int i = 0; i < inventory[c]->itemList.size(); i++)
+		{
+			if (abs(range - inventory[c]->itemList[i]->tool->effectiveRange) < deltaRange) //filter through items to find one with the closest range
+			{
+				deltaRange = abs(range - inventory[c]->itemList[i]->tool->effectiveRange);
+				cInd = c;
+				iInd = i;
+			}
+		}
+	}
+	std::shared_ptr<Item> optimalItem = inventory[cInd]->itemList[iInd];
+
+	//how to figure out how to move selector to the item?
+
+	/*
+		hands		[0, -1]	[0]
+		containerA	[1, -1]	[1]
+			tool	[1, 0]  [1, 0]
+			knife	[1, 1]	[1, 1]	=
+		containerB	[2, -1]	[2]
+			gun		[2, 0]	[2, 0]	*
+	*/
+
+	while (optimalItem != selectedItem) //optimize check
+	{
+		if (containerIndex == cInd)
+		{
+			if (itemIndex == iInd) return; //??
+			else if (itemIndex > iInd) moveSelectorUp();
+			else if (itemIndex < iInd) moveSelectorDown();
+		}
+		else if (containerIndex > cInd) moveSelectorUp();
+		else if (containerIndex < cInd) moveSelectorDown();
+	}
 }
 
 bool AICreature::inEffectiveRange()
@@ -251,7 +442,6 @@ void AICreature::behave()
 
 void AICreature::act()
 {
-	updateTools();
 
 	/*
 		this	player	diff	attitude	result
@@ -285,20 +475,36 @@ void AICreature::act()
 	actionClock.tickUp();
 	for (int i = 1; i <= actionClock.numCalls; actionClock.numCalls--)
 	{
+		/*
+			Behaviors to add
+				pick up useful tools
+				equip armor if better
+		*/
+
 		//do stuff
 		//if (actionIndex % 2 == 0) //every 2 cycles
-		//reload on empty mag
 
-		if (selectedItem->tool->getMagazine().availableAmmo <= 0)
+		if (selectedItem->tool->getMagazine().availableAmmo <= 0 && selectedItem->tool->getMagazine().isValid)
 		{
-			reload();
-			//if (reload()) //if can reload
-			//else //switch weapons 
+			if (!reload()) //reload if possible, else drop the weapon
+			{
+				dropItem();
+				filterIndexes();
+			}
 		}
 
-		if (actionIndex > 9) actionIndex = 0; //tick up every second, reset after 9
+		if (actionIndex % 5 == 0) //every 5 seconds
+		{
+			selectAccordingToRange((float)getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y));
+			filterIndexes();
+		}
+
+		if (actionIndex > 10) actionIndex = 1; //tick up every second, reset after 9
 		else actionIndex++;
 	}
+
+	filterIndexes();
+	updateTools();
 
 	move();
 }

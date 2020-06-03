@@ -52,7 +52,7 @@ protected:
 	void changeStanceDown();
 
 	//world interact
-	virtual void pickUpItem(); //should eventually chenge to pure
+	virtual bool pickUpItem(); //should eventually chenge to pure
 	virtual void dropItem();
 
 	//actions
@@ -84,7 +84,7 @@ private:
 	void move();
 
 	//world interact
-	void pickUpItem();
+	bool pickUpItem();
 	void dropItem();
 
 	//actions
@@ -104,10 +104,11 @@ private:
 
 namespace ep
 {
-	struct inventory
+	struct inventory //all inventories need to have hands as the first item in the list
 	{
 		inline static const std::vector<std::shared_ptr<Container>> testInventory = 
 		{
+			std::make_shared<Container>(ep::container::hands(0, 0, 0)),
 			std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, 
 			{
 				std::make_shared<Item>(ep::item::sip45(0, 0, 0)),
