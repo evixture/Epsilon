@@ -44,6 +44,20 @@ void StatusWindow::render() const
 	healthBar.render(drawPane);
 	armorBar.render(drawPane);
 
+	drawPane.console->printf(32, 0, "R : %i", WORLD->debugmap->player->stance.x);
+	drawPane.console->printf(32, 1, "G : %i", WORLD->debugmap->player->stance.y);
+	drawPane.console->printf(32, 2, "B : %i", WORLD->debugmap->player->stance.z);
+
+	for (int y = 0; y <= 2; y++)
+	{
+		for (int x = 0; x < 10; x++)
+		{
+			if (y == 0) drawPane.console->setCharForeground(32 + x, y, TCODColor::red);
+			if (y == 1) drawPane.console->setCharForeground(32 + x, y, TCODColor::green);
+			if (y == 2) drawPane.console->setCharForeground(32 + x, y, TCODColor::blue);
+		}
+	}
+
 	pushWindow();
 }
 
