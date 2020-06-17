@@ -1,12 +1,44 @@
 #include "main.hpp"
 
+Position2::Position2()
+	: x(0), y(0)
+{
+}
+
+Position2::Position2(int x, int y)
+	: x(x), y(y)
+{
+}
+
+Position2::Position2(Position3 position)
+	: x(position.x), y(position.y)
+{
+}
+
+Position2::Position2(Position4 position)
+	: x(position.x), y(position.y)
+{
+}
+
+bool Position2::operator==(const Position2& compPosition)
+{
+	return (this->x == compPosition.x && this->y == compPosition.y);
+}
+
+//----------------------------------------------------------------------------------------------------
+
 Position3::Position3()
-	: x(0), y(0), z(0)
+	: Position2(x, y), z(0)
 {
 }
 
 Position3::Position3(int x, int y, int z)
-	: x(x), y(y), z(z)
+	: Position2(x, y), z(z)
+{
+}
+
+Position3::Position3(Position4 position)
+	: Position2(position.x, position.y), z(position.z)
 {
 }
 

@@ -275,6 +275,7 @@ void AICreature::filterIndexes()
 
 void AICreature::selectAccordingToRange(float range)
 {
+	bool canFindOptimal = false;
 	float deltaRange = 100;
 	int cInd = 999;
 	int iInd = 999;
@@ -288,32 +289,38 @@ void AICreature::selectAccordingToRange(float range)
 				deltaRange = abs(range - inventory[c]->itemList[i]->tool->effectiveRange);
 				cInd = c;
 				iInd = i;
+				canFindOptimal = true;
 			}
 		}
 	}
-	std::shared_ptr<Item> optimalItem = inventory[cInd]->itemList[iInd];
-
-	//how to figure out how to move selector to the item?
-
-	/*
-		hands		[0, -1]	[0]
-		containerA	[1, -1]	[1]
-			tool	[1, 0]  [1, 0]
-			knife	[1, 1]	[1, 1]	=
-		containerB	[2, -1]	[2]
-			gun		[2, 0]	[2, 0]	*
-	*/
-
-	while (optimalItem != selectedItem) //optimize check
+	
+	if (canFindOptimal) //a check to make sure that there is a valid item and the indexes for it are in range
 	{
-		if (containerIndex == cInd)
+		std::shared_ptr<Item> optimalItem = inventory[cInd]->itemList[iInd];
+
+		//how to figure out how to move selector to the item?
+
+		/*
+			hands		[0, -1]	[0]
+			containerA	[1, -1]	[1]
+				tool	[1, 0]  [1, 0]
+				knife	[1, 1]	[1, 1]	=
+			containerB	[2, -1]	[2]
+				gun		[2, 0]	[2, 0]	*
+		*/
+
+		while (optimalItem != selectedItem) //optimize check
 		{
-			if (itemIndex == iInd) return; //??
-			else if (itemIndex > iInd) moveSelectorUp();
-			else if (itemIndex < iInd) moveSelectorDown();
+			if (containerIndex == cInd)
+			{
+				if (itemIndex == iInd) return; //??
+				else if (itemIndex > iInd) moveSelectorUp();
+				else if (itemIndex < iInd) moveSelectorDown();
+			}
+			else if (containerIndex > cInd) moveSelectorUp();
+			else if (containerIndex < cInd) moveSelectorDown();
 		}
-		else if (containerIndex > cInd) moveSelectorUp();
-		else if (containerIndex < cInd) moveSelectorDown();
+		canFindOptimal = false;
 	}
 }
 

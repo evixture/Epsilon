@@ -10,14 +10,37 @@ constexpr auto PI = 3.14159265;
 #define MAPPANE		engine->gui->worldWindow
 #define WORLD		engine->gui->worldWindow->world
 
-struct Position3
+struct Position2;
+struct Position3;
+struct Position4;
+
+struct Position2
 {
 	int x;
 	int y;
+
+	Position2();
+	Position2(int x, int y);
+
+	Position2(Position3 position);
+	Position2(Position4 position);
+
+	virtual ~Position2() {};
+
+	bool operator == (const Position2& compPosition);
+};
+
+struct Position3 : public Position2
+{
+	/*int x;
+	int y;*/
 	int z; //floor when used as position
 
 	Position3();
 	Position3(int x, int y, int z);
+
+	Position3(Position4 position);
+
 	virtual ~Position3() {};
 
 	bool		operator == (const Position3& compPosition);
@@ -26,7 +49,7 @@ struct Position3
 
 struct Position4 : public Position3
 {
-	char h;
+	char h; //range 0-3
 
 	Position4();
 	Position4(int x, int y, int h, int z);

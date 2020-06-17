@@ -1,3 +1,3 @@
-﻿  tool.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(18): warning C4172: returning address of local variable or temporary: nullMag
+﻿  aicreature.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\aicreature.cpp(167,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe
