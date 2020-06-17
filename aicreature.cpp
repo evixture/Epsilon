@@ -167,8 +167,9 @@ void AICreature::takeDamage(int damage)
 		AUDIO->playSound(PositionalTrackedSound(("jaw"), &mapPosition, 80.0f, 170.0f));
 
 		//do when killed
-		for (int c = inventory.size() - 1; c > 0; c--) //drop items on death
+		for (int c = inventory.size() - 1; c > 0; c--) //drop items on death, but not hands (c == 0)
 		{
+			inventory[c]->item->updateTool(mapPosition, lookPosition.x, lookPosition.y, false);
 			WORLD->debugmap->mapContainerList.push_back(inventory[c]);
 			inventory.erase(inventory.begin() + c);
 		}

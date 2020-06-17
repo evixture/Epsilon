@@ -42,6 +42,7 @@ Audio::Audio()
 
 Audio::~Audio()
 {
+	soundList.clear();
 	soLoud.deinit(); //crashes on exit, even if removed | WORKS AS VAR INSTEAD OF POINTER
 }
 

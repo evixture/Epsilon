@@ -276,10 +276,10 @@ bool Player::pickUpItem()
 			{
 				if (inventory[containerIndex]->addItem(WORLD->debugmap->mapItemList[i]))
 				{
-					WORLD->debugmap->mapItemList.erase(WORLD->debugmap->mapItemList.begin() + i);
-
 					GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapItemList[i]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 					AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
+
+					WORLD->debugmap->mapItemList.erase(WORLD->debugmap->mapItemList.begin() + i);
 
 					return true;
 				}
@@ -292,11 +292,11 @@ bool Player::pickUpItem()
 	{
 		if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->item->mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->item->mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->item->mapPosition.z == mapPosition.z)
 		{
-			inventory.push_back(WORLD->debugmap->mapContainerList[i]);
-			WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
-
 			GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapContainerList[i]->item->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 			AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
+
+			inventory.push_back(WORLD->debugmap->mapContainerList[i]);
+			WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
 
 			return true;
 		}
