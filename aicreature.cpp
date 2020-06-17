@@ -2,11 +2,8 @@
 
 AICreature::AICreature(Creature creature, TCODMap* fovMap)
 	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), soundInterest(0.0f), visualInterest(0.0f), interestDecay(.05f), interestDecayClock(0.5f), 
-	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false), attitude(0), actionClock(Clock(1.0f)), actionIndex(0)
+	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false), attitude(0), actionClock(Clock(1.0f)), actionIndex(0), lastKnownMapPosition(creature.mapPosition)
 {
-	//inventory.push_back(std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0)));
-	//inventory[1]->addItem(std::make_shared<Item>(ep::item::knife(0, 0, 0)));
-	//inventory[1]->addItem(std::make_shared<Item>(ep::item::cal556Magazine30(0, 0, 0)));
 	inventory = ep::inventory::testInventory;
 
 	selectedItem = inventory[0]->item; //select hands
@@ -520,7 +517,6 @@ void AICreature::act()
 void AICreature::update() //ai and behavior attributes update here
 {
 	inFov = WORLD->isInPlayerFov(mapPosition);
-	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
 
 	if (health != 0) //if alive
 	{
@@ -536,6 +532,13 @@ void AICreature::update() //ai and behavior attributes update here
 		ch = '$'; //set char to dead symbol
 		color = TCODColor::red;
 	}
+
+	if (inFov)
+	{
+		lastKnownMapPosition = mapPosition; //need renderPosition?
+	}
+	renderPosition = offsetPosition(lastKnownMapPosition, WORLD->xOffset, WORLD->yOffset); //replace lkrp with renderPosition update?
+
 }
 
 void AICreature::render(const Pane& pane) const
@@ -550,6 +553,7 @@ void AICreature::render(const Pane& pane) const
 		else
 		{
 			pane.console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
+			pane.console->setChar(renderPosition.x, renderPosition.y, '?');
 		}
 
 		if (false) //show pathfinding information

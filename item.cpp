@@ -64,8 +64,8 @@ void ActionManager::doAction(Creature* currentOwner)
 
 //----------------------------------------------------------------------------------------------------
 
-Item::Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, ItemType type)
-	: size(size), tile(tile), tool(tool), mapPosition(position), tileRenderPosition(position), distToEnt(5), type(type), barColor(TCODColor::white)
+Item::Item(int size, std::shared_ptr<Block> block, std::shared_ptr<Tool> tool, Position4 position, ItemType type)
+	: size(size), block(block), tool(tool), mapPosition(position), tileRenderPosition(position), distToEnt(5), type(type), barColor(TCODColor::white), lastKnownMapPosition(position)
 {
 	createActionManager();
 }
@@ -152,16 +152,28 @@ void Item::updateTile()
 {
 	mapPosition.h = WORLD->debugmap->player->mapPosition.h;
 	distToEnt = getDistance(WORLD->debugmap->player->mapPosition.x, WORLD->debugmap->player->mapPosition.y, mapPosition.x, mapPosition.y);
-	tileRenderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+	//tileRenderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+
+	if (WORLD->isInPlayerFov(mapPosition))
+	{
+		lastKnownMapPosition = mapPosition; //need renderPosition?
+	}
+	tileRenderPosition = offsetPosition(lastKnownMapPosition, WORLD->xOffset, WORLD->yOffset); //replace lkrp with renderPosition update?
 }
 
 void Item::renderTile(const Pane& pane) const
 {
-	tile->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.h, tileRenderPosition.z), pane);
+	block->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.h, tileRenderPosition.z), pane);
 
 	if (distToEnt < 5 && WORLD->isInPlayerFov(mapPosition))
 	{
-		pane.console->setCharBackground(tileRenderPosition.x, tileRenderPosition.y, tile->tileList[0].backgroundColor + TCODColor::darkGrey); //look into color later
+		pane.console->setCharBackground(tileRenderPosition.x, tileRenderPosition.y, block->tileList[0].backgroundColor + TCODColor::darkGrey); //look into color later
+	}
+
+	if (!WORLD->isInPlayerFov(mapPosition))
+	{
+		pane.console->setChar(tileRenderPosition.x, tileRenderPosition.y, '?');
+		pane.console->setCharForeground(tileRenderPosition.x, tileRenderPosition.y, TCODColor::darkestGrey); //look into color later
 	}
 }
 

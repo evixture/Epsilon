@@ -139,6 +139,7 @@ unsigned char	heightToBitFlag(int h);
 double			getAngle(int ix, int iy, int tx, int ty);
 double			getDistance(int ix, int iy, int tx, int ty);
 float			getFallTime(int h);
+Position3		offsetPosition(Position3 mapPosition, int xOffset, int yOffset);
 Position4		offsetPosition(Position4 mapPosition, int xOffset, int yOffset);
 Position4		getWalkableArea(Position4 mapPosition);
 

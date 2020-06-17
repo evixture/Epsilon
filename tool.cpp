@@ -354,7 +354,7 @@ void Bullet::update()
 
 void Bullet::render(const Pane& pane) const
 {
-	if (WORLD->debugmap->player->mapPosition.z == startPosition.z)
+	if (WORLD->debugmap->player->mapPosition.z == startPosition.z) // && WORLD->isInPlayerFov(mapPosition)
 	{
 		if (currentVelocity > 0)
 		{
@@ -378,6 +378,10 @@ void Bullet::render(const Pane& pane) const
 			}
 		}
 	}
+	//else
+	//{
+	//	GUI->logWindow->pushMessage(LogWindow::Message(("Bullet was blocked!"), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
+	//}
 }
 
 //----------------------------------------------------------------------------------------------------

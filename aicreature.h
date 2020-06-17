@@ -12,6 +12,8 @@ struct AICreature : public Creature
 	Position3 lookPosition; //where the ai looks, will also be used for aiming
 	Position3 focusPosition; //last known location of the player
 
+	Position3 lastKnownMapPosition;
+
 	int moveSpeedMode;
 
 	//interest

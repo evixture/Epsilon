@@ -48,13 +48,14 @@ struct Item
 	TCODColor barColor;
 
 	Position4 mapPosition;
+	Position3 lastKnownMapPosition;
 
-	std::shared_ptr<Block> tile;
+	std::shared_ptr<Block> block;
 	std::shared_ptr<Tool> tool;
 
 	std::shared_ptr<ActionManager> actionManager;
 
-	Item(int size, std::shared_ptr<Block> tile, std::shared_ptr<Tool> tool, Position4 position, ItemType type);
+	Item(int size, std::shared_ptr<Block> block, std::shared_ptr<Tool> tool, Position4 position, ItemType type);
 	virtual ~Item() {};
 
 	virtual MagazineData& getMagazineData();
@@ -68,7 +69,7 @@ struct Item
 
 private:
 	void createActionManager();
-	Position4 tileRenderPosition;
+	Position3 tileRenderPosition;
 };
 
 struct MagazineItem : public Item
