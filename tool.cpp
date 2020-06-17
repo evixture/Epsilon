@@ -135,7 +135,8 @@ void Tool::updatePositions(Position4& sourcePosition, int& targetX, int& targetY
 
 	updateToolPosition(targetX, targetY);
 
-	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset); // has to be after update tool position
+	//renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset); // has to be after update tool position
+	renderPosition = getRenderPosition(mapPosition);
 }
 
 void Tool::update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld)
@@ -349,7 +350,8 @@ void Bullet::update()
 		mapPosition = Position4(travel.x, travel.y, mapPosition.h, startPosition.z);
 	}
 
-	renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+	//renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+	renderPosition = getRenderPosition(mapPosition);
 }
 
 void Bullet::render(const Pane& pane) const

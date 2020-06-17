@@ -92,7 +92,8 @@ void Creature::update()
 {
 	angle = getAngle(renderPosition.x, renderPosition.y, INPUT->mouse.cx, INPUT->mouse.cy);
 
-	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
+	//renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
+	renderPosition = getRenderPosition(mapPosition);
 
 	if (health == 0) //if dead
 	{
@@ -475,7 +476,8 @@ void Player::updateTools()
 
 void Player::update()
 {
-	renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
+	//renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
+	renderPosition = getRenderPosition(mapPosition);
 
 	if (health != 0) //if player is alive
 	{

@@ -544,7 +544,8 @@ void AICreature::update() //ai and behavior attributes update here
 	{
 		lastKnownMapPosition = mapPosition; //need renderPosition?
 	}
-	renderPosition = offsetPosition(lastKnownMapPosition, WORLD->xOffset, WORLD->yOffset); //replace lkrp with renderPosition update?
+	//renderPosition = offsetPosition(lastKnownMapPosition, WORLD->xOffset, WORLD->yOffset); //replace lkrp with renderPosition update?
+	renderPosition = getRenderPosition(lastKnownMapPosition);
 
 }
 

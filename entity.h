@@ -14,7 +14,7 @@ struct Entity
 	virtual void render(const Pane& pane) const;
 
 protected:
-	Position3 renderPosition;
+	Position2 renderPosition; //replace with position2
 };
 
 struct Creature : public Entity

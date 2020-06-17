@@ -140,7 +140,8 @@ void Item::updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHel
 	changeBarColor();
 
 	this->mapPosition = Position4(tool->sourcePosition.x, tool->sourcePosition.y, mapPosition.h, mapPosition.z);
-	tileRenderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+	//tileRenderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
+	tileRenderPosition = Position4(mapPosition.x - WORLD->xOffset, mapPosition.y - WORLD->yOffset, mapPosition.h, mapPosition.z); //replace with better way?
 }
 
 void Item::renderTool(const Pane& pane) const
@@ -158,7 +159,9 @@ void Item::updateTile()
 	{
 		lastKnownMapPosition = mapPosition; //need renderPosition?
 	}
-	tileRenderPosition = offsetPosition(lastKnownMapPosition, WORLD->xOffset, WORLD->yOffset); //replace lkrp with renderPosition update?
+	//tileRenderPosition = offsetPosition(lastKnownMapPosition, WORLD->xOffset, WORLD->yOffset); //replace lkrp with renderPosition update?
+	tileRenderPosition = Position4(mapPosition.x - WORLD->xOffset, mapPosition.y - WORLD->yOffset, mapPosition.h, mapPosition.z); //replace with better way?
+
 }
 
 void Item::renderTile(const Pane& pane) const

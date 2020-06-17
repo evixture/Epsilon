@@ -69,7 +69,7 @@ struct Item
 
 private:
 	void createActionManager();
-	Position3 tileRenderPosition;
+	Position4 tileRenderPosition; //replace with position2
 };
 
 struct MagazineItem : public Item

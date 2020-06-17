@@ -27,7 +27,8 @@ struct Position2
 
 	virtual ~Position2() {};
 
-	bool operator == (const Position2& compPosition);
+	//Position2&	operator = (const Position2& compPosition);
+	bool		operator == (const Position2& compPosition);
 };
 
 struct Position3 : public Position2
@@ -165,6 +166,8 @@ float			getFallTime(int h);
 Position3		offsetPosition(Position3 mapPosition, int xOffset, int yOffset);
 Position4		offsetPosition(Position4 mapPosition, int xOffset, int yOffset);
 Position4		getWalkableArea(Position4 mapPosition);
+//getRenderPosition(Position2 ...)
+Position2		getRenderPosition(Position2 mapPosition);
 
 namespace ep
 {

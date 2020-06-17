@@ -9,7 +9,7 @@ struct AICreature : public Creature
 	int pathStep;
 
 	Position3 pathfindPosition; //end point of the path
-	Position3 lookPosition; //where the ai looks, will also be used for aiming
+	Position3 lookPosition; //where the ai looks, will also be used for aiming //replace with position2?
 	Position3 focusPosition; //last known location of the player
 
 	Position3 lastKnownMapPosition;

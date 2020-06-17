@@ -20,6 +20,11 @@ Position2::Position2(Position4 position)
 {
 }
 
+//Position2& Position2::operator=(const Position2& compPosition)
+//{
+//	return Position2(compPosition.x, compPosition.y);
+//}
+
 bool Position2::operator==(const Position2& compPosition)
 {
 	return (this->x == compPosition.x && this->y == compPosition.y);
@@ -50,16 +55,6 @@ bool Position3::operator==(const Position3 & compPosition)
 Position3 Position3::operator-(const Position3& compPosition)
 {
 	return Position3(this->x - compPosition.x, this->y - compPosition.y, this->z - compPosition.z);
-}
-
-Position3 offsetPosition(Position3 mapPosition, int xOffset, int yOffset)
-{
-	return Position3(mapPosition.x - xOffset, mapPosition.y - yOffset, mapPosition.z);
-}
-
-Position4 offsetPosition(Position4 mapPosition, int xOffset, int yOffset)
-{
-	return Position4(mapPosition.x - xOffset, mapPosition.y - yOffset, mapPosition.h, mapPosition.z);
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -338,4 +333,19 @@ void Bar::render(const Pane& pane) const
 		}
 	}
 	pane.console->printf(pad + width, renderPosition.y, "]");
+}
+
+Position3 offsetPosition(Position3 mapPosition, int xOffset, int yOffset)
+{
+	return Position3(mapPosition.x - xOffset, mapPosition.y - yOffset, mapPosition.z);
+}
+
+Position4 offsetPosition(Position4 mapPosition, int xOffset, int yOffset)
+{
+	return Position4(mapPosition.x - xOffset, mapPosition.y - yOffset, mapPosition.h, mapPosition.z);
+}
+
+Position2 getRenderPosition(Position2 mapPosition)
+{
+	return Position2(mapPosition.x - WORLD->xOffset, mapPosition.y - WORLD->yOffset);
 }

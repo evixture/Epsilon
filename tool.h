@@ -66,7 +66,7 @@ struct Tool
 	virtual void			use(bool hold, bool swtch);							
 
 protected:
-	Position4 renderPosition;													
+	Position2 renderPosition; //replace with position2
 	unsigned char availibleFireMode;											
 
 	virtual void updatePositions(Position4& sourcePosition, int& targetX, int& targetY);
@@ -120,7 +120,7 @@ private:
 
 	BLine travel;																
 
-	Position4 renderPosition;													
+	Position2 renderPosition; //replace with position2											
 
 	Clock moveClock;
 	Clock fallClock;
