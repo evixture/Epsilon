@@ -67,7 +67,7 @@ private:
 	void moveSelectorUp();
 	void moveSelectorDown();
 	void filterIndexes();
-	void selectAccordingToRange(float range);
+	void selectAppropriateItem(float range);
 
 	Clock interestDecayClock;
 	Clock reactionFireClock;

@@ -24,10 +24,8 @@ struct Position2
 
 	Position2(Position3 position);
 	Position2(Position4 position);
-
 	virtual ~Position2() {};
 
-	//Position2&	operator = (const Position2& compPosition);
 	bool		operator == (const Position2& compPosition);
 };
 

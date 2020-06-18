@@ -83,5 +83,6 @@ private:
 	void updateEntities();
 
 	void renderTiles(const Pane& pane) const;
+	void renderWorldItems(const Pane& pane) const;
 	void renderCreatures(const Pane& pane) const;
 };

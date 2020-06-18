@@ -20,11 +20,6 @@ Position2::Position2(Position4 position)
 {
 }
 
-//Position2& Position2::operator=(const Position2& compPosition)
-//{
-//	return Position2(compPosition.x, compPosition.y);
-//}
-
 bool Position2::operator==(const Position2& compPosition)
 {
 	return (this->x == compPosition.x && this->y == compPosition.y);

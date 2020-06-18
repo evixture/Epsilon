@@ -694,18 +694,8 @@ void World::renderTiles(const Pane& pane) const
 	}
 }
 
-void World::renderCreatures(const Pane& pane) const
+void World::renderWorldItems(const Pane& pane) const
 {
-	for (auto& creature : debugmap->creatureList)
-	{
-		creature->render(pane);
-	}
-}
-
-void World::render(const Pane& pane) const
-{
-	renderTiles(pane);
-
 	for (auto& item : debugmap->mapItemList)
 	{
 		if (item->mapPosition.z == debugmap->player->mapPosition.z)
@@ -721,6 +711,32 @@ void World::render(const Pane& pane) const
 			container->item->renderTile(pane);
 		}
 	}
+}
 
+void World::renderCreatures(const Pane& pane) const
+{
+	//render creature items first, then creatures in seperate pass??
+	for (auto& creature : debugmap->creatureList)
+	{
+		creature->render(pane);
+	}
+	debugmap->player->render(pane);
+}
+
+void World::render(const Pane& pane) const
+{
+	/*
+	RENDER ORDER
+		All tiles
+		dead creatures?
+		item tiles
+		creature items
+		creatures
+		player items
+		player
+	*/
+
+	renderTiles(pane);
+	renderWorldItems(pane);
 	renderCreatures(pane);
 }

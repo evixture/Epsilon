@@ -273,32 +273,41 @@ void AICreature::filterIndexes()
 	}
 }
 
-void AICreature::selectAccordingToRange(float range)
+void AICreature::selectAppropriateItem(float range)
 {
 	bool canFindOptimal = false;
 	float deltaRange = 100;
 	int cInd = 999;
 	int iInd = 999;
 
-	for (int c = 0; c < inventory.size(); c++)
+	if (attitude < .25f) //if not very aggressive, keep hands out
 	{
-		for (int i = 0; i < inventory[c]->itemList.size(); i++)
+		cInd = 0;
+		iInd = -1;
+		canFindOptimal = true;
+	}
+	else
+	{
+		for (int c = 0; c < inventory.size(); c++)
 		{
-			if (abs(range - inventory[c]->itemList[i]->tool->effectiveRange) < deltaRange) //filter through items to find one with the closest range
+			for (int i = 0; i < inventory[c]->itemList.size(); i++)
 			{
-				deltaRange = abs(range - inventory[c]->itemList[i]->tool->effectiveRange);
-				cInd = c;
-				iInd = i;
-				canFindOptimal = true;
+				if (abs(range - inventory[c]->itemList[i]->tool->effectiveRange) < deltaRange) //filter through items to find one with the closest range
+				{
+					deltaRange = abs(range - inventory[c]->itemList[i]->tool->effectiveRange);
+					cInd = c;
+					iInd = i;
+					canFindOptimal = true;
+				}
 			}
 		}
 	}
-	
+
 	if (canFindOptimal) //a check to make sure that there is a valid item and the indexes for it are in range
 	{
-		std::shared_ptr<Item> optimalItem = inventory[cInd]->itemList[iInd];
-
-		//how to figure out how to move selector to the item?
+		std::shared_ptr<Item> optimalItem;
+		if		(iInd == -1) optimalItem = inventory[cInd]->item; //container item
+		else	optimalItem = inventory[cInd]->itemList[iInd]; //actual item
 
 		/*
 			hands		[0, -1]	[0]
@@ -313,7 +322,7 @@ void AICreature::selectAccordingToRange(float range)
 		{
 			if (containerIndex == cInd)
 			{
-				if (itemIndex == iInd) return; //??
+				if (itemIndex == iInd || iInd == -1) return; //end search if item or container item found
 				else if (itemIndex > iInd) moveSelectorUp();
 				else if (itemIndex < iInd) moveSelectorDown();
 			}
@@ -326,8 +335,7 @@ void AICreature::selectAccordingToRange(float range)
 
 bool AICreature::inEffectiveRange()
 {
-	return ((getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y) <= selectedItem->tool->effectiveRange) && selectedItem->tool->getMagazine().isValid); //change to take into account melee weapons
-	//getMagazine().velocity * 0.15f
+	return ((getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y) <= selectedItem->tool->effectiveRange)); //change to take into account melee weapons // && selectedItem->tool->getMagazine().isValid //getMagazine().velocity * 0.15f
 }
 
 void AICreature::decayInterest()
@@ -507,7 +515,7 @@ void AICreature::act()
 
 		if (actionIndex % 5 == 0) //every 5 seconds
 		{
-			selectAccordingToRange((float)getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y));
+			selectAppropriateItem((float)getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y));
 			filterIndexes();
 		}
 
