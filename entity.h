@@ -106,16 +106,34 @@ namespace ep
 {
 	struct inventory //all inventories need to have hands as the first item in the list
 	{
-		inline static const std::vector<std::shared_ptr<Container>> testInventory = 
+		//inline static const std::vector<std::shared_ptr<Container>> testInventory = 
+		//{
+		//	std::make_shared<Container>(ep::container::hands(0, 0, 0)),
+		//	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, 
+		//	{
+		//		std::make_shared<Item>(ep::item::sip45(0, 0, 0)),
+		//		std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(0, 0, 0)),
+		//		std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(0, 0, 0)),
+		//		std::make_shared<Item>(ep::item::knife(0, 0, 0))
+		//	}))
+		//};
+
+		//inline static MagazineItem cal45Magazine7(const Creature* const owner, int x, int y, int level)
+		//{
+		//	return MagazineItem(ep::item::cal45Magazine7(owner, x, y, level), MagazineData(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7));
+		//}
+
+		inline static std::vector<std::shared_ptr<Container>> testInventory(const Creature* owner)
 		{
-			std::make_shared<Container>(ep::container::hands(0, 0, 0)),
-			std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, 
+			return {
+			std::make_shared<Container>(ep::container::hands(owner, 0, 0, 0)),
+			std::make_shared<Container>(ep::container::smallBackpack(owner, 0, 0, 0,
 			{
-				std::make_shared<Item>(ep::item::sip45(0, 0, 0)),
-				std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(0, 0, 0)),
-				std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(0, 0, 0)),
-				std::make_shared<Item>(ep::item::knife(0, 0, 0))
-			}))
-		};
+				std::make_shared<Item>(ep::item::sip45(owner, 0, 0, 0)),
+				std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(owner, 0, 0, 0)),
+				std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(owner, 0, 0, 0)),
+				std::make_shared<Item>(ep::item::knife(owner, 0, 0, 0))
+			}))};
+		}
 	};
 }

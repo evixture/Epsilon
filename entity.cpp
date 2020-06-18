@@ -21,7 +21,7 @@ Creature::Creature(Position4 pos, int ch, std::string name, Position3 stance, in
 	:Entity(pos, ch, name, TCODColor(stance.x, stance.y, stance.z)), health(health), equippedArmor(armor), angle(0), containerIndex(0), itemIndex(0),
 	moveClock(0), moveSpeed(0), baseMoveTime(0.0f), stance(stance)
 {
-	inventory.push_back(std::make_shared<Container>(ep::container::hands(0, 0, 0)));
+	inventory.push_back(std::make_shared<Container>(ep::container::hands(this, 0, 0, 0)));
 	selectedItem = inventory[0]->item;
 }
 
@@ -118,11 +118,11 @@ Player::Player(Position4 position)
 {
 	hasSecondChance = true;
 
-	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0)));
-	inventory[1]->addItem(	std::make_shared<Item>(ep::item::sip45(0, 0, 0)));
-	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(0, 0, 0)));
-	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(0, 0, 0)));
-	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0)));
+	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(this, 0, 0, 0)));
+	inventory[1]->addItem(	std::make_shared<Item>(ep::item::sip45(this, 0, 0, 0)));
+	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(this, 0, 0, 0)));
+	inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(this, 0, 0, 0)));
+	inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(this, 0, 0, 0)));
 
 	if (inventory.size() > 0)
 	{
@@ -281,6 +281,7 @@ bool Player::pickUpItem()
 					AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
 
 					WORLD->debugmap->mapItemList.erase(WORLD->debugmap->mapItemList.begin() + i);
+					inventory[containerIndex]->itemList[inventory[containerIndex]->itemList.size() - 1]->owner = this;
 
 					return true;
 				}
@@ -298,6 +299,7 @@ bool Player::pickUpItem()
 
 			inventory.push_back(WORLD->debugmap->mapContainerList[i]);
 			WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
+			inventory[inventory.size() - 1]->item->owner = this;
 
 			return true;
 		}
@@ -314,6 +316,7 @@ void Player::dropItem()
 			GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->itemList[itemIndex]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 			AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
 
+			selectedItem->owner = WORLD->debugmap->global.get();
 			WORLD->debugmap->mapItemList.push_back(selectedItem);
 			inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
 		}
@@ -324,6 +327,7 @@ void Player::dropItem()
 				GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->item->tool->name, LogWindow::Message::MessageLevel::LOW));
 				AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
 
+				selectedItem->owner = WORLD->debugmap->global.get();
 				WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
 				inventory.erase(inventory.begin() + containerIndex);
 			}

@@ -6,6 +6,13 @@
 	|	L	Item
 	|		|	Action Manager
 	|		|	L	Action
+
+
+	OWNERSHIP
+		item
+		tool
+		tile?
+		bullet
 */
 struct Action
 {
@@ -40,6 +47,8 @@ private:
 
 struct Item
 {
+	const Creature* owner; //creature and its pointer cannot be modified
+
 	enum class ItemType {HAND, NORMAL, FIREARM, MAGAZINE, ARMOR, MELEE} type;
 
 	unsigned char size;
@@ -55,7 +64,7 @@ struct Item
 
 	std::shared_ptr<ActionManager> actionManager;
 
-	Item(int size, std::shared_ptr<Block> block, std::shared_ptr<Tool> tool, Position4 position, ItemType type);
+	Item(const Creature* creature, int size, std::shared_ptr<Block> block, std::shared_ptr<Tool> tool, Position4 position, ItemType type);
 	virtual ~Item() {};
 
 	virtual MagazineData& getMagazineData();
@@ -119,75 +128,75 @@ ITEM SIZES
 
 	struct item
 	{
-		inline static Item smallBackpack(int x, int y, int level)
+		inline static Item smallBackpack(const Creature* owner, int x, int y, int level)
 		{
-			return Item(2, std::make_shared<Block>(ep::block::item::smallBackpack), std::make_shared<Tool>(ep::tool::smallBackpack), Position4(x, y, 3, level), Item::ItemType::NORMAL);
+			return Item(owner, 2, std::make_shared<Block>(ep::block::item::smallBackpack), std::make_shared<Tool>(ep::tool::smallBackpack), Position4(x, y, 3, level), Item::ItemType::NORMAL);
 		}
 
-		inline static Item hands(int x, int y, int level)
+		inline static Item hands(const Creature* owner, int x, int y, int level)
 		{
-			return Item(1, std::make_shared<Block>(ep::block::item::defBlock), std::make_shared<Melee>(ep::tool::hands), Position4(x, y, 3, level), Item::ItemType::HAND);
+			return Item(owner, 1, std::make_shared<Block>(ep::block::item::defBlock), std::make_shared<Melee>(ep::tool::hands), Position4(x, y, 3, level), Item::ItemType::HAND);
 		}
 
-		inline static Item L1R3Armor(int x, int y, int level)
+		inline static Item L1R3Armor(const Creature* owner, int x, int y, int level)
 		{
-			return Item(2, std::make_shared<Block>(ep::block::item::L1R3Armor), std::make_shared<Armor>(ep::tool::L1R3Armor), Position4(x, y, 3, level), Item::ItemType::ARMOR);
+			return Item(owner, 2, std::make_shared<Block>(ep::block::item::L1R3Armor), std::make_shared<Armor>(ep::tool::L1R3Armor), Position4(x, y, 3, level), Item::ItemType::ARMOR);
 		}
 
-		inline static Item sip45(int x, int y, int level)
+		inline static Item sip45(const Creature* owner, int x, int y, int level)
 		{
-			return Item(2, std::make_shared<Block>(ep::block::item::sip45), std::make_shared<Firearm>(ep::tool::sip45), Position4(x, y, 3, level), Item::ItemType::FIREARM);
+			return Item(owner, 2, std::make_shared<Block>(ep::block::item::sip45), std::make_shared<Firearm>(ep::tool::sip45), Position4(x, y, 3, level), Item::ItemType::FIREARM);
 		}
 
-		inline static Item cal45Magazine7(int x, int y, int level)
+		inline static Item cal45Magazine7(const Creature* owner, int x, int y, int level)
 		{
-			return Item(1, std::make_shared<Block>(ep::block::item::cal45Magazine7), std::make_shared<Tool>(ep::tool::cal45magazine7), Position4(x, y, 3, level), Item::ItemType::NORMAL);
+			return Item(owner, 1, std::make_shared<Block>(ep::block::item::cal45Magazine7), std::make_shared<Tool>(ep::tool::cal45magazine7), Position4(x, y, 3, level), Item::ItemType::NORMAL);
 		}
 
-		inline static Item sir556(int x, int y, int level)
+		inline static Item sir556(const Creature* owner, int x, int y, int level)
 		{
-			return Item(3, std::make_shared<Block>(ep::block::item::sir556), std::make_shared<Firearm>(ep::tool::sir556), Position4(x, y, 3, level), Item::ItemType::FIREARM);
+			return Item(owner, 3, std::make_shared<Block>(ep::block::item::sir556), std::make_shared<Firearm>(ep::tool::sir556), Position4(x, y, 3, level), Item::ItemType::FIREARM);
 		}
 
-		inline static Item cal556Magazine30(int x, int y, int level)
+		inline static Item cal556Magazine30(const Creature* owner, int x, int y, int level)
 		{
-			return Item(1, std::make_shared<Block>(ep::block::item::cal556Magazine30), std::make_shared<Tool>(ep::tool::cal556magazine30), Position4(x, y, 3, level), Item::ItemType::NORMAL);
+			return Item(owner, 1, std::make_shared<Block>(ep::block::item::cal556Magazine30), std::make_shared<Tool>(ep::tool::cal556magazine30), Position4(x, y, 3, level), Item::ItemType::NORMAL);
 		}
 
-		inline static Item knife(int x, int y, int level)
+		inline static Item knife(const Creature* owner, int x, int y, int level)
 		{
-			return Item(1, std::make_shared<Block>(ep::block::item::knife), std::make_shared<Melee>(ep::tool::knife), Position4(x, y, 3, level), Item::ItemType::MELEE);
+			return Item(owner, 1, std::make_shared<Block>(ep::block::item::knife), std::make_shared<Melee>(ep::tool::knife), Position4(x, y, 3, level), Item::ItemType::MELEE);
 		}
 	};
 
 	struct container
 	{
-		inline static Container smallBackpack(int x, int y, int level)
+		inline static Container smallBackpack(const Creature* owner, int x, int y, int level)
 		{
-			return Container(5, std::make_shared<Item>(ep::item::smallBackpack(x, y, level)));
+			return Container(5, std::make_shared<Item>(ep::item::smallBackpack(owner, x, y, level)));
 		}
 
-		inline static Container smallBackpack(int x, int y, int level, std::vector<std::shared_ptr<Item>> itemList)
+		inline static Container smallBackpack(const Creature* owner, int x, int y, int level, std::vector<std::shared_ptr<Item>> itemList)
 		{
-			return Container(5, std::make_shared<Item>(ep::item::smallBackpack(x, y, level)), itemList);
+			return Container(5, std::make_shared<Item>(ep::item::smallBackpack(owner, x, y, level)), itemList);
 		}
 
-		inline static Container hands(int x, int y, int level)
+		inline static Container hands(const Creature* owner, int x, int y, int level)
 		{
-			return Container(0, std::make_shared<Item>(ep::item::hands(x, y, level)));
+			return Container(0, std::make_shared<Item>(ep::item::hands(owner, x, y, level)));
 		}
 	};
 
 	struct magazineItem
 	{
-		inline static MagazineItem cal45Magazine7(int x, int y, int level)
+		inline static MagazineItem cal45Magazine7(const Creature* owner, int x, int y, int level)
 		{
-			return MagazineItem(ep::item::cal45Magazine7(x, y, level), MagazineData(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7));
+			return MagazineItem(ep::item::cal45Magazine7(owner, x, y, level), MagazineData(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7));
 		}
 
-		inline static MagazineItem cal556Magazine30(int x, int y, int level)
+		inline static MagazineItem cal556Magazine30(const Creature* owner, int x, int y, int level)
 		{
-			return MagazineItem(ep::item::cal556Magazine30(x, y, level), MagazineData(MagazineData::AmmoType::FIVEPOINTFIVESIX, 30, 30));
+			return MagazineItem(ep::item::cal556Magazine30(owner, x, y, level), MagazineData(MagazineData::AmmoType::FIVEPOINTFIVESIX, 30, 30));
 		}
 	};
 }

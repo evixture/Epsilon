@@ -4,7 +4,7 @@ AICreature::AICreature(Creature creature, TCODMap* fovMap)
 	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), soundInterest(0.0f), visualInterest(0.0f), interestDecay(.05f), interestDecayClock(0.5f), 
 	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false), attitude(0), actionClock(Clock(1.0f)), actionIndex(0), lastKnownMapPosition(creature.mapPosition)
 {
-	inventory = ep::inventory::testInventory;
+	inventory = ep::inventory::testInventory(this);
 
 	selectedItem = inventory[0]->item; //select hands
 }
@@ -66,6 +66,7 @@ bool AICreature::pickUpItem()
 				if (inventory[containerIndex]->addItem(WORLD->debugmap->mapItemList[i]))
 				{
 					WORLD->debugmap->mapItemList.erase(WORLD->debugmap->mapItemList.begin() + i);
+					inventory[containerIndex]->itemList[inventory[containerIndex]->itemList.size() - 1]->owner = this;
 
 					AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
 
@@ -82,6 +83,7 @@ bool AICreature::pickUpItem()
 		{
 			inventory.push_back(WORLD->debugmap->mapContainerList[i]);
 			WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
+			inventory[inventory.size() - 1]->item->owner = this;
 
 			AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
 
@@ -97,6 +99,7 @@ void AICreature::dropItem() //prob here
 	{
 		if (itemIndex >= 0)
 		{
+			selectedItem->owner = WORLD->debugmap->global.get();
 			WORLD->debugmap->mapItemList.push_back(selectedItem);
 			inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
 
@@ -106,6 +109,7 @@ void AICreature::dropItem() //prob here
 		{
 			if (selectedItem->type != Item::ItemType::HAND)
 			{
+				selectedItem->owner = WORLD->debugmap->global.get();
 				WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
 				inventory.erase(inventory.begin() + containerIndex);
 

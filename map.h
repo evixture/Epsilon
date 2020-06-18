@@ -14,7 +14,8 @@ struct Map
 	int width;
 	int height;
 
-	std::shared_ptr<Player> player;												
+	std::shared_ptr<Player> player;
+	std::shared_ptr<Creature> global;
 																									
 	std::vector<std::shared_ptr<Creature>> creatureList;			
 	std::vector<std::shared_ptr<Item>> mapItemList;				
