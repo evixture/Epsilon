@@ -46,10 +46,12 @@ void Settings::printLogo() const
 
 void Settings::printDebugStats() const
 {
-	TCODConsole::root->printf(10, 0, "FPS>%i | Mouse %i, %i | Player %i, %i, %i | a %i | s %i | c %i, i %i",
+	TCODConsole::root->printf(10, 0, "FPS>%i | Mouse %i, %i (%i, %i) | Player %i, %i, %i | a %i | s %i | c %i, i %i",
 		fpsCount,
-		SETTINGS->input->mouse.cx,
-		SETTINGS->input->mouse.cy,
+		SETTINGS->input->mouse->screenPosition.x,
+		SETTINGS->input->mouse->screenPosition.y,
+		SETTINGS->input->mouse->mapPosition.x,
+		SETTINGS->input->mouse->mapPosition.y,
 		WORLD->debugmap->player->mapPosition.x,
 		WORLD->debugmap->player->mapPosition.y,
 		WORLD->debugmap->player->mapPosition.z,

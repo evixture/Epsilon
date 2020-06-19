@@ -84,17 +84,14 @@ void Gui::renderMouse() const
 {
 	if (activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
 	{
-		if (INPUT->mouse.cx >= 1 && INPUT->mouse.cx <= 60)
-		{
-			if (INPUT->mouse.cy >= 3 && INPUT->mouse.cy <= 60)
-			{
-				Position3 position = Position3(INPUT->mouse.cx + worldWindow->world->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.z);
-				TCODColor color = worldWindow->world->debugmap->getBlock(position)->tileList[0].backgroundColor;
-				TCODConsole::root->setCharBackground(INPUT->mouse.cx, INPUT->mouse.cy, color - TCODColor::darkestGrey);
-			}
+		if (INPUT->mouse->screenPosition.x >= 1 && INPUT->mouse->screenPosition.x <= 60 && INPUT->mouse->screenPosition.y >= 3 && INPUT->mouse->screenPosition.y <= 60)
+		{		
+			Position3 position = Position3(INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.x, WORLD->debugmap->player->mapPosition.z);
+			TCODColor color = worldWindow->world->debugmap->getBlock(position)->tileList[0].backgroundColor;
+			TCODConsole::root->setCharBackground(INPUT->mouse->screenPosition.x, INPUT->mouse->screenPosition.y, color - TCODColor::darkestGrey);
 		}
 	}
-	TCODConsole::root->setChar(INPUT->mouse.cx, INPUT->mouse.cy, '+');
+	TCODConsole::root->setChar(INPUT->mouse->screenPosition.x, INPUT->mouse->screenPosition.y, '+');
 }
 
 void Gui::render() const

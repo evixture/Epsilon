@@ -90,7 +90,7 @@ void Creature::updateTools()
 
 void Creature::update()
 {
-	angle = getAngle(renderPosition.x, renderPosition.y, INPUT->mouse.cx, INPUT->mouse.cy);
+	angle = getAngle(renderPosition.x, renderPosition.y, INPUT->mouse->screenPosition.x, INPUT->mouse->screenPosition.y);
 
 	//renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
 	renderPosition = getRenderPosition(mapPosition);
@@ -449,12 +449,12 @@ void Player::updateTools()
 			if (itemIndex == -1 && containerIndex == i) //if container is the held item
 			{
 				//special update the held container
-				inventory[i]->item->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, true); //uses the map position of the mouse
+				inventory[i]->item->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, true); //uses the map position of the mouse
 			}
 			else
 			{
 				//normal update the container
-				inventory[i]->item->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, false);
+				inventory[i]->item->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, false);
 			}
 
 			for (int j = 0; j < inventory[i]->itemList.size(); j++) //stops when i gets to empty container list
@@ -462,19 +462,19 @@ void Player::updateTools()
 				if (itemIndex == j && containerIndex == i)
 				{
 					//special update held item
-					inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, true);
+					inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, true);
 				}
 				else
 				{
 					//normal update the item
-					inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3 + WORLD->yOffset, false);
+					inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, false);
 				}
 			}
 		}
 	}
 	else
 	{
-		selectedItem->updateTool(mapPosition, INPUT->mouse.cx - 1 + WORLD->xOffset, INPUT->mouse.cy - 3, true);
+		selectedItem->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, true);
 	}
 }
 
@@ -492,26 +492,26 @@ void Player::update()
 		else backgroundColor = TCODColor::pink;
 
 		//items
-		if (INPUT->mouse.wheel_up || INPUT->mouse.wheel_down)
+		if (INPUT->TCODmouse.wheel_up || INPUT->TCODmouse.wheel_down)
 		{
 			if (!INPUT->deepInteractKey->isDown)
 			{
-				if (INPUT->mouse.wheel_up)
+				if (INPUT->TCODmouse.wheel_up)
 				{
 					moveSelectorUp();
 				}
-				else if (INPUT->mouse.wheel_down)
+				else if (INPUT->TCODmouse.wheel_down)
 				{
 					moveSelectorDown();
 				}
 			}
 			else if (INPUT->deepInteractKey->isDown)
 			{
-				if (INPUT->mouse.wheel_up)
+				if (INPUT->TCODmouse.wheel_up)
 				{
 					selectedItem->actionManager->moveSelectorUp();
 				}
-				else if (INPUT->mouse.wheel_down)
+				else if (INPUT->TCODmouse.wheel_down)
 				{
 					selectedItem->actionManager->moveSelectorDown();
 				}
@@ -545,7 +545,7 @@ void Player::update()
 		
 		filterIndexes();
 		
-		angle = getAngle(renderPosition.x, renderPosition.y, engine->settings->input->mouse.cx - 1, engine->settings->input->mouse.cy - 3);
+		angle = getAngle(renderPosition.x, renderPosition.y, INPUT->mouse->screenPosition.x - 1, INPUT->mouse->screenPosition.y - 3); //change to use mouse map position
 		
 		updateTools();
 		

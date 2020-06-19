@@ -67,10 +67,23 @@ void MouseButton::update()
 
 //----------------------------------------------------------------------------------------------------
 
-Input::Input()
-	:keyboard(), mouse()
+Mouse::Mouse()
+	:screenPosition(Position2(0, 0)), mapPosition(Position2(0, 0))
 {
-	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &mouse);
+}
+
+void Mouse::update(TCOD_mouse_t TCODmouse)
+{
+	screenPosition = Position2(TCODmouse.cx, TCODmouse.cy);
+	mapPosition = Position2(screenPosition.x + WORLD->xOffset - 1, screenPosition.y + WORLD->yOffset - 3);
+}
+
+//----------------------------------------------------------------------------------------------------
+
+Input::Input()
+	:keyboard(), TCODmouse(), mouse(std::make_shared<Mouse>())
+{
+	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &TCODmouse);
 	TCODMouse::showCursor(false);
 
 	buttonList.push_back(moveUpKey				= std::make_shared<KeyboardButton>(sf::Keyboard::W));
@@ -109,7 +122,7 @@ Input::Input()
 
 void Input::update()
 {
-	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &mouse);
+	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &TCODmouse);
 
 	if (TCODConsole::hasMouseFocus()) TCODMouse::showCursor(false);
 
@@ -133,4 +146,7 @@ void Input::update()
 		if		(GUI->activeLogWindow == Gui::ActiveLogWindow::LOG) GUI->activeLogWindow = Gui::ActiveLogWindow::INFO;
 		else if (GUI->activeLogWindow == Gui::ActiveLogWindow::INFO) GUI->activeLogWindow = Gui::ActiveLogWindow::LOG;
 	}
+
+	mouse->update(TCODmouse);
 }
+

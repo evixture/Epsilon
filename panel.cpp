@@ -598,11 +598,11 @@ void InfoWindow::setTileDetails()
 {
 	tileDetail = "---";
 
-	if (INPUT->mouse.cx >= 1 && INPUT->mouse.cx <= 60 && INPUT->mouse.cy >= 3 && INPUT->mouse.cy <= 62) //if in map window
+	if (INPUT->mouse->screenPosition.x >= 1 && INPUT->mouse->screenPosition.x <= 60 && INPUT->mouse->screenPosition.y >= 3 && INPUT->mouse->screenPosition.y <= 62) //if in map window
 	{
-		if (WORLD->debugmap->getBlock(Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.z))->explored)
+		if (WORLD->debugmap->getBlock(Position3(INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, WORLD->debugmap->player->mapPosition.z))->explored)
 		{
-			static Position3 position = Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.z);
+			static Position3 position = Position3(INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, WORLD->debugmap->player->mapPosition.z);
 			tileDetail = getTileName(WORLD->debugmap->getBlock(position)->getTileData(WORLD->debugmap->player->mapPosition.h).nameID);
 		}
 	}
@@ -616,7 +616,7 @@ void InfoWindow::setCreatureDetails()
 	{
 		if (creature->mapPosition.z == WORLD->debugmap->player->mapPosition.z)
 		{
-			if (creature->mapPosition.x == INPUT->mouse.cx + WORLD->xOffset - 1 && creature->mapPosition.y == INPUT->mouse.cy + WORLD->yOffset - 3)
+			if (creature->mapPosition.x == INPUT->mouse->mapPosition.x && creature->mapPosition.y == INPUT->mouse->mapPosition.y)
 			{
 				if (WORLD->isInPlayerFov(creature->mapPosition)) creatureDetail = creature->name;
 			}

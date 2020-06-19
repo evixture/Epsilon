@@ -42,9 +42,20 @@ private:
 	sf::Mouse::Button button;
 };
 
+struct Mouse
+{
+	Position2 screenPosition;
+	Position2 mapPosition;
+
+	Mouse();
+
+	void update(TCOD_mouse_t TCODmouse);
+};
+
 struct Input
 {
-	TCOD_mouse_t mouse;
+	std::shared_ptr<Mouse> mouse;
+	TCOD_mouse_t TCODmouse;
 
 	std::shared_ptr<KeyboardButton> moveUpKey; //key to move the player / menu selector up
 	std::shared_ptr<KeyboardButton> moveDownKey; //key to move the player / menu selector down
