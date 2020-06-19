@@ -1,22 +1,8 @@
-﻿  aicreature.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\aicreature.cpp(171,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  audio.cpp
-  engine.cpp
-  entity.cpp
-  gui.cpp
-  input.cpp
-  item.cpp
-  main.cpp
-  map.cpp
-  panel.cpp
-  settings.cpp
-  tile.cpp
-  tool.cpp
+﻿  tool.cpp
   utility.cpp
   window.cpp
   Generating Code...
 E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(18): warning C4172: returning address of local variable or temporary: nullMag
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\item.cpp(129): warning C4172: returning address of local variable or temporary: nullMag
   
   Searching libraries
       Searching E:\SFML\SFML-2.5.1\lib\sfml-window.lib:

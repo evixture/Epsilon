@@ -1,13 +1,13 @@
 #include "main.hpp"
 
-Tool::Tool(std::string name, TCODColor color, int ch)
-	: name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), 
+Tool::Tool(const Creature* owner, std::string name, TCODColor color, int ch)
+	: name(name), color(color), ch(ch), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), owner(owner),
 	ammoType(MagazineData::AmmoType::NONE), fireMode(SAFE), availibleFireMode(0), isHeld(false), type(Tool::Type::TOOL), angle(0.0f), effectiveRange(5)
 {
 }
 
-Tool::Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
-	: name(name), color(color), ch(NULL), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), 
+Tool::Tool(const Creature* owner, std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
+	: name(name), color(color), ch(NULL), mapPosition(Position4(0, 0, 0, 0)), dx(0), dy(0), sourcePosition(Position4(0, 0, 0, 0)), owner(owner),
 	ammoType(ammoType), fireMode(fireMode), availibleFireMode(availibleFireModeFlag), isHeld(false), type(Tool::Type::TOOL), angle(0.0f), effectiveRange(5)
 {
 }
@@ -222,9 +222,9 @@ void Melee::render(const Pane& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Bullet::Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
+Bullet::Bullet(const Creature* owner, int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
 	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), travel(BLine(startPosition.x, startPosition.y, tox, toy)),
-	mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveClock(1.0f / velocity), fallClock(0)
+	mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveClock(1.0f / velocity), fallClock(0), owner(owner)
 {
 	do
 	{
@@ -315,16 +315,13 @@ void Bullet::update()
 					currentVelocity -= WORLD->debugmap->getBlock(mapPosition)->tileList[mapPosition.h].deceleration;
 				}			
 			
-				for (auto& creature : WORLD->debugmap->creatureList) //if hit a creature
+				for (auto& creature : WORLD->debugmap->creatureList)
 				{
-					if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.z == mapPosition.z && mapPosition.h <= creature->mapPosition.h)
+					if (creature.get() != owner) //dont hit self
 					{
-						if (!(mapPosition == startPosition))
-						{
-							if (creature->health != 0) //check for later
-							{
-								doBulletDamage(creature);
-							}
+						if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.z == mapPosition.z && mapPosition.h <= creature->mapPosition.h) //if hit a creature
+						{						
+							doBulletDamage(creature);							
 						}
 					}
 				}
@@ -388,9 +385,9 @@ void Bullet::render(const Pane& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Firearm::Firearm(std::string name, TCODColor color, int shotsPerSecond, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
-	:Melee(Tool(name, color, ammoType, fireMode, availibleFireModeFlag), /* MELEE DAMAGE */ 25, 0), fireRPS(shotsPerSecond), reloadTime(reloadSpeed),
-	usedMag(MagazineData(ammoType, 0, 0, true)), fireClock(1.0f / shotsPerSecond), reloadClock(reloadSpeed)
+Firearm::Firearm(const Creature* owner, std::string name, TCODColor color, int fireRPS, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
+	:Melee(Tool(owner, name, color, ammoType, fireMode, availibleFireModeFlag), /* MELEE DAMAGE */ 25, 0), fireRPS(fireRPS), reloadTime(reloadSpeed),
+	usedMag(MagazineData(ammoType, 0, 0, true)), fireClock(1.0f / fireRPS), reloadClock(reloadSpeed)
 {
 	type = Tool::Type::FIREARM;
 
@@ -544,7 +541,7 @@ void Firearm::fireBullet()
 	{
 		for (float i = 1.0f; i <= fireClock.numCalls; fireClock.numCalls--)
 		{
-			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, getMagazine().velocity, getMagazine().mass));
+			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(owner, ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, getMagazine().velocity, getMagazine().mass));
 
 			usedMag.availableAmmo--;
 
@@ -660,8 +657,8 @@ void Firearm::render(const Pane& pane) const
 	}
 }
 
-Armor::Armor(std::string name, TCODColor color, int defense, int durability)
-	: Tool(name, color, ep::character::ballisticVest), defense(defense), durability(durability)
+Armor::Armor(const Creature* owner, std::string name, TCODColor color, int defense, int durability)
+	: Tool(owner, name, color, ep::character::ballisticVest), defense(defense), durability(durability)
 {
 	type = Tool::Type::ARMOR;
 }
@@ -672,11 +669,11 @@ void Armor::equip(Armor& armor) //if the passed armor is not equal to the armor 
 	{
 		if (this->defense == armor.defense && this->durability == armor.durability) //if armor is already equipped
 		{
-			armor = Armor("", TCODColor::pink, 0, 0);
+			armor = Armor(owner, "", TCODColor::pink, 0, 0); //??
 		}
 		else
 		{
-			armor = Armor(this->name, this->color, this->defense, this->durability);
+			armor = Armor(owner, this->name, this->color, this->defense, this->durability);
 
 			AUDIO->playSound(Sound(("full ip"), 60.0f, 100.0f));
 		}

@@ -29,6 +29,8 @@ struct Armor;
 
 struct Tool																		
 {
+	const Creature* owner;
+
 	enum class Type { TOOL, MELEE, FIREARM, ARMOR } type;
 
 	TCODColor color;															
@@ -50,8 +52,8 @@ struct Tool
 
 	enum FireType { SAFE = 0x01, SEMI = 0x02, FULL = 0x04 } fireMode;			
 
-	Tool(std::string name, TCODColor color, int ch);							
-	Tool(std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag);
+	Tool(const Creature* owner, std::string name, TCODColor color, int ch);							
+	Tool(const Creature* owner, std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag);
 	virtual ~Tool() {};
 
 	virtual void update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld);
@@ -94,6 +96,8 @@ private:
 
 struct Bullet																	
 {
+	const Creature* owner;
+
 	unsigned char ch;															
 
 	const short int mass;														
@@ -104,7 +108,7 @@ struct Bullet
 	Position4 mapPosition;														
 
 	//check if use ref
-	Bullet(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass);
+	Bullet(const Creature* owner, int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass);
 
 	void doBulletDamage(std::shared_ptr<Creature>& creature);					
 
@@ -133,7 +137,7 @@ struct Firearm : public Melee
 	int fireRPS;																
 	float reloadTime;															
 
-	Firearm(std::string name, TCODColor color, int fireRPS, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag);
+	Firearm(const Creature* owner, std::string name, TCODColor color, int fireRPS, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag);
 
 	MagazineData& getMagazine();												
 
@@ -162,7 +166,7 @@ struct Armor : public Tool
 	short int defense;
 	short int durability;
 
-	Armor(std::string name, TCODColor color, int defense, int durability);
+	Armor(const Creature* owner, std::string name, TCODColor color, int defense, int durability);
 
 	void equip(Armor& armor);
 };
@@ -171,26 +175,59 @@ namespace ep
 {
 	struct tool
 	{
-		inline static const Tool smallBackpack =	Tool("Small Backpack",		ep::color::smallBackpackFG, ep::character::backpack);
-		inline static const Tool cal45magazine7 =	Tool("45 Magazine -7-",		ep::color::pistolFG, ep::character::pistolMagazine);
-		inline static const Tool cal556magazine30 = Tool("5.56 Magazine -30-",	ep::color::rifleFG, ep::character::rifleMagazine);
-		inline static const Melee hands =			Melee(Tool("Hands",			ep::color::handFG, TCOD_CHAR_UMLAUT), 30, 20);
-		inline static const Melee knife =			Melee(Tool("-Test Knife 34 damage-", TCODColor::silver, ep::character::knife), 0, 34);
-		inline static const Firearm sip45 =			Firearm("SIP45",			ep::color::pistolFG, 5, 1.0f, MagazineData::AmmoType::FOURTYFIVEACP, Firearm::FireType::SEMI, Firearm::FireType::SEMI | Firearm::FireType::SAFE);
-		inline static const Firearm sir556 =		Firearm("SIR556",			ep::color::rifleFG, 10, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Firearm::FireType::FULL, Firearm::FireType::FULL | Firearm::FireType::SEMI | Firearm::FireType::SAFE);
-		inline static const Armor L1R3Armor =		Armor("test armor",			TCODColor::black, 100, 300);
+		//inline static const Tool smallBackpack =	Tool("Small Backpack",		ep::color::smallBackpackFG, ep::character::backpack);
+		//inline static const Tool cal45magazine7 =	Tool("45 Magazine -7-",		ep::color::pistolFG, ep::character::pistolMagazine);
+		//inline static const Tool cal556magazine30 = Tool("5.56 Magazine -30-",	ep::color::rifleFG, ep::character::rifleMagazine);
+		//inline static const Melee hands =			Melee(Tool("Hands",			ep::color::handFG, TCOD_CHAR_UMLAUT), 30, 20);
+		//inline static const Melee knife =			Melee(Tool("-Test Knife 34 damage-", TCODColor::silver, ep::character::knife), 0, 34);
+		//inline static const Firearm sip45 =			Firearm("SIP45",			ep::color::pistolFG, 5, 1.0f, MagazineData::AmmoType::FOURTYFIVEACP, Firearm::FireType::SEMI, Firearm::FireType::SEMI | Firearm::FireType::SAFE);
+		//inline static const Firearm sir556 =		Firearm("SIR556",			ep::color::rifleFG, 10, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Firearm::FireType::FULL, Firearm::FireType::FULL | Firearm::FireType::SEMI | Firearm::FireType::SAFE);
+		//inline static const Armor L1R3Armor =		Armor("test armor",			TCODColor::black, 100, 300);
+
+		inline static Tool smallBackpack(const Creature* owner)
+		{
+			return Tool(owner, "Small Backpack", ep::color::smallBackpackFG, ep::character::backpack);
+		}
+		inline static Tool cal45magazine7(const Creature* owner)
+		{
+			return Tool(owner, "45 Magazine -7-", ep::color::pistolFG, ep::character::pistolMagazine);
+		}
+		inline static Tool cal556magazine30(const Creature* owner)
+		{
+			return Tool(owner, "5.56 Magazine -30-", ep::color::rifleFG, ep::character::rifleMagazine);
+		}
+		inline static Melee hands(const Creature* owner)
+		{
+			return Melee(Tool(owner, "Hands", ep::color::handFG, TCOD_CHAR_UMLAUT), 30, 20);
+		}
+		inline static Melee knife(const Creature* owner)
+		{
+			return Melee(Tool(owner, "-Test Knife 34 damage-", TCODColor::silver, ep::character::knife), 0, 34);
+		}
+		inline static Firearm sip45(const Creature* owner)
+		{
+			return Firearm(owner, "SIP45", ep::color::pistolFG, 5, 1.0f, MagazineData::AmmoType::FOURTYFIVEACP, Firearm::FireType::SEMI, Firearm::FireType::SEMI | Firearm::FireType::SAFE);
+		}
+		inline static Firearm sir556(const Creature* owner)
+		{
+			return Firearm(owner, "SIR556", ep::color::rifleFG, 10, 2.0f, MagazineData::AmmoType::FIVEPOINTFIVESIX, Firearm::FireType::FULL, Firearm::FireType::FULL | Firearm::FireType::SEMI | Firearm::FireType::SAFE);
+		}
+		inline static Armor L1R3Armor(const Creature* owner)
+		{
+			return Armor(owner, "test armor", TCODColor::black, 100, 300);
+		}
 	};
 
 	struct bullet
 	{
-		inline static Bullet cal45(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound)
+		inline static Bullet cal45(const Creature* owner, int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound)
 		{
-			return Bullet(ch, startPosition, dx, dy, xbound, ybound, 80, 230);
+			return Bullet(owner, ch, startPosition, dx, dy, xbound, ybound, 80, 230);
 		}
 
-		inline static Bullet cal556(int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound)
+		inline static Bullet cal556(const Creature* owner, int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound)
 		{
-			return Bullet(ch, startPosition, dx, dy, xbound, ybound, 300, 55);
+			return Bullet(owner, ch, startPosition, dx, dy, xbound, ybound, 300, 55);
 		}
 	};
 }
