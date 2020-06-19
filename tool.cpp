@@ -571,38 +571,56 @@ void Firearm::changeFireMode()
 	if (isHeld)
 	{
 		//full->semi->safe->full
-		if (fireMode == FireType::SAFE)
+		//if (fireMode == FireType::SAFE)
+		//{
+		//	if (availibleFireMode & FireType::FULL) //if availible fire mode has FULL fire mode bit set
+		//	{
+		//		fireMode = FireType::FULL;
+		//	}
+		//	else if (availibleFireMode & FireType::SEMI)
+		//	{
+		//		fireMode = FireType::SEMI;
+		//	}
+		//}
+		//else if (fireMode == FireType::SEMI)
+		//{
+		//	if (availibleFireMode & FireType::SAFE)
+		//	{
+		//		fireMode = FireType::SAFE;
+		//	}
+		//	else if (availibleFireMode & FireType::FULL)
+		//	{
+		//		fireMode = FireType::FULL;
+		//	}
+		//}
+		//else if (fireMode == FireType::FULL)
+		//{
+		//	if (availibleFireMode & FireType::SEMI)
+		//	{
+		//		fireMode = FireType::SEMI;
+		//	}
+		//	else if (availibleFireMode & FireType::SAFE)
+		//	{
+		//		fireMode = FireType::SAFE;
+		//	}
+		//}
+
+		switch (fireMode)
 		{
-			if (availibleFireMode & FireType::FULL) //if availible fire mode has FULL fire mode bit set
-			{
-				fireMode = FireType::FULL;
-			}
-			else if (availibleFireMode & FireType::SEMI)
-			{
-				fireMode = FireType::SEMI;
-			}
-		}
-		else if (fireMode == FireType::SEMI)
-		{
-			if (availibleFireMode & FireType::SAFE)
-			{
-				fireMode = FireType::SAFE;
-			}
-			else if (availibleFireMode & FireType::FULL)
-			{
-				fireMode = FireType::FULL;
-			}
-		}
-		else if (fireMode == FireType::FULL)
-		{
-			if (availibleFireMode & FireType::SEMI)
-			{
-				fireMode = FireType::SEMI;
-			}
-			else if (availibleFireMode & FireType::SAFE)
-			{
-				fireMode = FireType::SAFE;
-			}
+		case FireType::SAFE:
+			if (availibleFireMode & FireType::FULL)			fireMode = FireType::FULL;
+			else if (availibleFireMode & FireType::SEMI)	fireMode = FireType::SEMI;
+			break;
+
+		case FireType::SEMI:
+			if (availibleFireMode & FireType::SAFE)			fireMode = FireType::SAFE;
+			else if (availibleFireMode & FireType::FULL)	fireMode = FireType::FULL;
+			break;
+
+		case FireType::FULL:
+			if (availibleFireMode & FireType::SEMI)			fireMode = FireType::SEMI;
+			else if (availibleFireMode & FireType::SAFE)	fireMode = FireType::SAFE;
+			break;
 		}
 		AUDIO->playSound(Sound(("tip"), 55.0f, 50.0f));
 	}

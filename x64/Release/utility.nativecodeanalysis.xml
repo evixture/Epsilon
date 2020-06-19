@@ -198,63 +198,29 @@
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>input.h</FILENAME>
-      <LINE>21</LINE>
-      <COLUMN>1</COLUMN>
+      <FILENAME>utility.cpp</FILENAME>
+      <LINE>170</LINE>
+      <COLUMN>32</COLUMN>
     </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'KeyboardButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>KeyboardButton::{ctor}</FUNCTION>
-    <DECORATED>??0KeyboardButton@@QEAA@XZ</DECORATED>
-    <FUNCLINE>21</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>KeyboardButton::button</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>input.h</FILENAME>
-      <LINE>31</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'MouseButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>MouseButton::{ctor}</FUNCTION>
-    <DECORATED>??0MouseButton@@QEAA@XZ</DECORATED>
-    <FUNCLINE>31</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>MouseButton::button</targetSymbol>
-    </ADDITIONALINFO>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>getAngle</FUNCTION>
+    <DECORATED>?getAngle@@YANHHHH@Z</DECORATED>
+    <FUNCLINE>168</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>utility.cpp</FILENAME>
-      <LINE>145</LINE>
-      <COLUMN>27</COLUMN>
+      <LINE>170</LINE>
+      <COLUMN>61</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>getAngle</FUNCTION>
     <DECORATED>?getAngle@@YANHHHH@Z</DECORATED>
-    <FUNCLINE>143</FUNCLINE>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>utility.cpp</FILENAME>
-      <LINE>145</LINE>
-      <COLUMN>47</COLUMN>
-    </SFA>
-    <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>getAngle</FUNCTION>
-    <DECORATED>?getAngle@@YANHHHH@Z</DECORATED>
-    <FUNCLINE>143</FUNCLINE>
+    <FUNCLINE>168</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

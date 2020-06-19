@@ -74,52 +74,81 @@ Item::Item(const Creature* creature, int size, std::shared_ptr<Block> block, std
 
 void Item::createActionManager()
 {
-	if (type == ItemType::NORMAL)
+	//if (type == ItemType::NORMAL)
+	//{
+	//	actionManager = std::make_shared<ActionManager>(std::vector<Action> {
+	//		Action("Drop", Action::Type::DROP)
+	//	});
+	//}
+	//else if (type == ItemType::MAGAZINE)
+	//{
+	//	actionManager = std::make_shared<ActionManager>(std::vector<Action> {
+	//		Action("Drop", Action::Type::DROP)
+	//	});
+	//}
+	//else if (type == ItemType::MELEE)
+	//{
+	//	actionManager = std::make_shared<ActionManager>(std::vector<Action> {
+	//		Action("Drop", Action::Type::DROP),
+	//		Action("Melee",Action::Type::MELEE)
+	//	});
+	//}
+	//else if (type == ItemType::FIREARM)
+	//{
+	//	actionManager = std::make_shared<ActionManager>(std::vector<Action> {
+	//		Action("Reload",Action::Type::RELOAD),
+	//		Action("Drop",Action::Type::DROP),
+	//		Action("Change Fire Mode",Action::Type::CHANGEFIREMODE),
+	//		Action("Melee",Action::Type::MELEE)
+	//	});
+	//}
+	//else if (type == ItemType::ARMOR)
+	//{
+	//	actionManager = std::make_shared<ActionManager>(std::vector<Action> {
+	//		Action("Drop", Action::Type::DROP),
+	//		Action("Equip", Action::Type::EQUIP)
+	//	});
+	//}
+	//else if (type == ItemType::HAND)
+	//{
+	//	actionManager = std::make_shared<ActionManager>(std::vector<Action> {
+	//		Action("Melee", Action::Type::MELEE)
+	//	});
+	//}
+	//else
+	//{
+	//	actionManager = std::make_shared<ActionManager>(std::vector<Action> {
+	//		Action("ERROR", Action::Type::EQUIP)
+	//	});
+	//}
+
+	switch (type)
 	{
-		actionManager = std::make_shared<ActionManager>(std::vector<Action> {
-			Action("Drop", Action::Type::DROP)
-		});
-	}
-	else if (type == ItemType::MAGAZINE)
-	{
-		actionManager = std::make_shared<ActionManager>(std::vector<Action> {
-			Action("Drop", Action::Type::DROP)
-		});
-	}
-	else if (type == ItemType::MELEE)
-	{
-		actionManager = std::make_shared<ActionManager>(std::vector<Action> {
-			Action("Drop", Action::Type::DROP),
-			Action("Melee",Action::Type::MELEE)
-		});
-	}
-	else if (type == ItemType::FIREARM)
-	{
-		actionManager = std::make_shared<ActionManager>(std::vector<Action> {
-			Action("Reload",Action::Type::RELOAD),
-			Action("Drop",Action::Type::DROP),
-			Action("Change Fire Mode",Action::Type::CHANGEFIREMODE),
-			Action("Melee",Action::Type::MELEE)
-		});
-	}
-	else if (type == ItemType::ARMOR)
-	{
-		actionManager = std::make_shared<ActionManager>(std::vector<Action> {
-			Action("Drop", Action::Type::DROP),
-			Action("Equip", Action::Type::EQUIP)
-		});
-	}
-	else if (type == ItemType::HAND)
-	{
-		actionManager = std::make_shared<ActionManager>(std::vector<Action> {
-			Action("Melee", Action::Type::MELEE)
-		});
-	}
-	else
-	{
-		actionManager = std::make_shared<ActionManager>(std::vector<Action> {
-			Action("ERROR", Action::Type::EQUIP)
-		});
+	case ItemType::NORMAL:
+	case ItemType::MAGAZINE:
+		actionManager = std::make_shared<ActionManager>(std::vector<Action>{Action("Drop", Action::Type::DROP)});
+		break;
+
+	case ItemType::MELEE:
+		actionManager = std::make_shared<ActionManager>(std::vector<Action>{Action("Drop", Action::Type::DROP), Action("Melee",Action::Type::MELEE)});
+		break;
+
+	case ItemType::FIREARM:
+		actionManager = std::make_shared<ActionManager>
+			(std::vector<Action>{Action("Reload",Action::Type::RELOAD), Action("Drop",Action::Type::DROP), Action("Change Fire Mode",Action::Type::CHANGEFIREMODE), Action("Melee",Action::Type::MELEE)});
+		break;
+
+	case ItemType::ARMOR:
+		actionManager = std::make_shared<ActionManager>(std::vector<Action>{Action("Drop", Action::Type::DROP), Action("Equip", Action::Type::EQUIP)});
+		break;
+
+	case ItemType::HAND:
+		actionManager = std::make_shared<ActionManager>(std::vector<Action>{Action("Melee", Action::Type::MELEE)});
+		break;
+
+	default:
+		actionManager = std::make_shared<ActionManager>(std::vector<Action>{Action("ERROR", Action::Type::EQUIP)});
+		break;
 	}
 }
 

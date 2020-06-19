@@ -198,66 +198,15 @@
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>input.h</FILENAME>
-      <LINE>21</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'KeyboardButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>KeyboardButton::{ctor}</FUNCTION>
-    <DECORATED>??0KeyboardButton@@QEAA@XZ</DECORATED>
-    <FUNCLINE>21</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>KeyboardButton::button</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>input.h</FILENAME>
-      <LINE>31</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'MouseButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>MouseButton::{ctor}</FUNCTION>
-    <DECORATED>??0MouseButton@@QEAA@XZ</DECORATED>
-    <FUNCLINE>31</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>MouseButton::button</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>tile.cpp</FILENAME>
-      <LINE>9</LINE>
-      <COLUMN>7</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Block::destroyed' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Block::{ctor}</FUNCTION>
-    <DECORATED>??0Block@@QEAA@V?$vector@UTile@@V?$allocator@UTile@@@std@@@std@@EE@Z</DECORATED>
-    <FUNCLINE>9</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>Block::destroyed</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>tile.cpp</FILENAME>
-      <LINE>13</LINE>
+      <LINE>10</LINE>
       <COLUMN>7</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'Block::destroyed' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>Block::{ctor}</FUNCTION>
     <DECORATED>??0Block@@QEAA@V?$vector@UTile@@V?$allocator@UTile@@@std@@@std@@EEW4Tag@0@@Z</DECORATED>
-    <FUNCLINE>13</FUNCLINE>
+    <FUNCLINE>10</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>Block::destroyed</targetSymbol>
     </ADDITIONALINFO>
@@ -267,14 +216,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>tile.cpp</FILENAME>
-      <LINE>25</LINE>
-      <COLUMN>27</COLUMN>
+      <LINE>21</LINE>
+      <COLUMN>64</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Block::getTileData</FUNCTION>
     <DECORATED>?getTileData@Block@@QEBA?AUTile@@H@Z</DECORATED>
-    <FUNCLINE>17</FUNCLINE>
+    <FUNCLINE>15</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

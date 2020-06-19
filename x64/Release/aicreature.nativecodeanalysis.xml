@@ -198,49 +198,85 @@
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>input.h</FILENAME>
-      <LINE>21</LINE>
-      <COLUMN>1</COLUMN>
+      <FILENAME>aicreature.cpp</FILENAME>
+      <LINE>207</LINE>
+      <COLUMN>17</COLUMN>
     </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'KeyboardButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>KeyboardButton::{ctor}</FUNCTION>
-    <DECORATED>??0KeyboardButton@@QEAA@XZ</DECORATED>
-    <FUNCLINE>21</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>KeyboardButton::button</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>input.h</FILENAME>
-      <LINE>31</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'MouseButton::button' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>MouseButton::{ctor}</FUNCTION>
-    <DECORATED>??0MouseButton@@QEAA@XZ</DECORATED>
-    <FUNCLINE>31</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>MouseButton::button</targetSymbol>
-    </ADDITIONALINFO>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>AICreature::moveSelectorUp</FUNCTION>
+    <DECORATED>?moveSelectorUp@AICreature@@AEAAXXZ</DECORATED>
+    <FUNCLINE>189</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>aicreature.cpp</FILENAME>
-      <LINE>106</LINE>
-      <COLUMN>128</COLUMN>
+      <LINE>219</LINE>
+      <COLUMN>16</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
-    <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
-    <FUNCTION>AICreature::inEffectiveRange</FUNCTION>
-    <DECORATED>?inEffectiveRange@AICreature@@AEAA_NXZ</DECORATED>
-    <FUNCLINE>104</FUNCLINE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>AICreature::moveSelectorDown</FUNCTION>
+    <DECORATED>?moveSelectorDown@AICreature@@AEAAXXZ</DECORATED>
+    <FUNCLINE>215</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>aicreature.cpp</FILENAME>
+      <LINE>223</LINE>
+      <COLUMN>21</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>AICreature::moveSelectorDown</FUNCTION>
+    <DECORATED>?moveSelectorDown@AICreature@@AEAAXXZ</DECORATED>
+    <FUNCLINE>215</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>aicreature.cpp</FILENAME>
+      <LINE>232</LINE>
+      <COLUMN>18</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>AICreature::moveSelectorDown</FUNCTION>
+    <DECORATED>?moveSelectorDown@AICreature@@AEAAXXZ</DECORATED>
+    <FUNCLINE>215</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>aicreature.cpp</FILENAME>
+      <LINE>250</LINE>
+      <COLUMN>20</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>AICreature::filterIndexes</FUNCTION>
+    <DECORATED>?filterIndexes@AICreature@@AEAAXXZ</DECORATED>
+    <FUNCLINE>241</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>aicreature.cpp</FILENAME>
+      <LINE>263</LINE>
+      <COLUMN>17</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>AICreature::filterIndexes</FUNCTION>
+    <DECORATED>?filterIndexes@AICreature@@AEAAXXZ</DECORATED>
+    <FUNCLINE>241</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

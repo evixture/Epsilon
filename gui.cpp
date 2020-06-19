@@ -25,30 +25,58 @@ void Gui::update()
 		else if (activeWindow != Gui::ActiveWindow::INVENTORYFULL && activeWindow != Gui::ActiveWindow::STARTUPSPLASH)	activeWindow = Gui::ActiveWindow::INVENTORYFULL;
 	}
 
-	if (activeWindow == Gui::ActiveWindow::NONE)
+	//if (activeWindow == Gui::ActiveWindow::NONE)
+	//{
+	//	worldWindow->update();
+	//	playerWindow->update();
+	//	statusWindow->update();
+	//	inventoryWindow->update();
+	//	proximityWindow->update();
+	//	actionWindow->update();
+	//
+	//	if		(activeLogWindow == Gui::ActiveLogWindow::LOG)	logWindow->update();
+	//	else if (activeLogWindow == Gui::ActiveLogWindow::INFO) infoWindow->update();
+	//}
+	//else if (activeWindow == Gui::ActiveWindow::STARTUPSPLASH)
+	//{
+	//	startupSplashWindow->update();
+	//}
+	//else if (activeWindow == Gui::ActiveWindow::INVENTORYFULL)
+	//{
+	//	worldWindow->update();
+	//	inventoryFullWindow->update();
+	//}
+	//else if (activeWindow == Gui::ActiveWindow::PAUSE)
+	//{
+	//	pauseWindow->update();
+	//}
+
+	switch (activeWindow)
 	{
+	case Gui::ActiveWindow::NONE:
 		worldWindow->update();
 		playerWindow->update();
 		statusWindow->update();
 		inventoryWindow->update();
 		proximityWindow->update();
 		actionWindow->update();
-
+		
 		if		(activeLogWindow == Gui::ActiveLogWindow::LOG)	logWindow->update();
 		else if (activeLogWindow == Gui::ActiveLogWindow::INFO) infoWindow->update();
-	}
-	else if (activeWindow == Gui::ActiveWindow::STARTUPSPLASH)
-	{
+		break;
+
+	case Gui::ActiveWindow::STARTUPSPLASH:
 		startupSplashWindow->update();
-	}
-	else if (activeWindow == Gui::ActiveWindow::INVENTORYFULL)
-	{
+		break;
+
+	case Gui::ActiveWindow::INVENTORYFULL:
 		worldWindow->update();
 		inventoryFullWindow->update();
-	}
-	else if (activeWindow == Gui::ActiveWindow::PAUSE)
-	{
+		break;
+
+	case Gui::ActiveWindow::PAUSE:
 		pauseWindow->update();
+		break;
 	}
 }
 

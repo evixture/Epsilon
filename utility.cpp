@@ -183,6 +183,107 @@ float getFallTime(int h)
 	return sqrt((2.0f * h) / 16);
 }
 
+std::string getTileName(char id)
+{
+	switch (id)
+	{
+	case -1:
+		return "ERROR";
+		break;
+	case 0:
+		return "---";
+		break;
+
+	case 1:
+		return "Grass";
+		break;
+
+	case 2:
+		return "Flower";
+		break;
+
+	case 3:
+		return "Floor";
+		break;
+
+	case 4:
+		return "Concrete";
+		break;
+
+	case 5:
+		return "Shingle";
+		break;
+
+	case 6:
+		return "Door";
+		break;
+
+	case 7:
+		return "Wall";
+		break;
+
+	case 8:
+		return "Window";
+		break;
+
+	case 9:
+		return "Table Leg";
+		break;
+
+	case 10:
+		return "Table Top";
+		break;
+
+	case 11:
+		return "Upward Stair";
+		break;
+
+	case 12:
+		return "Downward Stair";
+		break;
+
+	case 13:
+		return "Sky";
+		break;
+
+	case 14:
+		return "Pistol";
+		break;
+
+	case 15:
+		return "Pistol Magazine";
+		break;
+
+	case 16:
+		return "Rifle";
+		break;
+
+	case 17:
+		return "Rifle Magazine";
+		break;
+
+	case 18:
+		return "Small Backpack";
+		break;
+
+	case 19:
+		return "Level 1, R3 Armor";
+		break;
+
+	case 20:
+		return "Knife";
+		break;
+
+	case 21:
+		return "Rubble";
+		break;
+
+	default:
+		return "ERROR";
+		break;
+	}
+}
+
 Position4 getWalkableArea(Position4 centerPosition)
 {
 	/*

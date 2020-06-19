@@ -603,7 +603,7 @@ void InfoWindow::setTileDetails()
 		if (WORLD->debugmap->getBlock(Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.z))->explored)
 		{
 			static Position3 position = Position3(INPUT->mouse.cx + WORLD->xOffset - 1, INPUT->mouse.cy + WORLD->yOffset - 3, WORLD->debugmap->player->mapPosition.z);
-			tileDetail = WORLD->debugmap->getBlock(position)->getTileData(WORLD->debugmap->player->mapPosition.h).name;
+			tileDetail = getTileName(WORLD->debugmap->getBlock(position)->getTileData(WORLD->debugmap->player->mapPosition.h).nameID);
 		}
 	}
 }

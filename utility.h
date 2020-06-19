@@ -158,10 +158,13 @@ drawPane.console->printf(30, 0, "]");
 */
 
 unsigned char	heightToBitFlag(int h);
+
 double			getAngle(int ix, int iy, int tx, int ty);
 double			getDistance(int ix, int iy, int tx, int ty);
 float			getFallTime(int h);
-Position3		offsetPosition(Position3 mapPosition, int xOffset, int yOffset);
+std::string		getTileName(char id);
+
+Position3		offsetPosition(Position3 mapPosition, int xOffset, int yOffset); //need??
 Position4		offsetPosition(Position4 mapPosition, int xOffset, int yOffset);
 Position4		getWalkableArea(Position4 mapPosition);
 //getRenderPosition(Position2 ...)

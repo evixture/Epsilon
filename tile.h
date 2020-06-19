@@ -6,6 +6,32 @@
 		|	Tile
 */
 
+/*
+TILE NAME LOOKUP
+	Grass
+	Flower
+	Floor
+	Concrete
+	Shingle
+	Door
+	Wall
+	Window
+	Table Top
+	Table Leg
+	Upward Stair
+	Downward Stair
+	Sky
+	ERROR
+
+	Pistol
+	Pistol Magazine
+	Rifle
+	Rifle Magazine
+	Small Backpack
+	Level 1, R3 Armor
+	Knife
+*/
+
 struct Tile
 {
 	unsigned char ch;
@@ -14,9 +40,10 @@ struct Tile
 	unsigned short int deceleration;
 	int strength;
 
-	std::string name;
+	//std::string name;
+	char nameID;
 
-	Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int deceleration, std::string name = "", int strength = -1);
+	Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int deceleration, char nameID, int strength = -1);
 };
 
 struct Block
@@ -77,194 +104,194 @@ namespace ep
 
 		inline static const std::vector<Tile> grass0 =
 		{
-			Tile('.',							ep::color::grassFG,			ep::color::grassBG,		999,	"Grass"),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0)
+			Tile('.',							ep::color::grassFG,			ep::color::grassBG,		999,	1),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
 		inline static const std::vector<Tile> grass1 =
 		{ 
-			Tile('"',							ep::color::grassFG,			ep::color::grassBG,		999,	"Grass"),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0)
+			Tile('"',							ep::color::grassFG,			ep::color::grassBG,		999,	1),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
 		inline static const std::vector<Tile> grass2 =
 		{
-			Tile('`',							ep::color::grassFG,			ep::color::grassBG,		999,	"Grass"),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0)
+			Tile('`',							ep::color::grassFG,			ep::color::grassBG,		999,	1),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
 		inline static const std::vector<Tile> grass3 =
 		{
-			Tile(',',							ep::color::grassFG,			ep::color::grassBG,		999,	"Grass"),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0)
+			Tile(',',							ep::color::grassFG,			ep::color::grassBG,		999,	1),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
 		inline static const std::vector<Tile> flower =
 		{
-			Tile(ep::character::flower,			ep::color::flowerFG,		ep::color::flowerBG,	999,	"Flower"),
-			Tile(ep::character::flower,			ep::color::flowerFG,		ep::color::flowerBG,	10,		"Flower",	10),
-			Tile(ep::character::flower,			ep::color::flowerFG,		ep::color::flowerBG,	10,		"Flower",	10),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		"",			10)
+			Tile(ep::character::flower,			ep::color::flowerFG,		ep::color::flowerBG,	999,	2),
+			Tile(ep::character::flower,			ep::color::flowerFG,		ep::color::flowerBG,	10,		2,	10),
+			Tile(ep::character::flower,			ep::color::flowerFG,		ep::color::flowerBG,	10,		2,	10),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0,	10)
 		};
 	
 		inline static const std::vector<Tile> floor =
 		{
-			Tile(' ',							ep::color::floorFG,			ep::color::floorBG,		999,	"Floor"),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0)
+			Tile(' ',							ep::color::floorFG,			ep::color::floorBG,		999,	3),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
 		inline static const std::vector<Tile> concrete =
 		{
-			Tile('`',							ep::color::concreteFG,		ep::color::concreteBG,	999,	"Concrete"),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0)
+			Tile('`',							ep::color::concreteFG,		ep::color::concreteBG,	999,	4),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
 		inline static const std::vector<Tile> shingle =
 		{
-			Tile(240,							ep::color::shingleFG,		ep::color::shingleBG,	999,	"Shingles"),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0)
+			Tile(240,							ep::color::shingleFG,		ep::color::shingleBG,	999,	5),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
 		inline static const std::vector<Tile> door =
 		{
-			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		25,		"Door"),
-			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		25,		"Door"),
-			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		25,		"Door"),
-			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		25,		"Door")
+			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		25,		6),
+			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		25,		6),
+			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		25,		6),
+			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		25,		6)
 		};
 	
 		inline static const std::vector<Tile> wall =
 		{
-			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		"Wall", -1),
-			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		"Wall", 1000),
-			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		"Wall", 1000),
-			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		"Wall", 1000)
+			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7, -1),
+			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7, 1000),
+			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7, 1000),
+			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7, 1000)
 		};
 	
 		inline static const std::vector<Tile> window =
 		{
-			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		"Wall",		-1),
-			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		"Wall",		1000),
-			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		"Wall",		1000),
-			Tile(ep::character::window,			ep::color::windowFG,		ep::color::windowBG,	0,		"Window",	100)
+			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7,	-1),
+			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7,	1000),
+			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7,	1000),
+			Tile(ep::character::window,			ep::color::windowFG,		ep::color::windowBG,	0,		8,	100)
 		};
 	
 		inline static const std::vector<Tile> tableLeg =
 		{
-			Tile(' ',							ep::color::floorFG,			ep::color::floorBG,		999,	"Floor"),
-			Tile('!',							ep::color::tableFG,			ep::color::floorBG,		25,		"Table Leg", 200),
-			Tile(ep::character::table,			ep::color::tableFG,			ep::color::floorBG,		25,		"Table Top", 500),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0)
+			Tile(' ',							ep::color::floorFG,			ep::color::floorBG,		999,	3),
+			Tile('!',							ep::color::tableFG,			ep::color::floorBG,		25,		9,	200),
+			Tile(ep::character::table,			ep::color::tableFG,			ep::color::floorBG,		25,		10, 500),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
 		inline static const std::vector<Tile> tableTop =
 		{
-			Tile(' ',							ep::color::floorFG,			ep::color::floorBG,		999,	"Floor"),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		"Floor",		200),
-			Tile(ep::character::table,			ep::color::tableFG,			ep::color::floorBG,		25,		"Table Top",	500),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0)
+			Tile(' ',							ep::color::floorFG,			ep::color::floorBG,		999,	3),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		3,	200),
+			Tile(ep::character::table,			ep::color::tableFG,			ep::color::floorBG,		25,		10,	500),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
 		inline static const std::vector<Tile> upStair =
 		{
-			Tile(ep::character::upStair,		ep::color::doorFG,			ep::color::floorBG,		50,		"Upwards Stair"),
-			Tile(ep::character::upStair,		ep::color::doorFG,			ep::color::floorBG,		50,		"Upwards Stair"),
-			Tile(ep::character::upStair,		ep::color::doorFG,			ep::color::floorBG,		50,		"Upwards Stair"),
-			Tile(ep::character::upStair,		ep::color::doorFG,			ep::color::floorBG,		50,		"Upwards Stair")
+			Tile(ep::character::upStair,		ep::color::doorFG,			ep::color::floorBG,		50,		11),
+			Tile(ep::character::upStair,		ep::color::doorFG,			ep::color::floorBG,		50,		11),
+			Tile(ep::character::upStair,		ep::color::doorFG,			ep::color::floorBG,		50,		11),
+			Tile(ep::character::upStair,		ep::color::doorFG,			ep::color::floorBG,		50,		11)
 		};
 	
 		inline static const std::vector<Tile> downStair =
 		{
-			Tile(ep::character::downStair,		ep::color::doorFG,			ep::color::floorBG,		50,		"Downwards Stair"),
-			Tile(ep::character::downStair,		ep::color::doorFG,			ep::color::floorBG,		50,		"Downwards Stair"),
-			Tile(ep::character::downStair,		ep::color::doorFG,			ep::color::floorBG,		50,		"Downwards Stair"),
-			Tile(ep::character::downStair,		ep::color::doorFG,			ep::color::floorBG,		50,		"Downwards Stair")
+			Tile(ep::character::downStair,		ep::color::doorFG,			ep::color::floorBG,		50,		12),
+			Tile(ep::character::downStair,		ep::color::doorFG,			ep::color::floorBG,		50,		12),
+			Tile(ep::character::downStair,		ep::color::doorFG,			ep::color::floorBG,		50,		12),
+			Tile(ep::character::downStair,		ep::color::doorFG,			ep::color::floorBG,		50,		12)
 		};
 	
 		inline static const std::vector<Tile> sky =
 		{
-			Tile(' ',							ep::color::windowFG,		ep::color::windowBG,	0,		"Sky"),
-			Tile(' ',							ep::color::windowFG,		ep::color::windowBG,	0,		"Sky"),
-			Tile(' ',							ep::color::windowFG,		ep::color::windowBG,	0,		"Sky"),
-			Tile(' ',							ep::color::windowFG,		ep::color::windowBG,	0,		"Sky")
+			Tile(' ',							ep::color::windowFG,		ep::color::windowBG,	0,		13),
+			Tile(' ',							ep::color::windowFG,		ep::color::windowBG,	0,		13),
+			Tile(' ',							ep::color::windowFG,		ep::color::windowBG,	0,		13),
+			Tile(' ',							ep::color::windowFG,		ep::color::windowBG,	0,		13)
 		};
 	
 		inline static const std::vector<Tile> error =
 		{
-			Tile('%',							TCODColor::pink,			TCODColor::pink,		999,	"ERROR"),
-			Tile('%',							TCODColor::pink,			TCODColor::pink,		999,	"ERROR"),
-			Tile('%',							TCODColor::pink,			TCODColor::pink,		999,	"ERROR"),
-			Tile('%',							TCODColor::pink,			TCODColor::pink,		999,	"ERROR")
+			Tile('%',							TCODColor::pink,			TCODColor::pink,		999,	-1),
+			Tile('%',							TCODColor::pink,			TCODColor::pink,		999,	-1),
+			Tile('%',							TCODColor::pink,			TCODColor::pink,		999,	-1),
+			Tile('%',							TCODColor::pink,			TCODColor::pink,		999,	-1)
 		};
 																					
 		inline static const std::vector<Tile> pistol =
 		{
-			Tile(ep::character::pistol,			ep::color::pistolFG,		ep::color::itemBG,		0,		"Pistol"),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),		
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),		
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0)
+			Tile(ep::character::pistol,			ep::color::pistolFG,		ep::color::itemBG,		0,		14),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
 		inline static const std::vector<Tile> pistolMagazine =
 		{
-			Tile(ep::character::pistolMagazine, ep::color::pistolFG,		ep::color::itemBG,		0,		"Pistol Magazine"),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),		
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),		
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0)
+			Tile(ep::character::pistolMagazine, ep::color::pistolFG,		ep::color::itemBG,		0,		15),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
 		inline static const std::vector<Tile> rifle =
 		{
-			Tile(ep::character::rifle,			ep::color::rifleFG,			ep::color::itemBG,		0,		"Rifle"),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),		
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),		
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0)
+			Tile(ep::character::rifle,			ep::color::rifleFG,			ep::color::itemBG,		0,		16),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
 		inline static const std::vector<Tile> rifleMagazine =
 		{
-			Tile(ep::character::rifleMagazine,	ep::color::rifleFG,			ep::color::itemBG,		0,		"Rifle Magazine"),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),		
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),		
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0)
+			Tile(ep::character::rifleMagazine,	ep::color::rifleFG,			ep::color::itemBG,		0,		17),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
 		inline static const std::vector<Tile> smallBackpack =
 		{
-			Tile(ep::character::backpack,		ep::color::smallBackpackFG, ep::color::itemBG,		0,		"Small Backpack"),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),		
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),		
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0)
+			Tile(ep::character::backpack,		ep::color::smallBackpackFG, ep::color::itemBG,		0,		18),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
 		inline static const std::vector<Tile> L1R3Armor =
 		{
-			Tile(ep::character::ballisticVest,	TCODColor::black,			ep::color::itemBG,		0,		"Level 1, R3 Armor"),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),		
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),		
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0)
+			Tile(ep::character::ballisticVest,	TCODColor::black,			ep::color::itemBG,		0,		19),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
 		inline static const std::vector<Tile> knife =
 		{
-			Tile(ep::character::knife,			TCODColor::silver,			ep::color::itemBG,		0,		"Knife"),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0)
+			Tile(ep::character::knife,			TCODColor::silver,			ep::color::itemBG,		0,		20),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	};
 
