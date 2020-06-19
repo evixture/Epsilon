@@ -33,7 +33,7 @@ void Ribbon::render() const
 //----------------------------------------------------------------------------------------------------
 
 Window::Window(int consoleWidth, int consoleHeight, std::string panelName, int rx, int ry)
-	: consoleWidth(consoleWidth), consoleHeight(consoleHeight), renderpos(Position3(rx, ry, NULL)), 
+	: consoleWidth(consoleWidth), consoleHeight(consoleHeight), renderpos(Position2(rx, ry)), 
 	mainPane(Pane(consoleWidth, consoleHeight, ep::color::rootBG, ep::color::rootFG)), ribbon(Ribbon(panelName, consoleWidth)), drawPane(Pane(consoleWidth, consoleHeight - 1, ep::color::drawBG, ep::color::drawFG))
 {
 }

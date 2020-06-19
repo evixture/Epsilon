@@ -38,7 +38,7 @@ struct Window
 {
 	const unsigned short int consoleWidth;
 	const unsigned short int consoleHeight;
-	Position3 renderpos;
+	Position2 renderpos;
 
 	Pane drawPane;
 
