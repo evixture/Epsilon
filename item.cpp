@@ -65,7 +65,7 @@ void ActionManager::doAction(Creature* currentOwner)
 //----------------------------------------------------------------------------------------------------
 
 Item::Item(const Creature* creature, int size, std::shared_ptr<Block> block, std::shared_ptr<Tool> tool, Position4 position, ItemType type)
-	: owner(creature), size(size), block(block), tool(tool), mapPosition(position), tileRenderPosition(position), distToEnt(5), type(type), barColor(TCODColor::white), lastKnownMapPosition(position)
+	: owner(creature), size(size), block(block), tool(tool), mapPosition(position), tileRenderPosition(position), distToEnt(5), type(type), barColor(TCODColor::white), lastKnownMapPosition(position), inFov(false)
 {
 	createActionManager();
 
@@ -165,6 +165,8 @@ void Item::changeBarColor()
 
 void Item::updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHeld)
 {
+	inFov = WORLD->isInPlayerFov(mapPosition); //need in tool?
+
 	tool->update(mapPosition, xMouse, yMouse, isHeld);
 	actionManager->update();
 
@@ -182,11 +184,13 @@ void Item::renderTool(const Pane& pane) const
 
 void Item::updateTile()
 {
+	inFov = WORLD->isInPlayerFov(mapPosition);
+
 	mapPosition.h = WORLD->debugmap->player->mapPosition.h;
 	distToEnt = getDistance(WORLD->debugmap->player->mapPosition.x, WORLD->debugmap->player->mapPosition.y, mapPosition.x, mapPosition.y);
 	//tileRenderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
-	if (WORLD->isInPlayerFov(mapPosition))
+	if (inFov)
 	{
 		lastKnownMapPosition = mapPosition; //need renderPosition?
 	}
@@ -199,12 +203,12 @@ void Item::renderTile(const Pane& pane) const
 {
 	block->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.h, tileRenderPosition.z), pane);
 
-	if (distToEnt < 5 && WORLD->isInPlayerFov(mapPosition))
+	if (distToEnt < 5 && inFov)
 	{
 		pane.console->setCharBackground(tileRenderPosition.x, tileRenderPosition.y, block->tileList[0].backgroundColor + TCODColor::darkGrey); //look into color later
 	}
 
-	if (!WORLD->isInPlayerFov(mapPosition))
+	if (!inFov)
 	{
 		pane.console->setChar(tileRenderPosition.x, tileRenderPosition.y, '?');
 		pane.console->setCharForeground(tileRenderPosition.x, tileRenderPosition.y, TCODColor::darkestGrey); //look into color later

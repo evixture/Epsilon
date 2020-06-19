@@ -53,6 +53,7 @@ struct Item
 
 	unsigned char size;
 	double distToEnt;
+	bool inFov;
 	
 	TCODColor barColor;
 
