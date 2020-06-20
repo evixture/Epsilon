@@ -135,8 +135,8 @@ void InventoryWindow::render() const
 {
 	clearWindow();
 
-	int drawLine = 0;
-	int drawLineStart = 0;
+	int drawLine = 0; //construction
+	int drawLineStart = 0; //construction
 
 	for (auto& container : inventoryItemList)
 	{
@@ -205,10 +205,10 @@ SplashWindow::SplashWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 	
 	for (int i = 0; i < numSlashIndexes; i++)
 	{
-		int val;
+		int val = (i == 0)? 0 : (int)(slashList.size() / numSlashIndexes) * i; //construction
 
-		if (i == 0) val = 0;
-		else		val = (int)(slashList.size() / numSlashIndexes) * i;
+		//if (i == 0) val = 0;
+		//else		val = (int)(slashList.size() / numSlashIndexes) * i;
 
 		slashIndexList.push_back(val);
 	}
@@ -262,8 +262,8 @@ void SplashWindow::render() const
 {
 	clearWindow();
 
-	int slashWidth	= ((drawPane.consoleWidth / 2)	- (drawPane.consoleWidth % 2));
-	int slashHeight = ((drawPane.consoleHeight / 2) - (drawPane.consoleHeight % 2));
+	int slashWidth	= ((drawPane.consoleWidth / 2)	- (drawPane.consoleWidth % 2)); //construction
+	int slashHeight = ((drawPane.consoleHeight / 2) - (drawPane.consoleHeight % 2)); //construction
 
 	for (int y = 0; y < slashHeight; y++)
 	{
@@ -319,8 +319,8 @@ void InventoryFullWindow::render() const
 {
 	clearWindow();
 
-	int drawLine = 0;
-	int drawLineStart = 0;
+	int drawLine = 0; //construction
+	int drawLineStart = 0; //construction
 
 	for (auto& container : inventoryItemList)
 	{
@@ -407,7 +407,7 @@ void LogWindow::render() const
 {
 	clearWindow();
 
-	int line = 0;
+	int line = 0; //construction
 	for (int i = 0; i < messageList.size(); ++i)
 	{
 		if (i == 0) drawPane.console->printf(0, line, "|>%s", messageList[i].message.c_str());
@@ -441,7 +441,7 @@ void ProximityWindow::render() const
 {
 	clearWindow();
 
-	int line = 0;
+	int line = 0; //construction
 
 	for (auto& container : proximityContainerList)
 	{
@@ -602,7 +602,7 @@ void InfoWindow::setTileDetails()
 	{
 		if (WORLD->debugmap->getBlock(Position3(INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, WORLD->debugmap->player->mapPosition.z))->explored)
 		{
-			static Position3 position = Position3(INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, WORLD->debugmap->player->mapPosition.z);
+			static Position3 position = Position3(INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, WORLD->debugmap->player->mapPosition.z); //construction
 			tileDetail = getTileName(WORLD->debugmap->getBlock(position)->getTileData(WORLD->debugmap->player->mapPosition.h).nameID);
 		}
 	}

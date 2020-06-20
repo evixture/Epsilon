@@ -17,8 +17,8 @@ void AICreature::move()
 			default stance is standing, but lower if stealth
 	*/
 
-	static int stepSound;
-	static int stepSpeed;
+	static int stepSound; //construction
+	static int stepSpeed; //construction
 
 	if (moveSpeedMode == 2)			baseMoveTime = .25f; //sprint
 	else if (moveSpeedMode == 0)	baseMoveTime = 1.0f; //creep
@@ -280,10 +280,10 @@ void AICreature::filterIndexes()
 
 void AICreature::selectAppropriateItem(float range)
 {
-	bool canFindOptimal = false;
-	float deltaRange = 100;
-	int cInd = 999;
-	int iInd = 999;
+	bool canFindOptimal = false; //construction
+	float deltaRange = 100; //construction
+	int cInd = 999; //construction
+	int iInd = 999; //construction
 
 	if (attitude < .25f) //if not very aggressive, keep hands out
 	{
@@ -351,36 +351,18 @@ void AICreature::decayInterest()
 
 	for (int i = 1; i <= interestDecayClock.numCalls; interestDecayClock.numCalls--)
 	{
-		if (soundInterest - interestDecay < 0)
-		{
-			soundInterest = 0;
-		}
-		else
-		{
-			soundInterest -= interestDecay;
-		}
+		if (soundInterest - interestDecay < 0)	soundInterest = 0;
+		else									soundInterest -= interestDecay;
 
 		if (!inFov) //decay out of fov
 		{
-			if (visualInterest - interestDecay < 0)
-			{
-				visualInterest = 0;
-			}
-			else
-			{
-				visualInterest -= interestDecay;
-			}
+			if (visualInterest - interestDecay < 0) visualInterest = 0;
+			else									visualInterest -= interestDecay;
 		}
 		else
 		{
-			if (visualInterest + .25f > calcVisInt)
-			{
-				visualInterest = calcVisInt;
-			}
-			else
-			{
-				visualInterest += 0.25f;
-			}
+			if (visualInterest + .25f > calcVisInt) visualInterest = calcVisInt;
+			else									visualInterest += 0.25f;
 		}
 	}
 }
@@ -393,24 +375,15 @@ void AICreature::reactToSounds()
 		{
 			if (sound->getPosition().second.z == mapPosition.z)
 			{
-				float soundInterestChange;
-				double distance = getDistance(mapPosition.x, mapPosition.y, sound->getPosition().second.x, sound->getPosition().second.y);
+				float soundInterestChange; //construction
+				double distance = getDistance(mapPosition.x, mapPosition.y, sound->getPosition().second.x, sound->getPosition().second.y); //construction
 
-				if (distance > 0.0f)
-				{
-					soundInterestChange = (float)((15.0f / (distance + 30.0f)) * (sound->worldVolume / 50.f));
-				}
-				else
-				{
-					soundInterestChange = 0.0f;
-				}
+				if (distance > 0.0f) soundInterestChange = (float)((15.0f / (distance + 30.0f)) * (sound->worldVolume / 50.f));
+				else soundInterestChange = 0.0f;
 
 				if (soundInterestChange >= 0.5f)
 				{
-					if (soundInterest < soundInterestChange)
-					{
-						soundInterest = soundInterestChange;
-					}
+					if (soundInterest < soundInterestChange) soundInterest = soundInterestChange;
 					
 					pathfindPosition = getWalkableArea(sound->getPosition().second);
 					lookPosition = sound->getPosition().second;
@@ -480,7 +453,7 @@ void AICreature::act()
 	if at 128 stance, nothing is aggressive
 	*/
 
-	Position3 deltaStance = this->stance - WORLD->debugmap->player->stance;
+	Position3 deltaStance = this->stance - WORLD->debugmap->player->stance; //construction
 	if (deltaStance.x >= 0) if (attitude < deltaStance.x / 255.0f) attitude = deltaStance.x / 255.0f;
 	if (deltaStance.y >= 0) if (attitude < deltaStance.y / 255.0f) attitude = deltaStance.y / 255.0f;
 	if (deltaStance.z >= 0) if (attitude < deltaStance.z / 255.0f) attitude = deltaStance.z / 255.0f;
@@ -554,10 +527,8 @@ void AICreature::update() //ai and behavior attributes update here
 		color = TCODColor::red;
 	}
 
-	if (inFov)
-	{
-		lastKnownMapPosition = mapPosition; //need renderPosition?
-	}
+	if (inFov) lastKnownMapPosition = mapPosition; //need renderPosition?
+
 	//renderPosition = offsetPosition(lastKnownMapPosition, WORLD->xOffset, WORLD->yOffset); //replace lkrp with renderPosition update?
 	renderPosition = getRenderPosition(lastKnownMapPosition);
 
@@ -581,7 +552,7 @@ void AICreature::render(const Pane& pane) const
 		if (false) //show pathfinding information
 		{
 			//render path
-			int x, y;
+			int x, y; //construction
 			for (int i = 0; i < path.size(); i++)
 			{
 				path.get(i, &x, &y);
@@ -598,10 +569,7 @@ void AICreature::render(const Pane& pane) const
 	
 		if (health != 0)
 		{
-			if (inFov)
-			{
-				selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
-			}
+			if (inFov) selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
 		}
 	}
 }

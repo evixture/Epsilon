@@ -126,10 +126,7 @@ Player::Player(Position4 position)
 
 	if (inventory.size() > 0)
 	{
-		if (inventory[0]->itemList.size() > 0)
-		{
-			selectedItem = inventory[containerIndex]->itemList[itemIndex];
-		}
+		if (inventory[0]->itemList.size() > 0) selectedItem = inventory[containerIndex]->itemList[itemIndex];
 	}
 	else
 	{
@@ -139,7 +136,7 @@ Player::Player(Position4 position)
 
 void Player::move()
 {
-	static int stepSound;
+	static int stepSound; //construction
 	static int stepSpeed;
 	static bool moved = false;
 
@@ -149,7 +146,7 @@ void Player::move()
 		else if (INPUT->moveSlowKey->isDown)	baseMoveTime = 1.0f;
 		else									baseMoveTime = .5f;
 
-		int xMoveDist = 0;
+		int xMoveDist = 0; //construction
 		int yMoveDist = 0;
 
 		if (INPUT->stanceDownKey->isSwitched) changeStanceDown();
@@ -379,14 +376,8 @@ void Player::filterIndexes()
 	//	-1 : container selected
 	//	0+ : item in vector
 
-	if (containerIndex + 1 > (inventory.size()))
-	{
-		containerIndex = (int)(inventory.size() - 1);
-	}
-	else if (containerIndex == -1 && inventory.size() > 0)
-	{
-		containerIndex = 0;
-	}
+	if (containerIndex + 1 > (inventory.size())) containerIndex = (int)(inventory.size() - 1);
+	else if (containerIndex == -1 && inventory.size() > 0) containerIndex = 0;
 
 	if (containerIndex != -1) //selected an item, not a container
 	{
@@ -452,36 +443,17 @@ void Player::updateTools()
 	{
 		for (int i = 0; i < inventory.size(); i++)
 		{
-			if (itemIndex == -1 && containerIndex == i) //if container is the held item
-			{
-				//special update the held container
-				inventory[i]->item->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, true); //uses the map position of the mouse
-			}
-			else
-			{
-				//normal update the container
-				inventory[i]->item->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, false);
-			}
+			if (itemIndex == -1 && containerIndex == i) inventory[i]->item->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, true); //uses the map position of the mouse		
+			else inventory[i]->item->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, false);
 
 			for (int j = 0; j < inventory[i]->itemList.size(); j++) //stops when i gets to empty container list
 			{
-				if (itemIndex == j && containerIndex == i)
-				{
-					//special update held item
-					inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, true);
-				}
-				else
-				{
-					//normal update the item
-					inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, false);
-				}
+				if (itemIndex == j && containerIndex == i) inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, true);
+				else inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, false);
 			}
 		}
 	}
-	else
-	{
-		selectedItem->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, true);
-	}
+	else selectedItem->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, true);
 }
 
 void Player::update()
@@ -491,10 +463,7 @@ void Player::update()
 
 	if (health != 0) //if player is alive
 	{
-		if (INPUT->highlightKey->isDown)
-		{
-			backgroundColor = TCODColor::yellow;
-		}
+		if (INPUT->highlightKey->isDown) backgroundColor = TCODColor::yellow;
 		else backgroundColor = TCODColor::pink;
 
 		//items
@@ -502,52 +471,21 @@ void Player::update()
 		{
 			if (!INPUT->deepInteractKey->isDown)
 			{
-				if (INPUT->TCODmouse.wheel_up)
-				{
-					moveSelectorUp();
-				}
-				else if (INPUT->TCODmouse.wheel_down)
-				{
-					moveSelectorDown();
-				}
+				if (INPUT->TCODmouse.wheel_up) moveSelectorUp();
+				else if (INPUT->TCODmouse.wheel_down) moveSelectorDown();
 			}
 			else if (INPUT->deepInteractKey->isDown)
 			{
-				if (INPUT->TCODmouse.wheel_up)
-				{
-					selectedItem->actionManager->moveSelectorUp();
-				}
-				else if (INPUT->TCODmouse.wheel_down)
-				{
-					selectedItem->actionManager->moveSelectorDown();
-				}
+				if (INPUT->TCODmouse.wheel_up) selectedItem->actionManager->moveSelectorUp();
+				else if (INPUT->TCODmouse.wheel_down) selectedItem->actionManager->moveSelectorDown();
 			}
 		}
 		
-		if (INPUT->pickUpKey->isSwitched)
-		{
-			pickUpItem();
-		}
-		
-		if (INPUT->dropKey->isSwitched)
-		{
-			dropItem();
-		}
-		
-		if (INPUT->reloadKey->isSwitched)
-		{
-			reload();
-		}
-
-		if (INPUT->primaryUseButton->isDown)
-		{
-			selectedItem->tool->use(INPUT->primaryUseButton->isDown, INPUT->primaryUseButton->isSwitched);
-		}
-
-		if (INPUT->alternateUseButton->isSwitched)
-		{
-			selectedItem->actionManager->doAction(this);
-		}
+		if (INPUT->pickUpKey->isSwitched)			pickUpItem(); 
+		if (INPUT->dropKey->isSwitched)				dropItem(); 
+		if (INPUT->reloadKey->isSwitched)			reload(); 
+		if (INPUT->primaryUseButton->isDown)		selectedItem->tool->use(INPUT->primaryUseButton->isDown, INPUT->primaryUseButton->isSwitched); 
+		if (INPUT->alternateUseButton->isSwitched)	selectedItem->actionManager->doAction(this);
 		
 		filterIndexes();
 		
@@ -558,10 +496,7 @@ void Player::update()
 		//world
 		if (INPUT->worldInteractKey->isSwitched)
 		{
-			if (WORLD->debugmap->getBlock(mapPosition)->tag == Block::Tag::STAIR)
-			{
-				WORLD->debugmap->getBlock(mapPosition)->interact();
-			}
+			if (WORLD->debugmap->getBlock(mapPosition)->tag == Block::Tag::STAIR) WORLD->debugmap->getBlock(mapPosition)->interact();
 		}
 
 		move();
@@ -575,10 +510,7 @@ void Player::update()
 
 void Player::render(const Pane& pane) const
 {
-	if (backgroundColor != TCODColor::pink)
-	{
-		pane.console->setCharBackground(renderPosition.x, renderPosition.y, backgroundColor);
-	}
+	if (backgroundColor != TCODColor::pink) pane.console->setCharBackground(renderPosition.x, renderPosition.y, backgroundColor);
 
 	if (health != 0)
 	{
@@ -586,10 +518,7 @@ void Player::render(const Pane& pane) const
 		{
 			container->item->renderTool(pane);
 
-			for (auto& tool : container->itemList)
-			{
-				tool->renderTool(pane);
-			}
+			for (auto& tool : container->itemList) tool->renderTool(pane);
 		}
 	}
 

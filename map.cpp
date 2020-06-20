@@ -511,8 +511,8 @@ bool Map::getWalkability(Position4 position, bool checkCreatures) const
 		}
 	}
 
-	bool walkableBool = true;
-	unsigned char walkableFlag = getBlock(position)->walkableFlag;
+	bool walkableBool = true; //construction
+	unsigned char walkableFlag = getBlock(position)->walkableFlag; //construction
 
 	for (int i = 0; i < position.h; ++i)
 	{
@@ -689,25 +689,13 @@ void World::renderTiles(const Pane& pane) const
 		{
 			if (false) //render walkability
 			{
-				if (debugmap->getWalkability(Position4(x, y, debugmap->player->mapPosition.h, 0), true) == true)
-				{
-					pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::green);
-				}
-				else
-				{
-					pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::red);
-				}
+				if (debugmap->getWalkability(Position4(x, y, debugmap->player->mapPosition.h, 0), true) == true)	pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::green);
+				else																								pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::red);
 			}
 			else if (false) //render fov
 			{
-				if (isInPlayerFov(Position4(x, y, debugmap->player->mapPosition.h, 0)) == true) //all tiles not on player height are out of fov
-				{
-					pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::green);
-				}
-				else
-				{
-					pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::red);
-				}
+				if (isInPlayerFov(Position4(x, y, debugmap->player->mapPosition.h, 0)) == true) pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::green);
+				else																			pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::red);
 			}
 			else debugmap->getBlock(Position3(x, y, debugmap->player->mapPosition.z))->render(Position4(x - xOffset, y - yOffset, debugmap->player->mapPosition.h, debugmap->player->mapPosition.z), pane);
 		}
@@ -718,28 +706,19 @@ void World::renderWorldItems(const Pane& pane) const
 {
 	for (auto& item : debugmap->mapItemList)
 	{
-		if (item->mapPosition.z == debugmap->player->mapPosition.z)
-		{
-			item->renderTile(pane);
-		}
+		if (item->mapPosition.z == debugmap->player->mapPosition.z) item->renderTile(pane);
 	}
 
 	for (auto& container : debugmap->mapContainerList)
 	{
-		if (container->item->mapPosition.z == debugmap->player->mapPosition.z)
-		{
-			container->item->renderTile(pane);
-		}
+		if (container->item->mapPosition.z == debugmap->player->mapPosition.z) container->item->renderTile(pane);
 	}
 }
 
 void World::renderCreatures(const Pane& pane) const
 {
 	//render creature items first, then creatures in seperate pass??
-	for (auto& creature : debugmap->creatureList)
-	{
-		creature->render(pane);
-	}
+	for (auto& creature : debugmap->creatureList) creature->render(pane);
 	debugmap->player->render(pane);
 }
 

@@ -19,7 +19,7 @@ struct Position2
 	int x;
 	int y;
 
-	Position2();
+	Position2() = default;
 	Position2(int x, int y);
 
 	Position2(Position3 position);
@@ -35,7 +35,7 @@ struct Position3 : public Position2
 	int y;*/
 	int z; //floor when used as position
 
-	Position3();
+	Position3() = default;
 	Position3(int x, int y, int z);
 
 	Position3(Position4 position);
@@ -50,7 +50,7 @@ struct Position4 : public Position3
 {
 	char h; //range 0-3
 
-	Position4();
+	Position4() = default;
 	Position4(int x, int y, int h, int z);
 
 	bool operator == (const Position4& compPosition);

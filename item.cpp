@@ -192,10 +192,8 @@ void Item::updateTile()
 	distToEnt = getDistance(WORLD->debugmap->player->mapPosition.x, WORLD->debugmap->player->mapPosition.y, mapPosition.x, mapPosition.y);
 	//tileRenderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
-	if (inFov)
-	{
-		lastKnownMapPosition = mapPosition; //need renderPosition?
-	}
+	if (inFov) lastKnownMapPosition = mapPosition; //need renderPosition?
+
 	//tileRenderPosition = offsetPosition(lastKnownMapPosition, WORLD->xOffset, WORLD->yOffset); //replace lkrp with renderPosition update?
 	tileRenderPosition = Position4(mapPosition.x - WORLD->xOffset, mapPosition.y - WORLD->yOffset, mapPosition.h, mapPosition.z); //replace with better way?
 
@@ -249,7 +247,7 @@ Container::Container(int itemCapacity, std::shared_ptr<Item> item, std::vector<s
 
 bool Container::addItem(std::shared_ptr<Item> item)
 {
-	int spaceUsed = 0;
+	int spaceUsed = 0; //construction
 
 	for (auto& i : itemList) spaceUsed += i->size;
 

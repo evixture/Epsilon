@@ -23,7 +23,7 @@ protected:
 struct KeyboardButton : public Button
 {
 	KeyboardButton(sf::Keyboard::Key key);
-	KeyboardButton();
+	KeyboardButton() = default;
 
 	void update();
 
@@ -34,7 +34,7 @@ private:
 struct MouseButton : public Button
 {
 	MouseButton(sf::Mouse::Button button);
-	MouseButton();
+	MouseButton() = default;
 
 	void update();
 

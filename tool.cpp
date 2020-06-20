@@ -169,9 +169,9 @@ void Melee::useMelee()
 {
 	for (auto& creature : WORLD->debugmap->creatureList)
 	{
-		if (mapPosition.x == creature->mapPosition.x && mapPosition.y == creature->mapPosition.y)
+		if (mapPosition == creature->mapPosition)
 		{
-			if (creature != WORLD->debugmap->player)
+			if (creature.get() != owner)
 			{
 				doMeleeDamage(creature);
 
@@ -194,10 +194,10 @@ void Melee::doMeleeDamage(std::shared_ptr<Creature>& creature)
 {
 	if (creature->health > 0) //if creature is alive //HOW TO CHECK IF NOT HOLDING CREATURE
 	{																				
-		float sharpDamageResult = sharpDamage * (1.0f - (creature->equippedArmor.defense / 400.0f));
-		float bluntDamageResult = bluntDamage * 1.0f; //should bluntdamage do less damage at higher armor?
+		float sharpDamageResult = sharpDamage * (1.0f - (creature->equippedArmor.defense / 400.0f)); //construction
+		float bluntDamageResult = bluntDamage * 1.0f; //should bluntdamage do less damage at higher armor? //construction
 
-		int totalDamage = int(sharpDamageResult + bluntDamageResult);
+		int totalDamage = int(sharpDamageResult + bluntDamageResult); //construction
 
 		creature->takeDamage(totalDamage);
 
@@ -308,7 +308,7 @@ void Bullet::update()
 					AUDIO->playSound(PositionalStaticSound(("crash"), mapPosition, 85.0f, 100.0f));
 				}
 
-				int decel = WORLD->debugmap->getBlock(mapPosition)->tileList[mapPosition.h].deceleration;
+				int decel = WORLD->debugmap->getBlock(mapPosition)->tileList[mapPosition.h].deceleration; //construction
 
 				if (currentVelocity - decel < 0)
 				{
@@ -559,16 +559,13 @@ void Firearm::fireBullet()
 
 bool Firearm::reload(MagazineData& magazine)
 {
-	if (this->isHeld)
+	if (this->isHeld && reloadClock.numCalls >= 1.0f)
 	{
-		if (reloadClock.numCalls >= 1.0f) //if it can reload
-		{
-			std::swap(this->usedMag, magazine);
-			reloadClock.addTime(reloadTime);
-			AUDIO->playSound(PositionalTrackedSound(("check chick"), &mapPosition, 65.0f, 40.0f));
+		std::swap(this->usedMag, magazine);
+		reloadClock.addTime(reloadTime);
+		AUDIO->playSound(PositionalTrackedSound(("check chick"), &mapPosition, 65.0f, 40.0f));
 
-			return true;
-		}
+		return true;
 	}
 	return false;
 }
@@ -645,8 +642,8 @@ void Firearm::use(bool hold, bool swtch)
 	{
 		if (fireClock.numCalls >= 1.0f && usedMag.availableAmmo > 0 && reloadClock.numCalls >= 1.0f) //fires bullet
 		{
-			if		(fireMode == FireType::FULL && (hold || swtch)) fireBullet();
-			else if (fireMode == FireType::SEMI && swtch)			fireBullet();
+			if ((fireMode == FireType::FULL && (hold || swtch)) || (fireMode == FireType::SEMI && swtch)) fireBullet();
+			//else if (fireMode == FireType::SEMI && swtch)			fireBullet();
 		}
 	}
 }

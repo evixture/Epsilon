@@ -50,12 +50,9 @@ void Audio::update()
 {
 	if (soLoud.getActiveVoiceCount() < soundList.size()) //if more sounds are in the list than are actually playing
 	{
-		int excessSounds = (int)soundList.size() - soLoud.getActiveVoiceCount();
+		int excessSounds = (int)soundList.size() - soLoud.getActiveVoiceCount(); //construction
 
-		for (int e = 0; e < excessSounds; e++)
-		{
-			soundList.erase(soundList.begin()); //delete the front (oldest) sound until all old sounds are gone //may delete old long playing sounds?
-		}
+		for (int e = 0; e < excessSounds; e++) soundList.erase(soundList.begin()); //delete the front (oldest) sound until all old sounds are gone //may delete old long playing sounds?
 	}
 
 	soLoud.set3dListenerPosition((float)WORLD->debugmap->player->mapPosition.x, (float)WORLD->debugmap->player->mapPosition.h, (float)WORLD->debugmap->player->mapPosition.y);
@@ -72,7 +69,7 @@ void Audio::update()
 
 int Audio::playSound(Sound sound)
 {
-	int handle = 0;
+	int handle = 0; //construction
 
 	if (sound.getPosition().first == true) //3d sound
 	{

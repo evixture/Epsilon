@@ -1,10 +1,5 @@
 #include "main.hpp"
 
-Position2::Position2()
-	: x(0), y(0)
-{
-}
-
 Position2::Position2(int x, int y)
 	: x(x), y(y)
 {
@@ -27,11 +22,6 @@ bool Position2::operator==(const Position2& compPosition)
 
 //----------------------------------------------------------------------------------------------------
 
-Position3::Position3()
-	: Position2(x, y), z(0)
-{
-}
-
 Position3::Position3(int x, int y, int z)
 	: Position2(x, y), z(z)
 {
@@ -53,11 +43,6 @@ Position3 Position3::operator-(const Position3& compPosition)
 }
 
 //----------------------------------------------------------------------------------------------------
-
-Position4::Position4()
-	:Position3(0, 0, 0), h(0)
-{
-}
 
 Position4::Position4(int x, int y, int h, int z)
 	: Position3(x, y, z), h(h)
@@ -167,14 +152,14 @@ unsigned char heightToBitFlag(int h)
 
 double getAngle(int xStart, int yStart, int xTarget, int yTarget)
 {
-	double itan = (double)(yTarget - yStart) / (double)(xTarget - xStart);
+	double itan = (double)(yTarget - yStart) / (double)(xTarget - xStart); //construction
 	return atan(itan) * 180.0 / PI;
 }
 
 double getDistance(int xStart, int yStart, int xTarget, int yTarget)
 {
-	double xLength = pow(xTarget - xStart, 2);
-	double yLength = pow(yTarget - yStart, 2);
+	double xLength = pow(xTarget - xStart, 2); //construction
+	double yLength = pow(yTarget - yStart, 2); //construction
 	return sqrt(xLength + yLength);
 }
 
@@ -294,10 +279,7 @@ Position4 getWalkableArea(Position4 centerPosition)
 	*/
 
 	//if center position is valid
-	if (WORLD->debugmap->getWalkability(centerPosition, true) == true)
-	{
-		return centerPosition;
-	}
+	if (WORLD->debugmap->getWalkability(centerPosition, true) == true) return centerPosition;
 
 	//search the surrounding area for walkable block
 	for (int y = -1; y <= 1; y++)
@@ -306,7 +288,7 @@ Position4 getWalkableArea(Position4 centerPosition)
 		{
 			if (!(x == 0 && y == 0)) // do not check center position
 			{
-				if (WORLD->debugmap->getWalkability(Position4(centerPosition.x + x, centerPosition.y + y, centerPosition.h, centerPosition.z), true) == true)
+				if (WORLD->debugmap->getWalkability(Position4(centerPosition.x + x, centerPosition.y + y, centerPosition.h, centerPosition.z), true) == true) //can use single var for this and return
 				{
 					return Position4(centerPosition.x + x, centerPosition.y + y, centerPosition.h, centerPosition.z);
 				}

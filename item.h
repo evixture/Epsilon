@@ -47,7 +47,7 @@ private:
 
 struct Item
 {
-	const Creature* owner; //creature and its pointer cannot be modified
+	const Creature* owner;
 
 	enum class ItemType {HAND, NORMAL, FIREARM, MAGAZINE, ARMOR, MELEE} type;
 
