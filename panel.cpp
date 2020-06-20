@@ -135,8 +135,8 @@ void InventoryWindow::render() const
 {
 	clearWindow();
 
-	static int drawLine = 0;
-	static int drawLineStart = 0;
+	int drawLine = 0; //construction
+	int drawLineStart = 0; //construction
 
 	for (auto& container : inventoryItemList)
 	{
@@ -602,7 +602,7 @@ void InfoWindow::setTileDetails()
 	{
 		if (WORLD->debugmap->getBlock(Position3(INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, WORLD->debugmap->player->mapPosition.z))->explored)
 		{
-			static Position3 position = Position3(INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, WORLD->debugmap->player->mapPosition.z);
+			static Position3 position = Position3(INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, WORLD->debugmap->player->mapPosition.z); //construction
 			tileDetail = getTileName(WORLD->debugmap->getBlock(position)->getTileData(WORLD->debugmap->player->mapPosition.h).nameID);
 		}
 	}

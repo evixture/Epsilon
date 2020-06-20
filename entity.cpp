@@ -136,7 +136,7 @@ Player::Player(Position4 position)
 
 void Player::move()
 {
-	static int stepSound;
+	static int stepSound; //construction
 	static int stepSpeed;
 	static bool moved = false;
 
@@ -146,7 +146,7 @@ void Player::move()
 		else if (INPUT->moveSlowKey->isDown)	baseMoveTime = 1.0f;
 		else									baseMoveTime = .5f;
 
-		int xMoveDist = 0;
+		int xMoveDist = 0; //construction
 		int yMoveDist = 0;
 
 		if (INPUT->stanceDownKey->isSwitched) changeStanceDown();

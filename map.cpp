@@ -511,8 +511,8 @@ bool Map::getWalkability(Position4 position, bool checkCreatures) const
 		}
 	}
 
-	static bool walkableBool = true;
-	static unsigned char walkableFlag = getBlock(position)->walkableFlag;
+	bool walkableBool = true; //construction
+	unsigned char walkableFlag = getBlock(position)->walkableFlag; //construction
 
 	for (int i = 0; i < position.h; ++i)
 	{

@@ -17,8 +17,8 @@ void AICreature::move()
 			default stance is standing, but lower if stealth
 	*/
 
-	static int stepSound;
-	static int stepSpeed;
+	static int stepSound; //construction
+	static int stepSpeed; //construction
 
 	if (moveSpeedMode == 2)			baseMoveTime = .25f; //sprint
 	else if (moveSpeedMode == 0)	baseMoveTime = 1.0f; //creep

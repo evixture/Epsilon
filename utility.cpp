@@ -152,15 +152,15 @@ unsigned char heightToBitFlag(int h)
 
 double getAngle(int xStart, int yStart, int xTarget, int yTarget)
 {
-	//double itan = (double)(yTarget - yStart) / (double)(xTarget - xStart);
-	return atan((double)(yTarget - yStart) / (double)(xTarget - xStart)) * 180.0 / PI;
+	double itan = (double)(yTarget - yStart) / (double)(xTarget - xStart); //construction
+	return atan(itan) * 180.0 / PI;
 }
 
 double getDistance(int xStart, int yStart, int xTarget, int yTarget)
 {
-	//double xLength = pow(xTarget - xStart, 2);
-	//double yLength = pow(yTarget - yStart, 2);
-	return sqrt(pow(xTarget - xStart, 2) + pow(yTarget - yStart, 2));
+	double xLength = pow(xTarget - xStart, 2); //construction
+	double yLength = pow(yTarget - yStart, 2); //construction
+	return sqrt(xLength + yLength);
 }
 
 float getFallTime(int h)
