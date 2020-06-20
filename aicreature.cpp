@@ -2,7 +2,8 @@
 
 AICreature::AICreature(Creature creature, TCODMap* fovMap)
 	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), soundInterest(0.0f), visualInterest(0.0f), interestDecay(.05f), interestDecayClock(0.5f), 
-	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false), attitude(0), actionClock(Clock(1.0f)), actionIndex(0), lastKnownMapPosition(creature.mapPosition)
+	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false), attitude(0), actionClock(Clock(1.0f)), actionIndex(0), lastKnownMapPosition(creature.mapPosition), stepSound(0), stepSpeed(0),
+	canFindOptimal(false), deltaRange(100), cInd(999), iInd(999), distance(0.0), soundInterestChange(0.0f), deltaStance(Position3(0, 0, 0)), x(0), y(0)
 {
 	inventory = ep::inventory::testInventory(this);
 
@@ -17,8 +18,8 @@ void AICreature::move()
 			default stance is standing, but lower if stealth
 	*/
 
-	static int stepSound; //construction
-	static int stepSpeed; //construction
+	//static int stepSound;
+	stepSpeed = 0;
 
 	if (moveSpeedMode == 2)			baseMoveTime = .25f; //sprint
 	else if (moveSpeedMode == 0)	baseMoveTime = 1.0f; //creep
@@ -280,10 +281,10 @@ void AICreature::filterIndexes()
 
 void AICreature::selectAppropriateItem(float range)
 {
-	bool canFindOptimal = false; //construction
-	float deltaRange = 100; //construction
-	int cInd = 999; //construction
-	int iInd = 999; //construction
+	canFindOptimal = false;
+	deltaRange = 100;
+	cInd = 999;
+	iInd = 999;
 
 	if (attitude < .25f) //if not very aggressive, keep hands out
 	{
@@ -375,8 +376,7 @@ void AICreature::reactToSounds()
 		{
 			if (sound->getPosition().second.z == mapPosition.z)
 			{
-				float soundInterestChange; //construction
-				double distance = getDistance(mapPosition.x, mapPosition.y, sound->getPosition().second.x, sound->getPosition().second.y); //construction
+				distance = getDistance(mapPosition.x, mapPosition.y, sound->getPosition().second.x, sound->getPosition().second.y);
 
 				if (distance > 0.0f) soundInterestChange = (float)((15.0f / (distance + 30.0f)) * (sound->worldVolume / 50.f));
 				else soundInterestChange = 0.0f;
@@ -453,7 +453,7 @@ void AICreature::act()
 	if at 128 stance, nothing is aggressive
 	*/
 
-	Position3 deltaStance = this->stance - WORLD->debugmap->player->stance; //construction
+	deltaStance = this->stance - WORLD->debugmap->player->stance;
 	if (deltaStance.x >= 0) if (attitude < deltaStance.x / 255.0f) attitude = deltaStance.x / 255.0f;
 	if (deltaStance.y >= 0) if (attitude < deltaStance.y / 255.0f) attitude = deltaStance.y / 255.0f;
 	if (deltaStance.z >= 0) if (attitude < deltaStance.z / 255.0f) attitude = deltaStance.z / 255.0f;
@@ -552,10 +552,10 @@ void AICreature::render(const Pane& pane) const
 		if (false) //show pathfinding information
 		{
 			//render path
-			int x, y; //construction
+			//int x, y;
 			for (int i = 0; i < path.size(); i++)
 			{
-				path.get(i, &x, &y);
+				//path.get(i, &x, &y);
 
 				pane.console->setCharBackground(x - WORLD->xOffset, y - WORLD->yOffset, TCODColor::pink);
 			}

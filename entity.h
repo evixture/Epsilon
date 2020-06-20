@@ -99,6 +99,13 @@ private:
 	void moveSelectorDown(); //moves the selector down on the inventory
 	void filterIndexes(); //filters the container and item indexes to make sure they are in range
 
+	int stepSound;
+	int stepSpeed;
+	bool moved;// = false;
+
+	int xMoveDist;// = 0;
+	int yMoveDist;// = 0;
+
 	friend struct ActionManager;
 };
 

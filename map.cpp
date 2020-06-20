@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 Map::Map(std::string filePath)
-	: filePath(filePath), height(NULL), width(NULL), totalFloors(NULL)
+	: filePath(filePath), height(NULL), width(NULL), totalFloors(NULL), walkableBool(true), walkableFlag(0)
 {
 	TCODRandom* RNG = TCODRandom::getInstance();
 	RNG->setDistribution(TCOD_DISTRIBUTION_LINEAR);
@@ -511,8 +511,8 @@ bool Map::getWalkability(Position4 position, bool checkCreatures) const
 		}
 	}
 
-	bool walkableBool = true; //construction
-	unsigned char walkableFlag = getBlock(position)->walkableFlag; //construction
+	walkableBool = true;
+	walkableFlag = getBlock(position)->walkableFlag;
 
 	for (int i = 0; i < position.h; ++i)
 	{
