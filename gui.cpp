@@ -86,7 +86,7 @@ void Gui::renderMouse() const
 	{
 		if (INPUT->mouse->screenPosition.x >= 1 && INPUT->mouse->screenPosition.x <= 60 && INPUT->mouse->screenPosition.y >= 3 && INPUT->mouse->screenPosition.y <= 60)
 		{		
-			Position3 position = Position3(INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.x, WORLD->debugmap->player->mapPosition.z);
+			Position3 position = Position3(INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, WORLD->debugmap->player->mapPosition.z);
 			TCODColor color = worldWindow->world->debugmap->getBlock(position)->tileList[0].backgroundColor;
 			TCODConsole::root->setCharBackground(INPUT->mouse->screenPosition.x, INPUT->mouse->screenPosition.y, color - TCODColor::darkestGrey);
 		}
@@ -96,8 +96,35 @@ void Gui::renderMouse() const
 
 void Gui::render() const
 {
-	if (activeWindow == Gui::ActiveWindow::NONE)
+	//if (activeWindow == Gui::ActiveWindow::NONE)
+	//{
+	//	worldWindow->render();
+	//	playerWindow->render();
+	//	statusWindow->render();
+	//	inventoryWindow->render();
+	//	proximityWindow->render();
+	//	actionWindow->render();
+	//
+	//	if		(activeLogWindow == Gui::ActiveLogWindow::LOG)	logWindow->render();
+	//	else if (activeLogWindow == Gui::ActiveLogWindow::INFO) infoWindow->render();
+	//}
+	//else if (activeWindow == Gui::ActiveWindow::STARTUPSPLASH)
+	//{
+	//	startupSplashWindow->render();
+	//}
+	//else if (activeWindow == Gui::ActiveWindow::INVENTORYFULL)
+	//{
+	//	worldWindow->render();
+	//	inventoryFullWindow->render();
+	//}
+	//else if (activeWindow == Gui::ActiveWindow::PAUSE)
+	//{
+	//	pauseWindow->render();
+	//}
+
+	switch (activeWindow)
 	{
+	case Gui::ActiveWindow::NONE:
 		worldWindow->render();
 		playerWindow->render();
 		statusWindow->render();
@@ -105,21 +132,22 @@ void Gui::render() const
 		proximityWindow->render();
 		actionWindow->render();
 
-		if		(activeLogWindow == Gui::ActiveLogWindow::LOG)	logWindow->render();
+		if (activeLogWindow == Gui::ActiveLogWindow::LOG)		logWindow->render();
 		else if (activeLogWindow == Gui::ActiveLogWindow::INFO) infoWindow->render();
-	}
-	else if (activeWindow == Gui::ActiveWindow::STARTUPSPLASH)
-	{
+		break;
+
+	case Gui::ActiveWindow::STARTUPSPLASH:
 		startupSplashWindow->render();
-	}
-	else if (activeWindow == Gui::ActiveWindow::INVENTORYFULL)
-	{
+		break;
+
+	case Gui::ActiveWindow::INVENTORYFULL:
 		worldWindow->render();
 		inventoryFullWindow->render();
-	}
-	else if (activeWindow == Gui::ActiveWindow::PAUSE)
-	{
+		break;
+
+	case Gui::ActiveWindow::PAUSE:
 		pauseWindow->render();
+		break;
 	}
 
 	renderMouse();

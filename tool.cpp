@@ -12,10 +12,12 @@ Tool::Tool(const Creature* owner, std::string name, TCODColor color, MagazineDat
 {
 }
 
-MagazineData& Tool::getMagazine()
+std::pair<bool, MagazineData&> Tool::getMagazine()
 {
-	auto nullMag = MagazineData(MagazineData::AmmoType::NONE, 0, 0, false);
-	return nullMag;
+	MagazineData nullMag = MagazineData(MagazineData::AmmoType::NONE, 0, 0);
+	//return nullMag;
+
+	return std::pair<bool, MagazineData&>(false, nullMag);
 }
 
 bool Tool::reload(MagazineData& magazine)
@@ -224,7 +226,7 @@ void Melee::render(const Pane& pane) const
 
 Bullet::Bullet(const Creature* owner, int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
 	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), travel(BLine(startPosition.x, startPosition.y, tox, toy)),
-	mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveClock(1.0f / velocity), fallClock(0), owner(owner)
+	mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveClock(1.0f / velocity), fallClock(0), owner(owner), inFov(false)
 {
 	do
 	{
@@ -290,6 +292,8 @@ void Bullet::doBulletDamage(std::shared_ptr<Creature>& creature)
 
 void Bullet::update()
 {
+	inFov = WORLD->isInPlayerFov(mapPosition);
+
 	if (currentVelocity > 0 && mapPosition.h > 0)
 	{
 		moveClock.tickUp();
@@ -353,7 +357,8 @@ void Bullet::update()
 
 void Bullet::render(const Pane& pane) const
 {
-	if (WORLD->debugmap->player->mapPosition.z == startPosition.z) // && WORLD->isInPlayerFov(mapPosition)
+	//fov GOES OUT OF FOV WHEN HEIGHT DECREASE
+	if (inFov) // && WORLD->isInPlayerFov(mapPosition)  WORLD->debugmap->player->mapPosition.z == startPosition.z && 
 	{
 		if (currentVelocity > 0)
 		{
@@ -381,13 +386,15 @@ void Bullet::render(const Pane& pane) const
 	//{
 	//	GUI->logWindow->pushMessage(LogWindow::Message(("Bullet was blocked!"), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
 	//}
+
+	GUI->logWindow->pushMessage(LogWindow::Message(("Bullet Height: " + std::to_string(mapPosition.h)), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
 }
 
 //----------------------------------------------------------------------------------------------------
 
 Firearm::Firearm(const Creature* owner, std::string name, TCODColor color, int fireRPS, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag)
 	:Melee(Tool(owner, name, color, ammoType, fireMode, availibleFireModeFlag), /* MELEE DAMAGE */ 25, 0), fireRPS(fireRPS), reloadTime(reloadSpeed),
-	usedMag(MagazineData(ammoType, 0, 0, true)), fireClock(1.0f / fireRPS), reloadClock(reloadSpeed)
+	usedMag(MagazineData(ammoType, 0, 0)), fireClock(1.0f / fireRPS), reloadClock(reloadSpeed)
 {
 	type = Tool::Type::FIREARM;
 
@@ -530,9 +537,9 @@ void Firearm::updateToolPosition(int targetX, int targetY)
 	}
 }
 
-MagazineData& Firearm::getMagazine()
+std::pair<bool, MagazineData&> Firearm::getMagazine()
 {
-	return usedMag;
+	return std::pair<bool, MagazineData&>(true, usedMag);
 }
 
 void Firearm::fireBullet()
@@ -541,7 +548,7 @@ void Firearm::fireBullet()
 	{
 		for (float i = 1.0f; i <= fireClock.numCalls; fireClock.numCalls--)
 		{
-			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(owner, ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, getMagazine().velocity, getMagazine().mass));
+			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(owner, ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, getMagazine().second.velocity, getMagazine().second.mass));
 
 			usedMag.availableAmmo--;
 

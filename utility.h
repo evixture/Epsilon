@@ -95,9 +95,7 @@ struct MagazineData
 	int velocity;
 	int mass;
 
-	bool isValid;
-
-	MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid = true);
+	MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo);
 
 	bool operator == (const MagazineData& compMag);
 };

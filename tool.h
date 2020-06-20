@@ -59,7 +59,7 @@ struct Tool
 	virtual void update(Position4& sourcePosition, int& targetX, int& targetY, bool& isHeld);
 	virtual void render(const Pane& pane) const;								
 
-	virtual	MagazineData&	getMagazine();										
+	virtual	std::pair<bool, MagazineData&>	getMagazine();										
 	virtual bool			reload(MagazineData& magazine);						
 	virtual void			changeFireMode();									
 	virtual void			useMelee();											
@@ -97,6 +97,7 @@ private:
 struct Bullet																	
 {
 	const Creature* owner;
+	bool inFov;
 
 	unsigned char ch;															
 
@@ -139,7 +140,7 @@ struct Firearm : public Melee
 
 	Firearm(const Creature* owner, std::string name, TCODColor color, int fireRPS, float reloadSpeed, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag);
 
-	MagazineData& getMagazine();												
+	std::pair<bool, MagazineData&> getMagazine();
 
 	bool reload(MagazineData& magazine);										
 	void changeFireMode();														

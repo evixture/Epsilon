@@ -49,6 +49,7 @@ void AICreature::move()
 			{
 				stepSound++;
 			}
+		
 		}
 	}
 }
@@ -125,13 +126,13 @@ bool AICreature::reload()
 	{
 		for (auto& item : container->itemList)
 		{
-			if (item->getMagazineData().isValid == true) // if it is actually a magazine
+			if (item->getMagazineData().first == true) // if it is actually a magazine
 			{
-				if (item->getMagazineData().ammoType == selectedItem->tool->ammoType) // if it has the same type of ammo as the current weapon
+				if (item->getMagazineData().second.ammoType == selectedItem->tool->ammoType) // if it has the same type of ammo as the current weapon
 				{
-					if (item->getMagazineData().availableAmmo != 0) // if the magazine is not empty
+					if (item->getMagazineData().second.availableAmmo != 0) // if the magazine is not empty
 					{
-						return selectedItem->tool->reload(item->getMagazineData()); //returns true on a proper reload
+						return selectedItem->tool->reload(item->getMagazineData().second); //returns true on a proper reload
 					}
 				}
 			}
@@ -168,7 +169,7 @@ void AICreature::takeDamage(int damage)
 		AUDIO->playSound(PositionalTrackedSound(("jaw"), &mapPosition, 80.0f, 170.0f));
 
 		//do when killed
-		for (int c = inventory.size() - 1; c > 0; c--) //drop items on death, but not hands (c == 0)
+		for (int c = (int)inventory.size() - 1; c > 0; c--) //drop items on death, but not hands (c == 0)
 		{
 			inventory[c]->item->updateTool(mapPosition, lookPosition.x, lookPosition.y, false);
 			WORLD->debugmap->mapContainerList.push_back(inventory[c]);
@@ -508,7 +509,8 @@ void AICreature::act()
 		//do stuff
 		//if (actionIndex % 2 == 0) //every 2 cycles
 
-		if (selectedItem->tool->getMagazine().availableAmmo <= 0 && selectedItem->tool->getMagazine().isValid)
+		//if (selectedItem->tool->getMagazine().availableAmmo <= 0 && selectedItem->tool->getMagazine().isValid)
+		if (selectedItem->tool->getMagazine().first == true && selectedItem->tool->getMagazine().second.availableAmmo <= 0)
 		{
 			if (!reload()) //reload if possible, else drop the weapon
 			{

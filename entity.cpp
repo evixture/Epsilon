@@ -141,6 +141,7 @@ void Player::move()
 {
 	static int stepSound;
 	static int stepSpeed;
+	static bool moved = false;
 
 	if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
 	{
@@ -177,25 +178,30 @@ void Player::move()
 				{
 					mapPosition.x += xMoveDist;
 					xMoveDist = 0;
+					moved = true;
 				} 
 				if (WORLD->debugmap->getWalkability(Position4(mapPosition.x, mapPosition.y + yMoveDist, mapPosition.h, mapPosition.z), true))
 				{
 					mapPosition.y += yMoveDist;
 					yMoveDist = 0;
+					moved = true;
 				}
 				WORLD->updateBlock(mapPosition, true); //update new position property
 
 				//play footstep sound
-				if (baseMoveTime == .25f) stepSpeed = mapPosition.h;
-				else stepSpeed = mapPosition.h - 1;
-				if (stepSound >= stepSpeed)
+				if (moved)
 				{
-					AUDIO->playSound(PositionalTrackedSound(("top"), &mapPosition, 70.0f, 10.0f));
-					stepSound = 0;
-				}
-				else
-				{
-					stepSound++;
+					if (baseMoveTime == .25f) stepSpeed = mapPosition.h;
+					else stepSpeed = mapPosition.h - 1;
+					if (stepSound >= stepSpeed)
+					{
+						AUDIO->playSound(PositionalTrackedSound(("top"), &mapPosition, 70.0f, 10.0f));
+						stepSound = 0;
+					}
+					else
+					{
+						stepSound++;
+					}
 				}
 			}
 		}
@@ -409,13 +415,13 @@ bool Player::reload()
 	{
 		for (auto& item : container->itemList)
 		{
-			if (item->getMagazineData().isValid == true) // if it is actually a magazine
+			if (item->getMagazineData().first == true) // if it is actually a magazine
 			{
-				if (item->getMagazineData().ammoType == selectedItem->tool->ammoType) // if it has the same type of ammo as the current weapon
+				if (item->getMagazineData().second.ammoType == selectedItem->tool->ammoType) // if it has the same type of ammo as the current weapon
 				{
-					if (item->getMagazineData().availableAmmo != 0) // if the magazine is not empty
+					if (item->getMagazineData().second.availableAmmo != 0) // if the magazine is not empty
 					{
-						selectedItem->tool->reload(item->getMagazineData());
+						selectedItem->tool->reload(item->getMagazineData().second);
 						return true;
 					}
 				}

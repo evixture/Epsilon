@@ -152,10 +152,12 @@ void Item::createActionManager()
 	}
 }
 
-MagazineData& Item::getMagazineData()
+std::pair<bool, MagazineData&> Item::getMagazineData()
 {
-	auto nullMag = MagazineData(MagazineData::AmmoType::NONE, 0, 0, false);
-	return nullMag; //find a way to fix later
+	MagazineData nullMag = MagazineData(MagazineData::AmmoType::NONE, 0, 0);
+	//return nullMag;
+
+	return std::pair<bool, MagazineData&>(false, nullMag);
 }
 
 void Item::changeBarColor()
@@ -222,9 +224,9 @@ MagazineItem::MagazineItem(Item item, MagazineData magazineData)
 {
 }
 
-MagazineData& MagazineItem::getMagazineData()
+std::pair<bool, MagazineData&> MagazineItem::getMagazineData()
 {
-	return magazineData;
+	return std::pair<bool, MagazineData&>(true, magazineData);
 }
 
 void MagazineItem::changeBarColor()

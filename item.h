@@ -68,7 +68,7 @@ struct Item
 	Item(const Creature* creature, int size, std::shared_ptr<Block> block, std::shared_ptr<Tool> tool, Position4 position, ItemType type);
 	virtual ~Item() {};
 
-	virtual MagazineData& getMagazineData();
+	virtual std::pair<bool, MagazineData&> getMagazineData();
 	virtual void changeBarColor();
 
 	void updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHeld);
@@ -88,7 +88,7 @@ struct MagazineItem : public Item
 
 	MagazineItem(Item item, MagazineData magazineData);
 
-	MagazineData& getMagazineData();
+	std::pair<bool, MagazineData&> getMagazineData();
 
 	void changeBarColor();
 };

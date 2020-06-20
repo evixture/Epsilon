@@ -318,8 +318,8 @@ Position4 getWalkableArea(Position4 centerPosition)
 
 //----------------------------------------------------------------------------------------------------
 
-MagazineData::MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo, bool isValid)
-	:isValid(isValid), ammoType(ammoType), ammoCapacity(ammoCapacity), availableAmmo(availableAmmo)
+MagazineData::MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmmo)
+	: ammoType(ammoType), ammoCapacity(ammoCapacity), availableAmmo(availableAmmo)
 {
 	switch (ammoType)
 	{
@@ -340,8 +340,7 @@ MagazineData::MagazineData(AmmoType ammoType, int ammoCapacity, int availableAmm
 
 bool MagazineData::operator==(const MagazineData& compMag)
 {
-	if (this->ammoType == compMag.ammoType && ammoCapacity == compMag.ammoCapacity && availableAmmo == compMag.availableAmmo && isValid == compMag.isValid) return true;
-	return false;
+	return (this->ammoType == compMag.ammoType && ammoCapacity == compMag.ammoCapacity && availableAmmo == compMag.availableAmmo);
 }
 
 Clock::Clock(float timeBetweenUpdates)

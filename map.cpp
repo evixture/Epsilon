@@ -602,12 +602,21 @@ int World::getOffset(int playerx, int mapw, int renderw)
 
 void World::computeFov(Position4 mapPosition) //calculate the fov from the point of view of the map position
 {
-	int height;
+	//int height;
+	//
+	//if (mapPosition.h < 1) height = 0;
+	//else height = mapPosition.h - 1;
+	//
 
-	if (mapPosition.h < 1) height = 0;
-	else height = mapPosition.h - 1;
+	//for (int i = 0; i <= 2; ++i) //hard code bad; orig used height
+	//{
+	//	debugmap->fovMapList[i]->computeFov(mapPosition.x, mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
+	//}
 
-	debugmap->fovMapList[height]->computeFov(mapPosition.x, mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
+	for (auto& fovMap : debugmap->fovMapList)
+	{
+		fovMap->computeFov(mapPosition.x, mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
+	}
 }
 
 bool World::isInPlayerFov(Position4 position) const
@@ -678,9 +687,20 @@ void World::renderTiles(const Pane& pane) const
 	{
 		for (int x = xOffset; x < pane.consoleWidth + xOffset; ++x)
 		{
-			if (false)//render walkability
+			if (false) //render walkability
 			{
 				if (debugmap->getWalkability(Position4(x, y, debugmap->player->mapPosition.h, 0), true) == true)
+				{
+					pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::green);
+				}
+				else
+				{
+					pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::red);
+				}
+			}
+			else if (false) //render fov
+			{
+				if (isInPlayerFov(Position4(x, y, debugmap->player->mapPosition.h, 0)) == true) //all tiles not on player height are out of fov
 				{
 					pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::green);
 				}
