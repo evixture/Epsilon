@@ -247,7 +247,7 @@ Container::Container(int itemCapacity, std::shared_ptr<Item> item, std::vector<s
 
 bool Container::addItem(std::shared_ptr<Item> item)
 {
-	int spaceUsed = 0; //construction
+	static int spaceUsed = 0;
 
 	for (auto& i : itemList) spaceUsed += i->size;
 

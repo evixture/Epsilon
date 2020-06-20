@@ -194,10 +194,10 @@ void Melee::doMeleeDamage(std::shared_ptr<Creature>& creature)
 {
 	if (creature->health > 0) //if creature is alive //HOW TO CHECK IF NOT HOLDING CREATURE
 	{																				
-		float sharpDamageResult = sharpDamage * (1.0f - (creature->equippedArmor.defense / 400.0f)); //construction
-		float bluntDamageResult = bluntDamage * 1.0f; //should bluntdamage do less damage at higher armor? //construction
+		static float sharpDamageResult = sharpDamage * (1.0f - (creature->equippedArmor.defense / 400.0f));
+		static float bluntDamageResult = bluntDamage * 1.0f; //should bluntdamage do less damage at higher armor?
 
-		int totalDamage = int(sharpDamageResult + bluntDamageResult); //construction
+		static int totalDamage = int(sharpDamageResult + bluntDamageResult);
 
 		creature->takeDamage(totalDamage);
 
@@ -308,7 +308,7 @@ void Bullet::update()
 					AUDIO->playSound(PositionalStaticSound(("crash"), mapPosition, 85.0f, 100.0f));
 				}
 
-				int decel = WORLD->debugmap->getBlock(mapPosition)->tileList[mapPosition.h].deceleration; //construction
+				static int decel = WORLD->debugmap->getBlock(mapPosition)->tileList[mapPosition.h].deceleration; //construction
 
 				if (currentVelocity - decel < 0)
 				{

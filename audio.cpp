@@ -50,7 +50,7 @@ void Audio::update()
 {
 	if (soLoud.getActiveVoiceCount() < soundList.size()) //if more sounds are in the list than are actually playing
 	{
-		int excessSounds = (int)soundList.size() - soLoud.getActiveVoiceCount(); //construction
+		static int excessSounds = (int)soundList.size() - soLoud.getActiveVoiceCount();
 
 		for (int e = 0; e < excessSounds; e++) soundList.erase(soundList.begin()); //delete the front (oldest) sound until all old sounds are gone //may delete old long playing sounds?
 	}
@@ -69,7 +69,7 @@ void Audio::update()
 
 int Audio::playSound(Sound sound)
 {
-	int handle = 0; //construction
+	int handle = 0; //no static?
 
 	if (sound.getPosition().first == true) //3d sound
 	{
