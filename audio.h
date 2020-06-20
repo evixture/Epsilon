@@ -59,8 +59,4 @@ struct Audio
 	void update();
 
 	int playSound(Sound sound);
-
-private:
-	int excessSounds;
-	int handle;
 };

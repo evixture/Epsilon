@@ -75,20 +75,5 @@ private:
 	int actionIndex;
 	Clock actionClock;
 
-	int stepSound;
-	int stepSpeed;
-
-	bool canFindOptimal;// = false;
-	float deltaRange;// = 100;
-	int cInd;// = 999;
-	int iInd;// = 999;
-
-	float soundInterestChange2;
-	double distance;
-
-	Position3 deltaStance;
-
-	int x, y;
-
 	friend struct ActionManager;
 };

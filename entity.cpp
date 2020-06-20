@@ -114,8 +114,7 @@ void Creature::render(const Pane& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Player::Player(Position4 position)
-	:Creature(position, '@', "player", Position3(255, 255, 255), 100, Armor(this, "", TCODColor::pink, 0, 0)), backgroundColor(TCODColor::pink), hasSecondChance(true),
-	stepSound(0), stepSpeed(0), moved(false), xMoveDist(0), yMoveDist(0)
+	:Creature(position, '@', "player", Position3(255, 255, 255), 100, Armor(this, "", TCODColor::pink, 0, 0)), backgroundColor(TCODColor::pink), hasSecondChance(true)
 {
 	hasSecondChance = true;
 
@@ -137,18 +136,18 @@ Player::Player(Position4 position)
 
 void Player::move()
 {
-	//stepSound = 0;
-	stepSpeed = 0;
-	moved = false;
-
-	xMoveDist = 0;
-	yMoveDist = 0;
+	static int stepSound; //construction
+	static int stepSpeed;
+	static bool moved = false;
 
 	if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
 	{
 		if (INPUT->moveFastKey->isDown)			baseMoveTime = .25f;
 		else if (INPUT->moveSlowKey->isDown)	baseMoveTime = 1.0f;
 		else									baseMoveTime = .5f;
+
+		int xMoveDist = 0; //construction
+		int yMoveDist = 0;
 
 		if (INPUT->stanceDownKey->isSwitched) changeStanceDown();
 		if (INPUT->stanceUpKey->isSwitched) changeStanceUp();

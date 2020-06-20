@@ -51,9 +51,6 @@ private:
 	bool getContainers(pugi::xml_node& dataNode);
 
 	std::shared_ptr<Block> getTileFromCode(std::string code);
-
-	mutable bool walkableBool;
-	mutable unsigned char walkableFlag;
 };
 
 struct World

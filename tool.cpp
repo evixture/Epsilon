@@ -194,12 +194,10 @@ void Melee::doMeleeDamage(std::shared_ptr<Creature>& creature)
 {
 	if (creature->health > 0) //if creature is alive //HOW TO CHECK IF NOT HOLDING CREATURE
 	{																				
-		//float sharpDamageResult = sharpDamage * (1.0f - (creature->equippedArmor.defense / 400.0f));
-		//float bluntDamageResult = bluntDamage * 1.0f; //should bluntdamage do less damage at higher armor?
+		float sharpDamageResult = sharpDamage * (1.0f - (creature->equippedArmor.defense / 400.0f)); //construction
+		float bluntDamageResult = bluntDamage * 1.0f; //should bluntdamage do less damage at higher armor? //construction
 
-		//int totalDamage = int(sharpDamageResult + bluntDamageResult);
-
-		int totalDamage = int(sharpDamage * (1.0f - (creature->equippedArmor.defense / 400.0f)) + bluntDamage * 1.0f);
+		int totalDamage = int(sharpDamageResult + bluntDamageResult); //construction
 
 		creature->takeDamage(totalDamage);
 
