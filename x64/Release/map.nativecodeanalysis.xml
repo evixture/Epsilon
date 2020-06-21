@@ -198,6 +198,74 @@
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>22</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position2::x' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position2::{ctor}</FUNCTION>
+    <DECORATED>??0Position2@@QEAA@XZ</DECORATED>
+    <FUNCLINE>22</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position2::x</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>22</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position2::y' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position2::{ctor}</FUNCTION>
+    <DECORATED>??0Position2@@QEAA@XZ</DECORATED>
+    <FUNCLINE>22</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position2::y</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>38</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position3::z' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position3::{ctor}</FUNCTION>
+    <DECORATED>??0Position3@@QEAA@XZ</DECORATED>
+    <FUNCLINE>38</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position3::z</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>utility.h</FILENAME>
+      <LINE>53</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Position4::h' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Position4::{ctor}</FUNCTION>
+    <DECORATED>??0Position4@@QEAA@XZ</DECORATED>
+    <FUNCLINE>53</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Position4::h</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
       <LINE>169</LINE>
       <COLUMN>23</COLUMN>
@@ -297,14 +365,14 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>map.cpp</FILENAME>
-      <LINE>622</LINE>
+      <LINE>631</LINE>
       <COLUMN>38</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>World::isInPlayerFov</FUNCTION>
     <DECORATED>?isInPlayerFov@World@@QEBA_NUPosition4@@@Z</DECORATED>
-    <FUNCLINE>613</FUNCLINE>
+    <FUNCLINE>622</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

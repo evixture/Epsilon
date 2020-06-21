@@ -71,8 +71,8 @@ void Block::interact()
 
 void Block::render(Position4 renderPosition, const Pane& pane) const
 {
-	Position4 position = Position4(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.h, renderPosition.z); //construction
-	Tile tile = getTileData(renderPosition.h); //construction
+	Position4 position = Position4(renderPosition.x + WORLD->xOffset, renderPosition.y + WORLD->yOffset, renderPosition.h, renderPosition.z); //change later to be optimized version
+	Tile tile = getTileData(renderPosition.h);
 
 	if (WORLD->isInPlayerFov(position))
 	{

@@ -199,84 +199,84 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>227</LINE>
+      <LINE>230</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorUp</FUNCTION>
     <DECORATED>?moveSelectorUp@Player@@AEAAXXZ</DECORATED>
-    <FUNCLINE>205</FUNCLINE>
+    <FUNCLINE>208</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>241</LINE>
+      <LINE>244</LINE>
       <COLUMN>16</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@AEAAXXZ</DECORATED>
-    <FUNCLINE>237</FUNCLINE>
+    <FUNCLINE>240</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>247</LINE>
+      <LINE>250</LINE>
       <COLUMN>21</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@AEAAXXZ</DECORATED>
-    <FUNCLINE>237</FUNCLINE>
+    <FUNCLINE>240</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>258</LINE>
+      <LINE>261</LINE>
       <COLUMN>18</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@Player@@AEAAXXZ</DECORATED>
-    <FUNCLINE>237</FUNCLINE>
+    <FUNCLINE>240</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>376</LINE>
+      <LINE>379</LINE>
       <COLUMN>20</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@AEAAXXZ</DECORATED>
-    <FUNCLINE>367</FUNCLINE>
+    <FUNCLINE>370</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>entity.cpp</FILENAME>
-      <LINE>389</LINE>
+      <LINE>386</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@AEAAXXZ</DECORATED>
-    <FUNCLINE>367</FUNCLINE>
+    <FUNCLINE>370</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

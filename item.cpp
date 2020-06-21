@@ -74,54 +74,6 @@ Item::Item(const Creature* creature, int size, std::shared_ptr<Block> block, std
 
 void Item::createActionManager()
 {
-	//if (type == ItemType::NORMAL)
-	//{
-	//	actionManager = std::make_shared<ActionManager>(std::vector<Action> {
-	//		Action("Drop", Action::Type::DROP)
-	//	});
-	//}
-	//else if (type == ItemType::MAGAZINE)
-	//{
-	//	actionManager = std::make_shared<ActionManager>(std::vector<Action> {
-	//		Action("Drop", Action::Type::DROP)
-	//	});
-	//}
-	//else if (type == ItemType::MELEE)
-	//{
-	//	actionManager = std::make_shared<ActionManager>(std::vector<Action> {
-	//		Action("Drop", Action::Type::DROP),
-	//		Action("Melee",Action::Type::MELEE)
-	//	});
-	//}
-	//else if (type == ItemType::FIREARM)
-	//{
-	//	actionManager = std::make_shared<ActionManager>(std::vector<Action> {
-	//		Action("Reload",Action::Type::RELOAD),
-	//		Action("Drop",Action::Type::DROP),
-	//		Action("Change Fire Mode",Action::Type::CHANGEFIREMODE),
-	//		Action("Melee",Action::Type::MELEE)
-	//	});
-	//}
-	//else if (type == ItemType::ARMOR)
-	//{
-	//	actionManager = std::make_shared<ActionManager>(std::vector<Action> {
-	//		Action("Drop", Action::Type::DROP),
-	//		Action("Equip", Action::Type::EQUIP)
-	//	});
-	//}
-	//else if (type == ItemType::HAND)
-	//{
-	//	actionManager = std::make_shared<ActionManager>(std::vector<Action> {
-	//		Action("Melee", Action::Type::MELEE)
-	//	});
-	//}
-	//else
-	//{
-	//	actionManager = std::make_shared<ActionManager>(std::vector<Action> {
-	//		Action("ERROR", Action::Type::EQUIP)
-	//	});
-	//}
-
 	switch (type)
 	{
 	case ItemType::NORMAL:
@@ -155,8 +107,6 @@ void Item::createActionManager()
 std::pair<bool, MagazineData&> Item::getMagazineData()
 {
 	MagazineData nullMag = MagazineData(MagazineData::AmmoType::NONE, 0, 0);
-	//return nullMag;
-
 	return std::pair<bool, MagazineData&>(false, nullMag);
 }
 
@@ -175,7 +125,6 @@ void Item::updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHel
 	changeBarColor();
 
 	this->mapPosition = Position4(tool->sourcePosition.x, tool->sourcePosition.y, mapPosition.h, mapPosition.z);
-	//tileRenderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 	tileRenderPosition = Position4(mapPosition.x - WORLD->xOffset, mapPosition.y - WORLD->yOffset, mapPosition.h, mapPosition.z); //replace with better way?
 }
 
@@ -190,11 +139,9 @@ void Item::updateTile()
 
 	mapPosition.h = WORLD->debugmap->player->mapPosition.h;
 	distToEnt = getDistance(WORLD->debugmap->player->mapPosition.x, WORLD->debugmap->player->mapPosition.y, mapPosition.x, mapPosition.y);
-	//tileRenderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 
 	if (inFov) lastKnownMapPosition = mapPosition; //need renderPosition?
 
-	//tileRenderPosition = offsetPosition(lastKnownMapPosition, WORLD->xOffset, WORLD->yOffset); //replace lkrp with renderPosition update?
 	tileRenderPosition = Position4(mapPosition.x - WORLD->xOffset, mapPosition.y - WORLD->yOffset, mapPosition.h, mapPosition.z); //replace with better way?
 
 }
@@ -247,7 +194,7 @@ Container::Container(int itemCapacity, std::shared_ptr<Item> item, std::vector<s
 
 bool Container::addItem(std::shared_ptr<Item> item)
 {
-	int spaceUsed = 0; //construction
+	int spaceUsed = 0;
 
 	for (auto& i : itemList) spaceUsed += i->size;
 

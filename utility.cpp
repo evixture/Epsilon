@@ -62,29 +62,13 @@ BLine::BLine(int xStart, int yStart, int xTarget, int yTarget)
 	deltax = destx - origx;
 	deltay = desty - origy;
 
-	if (deltax > 0)
-	{
-		stepx = 1;
-	}
+	if (deltax > 0)			stepx = 1;
+	else if (deltax < 0)	stepx = -1;
+	else					stepx = 0;
 
-	else if (deltax < 0)
-	{
-		stepx = -1;
-	}
-
-	else stepx = 0;
-
-	if (deltay > 0)
-	{
-		stepy = 1;
-	}
-
-	else if (deltay < 0)
-	{
-		stepy = -1;
-	}
-
-	else stepy = 0;
+	if (deltay > 0)			stepy = 1;
+	else if (deltay < 0)	stepy = -1;
+	else					stepy = 0;
 
 	if (stepx * deltax > stepy * deltay)
 	{
@@ -152,14 +136,14 @@ unsigned char heightToBitFlag(int h)
 
 double getAngle(int xStart, int yStart, int xTarget, int yTarget)
 {
-	double itan = (double)(yTarget - yStart) / (double)(xTarget - xStart); //construction
+	double itan = (double)(yTarget - yStart) / (double)(xTarget - xStart);
 	return atan(itan) * 180.0 / PI;
 }
 
 double getDistance(int xStart, int yStart, int xTarget, int yTarget)
 {
-	double xLength = pow(xTarget - xStart, 2); //construction
-	double yLength = pow(yTarget - yStart, 2); //construction
+	double xLength = pow(xTarget - xStart, 2);
+	double yLength = pow(yTarget - yStart, 2);
 	return sqrt(xLength + yLength);
 }
 
@@ -269,20 +253,18 @@ std::string getTileName(char id)
 	}
 }
 
-Position4 getWalkableArea(Position4 centerPosition)
-{
-	/*
+/*
 	CHECK ORDER:
 	1 2 3
 	4 0 5
 	6 7 8
-	*/
+*/
 
-	//if center position is valid
-	if (WORLD->debugmap->getWalkability(centerPosition, true) == true) return centerPosition;
+Position4 getWalkableArea(Position4 centerPosition)
+{
+	if (WORLD->debugmap->getWalkability(centerPosition, true) == true) return centerPosition; //if center position is valid
 
-	//search the surrounding area for walkable block
-	for (int y = -1; y <= 1; y++)
+	for (int y = -1; y <= 1; y++) //search the surrounding area for walkable block
 	{
 		for (int x = -1; x <= 1; x++)
 		{

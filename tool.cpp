@@ -15,8 +15,6 @@ Tool::Tool(const Creature* owner, std::string name, TCODColor color, MagazineDat
 std::pair<bool, MagazineData&> Tool::getMagazine()
 {
 	MagazineData nullMag = MagazineData(MagazineData::AmmoType::NONE, 0, 0);
-	//return nullMag;
-
 	return std::pair<bool, MagazineData&>(false, nullMag);
 }
 
@@ -137,7 +135,6 @@ void Tool::updatePositions(Position4& sourcePosition, int& targetX, int& targetY
 
 	updateToolPosition(targetX, targetY);
 
-	//renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset); // has to be after update tool position
 	renderPosition = getRenderPosition(mapPosition);
 }
 
@@ -194,10 +191,10 @@ void Melee::doMeleeDamage(std::shared_ptr<Creature>& creature)
 {
 	if (creature->health > 0) //if creature is alive //HOW TO CHECK IF NOT HOLDING CREATURE
 	{																				
-		float sharpDamageResult = sharpDamage * (1.0f - (creature->equippedArmor.defense / 400.0f)); //construction
-		float bluntDamageResult = bluntDamage * 1.0f; //should bluntdamage do less damage at higher armor? //construction
+		float sharpDamageResult = sharpDamage * (1.0f - (creature->equippedArmor.defense / 400.0f));
+		float bluntDamageResult = bluntDamage * 1.0f; //should bluntdamage do less damage at higher armor?
 
-		int totalDamage = int(sharpDamageResult + bluntDamageResult); //construction
+		int totalDamage = int(sharpDamageResult + bluntDamageResult);
 
 		creature->takeDamage(totalDamage);
 
@@ -308,7 +305,7 @@ void Bullet::update()
 					AUDIO->playSound(PositionalStaticSound(("crash"), mapPosition, 85.0f, 100.0f));
 				}
 
-				int decel = WORLD->debugmap->getBlock(mapPosition)->tileList[mapPosition.h].deceleration; //construction
+				int decel = WORLD->debugmap->getBlock(mapPosition)->tileList[mapPosition.h].deceleration;
 
 				if (currentVelocity - decel < 0)
 				{
@@ -351,14 +348,12 @@ void Bullet::update()
 		mapPosition = Position4(travel.x, travel.y, mapPosition.h, startPosition.z);
 	}
 
-	//renderPosition = offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset);
 	renderPosition = getRenderPosition(mapPosition);
 }
 
 void Bullet::render(const Pane& pane) const
 {
-	//fov GOES OUT OF FOV WHEN HEIGHT DECREASE
-	if (inFov) // && WORLD->isInPlayerFov(mapPosition)  WORLD->debugmap->player->mapPosition.z == startPosition.z && 
+	if (inFov)
 	{
 		if (currentVelocity > 0)
 		{
@@ -382,12 +377,6 @@ void Bullet::render(const Pane& pane) const
 			}
 		}
 	}
-	//else
-	//{
-	//	GUI->logWindow->pushMessage(LogWindow::Message(("Bullet was blocked!"), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
-	//}
-
-	GUI->logWindow->pushMessage(LogWindow::Message(("Bullet Height: " + std::to_string(mapPosition.h)), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -574,41 +563,6 @@ void Firearm::changeFireMode()
 {
 	if (isHeld)
 	{
-		//full->semi->safe->full
-		//if (fireMode == FireType::SAFE)
-		//{
-		//	if (availibleFireMode & FireType::FULL) //if availible fire mode has FULL fire mode bit set
-		//	{
-		//		fireMode = FireType::FULL;
-		//	}
-		//	else if (availibleFireMode & FireType::SEMI)
-		//	{
-		//		fireMode = FireType::SEMI;
-		//	}
-		//}
-		//else if (fireMode == FireType::SEMI)
-		//{
-		//	if (availibleFireMode & FireType::SAFE)
-		//	{
-		//		fireMode = FireType::SAFE;
-		//	}
-		//	else if (availibleFireMode & FireType::FULL)
-		//	{
-		//		fireMode = FireType::FULL;
-		//	}
-		//}
-		//else if (fireMode == FireType::FULL)
-		//{
-		//	if (availibleFireMode & FireType::SEMI)
-		//	{
-		//		fireMode = FireType::SEMI;
-		//	}
-		//	else if (availibleFireMode & FireType::SAFE)
-		//	{
-		//		fireMode = FireType::SAFE;
-		//	}
-		//}
-
 		switch (fireMode)
 		{
 		case FireType::SAFE:
@@ -643,7 +597,6 @@ void Firearm::use(bool hold, bool swtch)
 		if (fireClock.numCalls >= 1.0f && usedMag.availableAmmo > 0 && reloadClock.numCalls >= 1.0f) //fires bullet
 		{
 			if ((fireMode == FireType::FULL && (hold || swtch)) || (fireMode == FireType::SEMI && swtch)) fireBullet();
-			//else if (fireMode == FireType::SEMI && swtch)			fireBullet();
 		}
 	}
 }

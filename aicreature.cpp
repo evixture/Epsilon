@@ -17,8 +17,8 @@ void AICreature::move()
 			default stance is standing, but lower if stealth
 	*/
 
-	static int stepSound; //construction
-	static int stepSpeed; //construction
+	static int stepSound;
+	static int stepSpeed;
 
 	if (moveSpeedMode == 2)			baseMoveTime = .25f; //sprint
 	else if (moveSpeedMode == 0)	baseMoveTime = 1.0f; //creep
@@ -280,10 +280,10 @@ void AICreature::filterIndexes()
 
 void AICreature::selectAppropriateItem(float range)
 {
-	bool canFindOptimal = false; //construction
-	float deltaRange = 100; //construction
-	int cInd = 999; //construction
-	int iInd = 999; //construction
+	bool canFindOptimal = false;
+	float deltaRange = 100;
+	int cInd = 999;
+	int iInd = 999;
 
 	if (attitude < .25f) //if not very aggressive, keep hands out
 	{
@@ -340,7 +340,7 @@ void AICreature::selectAppropriateItem(float range)
 
 bool AICreature::inEffectiveRange()
 {
-	return ((getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y) <= selectedItem->tool->effectiveRange)); //change to take into account melee weapons // && selectedItem->tool->getMagazine().isValid //getMagazine().velocity * 0.15f
+	return ((getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y) <= selectedItem->tool->effectiveRange)); //change to take into account melee weapons
 }
 
 void AICreature::decayInterest()
@@ -375,8 +375,8 @@ void AICreature::reactToSounds()
 		{
 			if (sound->getPosition().second.z == mapPosition.z)
 			{
-				float soundInterestChange; //construction
-				double distance = getDistance(mapPosition.x, mapPosition.y, sound->getPosition().second.x, sound->getPosition().second.y); //construction
+				float soundInterestChange;
+				double distance = getDistance(mapPosition.x, mapPosition.y, sound->getPosition().second.x, sound->getPosition().second.y);
 
 				if (distance > 0.0f) soundInterestChange = (float)((15.0f / (distance + 30.0f)) * (sound->worldVolume / 50.f));
 				else soundInterestChange = 0.0f;
@@ -395,7 +395,6 @@ void AICreature::reactToSounds()
 		}
 	}
 }
-
 
 /*
 AUDIO FIELD
@@ -453,7 +452,7 @@ void AICreature::act()
 	if at 128 stance, nothing is aggressive
 	*/
 
-	Position3 deltaStance = this->stance - WORLD->debugmap->player->stance; //construction
+	Position3 deltaStance = this->stance - WORLD->debugmap->player->stance;
 	if (deltaStance.x >= 0) if (attitude < deltaStance.x / 255.0f) attitude = deltaStance.x / 255.0f;
 	if (deltaStance.y >= 0) if (attitude < deltaStance.y / 255.0f) attitude = deltaStance.y / 255.0f;
 	if (deltaStance.z >= 0) if (attitude < deltaStance.z / 255.0f) attitude = deltaStance.z / 255.0f;
@@ -479,10 +478,6 @@ void AICreature::act()
 				equip armor if better
 		*/
 
-		//do stuff
-		//if (actionIndex % 2 == 0) //every 2 cycles
-
-		//if (selectedItem->tool->getMagazine().availableAmmo <= 0 && selectedItem->tool->getMagazine().isValid)
 		if (selectedItem->tool->getMagazine().first == true && selectedItem->tool->getMagazine().second.availableAmmo <= 0)
 		{
 			if (!reload()) //reload if possible, else drop the weapon
@@ -529,7 +524,6 @@ void AICreature::update() //ai and behavior attributes update here
 
 	if (inFov) lastKnownMapPosition = mapPosition; //need renderPosition?
 
-	//renderPosition = offsetPosition(lastKnownMapPosition, WORLD->xOffset, WORLD->yOffset); //replace lkrp with renderPosition update?
 	renderPosition = getRenderPosition(lastKnownMapPosition);
 
 }
@@ -552,7 +546,7 @@ void AICreature::render(const Pane& pane) const
 		if (false) //show pathfinding information
 		{
 			//render path
-			int x, y; //construction
+			int x, y;
 			for (int i = 0; i < path.size(); i++)
 			{
 				path.get(i, &x, &y);

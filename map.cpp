@@ -511,8 +511,8 @@ bool Map::getWalkability(Position4 position, bool checkCreatures) const
 		}
 	}
 
-	bool walkableBool = true; //construction
-	unsigned char walkableFlag = getBlock(position)->walkableFlag; //construction
+	bool walkableBool = true;
+	unsigned char walkableFlag = getBlock(position)->walkableFlag;
 
 	for (int i = 0; i < position.h; ++i)
 	{
@@ -602,17 +602,6 @@ int World::getOffset(int playerx, int mapw, int renderw)
 
 void World::computeFov(Position4 mapPosition) //calculate the fov from the point of view of the map position
 {
-	//int height;
-	//
-	//if (mapPosition.h < 1) height = 0;
-	//else height = mapPosition.h - 1;
-	//
-
-	//for (int i = 0; i <= 2; ++i) //hard code bad; orig used height
-	//{
-	//	debugmap->fovMapList[i]->computeFov(mapPosition.x, mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
-	//}
-
 	for (auto& fovMap : debugmap->fovMapList)
 	{
 		fovMap->computeFov(mapPosition.x, mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
@@ -652,31 +641,17 @@ void World::update()
 	xOffset = getOffset(debugmap->player->mapPosition.x, debugmap->width, MAPPANE->drawPane.consoleWidth);
 	yOffset = getOffset(debugmap->player->mapPosition.y, debugmap->height, MAPPANE->drawPane.consoleHeight);
 
-	if (INPUT->debug1Key->isSwitched)
-	{
-		AUDIO->playSound(PositionalStaticSound("Testing", Position4(20, 10, 0, 0), 0.0f, 100.0f)); //2d sound
-	}
+	if (INPUT->debug1Key->isSwitched) AUDIO->playSound(PositionalStaticSound("Testing", Position4(20, 10, 0, 0), 0.0f, 100.0f)); //2d sound
 
 	updateEntities(); //needs to be first to prevent bad fov checks
 	computeFov(debugmap->player->mapPosition);
 
-	for (auto& item : debugmap->mapItemList)
-	{
-		item->updateTile();
-	}
+	for (auto& item : debugmap->mapItemList) item->updateTile();
 
-	for (auto& container : debugmap->mapContainerList)
-	{
-		container->item->updateTile();
-	}
+	for (auto& container : debugmap->mapContainerList) container->item->updateTile();
 
-	//AUDIO
 	soundList = soundBuffer;
-
-	if (soundBuffer.size() > 0)
-	{
-		soundBuffer.clear();
-	}
+	if (soundBuffer.size() > 0) soundBuffer.clear();
 }
 
 //--------------------------------------------------------------------------------------------

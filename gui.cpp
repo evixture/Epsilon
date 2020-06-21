@@ -25,32 +25,6 @@ void Gui::update()
 		else if (activeWindow != Gui::ActiveWindow::INVENTORYFULL && activeWindow != Gui::ActiveWindow::STARTUPSPLASH)	activeWindow = Gui::ActiveWindow::INVENTORYFULL;
 	}
 
-	//if (activeWindow == Gui::ActiveWindow::NONE)
-	//{
-	//	worldWindow->update();
-	//	playerWindow->update();
-	//	statusWindow->update();
-	//	inventoryWindow->update();
-	//	proximityWindow->update();
-	//	actionWindow->update();
-	//
-	//	if		(activeLogWindow == Gui::ActiveLogWindow::LOG)	logWindow->update();
-	//	else if (activeLogWindow == Gui::ActiveLogWindow::INFO) infoWindow->update();
-	//}
-	//else if (activeWindow == Gui::ActiveWindow::STARTUPSPLASH)
-	//{
-	//	startupSplashWindow->update();
-	//}
-	//else if (activeWindow == Gui::ActiveWindow::INVENTORYFULL)
-	//{
-	//	worldWindow->update();
-	//	inventoryFullWindow->update();
-	//}
-	//else if (activeWindow == Gui::ActiveWindow::PAUSE)
-	//{
-	//	pauseWindow->update();
-	//}
-
 	switch (activeWindow)
 	{
 	case Gui::ActiveWindow::NONE:
@@ -96,32 +70,6 @@ void Gui::renderMouse() const
 
 void Gui::render() const
 {
-	//if (activeWindow == Gui::ActiveWindow::NONE)
-	//{
-	//	worldWindow->render();
-	//	playerWindow->render();
-	//	statusWindow->render();
-	//	inventoryWindow->render();
-	//	proximityWindow->render();
-	//	actionWindow->render();
-	//
-	//	if		(activeLogWindow == Gui::ActiveLogWindow::LOG)	logWindow->render();
-	//	else if (activeLogWindow == Gui::ActiveLogWindow::INFO) infoWindow->render();
-	//}
-	//else if (activeWindow == Gui::ActiveWindow::STARTUPSPLASH)
-	//{
-	//	startupSplashWindow->render();
-	//}
-	//else if (activeWindow == Gui::ActiveWindow::INVENTORYFULL)
-	//{
-	//	worldWindow->render();
-	//	inventoryFullWindow->render();
-	//}
-	//else if (activeWindow == Gui::ActiveWindow::PAUSE)
-	//{
-	//	pauseWindow->render();
-	//}
-
 	switch (activeWindow)
 	{
 	case Gui::ActiveWindow::NONE:

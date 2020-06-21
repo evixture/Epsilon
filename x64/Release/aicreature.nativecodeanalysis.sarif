@@ -284,6 +284,78 @@
           }
         },
         {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'Position2::x' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/utility.h"
+                },
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 2,
+                  "endLine": 22,
+                  "endColumn": 2
+                }
+              }
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Position2::x"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'Position2::y' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/utility.h"
+                },
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 2,
+                  "endLine": 22,
+                  "endColumn": 2
+                }
+              }
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Position2::y"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'Position3::z' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/utility.h"
+                },
+                "region": {
+                  "startLine": 38,
+                  "startColumn": 2,
+                  "endLine": 38,
+                  "endColumn": 2
+                }
+              }
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Position3::z"
+          }
+        },
+        {
           "ruleId": "C26451",
           "message": {
             "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
@@ -295,9 +367,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/aicreature.cpp"
                 },
                 "region": {
-                  "startLine": 207,
+                  "startLine": 208,
                   "startColumn": 8,
-                  "endLine": 207,
+                  "endLine": 208,
                   "endColumn": 20
                 }
               }
@@ -316,9 +388,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/aicreature.cpp"
                 },
                 "region": {
-                  "startLine": 219,
+                  "startLine": 220,
                   "startColumn": 7,
-                  "endLine": 219,
+                  "endLine": 220,
                   "endColumn": 19
                 }
               }
@@ -337,9 +409,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/aicreature.cpp"
                 },
                 "region": {
-                  "startLine": 223,
+                  "startLine": 224,
                   "startColumn": 12,
-                  "endLine": 223,
+                  "endLine": 224,
                   "endColumn": 24
                 }
               }
@@ -358,9 +430,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/aicreature.cpp"
                 },
                 "region": {
-                  "startLine": 232,
+                  "startLine": 233,
                   "startColumn": 9,
-                  "endLine": 232,
+                  "endLine": 233,
                   "endColumn": 21
                 }
               }
@@ -379,9 +451,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/aicreature.cpp"
                 },
                 "region": {
-                  "startLine": 250,
+                  "startLine": 251,
                   "startColumn": 6,
-                  "endLine": 250,
+                  "endLine": 251,
                   "endColumn": 23
                 }
               }
@@ -400,9 +472,9 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/aicreature.cpp"
                 },
                 "region": {
-                  "startLine": 263,
+                  "startLine": 264,
                   "startColumn": 8,
-                  "endLine": 263,
+                  "endLine": 264,
                   "endColumn": 20
                 }
               }
@@ -419,7 +491,7 @@
       },
       "invocations": [
         {
-          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.26.28801\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x00417190 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_84b1799cast -typedil -f aicreature.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1926 -D_MSC_FULL_VER=192628806 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -I E:\\SoLoud\\soloud-RELEASE_20200207\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Og -Ot -Oy -Oi -ltcg -DCODE_ANALYSIS -DNDEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -MD -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -std:c++17 -Fox64\\Release\\aicreature.obj -Fdx64\\Release\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeMinimumRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.26.28801\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.26.28801\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.26.28801\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um",
+          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.26.28801\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x00417190 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_663be6f0ast -typedil -f aicreature.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1926 -D_MSC_FULL_VER=192628806 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -I E:\\SoLoud\\soloud-RELEASE_20200207\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Og -Ot -Oy -Oi -ltcg -DCODE_ANALYSIS -DNDEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -MD -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -std:c++17 -Fox64\\Release\\aicreature.obj -Fdx64\\Release\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeMinimumRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.26.28801\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.26.28801\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.26.28801\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um",
           "executionSuccessful": true,
           "ruleConfigurationOverrides": [
             {

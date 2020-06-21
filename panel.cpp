@@ -3,7 +3,6 @@
 MapWindow::MapWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 	: Window(consoleWidth, consoleHeight, "World", rx, ry)
 {
-	//actual map dims should be 60x60
 	mapSidePanel = std::make_shared<Pane>(1, 61, ep::color::ribbonBG, ep::color::ribbonFG);
 	world = std::make_shared<World>();
 }
@@ -135,8 +134,8 @@ void InventoryWindow::render() const
 {
 	clearWindow();
 
-	int drawLine = 0; //construction
-	int drawLineStart = 0; //construction
+	int drawLine = 0;
+	int drawLineStart = 0;
 
 	for (auto& container : inventoryItemList)
 	{
@@ -205,11 +204,7 @@ SplashWindow::SplashWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 	
 	for (int i = 0; i < numSlashIndexes; i++)
 	{
-		int val = (i == 0)? 0 : (int)(slashList.size() / numSlashIndexes) * i; //construction
-
-		//if (i == 0) val = 0;
-		//else		val = (int)(slashList.size() / numSlashIndexes) * i;
-
+		int val = (i == 0)? 0 : (int)(slashList.size() / numSlashIndexes) * i;
 		slashIndexList.push_back(val);
 	}
 }
@@ -262,16 +257,16 @@ void SplashWindow::render() const
 {
 	clearWindow();
 
-	int slashWidth	= ((drawPane.consoleWidth / 2)	- (drawPane.consoleWidth % 2)); //construction
-	int slashHeight = ((drawPane.consoleHeight / 2) - (drawPane.consoleHeight % 2)); //construction
+	int slashWidth	= ((drawPane.consoleWidth / 2)	- (drawPane.consoleWidth % 2));
+	int slashHeight = ((drawPane.consoleHeight / 2) - (drawPane.consoleHeight % 2));
 
 	for (int y = 0; y < slashHeight; y++)
 	{
 		for (int x = 0; x < slashWidth; x++)
 		{
-			if (((x < 46 / 2) || (x > 60 / 2)) || ((y < 18 / 2) || (y > 28 / 2))) /*not in logo*/
+			if (((x < 46 / 2) || (x > 60 / 2)) || ((y < 18 / 2) || (y > 28 / 2))) //not in logo
 			{
-				if (((x < 48 / 2) || (x > 58 / 2)) || ((y < 48 / 2) || (y > 52 / 2))) /*not in menu options*/
+				if (((x < 48 / 2) || (x > 58 / 2)) || ((y < 48 / 2) || (y > 52 / 2))) //not in menu options
 				{
 					switch (slashList[x + y * slashWidth])
 					{
@@ -319,8 +314,8 @@ void InventoryFullWindow::render() const
 {
 	clearWindow();
 
-	int drawLine = 0; //construction
-	int drawLineStart = 0; //construction
+	int drawLine = 0;
+	int drawLineStart = 0;
 
 	for (auto& container : inventoryItemList)
 	{
@@ -407,7 +402,7 @@ void LogWindow::render() const
 {
 	clearWindow();
 
-	int line = 0; //construction
+	int line = 0;
 	for (int i = 0; i < messageList.size(); ++i)
 	{
 		if (i == 0) drawPane.console->printf(0, line, "|>%s", messageList[i].message.c_str());
@@ -441,7 +436,7 @@ void ProximityWindow::render() const
 {
 	clearWindow();
 
-	int line = 0; //construction
+	int line = 0;
 
 	for (auto& container : proximityContainerList)
 	{
@@ -602,7 +597,7 @@ void InfoWindow::setTileDetails()
 	{
 		if (WORLD->debugmap->getBlock(Position3(INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, WORLD->debugmap->player->mapPosition.z))->explored)
 		{
-			static Position3 position = Position3(INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, WORLD->debugmap->player->mapPosition.z); //construction
+			static Position3 position = Position3(INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, WORLD->debugmap->player->mapPosition.z);
 			tileDetail = getTileName(WORLD->debugmap->getBlock(position)->getTileData(WORLD->debugmap->player->mapPosition.h).nameID);
 		}
 	}

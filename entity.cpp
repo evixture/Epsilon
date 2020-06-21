@@ -92,7 +92,6 @@ void Creature::update()
 {
 	angle = getAngle(renderPosition.x, renderPosition.y, INPUT->mouse->screenPosition.x, INPUT->mouse->screenPosition.y);
 
-	//renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
 	renderPosition = getRenderPosition(mapPosition);
 
 	if (health == 0) //if dead
@@ -136,7 +135,7 @@ Player::Player(Position4 position)
 
 void Player::move()
 {
-	static int stepSound; //construction
+	static int stepSound;
 	static int stepSpeed;
 	static bool moved = false;
 
@@ -146,7 +145,7 @@ void Player::move()
 		else if (INPUT->moveSlowKey->isDown)	baseMoveTime = 1.0f;
 		else									baseMoveTime = .5f;
 
-		int xMoveDist = 0; //construction
+		int xMoveDist = 0;
 		int yMoveDist = 0;
 
 		if (INPUT->stanceDownKey->isSwitched) changeStanceDown();
@@ -458,7 +457,6 @@ void Player::updateTools()
 
 void Player::update()
 {
-	//renderPosition = Position3(offsetPosition(mapPosition, WORLD->xOffset, WORLD->yOffset));
 	renderPosition = getRenderPosition(mapPosition);
 
 	if (health != 0) //if player is alive

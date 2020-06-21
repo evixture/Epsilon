@@ -199,23 +199,6 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>tile.cpp</FILENAME>
-      <LINE>10</LINE>
-      <COLUMN>7</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'Block::destroyed' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>Block::{ctor}</FUNCTION>
-    <DECORATED>??0Block@@QEAA@V?$vector@UTile@@V?$allocator@UTile@@@std@@@std@@EEW4Tag@0@@Z</DECORATED>
-    <FUNCLINE>10</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>Block::destroyed</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>tile.cpp</FILENAME>
       <LINE>21</LINE>
       <COLUMN>64</COLUMN>
     </SFA>
