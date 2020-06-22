@@ -292,7 +292,7 @@ bool Map::getCreatures(pugi::xml_node& dataNode)
 						armorColor = TCODColor::pink;
 					}
 				}
-				Creature creature = Creature(Position4(x, y, level, floor), ch, name, Position3(0, 0, 128), health, Armor(&creature, "TEMP", armorColor, armorDefense, armorDurability)); //missing armor name in file
+				Creature creature = Creature(Position4(x, y, level, floor), ch, name, Position3(0, 0, 255), health, Armor(&creature, "TEMP", armorColor, armorDefense, armorDurability)); //missing armor name in file
 				creatureList.push_back(std::make_shared<AICreature>(creature, fovMapList[creature.mapPosition.h - 1].get()));
 			}	
 		}
