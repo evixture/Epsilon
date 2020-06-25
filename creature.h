@@ -1,21 +1,21 @@
 #include "main.hpp"
 
-struct Entity
-{
-	Position4 mapPosition;
-	unsigned char ch;
-	TCODColor color;
-	std::string name;
-
-	Entity(Position4 pos, int ch, std::string name, TCODColor color);
-	virtual ~Entity() {};
-
-	virtual void update();
-	virtual void render(const Pane& pane) const;
-
-protected:
-	Position2 renderPosition; //replace with position2
-};
+//struct Entity
+//{
+//	Position4 mapPosition;
+//	unsigned char ch;
+//	TCODColor color;
+//	std::string name;
+//
+//	Entity(Position4 pos, int ch, std::string name, TCODColor color);
+//	virtual ~Entity() {};
+//
+//	virtual void update();
+//	virtual void render(const Pane& pane) const;
+//
+//protected:
+//	Position2 renderPosition; //replace with position2
+//};
 
 struct Creature : public Entity
 {

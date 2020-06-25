@@ -221,163 +221,7 @@ void Melee::render(const Pane& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Bullet::Bullet(const Creature* owner, int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass)
-	:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), travel(BLine(startPosition.x, startPosition.y, tox, toy)),
-	mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveClock(1.0f / velocity), fallClock(0), owner(owner), inFov(false)
-{
-	do
-	{
-		if (tox != 0) tox *= 2;
-		if (toy != 0) toy *= 2;
-	} while (((tox + startPosition.x < xbound && tox + startPosition.x > 0) && tox != 0) || ((toy + startPosition.y < ybound && toy + startPosition.y > 0) && toy != 0));
 
-	tox += startPosition.x;
-	toy += startPosition.y;
-
-	travel = BLine(startPosition.x, startPosition.y, tox, toy);
-}
-
-void Bullet::doBulletDamage(std::shared_ptr<Creature>& creature)
-{
-	int damage = 0;
-
-	if (creature->health != 0)
-	{
-		if (creature->equippedArmor.durability > 0) //if the armor durability is high enough
-		{
-			if (currentVelocity - creature->equippedArmor.defense > 0) //if bullet is fast enough to pass through armor
-			{
-				creature->equippedArmor.durability -= currentVelocity; //should happen before taking damage to prevent high damage
-				currentVelocity -= creature->equippedArmor.defense;
-
-				damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //2.0f can be changed to manage ttk and bullet damage
-
-				creature->takeDamage(damage);
-
-				currentVelocity -= 100; //slowdown after going through body
-			}
-			else //if the bullet is stopped by the armor
-			{
-				creature->equippedArmor.durability -= currentVelocity;
-				currentVelocity = 0;
-			}
-
-			if (creature->equippedArmor.durability < 0)
-			{
-				creature->equippedArmor.durability = 0;
-			}
-		}
-		else
-		{
-			damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass);
-			
-			creature->takeDamage(damage);
-
-			currentVelocity -= 100; //slowdown after going through body
-		}
-
-		if (damage > 0)
-		{
-			GUI->logWindow->pushMessage(LogWindow::Message((creature->name + " shot for " + std::to_string(damage) + " damage!"), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
-		}
-		else
-		{
-			GUI->logWindow->pushMessage(LogWindow::Message(("Bullet was blocked!"), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
-		}
-	}
-}
-
-void Bullet::update()
-{
-	inFov = WORLD->isInPlayerFov(mapPosition);
-
-	if (currentVelocity > 0 && mapPosition.h > 0)
-	{
-		moveClock.tickUp();
-
-		for (int i = 1; i < moveClock.numCalls; moveClock.numCalls--)
-		{
-			if (WORLD->debugmap->inMapBounds(mapPosition))
-			{
-				if (WORLD->debugmap->getBlock(mapPosition)->destroy(mass, mapPosition.h))
-				{
-					WORLD->updateBlock(mapPosition, false); //check if pos needs to be reassigned before
-					AUDIO->playSound(PositionalStaticSound(("crash"), mapPosition, 85.0f, 100.0f));
-				}
-
-				int decel = WORLD->debugmap->getBlock(mapPosition)->tileList[mapPosition.h].deceleration;
-
-				if (currentVelocity - decel < 0)
-				{
-					currentVelocity = 0;
-				}
-				else
-				{
-					currentVelocity -= WORLD->debugmap->getBlock(mapPosition)->tileList[mapPosition.h].deceleration;
-				}			
-			
-				for (auto& creature : WORLD->debugmap->creatureList)
-				{
-					if (creature.get() != owner) //dont hit self
-					{
-						if (creature->mapPosition.x == mapPosition.x && creature->mapPosition.y == mapPosition.y && creature->mapPosition.z == mapPosition.z && mapPosition.h <= creature->mapPosition.h) //if hit a creature
-						{						
-							doBulletDamage(creature);							
-						}
-					}
-				}
-				
-				travel.step();
-				mapPosition = Position4(travel.x, travel.y, mapPosition.h, startPosition.z);
-
-			}
-			else
-			{
-				currentVelocity = 0;
-				mapPosition.h = 0;
-			}
-		}
-	}
-
-	if (currentVelocity > 0 && mapPosition.h > 0)
-	{
-		fallClock.timeBetweenUpdates = (getFallTime(mapPosition.h) - getFallTime(mapPosition.h - 1));
-		fallClock.tickUp();
-
-		for (int i = 1; i < fallClock.numCalls; fallClock.numCalls--) mapPosition.h--;
-		mapPosition = Position4(travel.x, travel.y, mapPosition.h, startPosition.z);
-	}
-
-	renderPosition = getRenderPosition(mapPosition);
-}
-
-void Bullet::render(const Pane& pane) const
-{
-	if (inFov)
-	{
-		if (currentVelocity > 0)
-		{
-			if (mapPosition.h > 0) //in the air
-			{
-				pane.console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::brass); //check later
-
-				if ((startPosition.x == travel.x && startPosition.y == travel.y))
-				{
-					pane.console->setChar(renderPosition.x, renderPosition.y, '*'); //muzzle flash
-				}
-				else
-				{
-					pane.console->setChar(renderPosition.x, renderPosition.y, ch);
-				}
-			}
-			else //on the ground
-			{
-				pane.console->setChar(renderPosition.x, renderPosition.y, ch);
-				pane.console->setCharForeground(renderPosition.x, renderPosition.y, WORLD->debugmap->getBlock(mapPosition)->tileList[0].foregroundColor);
-			}
-		}
-	}
-}
 
 //----------------------------------------------------------------------------------------------------
 
@@ -537,7 +381,17 @@ void Firearm::fireBullet()
 	{
 		for (float i = 1.0f; i <= fireClock.numCalls; fireClock.numCalls--)
 		{
-			bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(owner, ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, getMagazine().second.velocity, getMagazine().second.mass));
+			switch (getMagazine().second.ammoType)
+			{
+			case MagazineData::AmmoType::FOURTYFIVEACP:
+				bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ep::bullet::cal45(owner, "cal45", mapPosition, Position2(mapPosition.x + dx, mapPosition.y + dy))));
+				break;
+			case MagazineData::AmmoType::FIVEPOINTFIVESIX:
+				bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ep::bullet::cal556(owner, "cal556", mapPosition, Position2(mapPosition.x + dx, mapPosition.y + dy))));
+				break;
+			}
+
+			//bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(owner, ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, getMagazine().second.velocity, getMagazine().second.mass));
 
 			usedMag.availableAmmo--;
 

@@ -73,6 +73,28 @@ private:
 		origy,  destx,  desty;
 };
 
+struct FLine //function line; not length limited like BLine
+{
+	int step;
+	float multiplier;
+	const Position2 startPosition;
+
+	//fline(angle)
+	//fline(targetPos)
+	FLine(Position2 startPosition, Position2 targetPosition);
+
+	//get pos
+	Position2 getPosition() const;
+	//get next pos
+	Position2 getNextPosition() const;
+	//get step
+	//step
+	void stepLine();
+
+private:
+	bool vertical;
+};
+
 struct Clock
 {
 	float numCalls;

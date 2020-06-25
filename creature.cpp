@@ -1,19 +1,19 @@
 #include "main.hpp"
 
-Entity::Entity(Position4 pos, int ch, std::string name, TCODColor color)
-	:mapPosition(pos), renderPosition(pos), ch(ch), color(color), name(name)
-{}
-
-void Entity::update()
-{
-	return;
-}
-
-void Entity::render(const Pane& pane) const
-{
-	pane.console->setChar(mapPosition.x, mapPosition.y, ch);
-	pane.console->setCharForeground(mapPosition.x, mapPosition.y, color);
-}
+//Entity::Entity(Position4 pos, int ch, std::string name, TCODColor color)
+//	:mapPosition(pos), renderPosition(pos), ch(ch), color(color), name(name)
+//{}
+//
+//void Entity::update()
+//{
+//	return;
+//}
+//
+//void Entity::render(const Pane& pane) const
+//{
+//	pane.console->setChar(mapPosition.x, mapPosition.y, ch);
+//	pane.console->setCharForeground(mapPosition.x, mapPosition.y, color);
+//}
 
 //----------------------------------------------------------------------------------------------------
 

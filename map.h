@@ -34,7 +34,7 @@ struct Map
 	bool getTransparency			(Position4& position) const;
 	bool getWalkability				(Position4 position, bool checkCreatures) const;
 	bool getSolidity				(Position4& position) const;
-	bool inMapBounds				(Position3& position) const;
+	bool inMapBounds				(Position3 position) const;
 
 	std::shared_ptr<Block> getBlock(Position3 position) const;
 

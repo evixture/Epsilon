@@ -22,7 +22,8 @@
     <ClCompile Include="..\..\..\..\pugixml-1.10\src\pugixml.cpp" />
     <ClCompile Include="aicreature.cpp" />
     <ClCompile Include="engine.cpp" />
-    <ClCompile Include="entity.cpp" />
+    <ClCompile Include="creature.cpp" />
+    <ClCompile Include="environment.cpp" />
     <ClCompile Include="gui.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="item.cpp" />
@@ -39,7 +40,8 @@
   <ItemGroup>
     <ClInclude Include="aicreature.h" />
     <ClInclude Include="engine.h" />
-    <ClInclude Include="entity.h" />
+    <ClInclude Include="creature.h" />
+    <ClInclude Include="environment.h" />
     <ClInclude Include="gui.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="item.h" />

@@ -31,11 +31,13 @@ struct Player;
 
 #include "audio.h"
 
+#include "environment.h"
+
 	#include "tile.h"
 	#include "tool.h"
 #include "item.h"
 
-	#include "entity.h"
+	#include "creature.h"
 	#include "aicreature.h"
 #include "map.h"
 

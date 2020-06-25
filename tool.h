@@ -27,7 +27,7 @@
 
 struct Armor;
 
-struct Tool																		
+struct Tool	//needs cleanup
 {
 	const Creature* owner;
 
@@ -50,7 +50,7 @@ struct Tool
 
 	std::string name;															
 
-	enum FireType { SAFE = 0x01, SEMI = 0x02, FULL = 0x04 } fireMode;			
+	enum FireType { SAFE = 0x01, SEMI = 0x02, FULL = 0x04 } fireMode; //move to firearm only??
 
 	Tool(const Creature* owner, std::string name, TCODColor color, int ch);							
 	Tool(const Creature* owner, std::string name, TCODColor color, MagazineData::AmmoType ammoType, FireType fireMode, char availibleFireModeFlag);
@@ -92,43 +92,6 @@ struct Melee : public Tool
 
 private:
 	void doMeleeDamage(std::shared_ptr<Creature>& creature);					
-};
-
-struct Bullet																	
-{
-	const Creature* owner;
-	bool inFov;
-
-	unsigned char ch;															
-
-	const short int mass;														
-	const short int baseVelocity;												
-	short int currentVelocity;													
-
-	Position4 startPosition;													
-	Position4 mapPosition;														
-
-	//check if use ref
-	Bullet(const Creature* owner, int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound, int velocity, int mass);
-
-	void doBulletDamage(std::shared_ptr<Creature>& creature);					
-
-	void update();																
-	void render(const Pane& pane) const;										
-
-private:
-	short int tox;																
-	short int toy;																
-
-	int xbound;																	
-	int ybound;																	
-
-	BLine travel;																
-
-	Position2 renderPosition; //replace with position2											
-
-	Clock moveClock;
-	Clock fallClock;
 };
 
 struct Firearm : public Melee													
@@ -221,14 +184,15 @@ namespace ep
 
 	struct bullet
 	{
-		inline static Bullet cal45(const Creature* owner, int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound)
+		//const Creature* owner, std::string name, const Position4 startPosition, Position2 targetPosition, int velocity, int mass
+		inline static Bullet cal45(const Creature* owner, std::string name, Position4 startPosition, Position2 targetPosition)
 		{
-			return Bullet(owner, ch, startPosition, dx, dy, xbound, ybound, 80, 230);
+			return Bullet(owner, name, startPosition, targetPosition, 80, 230);
 		}
 
-		inline static Bullet cal556(const Creature* owner, int ch, Position4 startPosition, int dx, int dy, int xbound, int ybound)
+		inline static Bullet cal556(const Creature* owner, std::string name, Position4 startPosition, Position2 targetPosition)
 		{
-			return Bullet(owner, ch, startPosition, dx, dy, xbound, ybound, 300, 55);
+			return Bullet(owner, name, startPosition, targetPosition, 300, 55);
 		}
 	};
 }

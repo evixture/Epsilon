@@ -55,6 +55,9 @@
     <Filter Include="Source\Audio">
       <UniqueIdentifier>{8fd2a4d9-7450-4913-9e35-041aa071365b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Environment">
+      <UniqueIdentifier>{1a7d158e-592a-4485-b83f-affd86fedfab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h">
@@ -71,9 +74,6 @@
     </ClInclude>
     <ClInclude Include="settings.h">
       <Filter>Source\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="entity.h">
-      <Filter>Source\Entity</Filter>
     </ClInclude>
     <ClInclude Include="window.h">
       <Filter>Source\Window</Filter>
@@ -105,6 +105,12 @@
     <ClInclude Include="audio.h">
       <Filter>Source\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="environment.h">
+      <Filter>Source\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="creature.h">
+      <Filter>Source\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -121,9 +127,6 @@
     </ClCompile>
     <ClCompile Include="settings.cpp">
       <Filter>Source\Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="entity.cpp">
-      <Filter>Source\Entity</Filter>
     </ClCompile>
     <ClCompile Include="window.cpp">
       <Filter>Source\Window</Filter>
@@ -154,6 +157,12 @@
     </ClCompile>
     <ClCompile Include="audio.cpp">
       <Filter>Source\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="environment.cpp">
+      <Filter>Source\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="creature.cpp">
+      <Filter>Source\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -491,7 +491,7 @@ std::shared_ptr<Block> Map::getTileFromCode(std::string code)
 	}
 }
 
-bool Map::inMapBounds(Position3& position) const
+bool Map::inMapBounds(Position3 position) const
 {
 	return ((position.z >= 0 && position.z < totalFloors) && (position.x >= 0 && position.x < width) && (position.y >= 0 && position.y < height)); //can optimize by checking opposite
 }

@@ -129,6 +129,59 @@ bool BLine::end()
 
 //----------------------------------------------------------------------------------------------------
 
+
+FLine::FLine(Position2 startPosition, Position2 targetPosition)
+	: step(0), startPosition(startPosition)
+{
+	if (targetPosition.x - startPosition.x != 0)
+	{
+		vertical = false; //step along x
+		multiplier = (float)(targetPosition.y - startPosition.y) / (float)(targetPosition.x - startPosition.x);
+	}
+	else
+	{
+		vertical = true; //step along y
+		if (targetPosition.y - startPosition.y > 0) multiplier = 1;
+		else if (targetPosition.y - startPosition.y < 0) multiplier = -1;
+		else multiplier = 0; //no line
+	}
+}
+
+Position2 FLine::getPosition() const
+{
+	if (!vertical)
+	{
+		return Position2(startPosition.x + step, startPosition.y + step * multiplier);
+	}
+	else
+	{
+		if (multiplier == 1) return Position2(startPosition.x + step, startPosition.y); //vert line up
+		else if (multiplier == -1) return Position2(startPosition.x - step, startPosition.y); //vert line down
+	}
+	return Position2(0, 0); //no line
+}
+
+Position2 FLine::getNextPosition() const
+{
+	if (!vertical)
+	{
+		return Position2(startPosition.x + (step + 1), startPosition.y + (step + 1) * multiplier);
+	}
+	else
+	{
+		if (multiplier == 1) return Position2(startPosition.x + (step + 1), startPosition.y); //vert line up
+		else if (multiplier == -1) return Position2(startPosition.x - (step - 1), startPosition.y); //vert line down
+	}
+	return Position2(0, 0); //no line
+}
+
+void FLine::stepLine()
+{
+	step++;
+}
+
+//----------------------------------------------------------------------------------------------------
+
 unsigned char heightToBitFlag(int h)
 {
 	return 1 << h;
@@ -408,3 +461,4 @@ Position2 getRenderPosition(Position2 mapPosition)
 {
 	return Position2(mapPosition.x - WORLD->xOffset, mapPosition.y - WORLD->yOffset);
 }
+
