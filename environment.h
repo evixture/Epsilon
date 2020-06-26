@@ -139,7 +139,7 @@ struct Bullet : public Projectile
 	//Position4 mapPosition;//
 
 	//check if use ref
-	Bullet(const Creature* owner, std::string name, const Position4 startPosition, Position2 targetPosition, int velocity, int mass);
+	Bullet(const Creature* owner, std::string name, int ch, const Position4 startPosition, Position2 targetPosition, int velocity, int mass);
 
 	void doBulletDamage(std::shared_ptr<Creature>& creature);
 

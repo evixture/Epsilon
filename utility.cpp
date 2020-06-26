@@ -130,54 +130,113 @@ bool BLine::end()
 //----------------------------------------------------------------------------------------------------
 
 
-FLine::FLine(Position2 startPosition, Position2 targetPosition)
+FLine::FLine(Position2 startPosition, Position2 targetPosition) //cant shoot straight up
 	: step(0), startPosition(startPosition)
 {
-	if (targetPosition.x - startPosition.x != 0)
+	if (!(startPosition == targetPosition))
 	{
-		vertical = false; //step along x
-		multiplier = (float)(targetPosition.y - startPosition.y) / (float)(targetPosition.x - startPosition.x);
+		if (targetPosition.x <= startPosition.x && targetPosition.y <= startPosition.y) negative = true;
+		else negative = false;
+
+		valid = true;
+		if ((float)(abs(targetPosition.y - startPosition.y)) / (float)(abs(targetPosition.x - startPosition.x)) > 1.0f)
+		{
+			yStep = true; //if slope too great, step along y axis in order to not skip blocks
+			multiplier = (float)(targetPosition.x - startPosition.x) / (float)(targetPosition.y - startPosition.y);
+		}
+		else
+		{
+			yStep = false;
+			multiplier = (float)(targetPosition.y - startPosition.y) / (float)(targetPosition.x - startPosition.x);
+		}
 	}
 	else
 	{
-		vertical = true; //step along y
-		if (targetPosition.y - startPosition.y > 0) multiplier = 1;
-		else if (targetPosition.y - startPosition.y < 0) multiplier = -1;
-		else multiplier = 0; //no line
+		valid = false;
+		yStep = false;
+		multiplier = 0.0f;
 	}
+
+	//if (targetPosition.x - startPosition.x != 0) //needs to be y step if angle is greater than 45 deg
+	//{
+	//	yStep = false; //step along x
+	//	multiplier = (float)(targetPosition.y - startPosition.y) / (float)(targetPosition.x - startPosition.x);
+	//}
+	//else
+	//{
+	//	yStep = true; //step along y
+	//	if (targetPosition.y - startPosition.y > 0) multiplier = 1;
+	//	else if (targetPosition.y - startPosition.y < 0) multiplier = -1;
+	//	else multiplier = 0; //no line
+	//}
 }
 
 Position2 FLine::getPosition() const
 {
-	if (!vertical)
+	//if (!yStep)
+	//{
+	//	return Position2(startPosition.x + step, startPosition.y + step * multiplier);
+	//}
+	//else
+	//{
+	//	if (multiplier == 1) return Position2(startPosition.x, startPosition.y + step); //vert line up
+	//	else if (multiplier == -1) return Position2(startPosition.x, startPosition.y - step); //vert line down
+	//}
+	//return Position2(0, 0); //no line
+
+	if (valid)
 	{
-		return Position2(startPosition.x + step, startPosition.y + step * multiplier);
+		if (yStep == true)
+		{
+			return Position2(startPosition.x + (step * multiplier), startPosition.y + step);
+		}
+		else
+		{
+			return Position2(startPosition.x + step, startPosition.y + (step * multiplier));
+		}
 	}
-	else
-	{
-		if (multiplier == 1) return Position2(startPosition.x + step, startPosition.y); //vert line up
-		else if (multiplier == -1) return Position2(startPosition.x - step, startPosition.y); //vert line down
-	}
-	return Position2(0, 0); //no line
 }
 
 Position2 FLine::getNextPosition() const
 {
-	if (!vertical)
+	//if (!yStep)
+	//{
+	//	return Position2(startPosition.x + (step + 1), startPosition.y + (step + 1) * multiplier);
+	//}
+	//else
+	//{
+	//	if (multiplier == 1) return Position2(startPosition.x, startPosition.y + (step + 1)); //vert line up
+	//	else if (multiplier == -1) return Position2(startPosition.x, startPosition.y - (step - 1)); //vert line down
+	//}
+	//return Position2(0, 0); //no line
+
+	if (valid)
 	{
-		return Position2(startPosition.x + (step + 1), startPosition.y + (step + 1) * multiplier);
+		if (yStep == true)
+		{
+			if (negative) return Position2(startPosition.x + ((step - 1) * multiplier), startPosition.y + (step - 1));
+			else return Position2(startPosition.x + ((step + 1) * multiplier), startPosition.y + (step + 1));
+		}
+		else
+		{
+			if (negative) return Position2(startPosition.x + (step - 1), startPosition.y + ((step - 1) * multiplier));
+			return Position2(startPosition.x + (step + 1), startPosition.y + ((step + 1) * multiplier));
+		}
 	}
-	else
-	{
-		if (multiplier == 1) return Position2(startPosition.x + (step + 1), startPosition.y); //vert line up
-		else if (multiplier == -1) return Position2(startPosition.x - (step - 1), startPosition.y); //vert line down
-	}
-	return Position2(0, 0); //no line
+}
+
+bool FLine::isValid()
+{
+	return valid;
 }
 
 void FLine::stepLine()
 {
-	step++;
+	if (valid)
+	{
+		if (negative) step--;
+		else step++;
+	}
 }
 
 //----------------------------------------------------------------------------------------------------

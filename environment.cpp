@@ -45,10 +45,10 @@ void Projectile::render(const Pane& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Bullet::Bullet(const Creature* owner, std::string name, const Position4 startPosition, Position2 targetPosition, int velocity, int mass)
+Bullet::Bullet(const Creature* owner, std::string name, int ch, const Position4 startPosition, Position2 targetPosition, int velocity, int mass)
 	//:ch(ch), startPosition(startPosition), tox(dx), toy(dy), xbound(xbound), ybound(ybound), travel(BLine(startPosition.x, startPosition.y, tox, toy)),
 	//mapPosition(startPosition), mass(mass), baseVelocity(velocity), currentVelocity(velocity), moveClock(1.0f / velocity), fallClock(0), owner(owner), inFov(false)
-	: Projectile(owner, '*', name, TCODColor::copper, startPosition, targetPosition, velocity, mass)
+	: Projectile(owner, ch, name, TCODColor::copper, startPosition, targetPosition, velocity, mass)
 {
 	//do
 	//{

@@ -87,12 +87,16 @@ struct FLine //function line; not length limited like BLine
 	Position2 getPosition() const;
 	//get next pos
 	Position2 getNextPosition() const;
+
+	bool isValid();
 	//get step
 	//step
 	void stepLine();
 
 private:
-	bool vertical;
+	bool negative;
+	bool yStep;
+	bool valid;
 };
 
 struct Clock
