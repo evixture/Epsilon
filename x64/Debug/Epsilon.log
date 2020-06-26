@@ -1,10 +1,1 @@
-﻿  utility.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(191,37): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(195,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(217,51): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(218,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(222,81): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(223,67): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(198): warning C4715: 'FLine::getPosition': not all control paths return a value
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(226): warning C4715: 'FLine::getNextPosition': not all control paths return a value
-  Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe
+﻿  Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

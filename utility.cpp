@@ -130,99 +130,79 @@ bool BLine::end()
 //----------------------------------------------------------------------------------------------------
 
 
-FLine::FLine(Position2 startPosition, Position2 targetPosition) //cant shoot straight up
-	: step(0), startPosition(startPosition)
+FLine::FLine(Position2 startPosition, Position2 targetPosition) //SW shot reverse
+	: step(0), startPosition(startPosition), negative(false)
 {
 	if (!(startPosition == targetPosition))
 	{
-		if (targetPosition.x <= startPosition.x && targetPosition.y <= startPosition.y) negative = true;
-		else negative = false;
-
 		valid = true;
+
 		if ((float)(abs(targetPosition.y - startPosition.y)) / (float)(abs(targetPosition.x - startPosition.x)) > 1.0f)
 		{
 			yStep = true; //if slope too great, step along y axis in order to not skip blocks
-			multiplier = (float)(targetPosition.x - startPosition.x) / (float)(targetPosition.y - startPosition.y);
+			xMultiplier = (float)(targetPosition.x - startPosition.x) / (float)(targetPosition.y - startPosition.y);
+			yMultiplier = (float)(targetPosition.y - startPosition.y) / (float)(targetPosition.x - startPosition.x);
 		}
 		else
 		{
 			yStep = false;
-			multiplier = (float)(targetPosition.y - startPosition.y) / (float)(targetPosition.x - startPosition.x);
+			yMultiplier = (float)(targetPosition.y - startPosition.y) / (float)(targetPosition.x - startPosition.x);
+			xMultiplier = (float)(targetPosition.x - startPosition.x) / (float)(targetPosition.y - startPosition.y);
 		}
+
+		//if (targetPosition.x <= startPosition.x && targetPosition.y <= startPosition.y) negative = true;
+		//if (xMultiplier < 0.0f) negative = true;
+		//else negative = false;
+
+		if (targetPosition.x - startPosition.x < 0 || targetPosition.y - startPosition.y < 0)
+		{
+			if (targetPosition.x - startPosition.x < 0 && targetPosition.y - startPosition.y < 0) negative = true;
+			if ((yStep == false && xMultiplier <= -1.0f) || (yStep == true && yMultiplier <= -1.0f)) negative = true;
+		}
+
+		GUI->logWindow->pushMessage(LogWindow::Message("xm: " + std::to_string(xMultiplier) + " ym: " + std::to_string(yMultiplier)+ " n:" + std::to_string(negative), LogWindow::Message::MessageLevel::MEDIUM));
 	}
 	else
 	{
 		valid = false;
 		yStep = false;
-		multiplier = 0.0f;
+		xMultiplier = 0.0f;
+		yMultiplier = 0.0f;
 	}
-
-	//if (targetPosition.x - startPosition.x != 0) //needs to be y step if angle is greater than 45 deg
-	//{
-	//	yStep = false; //step along x
-	//	multiplier = (float)(targetPosition.y - startPosition.y) / (float)(targetPosition.x - startPosition.x);
-	//}
-	//else
-	//{
-	//	yStep = true; //step along y
-	//	if (targetPosition.y - startPosition.y > 0) multiplier = 1;
-	//	else if (targetPosition.y - startPosition.y < 0) multiplier = -1;
-	//	else multiplier = 0; //no line
-	//}
 }
 
 Position2 FLine::getPosition() const
 {
-	//if (!yStep)
-	//{
-	//	return Position2(startPosition.x + step, startPosition.y + step * multiplier);
-	//}
-	//else
-	//{
-	//	if (multiplier == 1) return Position2(startPosition.x, startPosition.y + step); //vert line up
-	//	else if (multiplier == -1) return Position2(startPosition.x, startPosition.y - step); //vert line down
-	//}
-	//return Position2(0, 0); //no line
-
 	if (valid)
 	{
 		if (yStep == true)
 		{
-			return Position2(startPosition.x + (step * multiplier), startPosition.y + step);
+			return Position2(startPosition.x + (step * yMultiplier), startPosition.y + step);
 		}
 		else
 		{
-			return Position2(startPosition.x + step, startPosition.y + (step * multiplier));
+			return Position2(startPosition.x + step, startPosition.y + (step * xMultiplier));
 		}
 	}
+	return Position2(0, 0);
 }
 
 Position2 FLine::getNextPosition() const
 {
-	//if (!yStep)
-	//{
-	//	return Position2(startPosition.x + (step + 1), startPosition.y + (step + 1) * multiplier);
-	//}
-	//else
-	//{
-	//	if (multiplier == 1) return Position2(startPosition.x, startPosition.y + (step + 1)); //vert line up
-	//	else if (multiplier == -1) return Position2(startPosition.x, startPosition.y - (step - 1)); //vert line down
-	//}
-	//return Position2(0, 0); //no line
-
 	if (valid)
 	{
 		if (yStep == true)
 		{
-			if (negative) return Position2(startPosition.x + ((step - 1) * multiplier), startPosition.y + (step - 1));
-			else return Position2(startPosition.x + ((step + 1) * multiplier), startPosition.y + (step + 1));
+			if (negative) return Position2(startPosition.x + ((step - 1) * yMultiplier), startPosition.y + (step - 1));
+			else return Position2(startPosition.x + ((step + 1) * yMultiplier), startPosition.y + (step + 1));
 		}
 		else
 		{
-			if (negative) return Position2(startPosition.x + (step - 1), startPosition.y + ((step - 1) * multiplier));
-			return Position2(startPosition.x + (step + 1), startPosition.y + ((step + 1) * multiplier));
+			if (negative) return Position2(startPosition.x + (step - 1), startPosition.y + ((step - 1) * xMultiplier));
+			return Position2(startPosition.x + (step + 1), startPosition.y + ((step + 1) * xMultiplier));
 		}
 	}
+	return Position2(0, 0);
 }
 
 bool FLine::isValid()
