@@ -146,12 +146,14 @@ void InventoryWindow::render() const
 				if (container == WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex] && WORLD->debugmap->player->itemIndex == -1)
 				{
 					drawPane.console->printf(0, drawLineStart, "|>%s", container->item->tool->name.c_str());
+					drawPane.console->putChar(0, drawLineStart, container->item->block->tileList[0].ch);
 					drawPane.console->setCharForeground(1, drawLineStart, ep::color::selector); //color the cursor
 					drawPane.console->setCharForeground(0, drawLineStart, WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex]->item->barColor); //color the bar
 				}
 				else
 				{
-					drawPane.console->printf(0, drawLineStart, "| %s", container->item->tool->name.c_str());
+					drawPane.console->printf(0, drawLineStart, "| %s",  container->item->tool->name.c_str());
+					drawPane.console->putChar(0, drawLineStart, container->item->block->tileList[0].ch);
 					drawPane.console->setCharForeground(0, drawLineStart, WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex]->item->barColor); //color the bar
 				}
 				++drawLine;
@@ -171,12 +173,14 @@ void InventoryWindow::render() const
 					if (item == WORLD->debugmap->player->selectedItem)
 					{
 						drawPane.console->printf(0, drawLine, "|>  %s", item->tool->name.c_str());
+						drawPane.console->putChar(0, drawLine, item->block->tileList[0].ch);
 						drawPane.console->setCharForeground(1, drawLine, ep::color::selector);
 						drawPane.console->setCharForeground(0, drawLine, item->barColor); //color the bar
 					}
 					else
 					{
 						drawPane.console->printf(0, drawLine, "|   %s", item->tool->name.c_str());
+						drawPane.console->putChar(0, drawLine, item->block->tileList[0].ch);
 						drawPane.console->setCharForeground(0, drawLine, item->barColor); //color the bar
 					}
 					++drawLine;
@@ -326,11 +330,14 @@ void InventoryFullWindow::render() const
 				if (container == WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex] && WORLD->debugmap->player->itemIndex == -1)
 				{
 					drawPane.console->printf(0, drawLineStart, "|>%s", container->item->tool->name.c_str());
+					drawPane.console->putChar(0, drawLineStart, container->item->block->tileList[0].ch);
 					drawPane.console->setCharForeground(1, drawLineStart, ep::color::selector);
 				}
 				else
 				{
 					drawPane.console->printf(0, drawLineStart, "| %s", container->item->tool->name.c_str());
+					drawPane.console->putChar(0, drawLineStart, container->item->block->tileList[0].ch);
+					drawPane.console->setCharForeground(0, drawLineStart, WORLD->debugmap->player->inventory[WORLD->debugmap->player->containerIndex]->item->barColor); //color the bar
 				}
 				++drawLine;
 			}
@@ -349,11 +356,15 @@ void InventoryFullWindow::render() const
 					if (item == WORLD->debugmap->player->selectedItem)
 					{
 						drawPane.console->printf(0, drawLine, "|>  %s", item->tool->name.c_str());
+						drawPane.console->putChar(0, drawLine, item->block->tileList[0].ch);
 						drawPane.console->setCharForeground(1, drawLine, ep::color::selector);
+						drawPane.console->setCharForeground(0, drawLine, item->barColor); //color the bar
 					}
 					else
 					{
 						drawPane.console->printf(0, drawLine, "|   %s", item->tool->name.c_str());
+						drawPane.console->putChar(0, drawLine, item->block->tileList[0].ch);
+						drawPane.console->setCharForeground(0, drawLine, item->barColor); //color the bar
 					}
 					++drawLine;
 				}

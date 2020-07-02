@@ -89,7 +89,7 @@ struct Entity
 	virtual void render(const Pane& pane) const;
 
 protected:
-	Position2 renderPosition; //replace with position2
+	Position2 renderPosition;
 };
 
 
@@ -107,6 +107,8 @@ struct Projectile : public Entity
 
 	Projectile(const Creature* owner, int ch, std::string name, TCODColor color, const Position4 startPosition, Position2 targetPosition, int velocity, int mass);
 
+	//vvoid throw
+
 	virtual void update();
 	virtual void render(const Pane& pane) const;
 
@@ -114,10 +116,6 @@ protected:
 	Position2 targetPosition;
 	Position4 nextPosition;
 
-	//int xbound;
-	//int ybound;
-
-	//BLine travel;
 	FLine fTravel;
 
 	Clock moveClock;
@@ -126,18 +124,6 @@ protected:
 
 struct Bullet : public Projectile
 {
-	//const Creature* owner;//
-	//bool inFov;//
-	//
-	//unsigned char ch;//
-	//
-	//const short int mass;//
-	//const short int baseVelocity;//
-	//short int currentVelocity;//
-	//
-	//Position4 startPosition;//
-	//Position4 mapPosition;//
-
 	//check if use ref
 	Bullet(const Creature* owner, std::string name, int ch, const Position4 startPosition, Position2 targetPosition, int velocity, int mass);
 
@@ -145,18 +131,4 @@ struct Bullet : public Projectile
 
 	void update();
 	void render(const Pane& pane) const;
-
-private:
-	//short int tox;//
-	//short int toy;//
-	//
-	//int xbound;//
-	//int ybound;//
-	//
-	//BLine travel;//
-	//
-	//Position2 renderPosition;	//					
-	//
-	//Clock moveClock;//
-	//Clock fallClock;//
 };
