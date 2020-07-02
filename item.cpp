@@ -69,6 +69,8 @@ Item::Item(const Creature* creature, int size, std::shared_ptr<Block> block, std
 {
 	createActionManager();
 
+	onMap = (owner == nullptr) ? true : false;
+
 	if (type == ItemType::HAND) tool->effectiveRange = 5; //override effective range for hands
 }
 
@@ -128,10 +130,10 @@ void Item::updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHel
 	tileRenderPosition = Position4(mapPosition.x - WORLD->xOffset, mapPosition.y - WORLD->yOffset, mapPosition.h, mapPosition.z); //replace with better way?
 }
 
-void Item::renderTool(const Pane& pane) const
-{
-	tool->render(pane);
-}
+//void Item::renderTool(const Pane& pane) const
+//{
+//	tool->render(pane);
+//}
 
 void Item::updateTile()
 {
@@ -146,19 +148,42 @@ void Item::updateTile()
 
 }
 
-void Item::renderTile(const Pane& pane) const
+//void Item::renderTile(const Pane& pane) const
+//{
+//	block->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.h, tileRenderPosition.z), pane);
+//
+//	if (distToEnt < 5 && inFov)
+//	{
+//		pane.console->setCharBackground(tileRenderPosition.x, tileRenderPosition.y, block->tileList[0].backgroundColor + TCODColor::darkGrey); //look into color later
+//	}
+//
+//	if (!inFov)
+//	{
+//		pane.console->setChar(tileRenderPosition.x, tileRenderPosition.y, '?');
+//		pane.console->setCharForeground(tileRenderPosition.x, tileRenderPosition.y, TCODColor::darkestGrey); //look into color later
+//	}
+//}
+
+void Item::render(const Pane& pane) const
 {
-	block->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.h, tileRenderPosition.z), pane);
-
-	if (distToEnt < 5 && inFov)
+	if (onMap)
 	{
-		pane.console->setCharBackground(tileRenderPosition.x, tileRenderPosition.y, block->tileList[0].backgroundColor + TCODColor::darkGrey); //look into color later
+		block->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.h, tileRenderPosition.z), pane);
+
+		if (distToEnt < 5 && inFov)
+		{
+			pane.console->setCharBackground(tileRenderPosition.x, tileRenderPosition.y, block->tileList[0].backgroundColor + TCODColor::darkGrey); //look into color later
+		}
+
+		if (!inFov)
+		{
+			pane.console->setChar(tileRenderPosition.x, tileRenderPosition.y, '?');
+			pane.console->setCharForeground(tileRenderPosition.x, tileRenderPosition.y, TCODColor::darkestGrey); //look into color later
+		}
 	}
-
-	if (!inFov)
+	else
 	{
-		pane.console->setChar(tileRenderPosition.x, tileRenderPosition.y, '?');
-		pane.console->setCharForeground(tileRenderPosition.x, tileRenderPosition.y, TCODColor::darkestGrey); //look into color later
+		tool->render(pane);
 	}
 }
 

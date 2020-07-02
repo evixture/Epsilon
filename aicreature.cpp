@@ -100,7 +100,7 @@ void AICreature::dropItem() //prob here
 	{
 		if (itemIndex >= 0)
 		{
-			selectedItem->owner = WORLD->debugmap->global.get();
+			selectedItem->owner = nullptr;
 			WORLD->debugmap->mapItemList.push_back(selectedItem);
 			inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
 
@@ -110,7 +110,7 @@ void AICreature::dropItem() //prob here
 		{
 			if (selectedItem->type != Item::ItemType::HAND)
 			{
-				selectedItem->owner = WORLD->debugmap->global.get();
+				selectedItem->owner = nullptr;
 				WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
 				inventory.erase(inventory.begin() + containerIndex);
 
@@ -563,7 +563,7 @@ void AICreature::render(const Pane& pane) const
 	
 		if (health != 0)
 		{
-			if (inFov) selectedItem->renderTool(pane); //want to fix, selected item is still rendered when dead
+			if (inFov) selectedItem->render(pane);
 		}
 	}
 }

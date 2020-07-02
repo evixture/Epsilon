@@ -7,6 +7,19 @@
 	|	L	MouseButton
 */
 
+/*
+make input list for all keys and mbuttons
+
+	all inputs in list
+	L	binds list?
+
+BUTTON
+	string name
+
+	char bind??
+
+*/
+
 struct Button
 {
 	Button();

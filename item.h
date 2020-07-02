@@ -54,13 +54,21 @@ struct Item
 	unsigned char size;
 	double distToEnt;
 	bool inFov;
+	bool onMap;
 	
 	TCODColor barColor;
 
 	Position4 mapPosition;
 	Position3 lastKnownMapPosition;
 
+	/*
+					IF THROWN		ON GROUND
+		TOOL	->	PROJECTILE	->	BLOCK
+		TOOL					->	BLOCK
+	*/
+
 	std::shared_ptr<Block> block;
+	std::shared_ptr<Projectile> projectile;
 	std::shared_ptr<Tool> tool;
 
 	std::shared_ptr<ActionManager> actionManager;
@@ -71,11 +79,23 @@ struct Item
 	virtual std::pair<bool, MagazineData&> getMagazineData();
 	virtual void changeBarColor();
 
-	void updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHeld);
-	void renderTool(const Pane& pane) const;
+	/*
+	virtual	std::pair<bool, MagazineData&>	getMagazine();										
+	virtual bool			reload(MagazineData& magazine);						
+	virtual void			changeFireMode();									
+	virtual void			useMelee();											
+	virtual void			changeBarColor(TCODColor& color);					
+	virtual void			equip(Armor& armor);								
+	virtual void			use(bool hold, bool swtch);			
+	*/
+
+	void updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHeld); //mappos can be removed because of owner
+	//void renderTool(const Pane& pane) const;
 
 	void updateTile();
-	void renderTile(const Pane& pane) const;
+	//void renderTile(const Pane& pane) const;
+
+	void render(const Pane& pane) const;
 
 private:
 	void createActionManager();

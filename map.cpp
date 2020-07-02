@@ -324,11 +324,11 @@ bool Map::getItems(pugi::xml_node& dataNode)
 			if (!(item.child("floor").empty())) floor = item.child("floor").text().as_int();
 			else return false;
 
-			if		(type == "SIR556")			mapItemList.push_back(std::make_shared<Item>(ep::item::sir556(global.get(), x, y, floor)));			
-			else if (type == "556Magazine30")	mapItemList.push_back(std::make_shared<MagazineItem>(ep::magazineItem::cal556Magazine30(global.get(), x, y, floor)));
-			else if (type == "45Magazine7")		mapItemList.push_back(std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(global.get(), x, y, floor)));
-			else if (type == "L1R3Armor")		mapItemList.push_back(std::make_shared<Item>(ep::item::L1R3Armor(global.get(), x, y, floor)));
-			else if (type == "Knife")			mapItemList.push_back(std::make_shared<Item>(ep::item::knife(global.get(), x, y, floor)));
+			if		(type == "SIR556")			mapItemList.push_back(std::make_shared<Item>(ep::item::sir556(nullptr, x, y, floor)));			
+			else if (type == "556Magazine30")	mapItemList.push_back(std::make_shared<MagazineItem>(ep::magazineItem::cal556Magazine30(nullptr, x, y, floor)));
+			else if (type == "45Magazine7")		mapItemList.push_back(std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(nullptr, x, y, floor)));
+			else if (type == "L1R3Armor")		mapItemList.push_back(std::make_shared<Item>(ep::item::L1R3Armor(nullptr, x, y, floor)));
+			else if (type == "Knife")			mapItemList.push_back(std::make_shared<Item>(ep::item::knife(nullptr, x, y, floor)));
 		}
 		return true;
 	}
@@ -358,7 +358,7 @@ bool Map::getContainers(pugi::xml_node& dataNode)
 			if (!(container.child("floor").empty()))	floor = container.child("floor").text().as_int();
 			else return false;
 
-			if (type == "SmallBackpack") mapContainerList.push_back(std::make_shared<Container>(ep::container::smallBackpack(global.get(), x, y, floor)));
+			if (type == "SmallBackpack") mapContainerList.push_back(std::make_shared<Container>(ep::container::smallBackpack(nullptr, x, y, floor)));
 		}
 		return true;
 	}
@@ -646,9 +646,17 @@ void World::update()
 	updateEntities(); //needs to be first to prevent bad fov checks
 	computeFov(debugmap->player->mapPosition);
 
-	for (auto& item : debugmap->mapItemList) item->updateTile();
+	for (auto& item : debugmap->mapItemList)
+	{
+		if (!item->onMap) item->onMap = true;
+		item->updateTile();
+	}
 
-	for (auto& container : debugmap->mapContainerList) container->item->updateTile();
+	for (auto& container : debugmap->mapContainerList)
+	{
+		if (!container->item->onMap) container->item->onMap = true;
+		container->item->updateTile();
+	}
 
 	soundList = soundBuffer;
 	if (soundBuffer.size() > 0) soundBuffer.clear();
@@ -681,12 +689,12 @@ void World::renderWorldItems(const Pane& pane) const
 {
 	for (auto& item : debugmap->mapItemList)
 	{
-		if (item->mapPosition.z == debugmap->player->mapPosition.z) item->renderTile(pane);
+		if (item->mapPosition.z == debugmap->player->mapPosition.z) item->render(pane);
 	}
 
 	for (auto& container : debugmap->mapContainerList)
 	{
-		if (container->item->mapPosition.z == debugmap->player->mapPosition.z) container->item->renderTile(pane);
+		if (container->item->mapPosition.z == debugmap->player->mapPosition.z) container->item->render(pane);
 	}
 }
 

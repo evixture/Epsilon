@@ -99,15 +99,17 @@ struct Projectile : public Entity
 	const Creature* owner;
 	bool inFov;
 
+	bool onGround;
+
 	const short int mass;
-	const short int baseVelocity; //need?
+	const short int baseVelocity;
 	short int currentVelocity;
 
 	const Position4 startPosition;
 
 	Projectile(const Creature* owner, int ch, std::string name, TCODColor color, const Position4 startPosition, Position2 targetPosition, int velocity, int mass);
 
-	//vvoid throw
+	virtual void doProjectileDamage(std::shared_ptr<Creature>& creature);
 
 	virtual void update();
 	virtual void render(const Pane& pane) const;
@@ -127,7 +129,7 @@ struct Bullet : public Projectile
 	//check if use ref
 	Bullet(const Creature* owner, std::string name, int ch, const Position4 startPosition, Position2 targetPosition, int velocity, int mass);
 
-	void doBulletDamage(std::shared_ptr<Creature>& creature);
+	void doProjectileDamage(std::shared_ptr<Creature>& creature);
 
 	void update();
 	void render(const Pane& pane) const;

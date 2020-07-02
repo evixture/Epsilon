@@ -318,7 +318,7 @@ void Player::dropItem()
 			GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->itemList[itemIndex]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
 			AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
 
-			selectedItem->owner = WORLD->debugmap->global.get();
+			selectedItem->owner = nullptr;
 			WORLD->debugmap->mapItemList.push_back(selectedItem);
 			inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
 		}
@@ -329,7 +329,7 @@ void Player::dropItem()
 				GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->item->tool->name, LogWindow::Message::MessageLevel::LOW));
 				AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
 
-				selectedItem->owner = WORLD->debugmap->global.get();
+				selectedItem->owner = nullptr;
 				WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
 				inventory.erase(inventory.begin() + containerIndex);
 			}
@@ -442,11 +442,15 @@ void Player::updateTools()
 	{
 		for (int i = 0; i < inventory.size(); i++)
 		{
+			if (inventory[i]->item->onMap) inventory[i]->item->onMap = false;
+
 			if (itemIndex == -1 && containerIndex == i) inventory[i]->item->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, true); //uses the map position of the mouse		
 			else inventory[i]->item->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, false);
 
 			for (int j = 0; j < inventory[i]->itemList.size(); j++) //stops when i gets to empty container list
 			{
+				if (inventory[i]->itemList[j]->onMap) inventory[i]->itemList[j]->onMap = false;
+
 				if (itemIndex == j && containerIndex == i) inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, true);
 				else inventory[i]->itemList[j]->updateTool(mapPosition, INPUT->mouse->mapPosition.x, INPUT->mouse->mapPosition.y, false);
 			}
@@ -514,9 +518,9 @@ void Player::render(const Pane& pane) const
 	{
 		for (auto& container : inventory)
 		{
-			container->item->renderTool(pane);
+			container->item->render(pane);
 
-			for (auto& tool : container->itemList) tool->renderTool(pane);
+			for (auto& tool : container->itemList) tool->render(pane);
 		}
 	}
 
