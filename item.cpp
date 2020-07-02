@@ -117,6 +117,67 @@ void Item::changeBarColor()
 	tool->changeBarColor(barColor);
 }
 
+bool Item::reload(MagazineData& magazine)
+{
+	if (!onMap)
+	{
+		if (type == ItemType::FIREARM)
+		{
+			return tool->reload(magazine);
+		}
+	}
+	return false;
+}
+
+bool Item::changeFireMode()
+{
+	if (!onMap)
+	{
+		if (type == ItemType::FIREARM)
+		{
+			tool->changeFireMode();
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Item::useMelee()
+{
+	if (!onMap)
+	{
+		if (type == ItemType::MELEE || type == ItemType::FIREARM)
+		{
+			tool->useMelee();
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Item::equip(Armor& armor)
+{
+	if (!onMap)
+	{
+		if (type == ItemType::ARMOR)
+		{
+			tool->equip(armor);
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Item::use(bool hold, bool swtch)
+{
+	if (!onMap)
+	{
+		tool->use(hold, swtch);
+		return true;
+	}
+	return false;
+}
+
 void Item::updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHeld)
 {
 	inFov = WORLD->isInPlayerFov(mapPosition); //need in tool?

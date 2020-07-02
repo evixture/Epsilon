@@ -79,15 +79,14 @@ struct Item
 	virtual std::pair<bool, MagazineData&> getMagazineData();
 	virtual void changeBarColor();
 
-	/*
-	virtual	std::pair<bool, MagazineData&>	getMagazine();										
-	virtual bool			reload(MagazineData& magazine);						
-	virtual void			changeFireMode();									
-	virtual void			useMelee();											
-	virtual void			changeBarColor(TCODColor& color);					
-	virtual void			equip(Armor& armor);								
-	virtual void			use(bool hold, bool swtch);			
-	*/
+	virtual bool reload(MagazineData& magazine);
+	virtual bool changeFireMode();
+	virtual bool useMelee();
+	virtual bool equip(Armor& armor);
+	virtual bool use(bool hold, bool swtch);
+	//throw() prob not
+	//drop()
+	//pick up(creature)
 
 	void updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHeld); //mappos can be removed because of owner
 	//void renderTool(const Pane& pane) const;
