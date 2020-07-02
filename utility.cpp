@@ -149,7 +149,7 @@ FLine::FLine(Position2 startPosition, Position2 targetPosition) //ENE reflection
 	{
 		valid = true;
 
-		Position2 delta = Position2(targetPosition.x - startPosition.x, targetPosition.y - startPosition.y);
+		Position2 delta = Position2(targetPosition.x - startPosition.x, targetPosition.y - startPosition.y); //DO NOT CHANGE, ANGLES RIGHT
 
 		if (delta.x == 0)
 		{
@@ -172,13 +172,10 @@ FLine::FLine(Position2 startPosition, Position2 targetPosition) //ENE reflection
 			vertical = false;
 			horizontal = false;
 
-			slope = ((float)(delta.x) / (float)(delta.y));
-
-			stepBackwards = (delta.y < 0) ? true : false;
-			yStep = (slope > 1.0f || slope < -1.0f) ? true : false;
+			slope = ((float)(delta.x) / (float)(delta.y)); //DO NOT CHANGE
+			stepBackwards = (delta.y < 0) ? true : false; //DO NOT CHANGE
+			yStep = (slope > -1.0f && slope < 1.0f) ? true : false; //DO NOT CHANGE
 		}
-
-		GUI->logWindow->pushMessage(LogWindow::Message("s: " + std::to_string(slope) + " vert: " + std::to_string(vertical) + " horiz: " + std::to_string(horizontal) + " stepBack: " + std::to_string(stepBackwards) + " yStep: " + std::to_string(yStep), LogWindow::Message::MessageLevel::MEDIUM));
 	}
 	else
 	{
@@ -233,8 +230,8 @@ Position2 FLine::getNextPosition() const
 		}
 		else
 		{
-			if (stepBackwards) return Position2(startPosition.x + (step - 1), startPosition.y + ((step - 1) * (1.0f / slope)));
-			else return Position2(startPosition.x + (step + 1), startPosition.y + ((step + 1) * (1.0f / slope)));
+			if (stepBackwards) return Position2(startPosition.x + (step + 1), startPosition.y + ((step + 1) * (1.0f / slope)));
+			else return Position2(startPosition.x + (step - 1), startPosition.y + ((step - 1) * (1.0f / slope)));
 		}
 	}
 	return Position2(0, 0);
@@ -249,8 +246,16 @@ void FLine::stepLine()
 {
 	if (valid)
 	{
-		if (stepBackwards) step--;
-		else step++;
+		if (yStep || slope >= 1.0f || horizontal) //find out why i have to do this
+		{
+			if (stepBackwards) step--;
+			else step++;
+		}
+		else
+		{
+			if (stepBackwards) step++;
+			else step--;
+		}
 	}
 }
 
