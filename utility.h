@@ -76,8 +76,8 @@ private:
 struct FLine //function line; not length limited like BLine
 {
 	int step;
-	float xMultiplier;
-	float yMultiplier;
+	float slope;
+	//float yMultiplier;
 	const Position2 startPosition;
 
 	//fline(angle)
@@ -95,7 +95,10 @@ struct FLine //function line; not length limited like BLine
 	void stepLine();
 
 private:
-	bool negative;
+	bool vertical;
+	bool horizontal;
+	bool stepBackwards;
+	//bool negative;
 	bool yStep;
 	bool valid;
 };

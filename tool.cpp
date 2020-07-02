@@ -468,6 +468,13 @@ void Firearm::update(Position4& sourcePosition, int& targetX, int& targetY, bool
 		else bulletList[i]->update();
 	}
 
+	if (this->isHeld)
+	{
+		Position2 delta = Position2(targetX - mapPosition.x, targetY - mapPosition.y);
+		float slope = ((float)(delta.x) / (float)(delta.y));
+		GUI->logWindow->pushMessage(LogWindow::Message("s: " + std::to_string(slope), LogWindow::Message::MessageLevel::MEDIUM));
+	}
+
 	if (fireClock.numCalls < 1.0f) fireClock.tickUp();
 	if (reloadClock.numCalls < 1.0f) reloadClock.tickUp();
 }

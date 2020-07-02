@@ -129,45 +129,62 @@ bool BLine::end()
 
 //----------------------------------------------------------------------------------------------------
 
+/*
+ slope neg	| slope pos
+ step neg	| step neg
+ --			|
+------------+------------
+ slope neg	| slope pos
+ step pos	| step pos
+			| ++
 
-FLine::FLine(Position2 startPosition, Position2 targetPosition) //SW shot reverse
-	: step(0), startPosition(startPosition), negative(false)
+	YSTEP COND:
+		if multiplier is > 1 or < -1
+*/
+
+FLine::FLine(Position2 startPosition, Position2 targetPosition) //ENE reflection
+	: step(0), startPosition(startPosition), vertical(false), horizontal(false), stepBackwards(false), slope(0.0f)
 {
 	if (!(startPosition == targetPosition))
 	{
 		valid = true;
 
-		if ((float)(abs(targetPosition.y - startPosition.y)) / (float)(abs(targetPosition.x - startPosition.x)) > 1.0f)
+		Position2 delta = Position2(targetPosition.x - startPosition.x, targetPosition.y - startPosition.y);
+
+		if (delta.x == 0)
 		{
-			yStep = true; //if slope too great, step along y axis in order to not skip blocks
-			xMultiplier = (float)(targetPosition.x - startPosition.x) / (float)(targetPosition.y - startPosition.y);
-			yMultiplier = (float)(targetPosition.y - startPosition.y) / (float)(targetPosition.x - startPosition.x);
+			vertical = true;
+			stepBackwards = (delta.y < 0) ? true : false;
+
+			horizontal = false;
+			yStep = true;
+		}
+		else if (delta.y == 0)
+		{
+			horizontal = true;
+			stepBackwards = (delta.x < 0) ? true : false;
+
+			vertical = false;
+			yStep = false;
 		}
 		else
 		{
-			yStep = false;
-			yMultiplier = (float)(targetPosition.y - startPosition.y) / (float)(targetPosition.x - startPosition.x);
-			xMultiplier = (float)(targetPosition.x - startPosition.x) / (float)(targetPosition.y - startPosition.y);
+			vertical = false;
+			horizontal = false;
+
+			slope = ((float)(delta.x) / (float)(delta.y));
+
+			stepBackwards = (delta.y < 0) ? true : false;
+			yStep = (slope > 1.0f || slope < -1.0f) ? true : false;
 		}
 
-		//if (targetPosition.x <= startPosition.x && targetPosition.y <= startPosition.y) negative = true;
-		//if (xMultiplier < 0.0f) negative = true;
-		//else negative = false;
-
-		if (targetPosition.x - startPosition.x < 0 || targetPosition.y - startPosition.y < 0)
-		{
-			if (targetPosition.x - startPosition.x < 0 && targetPosition.y - startPosition.y < 0) negative = true;
-			if ((yStep == false && xMultiplier <= -1.0f) || (yStep == true && yMultiplier <= -1.0f)) negative = true;
-		}
-
-		GUI->logWindow->pushMessage(LogWindow::Message("xm: " + std::to_string(xMultiplier) + " ym: " + std::to_string(yMultiplier)+ " n:" + std::to_string(negative), LogWindow::Message::MessageLevel::MEDIUM));
+		GUI->logWindow->pushMessage(LogWindow::Message("s: " + std::to_string(slope) + " vert: " + std::to_string(vertical) + " horiz: " + std::to_string(horizontal) + " stepBack: " + std::to_string(stepBackwards) + " yStep: " + std::to_string(yStep), LogWindow::Message::MessageLevel::MEDIUM));
 	}
 	else
 	{
 		valid = false;
 		yStep = false;
-		xMultiplier = 0.0f;
-		yMultiplier = 0.0f;
+		slope = 0.0f;
 	}
 }
 
@@ -175,13 +192,21 @@ Position2 FLine::getPosition() const
 {
 	if (valid)
 	{
-		if (yStep == true)
+		if (horizontal)
 		{
-			return Position2(startPosition.x + (step * yMultiplier), startPosition.y + step);
+			return Position2(startPosition.x + step, startPosition.y);
+		}
+		else if (vertical)
+		{
+			return Position2(startPosition.x, startPosition.y + step);
+		}
+		else if (yStep)
+		{
+			return Position2(startPosition.x + (step * (slope)), startPosition.y + step);
 		}
 		else
 		{
-			return Position2(startPosition.x + step, startPosition.y + (step * xMultiplier));
+			return Position2(startPosition.x + step, startPosition.y + (step * (1.0f / slope)));
 		}
 	}
 	return Position2(0, 0);
@@ -191,15 +216,25 @@ Position2 FLine::getNextPosition() const
 {
 	if (valid)
 	{
-		if (yStep == true)
+		if (horizontal)
 		{
-			if (negative) return Position2(startPosition.x + ((step - 1) * yMultiplier), startPosition.y + (step - 1));
-			else return Position2(startPosition.x + ((step + 1) * yMultiplier), startPosition.y + (step + 1));
+			if (stepBackwards) return Position2(startPosition.x + (step - 1), startPosition.y);
+			else return Position2(startPosition.x + (step + 1), startPosition.y);
+		}
+		else if (vertical)
+		{
+			if (stepBackwards) return Position2(startPosition.x, startPosition.y + (step - 1));
+			else return Position2(startPosition.x, startPosition.y + (step + 1));
+		}
+		else if (yStep)
+		{
+			if (stepBackwards) return Position2(startPosition.x + ((step - 1) * (slope)), startPosition.y + (step - 1));
+			else return Position2(startPosition.x + ((step + 1) * (slope)), startPosition.y + (step + 1));
 		}
 		else
 		{
-			if (negative) return Position2(startPosition.x + (step - 1), startPosition.y + ((step - 1) * xMultiplier));
-			return Position2(startPosition.x + (step + 1), startPosition.y + ((step + 1) * xMultiplier));
+			if (stepBackwards) return Position2(startPosition.x + (step - 1), startPosition.y + ((step - 1) * (1.0f / slope)));
+			else return Position2(startPosition.x + (step + 1), startPosition.y + ((step + 1) * (1.0f / slope)));
 		}
 	}
 	return Position2(0, 0);
@@ -214,7 +249,7 @@ void FLine::stepLine()
 {
 	if (valid)
 	{
-		if (negative) step--;
+		if (stepBackwards) step--;
 		else step++;
 	}
 }
