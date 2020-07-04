@@ -70,6 +70,9 @@ void MouseButton::update()
 Mouse::Mouse()
 	:screenPosition(Position2(0, 0)), mapPosition(Position2(0, 0))
 {
+	leftMB = std::make_shared<MouseButton>(sf::Mouse::Left, "LeftMB");
+	rightMB = std::make_shared<MouseButton>(sf::Mouse::Right, "RightMB");
+	MouseWheel = std::make_shared<MouseButton>(sf::Mouse::Middle, "MouseWheel");
 }
 
 void Mouse::update(TCOD_mouse_t TCODmouse)
@@ -81,7 +84,7 @@ void Mouse::update(TCOD_mouse_t TCODmouse)
 //----------------------------------------------------------------------------------------------------
 
 ButtonList::ButtonList()
-	:keyboard(), TCODmouse(), mouse(std::make_shared<Mouse>())
+	:keyboard(), TCODmouse()
 {
 	buttonList.push_back(escape			= std::make_shared<KeyboardButton>(sf::Keyboard::Escape		, "Escape"));
 	buttonList.push_back(f1				= std::make_shared<KeyboardButton>(sf::Keyboard::F1			, "F1"));
@@ -186,6 +189,36 @@ ButtonList::ButtonList()
 	buttonList.push_back(kp0			= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad0	, "k0"));
 }
 
+std::vector<std::shared_ptr<Button>> ButtonList::getButtonsDown()
+{
+	std::vector<std::shared_ptr<Button>> ret;
+
+	for (int i = 0; i < buttonList.size(); i++)
+	{
+		if (buttonList[i]->isDown)
+		{
+			ret.push_back(buttonList[i]);
+		}
+	}
+
+	return ret;
+}
+
+std::vector<std::shared_ptr<Button>> ButtonList::getButtonsSwitched()
+{
+	std::vector<std::shared_ptr<Button>> ret;
+
+	for (int i = 0; i < buttonList.size(); i++)
+	{
+		if (buttonList[i]->isSwitched)
+		{
+			ret.push_back(buttonList[i]);
+		}
+	}
+
+	return ret;
+}
+
 void ButtonList::update()
 {
 	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &TCODmouse);
@@ -212,81 +245,139 @@ void ButtonList::update()
 	//	if		(GUI->activeLogWindow == Gui::ActiveLogWindow::LOG) GUI->activeLogWindow = Gui::ActiveLogWindow::INFO;
 	//	else if (GUI->activeLogWindow == Gui::ActiveLogWindow::INFO) GUI->activeLogWindow = Gui::ActiveLogWindow::LOG;
 	//}
-	
-	mouse->update(TCODmouse);
+}
+
+Bind::Bind(std::shared_ptr<Button> bind, const std::string name)
+	:bind(bind), name(name)
+{
 }
 
 Input::Input()
-	:keyboard(), TCODmouse(), mouse(std::make_shared<Mouse>())
+	:buttonList(), TCODmouse(), mouse(std::make_shared<Mouse>())
 {
-	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &TCODmouse);
-	TCODMouse::showCursor(false);
-
-	buttonList.push_back(moveUpKey				= std::make_shared<KeyboardButton>(sf::Keyboard::W));
-	buttonList.push_back(moveDownKey			= std::make_shared<KeyboardButton>(sf::Keyboard::S));
-	buttonList.push_back(moveLeftKey			= std::make_shared<KeyboardButton>(sf::Keyboard::A));
-	buttonList.push_back(moveRightKey			= std::make_shared<KeyboardButton>(sf::Keyboard::D));
-
-	buttonList.push_back(moveSlowKey			= std::make_shared<KeyboardButton>(sf::Keyboard::LControl));
-	buttonList.push_back(moveFastKey			= std::make_shared<KeyboardButton>(sf::Keyboard::LShift));
-
-	buttonList.push_back(stanceDownKey			= std::make_shared<KeyboardButton>(sf::Keyboard::Z));
-	buttonList.push_back(stanceUpKey			= std::make_shared<KeyboardButton>(sf::Keyboard::X));
-
-	buttonList.push_back(pickUpKey				= std::make_shared<KeyboardButton>(sf::Keyboard::E));
-	buttonList.push_back(dropKey				= std::make_shared<KeyboardButton>(sf::Keyboard::Q));
-
-	buttonList.push_back(reloadKey				= std::make_shared<KeyboardButton>(sf::Keyboard::R));
-
-	buttonList.push_back(deepInteractKey		= std::make_shared<KeyboardButton>(sf::Keyboard::LAlt));
-	buttonList.push_back(worldInteractKey		= std::make_shared<KeyboardButton>(sf::Keyboard::Space));
-
-	buttonList.push_back(inventoryKey			= std::make_shared<KeyboardButton>(sf::Keyboard::I));
-	buttonList.push_back(fullscreenKey			= std::make_shared<KeyboardButton>(sf::Keyboard::F11));
-	buttonList.push_back(infoKey				= std::make_shared<KeyboardButton>(sf::Keyboard::N));
-	buttonList.push_back(menuKey				= std::make_shared<KeyboardButton>(sf::Keyboard::Escape));
-
-	buttonList.push_back(highlightKey			= std::make_shared<KeyboardButton>(sf::Keyboard::H));
-
-	buttonList.push_back(debug1Key				= std::make_shared<KeyboardButton>(sf::Keyboard::Num9));
-	buttonList.push_back(debug2Key				= std::make_shared<KeyboardButton>(sf::Keyboard::Num0));
-	buttonList.push_back(debug3Key				= std::make_shared<KeyboardButton>(sf::Keyboard::C));
-
-	buttonList.push_back(primaryUseButton		= std::make_shared<MouseButton>(sf::Mouse::Button::Left));
-	buttonList.push_back(alternateUseButton		= std::make_shared<MouseButton>(sf::Mouse::Button::Right));
+	bindList.push_back(moveUp			= std::make_shared<Bind>(buttonList->w			, "Move Up"		));
+	bindList.push_back(moveDown			= std::make_shared<Bind>(buttonList->a			, "Move Down"	));
+	bindList.push_back(moveLeft			= std::make_shared<Bind>(buttonList->s			, "Move Left"	));
+	bindList.push_back(moveRight		= std::make_shared<Bind>(buttonList->d			, "Move Right"	));
+									   							 								
+	bindList.push_back(moveSlow			= std::make_shared<Bind>(buttonList->leftControl, "Move Slow"	));
+	bindList.push_back(moveFast			= std::make_shared<Bind>(buttonList->leftShift	, "Move Fast"	));
+									   							 									
+	bindList.push_back(stanceDown		= std::make_shared<Bind>(buttonList->z			, "Stance Down"	));
+	bindList.push_back(stanceUp			= std::make_shared<Bind>(buttonList->x			, "Stance Up"	));
+									  							 									
+	bindList.push_back(pickUp			= std::make_shared<Bind>(buttonList->e			, "Pick Up"		));
+	bindList.push_back(drop				= std::make_shared<Bind>(buttonList->q			, "Drop"		));
+									   							 									
+	bindList.push_back(reload			= std::make_shared<Bind>(buttonList->r			, "Reload"		));
+									   							 									
+	bindList.push_back(deepInteract		= std::make_shared<Bind>(buttonList->leftAlt	, "Deep Interact"));
+	bindList.push_back(worldInteract	= std::make_shared<Bind>(buttonList->space		, "World Interact"));
+									   							 									
+	bindList.push_back(inventory		= std::make_shared<Bind>(buttonList->i			, "Inventory"	));
+	bindList.push_back(fullscreen		= std::make_shared<Bind>(buttonList->f11		, "Fullscreen"	));
+	bindList.push_back(info				= std::make_shared<Bind>(buttonList->n			, "Info"		));
+	bindList.push_back(menu				= std::make_shared<Bind>(buttonList->escape		, "Menu"		));
+									   							 								
+	bindList.push_back(highlight		= std::make_shared<Bind>(buttonList->h			, "Highlight"	));
+									  							 									
+	bindList.push_back(debug1			= std::make_shared<Bind>(buttonList->k1			, "debug1"		));
+	bindList.push_back(debug2			= std::make_shared<Bind>(buttonList->k2			, "debug2"		));
+	bindList.push_back(debug3			= std::make_shared<Bind>(buttonList->k3			, "debug3"		));
+									   							 									
+	bindList.push_back(primaryUse		= std::make_shared<Bind>(mouse->leftMB	, "Primary Use"	));
+	bindList.push_back(alternateUse		= std::make_shared<Bind>(mouse->rightMB	, "Alternate Use"));
 }
 
 void Input::update()
 {
-	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &TCODmouse);
+	buttonList->update();
+	mouse->update(TCODmouse);
 
-	if (TCODConsole::hasMouseFocus()) TCODMouse::showCursor(false);
-
-	for (auto& button : buttonList)
-	{
-		if		(TCODConsole::hasMouseFocus()) button->update();
-		else	button->isDown = false;
-	}
-
-	if (menuKey->isSwitched)
+	if (menu->bind->isSwitched)
 	{
 		if (GUI->activeWindow == Gui::ActiveWindow::NONE)
 		{
 			GUI->activeWindow = Gui::ActiveWindow::PAUSE;
-			INPUT->menuKey->isSwitched = false;
+			INPUT->menu->bind->isSwitched = false;
 		}
 	}
-
-	if (infoKey->isSwitched)
+	
+	if (info->bind->isSwitched)
 	{
 		if		(GUI->activeLogWindow == Gui::ActiveLogWindow::LOG) GUI->activeLogWindow = Gui::ActiveLogWindow::INFO;
 		else if (GUI->activeLogWindow == Gui::ActiveLogWindow::INFO) GUI->activeLogWindow = Gui::ActiveLogWindow::LOG;
 	}
-
-	mouse->update(TCODmouse);
 }
 
-Bind::Bind(std::shared_ptr<Button> input, const std::string name)
-	:input(input), name(name)
-{
-}
+
+//Input::Input()
+//	:keyboard(), TCODmouse(), mouse(std::make_shared<Mouse>())
+//{
+//	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &TCODmouse);
+//	TCODMouse::showCursor(false);
+//
+//	buttonList.push_back(moveUpKey				= std::make_shared<KeyboardButton>(sf::Keyboard::W));
+//	buttonList.push_back(moveDownKey			= std::make_shared<KeyboardButton>(sf::Keyboard::S));
+//	buttonList.push_back(moveLeftKey			= std::make_shared<KeyboardButton>(sf::Keyboard::A));
+//	buttonList.push_back(moveRightKey			= std::make_shared<KeyboardButton>(sf::Keyboard::D));
+//
+//	buttonList.push_back(moveSlowKey			= std::make_shared<KeyboardButton>(sf::Keyboard::LControl));
+//	buttonList.push_back(moveFastKey			= std::make_shared<KeyboardButton>(sf::Keyboard::LShift));
+//
+//	buttonList.push_back(stanceDownKey			= std::make_shared<KeyboardButton>(sf::Keyboard::Z));
+//	buttonList.push_back(stanceUpKey			= std::make_shared<KeyboardButton>(sf::Keyboard::X));
+//
+//	buttonList.push_back(pickUpKey				= std::make_shared<KeyboardButton>(sf::Keyboard::E));
+//	buttonList.push_back(dropKey				= std::make_shared<KeyboardButton>(sf::Keyboard::Q));
+//
+//	buttonList.push_back(reloadKey				= std::make_shared<KeyboardButton>(sf::Keyboard::R));
+//
+//	buttonList.push_back(deepInteractKey		= std::make_shared<KeyboardButton>(sf::Keyboard::LAlt));
+//	buttonList.push_back(worldInteractKey		= std::make_shared<KeyboardButton>(sf::Keyboard::Space));
+//
+//	buttonList.push_back(inventoryKey			= std::make_shared<KeyboardButton>(sf::Keyboard::I));
+//	buttonList.push_back(fullscreenKey			= std::make_shared<KeyboardButton>(sf::Keyboard::F11));
+//	buttonList.push_back(infoKey				= std::make_shared<KeyboardButton>(sf::Keyboard::N));
+//	buttonList.push_back(menuKey				= std::make_shared<KeyboardButton>(sf::Keyboard::Escape));
+//
+//	buttonList.push_back(highlightKey			= std::make_shared<KeyboardButton>(sf::Keyboard::H));
+//
+//	buttonList.push_back(debug1Key				= std::make_shared<KeyboardButton>(sf::Keyboard::Num9));
+//	buttonList.push_back(debug2Key				= std::make_shared<KeyboardButton>(sf::Keyboard::Num0));
+//	buttonList.push_back(debug3Key				= std::make_shared<KeyboardButton>(sf::Keyboard::C));
+//
+//	buttonList.push_back(primaryUseButton		= std::make_shared<MouseButton>(sf::Mouse::Button::Left));
+//	buttonList.push_back(alternateUseButton		= std::make_shared<MouseButton>(sf::Mouse::Button::Right));
+//}
+//
+//void Input::update()
+//{
+//	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &TCODmouse);
+//
+//	if (TCODConsole::hasMouseFocus()) TCODMouse::showCursor(false);
+//
+//	for (auto& button : buttonList)
+//	{
+//		if		(TCODConsole::hasMouseFocus()) button->update();
+//		else	button->isDown = false;
+//	}
+//
+//	if (menuKey->isSwitched)
+//	{
+//		if (GUI->activeWindow == Gui::ActiveWindow::NONE)
+//		{
+//			GUI->activeWindow = Gui::ActiveWindow::PAUSE;
+//			INPUT->menuKey->isSwitched = false;
+//		}
+//	}
+//
+//	if (infoKey->isSwitched)
+//	{
+//		if		(GUI->activeLogWindow == Gui::ActiveLogWindow::LOG) GUI->activeLogWindow = Gui::ActiveLogWindow::INFO;
+//		else if (GUI->activeLogWindow == Gui::ActiveLogWindow::INFO) GUI->activeLogWindow = Gui::ActiveLogWindow::LOG;
+//	}
+//
+//	mouse->update(TCODmouse);
+//}
+

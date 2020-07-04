@@ -71,7 +71,7 @@ void PlayerWindow::update()
 {
 	playerStance = WORLD->debugmap->player->mapPosition.h;
 
-	if (!(INPUT->moveUpKey->isDown) && !(INPUT->moveDownKey->isDown) && !(INPUT->moveLeftKey->isDown) && !(INPUT->moveRightKey->isDown)) playerSpeed = 0;
+	if (!(INPUT->moveUp->bind->isDown) && !(INPUT->moveDown->bind->isDown) && !(INPUT->moveLeft->bind->isDown) && !(INPUT->moveRight->bind->isDown)) playerSpeed = 0;
 	else if (WORLD->debugmap->player->baseMoveTime == .25f) playerSpeed = 3;
 	else if (WORLD->debugmap->player->baseMoveTime == .5f)	playerSpeed = 2;
 	else if (WORLD->debugmap->player->baseMoveTime == 1.0f) playerSpeed = 1;
@@ -232,7 +232,7 @@ void SplashWindow::update()
 
 	menu.update();
 
-	if (INPUT->worldInteractKey->isSwitched)
+	if (INPUT->worldInteract->bind->isSwitched)
 	{
 		if		(menu.menuSelection == "Start") GUI->activeWindow = Gui::ActiveWindow::NONE;
 		else if (menu.menuSelection == "Exit")	engine->gamestate = Engine::Gamestate::EXIT;
@@ -535,7 +535,7 @@ void PauseWindow::update()
 	if		(baseMenuActive)		baseMenu.update();
 	else if (settingsMenuActive)	settingsMenu.update();
 
-	if (INPUT->worldInteractKey->isSwitched)
+	if (INPUT->worldInteract->bind->isSwitched)
 	{
 		if (baseMenuActive)
 		{
@@ -571,7 +571,7 @@ void PauseWindow::update()
 		}
 	}
 
-	if (INPUT->menuKey->isSwitched && GUI->activeWindow == Gui::ActiveWindow::PAUSE)
+	if (INPUT->menu->bind->isSwitched && GUI->activeWindow == Gui::ActiveWindow::PAUSE)
 	{
 		if (baseMenuActive)
 		{

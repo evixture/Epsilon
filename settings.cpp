@@ -67,7 +67,7 @@ void Settings::update()
 	lastFrameTime = systemClock.restart();
 	input->update();
 
-	if (INPUT->fullscreenKey->isSwitched) setFullscreen();
+	if (INPUT->fullscreen->bind->isSwitched) setFullscreen();
 }
 
 void Settings::render() const

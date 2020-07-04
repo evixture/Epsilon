@@ -19,7 +19,7 @@ Gui::Gui(int windowX, int windowY)
 
 void Gui::update()
 {
-	if (INPUT->inventoryKey->isSwitched) //move to input?
+	if (INPUT->inventory->bind->isSwitched) //move to input?
 	{
 		if (activeWindow == Gui::ActiveWindow::INVENTORYFULL)															activeWindow = Gui::ActiveWindow::NONE;
 		else if (activeWindow != Gui::ActiveWindow::INVENTORYFULL && activeWindow != Gui::ActiveWindow::STARTUPSPLASH)	activeWindow = Gui::ActiveWindow::INVENTORYFULL;

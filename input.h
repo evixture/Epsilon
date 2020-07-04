@@ -70,15 +70,19 @@ struct Bind
 {
 	const std::string name;
 
-	std::shared_ptr<Button> input;
+	std::shared_ptr<Button> bind;
 
-	Bind(std::shared_ptr<Button> input, const std::string name);
+	Bind(std::shared_ptr<Button> bind, const std::string name);
 };
 
 struct Mouse
 {
 	Position2 screenPosition;
 	Position2 mapPosition;
+
+	std::shared_ptr<MouseButton> leftMB;
+	std::shared_ptr<MouseButton> rightMB;
+	std::shared_ptr<MouseButton> MouseWheel;
 
 	Mouse();
 
@@ -87,7 +91,6 @@ struct Mouse
 
 struct ButtonList
 {
-	std::shared_ptr<Mouse> mouse;
 	TCOD_mouse_t TCODmouse;
 
 	std::shared_ptr<KeyboardButton> escape;
@@ -191,28 +194,19 @@ struct ButtonList
 	std::shared_ptr<KeyboardButton> kpDown;
 	std::shared_ptr<KeyboardButton> kpRight;
 	std::shared_ptr<KeyboardButton> kp0;
-
-	std::shared_ptr<MouseButton> LeftMB;
-	std::shared_ptr<MouseButton> RightMB;
-	std::shared_ptr<MouseButton> MouseWheel;
-	std::shared_ptr<MouseButton> MouseWheelUp;
-	std::shared_ptr<MouseButton> MouseWheelDown;
-
+	
+	std::vector<std::shared_ptr<Button>> buttonList;
 
 	ButtonList();
+
+	std::vector<std::shared_ptr<Button>> getButtonsDown();
+	std::vector<std::shared_ptr<Button>> getButtonsSwitched();
 
 	void update();
 
 private:
 	TCOD_event_t keyEvent; //handles tcod events
 	TCOD_key_t keyboard; //handles tcod key events
-
-	std::vector<std::shared_ptr<Button>> buttonList;
-};
-
-struct Binds
-{
-
 };
 
 struct Input
@@ -220,46 +214,94 @@ struct Input
 	std::shared_ptr<Mouse> mouse;
 	TCOD_mouse_t TCODmouse;
 
-	std::shared_ptr<KeyboardButton> moveUpKey; //key to move the player / menu selector up
-	std::shared_ptr<KeyboardButton> moveDownKey; //key to move the player / menu selector down
-	std::shared_ptr<KeyboardButton> moveLeftKey; //key to move the player left
-	std::shared_ptr<KeyboardButton> moveRightKey; //key to move the player right
+	std::shared_ptr<Bind> moveUp; 
+	std::shared_ptr<Bind> moveDown; 
+	std::shared_ptr<Bind> moveLeft; 
+	std::shared_ptr<Bind> moveRight;
+					
+	std::shared_ptr<Bind> moveSlow; 
+	std::shared_ptr<Bind> moveFast; 
+					
+	std::shared_ptr<Bind> stanceDown;
+	std::shared_ptr<Bind> stanceUp; 
+					
+	std::shared_ptr<Bind> pickUp; 
+	std::shared_ptr<Bind> drop; 
+					
+	std::shared_ptr<Bind> reload; 
+					
+	std::shared_ptr<Bind> deepInteract; 
+	std::shared_ptr<Bind> worldInteract; 
+					
+	std::shared_ptr<Bind> inventory; 
+	std::shared_ptr<Bind> fullscreen; 
+	std::shared_ptr<Bind> info;
+	std::shared_ptr<Bind> menu; 
+					
+	std::shared_ptr<Bind> highlight;
+					
+	std::shared_ptr<Bind> debug1; 
+	std::shared_ptr<Bind> debug2;
+	std::shared_ptr<Bind> debug3; 
 
-	std::shared_ptr<KeyboardButton> moveSlowKey; //key to make the player move slower
-	std::shared_ptr<KeyboardButton> moveFastKey; //key to make the player move faster
+	std::shared_ptr<Bind> primaryUse;
+	std::shared_ptr<Bind> alternateUse;
 
-	std::shared_ptr<KeyboardButton> stanceDownKey; //key to make the player go prone
-	std::shared_ptr<KeyboardButton> stanceUpKey; //key to make the player crouch
-	std::shared_ptr<KeyboardButton> debug3Key; //key to make the player stand up
-
-	std::shared_ptr<KeyboardButton> pickUpKey; //key for the player to pick up an item on the ground
-	std::shared_ptr<KeyboardButton> dropKey; //key for the player to drop the selected item
-
-	std::shared_ptr<KeyboardButton> reloadKey; //key for the player to reload the selected item
-
-	std::shared_ptr<KeyboardButton> deepInteractKey; //key for the player to initiate the selection of alternate actions
-	std::shared_ptr<KeyboardButton> worldInteractKey; //key to interact with the world
-
-	std::shared_ptr<KeyboardButton> inventoryKey; //key to open the full menu
-	std::shared_ptr<KeyboardButton> fullscreenKey; //key to put the window in full screen
-	std::shared_ptr<KeyboardButton> infoKey;
-	std::shared_ptr<KeyboardButton> menuKey; //key to open the pause menu
-
-	std::shared_ptr<KeyboardButton> highlightKey;
-
-	std::shared_ptr<KeyboardButton> debug1Key; //key to do a debug action
-	std::shared_ptr<KeyboardButton> debug2Key; //key to do a debug action
-
-	std::shared_ptr<MouseButton> primaryUseButton; //key to use the primary action of the selected item
-	std::shared_ptr<MouseButton> alternateUseButton; //key to use the alternate use of the selected item
+	std::shared_ptr<ButtonList> buttonList;
 
 	Input();
 
 	void update();
 
 private:
-	TCOD_event_t keyEvent; //handles tcod events
-	TCOD_key_t keyboard; //handles tcod key events
-
-	std::vector<std::shared_ptr<Button>> buttonList;
+	std::vector<std::shared_ptr<Bind>> bindList;
 };
+
+//struct Input
+//{
+//	std::shared_ptr<Mouse> mouse;
+//	TCOD_mouse_t TCODmouse;
+//
+//	std::shared_ptr<KeyboardButton> moveUpKey; //key to move the player / menu selector up
+//	std::shared_ptr<KeyboardButton> moveDownKey; //key to move the player / menu selector down
+//	std::shared_ptr<KeyboardButton> moveLeftKey; //key to move the player left
+//	std::shared_ptr<KeyboardButton> moveRightKey; //key to move the player right
+//
+//	std::shared_ptr<KeyboardButton> moveSlowKey; //key to make the player move slower
+//	std::shared_ptr<KeyboardButton> moveFastKey; //key to make the player move faster
+//
+//	std::shared_ptr<KeyboardButton> stanceDownKey; //key to make the player go prone
+//	std::shared_ptr<KeyboardButton> stanceUpKey; //key to make the player crouch
+//	std::shared_ptr<KeyboardButton> debug3Key; //key to make the player stand up
+//
+//	std::shared_ptr<KeyboardButton> pickUpKey; //key for the player to pick up an item on the ground
+//	std::shared_ptr<KeyboardButton> dropKey; //key for the player to drop the selected item
+//
+//	std::shared_ptr<KeyboardButton> reloadKey; //key for the player to reload the selected item
+//
+//	std::shared_ptr<KeyboardButton> deepInteractKey; //key for the player to initiate the selection of alternate actions
+//	std::shared_ptr<KeyboardButton> worldInteractKey; //key to interact with the world
+//
+//	std::shared_ptr<KeyboardButton> inventoryKey; //key to open the full menu
+//	std::shared_ptr<KeyboardButton> fullscreenKey; //key to put the window in full screen
+//	std::shared_ptr<KeyboardButton> infoKey;
+//	std::shared_ptr<KeyboardButton> menuKey; //key to open the pause menu
+//
+//	std::shared_ptr<KeyboardButton> highlightKey;
+//
+//	std::shared_ptr<KeyboardButton> debug1Key; //key to do a debug action
+//	std::shared_ptr<KeyboardButton> debug2Key; //key to do a debug action
+//
+//	std::shared_ptr<MouseButton> primaryUseButton; //key to use the primary action of the selected item
+//	std::shared_ptr<MouseButton> alternateUseButton; //key to use the alternate use of the selected item
+//
+//	Input();
+//
+//	void update();
+//
+//private:
+//	TCOD_event_t keyEvent; //handles tcod events
+//	TCOD_key_t keyboard; //handles tcod key events
+//
+//	std::vector<std::shared_ptr<Button>> buttonList;
+//};
