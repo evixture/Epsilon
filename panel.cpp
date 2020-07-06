@@ -666,11 +666,59 @@ CommandWindow::CommandWindow(int consoleWidth, int consoleHeight, int rx, int ry
 
 void CommandWindow::update()
 {
+	if (INPUT->buttonList->enter->isSwitched)
+	{
+		std::string arg;
+		std::vector<std::string> argv;
 
+		std::istringstream iss(command);
+		std::vector<std::string> results((std::istream_iterator<std::string>(iss)), std::istream_iterator<std::string>());
 
-	//for (int i = 0; i < )
+		if (results.size() > 0)
+		{
+			arg = results[0];
+		}
+
+		if (results.size() > 1)
+		{
+			argv = results;
+			argv.erase(argv.begin()); //remove arg
+		}
+
+		//commands
+		if (arg == "SHOWWALKABLE")
+		{
+			if (argv[0] == "1") SETTINGS->showWalkable = true;
+			else if (argv[0] == "0") SETTINGS->showWalkable = false;
+		}
+
+		command.clear();
+
+	}
+	else if (INPUT->buttonList->backspace->isSwitched)
+	{
+		if (command.size() > 0)
+		{
+			command.pop_back();
+		}
+	}
+	else
+	{
+		command += INPUT->buttonList->getButtonsSwitchedText();
+	}
+	
 }
 
 void CommandWindow::render() const
 {
+	clearWindow();
+
+	for (int i = 0; i < consoleWidth; i++)
+	{
+		drawPane.console->setCharBackground(i, consoleHeight - 2, TCODColor::purple);
+	}
+
+	drawPane.console->printf(0, consoleHeight - 2, command.c_str());
+
+	pushWindow();
 }

@@ -25,7 +25,6 @@ struct Settings
 {
 	std::shared_ptr<Font> terminal16x16;
 
-
 	bool showAIMind;
 	bool showWalkable;
 

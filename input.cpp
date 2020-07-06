@@ -224,6 +224,23 @@ std::vector<std::shared_ptr<Button>> ButtonList::getButtonsSwitched()
 	return ret;
 }
 
+std::string ButtonList::getButtonsSwitchedText()
+{
+	std::vector<std::shared_ptr<Button>> buttons = getButtonsSwitched();
+	if (buttons.size() > 0)
+	{
+		if (buttons[0]->keyName.size() == 1)
+		{
+			return buttons[0]->keyName; //normal letter/symbol
+		}
+		else if (buttons[0]->keyName == "Space")
+		{
+			return " "; //space
+		}
+	}
+	return "";
+}
+
 void ButtonList::update(TCOD_mouse_t mouse)
 {
 	//keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &mouse); //fix
@@ -289,9 +306,10 @@ Input::Input()
 	bindList.push_back(debug1			= std::make_shared<Bind>(buttonList->k1			, "debug1"		));
 	bindList.push_back(debug2			= std::make_shared<Bind>(buttonList->k2			, "debug2"		));
 	bindList.push_back(debug3			= std::make_shared<Bind>(buttonList->k3			, "debug3"		));
+	bindList.push_back(console			= std::make_shared<Bind>(buttonList->tilde		, "Toggle Console"));
 									   							 									
-	bindList.push_back(primaryUse		= std::make_shared<Bind>(mouse->leftMB	, "Primary Use"	));
-	bindList.push_back(alternateUse		= std::make_shared<Bind>(mouse->rightMB	, "Alternate Use"));
+	bindList.push_back(primaryUse		= std::make_shared<Bind>(mouse->leftMB			, "Primary Use"	));
+	bindList.push_back(alternateUse		= std::make_shared<Bind>(mouse->rightMB			, "Alternate Use"));
 }
 
 void Input::update()
@@ -301,7 +319,7 @@ void Input::update()
 	buttonList->update(TCODmouse);
 	mouse->update(TCODmouse);
 
-	if (menu->bind->isSwitched)
+	/*if (menu->bind->isSwitched)
 	{
 		if (GUI->activeWindow == Gui::ActiveWindow::NONE)
 		{
@@ -314,7 +332,7 @@ void Input::update()
 	{
 		if		(GUI->activeLogWindow == Gui::ActiveLogWindow::LOG) GUI->activeLogWindow = Gui::ActiveLogWindow::INFO;
 		else if (GUI->activeLogWindow == Gui::ActiveLogWindow::INFO) GUI->activeLogWindow = Gui::ActiveLogWindow::LOG;
-	}
+	}*/
 }
 
 

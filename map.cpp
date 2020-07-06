@@ -670,7 +670,7 @@ void World::renderTiles(const Pane& pane) const
 	{
 		for (int x = xOffset; x < pane.consoleWidth + xOffset; ++x)
 		{
-			if (false) //render walkability
+			if (SETTINGS->showWalkable) //render walkability
 			{
 				if (debugmap->getWalkability(Position4(x, y, debugmap->player->mapPosition.h, 0), true) == true)	pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::green);
 				else																								pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::red);

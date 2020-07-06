@@ -197,8 +197,9 @@ struct ButtonList
 
 	ButtonList();
 
-	std::vector<std::shared_ptr<Button>> getButtonsDown();
-	std::vector<std::shared_ptr<Button>> getButtonsSwitched();
+	std::vector<std::shared_ptr<Button>>	getButtonsDown();
+	std::vector<std::shared_ptr<Button>>	getButtonsSwitched();
+	std::string								getButtonsSwitchedText();
 
 	void update(TCOD_mouse_t mouse);
 
@@ -240,6 +241,7 @@ struct Input
 	std::shared_ptr<Bind> debug1; 
 	std::shared_ptr<Bind> debug2;
 	std::shared_ptr<Bind> debug3; 
+	std::shared_ptr<Bind> console;
 
 	std::shared_ptr<Bind> primaryUse;
 	std::shared_ptr<Bind> alternateUse;

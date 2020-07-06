@@ -14,7 +14,8 @@ Gui::Gui(int windowX, int windowY)
 
 	pauseWindow			=	std::make_shared<PauseWindow>			(118, 61, 1, 2);
 	startupSplashWindow =	std::make_shared<SplashWindow>			(118, 61, 1, 2);
-	inventoryFullWindow =	std::make_shared<InventoryFullWindow>	(55, 61, 64, 2);
+	inventoryFullWindow =	std::make_shared<InventoryFullWindow>	(56, 61, 63, 2);
+	commandWindow		=	std::make_shared<CommandWindow>			(56, 61, 63, 2);
 }
 
 void Gui::update()
@@ -23,6 +24,27 @@ void Gui::update()
 	{
 		if (activeWindow == Gui::ActiveWindow::INVENTORYFULL)															activeWindow = Gui::ActiveWindow::NONE;
 		else if (activeWindow != Gui::ActiveWindow::INVENTORYFULL && activeWindow != Gui::ActiveWindow::STARTUPSPLASH)	activeWindow = Gui::ActiveWindow::INVENTORYFULL;
+	}
+
+	if (INPUT->menu->bind->isSwitched)
+	{
+		if (GUI->activeWindow == Gui::ActiveWindow::NONE)
+		{
+			GUI->activeWindow = Gui::ActiveWindow::PAUSE;
+			INPUT->menu->bind->isSwitched = false;
+		}
+	}
+
+	if (INPUT->info->bind->isSwitched)
+	{
+		if (GUI->activeLogWindow == Gui::ActiveLogWindow::LOG) GUI->activeLogWindow = Gui::ActiveLogWindow::INFO;
+		else if (GUI->activeLogWindow == Gui::ActiveLogWindow::INFO) GUI->activeLogWindow = Gui::ActiveLogWindow::LOG;
+	}
+
+	if (INPUT->console->bind->isSwitched)
+	{
+		if (GUI->activeWindow != Gui::ActiveWindow::COMMAND) GUI->activeWindow = Gui::ActiveWindow::COMMAND;
+		else if (GUI->activeWindow == Gui::ActiveWindow::COMMAND) GUI->activeWindow = Gui::ActiveWindow::NONE;
 	}
 
 	switch (activeWindow)
@@ -50,6 +72,10 @@ void Gui::update()
 
 	case Gui::ActiveWindow::PAUSE:
 		pauseWindow->update();
+		break;
+	case Gui::ActiveWindow::COMMAND:
+		worldWindow->update();
+		commandWindow->update();
 		break;
 	}
 }
@@ -95,6 +121,10 @@ void Gui::render() const
 
 	case Gui::ActiveWindow::PAUSE:
 		pauseWindow->render();
+		break;
+	case Gui::ActiveWindow::COMMAND:
+		worldWindow->render();
+		commandWindow->render();
 		break;
 	}
 

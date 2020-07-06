@@ -2,7 +2,7 @@
 
 struct Gui
 {
-	enum class ActiveWindow { NONE, STARTUPSPLASH, INVENTORYFULL, PAUSE} activeWindow;
+	enum class ActiveWindow { NONE, STARTUPSPLASH, INVENTORYFULL, PAUSE, COMMAND} activeWindow;
 	enum class ActiveLogWindow { LOG, INFO } activeLogWindow;
 
 	//Part-screen Windows
@@ -17,6 +17,7 @@ struct Gui
 	//Half Screen Windows
 	std::shared_ptr<MapWindow> worldWindow;
 	std::shared_ptr<InventoryFullWindow> inventoryFullWindow;
+	std::shared_ptr<CommandWindow> commandWindow;
 
 	//Full-screen Windows
 	std::shared_ptr<PauseWindow> pauseWindow;
