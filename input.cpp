@@ -243,30 +243,11 @@ std::string ButtonList::getButtonsSwitchedText()
 
 void ButtonList::update(TCOD_mouse_t mouse)
 {
-	//keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &mouse); //fix
-	
-	//if (TCODConsole::hasMouseFocus()) TCODMouse::showCursor(false);
-	
 	for (auto& button : buttonList)
 	{
 		if		(TCODConsole::hasMouseFocus()) button->update();
 		else	button->isDown = false;
 	}
-	
-	//if (menuKey->isSwitched)
-	//{
-	//	if (GUI->activeWindow == Gui::ActiveWindow::NONE)
-	//	{
-	//		GUI->activeWindow = Gui::ActiveWindow::PAUSE;
-	//		INPUT->menuKey->isSwitched = false;
-	//	}
-	//}
-	//
-	//if (infoKey->isSwitched)
-	//{
-	//	if		(GUI->activeLogWindow == Gui::ActiveLogWindow::LOG) GUI->activeLogWindow = Gui::ActiveLogWindow::INFO;
-	//	else if (GUI->activeLogWindow == Gui::ActiveLogWindow::INFO) GUI->activeLogWindow = Gui::ActiveLogWindow::LOG;
-	//}
 }
 
 Bind::Bind(std::shared_ptr<Button> bind, const std::string name)
@@ -318,91 +299,4 @@ void Input::update()
 
 	buttonList->update(TCODmouse);
 	mouse->update(TCODmouse);
-
-	/*if (menu->bind->isSwitched)
-	{
-		if (GUI->activeWindow == Gui::ActiveWindow::NONE)
-		{
-			GUI->activeWindow = Gui::ActiveWindow::PAUSE;
-			INPUT->menu->bind->isSwitched = false;
-		}
-	}
-	
-	if (info->bind->isSwitched)
-	{
-		if		(GUI->activeLogWindow == Gui::ActiveLogWindow::LOG) GUI->activeLogWindow = Gui::ActiveLogWindow::INFO;
-		else if (GUI->activeLogWindow == Gui::ActiveLogWindow::INFO) GUI->activeLogWindow = Gui::ActiveLogWindow::LOG;
-	}*/
 }
-
-
-//Input::Input()
-//	:keyboard(), TCODmouse(), mouse(std::make_shared<Mouse>())
-//{
-//	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &TCODmouse);
-//	TCODMouse::showCursor(false);
-//
-//	buttonList.push_back(moveUpKey				= std::make_shared<KeyboardButton>(sf::Keyboard::W));
-//	buttonList.push_back(moveDownKey			= std::make_shared<KeyboardButton>(sf::Keyboard::S));
-//	buttonList.push_back(moveLeftKey			= std::make_shared<KeyboardButton>(sf::Keyboard::A));
-//	buttonList.push_back(moveRightKey			= std::make_shared<KeyboardButton>(sf::Keyboard::D));
-//
-//	buttonList.push_back(moveSlowKey			= std::make_shared<KeyboardButton>(sf::Keyboard::LControl));
-//	buttonList.push_back(moveFastKey			= std::make_shared<KeyboardButton>(sf::Keyboard::LShift));
-//
-//	buttonList.push_back(stanceDownKey			= std::make_shared<KeyboardButton>(sf::Keyboard::Z));
-//	buttonList.push_back(stanceUpKey			= std::make_shared<KeyboardButton>(sf::Keyboard::X));
-//
-//	buttonList.push_back(pickUpKey				= std::make_shared<KeyboardButton>(sf::Keyboard::E));
-//	buttonList.push_back(dropKey				= std::make_shared<KeyboardButton>(sf::Keyboard::Q));
-//
-//	buttonList.push_back(reloadKey				= std::make_shared<KeyboardButton>(sf::Keyboard::R));
-//
-//	buttonList.push_back(deepInteractKey		= std::make_shared<KeyboardButton>(sf::Keyboard::LAlt));
-//	buttonList.push_back(worldInteractKey		= std::make_shared<KeyboardButton>(sf::Keyboard::Space));
-//
-//	buttonList.push_back(inventoryKey			= std::make_shared<KeyboardButton>(sf::Keyboard::I));
-//	buttonList.push_back(fullscreenKey			= std::make_shared<KeyboardButton>(sf::Keyboard::F11));
-//	buttonList.push_back(infoKey				= std::make_shared<KeyboardButton>(sf::Keyboard::N));
-//	buttonList.push_back(menuKey				= std::make_shared<KeyboardButton>(sf::Keyboard::Escape));
-//
-//	buttonList.push_back(highlightKey			= std::make_shared<KeyboardButton>(sf::Keyboard::H));
-//
-//	buttonList.push_back(debug1Key				= std::make_shared<KeyboardButton>(sf::Keyboard::Num9));
-//	buttonList.push_back(debug2Key				= std::make_shared<KeyboardButton>(sf::Keyboard::Num0));
-//	buttonList.push_back(debug3Key				= std::make_shared<KeyboardButton>(sf::Keyboard::C));
-//
-//	buttonList.push_back(primaryUseButton		= std::make_shared<MouseButton>(sf::Mouse::Button::Left));
-//	buttonList.push_back(alternateUseButton		= std::make_shared<MouseButton>(sf::Mouse::Button::Right));
-//}
-//
-//void Input::update()
-//{
-//	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &TCODmouse);
-//
-//	if (TCODConsole::hasMouseFocus()) TCODMouse::showCursor(false);
-//
-//	for (auto& button : buttonList)
-//	{
-//		if		(TCODConsole::hasMouseFocus()) button->update();
-//		else	button->isDown = false;
-//	}
-//
-//	if (menuKey->isSwitched)
-//	{
-//		if (GUI->activeWindow == Gui::ActiveWindow::NONE)
-//		{
-//			GUI->activeWindow = Gui::ActiveWindow::PAUSE;
-//			INPUT->menuKey->isSwitched = false;
-//		}
-//	}
-//
-//	if (infoKey->isSwitched)
-//	{
-//		if		(GUI->activeLogWindow == Gui::ActiveLogWindow::LOG) GUI->activeLogWindow = Gui::ActiveLogWindow::INFO;
-//		else if (GUI->activeLogWindow == Gui::ActiveLogWindow::INFO) GUI->activeLogWindow = Gui::ActiveLogWindow::LOG;
-//	}
-//
-//	mouse->update(TCODmouse);
-//}
-
