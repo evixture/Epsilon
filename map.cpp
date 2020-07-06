@@ -675,7 +675,7 @@ void World::renderTiles(const Pane& pane) const
 				if (debugmap->getWalkability(Position4(x, y, debugmap->player->mapPosition.h, 0), true) == true)	pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::green);
 				else																								pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::red);
 			}
-			else if (false) //render fov
+			else if (SETTINGS->showFOV) //render fov
 			{
 				if (isInPlayerFov(Position4(x, y, debugmap->player->mapPosition.h, 0)) == true) pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::green);
 				else																			pane.console->setCharBackground(x - xOffset, y - yOffset, TCODColor::red);

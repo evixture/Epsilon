@@ -8,7 +8,7 @@ Font::Font(std::string name, std::string xdim, std::string ydim, std::string fil
 //----------------------------------------------------------------------------------------------------
 
 Settings::Settings()
-	:showAIMind(false), showWalkable(false)
+	:showAIMind(false), showWalkable(false), showFOV(false)
 {
 }
 

@@ -27,6 +27,7 @@ struct Settings
 
 	bool showAIMind;
 	bool showWalkable;
+	bool showFOV;
 
 	Settings();
 

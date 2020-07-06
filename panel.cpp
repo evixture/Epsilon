@@ -692,6 +692,12 @@ void CommandWindow::update()
 			else if (argv[0] == "0") SETTINGS->showWalkable = false;
 		}
 
+		if (arg == "SHOWFOV")
+		{
+			if (argv[0] == "1") SETTINGS->showFOV = true;
+			else if (argv[0] == "0") SETTINGS->showFOV = false;
+		}
+
 		command.clear();
 
 	}
