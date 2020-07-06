@@ -77,6 +77,12 @@ Mouse::Mouse()
 
 void Mouse::update(TCOD_mouse_t TCODmouse)
 {
+	if (TCODConsole::hasMouseFocus()) TCODMouse::showCursor(false); //change later to use setting option
+
+	leftMB	  ->update();
+	rightMB	  ->update();
+	MouseWheel->update();
+
 	screenPosition = Position2(TCODmouse.cx, TCODmouse.cy);
 	mapPosition = Position2(screenPosition.x + WORLD->xOffset - 1, screenPosition.y + WORLD->yOffset - 3);
 }
@@ -84,7 +90,6 @@ void Mouse::update(TCOD_mouse_t TCODmouse)
 //----------------------------------------------------------------------------------------------------
 
 ButtonList::ButtonList()
-	:keyboard(), TCODmouse()
 {
 	buttonList.push_back(escape			= std::make_shared<KeyboardButton>(sf::Keyboard::Escape		, "Escape"));
 	buttonList.push_back(f1				= std::make_shared<KeyboardButton>(sf::Keyboard::F1			, "F1"));
@@ -219,11 +224,11 @@ std::vector<std::shared_ptr<Button>> ButtonList::getButtonsSwitched()
 	return ret;
 }
 
-void ButtonList::update()
+void ButtonList::update(TCOD_mouse_t mouse)
 {
-	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &TCODmouse);
+	//keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &mouse); //fix
 	
-	if (TCODConsole::hasMouseFocus()) TCODMouse::showCursor(false);
+	//if (TCODConsole::hasMouseFocus()) TCODMouse::showCursor(false);
 	
 	for (auto& button : buttonList)
 	{
@@ -253,11 +258,11 @@ Bind::Bind(std::shared_ptr<Button> bind, const std::string name)
 }
 
 Input::Input()
-	:buttonList(), TCODmouse(), mouse(std::make_shared<Mouse>())
+	:buttonList(std::make_shared<ButtonList>()), TCODmouse(), mouse(std::make_shared<Mouse>())
 {
 	bindList.push_back(moveUp			= std::make_shared<Bind>(buttonList->w			, "Move Up"		));
-	bindList.push_back(moveDown			= std::make_shared<Bind>(buttonList->a			, "Move Down"	));
-	bindList.push_back(moveLeft			= std::make_shared<Bind>(buttonList->s			, "Move Left"	));
+	bindList.push_back(moveDown			= std::make_shared<Bind>(buttonList->s			, "Move Down"	));
+	bindList.push_back(moveLeft			= std::make_shared<Bind>(buttonList->a			, "Move Left"	));
 	bindList.push_back(moveRight		= std::make_shared<Bind>(buttonList->d			, "Move Right"	));
 									   							 								
 	bindList.push_back(moveSlow			= std::make_shared<Bind>(buttonList->leftControl, "Move Slow"	));
@@ -291,7 +296,9 @@ Input::Input()
 
 void Input::update()
 {
-	buttonList->update();
+	keyEvent = TCODSystem::checkForEvent(TCOD_EVENT_ANY, NULL, &TCODmouse);
+
+	buttonList->update(TCODmouse);
 	mouse->update(TCODmouse);
 
 	if (menu->bind->isSwitched)

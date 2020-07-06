@@ -1,24 +1,2 @@
-﻿  aicreature.cpp
-  audio.cpp
-  creature.cpp
-  engine.cpp
-  environment.cpp
-  gui.cpp
-  input.cpp
-  item.cpp
-  main.cpp
-  map.cpp
-  panel.cpp
-  settings.cpp
-  tile.cpp
-  tool.cpp
-  utility.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(202,37): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(206,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(228,56): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(229,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(233,86): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(234,72): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  window.cpp
-  Generating Code...
+﻿  input.cpp
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

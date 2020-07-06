@@ -60,11 +60,11 @@ void Projectile::doProjectileDamage(std::shared_ptr<Creature>& creature)
 
 		if (damage > 0)
 		{
-			GUI->logWindow->pushMessage(LogWindow::Message((creature->name + " shot for " + std::to_string(damage) + " damage!"), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
+			GUI->logWindow->pushMessage(Message((creature->name + " shot for " + std::to_string(damage) + " damage!"), Message::MessageLevel::MEDIUM)); //damage message
 		}
 		else
 		{
-			GUI->logWindow->pushMessage(LogWindow::Message(("Bullet was blocked!"), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
+			GUI->logWindow->pushMessage(Message(("Bullet was blocked!"), Message::MessageLevel::MEDIUM)); //damage message
 		}
 	}
 }
@@ -201,11 +201,11 @@ void Bullet::doProjectileDamage(std::shared_ptr<Creature>& creature)
 
 		if (damage > 0)
 		{
-			GUI->logWindow->pushMessage(LogWindow::Message((creature->name + " shot for " + std::to_string(damage) + " damage!"), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
+			GUI->logWindow->pushMessage(Message((creature->name + " shot for " + std::to_string(damage) + " damage!"), Message::MessageLevel::MEDIUM)); //damage message
 		}
 		else
 		{
-			GUI->logWindow->pushMessage(LogWindow::Message(("Bullet was blocked!"), LogWindow::Message::MessageLevel::MEDIUM)); //damage message
+			GUI->logWindow->pushMessage(Message(("Bullet was blocked!"), Message::MessageLevel::MEDIUM)); //damage message
 		}
 	}
 }

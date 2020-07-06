@@ -446,7 +446,7 @@ Clock::Clock(float timeBetweenUpdates)
 
 void Clock::tickUp()
 {
-	numCalls += SETTINGS->lastFrameTime.asSeconds() / timeBetweenUpdates;
+	numCalls += ENGINE->lastFrameTime.asSeconds() / timeBetweenUpdates;
 }
 
 void Clock::addTime(float seconds)

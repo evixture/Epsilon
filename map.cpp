@@ -604,7 +604,7 @@ void World::computeFov(Position4 mapPosition) //calculate the fov from the point
 {
 	for (auto& fovMap : debugmap->fovMapList)
 	{
-		fovMap->computeFov(mapPosition.x, mapPosition.y, engine->settings->fovRad, engine->settings->lightWalls, engine->settings->fovtype);
+		fovMap->computeFov(mapPosition.x, mapPosition.y, ENGINE->fovRad, ENGINE->lightWalls, ENGINE->fovtype);
 	}
 }
 

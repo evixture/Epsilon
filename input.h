@@ -91,8 +91,6 @@ struct Mouse
 
 struct ButtonList
 {
-	TCOD_mouse_t TCODmouse;
-
 	std::shared_ptr<KeyboardButton> escape;
 	std::shared_ptr<KeyboardButton> f1;
 	std::shared_ptr<KeyboardButton> f2;
@@ -202,11 +200,10 @@ struct ButtonList
 	std::vector<std::shared_ptr<Button>> getButtonsDown();
 	std::vector<std::shared_ptr<Button>> getButtonsSwitched();
 
-	void update();
+	void update(TCOD_mouse_t mouse);
 
 private:
-	TCOD_event_t keyEvent; //handles tcod events
-	TCOD_key_t keyboard; //handles tcod key events
+	//TCOD_event_t keyEvent; //handles tcod events
 };
 
 struct Input
@@ -255,6 +252,8 @@ struct Input
 
 private:
 	std::vector<std::shared_ptr<Bind>> bindList;
+
+	TCOD_event_t keyEvent; //handles tcod events
 };
 
 //struct Input

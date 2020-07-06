@@ -279,7 +279,7 @@ bool Player::pickUpItem()
 			{
 				if (inventory[containerIndex]->addItem(WORLD->debugmap->mapItemList[i]))
 				{
-					GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapItemList[i]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
+					GUI->logWindow->pushMessage(Message("Picked up " + WORLD->debugmap->mapItemList[i]->tool->name, Message::MessageLevel::MEDIUM));
 					AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
 
 					WORLD->debugmap->mapItemList.erase(WORLD->debugmap->mapItemList.begin() + i);
@@ -296,7 +296,7 @@ bool Player::pickUpItem()
 	{
 		if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->item->mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->item->mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->item->mapPosition.z == mapPosition.z)
 		{
-			GUI->logWindow->pushMessage(LogWindow::Message("Picked up " + WORLD->debugmap->mapContainerList[i]->item->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
+			GUI->logWindow->pushMessage(Message("Picked up " + WORLD->debugmap->mapContainerList[i]->item->tool->name, Message::MessageLevel::MEDIUM));
 			AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
 
 			inventory.push_back(WORLD->debugmap->mapContainerList[i]);
@@ -315,7 +315,7 @@ void Player::dropItem()
 	{
 		if (itemIndex >= 0)
 		{
-			GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->itemList[itemIndex]->tool->name, LogWindow::Message::MessageLevel::MEDIUM));
+			GUI->logWindow->pushMessage(Message("Dropped " + inventory[containerIndex]->itemList[itemIndex]->tool->name, Message::MessageLevel::MEDIUM));
 			AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
 
 			selectedItem->owner = nullptr;
@@ -326,7 +326,7 @@ void Player::dropItem()
 		{
 			if (selectedItem->type != Item::ItemType::HAND)
 			{
-				GUI->logWindow->pushMessage(LogWindow::Message("Dropped " + inventory[containerIndex]->item->tool->name, LogWindow::Message::MessageLevel::LOW));
+				GUI->logWindow->pushMessage(Message("Dropped " + inventory[containerIndex]->item->tool->name, Message::MessageLevel::LOW));
 				AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
 
 				selectedItem->owner = nullptr;
@@ -411,8 +411,7 @@ bool Player::reload()
 				{
 					if (item->getMagazineData().second.availableAmmo != 0) // if the magazine is not empty
 					{
-						selectedItem->tool->reload(item->getMagazineData().second);
-						return true;
+						return selectedItem->tool->reload(item->getMagazineData().second);
 					}
 				}
 			}
@@ -483,10 +482,16 @@ void Player::update()
 			}
 		}
 		
-		if (INPUT->pickUp->bind->isSwitched)			pickUpItem();
-		if (INPUT->drop->bind->isSwitched)				dropItem();
-		if (INPUT->reload->bind->isSwitched)			reload();
-		if (INPUT->primaryUse->bind->isDown)		selectedItem->tool->use(INPUT->primaryUse->bind->isDown, INPUT->primaryUse->bind->isSwitched);
+		if (INPUT->pickUp->bind->isSwitched)		pickUpItem();
+		if (INPUT->drop->bind->isSwitched)			dropItem();
+		if (INPUT->reload->bind->isSwitched)
+		{
+			reload();
+		}
+		if (INPUT->primaryUse->bind->isDown)
+		{
+			selectedItem->tool->use(INPUT->primaryUse->bind->isDown, INPUT->primaryUse->bind->isSwitched);
+		}
 		if (INPUT->alternateUse->bind->isSwitched)	selectedItem->actionManager->doAction(this);
 		
 		filterIndexes();

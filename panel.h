@@ -1,5 +1,14 @@
 #include "main.hpp"
 
+struct Message
+{
+	enum class MessageLevel { LOW, MEDIUM, HIGH } messageLevel;
+	TCODColor color;
+	std::string message;
+
+	Message(std::string message, MessageLevel messageLevel);
+};
+
 struct StatusWindow : public Window
 {
 	StatusWindow(int consoleWidth, int consoleHeight, int rx, int ry);
@@ -83,15 +92,6 @@ private:
 
 struct LogWindow : public Window
 {
-	struct Message
-	{
-		enum class MessageLevel {LOW, MEDIUM, HIGH} messageLevel;
-		TCODColor color;
-		std::string message;
-
-		Message(std::string message, MessageLevel messageLevel);
-	};
-
 	LogWindow(int consoleWidth, int consoleHeight, int rx, int ry);
 
 	void pushMessage(Message message);
@@ -156,4 +156,15 @@ private:
 	void setTileDetails();
 	void setCreatureDetails();
 	void setItemDetails();
+};
+
+struct CommandWindow : public Window
+{
+	CommandWindow(int consoleWidth, int consoleHeight, int rx, int ry);
+
+	std::string command;
+	std::vector<Message> outputList;
+
+	void update();
+	void render() const;
 };

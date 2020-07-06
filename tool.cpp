@@ -198,7 +198,7 @@ void Melee::doMeleeDamage(std::shared_ptr<Creature>& creature)
 
 		creature->takeDamage(totalDamage);
 
-		GUI->logWindow->pushMessage(LogWindow::Message((creature->name + " was hit for " + std::to_string(totalDamage) + " damage!"), LogWindow::Message::MessageLevel::MEDIUM));
+		GUI->logWindow->pushMessage(Message((creature->name + " was hit for " + std::to_string(totalDamage) + " damage!"), Message::MessageLevel::MEDIUM));
 	}
 }
 

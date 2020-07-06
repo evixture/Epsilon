@@ -1,5 +1,15 @@
 #include "main.hpp"
 
+Message::Message(std::string message, MessageLevel messageLevel)
+	: message(message), messageLevel(messageLevel)
+{
+	if (messageLevel == Message::MessageLevel::HIGH)	color = ep::color::messageHigh;
+	else if (messageLevel == Message::MessageLevel::MEDIUM) color = ep::color::messageMed;
+	else													color = ep::color::messageLow;
+}
+
+//----------------------------------------------------------------------------------------------------
+
 MapWindow::MapWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 	: Window(consoleWidth, consoleHeight, "World", rx, ry)
 {
@@ -384,16 +394,6 @@ void InventoryFullWindow::render() const
 
 //----------------------------------------------------------------------------------------------------
 
-LogWindow::Message::Message(std::string message, MessageLevel messageLevel)
-	: message(message), messageLevel(messageLevel)
-{
-	if		(messageLevel == Message::MessageLevel::HIGH)	color = ep::color::messageHigh;
-	else if (messageLevel == Message::MessageLevel::MEDIUM) color = ep::color::messageMed;
-	else													color = ep::color::messageLow;
-}
-
-//----------------------------------------------------------------------------------------------------
-
 LogWindow::LogWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 	: Window(consoleWidth, consoleHeight, "Log", rx, ry)
 {
@@ -595,6 +595,8 @@ void PauseWindow::render() const
 	pushWindow();
 }
 
+//----------------------------------------------------------------------------------------------------
+
 InfoWindow::InfoWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 	: Window(consoleWidth, consoleHeight, "Information", rx, ry), tileDetail(""), creatureDetail(""), itemDetail("")
 {
@@ -653,4 +655,22 @@ void InfoWindow::render() const
 	drawPane.console->printf(0, 2, "Item : %s", itemDetail.c_str()); //will use later to show in depth description of held item
 
 	pushWindow();
+}
+
+//----------------------------------------------------------------------------------------------------
+
+CommandWindow::CommandWindow(int consoleWidth, int consoleHeight, int rx, int ry)
+	: Window(consoleWidth, consoleHeight, "Command", rx, ry)
+{
+}
+
+void CommandWindow::update()
+{
+
+
+	//for (int i = 0; i < )
+}
+
+void CommandWindow::render() const
+{
 }
