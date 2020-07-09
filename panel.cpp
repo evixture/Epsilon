@@ -81,7 +81,7 @@ void PlayerWindow::update()
 {
 	playerStance = WORLD->debugmap->player->mapPosition.h;
 
-	if (!(INPUT->moveUp->bind->isDown) && !(INPUT->moveDown->bind->isDown) && !(INPUT->moveLeft->bind->isDown) && !(INPUT->moveRight->bind->isDown)) playerSpeed = 0;
+	if (!(INPUT->moveUp->isDown) && !(INPUT->moveDown->isDown) && !(INPUT->moveLeft->isDown) && !(INPUT->moveRight->isDown)) playerSpeed = 0;
 	else if (WORLD->debugmap->player->baseMoveTime == .25f) playerSpeed = 3;
 	else if (WORLD->debugmap->player->baseMoveTime == .5f)	playerSpeed = 2;
 	else if (WORLD->debugmap->player->baseMoveTime == 1.0f) playerSpeed = 1;
@@ -242,7 +242,7 @@ void SplashWindow::update()
 
 	menu.update();
 
-	if (INPUT->worldInteract->bind->isSwitched)
+	if (INPUT->worldInteract->isSwitched)
 	{
 		if		(menu.menuSelection == "Start") GUI->activeWindow = Gui::ActiveWindow::NONE;
 		else if (menu.menuSelection == "Exit")	engine->gamestate = Engine::Gamestate::EXIT;
@@ -535,7 +535,7 @@ void PauseWindow::update()
 	if		(baseMenuActive)		baseMenu.update();
 	else if (settingsMenuActive)	settingsMenu.update();
 
-	if (INPUT->worldInteract->bind->isSwitched)
+	if (INPUT->worldInteract->isSwitched)
 	{
 		if (baseMenuActive)
 		{
@@ -571,7 +571,7 @@ void PauseWindow::update()
 		}
 	}
 
-	if (INPUT->menu->bind->isSwitched && GUI->activeWindow == Gui::ActiveWindow::PAUSE)
+	if (INPUT->menu->isSwitched && GUI->activeWindow == Gui::ActiveWindow::PAUSE)
 	{
 		if (baseMenuActive)
 		{
@@ -666,7 +666,7 @@ CommandWindow::CommandWindow(int consoleWidth, int consoleHeight, int rx, int ry
 
 void CommandWindow::update()
 {
-	if (INPUT->buttonList->enter->isSwitched)
+	if (INPUT->keyboard->enter->isSwitched)
 	{
 		std::string arg;
 		std::vector<std::string> argv;
@@ -701,7 +701,7 @@ void CommandWindow::update()
 		command.clear();
 
 	}
-	else if (INPUT->buttonList->backspace->isSwitched)
+	else if (INPUT->keyboard->backspace->isSwitched)
 	{
 		if (command.size() > 0)
 		{
@@ -710,7 +710,7 @@ void CommandWindow::update()
 	}
 	else
 	{
-		command += INPUT->buttonList->getButtonsSwitchedText();
+		command += INPUT->keyboard->getButtonsSwitchedText();
 	}
 	
 }

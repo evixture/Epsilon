@@ -141,25 +141,25 @@ void Player::move()
 
 	if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH)
 	{
-		if (INPUT->moveFast->bind->isDown)			baseMoveTime = .25f;
-		else if (INPUT->moveSlow->bind->isDown)	baseMoveTime = 1.0f;
+		if (INPUT->moveFast->isDown)			baseMoveTime = .25f;
+		else if (INPUT->moveSlow->isDown)	baseMoveTime = 1.0f;
 		else									baseMoveTime = .5f;
 
 		int xMoveDist = 0;
 		int yMoveDist = 0;
 
-		if (INPUT->stanceDown->bind->isSwitched) changeStanceDown();
-		if (INPUT->stanceUp->bind->isSwitched) changeStanceUp();
+		if (INPUT->stanceDown->isSwitched) changeStanceDown();
+		if (INPUT->stanceUp->isSwitched) changeStanceUp();
 
 		moveSpeed = baseMoveTime / mapPosition.h;
 
-		if (INPUT->moveUp->bind->isDown && INPUT->moveDown->bind->isDown) yMoveDist = 0;
-		else if (INPUT->moveUp->bind->isDown && !INPUT->moveDown->bind->isDown) yMoveDist = -1;
-		else if (INPUT->moveDown->bind->isDown && !INPUT->moveUp->bind->isDown) yMoveDist = 1;
+		if (INPUT->moveUp->isDown && INPUT->moveDown->isDown) yMoveDist = 0;
+		else if (INPUT->moveUp->isDown && !INPUT->moveDown->isDown) yMoveDist = -1;
+		else if (INPUT->moveDown->isDown && !INPUT->moveUp->isDown) yMoveDist = 1;
 
-		if (INPUT->moveLeft->bind->isDown && INPUT->moveRight->bind->isDown) xMoveDist = 0;
-		else if (INPUT->moveLeft->bind->isDown && !INPUT->moveRight->bind->isDown) xMoveDist = -1;
-		else if (INPUT->moveRight->bind->isDown && !INPUT->moveLeft->bind->isDown) xMoveDist = 1;
+		if (INPUT->moveLeft->isDown && INPUT->moveRight->isDown) xMoveDist = 0;
+		else if (INPUT->moveLeft->isDown && !INPUT->moveRight->isDown) xMoveDist = -1;
+		else if (INPUT->moveRight->isDown && !INPUT->moveLeft->isDown) xMoveDist = 1;
 
 		if (xMoveDist != 0 || yMoveDist != 0)
 		{
@@ -464,35 +464,35 @@ void Player::update()
 
 	if (health != 0) //if player is alive
 	{
-		if (INPUT->highlight->bind->isDown) backgroundColor = TCODColor::yellow;
+		if (INPUT->highlight->isDown) backgroundColor = TCODColor::yellow;
 		else backgroundColor = TCODColor::pink;
 
 		//items
 		if (INPUT->TCODmouse.wheel_up || INPUT->TCODmouse.wheel_down)
 		{
-			if (!INPUT->deepInteract->bind->isDown)
+			if (!INPUT->deepInteract->isDown)
 			{
 				if (INPUT->TCODmouse.wheel_up) moveSelectorUp();
 				else if (INPUT->TCODmouse.wheel_down) moveSelectorDown();
 			}
-			else if (INPUT->deepInteract->bind->isDown)
+			else if (INPUT->deepInteract->isDown)
 			{
 				if (INPUT->TCODmouse.wheel_up) selectedItem->actionManager->moveSelectorUp();
 				else if (INPUT->TCODmouse.wheel_down) selectedItem->actionManager->moveSelectorDown();
 			}
 		}
 		
-		if (INPUT->pickUp->bind->isSwitched)		pickUpItem();
-		if (INPUT->drop->bind->isSwitched)			dropItem();
-		if (INPUT->reload->bind->isSwitched)
+		if (INPUT->pickUp->isSwitched)		pickUpItem();
+		if (INPUT->drop->isSwitched)			dropItem();
+		if (INPUT->reload->isSwitched)
 		{
 			reload();
 		}
-		if (INPUT->primaryUse->bind->isDown)
+		if (INPUT->primaryUse->isDown)
 		{
-			selectedItem->tool->use(INPUT->primaryUse->bind->isDown, INPUT->primaryUse->bind->isSwitched);
+			selectedItem->tool->use(INPUT->primaryUse->isDown, INPUT->primaryUse->isSwitched);
 		}
-		if (INPUT->alternateUse->bind->isSwitched)	selectedItem->actionManager->doAction(this);
+		if (INPUT->alternateUse->isSwitched)	selectedItem->actionManager->doAction(this);
 		
 		filterIndexes();
 		
@@ -501,7 +501,7 @@ void Player::update()
 		updateTools();
 		
 		//world
-		if (INPUT->worldInteract->bind->isSwitched)
+		if (INPUT->worldInteract->isSwitched)
 		{
 			if (WORLD->debugmap->getBlock(mapPosition)->tag == Block::Tag::STAIR) WORLD->debugmap->getBlock(mapPosition)->interact();
 		}

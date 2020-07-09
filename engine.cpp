@@ -38,7 +38,7 @@ void Engine::update()
 	lastFrameTime = systemClock.restart();
 	input->update();
 
-	if (input->fullscreen->bind->isSwitched) setFullscreen();
+	if (input->fullscreen->isSwitched) setFullscreen();
 
 	settings->update();
 	gui->update();

@@ -641,7 +641,7 @@ void World::update()
 	xOffset = getOffset(debugmap->player->mapPosition.x, debugmap->width, MAPPANE->drawPane.consoleWidth);
 	yOffset = getOffset(debugmap->player->mapPosition.y, debugmap->height, MAPPANE->drawPane.consoleHeight);
 
-	if (INPUT->debug1->bind->isSwitched) AUDIO->playSound(PositionalStaticSound("Testing", Position4(20, 10, 0, 0), 0.0f, 100.0f)); //2d sound
+	if (INPUT->debug1->isSwitched) AUDIO->playSound(PositionalStaticSound("Testing", Position4(20, 10, 0, 0), 0.0f, 100.0f)); //2d sound
 
 	updateEntities(); //needs to be first to prevent bad fov checks
 	computeFov(debugmap->player->mapPosition);

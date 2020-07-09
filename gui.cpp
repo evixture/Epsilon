@@ -20,31 +20,39 @@ Gui::Gui(int windowX, int windowY)
 
 void Gui::update()
 {
-	if (INPUT->inventory->bind->isSwitched) //move to input?
+	if (INPUT->inventory->isSwitched) //move to input?
 	{
 		if (activeWindow == Gui::ActiveWindow::INVENTORYFULL)															activeWindow = Gui::ActiveWindow::NONE;
 		else if (activeWindow != Gui::ActiveWindow::INVENTORYFULL && activeWindow != Gui::ActiveWindow::STARTUPSPLASH)	activeWindow = Gui::ActiveWindow::INVENTORYFULL;
 	}
 
-	if (INPUT->menu->bind->isSwitched)
+	if (INPUT->menu->isSwitched)
 	{
 		if (GUI->activeWindow == Gui::ActiveWindow::NONE)
 		{
 			GUI->activeWindow = Gui::ActiveWindow::PAUSE;
-			INPUT->menu->bind->isSwitched = false;
+			INPUT->menu->isSwitched = false;
 		}
 	}
 
-	if (INPUT->info->bind->isSwitched)
+	if (INPUT->info->isSwitched)
 	{
 		if (GUI->activeLogWindow == Gui::ActiveLogWindow::LOG) GUI->activeLogWindow = Gui::ActiveLogWindow::INFO;
 		else if (GUI->activeLogWindow == Gui::ActiveLogWindow::INFO) GUI->activeLogWindow = Gui::ActiveLogWindow::LOG;
 	}
 
-	if (INPUT->console->bind->isSwitched)
+	if (INPUT->console->isSwitched)
 	{
-		if (GUI->activeWindow != Gui::ActiveWindow::COMMAND) GUI->activeWindow = Gui::ActiveWindow::COMMAND;
-		else if (GUI->activeWindow == Gui::ActiveWindow::COMMAND) GUI->activeWindow = Gui::ActiveWindow::NONE;
+		if (GUI->activeWindow != Gui::ActiveWindow::COMMAND)
+		{
+			GUI->activeWindow = Gui::ActiveWindow::COMMAND;
+			INPUT->bindsDisabled = true;
+		}
+		else if (GUI->activeWindow == Gui::ActiveWindow::COMMAND)
+		{
+			GUI->activeWindow = Gui::ActiveWindow::NONE;
+			INPUT->bindsDisabled = false;
+		}
 	}
 
 	switch (activeWindow)

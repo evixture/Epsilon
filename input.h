@@ -70,9 +70,15 @@ struct Bind
 {
 	const std::string name;
 
-	std::shared_ptr<Button> bind;
+	bool isDown;
+	bool isSwitched;
 
 	Bind(std::shared_ptr<Button> bind, const std::string name);
+
+	void update(bool disabled);
+
+private:
+	std::shared_ptr<Button> bind;
 };
 
 struct Mouse
@@ -89,7 +95,7 @@ struct Mouse
 	void update(TCOD_mouse_t TCODmouse);
 };
 
-struct ButtonList
+struct Keyboard
 {
 	std::shared_ptr<KeyboardButton> escape;
 	std::shared_ptr<KeyboardButton> f1;
@@ -193,21 +199,25 @@ struct ButtonList
 	std::shared_ptr<KeyboardButton> kpRight;
 	std::shared_ptr<KeyboardButton> kp0;
 	
-	std::vector<std::shared_ptr<Button>> buttonList;
+	std::vector<std::shared_ptr<KeyboardButton>> keyboard;
 
-	ButtonList();
+	Keyboard();
 
-	std::vector<std::shared_ptr<Button>>	getButtonsDown();
-	std::vector<std::shared_ptr<Button>>	getButtonsSwitched();
-	std::string								getButtonsSwitchedText();
+	std::vector<std::shared_ptr<KeyboardButton>>	getButtonsDown();
+	std::vector<std::shared_ptr<KeyboardButton>>	getButtonsSwitched();
+	std::string										getButtonsSwitchedText();
 
 	void update(TCOD_mouse_t mouse);
 };
 
 struct Input
 {
+	bool bindsDisabled;
+
 	std::shared_ptr<Mouse> mouse;
 	TCOD_mouse_t TCODmouse;
+
+	std::shared_ptr<Keyboard> keyboard;
 
 	std::shared_ptr<Bind> moveUp; 
 	std::shared_ptr<Bind> moveDown; 
@@ -242,8 +252,6 @@ struct Input
 
 	std::shared_ptr<Bind> primaryUse;
 	std::shared_ptr<Bind> alternateUse;
-
-	std::shared_ptr<ButtonList> buttonList;
 
 	Input();
 

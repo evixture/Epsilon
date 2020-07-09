@@ -464,13 +464,13 @@ void Menu::update()
 {
 	menuSelection = menuList[menuIndex];
 
-	if (INPUT->moveUp->bind->isSwitched && menuIndex > 0)
+	if (INPUT->moveUp->isSwitched && menuIndex > 0)
 	{
 		menuIndex--;
 		AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
 	}
 
-	if (INPUT->moveDown->bind->isSwitched && (menuIndex < menuList.size() - 1))
+	if (INPUT->moveDown->isSwitched && (menuIndex < menuList.size() - 1))
 	{	
 		++menuIndex;
 		AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));	

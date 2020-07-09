@@ -207,7 +207,7 @@ void Melee::update(Position4& sourcePosition, int& targetX, int& targetY, bool& 
 	this->isHeld = isHeld;
 	updatePositions(sourcePosition, targetX, targetY);
 
-	if (INPUT->primaryUse->bind->isSwitched && this->isHeld) useMelee();
+	if (INPUT->primaryUse->isSwitched && this->isHeld) useMelee();
 }
 
 void Melee::render(const Pane& pane) const
