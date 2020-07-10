@@ -9,6 +9,20 @@ struct Message
 	Message(std::string message, MessageLevel messageLevel);
 };
 
+struct Command
+{
+	std::string arg;
+	std::vector<std::string> argVariables;
+
+	bool hasArg;
+	bool hasArgVariables;
+
+	Command() = default;
+	Command(std::string commandInput);
+
+	void clear();
+};
+
 struct StatusWindow : public Window
 {
 	StatusWindow(int consoleWidth, int consoleHeight, int rx, int ry);
@@ -162,9 +176,13 @@ struct CommandWindow : public Window
 {
 	CommandWindow(int consoleWidth, int consoleHeight, int rx, int ry);
 
-	std::string command;
-	std::vector<Message> outputList;
 
 	void update();
 	void render() const;
+
+private:
+	std::vector<Message> outputList;
+
+	std::string rawCommand;
+	Command command;
 };

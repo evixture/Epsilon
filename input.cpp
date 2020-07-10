@@ -101,9 +101,9 @@ Keyboard::Keyboard()
 	keyboard.push_back(f7				= std::make_shared<KeyboardButton>(sf::Keyboard::F7			, "F7"));
 	keyboard.push_back(f8				= std::make_shared<KeyboardButton>(sf::Keyboard::F8			, "F8"));
 	keyboard.push_back(f9				= std::make_shared<KeyboardButton>(sf::Keyboard::F9			, "F9"));
-	keyboard.push_back(f10			= std::make_shared<KeyboardButton>(sf::Keyboard::F10		, "F10"));
-	keyboard.push_back(f11			= std::make_shared<KeyboardButton>(sf::Keyboard::F11		, "F11"));
-	keyboard.push_back(f12			= std::make_shared<KeyboardButton>(sf::Keyboard::F12		, "F12"));
+	keyboard.push_back(f10				= std::make_shared<KeyboardButton>(sf::Keyboard::F10		, "F10"));
+	keyboard.push_back(f11				= std::make_shared<KeyboardButton>(sf::Keyboard::F11		, "F11"));
+	keyboard.push_back(f12				= std::make_shared<KeyboardButton>(sf::Keyboard::F12		, "F12"));
 	keyboard.push_back(pause			= std::make_shared<KeyboardButton>(sf::Keyboard::Pause		, "Pause"));
 																		   							   			
 	keyboard.push_back(tilde			= std::make_shared<KeyboardButton>(sf::Keyboard::Tilde		, "~"));
@@ -121,14 +121,14 @@ Keyboard::Keyboard()
 	keyboard.push_back(equals			= std::make_shared<KeyboardButton>(sf::Keyboard::Equal		, "="));
 	keyboard.push_back(backspace		= std::make_shared<KeyboardButton>(sf::Keyboard::BackSpace	, "BackSpace"));
 	keyboard.push_back(insert			= std::make_shared<KeyboardButton>(sf::Keyboard::Insert		, "Insert"));
-	keyboard.push_back(home			= std::make_shared<KeyboardButton>(sf::Keyboard::Home		, "Home"));
+	keyboard.push_back(home				= std::make_shared<KeyboardButton>(sf::Keyboard::Home		, "Home"));
 	keyboard.push_back(pageUp			= std::make_shared<KeyboardButton>(sf::Keyboard::PageUp		, "PageUp"));
-	keyboard.push_back(numLock		= std::make_shared<KeyboardButton>(sf::Keyboard::PageDown	, "PageDown"));
-	keyboard.push_back(kpDivide		= std::make_shared<KeyboardButton>(sf::Keyboard::Divide		, "k/"));
+	keyboard.push_back(numLock			= std::make_shared<KeyboardButton>(sf::Keyboard::PageDown	, "PageDown"));
+	keyboard.push_back(kpDivide			= std::make_shared<KeyboardButton>(sf::Keyboard::Divide		, "k/"));
 	keyboard.push_back(kpMultiply		= std::make_shared<KeyboardButton>(sf::Keyboard::Multiply	, "k*"));
-	keyboard.push_back(kpMinus		= std::make_shared<KeyboardButton>(sf::Keyboard::Dash		, "k-"));
+	keyboard.push_back(kpMinus			= std::make_shared<KeyboardButton>(sf::Keyboard::Dash		, "k-"));
 																		   							   			
-	keyboard.push_back(tab			= std::make_shared<KeyboardButton>(sf::Keyboard::Tab		, "Tab"));
+	keyboard.push_back(tab				= std::make_shared<KeyboardButton>(sf::Keyboard::Tab		, "Tab"));
 	keyboard.push_back(q				= std::make_shared<KeyboardButton>(sf::Keyboard::Q			, "Q"));
 	keyboard.push_back(w				= std::make_shared<KeyboardButton>(sf::Keyboard::W			, "W"));
 	keyboard.push_back(e				= std::make_shared<KeyboardButton>(sf::Keyboard::E			, "E"));
@@ -142,12 +142,12 @@ Keyboard::Keyboard()
 	keyboard.push_back(leftBrace		= std::make_shared<KeyboardButton>(sf::Keyboard::LBracket	, "["));
 	keyboard.push_back(rightBrace		= std::make_shared<KeyboardButton>(sf::Keyboard::RBracket	, "]"));
 	keyboard.push_back(backSlash		= std::make_shared<KeyboardButton>(sf::Keyboard::BackSlash	, "\\"));
-	keyboard.push_back(del			= std::make_shared<KeyboardButton>(sf::Keyboard::Delete		, "Delete"));
-	keyboard.push_back(end			= std::make_shared<KeyboardButton>(sf::Keyboard::End		, "End"));
-	keyboard.push_back(pageDown		= std::make_shared<KeyboardButton>(sf::Keyboard::PageDown	, "PageDown"));
-	keyboard.push_back(kp7			= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad7	, "k7"));
-	keyboard.push_back(kp8			= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad8	, "k8"));
-	keyboard.push_back(kp9			= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad9	, "k9"));
+	keyboard.push_back(del				= std::make_shared<KeyboardButton>(sf::Keyboard::Delete		, "Delete"));
+	keyboard.push_back(end				= std::make_shared<KeyboardButton>(sf::Keyboard::End		, "End"));
+	keyboard.push_back(pageDown			= std::make_shared<KeyboardButton>(sf::Keyboard::PageDown	, "PageDown"));
+	keyboard.push_back(kp7				= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad7	, "k7"));
+	keyboard.push_back(kp8				= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad8	, "k8"));
+	keyboard.push_back(kp9				= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad9	, "k9"));
 	keyboard.push_back(kpAdd			= std::make_shared<KeyboardButton>(sf::Keyboard::Add		, "k+"));
 																		   							   			
 	keyboard.push_back(a				= std::make_shared<KeyboardButton>(sf::Keyboard::A			, "A"));
@@ -162,9 +162,9 @@ Keyboard::Keyboard()
 	keyboard.push_back(semiColon		= std::make_shared<KeyboardButton>(sf::Keyboard::SemiColon	, ";"));
 	keyboard.push_back(quote			= std::make_shared<KeyboardButton>(sf::Keyboard::Quote		, "'"));
 	keyboard.push_back(enter			= std::make_shared<KeyboardButton>(sf::Keyboard::Enter		, "Enter"));
-	keyboard.push_back(kp4			= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad4	, "k4"));
-	keyboard.push_back(kp5			= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad5	, "k5"));
-	keyboard.push_back(kp6			= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad6	, "k6"));
+	keyboard.push_back(kp4				= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad4	, "k4"));
+	keyboard.push_back(kp5				= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad5	, "k5"));
+	keyboard.push_back(kp6				= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad6	, "k6"));
 																		   							   			
 	keyboard.push_back(leftShift		= std::make_shared<KeyboardButton>(sf::Keyboard::LShift		, "LShift"));
 	keyboard.push_back(z				= std::make_shared<KeyboardButton>(sf::Keyboard::Z			, "Z"));
@@ -178,20 +178,20 @@ Keyboard::Keyboard()
 	keyboard.push_back(period			= std::make_shared<KeyboardButton>(sf::Keyboard::Period		, "."));
 	keyboard.push_back(slash			= std::make_shared<KeyboardButton>(sf::Keyboard::Slash		, "/"));
 	keyboard.push_back(rightShift		= std::make_shared<KeyboardButton>(sf::Keyboard::RShift		, "RShift"));
-	keyboard.push_back(kpUp			= std::make_shared<KeyboardButton>(sf::Keyboard::Up			, "Up"));
-	keyboard.push_back(kp1			= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad1	, "k1"));
-	keyboard.push_back(kp2			= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad2	, "k2"));
-	keyboard.push_back(kp3			= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad3	, "k3"));
+	keyboard.push_back(kpUp				= std::make_shared<KeyboardButton>(sf::Keyboard::Up			, "Up"));
+	keyboard.push_back(kp1				= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad1	, "k1"));
+	keyboard.push_back(kp2				= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad2	, "k2"));
+	keyboard.push_back(kp3				= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad3	, "k3"));
 																		   							   			
-	keyboard.push_back(leftControl	= std::make_shared<KeyboardButton>(sf::Keyboard::LControl	, "LControl"));
-	keyboard.push_back(leftAlt		= std::make_shared<KeyboardButton>(sf::Keyboard::LAlt		, "LAlt	"));
+	keyboard.push_back(leftControl		= std::make_shared<KeyboardButton>(sf::Keyboard::LControl	, "LControl"));
+	keyboard.push_back(leftAlt			= std::make_shared<KeyboardButton>(sf::Keyboard::LAlt		, "LAlt	"));
 	keyboard.push_back(space			= std::make_shared<KeyboardButton>(sf::Keyboard::Space		, "Space"));
-	keyboard.push_back(rightAlt		= std::make_shared<KeyboardButton>(sf::Keyboard::RAlt		, "RAlt"));
-	keyboard.push_back(rightControl	= std::make_shared<KeyboardButton>(sf::Keyboard::LControl	, "LControl"));
+	keyboard.push_back(rightAlt			= std::make_shared<KeyboardButton>(sf::Keyboard::RAlt		, "RAlt"));
+	keyboard.push_back(rightControl		= std::make_shared<KeyboardButton>(sf::Keyboard::LControl	, "LControl"));
 	keyboard.push_back(kpLeft			= std::make_shared<KeyboardButton>(sf::Keyboard::Left		, "Left"));
 	keyboard.push_back(kpDown			= std::make_shared<KeyboardButton>(sf::Keyboard::Down		, "Down"));
-	keyboard.push_back(kpRight		= std::make_shared<KeyboardButton>(sf::Keyboard::Right		, "Right"));
-	keyboard.push_back(kp0			= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad0	, "k0"));
+	keyboard.push_back(kpRight			= std::make_shared<KeyboardButton>(sf::Keyboard::Right		, "Right"));
+	keyboard.push_back(kp0				= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad0	, "k0"));
 }
 
 std::vector<std::shared_ptr<KeyboardButton>> Keyboard::getButtonsDown()
@@ -257,7 +257,7 @@ Bind::Bind(std::shared_ptr<Button> bind, const std::string name)
 
 void Bind::update(bool disabled)
 {
-	bind->update();
+	//bind->update(); binds are already updated in keyboard
 
 	if (!disabled)
 	{
@@ -315,9 +315,16 @@ void Input::update()
 
 	for (auto& bind : bindList)
 	{
-		bind->update(bindsDisabled);
+		if (bind != console)
+		{
+			bind->update(bindsDisabled);
+		}
+		else
+		{
+			bind->update(false); //dont block console command input
+		}
 	}
 
-	//keyboard->update(TCODmouse);
+	keyboard->update(TCODmouse);
 	mouse->update(TCODmouse);
 }

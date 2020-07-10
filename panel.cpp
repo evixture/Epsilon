@@ -659,6 +659,37 @@ void InfoWindow::render() const
 
 //----------------------------------------------------------------------------------------------------
 
+Command::Command(std::string commandInput)
+	: hasArg(false), hasArgVariables(false), arg(""), argVariables()
+{
+	std::istringstream iss(commandInput);
+	std::vector<std::string> rawCommand((std::istream_iterator<std::string>(iss)), std::istream_iterator<std::string>());
+
+	if (rawCommand.size() > 0)
+	{
+		hasArg = true;
+		arg = rawCommand[0];
+	}
+
+	if (rawCommand.size() > 1)
+	{
+		hasArgVariables = true;
+		argVariables = rawCommand;
+		argVariables.erase(argVariables.begin()); //remove arg
+	}
+}
+
+void Command::clear()
+{
+	arg.clear();
+	argVariables.clear();
+
+	hasArg = false;
+	hasArgVariables = false;
+}
+
+//----------------------------------------------------------------------------------------------------
+
 CommandWindow::CommandWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 	: Window(consoleWidth, consoleHeight, "Command", rx, ry)
 {
@@ -668,51 +699,46 @@ void CommandWindow::update()
 {
 	if (INPUT->keyboard->enter->isSwitched)
 	{
-		std::string arg;
-		std::vector<std::string> argv;
+		command = Command(rawCommand);
 
-		std::istringstream iss(command);
-		std::vector<std::string> results((std::istream_iterator<std::string>(iss)), std::istream_iterator<std::string>());
-
-		if (results.size() > 0)
+		if (command.hasArg)
 		{
-			arg = results[0];
+			if (command.arg == "SHOWWALKABLE")
+			{
+				if (command.hasArgVariables)
+				{
+					if (command.argVariables[0] == "1") SETTINGS->showWalkable = true;
+					else if (command.argVariables[0] == "0") SETTINGS->showWalkable = false;
+				}
+			}
+
+			if (command.arg == "SHOWFOV")
+			{
+				if (command.hasArgVariables)
+				{
+					if (command.argVariables[0] == "1") SETTINGS->showFOV = true;
+					else if (command.argVariables[0] == "0") SETTINGS->showFOV = false;
+				}
+			}
 		}
 
-		if (results.size() > 1)
-		{
-			argv = results;
-			argv.erase(argv.begin()); //remove arg
-		}
-
-		//commands
-		if (arg == "SHOWWALKABLE")
-		{
-			if (argv[0] == "1") SETTINGS->showWalkable = true;
-			else if (argv[0] == "0") SETTINGS->showWalkable = false;
-		}
-
-		if (arg == "SHOWFOV")
-		{
-			if (argv[0] == "1") SETTINGS->showFOV = true;
-			else if (argv[0] == "0") SETTINGS->showFOV = false;
-		}
-
+		rawCommand.clear();
 		command.clear();
-
 	}
 	else if (INPUT->keyboard->backspace->isSwitched)
 	{
-		if (command.size() > 0)
+		if (rawCommand.size() > 0)
 		{
-			command.pop_back();
+			rawCommand.pop_back();
 		}
 	}
 	else
 	{
-		command += INPUT->keyboard->getButtonsSwitchedText();
+		if (INPUT->keyboard->getButtonsSwitchedText() != "~")
+		{
+			rawCommand += INPUT->keyboard->getButtonsSwitchedText();
+		}
 	}
-	
 }
 
 void CommandWindow::render() const
@@ -721,10 +747,11 @@ void CommandWindow::render() const
 
 	for (int i = 0; i < consoleWidth; i++)
 	{
-		drawPane.console->setCharBackground(i, consoleHeight - 2, TCODColor::purple);
+		drawPane.console->setCharBackground(i, consoleHeight - 2, ep::color::selector);
 	}
 
-	drawPane.console->printf(0, consoleHeight - 2, command.c_str());
+	drawPane.console->printf(0, consoleHeight - 2, rawCommand.c_str());
+	drawPane.console->setChar(rawCommand.length(), consoleHeight - 2, '_');
 
 	pushWindow();
 }
