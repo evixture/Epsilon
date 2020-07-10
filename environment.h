@@ -92,8 +92,6 @@ protected:
 	Position2 renderPosition;
 };
 
-
-
 struct Projectile : public Entity
 {
 	const Creature* owner;

@@ -20,7 +20,7 @@ struct Map
 	std::vector<std::shared_ptr<Item>> mapItemList;				
 	std::vector<std::shared_ptr<Container>> mapContainerList;	
 
-	std::vector<std::vector< std::shared_ptr<Block >>> levelList;
+	std::vector<std::vector<std::shared_ptr<Block>>> levelList;
 	std::vector<std::shared_ptr<TCODMap>> fovMapList;
 
 	Map(std::string filePath);

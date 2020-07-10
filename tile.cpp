@@ -7,7 +7,7 @@ Tile::Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int dec
 
 //----------------------------------------------------------------------------------------------------
 
-Block::Block(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned char walkableFlag, Tag tag)
+Block::Block(std::array<Tile, 4> tileList, unsigned char transparentFlag, unsigned char walkableFlag, Tag tag)
 	: tileList(tileList), transparentFlag(transparentFlag), walkableFlag(walkableFlag), tag(tag), explored(false), destroyed(false)
 {
 }
@@ -46,7 +46,7 @@ bool Block::destroy(int damage, int h)
 
 			if (destroyed)
 			{
-				tileList = std::vector<Tile>
+				tileList = std::array<Tile, 4>
 				{
 					Tile('%', tileList[0].foregroundColor * TCODColor::lightGrey, tileList[0].backgroundColor * TCODColor::darkGrey, 0, 21),
 					Tile(0, TCODColor::pink, TCODColor::pink, 0, 21),
@@ -94,7 +94,7 @@ void Block::render(Position4 renderPosition, const Pane& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Stair::Stair(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance)
+Stair::Stair(std::array<Tile, 4> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance)
 	: Block(tileList, transparentFlag, ep::tileFlag::OOOOI, Block::Tag::STAIR), moveDistance(moveDistance)
 {
 }

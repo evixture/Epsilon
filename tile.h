@@ -54,9 +54,9 @@ struct Block
 	bool explored;
 	bool destroyed;
 
-	std::vector<Tile> tileList;
+	std::array<Tile, 4> tileList;
 
-	Block(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned char walkableFlag, Tag tag = Tag::STATIC);
+	Block(std::array<Tile, 4> tileList, unsigned char transparentFlag, unsigned char walkableFlag, Tag tag = Tag::STATIC);
 	virtual ~Block() {};
 
 	Tile getTileData(int h) const;
@@ -71,7 +71,7 @@ struct Stair : public Block
 {
 	char moveDistance;
 	
-	Stair(std::vector<Tile> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance);
+	Stair(std::array<Tile, 4> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance);
 
 	void interact();
 };
@@ -102,7 +102,7 @@ namespace ep
 			  2 ft
 		*/
 
-		inline static const std::vector<Tile> grass0 =
+		inline static const std::array<Tile, 4> grass0 =
 		{
 			Tile('.',							ep::color::grassFG,			ep::color::grassBG,		999,	1),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
@@ -110,7 +110,7 @@ namespace ep
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
-		inline static const std::vector<Tile> grass1 =
+		inline static const std::array<Tile, 4> grass1 =
 		{ 
 			Tile('"',							ep::color::grassFG,			ep::color::grassBG,		999,	1),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
@@ -118,7 +118,7 @@ namespace ep
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
-		inline static const std::vector<Tile> grass2 =
+		inline static const std::array<Tile, 4> grass2 =
 		{
 			Tile('`',							ep::color::grassFG,			ep::color::grassBG,		999,	1),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
@@ -126,7 +126,7 @@ namespace ep
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
-		inline static const std::vector<Tile> grass3 =
+		inline static const std::array<Tile, 4> grass3 =
 		{
 			Tile(',',							ep::color::grassFG,			ep::color::grassBG,		999,	1),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
@@ -134,7 +134,7 @@ namespace ep
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
-		inline static const std::vector<Tile> flower =
+		inline static const std::array<Tile, 4> flower =
 		{
 			Tile(ep::character::flower,			ep::color::flowerFG,		ep::color::flowerBG,	999,	2),
 			Tile(ep::character::flower,			ep::color::flowerFG,		ep::color::flowerBG,	10,		2,	10),
@@ -142,7 +142,7 @@ namespace ep
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0,	10)
 		};
 	
-		inline static const std::vector<Tile> floor =
+		inline static const std::array<Tile, 4> floor =
 		{
 			Tile(' ',							ep::color::floorFG,			ep::color::floorBG,		999,	3),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
@@ -150,7 +150,7 @@ namespace ep
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
-		inline static const std::vector<Tile> concrete =
+		inline static const std::array<Tile, 4> concrete =
 		{
 			Tile('`',							ep::color::concreteFG,		ep::color::concreteBG,	999,	4),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
@@ -158,7 +158,7 @@ namespace ep
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
-		inline static const std::vector<Tile> shingle =
+		inline static const std::array<Tile, 4> shingle =
 		{
 			Tile(240,							ep::color::shingleFG,		ep::color::shingleBG,	999,	5),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
@@ -166,7 +166,7 @@ namespace ep
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
-		inline static const std::vector<Tile> door =
+		inline static const std::array<Tile, 4> door =
 		{
 			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		25,		6),
 			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		25,		6),
@@ -174,7 +174,7 @@ namespace ep
 			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		25,		6)
 		};
 	
-		inline static const std::vector<Tile> wall =
+		inline static const std::array<Tile, 4> wall =
 		{
 			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7, -1),
 			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7, 1000),
@@ -182,7 +182,7 @@ namespace ep
 			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7, 1000)
 		};
 	
-		inline static const std::vector<Tile> window =
+		inline static const std::array<Tile, 4> window =
 		{
 			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7,	-1),
 			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7,	1000),
@@ -190,7 +190,7 @@ namespace ep
 			Tile(ep::character::window,			ep::color::windowFG,		ep::color::windowBG,	0,		8,	100)
 		};
 	
-		inline static const std::vector<Tile> tableLeg =
+		inline static const std::array<Tile, 4> tableLeg =
 		{
 			Tile(' ',							ep::color::floorFG,			ep::color::floorBG,		999,	3),
 			Tile('!',							ep::color::tableFG,			ep::color::floorBG,		25,		9,	200),
@@ -198,7 +198,7 @@ namespace ep
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
-		inline static const std::vector<Tile> tableTop =
+		inline static const std::array<Tile, 4> tableTop =
 		{
 			Tile(' ',							ep::color::floorFG,			ep::color::floorBG,		999,	3),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		3,	200),
@@ -206,7 +206,7 @@ namespace ep
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
-		inline static const std::vector<Tile> upStair =
+		inline static const std::array<Tile, 4> upStair =
 		{
 			Tile(ep::character::upStair,		ep::color::doorFG,			ep::color::floorBG,		50,		11),
 			Tile(ep::character::upStair,		ep::color::doorFG,			ep::color::floorBG,		50,		11),
@@ -214,7 +214,7 @@ namespace ep
 			Tile(ep::character::upStair,		ep::color::doorFG,			ep::color::floorBG,		50,		11)
 		};
 	
-		inline static const std::vector<Tile> downStair =
+		inline static const std::array<Tile, 4> downStair =
 		{
 			Tile(ep::character::downStair,		ep::color::doorFG,			ep::color::floorBG,		50,		12),
 			Tile(ep::character::downStair,		ep::color::doorFG,			ep::color::floorBG,		50,		12),
@@ -222,7 +222,7 @@ namespace ep
 			Tile(ep::character::downStair,		ep::color::doorFG,			ep::color::floorBG,		50,		12)
 		};
 	
-		inline static const std::vector<Tile> sky =
+		inline static const std::array<Tile, 4> sky =
 		{
 			Tile(' ',							ep::color::windowFG,		ep::color::windowBG,	0,		13),
 			Tile(' ',							ep::color::windowFG,		ep::color::windowBG,	0,		13),
@@ -230,7 +230,7 @@ namespace ep
 			Tile(' ',							ep::color::windowFG,		ep::color::windowBG,	0,		13)
 		};
 	
-		inline static const std::vector<Tile> error =
+		inline static const std::array<Tile, 4> error =
 		{
 			Tile('%',							TCODColor::pink,			TCODColor::pink,		999,	-1),
 			Tile('%',							TCODColor::pink,			TCODColor::pink,		999,	-1),
@@ -238,7 +238,7 @@ namespace ep
 			Tile('%',							TCODColor::pink,			TCODColor::pink,		999,	-1)
 		};
 																					
-		inline static const std::vector<Tile> pistol =
+		inline static const std::array<Tile, 4> pistol =
 		{
 			Tile(ep::character::pistol,			ep::color::pistolFG,		ep::color::itemBG,		0,		14),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
@@ -246,7 +246,7 @@ namespace ep
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
-		inline static const std::vector<Tile> pistolMagazine =
+		inline static const std::array<Tile, 4> pistolMagazine =
 		{
 			Tile(ep::character::pistolMagazine, ep::color::pistolFG,		ep::color::itemBG,		0,		15),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
@@ -254,7 +254,7 @@ namespace ep
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
-		inline static const std::vector<Tile> rifle =
+		inline static const std::array<Tile, 4> rifle =
 		{
 			Tile(ep::character::rifle,			ep::color::rifleFG,			ep::color::itemBG,		0,		16),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
@@ -262,7 +262,7 @@ namespace ep
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
-		inline static const std::vector<Tile> rifleMagazine =
+		inline static const std::array<Tile, 4> rifleMagazine =
 		{
 			Tile(ep::character::rifleMagazine,	ep::color::rifleFG,			ep::color::itemBG,		0,		17),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
@@ -270,7 +270,7 @@ namespace ep
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
-		inline static const std::vector<Tile> smallBackpack =
+		inline static const std::array<Tile, 4> smallBackpack =
 		{
 			Tile(ep::character::backpack,		ep::color::smallBackpackFG, ep::color::itemBG,		0,		18),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
@@ -278,7 +278,7 @@ namespace ep
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
-		inline static const std::vector<Tile> L1R3Armor =
+		inline static const std::array<Tile, 4> L1R3Armor =
 		{
 			Tile(ep::character::ballisticVest,	TCODColor::black,			ep::color::itemBG,		0,		19),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
@@ -286,7 +286,7 @@ namespace ep
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
-		inline static const std::vector<Tile> knife =
+		inline static const std::array<Tile, 4> knife =
 		{
 			Tile(ep::character::knife,			TCODColor::silver,			ep::color::itemBG,		0,		20),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0),
