@@ -166,7 +166,7 @@ namespace ep
 		}
 		inline static Melee knife(const Creature* owner)
 		{
-			return Melee(Tool(owner, "-Test Knife 34 damage-", TCODColor::silver, ep::character::knife), 0, 34);
+			return Melee(Tool(owner, "Knife", TCODColor::silver, ep::character::knife), 0, 34);
 		}
 		inline static Firearm sip45(const Creature* owner)
 		{
@@ -178,7 +178,7 @@ namespace ep
 		}
 		inline static Armor L1R3Armor(const Creature* owner)
 		{
-			return Armor(owner, "test armor", TCODColor::black, 100, 300);
+			return Armor(owner, "L1R3 Armor", TCODColor::black, 100, 300);
 		}
 	};
 

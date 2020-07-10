@@ -628,7 +628,7 @@
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>entity.cpp</FILENAME>
+      <FILENAME>creature.cpp</FILENAME>
       <LINE>229</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
@@ -641,7 +641,7 @@
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>entity.cpp</FILENAME>
+      <FILENAME>creature.cpp</FILENAME>
       <LINE>243</LINE>
       <COLUMN>16</COLUMN>
     </SFA>
@@ -654,7 +654,7 @@
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>entity.cpp</FILENAME>
+      <FILENAME>creature.cpp</FILENAME>
       <LINE>249</LINE>
       <COLUMN>21</COLUMN>
     </SFA>
@@ -667,7 +667,7 @@
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>entity.cpp</FILENAME>
+      <FILENAME>creature.cpp</FILENAME>
       <LINE>260</LINE>
       <COLUMN>18</COLUMN>
     </SFA>
@@ -680,7 +680,7 @@
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>entity.cpp</FILENAME>
+      <FILENAME>creature.cpp</FILENAME>
       <LINE>378</LINE>
       <COLUMN>20</COLUMN>
     </SFA>
@@ -693,7 +693,7 @@
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
-      <FILENAME>entity.cpp</FILENAME>
+      <FILENAME>creature.cpp</FILENAME>
       <LINE>385</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
@@ -702,6 +702,22 @@
     <FUNCTION>Player::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@Player@@AEAAXXZ</DECORATED>
     <FUNCLINE>369</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>input.cpp</FILENAME>
+      <LINE>253</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Bind::isSwitched' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Bind::{ctor}</FUNCTION>
+    <DECORATED>??0Bind@@QEAA@V?$shared_ptr@UButton@@@std@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@@Z</DECORATED>
+    <FUNCLINE>253</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Bind::isSwitched</targetSymbol>
+    </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
@@ -840,27 +856,43 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>panel.cpp</FILENAME>
-      <LINE>224</LINE>
+      <LINE>238</LINE>
       <COLUMN>13</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>SplashWindow::update</FUNCTION>
     <DECORATED>?update@SplashWindow@@UEAAXXZ</DECORATED>
-    <FUNCLINE>212</FUNCLINE>
+    <FUNCLINE>226</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>panel.cpp</FILENAME>
-      <LINE>271</LINE>
+      <LINE>285</LINE>
       <COLUMN>25</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>SplashWindow::render</FUNCTION>
     <DECORATED>?render@SplashWindow@@UEBAXXZ</DECORATED>
-    <FUNCLINE>256</FUNCLINE>
+    <FUNCLINE>270</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>panel.h</FILENAME>
+      <LINE>20</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Command::hasArg' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Command::{ctor}</FUNCTION>
+    <DECORATED>??0Command@@QEAA@XZ</DECORATED>
+    <FUNCLINE>20</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Command::hasArg</targetSymbol>
+    </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
@@ -879,39 +911,39 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>tool.cpp</FILENAME>
-      <LINE>609</LINE>
+      <LINE>463</LINE>
       <COLUMN>46</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>Firearm::update</FUNCTION>
     <DECORATED>?update@Firearm@@UEAAXAEAUPosition4@@AEAH1AEA_N@Z</DECORATED>
-    <FUNCLINE>604</FUNCLINE>
+    <FUNCLINE>458</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>utility.cpp</FILENAME>
-      <LINE>139</LINE>
+      <LINE>271</LINE>
       <COLUMN>32</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>getAngle</FUNCTION>
     <DECORATED>?getAngle@@YANHHHH@Z</DECORATED>
-    <FUNCLINE>137</FUNCLINE>
+    <FUNCLINE>269</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>utility.cpp</FILENAME>
-      <LINE>139</LINE>
+      <LINE>271</LINE>
       <COLUMN>61</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>getAngle</FUNCTION>
     <DECORATED>?getAngle@@YANHHHH@Z</DECORATED>
-    <FUNCLINE>137</FUNCLINE>
+    <FUNCLINE>269</FUNCLINE>
     <PATH></PATH>
   </DEFECT></DEFECTS>

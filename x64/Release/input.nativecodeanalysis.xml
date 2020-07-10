@@ -195,4 +195,38 @@
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>input.cpp</FILENAME>
+      <LINE>253</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Bind::isSwitched' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Bind::{ctor}</FUNCTION>
+    <DECORATED>??0Bind@@QEAA@V?$shared_ptr@UButton@@@std@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@@Z</DECORATED>
+    <FUNCLINE>253</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Bind::isSwitched</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
+      <FILENAME>input.cpp</FILENAME>
+      <LINE>253</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Bind::isDown' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Bind::{ctor}</FUNCTION>
+    <DECORATED>??0Bind@@QEAA@V?$shared_ptr@UButton@@@std@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@@Z</DECORATED>
+    <FUNCLINE>253</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Bind::isDown</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
 </DEFECTS>
