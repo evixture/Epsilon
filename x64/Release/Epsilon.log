@@ -1,32 +1,10 @@
-﻿  aicreature.cpp
-  engine.cpp
-  creature.cpp
-  environment.cpp
-  gui.cpp
-  input.cpp
-  item.cpp
-  main.cpp
-  map.cpp
-  panel.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(754,71): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  settings.cpp
-  audio.cpp
-  tile.cpp
-  tool.cpp
-  utility.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(202,37): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(206,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(228,56): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(229,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(233,86): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(234,72): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  window.cpp
-  Compiling...
+﻿  panel.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(758,71): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  1119 of 3160 functions (35.4%) were compiled, the rest were copied from previous compilation.
-    541 functions were new in current compilation
-    314 functions had inline decision re-evaluated but remain unchanged
+  163 of 3169 functions ( 5.1%) were compiled, the rest were copied from previous compilation.
+    9 functions were new in current compilation
+    91 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Release\Epsilon.exe
 E:\pugixml-1.10\src\pugixml.cpp(1096): warning C26495: Variable 'pugi::xml_attribute_struct::header' is uninitialized. Always initialize a member variable (type.6).

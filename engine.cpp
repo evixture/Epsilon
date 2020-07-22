@@ -1,14 +1,24 @@
 #include "main.hpp"
 
+//std::vector<std::shared_ptr<Bind>> Engine::test()
+//{
+//	return input->bindList;
+//}
+
 Engine::Engine(int screenCharWidth, int screenCharHeight)
-	:gamestate(Gamestate::MAIN), settings(std::make_shared<Settings>()), gui(std::make_shared<Gui>(screenCharWidth, screenCharHeight)), audio(std::make_shared<Audio>()),
-	screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 10"), fullscreen(false), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_OPENGL2), //USE SDL2/ opengl2 TO RENDER, OTHERS WILL LOCK OR LOWER FPS
+	: screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 10"), fullscreen(false), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_OPENGL2), //USE SDL2/ opengl2 TO RENDER, OTHERS WILL LOCK OR LOWER FPS
 	fovRad(60), lightWalls(true), fpsCount(60)
 {
-	TCODSystem::setFps(0);
-	TCODConsole::setCustomFont("data/fonts/Epsilon16x16.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16);
+	gamestate = Gamestate::MAIN;
 
 	input = std::make_shared<Input>();
+	settings = std::make_shared<Settings>();
+	audio = std::make_shared<Audio>();
+	gui = std::make_shared<Gui>(screenCharWidth, screenCharHeight);
+
+
+	TCODSystem::setFps(0);
+	TCODConsole::setCustomFont("data/fonts/Epsilon16x16.png", TCOD_FONT_LAYOUT_ASCII_INROW | TCOD_FONT_TYPE_GRAYSCALE, 16, 16);
 
 	TCODConsole::initRoot(screenCharWidth, screenCharHeight, windowTitle.c_str(), fullscreen, renderer);
 	TCODConsole::root->setDefaultBackground(ep::color::rootBG);

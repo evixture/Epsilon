@@ -255,6 +255,11 @@ Bind::Bind(std::shared_ptr<Button> bind, const std::string name)
 {
 }
 
+std::shared_ptr<Button> Bind::getButton()
+{
+	return bind;
+}
+
 void Bind::update(bool disabled)
 {
 	//bind->update(); binds are already updated in keyboard
@@ -274,6 +279,8 @@ void Bind::update(bool disabled)
 Input::Input()
 	:keyboard(std::make_shared<Keyboard>()), TCODmouse(), mouse(std::make_shared<Mouse>()), bindsDisabled(false)
 {
+	//bindList = std::make_shared<std::vector<std::shared_ptr<Bind>>>();
+
 	bindList.push_back(moveUp			= std::make_shared<Bind>(keyboard->w			, "Move Up"		));
 	bindList.push_back(moveDown			= std::make_shared<Bind>(keyboard->s			, "Move Down"	));
 	bindList.push_back(moveLeft			= std::make_shared<Bind>(keyboard->a			, "Move Left"	));
@@ -292,7 +299,7 @@ Input::Input()
 									   							 									
 	bindList.push_back(deepInteract		= std::make_shared<Bind>(keyboard->leftAlt		, "Deep Interact"));
 	bindList.push_back(worldInteract	= std::make_shared<Bind>(keyboard->space		, "World Interact"));
-									   							 									
+									   						 									
 	bindList.push_back(inventory		= std::make_shared<Bind>(keyboard->i			, "Inventory"	));
 	bindList.push_back(fullscreen		= std::make_shared<Bind>(keyboard->f11			, "Fullscreen"	));
 	bindList.push_back(info				= std::make_shared<Bind>(keyboard->n			, "Info"		));
@@ -308,6 +315,11 @@ Input::Input()
 	bindList.push_back(primaryUse		= std::make_shared<Bind>(mouse->leftMB			, "Primary Use"	));
 	bindList.push_back(alternateUse		= std::make_shared<Bind>(mouse->rightMB			, "Alternate Use"));
 }
+
+//std::vector<std::shared_ptr<Bind>> Input::getBindList()
+//{
+//	return bindList;
+//}
 
 void Input::update()
 {

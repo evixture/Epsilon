@@ -525,15 +525,20 @@ void ActionWindow::render() const
 
 PauseWindow::PauseWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 	: Window(consoleWidth, consoleHeight, "Paused", rx, ry), 
-	baseMenu(std::vector<std::string>{"Return", "Settings", "Exit"}), settingsMenu(std::vector<std::string>{"Input", "Video", "Back"}), 
-	baseMenuActive(true), settingsMenuActive(false)
+	baseMenu(std::vector<std::string>{"Return", "Settings", "Exit"}), settingsMenu(std::vector<std::string>{"Input", "Video", "Back"}), //bindMenu(BindMenu(engine->test())),
+	baseMenuActive(true), settingsMenuActive(false), bindMenuActive(false)
+
 {
+	bindMenu = BindMenu(); //cant access because engine ctor hasnt finished yet?
 }
 
 void PauseWindow::update()
 {
-	if		(baseMenuActive)		baseMenu.update();
+	//bindMenu = BindMenu(INPUT->bindList); //works in update but not ctor
+
+	if (baseMenuActive)				baseMenu.update();
 	else if (settingsMenuActive)	settingsMenu.update();
+	else if (bindMenuActive)		bindMenu.update();
 
 	if (INPUT->worldInteract->isSwitched)
 	{
@@ -557,7 +562,8 @@ void PauseWindow::update()
 		{
 			if (settingsMenu.menuSelection == "Input")
 			{
-				//enter input menu
+				settingsMenuActive = false;
+				bindMenuActive = true;
 			}
 			else if (settingsMenu.menuSelection == "Video")
 			{
@@ -589,8 +595,9 @@ void PauseWindow::render() const
 {
 	clearWindow();
 
-	if		(baseMenuActive)		baseMenu.render(drawPane, 50, 50);
+	if (baseMenuActive)				baseMenu.render(drawPane, 50, 50);
 	else if (settingsMenuActive)	settingsMenu.render(drawPane, 50, 50);
+	else if (bindMenuActive)		bindMenu.render(drawPane, 50, 50);
 
 	pushWindow();
 }

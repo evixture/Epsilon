@@ -1,6 +1,6 @@
 #include "main.hpp"
 
-std::shared_ptr<Engine> engine = std::make_shared<Engine>(120, 64);
+std::shared_ptr<Engine> engine =		std::make_shared<Engine>(120, 64);
 
 int main() //should switch to winmain later if ready for the headache
 {

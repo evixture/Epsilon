@@ -134,14 +134,25 @@ struct Menu
 {
 	std::string menuSelection;
 
+	Menu() = default;
 	Menu(std::vector<std::string> menuList);
 
 	void update();
 	void render(const Pane& pane, const int rx, const int ry) const;
 
-private:
+protected:
 	unsigned int menuIndex;
 	std::vector<std::string> menuList;
+};
+
+struct BindMenu : public Menu
+{
+	std::vector<std::string> keyList;
+
+	BindMenu();
+
+	void update();
+	void render(const Pane& pane, const int rx, const int ry) const;
 };
 
 struct Bar

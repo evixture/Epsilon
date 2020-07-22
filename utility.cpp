@@ -541,3 +541,47 @@ Position2 getRenderPosition(Position2 mapPosition)
 	return Position2(mapPosition.x - WORLD->xOffset, mapPosition.y - WORLD->yOffset);
 }
 
+BindMenu::BindMenu()
+	:Menu(std::vector<std::string>({ "Close" }))
+{
+	for (int i = 0; i < INPUT->bindList.size(); ++i)
+	{
+		menuList.push_back(INPUT->bindList[i]->name);
+		keyList.push_back(INPUT->bindList[i]->getButton()->keyName);
+	}
+}
+
+void BindMenu::update()
+{
+	menuSelection = menuList[menuIndex];
+
+	if (INPUT->moveUp->isSwitched && menuIndex > 0)
+	{
+		menuIndex--;
+		AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
+	}
+
+	if (INPUT->moveDown->isSwitched && (menuIndex < menuList.size() - 1))
+	{
+		++menuIndex;
+		AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
+	}
+}
+
+void BindMenu::render(const Pane& pane, const int xRender, const int yRender) const
+{
+	for (int i = 0; i < menuList.size(); ++i)
+	{
+		if (i == menuIndex)
+		{
+			pane.console->printf(xRender, yRender + i, "|> %s", menuList[i].c_str());
+			pane.console->setCharForeground(xRender + 1, yRender + i, ep::color::selector);
+		}
+		else
+		{
+			pane.console->printf(xRender, yRender + i, "|  %s", menuList[i].c_str());
+		}
+
+		pane.console->printf(xRender + 10, yRender + i, keyList[i].c_str());
+	}
+}

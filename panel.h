@@ -150,9 +150,11 @@ struct PauseWindow : public Window
 private:
 	Menu baseMenu;
 	Menu settingsMenu;
+	Menu bindMenu;
 
 	bool baseMenuActive;
 	bool settingsMenuActive;
+	bool bindMenuActive;
 };
 
 struct InfoWindow : public Window

@@ -4,9 +4,10 @@ struct Engine //engine class that contains everything
 {
 	enum class Gamestate { MAIN, EXIT } gamestate; //the main state tht the game is in
 
-	std::shared_ptr<Settings> settings; //contains all of the settings and mainly non-graphical things
-	std::shared_ptr<Gui> gui; //contains nearly all of the things that need to be rendered to the screen
+	std::shared_ptr<Input> input;
+	std::shared_ptr<Settings> settings;
 	std::shared_ptr<Audio> audio;
+	std::shared_ptr<Gui> gui;
 
 	int screenCharWidth;
 	int screenCharHeight;
@@ -18,7 +19,7 @@ struct Engine //engine class that contains everything
 	const unsigned int fovRad;
 	const bool lightWalls;
 
-	std::shared_ptr<Input> input;
+	//std::vector<std::shared_ptr<Bind>> test();
 
 	Engine(int screenCharWidth, int screenCharHeight); //engine constructor that takes screen width in characters and screen height in characters
 	~Engine();

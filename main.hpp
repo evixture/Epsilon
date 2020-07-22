@@ -23,6 +23,7 @@
 #include <soloud_audiosource.h>
 
 struct Pane;
+struct Bind;
 struct Creature;
 struct Player;
 

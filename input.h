@@ -75,10 +75,12 @@ struct Bind
 
 	Bind(std::shared_ptr<Button> bind, const std::string name);
 
+	std::shared_ptr<Button> getButton();
+
 	void update(bool disabled);
 
-private:
 	std::shared_ptr<Button> bind;
+//private:
 };
 
 struct Mouse
@@ -255,10 +257,11 @@ struct Input
 
 	Input();
 
+	std::vector<std::shared_ptr<Bind>> bindList;
+	//std::vector<std::shared_ptr<Bind>> getBindList();
+
 	void update();
 
 private:
-	std::vector<std::shared_ptr<Bind>> bindList;
-
 	TCOD_event_t keyEvent; //handles tcod events
 };
