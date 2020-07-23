@@ -571,6 +571,14 @@ void PauseWindow::update()
 				baseMenuActive = true;
 			}
 		}
+		else if (bindMenuActive)
+		{
+			if (bindMenu.menuSelection == "Close" && !bindMenu.rebinding)
+			{
+				bindMenuActive = false;
+				settingsMenuActive = true;
+			}
+		}
 	}
 
 	if (INPUT->menu->isSwitched && GUI->activeWindow == Gui::ActiveWindow::PAUSE)

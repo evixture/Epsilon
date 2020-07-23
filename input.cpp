@@ -5,6 +5,12 @@ Button::Button(const std::string name)
 {
 }
 
+void Button::clear()
+{
+	isDown = false;
+	isSwitched = false;
+}
+
 //----------------------------------------------------------------------------------------------------
 
 KeyboardButton::KeyboardButton(sf::Keyboard::Key key, const std::string name)
@@ -258,6 +264,19 @@ Bind::Bind(std::shared_ptr<Button> bind, const std::string name)
 std::shared_ptr<Button> Bind::getButton()
 {
 	return bind;
+}
+
+void Bind::clear()
+{
+	bind->clear();
+
+	isDown = false;
+	isSwitched = false;
+}
+
+void Bind::rebind(std::shared_ptr<KeyboardButton> kbButton)
+{
+	bind = kbButton;
 }
 
 void Bind::update(bool disabled)

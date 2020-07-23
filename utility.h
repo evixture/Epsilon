@@ -149,12 +149,15 @@ struct BindMenu : public Menu
 {
 	std::vector<std::string> keyList;
 
-	bool gotInput;
+	bool rebinding;
 
 	BindMenu();
 
 	void update();
 	void render(const Pane& pane, const int rx, const int ry) const;
+
+private:
+	bool gotInput;
 };
 
 struct Bar

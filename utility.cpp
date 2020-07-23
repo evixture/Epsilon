@@ -542,7 +542,7 @@ Position2 getRenderPosition(Position2 mapPosition)
 }
 
 BindMenu::BindMenu()
-	:Menu(std::vector<std::string>({ "Close" })), gotInput(false)
+	:Menu(std::vector<std::string>({ "Close" })), gotInput(false), rebinding(false)
 {
 	//for (int i = 0; i < INPUT->bindList.size(); ++i)
 	//{
@@ -565,17 +565,47 @@ void BindMenu::update()
 
 		gotInput = true;
 	}
-
-	if (INPUT->moveUp->isSwitched && menuIndex > 0)
+	else
 	{
-		menuIndex--;
-		AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
-	}
+		menuSelection = menuList[menuIndex];
 
-	if (INPUT->moveDown->isSwitched && (menuIndex < menuList.size() - 1))
-	{
-		++menuIndex;
-		AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
+		if (!rebinding)
+		{
+			if (INPUT->keyboard->space->isSwitched && menuSelection != "Close")
+			{
+				INPUT->keyboard->space->clear();
+
+				rebinding = true;
+			}
+
+			if (INPUT->moveUp->isSwitched && menuIndex > 0)
+			{
+				menuIndex--;
+				AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
+			}
+
+			if (INPUT->moveDown->isSwitched && (menuIndex < menuList.size() - 1))
+			{
+				++menuIndex;
+				AUDIO->playSound(Sound(("tick"), 0.0f, 5.0f));
+			}
+		}
+		else
+		{
+			for (auto& bind : INPUT->bindList)
+			{
+				if (bind->name == menuSelection)
+				{
+					if (INPUT->keyboard->getButtonsSwitched().size() > 0)
+					{
+						bind->rebind(INPUT->keyboard->getButtonsSwitched()[0]);
+
+						rebinding = false;
+					}
+				}
+			}
+		}
+
 	}
 }
 

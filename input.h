@@ -38,6 +38,8 @@ struct Button
 	bool isSwitched;
 	const std::string keyName;
 
+	void clear();
+
 	virtual void update() = 0;
 	
 protected:
@@ -77,9 +79,12 @@ struct Bind
 
 	std::shared_ptr<Button> getButton();
 
+	void clear();
+	void rebind(std::shared_ptr<KeyboardButton> kbButton);
+
 	void update(bool disabled);
 
-	std::shared_ptr<Button> bind;
+	std::shared_ptr<Button> bind; //move later
 //private:
 };
 
