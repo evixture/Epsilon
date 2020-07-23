@@ -3,15 +3,18 @@
 struct Gui
 {
 	enum class ActiveWindow { NONE, STARTUPSPLASH, INVENTORYFULL, PAUSE, COMMAND} activeWindow;
-	enum class ActiveLogWindow { LOG, INFO } activeLogWindow;
+	enum class ActiveLowWindow { LOG, INFO } activeLowWindow;
 
 	//Part-screen Windows
+		//Top Windows
 	std::shared_ptr<PlayerWindow> playerWindow;
 	std::shared_ptr<StatusWindow> statusWindow;
+		//Mid Windows
 	std::shared_ptr<InventoryWindow> inventoryWindow;
-	std::shared_ptr<LogWindow> logWindow;
 	std::shared_ptr<ProximityWindow> proximityWindow;
 	std::shared_ptr<ActionWindow> actionWindow;
+		//Low Windows
+	std::shared_ptr<LogWindow> logWindow;
 	std::shared_ptr<InfoWindow> infoWindow;
 
 	//Half Screen Windows

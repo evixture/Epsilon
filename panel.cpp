@@ -525,11 +525,10 @@ void ActionWindow::render() const
 
 PauseWindow::PauseWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 	: Window(consoleWidth, consoleHeight, "Paused", rx, ry), 
-	baseMenu(std::vector<std::string>{"Return", "Settings", "Exit"}), settingsMenu(std::vector<std::string>{"Input", "Video", "Back"}), //bindMenu(BindMenu(engine->test())),
+	baseMenu(std::vector<std::string>{"Return", "Settings", "Exit to Main"}), settingsMenu(std::vector<std::string>{"Input", "Video", "Back"}), bindMenu(BindMenu()),
 	baseMenuActive(true), settingsMenuActive(false), bindMenuActive(false)
 
 {
-	bindMenu = BindMenu(); //cant access because engine ctor hasnt finished yet?
 }
 
 void PauseWindow::update()
@@ -547,9 +546,9 @@ void PauseWindow::update()
 				baseMenuActive = false;
 				settingsMenuActive = true;
 			}
-			else if (baseMenu.menuSelection == "Exit")
+			else if (baseMenu.menuSelection == "Exit to Main")
 			{
-				ENGINE->gamestate = Engine::Gamestate::EXIT;
+				GUI->activeWindow = Gui::ActiveWindow::STARTUPSPLASH;
 			}
 		}
 		else if (settingsMenuActive)
@@ -571,7 +570,7 @@ void PauseWindow::update()
 		}
 		else if (bindMenuActive)
 		{
-			if (bindMenu.menuSelection == "Close" && !bindMenu.rebinding)
+			if (bindMenu.menuSelection == "Back" && !bindMenu.rebinding)
 			{
 				bindMenuActive = false;
 				settingsMenuActive = true;

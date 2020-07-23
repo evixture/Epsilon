@@ -542,7 +542,7 @@ Position2 getRenderPosition(Position2 mapPosition)
 }
 
 BindMenu::BindMenu()
-	:Menu(std::vector<std::string>({ "Close" })), gotInput(false), rebinding(false)
+	:Menu(std::vector<std::string>({ "Back" })), gotInput(false), rebinding(false)
 {
 }
 
@@ -565,7 +565,7 @@ void BindMenu::update()
 
 		if (!rebinding)
 		{
-			if (INPUT->keyboard->space->isSwitched && menuSelection != "Close")
+			if (INPUT->keyboard->space->isSwitched && menuSelection != "Back")
 			{
 				INPUT->keyboard->space->clear();
 				keyList[menuIndex - 1] = " ";
@@ -608,7 +608,7 @@ void BindMenu::render(const Pane& pane, const int xRender, const int yRender) co
 	{
 		if (i < menuList.size() - 1) //dont render key bind for "close" and align binds right
 		{
-				pane.console->printf(xRender + 20, yRender + i - 15, "\"%s\"", keyList[i].c_str());		
+			pane.console->printf(xRender + 20, yRender + i - 15, "\"%s\"", keyList[i].c_str());		
 		}
 
 		if (i == menuIndex)

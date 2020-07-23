@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 Gui::Gui(int windowX, int windowY)
-	: activeWindow(Gui::ActiveWindow::STARTUPSPLASH), activeLogWindow(Gui::ActiveLogWindow::LOG)
+	: activeWindow(Gui::ActiveWindow::STARTUPSPLASH), activeLowWindow(Gui::ActiveLowWindow::LOG)
 {
 	windowList.push_back(worldWindow		= std::make_shared<MapWindow>		(60, 61, 1, 2));
 	windowList.push_back(playerWindow		= std::make_shared<PlayerWindow>	(10, 10, 63, 2));
@@ -20,28 +20,32 @@ Gui::Gui(int windowX, int windowY)
 
 void Gui::update()
 {
-	if (INPUT->inventory->isSwitched) //move to input?
+	if (INPUT->inventory->isSwitched) //inventory
 	{
 		if (activeWindow == Gui::ActiveWindow::INVENTORYFULL)															activeWindow = Gui::ActiveWindow::NONE;
 		else if (activeWindow != Gui::ActiveWindow::INVENTORYFULL && activeWindow != Gui::ActiveWindow::STARTUPSPLASH)	activeWindow = Gui::ActiveWindow::INVENTORYFULL;
 	}
 
-	if (INPUT->menu->isSwitched)
+	if (INPUT->menu->isSwitched) //menu
 	{
-		if (GUI->activeWindow == Gui::ActiveWindow::NONE)
+		if (GUI->activeWindow == Gui::ActiveWindow::NONE || GUI->activeWindow == Gui::ActiveWindow::COMMAND || GUI->activeWindow == Gui::ActiveWindow::INVENTORYFULL)
 		{
 			GUI->activeWindow = Gui::ActiveWindow::PAUSE;
 			INPUT->menu->isSwitched = false;
 		}
+		else if (GUI->activeWindow == Gui::ActiveWindow::COMMAND)
+		{
+			GUI->activeWindow = Gui::ActiveWindow::NONE;
+		}
 	}
 
-	if (INPUT->info->isSwitched)
+	if (INPUT->info->isSwitched) //info
 	{
-		if (GUI->activeLogWindow == Gui::ActiveLogWindow::LOG) GUI->activeLogWindow = Gui::ActiveLogWindow::INFO;
-		else if (GUI->activeLogWindow == Gui::ActiveLogWindow::INFO) GUI->activeLogWindow = Gui::ActiveLogWindow::LOG;
+		if (GUI->activeLowWindow == Gui::ActiveLowWindow::LOG) GUI->activeLowWindow = Gui::ActiveLowWindow::INFO;
+		else if (GUI->activeLowWindow == Gui::ActiveLowWindow::INFO) GUI->activeLowWindow = Gui::ActiveLowWindow::LOG;
 	}
 
-	if (INPUT->console->isSwitched)
+	if (INPUT->console->isSwitched) //console
 	{
 		if (GUI->activeWindow != Gui::ActiveWindow::COMMAND)
 		{
@@ -65,8 +69,8 @@ void Gui::update()
 		proximityWindow->update();
 		actionWindow->update();
 		
-		if		(activeLogWindow == Gui::ActiveLogWindow::LOG)	logWindow->update();
-		else if (activeLogWindow == Gui::ActiveLogWindow::INFO) infoWindow->update();
+		if		(activeLowWindow == Gui::ActiveLowWindow::LOG)	logWindow->update();
+		else if (activeLowWindow == Gui::ActiveLowWindow::INFO) infoWindow->update();
 		break;
 
 	case Gui::ActiveWindow::STARTUPSPLASH:
@@ -114,8 +118,8 @@ void Gui::render() const
 		proximityWindow->render();
 		actionWindow->render();
 
-		if (activeLogWindow == Gui::ActiveLogWindow::LOG)		logWindow->render();
-		else if (activeLogWindow == Gui::ActiveLogWindow::INFO) infoWindow->render();
+		if (activeLowWindow == Gui::ActiveLowWindow::LOG)		logWindow->render();
+		else if (activeLowWindow == Gui::ActiveLowWindow::INFO) infoWindow->render();
 		break;
 
 	case Gui::ActiveWindow::STARTUPSPLASH:

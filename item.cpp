@@ -178,6 +178,34 @@ bool Item::use(bool hold, bool swtch)
 	return false;
 }
 
+bool Item::pickUp(Creature* owner)
+{
+	if (onMap)
+	{
+		if (owner->containerIndex != -1)
+		{
+			if (owner->inventory[owner->containerIndex]->addItem(std::make_shared<Item>(*this)))
+			{
+				//WORLD->debugmap->mapItemList.erase(WORLD->debugmap->mapItemList.begin() + i); //how to delete on map vec?
+
+				for (int i = 0; i < WORLD->debugmap->mapItemList.size(); i++)
+				{
+					if (this == WORLD->debugmap->mapItemList[i].get())
+					{
+						WORLD->debugmap->mapItemList.erase(WORLD->debugmap->mapItemList.begin() + i);
+					}
+				}
+
+				this->owner = owner;
+				onMap = false;
+				
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 void Item::updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHeld)
 {
 	inFov = WORLD->isInPlayerFov(mapPosition); //need in tool?
@@ -276,6 +304,44 @@ Container::Container(int itemCapacity, std::shared_ptr<Item> item)
 Container::Container(int itemCapacity, std::shared_ptr<Item> item, std::vector<std::shared_ptr<Item>> itemList)
 	: itemCapacity(itemCapacity), item(item), currentSize(0), itemList(itemList)
 {
+}
+
+bool Container::pickUp(Creature* owner)
+{
+	/*
+	//for containers
+	for (int i = 0; i < WORLD->debugmap->mapContainerList.size(); ++i)
+	{
+		if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->item->mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->item->mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->item->mapPosition.z == mapPosition.z)
+		{
+			GUI->logWindow->pushMessage(Message("Picked up " + WORLD->debugmap->mapContainerList[i]->item->tool->name, Message::MessageLevel::MEDIUM));
+			AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
+
+			inventory.push_back(WORLD->debugmap->mapContainerList[i]);
+			WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
+			inventory[inventory.size() - 1]->item->owner = this;
+
+			return true;
+		}
+	}
+	*/
+
+	if (item->onMap)
+	{
+		owner->inventory.push_back(std::make_shared<Container>(*this));
+		//WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
+		for (int i = 0; i < WORLD->debugmap->mapContainerList.size(); i++)
+		{
+			if (this == WORLD->debugmap->mapContainerList[i].get()) WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
+		}
+
+		this->item->owner = owner;
+		item->onMap = false;
+
+		return true;
+	}
+
+	return false;
 }
 
 bool Container::addItem(std::shared_ptr<Item> item)

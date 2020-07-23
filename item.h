@@ -52,6 +52,8 @@ struct Item
 	enum class ItemType {HAND, NORMAL, FIREARM, MAGAZINE, ARMOR, MELEE} type;
 
 	unsigned char size;
+	//float wweight;
+
 	double distToEnt;
 	bool inFov;
 	bool onMap;
@@ -84,9 +86,10 @@ struct Item
 	virtual bool useMelee();
 	virtual bool equip(Armor& armor);
 	virtual bool use(bool hold, bool swtch);
+	//pick up(creature)
+	virtual bool pickUp(Creature* owner);
 	//throw() prob not
 	//drop()
-	//pick up(creature)
 
 	void updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHeld); //mappos can be removed because of owner
 	//void renderTool(const Pane& pane) const;
@@ -123,6 +126,8 @@ struct Container
 
 	Container(int itemCapacity, std::shared_ptr<Item> item);
 	Container(int itemCapacity, std::shared_ptr<Item> item, std::vector<std::shared_ptr<Item>> itemList);
+
+	bool pickUp(Creature* owner);
 
 	bool addItem(std::shared_ptr<Item> item);
 };

@@ -271,41 +271,69 @@ void Player::moveSelectorDown()
 bool Player::pickUpItem()
 {
 	//for items
-	for (int i = 0; i < WORLD->debugmap->mapItemList.size(); ++i)
+	//for (int i = 0; i < WORLD->debugmap->mapItemList.size(); ++i)
+	//{
+	//	if (WORLD->debugmap->mapItemList[i] != nullptr && WORLD->debugmap->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->debugmap->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->debugmap->mapItemList[i]->mapPosition.z == mapPosition.z)
+	//	{
+	//		if (containerIndex != -1)
+	//		{
+	//			if (inventory[containerIndex]->addItem(WORLD->debugmap->mapItemList[i]))
+	//			{
+	//				GUI->logWindow->pushMessage(Message("Picked up " + WORLD->debugmap->mapItemList[i]->tool->name, Message::MessageLevel::MEDIUM));
+	//				AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
+	//
+	//				WORLD->debugmap->mapItemList.erase(WORLD->debugmap->mapItemList.begin() + i);
+	//				inventory[containerIndex]->itemList[inventory[containerIndex]->itemList.size() - 1]->owner = this;
+	//
+	//				return true;
+	//			}
+	//		}
+	//	}
+	//}
+
+	////for containers
+	//for (int i = 0; i < WORLD->debugmap->mapContainerList.size(); ++i)
+	//{
+	//	if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->item->mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->item->mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->item->mapPosition.z == mapPosition.z)
+	//	{
+	//		GUI->logWindow->pushMessage(Message("Picked up " + WORLD->debugmap->mapContainerList[i]->item->tool->name, Message::MessageLevel::MEDIUM));
+	//		AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
+	//
+	//		inventory.push_back(WORLD->debugmap->mapContainerList[i]);
+	//		WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
+	//		inventory[inventory.size() - 1]->item->owner = this;
+	//
+	//		return true;
+	//	}
+	//}
+
+	for (auto& item : WORLD->debugmap->mapItemList)
 	{
-		if (WORLD->debugmap->mapItemList[i] != nullptr && WORLD->debugmap->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->debugmap->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->debugmap->mapItemList[i]->mapPosition.z == mapPosition.z)
+		if (item->onMap && item->mapPosition.x == mapPosition.x && item->mapPosition.y == mapPosition.y && item->mapPosition.z == mapPosition.z)
 		{
-			if (containerIndex != -1)
+			if (item->pickUp(this)) //got picked up
 			{
-				if (inventory[containerIndex]->addItem(WORLD->debugmap->mapItemList[i]))
-				{
-					GUI->logWindow->pushMessage(Message("Picked up " + WORLD->debugmap->mapItemList[i]->tool->name, Message::MessageLevel::MEDIUM));
-					AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
+				GUI->logWindow->pushMessage(Message("Picked up " + item->tool->name, Message::MessageLevel::MEDIUM));
+				AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
 
-					WORLD->debugmap->mapItemList.erase(WORLD->debugmap->mapItemList.begin() + i);
-					inventory[containerIndex]->itemList[inventory[containerIndex]->itemList.size() - 1]->owner = this;
-
-					return true;
-				}
+				return true;
 			}
 		}
 	}
 
-	//for containers
-	for (int i = 0; i < WORLD->debugmap->mapContainerList.size(); ++i)
+	for (auto& container : WORLD->debugmap->mapContainerList)
 	{
-		if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->item->mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->item->mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->item->mapPosition.z == mapPosition.z)
+		if (container->item->onMap && container->item->mapPosition.x == mapPosition.x && container->item->mapPosition.y == mapPosition.y && container->item->mapPosition.z == mapPosition.z)
 		{
-			GUI->logWindow->pushMessage(Message("Picked up " + WORLD->debugmap->mapContainerList[i]->item->tool->name, Message::MessageLevel::MEDIUM));
-			AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
+			container->pickUp(this);
 
-			inventory.push_back(WORLD->debugmap->mapContainerList[i]);
-			WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
-			inventory[inventory.size() - 1]->item->owner = this;
+			GUI->logWindow->pushMessage(Message("Picked up " + container->item->tool->name, Message::MessageLevel::MEDIUM));
+			AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
 
 			return true;
 		}
 	}
+
 	return false;
 }
 
@@ -411,7 +439,8 @@ bool Player::reload()
 				{
 					if (item->getMagazineData().second.availableAmmo != 0) // if the magazine is not empty
 					{
-						return selectedItem->tool->reload(item->getMagazineData().second);
+						//return selectedItem->tool->reload(item->getMagazineData().second);
+						return selectedItem->reload(item->getMagazineData().second);
 					}
 				}
 			}
