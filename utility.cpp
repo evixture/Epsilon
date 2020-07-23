@@ -592,14 +592,14 @@ void BindMenu::update()
 		}
 		else
 		{
-			for (auto& bind : INPUT->bindList)
+			for (int i = 0; i < INPUT->bindList.size(); ++i)
 			{
-				if (bind->name == menuSelection)
+				if (INPUT->bindList[i]->name == menuSelection)
 				{
 					if (INPUT->keyboard->getButtonsSwitched().size() > 0)
 					{
-						bind->rebind(INPUT->keyboard->getButtonsSwitched()[0]);
-
+						INPUT->bindList[i]->rebind(INPUT->keyboard->getButtonsSwitched()[0]);
+						keyList[i] = INPUT->keyboard->getButtonsSwitched()[0]->keyName;
 						rebinding = false;
 					}
 				}
