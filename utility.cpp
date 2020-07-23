@@ -585,17 +585,17 @@ void BindMenu::render(const Pane& pane, const int xRender, const int yRender) co
 	{
 		if (i == menuIndex)
 		{
-			pane.console->printf(xRender, yRender + i, "|> %s", menuList[i].c_str());
-			pane.console->setCharForeground(xRender + 1, yRender + i, ep::color::selector);
+			pane.console->printf(xRender, yRender + i - 16, "|> %s", menuList[i].c_str());
+			pane.console->setCharForeground(xRender + 1, yRender + i - 16, ep::color::selector);
 		}
 		else
 		{
-			pane.console->printf(xRender, yRender + i, "|  %s", menuList[i].c_str());
+			pane.console->printf(xRender, yRender + i - 16, "|  %s", menuList[i].c_str());
 		}
 
-		if (i < menuList.size() - 1) //dont render key bind for "close"
+		if (i < menuList.size() - 1) //dont render key bind for "close" and align binds right
 		{
-			pane.console->printf(xRender + 10, yRender + i, keyList[i].c_str());
+			pane.console->printf(xRender + 20, yRender + i - 15, keyList[i].c_str());
 		}
 	}
 }
