@@ -190,7 +190,7 @@ Keyboard::Keyboard()
 	keyboard.push_back(kp3				= std::make_shared<KeyboardButton>(sf::Keyboard::Numpad3	, "k3"));
 																		   							   			
 	keyboard.push_back(leftControl		= std::make_shared<KeyboardButton>(sf::Keyboard::LControl	, "LControl"));
-	keyboard.push_back(leftAlt			= std::make_shared<KeyboardButton>(sf::Keyboard::LAlt		, "LAlt	"));
+	keyboard.push_back(leftAlt			= std::make_shared<KeyboardButton>(sf::Keyboard::LAlt		, "LAlt"));
 	keyboard.push_back(space			= std::make_shared<KeyboardButton>(sf::Keyboard::Space		, "Space"));
 	keyboard.push_back(rightAlt			= std::make_shared<KeyboardButton>(sf::Keyboard::RAlt		, "RAlt"));
 	keyboard.push_back(rightControl		= std::make_shared<KeyboardButton>(sf::Keyboard::LControl	, "LControl"));

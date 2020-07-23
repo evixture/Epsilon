@@ -544,11 +544,6 @@ Position2 getRenderPosition(Position2 mapPosition)
 BindMenu::BindMenu()
 	:Menu(std::vector<std::string>({ "Close" })), gotInput(false), rebinding(false)
 {
-	//for (int i = 0; i < INPUT->bindList.size(); ++i)
-	//{
-	//	menuList.push_back(INPUT->bindList[i]->name);
-	//	keyList.push_back(INPUT->bindList[i]->getButton()->keyName);
-	//}
 }
 
 void BindMenu::update()
@@ -562,7 +557,6 @@ void BindMenu::update()
 		}
 
 		menuSelection = menuList[menuIndex];
-
 		gotInput = true;
 	}
 	else
@@ -574,7 +568,7 @@ void BindMenu::update()
 			if (INPUT->keyboard->space->isSwitched && menuSelection != "Close")
 			{
 				INPUT->keyboard->space->clear();
-
+				keyList[menuIndex - 1] = " ";
 				rebinding = true;
 			}
 
@@ -605,7 +599,6 @@ void BindMenu::update()
 				}
 			}
 		}
-
 	}
 }
 
@@ -613,19 +606,19 @@ void BindMenu::render(const Pane& pane, const int xRender, const int yRender) co
 {
 	for (int i = 0; i < menuList.size(); ++i)
 	{
+		if (i < menuList.size() - 1) //dont render key bind for "close" and align binds right
+		{
+				pane.console->printf(xRender + 20, yRender + i - 15, "\"%s\"", keyList[i].c_str());		
+		}
+
 		if (i == menuIndex)
 		{
 			pane.console->printf(xRender, yRender + i - 16, "|> %s", menuList[i].c_str());
-			pane.console->setCharForeground(xRender + 1, yRender + i - 16, ep::color::selector);
+			for (int j = 0; j < 30; j++) pane.console->setCharForeground(xRender + j, yRender + i - 16, ep::color::selector); //highlight whole row
 		}
 		else
 		{
 			pane.console->printf(xRender, yRender + i - 16, "|  %s", menuList[i].c_str());
-		}
-
-		if (i < menuList.size() - 1) //dont render key bind for "close" and align binds right
-		{
-			pane.console->printf(xRender + 20, yRender + i - 15, keyList[i].c_str());
 		}
 	}
 }

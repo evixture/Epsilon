@@ -534,8 +534,6 @@ PauseWindow::PauseWindow(int consoleWidth, int consoleHeight, int rx, int ry)
 
 void PauseWindow::update()
 {
-	//bindMenu = BindMenu(INPUT->bindList); //works in update but not ctor
-
 	if (INPUT->worldInteract->isSwitched)
 	{
 		if (baseMenuActive)
@@ -591,6 +589,14 @@ void PauseWindow::update()
 		{
 			settingsMenuActive = false;
 			baseMenuActive = true;
+		}
+		else if (bindMenuActive)
+		{
+			if (!bindMenu.rebinding)
+			{
+				bindMenuActive = false;
+				settingsMenuActive = true;
+			}
 		}
 	}
 
