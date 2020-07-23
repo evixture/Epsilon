@@ -536,10 +536,6 @@ void PauseWindow::update()
 {
 	//bindMenu = BindMenu(INPUT->bindList); //works in update but not ctor
 
-	if (baseMenuActive)				baseMenu.update();
-	else if (settingsMenuActive)	settingsMenu.update();
-	else if (bindMenuActive)		bindMenu.update();
-
 	if (INPUT->worldInteract->isSwitched)
 	{
 		if (baseMenuActive)
@@ -589,6 +585,10 @@ void PauseWindow::update()
 			baseMenuActive = true;
 		}
 	}
+
+	if (baseMenuActive)				baseMenu.update();
+	else if (settingsMenuActive)	settingsMenu.update();
+	else if (bindMenuActive)		bindMenu.update();
 }
 
 void PauseWindow::render() const

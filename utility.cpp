@@ -542,18 +542,29 @@ Position2 getRenderPosition(Position2 mapPosition)
 }
 
 BindMenu::BindMenu()
-	:Menu(std::vector<std::string>({ "Close" }))
+	:Menu(std::vector<std::string>({ "Close" })), gotInput(false)
 {
-	for (int i = 0; i < INPUT->bindList.size(); ++i)
-	{
-		menuList.push_back(INPUT->bindList[i]->name);
-		keyList.push_back(INPUT->bindList[i]->getButton()->keyName);
-	}
+	//for (int i = 0; i < INPUT->bindList.size(); ++i)
+	//{
+	//	menuList.push_back(INPUT->bindList[i]->name);
+	//	keyList.push_back(INPUT->bindList[i]->getButton()->keyName);
+	//}
 }
 
 void BindMenu::update()
 {
-	menuSelection = menuList[menuIndex];
+	if (!gotInput)
+	{
+		for (int i = 0; i < INPUT->bindList.size(); ++i)
+		{
+			menuList.push_back(INPUT->bindList[i]->name);
+			keyList.push_back(INPUT->bindList[i]->getButton()->keyName);
+		}
+
+		menuSelection = menuList[menuIndex];
+
+		gotInput = true;
+	}
 
 	if (INPUT->moveUp->isSwitched && menuIndex > 0)
 	{
@@ -582,6 +593,9 @@ void BindMenu::render(const Pane& pane, const int xRender, const int yRender) co
 			pane.console->printf(xRender, yRender + i, "|  %s", menuList[i].c_str());
 		}
 
-		pane.console->printf(xRender + 10, yRender + i, keyList[i].c_str());
+		if (i < menuList.size() - 1) //dont render key bind for "close"
+		{
+			pane.console->printf(xRender + 10, yRender + i, keyList[i].c_str());
+		}
 	}
 }

@@ -137,8 +137,8 @@ struct Menu
 	Menu() = default;
 	Menu(std::vector<std::string> menuList);
 
-	void update();
-	void render(const Pane& pane, const int rx, const int ry) const;
+	virtual void update();
+	virtual void render(const Pane& pane, const int rx, const int ry) const;
 
 protected:
 	unsigned int menuIndex;
@@ -148,6 +148,8 @@ protected:
 struct BindMenu : public Menu
 {
 	std::vector<std::string> keyList;
+
+	bool gotInput;
 
 	BindMenu();
 

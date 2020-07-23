@@ -150,7 +150,7 @@ struct PauseWindow : public Window
 private:
 	Menu baseMenu;
 	Menu settingsMenu;
-	Menu bindMenu;
+	BindMenu bindMenu; //wont call right update if made as normal menu
 
 	bool baseMenuActive;
 	bool settingsMenuActive;

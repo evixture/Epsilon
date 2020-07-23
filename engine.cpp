@@ -14,7 +14,7 @@ Engine::Engine(int screenCharWidth, int screenCharHeight)
 	input = std::make_shared<Input>();
 	settings = std::make_shared<Settings>();
 	audio = std::make_shared<Audio>();
-	gui = std::make_shared<Gui>(screenCharWidth, screenCharHeight);
+	gui = std::make_shared<Gui>(screenCharWidth, screenCharHeight); //input is undefined when entering
 
 
 	TCODSystem::setFps(0);
