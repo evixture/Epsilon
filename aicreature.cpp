@@ -129,21 +129,29 @@ void AICreature::dropItem() //prob here
 	{
 		if (itemIndex >= 0)
 		{
-			selectedItem->owner = nullptr;
-			WORLD->debugmap->mapItemList.push_back(selectedItem);
-			inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
+			//selectedItem->owner = nullptr;
+			//WORLD->debugmap->mapItemList.push_back(selectedItem);
+			//inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
+			//
+			//AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
 
 			AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
+
+			selectedItem->drop(this);
 		}
 		else if (itemIndex <= -1)
 		{
 			if (selectedItem->type != Item::ItemType::HAND)
 			{
-				selectedItem->owner = nullptr;
-				WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
-				inventory.erase(inventory.begin() + containerIndex);
+				//selectedItem->owner = nullptr;
+				//WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
+				//inventory.erase(inventory.begin() + containerIndex);
+				//
+				//AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
 
 				AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
+
+				inventory[containerIndex]->drop(this);
 			}
 		}
 	}

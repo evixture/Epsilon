@@ -345,10 +345,8 @@ void Player::dropItem()
 		{
 			GUI->logWindow->pushMessage(Message("Dropped " + inventory[containerIndex]->itemList[itemIndex]->tool->name, Message::MessageLevel::MEDIUM));
 			AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
-
-			selectedItem->owner = nullptr;
-			WORLD->debugmap->mapItemList.push_back(selectedItem);
-			inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
+			
+			selectedItem->drop(this);
 		}
 		else if (itemIndex <= -1)
 		{
@@ -356,10 +354,8 @@ void Player::dropItem()
 			{
 				GUI->logWindow->pushMessage(Message("Dropped " + inventory[containerIndex]->item->tool->name, Message::MessageLevel::LOW));
 				AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
-
-				selectedItem->owner = nullptr;
-				WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
-				inventory.erase(inventory.begin() + containerIndex);
+				
+				inventory[containerIndex]->drop(this);
 			}
 		}
 	}

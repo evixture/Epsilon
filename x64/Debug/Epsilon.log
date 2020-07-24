@@ -1,4 +1,6 @@
-﻿  item.cpp
+﻿  aicreature.cpp
+  creature.cpp
+  Generating Code...
   
   Searching libraries
       Searching E:\SFML\SFML-2.5.1\lib\sfml-window.lib:

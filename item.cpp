@@ -206,6 +206,27 @@ bool Item::pickUp(Creature* owner)
 	return false;
 }
 
+void Item::drop(Creature* owner)
+{
+	if (!onMap)
+	{
+		/*
+			GUI->logWindow->pushMessage(Message("Dropped " + inventory[containerIndex]->itemList[itemIndex]->tool->name, Message::MessageLevel::MEDIUM));
+			AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
+
+			selectedItem->owner = nullptr;
+			WORLD->debugmap->mapItemList.push_back(selectedItem);
+			inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
+		*/
+
+		WORLD->debugmap->mapItemList.push_back(std::make_shared<Item>(*this));
+		owner->inventory[owner->containerIndex]->itemList.erase(owner->inventory[owner->containerIndex]->itemList.begin() + owner->itemIndex);
+
+		onMap = true;
+		this->owner = nullptr;
+	}
+}
+
 void Item::updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHeld)
 {
 	inFov = WORLD->isInPlayerFov(mapPosition); //need in tool?
@@ -342,6 +363,26 @@ bool Container::pickUp(Creature* owner)
 	}
 
 	return false;
+}
+
+void Container::drop(Creature* owner)
+{
+	/*
+				GUI->logWindow->pushMessage(Message("Dropped " + inventory[containerIndex]->item->tool->name, Message::MessageLevel::LOW));
+				AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
+
+				selectedItem->owner = nullptr;
+				WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
+				inventory.erase(inventory.begin() + containerIndex);
+	*/
+	if (!item->onMap)
+	{
+		WORLD->debugmap->mapContainerList.push_back(std::make_shared<Container>(*this));
+		owner->inventory.erase(owner->inventory.begin() + owner->containerIndex);
+
+		item->onMap = true;
+		this->item->owner = nullptr;
+	}
 }
 
 bool Container::addItem(std::shared_ptr<Item> item)
