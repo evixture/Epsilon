@@ -33,10 +33,6 @@ void Gui::update()
 			GUI->activeWindow = Gui::ActiveWindow::PAUSE;
 			INPUT->menu->isSwitched = false;
 		}
-		else if (GUI->activeWindow == Gui::ActiveWindow::COMMAND)
-		{
-			GUI->activeWindow = Gui::ActiveWindow::NONE;
-		}
 	}
 
 	if (INPUT->info->isSwitched) //info

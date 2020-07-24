@@ -346,7 +346,7 @@ void Input::update()
 
 	for (auto& bind : bindList)
 	{
-		if (bind != console || bind != menu)
+		if (bind != console)
 		{
 			bind->update(bindsDisabled);
 		}

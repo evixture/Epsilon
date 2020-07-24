@@ -489,6 +489,8 @@ void Player::update()
 
 	if (health != 0) //if player is alive
 	{
+		color = TCODColor(stance.x, stance.y, stance.z);
+
 		if (INPUT->highlight->isDown) backgroundColor = TCODColor::yellow;
 		else backgroundColor = TCODColor::pink;
 

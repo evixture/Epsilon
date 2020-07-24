@@ -63,7 +63,8 @@ void Engine::render() const
 	gui->render();
 	
 	if (GUI->activeWindow != Gui::ActiveWindow::STARTUPSPLASH) printLogo();
-	printDebugStats();
+
+	if (SETTINGS->showDebug) printDebugStats();
 
 	TCODConsole::flush();	
 }

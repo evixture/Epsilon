@@ -740,6 +740,37 @@ void CommandWindow::update()
 					else if (command.argVariables[0] == "0") SETTINGS->showFOV = false;
 				}
 			}
+
+			if (command.arg == "SHOWDEBUG")
+			{
+				if (command.hasArgVariables)
+				{
+					if (command.argVariables[0] == "1") SETTINGS->showDebug = true;
+					else if (command.argVariables[0] == "0") SETTINGS->showDebug = false;
+				}
+			}
+
+			if (command.arg == "SETSTANCE")
+			{
+				if (command.hasArgVariables && command.argVariables.size() >= 3)
+				{
+					try
+					{
+						int x = (std::stoi(command.argVariables[0]) >= 0 && std::stoi(command.argVariables[0]) <= 255) ? std::stoi(command.argVariables[0]) : -1;
+						int y = (std::stoi(command.argVariables[1]) >= 0 && std::stoi(command.argVariables[1]) <= 255) ? std::stoi(command.argVariables[1]) : -1;
+						int z = (std::stoi(command.argVariables[2]) >= 0 && std::stoi(command.argVariables[2]) <= 255) ? std::stoi(command.argVariables[2]) : -1;
+
+						if (x != -1 && y != -1 && z != -1)
+						{
+							WORLD->debugmap->player->stance = Position3(x, y, x);
+						}
+					}
+					catch (...)
+					{
+						//push error to console
+					}
+				}
+			}
 		}
 
 		rawCommand.clear();
