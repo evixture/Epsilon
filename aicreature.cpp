@@ -2,7 +2,7 @@
 
 AICreature::AICreature(Creature creature, TCODMap* fovMap)
 	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), soundInterest(0.0f), visualInterest(0.0f), interestDecay(.05f), interestDecayClock(0.5f), 
-	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false), attitude(0), actionClock(Clock(1.0f)), actionIndex(0), lastKnownMapPosition(creature.mapPosition)
+	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false), attitude(0), actionClock(Clock(1.0f)), actionIndex(0), lastKnownMapPosition(creature.mapPosition), discovered(false)
 {
 	inventory = ep::inventory::testInventory(this);
 
@@ -543,6 +543,7 @@ void AICreature::act()
 void AICreature::update() //ai and behavior attributes update here
 {
 	inFov = WORLD->isInPlayerFov(mapPosition);
+	if (inFov) discovered = true;
 
 	if (health != 0) //if alive
 	{
@@ -569,18 +570,21 @@ void AICreature::render(const Pane& pane) const
 {
 	if (WORLD->debugmap->player->mapPosition.z == mapPosition.z)
 	{
-		if (inFov)
+		if (discovered)
 		{
-			pane.console->setChar(renderPosition.x, renderPosition.y, ch);
-			pane.console->setCharForeground(renderPosition.x, renderPosition.y, color);
-		}
-		else
-		{
-			pane.console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkestGrey);
-			pane.console->setChar(renderPosition.x, renderPosition.y, '?');
+			if (inFov)
+			{
+				pane.console->setChar(renderPosition.x, renderPosition.y, ch);
+				pane.console->setCharForeground(renderPosition.x, renderPosition.y, color);
+			}
+			else
+			{
+				pane.console->setCharForeground(renderPosition.x, renderPosition.y, TCODColor::darkerGrey);
+				pane.console->setChar(renderPosition.x, renderPosition.y, '?');
+			}
 		}
 
-		if (false) //show pathfinding information
+		if (SETTINGS->showAIMind) //show pathfinding information
 		{
 			//render path
 			int x, y;

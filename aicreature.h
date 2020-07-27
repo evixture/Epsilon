@@ -39,6 +39,7 @@ struct AICreature : public Creature
 	void render(const Pane& pane) const; // virtual renders the creature
 
 private:
+	bool discovered;
 	bool inFov;
 
 	void behave();

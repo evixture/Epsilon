@@ -55,6 +55,7 @@ struct Item
 	//float wweight;
 
 	double distToEnt;
+	bool discovered;
 	bool inFov;
 	bool onMap;
 	

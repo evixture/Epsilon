@@ -65,7 +65,8 @@ void ActionManager::doAction(Creature* currentOwner)
 //----------------------------------------------------------------------------------------------------
 
 Item::Item(const Creature* creature, int size, std::shared_ptr<Block> block, std::shared_ptr<Tool> tool, Position4 position, ItemType type)
-	: owner(creature), size(size), block(block), tool(tool), mapPosition(position), tileRenderPosition(position), distToEnt(5), type(type), barColor(TCODColor::white), lastKnownMapPosition(position), inFov(false)
+	: owner(creature), size(size), block(block), tool(tool), mapPosition(position), tileRenderPosition(position), distToEnt(5), type(type), barColor(TCODColor::white),
+	lastKnownMapPosition(position), inFov(false), discovered(false)
 {
 	createActionManager();
 
@@ -229,7 +230,8 @@ void Item::drop(Creature* owner)
 
 void Item::updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHeld)
 {
-	inFov = WORLD->isInPlayerFov(mapPosition); //need in tool?
+	inFov = WORLD->isInPlayerFov(mapPosition);
+	if (inFov) discovered = true;
 
 	tool->update(mapPosition, xMouse, yMouse, isHeld);
 	actionManager->update();
@@ -248,6 +250,7 @@ void Item::updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHel
 void Item::updateTile()
 {
 	inFov = WORLD->isInPlayerFov(mapPosition);
+	if (inFov) discovered = true;
 
 	mapPosition.h = WORLD->debugmap->player->mapPosition.h;
 	distToEnt = getDistance(WORLD->debugmap->player->mapPosition.x, WORLD->debugmap->player->mapPosition.y, mapPosition.x, mapPosition.y);
@@ -276,24 +279,27 @@ void Item::updateTile()
 
 void Item::render(const Pane& pane) const
 {
-	if (onMap)
+	if (discovered)
 	{
-		block->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.h, tileRenderPosition.z), pane);
-
-		if (distToEnt < 5 && inFov)
+		if (onMap)
 		{
-			pane.console->setCharBackground(tileRenderPosition.x, tileRenderPosition.y, block->tileList[0].backgroundColor + TCODColor::darkGrey); //look into color later
-		}
+			block->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.h, tileRenderPosition.z), pane);
 
-		if (!inFov)
-		{
-			pane.console->setChar(tileRenderPosition.x, tileRenderPosition.y, '?');
-			pane.console->setCharForeground(tileRenderPosition.x, tileRenderPosition.y, TCODColor::darkestGrey); //look into color later
+			if (distToEnt < 5 && inFov)
+			{
+				pane.console->setCharBackground(tileRenderPosition.x, tileRenderPosition.y, block->tileList[0].backgroundColor + TCODColor::darkGrey); //look into color later
+			}
+
+			if (!inFov)
+			{
+				pane.console->setChar(tileRenderPosition.x, tileRenderPosition.y, '?');
+				pane.console->setCharForeground(tileRenderPosition.x, tileRenderPosition.y, TCODColor::darkerGrey); //look into color later
+			}
 		}
-	}
-	else
-	{
-		tool->render(pane);
+		else
+		{
+			tool->render(pane);
+		}
 	}
 }
 

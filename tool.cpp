@@ -384,13 +384,13 @@ void Firearm::fireBullet()
 			switch (getMagazine().second.ammoType)
 			{
 			case MagazineData::AmmoType::FOURTYFIVEACP:
-				bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ep::bullet::cal45(owner, "cal45", ch, mapPosition, Position2(mapPosition.x + dx, mapPosition.y + dy))));
+				bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ep::bullet::cal45(owner, ch, mapPosition, Position2(mapPosition.x + dx, mapPosition.y + dy))));
 				break;
 			case MagazineData::AmmoType::FIVEPOINTFIVESIX:
-				bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ep::bullet::cal556(owner, "cal556", ch, mapPosition, Position2(mapPosition.x + dx, mapPosition.y + dy))));
+				bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(ep::bullet::cal556(owner, ch, mapPosition, Position2(mapPosition.x + dx, mapPosition.y + dy))));
 				break;
 			}
-
+			
 			//bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(owner, ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, getMagazine().second.velocity, getMagazine().second.mass));
 
 			usedMag.availableAmmo--;

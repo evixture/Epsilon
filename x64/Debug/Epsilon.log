@@ -1,3 +1,4 @@
-﻿  panel.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(805,71): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+﻿  aicreature.cpp
+  item.cpp
+  Generating Code...
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

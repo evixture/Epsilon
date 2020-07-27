@@ -185,14 +185,14 @@ namespace ep
 	struct bullet
 	{
 		//const Creature* owner, std::string name, const Position4 startPosition, Position2 targetPosition, int velocity, int mass
-		inline static Bullet cal45(const Creature* owner, std::string name, int ch, Position4 startPosition, Position2 targetPosition)
+		inline static Bullet cal45(const Creature* owner, int ch, Position4 startPosition, Position2 targetPosition)
 		{
-			return Bullet(owner, name, ch, startPosition, targetPosition, 80, 230);
+			return Bullet(owner, "cal45", ch, startPosition, targetPosition, 80, 230);
 		}
 
-		inline static Bullet cal556(const Creature* owner, std::string name, int ch, Position4 startPosition, Position2 targetPosition)
+		inline static Bullet cal556(const Creature* owner, int ch, Position4 startPosition, Position2 targetPosition)
 		{
-			return Bullet(owner, name, ch, startPosition, targetPosition, 300, 55);
+			return Bullet(owner, "cal556", ch, startPosition, targetPosition, 300, 55);
 		}
 	};
 }
