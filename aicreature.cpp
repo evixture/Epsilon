@@ -59,7 +59,7 @@ bool AICreature::pickUpItem()
 {
 	for (auto& item : WORLD->debugmap->mapItemList)
 	{
-		if (item->onMap && item->mapPosition.x == mapPosition.x && item->mapPosition.y == mapPosition.y && item->mapPosition.z == mapPosition.z)
+		if (item->onMap && !item->inAir && item->mapPosition.x == mapPosition.x && item->mapPosition.y == mapPosition.y && item->mapPosition.z == mapPosition.z)
 		{
 			if (item->pickUp(this)) //got picked up
 			{
@@ -73,7 +73,7 @@ bool AICreature::pickUpItem()
 
 	for (auto& container : WORLD->debugmap->mapContainerList)
 	{
-		if (container->item->onMap && container->item->mapPosition.x == mapPosition.x && container->item->mapPosition.y == mapPosition.y && container->item->mapPosition.z == mapPosition.z)
+		if (container->item->onMap && !container->item->inAir && container->item->mapPosition.x == mapPosition.x && container->item->mapPosition.y == mapPosition.y && container->item->mapPosition.z == mapPosition.z)
 		{
 			container->pickUp(this);
 

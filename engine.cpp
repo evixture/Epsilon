@@ -19,10 +19,6 @@ Engine::Engine(int screenCharWidth, int screenCharHeight)
 	TCODConsole::root->setDefaultBackground(ep::color::rootBG);
 }
 
-Engine::~Engine()
-{
-}
-
 void Engine::setFullscreen()
 {
 	if (!fullscreen)

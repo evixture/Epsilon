@@ -123,7 +123,7 @@ void Item::changeBarColor()
 
 bool Item::reload(MagazineData& magazine)
 {
-	if (!onMap)
+	if (!onMap && !inAir)
 	{
 		if (type == ItemType::FIREARM)
 		{
@@ -135,7 +135,7 @@ bool Item::reload(MagazineData& magazine)
 
 bool Item::changeFireMode()
 {
-	if (!onMap)
+	if (!onMap && !inAir)
 	{
 		if (type == ItemType::FIREARM)
 		{
@@ -148,7 +148,7 @@ bool Item::changeFireMode()
 
 bool Item::useMelee()
 {
-	if (!onMap)
+	if (!onMap && !inAir)
 	{
 		if (type == ItemType::MELEE || type == ItemType::FIREARM)
 		{
@@ -161,7 +161,7 @@ bool Item::useMelee()
 
 bool Item::equip(Armor& armor)
 {
-	if (!onMap)
+	if (!onMap && !inAir)
 	{
 		if (type == ItemType::ARMOR)
 		{
@@ -174,7 +174,7 @@ bool Item::equip(Armor& armor)
 
 bool Item::use(bool hold, bool swtch)
 {
-	if (!onMap)
+	if (!onMap && !inAir)
 	{
 		tool->use(hold, swtch);
 		return true;
@@ -224,10 +224,10 @@ void Item::drop()
 
 void Item::throwItem()
 {
-	if (!onMap)
+	if (!onMap && !inAir)
 	{
 		inAir = true; //needs to be first?
-		projectile = std::make_shared<Projectile>(owner, tool->ch, tool->name, tool->color, tool->mapPosition, owner->targetPosition, 80, 240);
+		projectile = std::make_shared<Projectile>(owner, block->tileList[0].ch, tool->name, block->tileList[0].foregroundColor, tool->mapPosition, owner->targetPosition, 50, 240);
 
 		WORLD->debugmap->mapItemList.push_back(std::make_shared<Item>(*this));																   //needs to be last
 		owner->inventory[owner->containerIndex]->itemList.erase(owner->inventory[owner->containerIndex]->itemList.begin() + owner->itemIndex); //needs to be last
@@ -261,16 +261,18 @@ void Item::updateTile()
 	//mapPosition.h = WORLD->debugmap->player->mapPosition.h;
 	distToEnt = getDistance(WORLD->debugmap->player->mapPosition.x, WORLD->debugmap->player->mapPosition.y, mapPosition.x, mapPosition.y);
 
-	if (inAir == true)
-	{
-		projectile->update();
-		mapPosition = projectile->mapPosition;
-
-		if (projectile->onGround)
-		{
-			inAir = false;
-			onMap = true;
+	if (inAir == true)							
+	{											
+		projectile->update();					
+		mapPosition = projectile->mapPosition;	
+												
+		if (projectile->onGround)				
+		{										
+			inAir = false;						
+			onMap = true;						
 		}
+		
+		GUI->logWindow->pushMessage(Message("Pos (x, y, h): " + std::to_string(mapPosition.x) + " " + std::to_string(mapPosition.y) + " " + std::to_string(mapPosition.h), Message::MessageLevel::MEDIUM));
 	}
 
 	tileRenderPosition = Position4(mapPosition.x - WORLD->xOffset, mapPosition.y - WORLD->yOffset, mapPosition.h, mapPosition.z); //replace with better way?
@@ -283,8 +285,8 @@ void Item::render(const Pane& pane) const
 		if (onMap || inAir)
 		{
 			block->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.h, tileRenderPosition.z), pane);
-
-			if (distToEnt < 5 && inFov)
+			
+			if (distToEnt < 5.0f && inFov)
 			{
 				pane.console->setCharBackground(tileRenderPosition.x, tileRenderPosition.y, block->tileList[0].backgroundColor + TCODColor::darkGrey); //look into color later
 			}
@@ -292,7 +294,7 @@ void Item::render(const Pane& pane) const
 			if (!inFov)
 			{
 				pane.console->setChar(tileRenderPosition.x, tileRenderPosition.y, '?');
-				pane.console->setCharForeground(tileRenderPosition.x, tileRenderPosition.y, TCODColor::darkerGrey); //look into color later
+				pane.console->setCharForeground(tileRenderPosition.x, tileRenderPosition.y, TCODColor::darkerGrey); //known but out of fov
 			}
 		}
 		else
@@ -334,7 +336,7 @@ Container::Container(int itemCapacity, std::shared_ptr<Item> item, std::vector<s
 
 bool Container::pickUp(Creature* owner)
 {
-	if (item->onMap)
+	if (item->onMap && !item->inAir)
 	{
 		owner->inventory.push_back(std::make_shared<Container>(*this));
 		//WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
@@ -354,7 +356,7 @@ bool Container::pickUp(Creature* owner)
 
 void Container::drop(Creature* owner)
 {
-	if (!item->onMap)
+	if (!item->onMap && !item->inAir)
 	{
 		WORLD->debugmap->mapContainerList.push_back(std::make_shared<Container>(*this));
 		owner->inventory.erase(owner->inventory.begin() + owner->containerIndex);

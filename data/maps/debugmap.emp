@@ -238,8 +238,10 @@ s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
 		-->
 	</creatures>
 	<!-- = = = = = = = = = = = = = = = = = -->
+
 	<items>
 		
+  <!--
 		<item type = "SIR556">
 			<x>4</x>
 			<y>7</y>
@@ -312,16 +314,17 @@ s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
       <floor>0</floor>
     </item>
 
+  -->
   </items>
 	<!-- = = = = = = = = = = = = = = = = = -->
 	<containers>
-
+    <!--
 		<container type = "SmallBackpack">
 			<x>20</x>
 			<y>10</y>
 			<floor>0</floor>
 		</container>
-		
+	-->
 	</containers>
-	
+		
 </map>

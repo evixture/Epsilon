@@ -108,7 +108,7 @@ void Projectile::update()
 		}
 	}
 
-	if (mapPosition.h > 0)
+	if (mapPosition.h > 1)
 	{
 		fallClock.timeBetweenUpdates = (getFallTime(mapPosition.h) - getFallTime(mapPosition.h - 1));
 		fallClock.tickUp();
@@ -249,7 +249,7 @@ void Bullet::update()
 		}
 	}
 
-	if (mapPosition.h > 0)
+	if (mapPosition.h > 1)
 	{
 		fallClock.timeBetweenUpdates = (getFallTime(mapPosition.h) - getFallTime(mapPosition.h - 1));
 		fallClock.tickUp();

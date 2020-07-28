@@ -22,7 +22,6 @@ struct Engine //engine class that contains everything
 	//std::vector<std::shared_ptr<Bind>> test();
 
 	Engine(int screenCharWidth, int screenCharHeight); //engine constructor that takes screen width in characters and screen height in characters
-	~Engine();
 
 	void setFullscreen();
 
