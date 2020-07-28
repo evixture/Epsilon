@@ -214,10 +214,10 @@ void Item::drop()
 {
 	if (!onMap && !inAir)
 	{
+		onMap = true;
+
 		WORLD->debugmap->mapItemList.push_back(std::make_shared<Item>(*this));
 		owner->inventory[owner->containerIndex]->itemList.erase(owner->inventory[owner->containerIndex]->itemList.begin() + owner->itemIndex);
-
-		onMap = true;
 		this->owner = nullptr;
 	}
 }
@@ -272,7 +272,7 @@ void Item::updateTile()
 			onMap = true;						
 		}
 		
-		GUI->logWindow->pushMessage(Message("Pos (x, y, h): " + std::to_string(mapPosition.x) + " " + std::to_string(mapPosition.y) + " " + std::to_string(mapPosition.h), Message::MessageLevel::MEDIUM));
+		//GUI->logWindow->pushMessage(Message("Pos (x, y, h): " + std::to_string(mapPosition.x) + " " + std::to_string(mapPosition.y) + " " + std::to_string(mapPosition.h), Message::MessageLevel::MEDIUM));
 	}
 
 	tileRenderPosition = Position4(mapPosition.x - WORLD->xOffset, mapPosition.y - WORLD->yOffset, mapPosition.h, mapPosition.z); //replace with better way?
