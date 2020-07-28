@@ -431,6 +431,7 @@ void Player::updateTools()
 void Player::update()
 {
 	renderPosition = getRenderPosition(mapPosition);
+	targetPosition = INPUT->mouse->mapPosition;
 
 	if (health != 0) //if player is alive
 	{

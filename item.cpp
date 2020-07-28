@@ -66,7 +66,7 @@ void ActionManager::doAction(Creature* currentOwner)
 
 Item::Item(const Creature* creature, int size, std::shared_ptr<Block> block, std::shared_ptr<Tool> tool, Position4 position, ItemType type)
 	: owner(creature), size(size), block(block), tool(tool), mapPosition(position), tileRenderPosition(position), distToEnt(5), type(type), barColor(TCODColor::white),
-	lastKnownMapPosition(position), inFov(false), discovered(false)
+	lastKnownMapPosition(position), inFov(false), discovered(false), inAir(false)
 {
 	createActionManager();
 
@@ -219,6 +219,21 @@ void Item::drop(Creature* owner)
 	}
 }
 
+void Item::throwItem()
+{
+	if (!onMap)
+	{
+		WORLD->debugmap->mapItemList.push_back(std::make_shared<Item>(*this));
+		owner->inventory[owner->containerIndex]->itemList.erase(owner->inventory[owner->containerIndex]->itemList.begin() + owner->itemIndex);
+		owner = nullptr;
+
+		//Projectile(const Creature* owner, int ch, std::string name, TCODColor color, const Position4 startPosition, Position2 targetPosition, int velocity, int mass);
+		projectile = std::make_shared<Projectile>(owner, tool->ch, tool->name, tool->color, mapPosition, owner->targetPosition, 80, 240);
+
+		inAir = true;
+	}
+}
+
 void Item::updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHeld)
 {
 	inFov = WORLD->isInPlayerFov(mapPosition);
@@ -236,15 +251,28 @@ void Item::updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHel
 void Item::updateTile()
 {
 	inFov = WORLD->isInPlayerFov(mapPosition);
-	if (inFov) discovered = true;
+	if (inFov)
+	{
+		discovered = true;
+		lastKnownMapPosition = mapPosition;
+	}
 
 	mapPosition.h = WORLD->debugmap->player->mapPosition.h;
 	distToEnt = getDistance(WORLD->debugmap->player->mapPosition.x, WORLD->debugmap->player->mapPosition.y, mapPosition.x, mapPosition.y);
 
-	if (inFov) lastKnownMapPosition = mapPosition; //need renderPosition?
+	if (inAir)
+	{
+		projectile->update();
+		mapPosition = projectile->mapPosition;
+
+		if (projectile->onGround)
+		{
+			inAir = false;
+			onMap = true;
+		}
+	}
 
 	tileRenderPosition = Position4(mapPosition.x - WORLD->xOffset, mapPosition.y - WORLD->yOffset, mapPosition.h, mapPosition.z); //replace with better way?
-
 }
 
 void Item::render(const Pane& pane) const

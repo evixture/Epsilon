@@ -160,7 +160,7 @@ void AICreature::takeDamage(int damage)
 		//do when killed
 		for (int c = (int)inventory.size() - 1; c > 0; c--) //drop items on death, but not hands (c == 0)
 		{
-			inventory[c]->item->updateTool(mapPosition, lookPosition.x, lookPosition.y, false);
+			inventory[c]->item->updateTool(mapPosition, targetPosition.x, targetPosition.y, false);
 			WORLD->debugmap->mapContainerList.push_back(inventory[c]);
 			inventory.erase(inventory.begin() + c);
 		}
@@ -172,8 +172,8 @@ void AICreature::takeDamage(int damage)
 
 void AICreature::updateTools()
 {
-	angle = getAngle(mapPosition.x, mapPosition.y, lookPosition.x, lookPosition.y);
-	selectedItem->updateTool(mapPosition, lookPosition.x, lookPosition.y, true);
+	angle = getAngle(mapPosition.x, mapPosition.y, targetPosition.x, targetPosition.y);
+	selectedItem->updateTool(mapPosition, targetPosition.x, targetPosition.y, true);
 }
 
 void AICreature::moveSelectorUp()
@@ -375,7 +375,7 @@ void AICreature::reactToSounds()
 					if (soundInterest < soundInterestChange) soundInterest = soundInterestChange;
 					
 					pathfindPosition = getWalkableArea(sound->getPosition().second);
-					lookPosition = sound->getPosition().second;
+					targetPosition = sound->getPosition().second;
 
 					//pathfind to sound source
 					path.compute(mapPosition.x, mapPosition.y, pathfindPosition.x, pathfindPosition.y);
@@ -393,7 +393,7 @@ void AICreature::behave()
 	if (inFov)
 	{
 		focusPosition = WORLD->debugmap->player->mapPosition;
-		lookPosition = WORLD->debugmap->player->mapPosition; //add random coords (1, -1) for inaccuracy
+		targetPosition = WORLD->debugmap->player->mapPosition; //add random coords (1, -1) for inaccuracy
 		pathfindPosition = getWalkableArea(WORLD->debugmap->player->mapPosition); //player tile is not walkable
 	}
 	else

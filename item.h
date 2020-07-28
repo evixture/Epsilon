@@ -57,6 +57,8 @@ struct Item
 	double distToEnt;
 	bool discovered;
 	bool inFov;
+
+	bool inAir;
 	bool onMap;
 	
 	TCODColor barColor;
@@ -90,7 +92,7 @@ struct Item
 
 	virtual bool pickUp(Creature* owner);
 	virtual void drop(Creature* owner);
-	//throw() prob not
+	virtual void throwItem();
 
 	void updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHeld); //mappos can be removed because of owner
 	void updateTile();

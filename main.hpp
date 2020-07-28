@@ -20,6 +20,7 @@
 #include <soloud_thread.h> //need later??
 #include <soloud_speech.h>
 #include <soloud_wav.h>
+#include <soloud_freeverbfilter.h>
 #include <soloud_audiosource.h>
 
 struct Pane;

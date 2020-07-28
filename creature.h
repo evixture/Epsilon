@@ -3,6 +3,8 @@
 
 struct Creature : public Entity
 {
+	Position2 targetPosition;
+
 	float baseMoveTime;
 
 	short int health;
@@ -25,6 +27,7 @@ struct Creature : public Entity
 	virtual void render(const Pane& pane) const;
 
 protected:
+
 	float moveSpeed;
 	Clock moveClock;
 
