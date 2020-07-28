@@ -391,8 +391,6 @@ void Firearm::fireBullet()
 				break;
 			}
 			
-			//bulletList.insert(bulletList.begin(), std::make_shared<Bullet>(owner, ch, mapPosition, dx, dy, WORLD->debugmap->width, WORLD->debugmap->height, getMagazine().second.velocity, getMagazine().second.mass));
-
 			usedMag.availableAmmo--;
 
 			AUDIO->playSound(PositionalTrackedSound(("cop"), &mapPosition, 100.0f, 80.0f));

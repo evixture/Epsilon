@@ -57,42 +57,6 @@ void AICreature::move()
 
 bool AICreature::pickUpItem()
 {
-	////for items
-	//for (int i = 0; i < WORLD->debugmap->mapItemList.size(); ++i)
-	//{
-	//	if (WORLD->debugmap->mapItemList[i] != nullptr && WORLD->debugmap->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->debugmap->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->debugmap->mapItemList[i]->mapPosition.z == mapPosition.z)
-	//	{
-	//		if (containerIndex != -1)
-	//		{
-	//			if (inventory[containerIndex]->addItem(WORLD->debugmap->mapItemList[i]))
-	//			{
-	//				WORLD->debugmap->mapItemList.erase(WORLD->debugmap->mapItemList.begin() + i);
-	//				inventory[containerIndex]->itemList[inventory[containerIndex]->itemList.size() - 1]->owner = this;
-	//
-	//				AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
-	//
-	//				return true;
-	//			}
-	//		}
-	//	}
-	//}
-	//
-	////for containers
-	//for (int i = 0; i < WORLD->debugmap->mapContainerList.size(); ++i)
-	//{
-	//	if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->item->mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->item->mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->item->mapPosition.z == mapPosition.z)
-	//	{
-	//		inventory.push_back(WORLD->debugmap->mapContainerList[i]);
-	//		WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
-	//		inventory[inventory.size() - 1]->item->owner = this;
-	//
-	//		AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
-	//
-	//		return true;
-	//	}
-	//}
-	//return false;
-
 	for (auto& item : WORLD->debugmap->mapItemList)
 	{
 		if (item->onMap && item->mapPosition.x == mapPosition.x && item->mapPosition.y == mapPosition.y && item->mapPosition.z == mapPosition.z)
@@ -129,12 +93,6 @@ void AICreature::dropItem() //prob here
 	{
 		if (itemIndex >= 0)
 		{
-			//selectedItem->owner = nullptr;
-			//WORLD->debugmap->mapItemList.push_back(selectedItem);
-			//inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
-			//
-			//AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
-
 			AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
 
 			selectedItem->drop(this);
@@ -143,12 +101,6 @@ void AICreature::dropItem() //prob here
 		{
 			if (selectedItem->type != Item::ItemType::HAND)
 			{
-				//selectedItem->owner = nullptr;
-				//WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
-				//inventory.erase(inventory.begin() + containerIndex);
-				//
-				//AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
-
 				AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
 
 				inventory[containerIndex]->drop(this);
@@ -169,7 +121,7 @@ bool AICreature::reload()
 				{
 					if (item->getMagazineData().second.availableAmmo != 0) // if the magazine is not empty
 					{
-						return selectedItem->tool->reload(item->getMagazineData().second); //returns true on a proper reload
+						return selectedItem->reload(item->getMagazineData().second); //returns true on a proper reload
 					}
 				}
 			}
@@ -180,17 +132,17 @@ bool AICreature::reload()
 
 void AICreature::changeFireMode()
 {
-	selectedItem->tool->changeFireMode();
+	selectedItem->changeFireMode();
 }
 
 void AICreature::equipArmor()
 {
-	selectedItem->tool->equip(equippedArmor); //bool return??
+	selectedItem->equip(equippedArmor); //bool return??
 }
 
 void AICreature::useMelee()
 {
-	selectedItem->tool->useMelee();
+	selectedItem->useMelee();
 }
 
 void AICreature::takeDamage(int damage)
@@ -433,29 +385,6 @@ void AICreature::reactToSounds()
 	}
 }
 
-/*
-AUDIO FIELD
-  ---
- -----
----E---
- -----
-  ---
-
-VISUAL FIELD
-     ++
-   ++++
-E++++++
-   ++++
-	 ++
-
-COMBINED
-  ---   ++
- -----++++
----E++++++
- -----++++
-  ---   ++
-*/
-
 void AICreature::behave()
 {
 	decayInterest();
@@ -476,19 +405,6 @@ void AICreature::behave()
 
 void AICreature::act()
 {
-
-	/*
-		this	player	diff	attitude	result
-	x	0		128		-128	.0			
-	y	64		0		64		.25
-	z	128		0		128		.5			.5
-	if diff is >= 128, auto aggression
-	ignores all values lower than max
-
-	if at 0 stance, 128 is aggressive
-	if at 128 stance, nothing is aggressive
-	*/
-
 	Position3 deltaStance = this->stance - WORLD->debugmap->player->stance;
 	if (deltaStance.x >= 0) if (attitude < deltaStance.x / 255.0f) attitude = deltaStance.x / 255.0f;
 	if (deltaStance.y >= 0) if (attitude < deltaStance.y / 255.0f) attitude = deltaStance.y / 255.0f;
@@ -500,7 +416,7 @@ void AICreature::act()
 		reactionFireClock.tickUp(); //replace later with something with more discretion
 		for (int i = 1; i <= reactionFireClock.numCalls; reactionFireClock.numCalls--)
 		{
-			if (aggression >= 0.5f) selectedItem->tool->use(false, true); //attack
+			if (aggression >= 0.5f) selectedItem->use(false, true); //attack
 		}
 	}
 
@@ -547,9 +463,6 @@ void AICreature::update() //ai and behavior attributes update here
 
 	if (health != 0) //if alive
 	{
-		//GUI->logWindow->pushMessage(LogWindow::Message("vi " + std::to_string(visualInterest), LogWindow::Message::MessageLevel::MEDIUM));
-		//GUI->logWindow->pushMessage(LogWindow::Message("si " + std::to_string(soundInterest), LogWindow::Message::MessageLevel::MEDIUM));
-
 		behave(); //take in surroundings and change attributes
 		act(); //take actions based on attribute values
 	}
@@ -563,7 +476,6 @@ void AICreature::update() //ai and behavior attributes update here
 	if (inFov) lastKnownMapPosition = mapPosition; //need renderPosition?
 
 	renderPosition = getRenderPosition(lastKnownMapPosition);
-
 }
 
 void AICreature::render(const Pane& pane) const

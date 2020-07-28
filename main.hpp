@@ -23,7 +23,6 @@
 #include <soloud_audiosource.h>
 
 struct Pane;
-//struct Bind;
 struct Creature;
 struct Player;
 
@@ -50,5 +49,3 @@ struct Player;
 #include "gui.h"
 
 #include "engine.h"
-
-//TODO : fov is computed every update, try to optimize later

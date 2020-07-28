@@ -52,7 +52,7 @@ struct Item
 	enum class ItemType {HAND, NORMAL, FIREARM, MAGAZINE, ARMOR, MELEE} type;
 
 	unsigned char size;
-	//float wweight;
+	//float weight;
 
 	double distToEnt;
 	bool discovered;
@@ -89,15 +89,11 @@ struct Item
 	virtual bool use(bool hold, bool swtch);
 
 	virtual bool pickUp(Creature* owner);
-	//drop()
 	virtual void drop(Creature* owner);
 	//throw() prob not
 
 	void updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHeld); //mappos can be removed because of owner
-	//void renderTool(const Pane& pane) const;
-
 	void updateTile();
-	//void renderTile(const Pane& pane) const;
 
 	void render(const Pane& pane) const;
 

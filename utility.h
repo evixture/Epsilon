@@ -31,9 +31,7 @@ struct Position2
 
 struct Position3 : public Position2
 {
-	/*int x;
-	int y;*/
-	int z; //floor when used as position
+	int z;
 
 	Position3() = default;
 	Position3(int x, int y, int z);
@@ -77,28 +75,24 @@ struct FLine //function line; not length limited like BLine
 {
 	int step;
 	float slope;
-	//float yMultiplier;
+
 	const Position2 startPosition;
 
 	//fline(angle)
 	//fline(targetPos)
 	FLine(Position2 startPosition, Position2 targetPosition);
 
-	//get pos
 	Position2 getPosition() const;
-	//get next pos
 	Position2 getNextPosition() const;
 
 	bool isValid();
-	//get step
-	//step
 	void stepLine();
 
 private:
 	bool vertical;
 	bool horizontal;
 	bool stepBackwards;
-	//bool negative;
+
 	bool yStep;
 	bool valid;
 };
@@ -180,27 +174,6 @@ private:
 	int pad;
 };
 
-/*
-drawPane.console->printf(0, 0, "Health : [");
-for (int i = 0; i < 20; ++i)
-{
-	if (displayHealth != -1)
-	{
-		if (i * 5 < displayHealth)
-		{
-			drawPane.console->printf(i + 10, 0, "=");
-			drawPane.console->setCharForeground(i + 10, 0, TCODColor::red);
-		}
-	}
-	else
-	{
-		drawPane.console->printf(i + 10, 0, "!");
-		drawPane.console->setCharForeground(i + 10, 0, TCODColor::red);
-	}
-}
-drawPane.console->printf(30, 0, "]");
-*/
-
 unsigned char	heightToBitFlag(int h);
 
 double			getAngle(int ix, int iy, int tx, int ty);
@@ -211,7 +184,6 @@ std::string		getTileName(char id);
 Position3		offsetPosition(Position3 mapPosition, int xOffset, int yOffset); //need??
 Position4		offsetPosition(Position4 mapPosition, int xOffset, int yOffset);
 Position4		getWalkableArea(Position4 mapPosition);
-//getRenderPosition(Position2 ...)
 Position2		getRenderPosition(Position2 mapPosition);
 
 namespace ep
@@ -347,13 +319,5 @@ namespace ep
 		inline static const TCODColor rifleFG =			TCODColor(79, 83, 84);
 
 		inline static const TCODColor pistolFG =		TCODColor(94, 93, 91);
-	};
-
-	struct magazineData
-	{
-		//inline static MagazineData* nullMagazine()
-		//{
-		//	return new MagazineData(MagazineData::AmmoType::NONE, 0, 0, false); //fix return new later
-		//}
 	};
 }

@@ -1,10 +1,5 @@
 #include "main.hpp"
 
-//std::vector<std::shared_ptr<Bind>> Engine::test()
-//{
-//	return input->bindList;
-//}
-
 Engine::Engine(int screenCharWidth, int screenCharHeight)
 	: screenCharWidth(screenCharWidth), screenCharHeight(screenCharHeight), windowTitle("Epsilon v. Alpha 10"), fullscreen(false), fovtype(FOV_RESTRICTIVE), renderer(TCOD_RENDERER_OPENGL2), //USE SDL2/ opengl2 TO RENDER, OTHERS WILL LOCK OR LOWER FPS
 	fovRad(60), lightWalls(true), fpsCount(60)

@@ -7,29 +7,6 @@
 	|	L	MouseButton
 */
 
-/*
-make input list for all keys and mbuttons
-
-	all inputs in list
-	L	binds list?
-
-	all input list
-	bind list
-
-	binds take in a button for input
-
-BUTTON
-	string name
-
-	char bind??
-
-BIND
-	button bind
-
-	bind name
-
-*/
-
 struct Button
 {
 	Button(const std::string name);
@@ -85,7 +62,6 @@ struct Bind
 	void update(bool disabled);
 
 	std::shared_ptr<Button> bind; //move later
-//private:
 };
 
 struct Mouse

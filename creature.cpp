@@ -1,22 +1,5 @@
 #include "main.hpp"
 
-//Entity::Entity(Position4 pos, int ch, std::string name, TCODColor color)
-//	:mapPosition(pos), renderPosition(pos), ch(ch), color(color), name(name)
-//{}
-//
-//void Entity::update()
-//{
-//	return;
-//}
-//
-//void Entity::render(const Pane& pane) const
-//{
-//	pane.console->setChar(mapPosition.x, mapPosition.y, ch);
-//	pane.console->setCharForeground(mapPosition.x, mapPosition.y, color);
-//}
-
-//----------------------------------------------------------------------------------------------------
-
 Creature::Creature(Position4 pos, int ch, std::string name, Position3 stance, int health, Armor armor)
 	:Entity(pos, ch, name, TCODColor(stance.x, stance.y, stance.z)), health(health), equippedArmor(armor), angle(0), containerIndex(0), itemIndex(0),
 	moveClock(0), moveSpeed(0), baseMoveTime(0.0f), stance(stance)
@@ -270,43 +253,6 @@ void Player::moveSelectorDown()
 
 bool Player::pickUpItem()
 {
-	//for items
-	//for (int i = 0; i < WORLD->debugmap->mapItemList.size(); ++i)
-	//{
-	//	if (WORLD->debugmap->mapItemList[i] != nullptr && WORLD->debugmap->mapItemList[i]->mapPosition.x == mapPosition.x && WORLD->debugmap->mapItemList[i]->mapPosition.y == mapPosition.y && WORLD->debugmap->mapItemList[i]->mapPosition.z == mapPosition.z)
-	//	{
-	//		if (containerIndex != -1)
-	//		{
-	//			if (inventory[containerIndex]->addItem(WORLD->debugmap->mapItemList[i]))
-	//			{
-	//				GUI->logWindow->pushMessage(Message("Picked up " + WORLD->debugmap->mapItemList[i]->tool->name, Message::MessageLevel::MEDIUM));
-	//				AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
-	//
-	//				WORLD->debugmap->mapItemList.erase(WORLD->debugmap->mapItemList.begin() + i);
-	//				inventory[containerIndex]->itemList[inventory[containerIndex]->itemList.size() - 1]->owner = this;
-	//
-	//				return true;
-	//			}
-	//		}
-	//	}
-	//}
-
-	////for containers
-	//for (int i = 0; i < WORLD->debugmap->mapContainerList.size(); ++i)
-	//{
-	//	if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->item->mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->item->mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->item->mapPosition.z == mapPosition.z)
-	//	{
-	//		GUI->logWindow->pushMessage(Message("Picked up " + WORLD->debugmap->mapContainerList[i]->item->tool->name, Message::MessageLevel::MEDIUM));
-	//		AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
-	//
-	//		inventory.push_back(WORLD->debugmap->mapContainerList[i]);
-	//		WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
-	//		inventory[inventory.size() - 1]->item->owner = this;
-	//
-	//		return true;
-	//	}
-	//}
-
 	for (auto& item : WORLD->debugmap->mapItemList)
 	{
 		if (item->onMap && item->mapPosition.x == mapPosition.x && item->mapPosition.y == mapPosition.y && item->mapPosition.z == mapPosition.z)
@@ -435,7 +381,6 @@ bool Player::reload()
 				{
 					if (item->getMagazineData().second.availableAmmo != 0) // if the magazine is not empty
 					{
-						//return selectedItem->tool->reload(item->getMagazineData().second);
 						return selectedItem->reload(item->getMagazineData().second);
 					}
 				}
@@ -447,17 +392,17 @@ bool Player::reload()
 
 void Player::changeFireMode()
 {
-	selectedItem->tool->changeFireMode();
+	selectedItem->changeFireMode();
 }
 
 void Player::equipArmor()
 {
-	selectedItem->tool->equip(equippedArmor);
+	selectedItem->equip(equippedArmor);
 }
 
 void Player::useMelee()
 {
-	selectedItem->tool->useMelee();
+	selectedItem->useMelee();
 }
 
 void Player::updateTools()
@@ -509,16 +454,10 @@ void Player::update()
 			}
 		}
 		
-		if (INPUT->pickUp->isSwitched)		pickUpItem();
+		if (INPUT->pickUp->isSwitched)			pickUpItem();
 		if (INPUT->drop->isSwitched)			dropItem();
-		if (INPUT->reload->isSwitched)
-		{
-			reload();
-		}
-		if (INPUT->primaryUse->isDown)
-		{
-			selectedItem->tool->use(INPUT->primaryUse->isDown, INPUT->primaryUse->isSwitched);
-		}
+		if (INPUT->reload->isSwitched)			reload();
+		if (INPUT->primaryUse->isDown)			selectedItem->use(INPUT->primaryUse->isDown, INPUT->primaryUse->isSwitched);
 		if (INPUT->alternateUse->isSwitched)	selectedItem->actionManager->doAction(this);
 		
 		filterIndexes();

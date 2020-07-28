@@ -211,15 +211,6 @@ void Item::drop(Creature* owner)
 {
 	if (!onMap)
 	{
-		/*
-			GUI->logWindow->pushMessage(Message("Dropped " + inventory[containerIndex]->itemList[itemIndex]->tool->name, Message::MessageLevel::MEDIUM));
-			AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
-
-			selectedItem->owner = nullptr;
-			WORLD->debugmap->mapItemList.push_back(selectedItem);
-			inventory[containerIndex]->itemList.erase(inventory[containerIndex]->itemList.begin() + itemIndex);
-		*/
-
 		WORLD->debugmap->mapItemList.push_back(std::make_shared<Item>(*this));
 		owner->inventory[owner->containerIndex]->itemList.erase(owner->inventory[owner->containerIndex]->itemList.begin() + owner->itemIndex);
 
@@ -242,11 +233,6 @@ void Item::updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHel
 	tileRenderPosition = Position4(mapPosition.x - WORLD->xOffset, mapPosition.y - WORLD->yOffset, mapPosition.h, mapPosition.z); //replace with better way?
 }
 
-//void Item::renderTool(const Pane& pane) const
-//{
-//	tool->render(pane);
-//}
-
 void Item::updateTile()
 {
 	inFov = WORLD->isInPlayerFov(mapPosition);
@@ -260,22 +246,6 @@ void Item::updateTile()
 	tileRenderPosition = Position4(mapPosition.x - WORLD->xOffset, mapPosition.y - WORLD->yOffset, mapPosition.h, mapPosition.z); //replace with better way?
 
 }
-
-//void Item::renderTile(const Pane& pane) const
-//{
-//	block->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.h, tileRenderPosition.z), pane);
-//
-//	if (distToEnt < 5 && inFov)
-//	{
-//		pane.console->setCharBackground(tileRenderPosition.x, tileRenderPosition.y, block->tileList[0].backgroundColor + TCODColor::darkGrey); //look into color later
-//	}
-//
-//	if (!inFov)
-//	{
-//		pane.console->setChar(tileRenderPosition.x, tileRenderPosition.y, '?');
-//		pane.console->setCharForeground(tileRenderPosition.x, tileRenderPosition.y, TCODColor::darkestGrey); //look into color later
-//	}
-//}
 
 void Item::render(const Pane& pane) const
 {
@@ -335,24 +305,6 @@ Container::Container(int itemCapacity, std::shared_ptr<Item> item, std::vector<s
 
 bool Container::pickUp(Creature* owner)
 {
-	/*
-	//for containers
-	for (int i = 0; i < WORLD->debugmap->mapContainerList.size(); ++i)
-	{
-		if (WORLD->debugmap->mapContainerList[i] != nullptr && WORLD->debugmap->mapContainerList[i]->item->mapPosition.x == mapPosition.x && WORLD->debugmap->mapContainerList[i]->item->mapPosition.y == mapPosition.y && WORLD->debugmap->mapContainerList[i]->item->mapPosition.z == mapPosition.z)
-		{
-			GUI->logWindow->pushMessage(Message("Picked up " + WORLD->debugmap->mapContainerList[i]->item->tool->name, Message::MessageLevel::MEDIUM));
-			AUDIO->playSound(PositionalTrackedSound(("pick up"), &mapPosition, 60.0f, 30.0f));
-
-			inventory.push_back(WORLD->debugmap->mapContainerList[i]);
-			WORLD->debugmap->mapContainerList.erase(WORLD->debugmap->mapContainerList.begin() + i);
-			inventory[inventory.size() - 1]->item->owner = this;
-
-			return true;
-		}
-	}
-	*/
-
 	if (item->onMap)
 	{
 		owner->inventory.push_back(std::make_shared<Container>(*this));
@@ -373,14 +325,6 @@ bool Container::pickUp(Creature* owner)
 
 void Container::drop(Creature* owner)
 {
-	/*
-				GUI->logWindow->pushMessage(Message("Dropped " + inventory[containerIndex]->item->tool->name, Message::MessageLevel::LOW));
-				AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
-
-				selectedItem->owner = nullptr;
-				WORLD->debugmap->mapContainerList.push_back(inventory[containerIndex]);
-				inventory.erase(inventory.begin() + containerIndex);
-	*/
 	if (!item->onMap)
 	{
 		WORLD->debugmap->mapContainerList.push_back(std::make_shared<Container>(*this));

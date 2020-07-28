@@ -1,21 +1,5 @@
 #include "main.hpp"
 
-//struct Entity
-//{
-//	Position4 mapPosition;
-//	unsigned char ch;
-//	TCODColor color;
-//	std::string name;
-//
-//	Entity(Position4 pos, int ch, std::string name, TCODColor color);
-//	virtual ~Entity() {};
-//
-//	virtual void update();
-//	virtual void render(const Pane& pane) const;
-//
-//protected:
-//	Position2 renderPosition; //replace with position2
-//};
 
 struct Creature : public Entity
 {
@@ -72,7 +56,7 @@ struct Player : public Creature
 
 	TCODColor backgroundColor;
 
-	Player(Position4 pos); //player constructor that takes a position
+	Player(Position4 pos);
 
 	void takeDamage(int damage);
 
@@ -106,23 +90,6 @@ namespace ep
 {
 	struct inventory //all inventories need to have hands as the first item in the list
 	{
-		//inline static const std::vector<std::shared_ptr<Container>> testInventory = 
-		//{
-		//	std::make_shared<Container>(ep::container::hands(0, 0, 0)),
-		//	std::make_shared<Container>(ep::container::smallBackpack(0, 0, 0, 
-		//	{
-		//		std::make_shared<Item>(ep::item::sip45(0, 0, 0)),
-		//		std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(0, 0, 0)),
-		//		std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(0, 0, 0)),
-		//		std::make_shared<Item>(ep::item::knife(0, 0, 0))
-		//	}))
-		//};
-
-		//inline static MagazineItem cal45Magazine7(const Creature* const owner, int x, int y, int level)
-		//{
-		//	return MagazineItem(ep::item::cal45Magazine7(owner, x, y, level), MagazineData(MagazineData::AmmoType::FOURTYFIVEACP, 7, 7));
-		//}
-
 		inline static std::vector<std::shared_ptr<Container>> testInventory(const Creature* owner)
 		{
 			return {

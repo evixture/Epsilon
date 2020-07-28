@@ -281,8 +281,6 @@ void Bind::rebind(std::shared_ptr<KeyboardButton> kbButton)
 
 void Bind::update(bool disabled)
 {
-	//bind->update(); binds are already updated in keyboard
-
 	if (!disabled)
 	{
 		isDown = bind->isDown;
@@ -298,8 +296,6 @@ void Bind::update(bool disabled)
 Input::Input()
 	:keyboard(std::make_shared<Keyboard>()), TCODmouse(), mouse(std::make_shared<Mouse>()), bindsDisabled(false)
 {
-	//bindList = std::make_shared<std::vector<std::shared_ptr<Bind>>>();
-
 	bindList.push_back(moveUp			= std::make_shared<Bind>(keyboard->w			, "Move Up"		));
 	bindList.push_back(moveDown			= std::make_shared<Bind>(keyboard->s			, "Move Down"	));
 	bindList.push_back(moveLeft			= std::make_shared<Bind>(keyboard->a			, "Move Left"	));
@@ -334,11 +330,6 @@ Input::Input()
 	bindList.push_back(primaryUse		= std::make_shared<Bind>(mouse->leftMB			, "Primary Use"	));
 	bindList.push_back(alternateUse		= std::make_shared<Bind>(mouse->rightMB			, "Alternate Use"));
 }
-
-//std::vector<std::shared_ptr<Bind>> Input::getBindList()
-//{
-//	return bindList;
-//}
 
 void Input::update()
 {

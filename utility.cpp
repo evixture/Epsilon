@@ -142,7 +142,7 @@ bool BLine::end()
 		if multiplier is > 1 or < -1
 */
 
-FLine::FLine(Position2 startPosition, Position2 targetPosition) //ENE reflection
+FLine::FLine(Position2 startPosition, Position2 targetPosition)
 	: step(0), startPosition(startPosition), vertical(false), horizontal(false), stepBackwards(false), slope(0.0f)
 {
 	if (!(startPosition == targetPosition))
