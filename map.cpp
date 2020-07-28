@@ -506,26 +506,26 @@ bool Map::getWalkability(Position4 position, bool checkCreatures) const
 		{
 			if (position.z == creature->mapPosition.z && position.x == creature->mapPosition.x && position.y == creature->mapPosition.y)
 			{
-				if (creature->health > 0) return false;
+				if (creature->health != 0) return false;
 			}
 		}
 	}
 
 	bool walkableBool = true;
-	unsigned char walkableFlag = getBlock(position)->walkableFlag;
+	unsigned char solidityFlag = getBlock(position)->solidityFlag;
 
 	for (int i = 0; i < position.h; ++i)
 	{
-		if (walkableFlag & heightToBitFlag(position.h - i)) walkableBool = false;
+		if (solidityFlag & heightToBitFlag(position.h - i)) walkableBool = false;
 	}
 
-	if (walkableBool == true && walkableFlag & heightToBitFlag(0)) return true;
+	if (walkableBool == true && solidityFlag & heightToBitFlag(0)) return true; //floor walkable
 	return false;
 }
 
 bool Map::getSolidity(Position4& position) const
 {
-	return (getBlock(position)->walkableFlag & heightToBitFlag(position.h));
+	return (getBlock(position)->solidityFlag & heightToBitFlag(position.h));
 }
 
 bool Map::getTransparency(Position4& position) const

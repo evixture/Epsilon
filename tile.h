@@ -40,7 +40,6 @@ struct Tile
 	unsigned short int deceleration;
 	int strength;
 
-	//std::string name;
 	char nameID;
 
 	Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int deceleration, char nameID, int strength = -1);
@@ -49,14 +48,17 @@ struct Tile
 struct Block
 {
 	enum class Tag {STATIC, STAIR} tag;
+
 	unsigned char transparentFlag;
+	unsigned char solidityFlag;
 	unsigned char walkableFlag;
+
 	bool explored;
 	bool destroyed;
 
 	std::array<Tile, 4> tileList;
 
-	Block(std::array<Tile, 4> tileList, unsigned char transparentFlag, unsigned char walkableFlag, Tag tag = Tag::STATIC);
+	Block(std::array<Tile, 4> tileList, unsigned char transparentFlag, unsigned char solidityFlag, Tag tag = Tag::STATIC);
 	virtual ~Block() {};
 
 	Tile getTileData(int h) const;
@@ -71,7 +73,7 @@ struct Stair : public Block
 {
 	char moveDistance;
 	
-	Stair(std::array<Tile, 4> tileList, unsigned char transparentFlag, unsigned char walkableFlag, int moveDistance);
+	Stair(std::array<Tile, 4> tileList, unsigned char transparentFlag, unsigned char solidityFlag, int moveDistance);
 
 	void interact();
 };
