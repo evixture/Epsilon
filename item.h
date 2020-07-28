@@ -91,7 +91,7 @@ struct Item
 	virtual bool use(bool hold, bool swtch);
 
 	virtual bool pickUp(Creature* owner);
-	virtual void drop(Creature* owner);
+	virtual void drop();
 	virtual void throwItem();
 
 	void updateTool(Position4& mapPosition, int xMouse, int yMouse, bool isHeld); //mappos can be removed because of owner

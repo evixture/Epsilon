@@ -95,7 +95,7 @@ void AICreature::dropItem() //prob here
 		{
 			AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
 
-			selectedItem->drop(this);
+			selectedItem->drop();
 		}
 		else if (itemIndex <= -1)
 		{

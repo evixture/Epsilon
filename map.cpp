@@ -648,13 +648,13 @@ void World::update()
 
 	for (auto& item : debugmap->mapItemList)
 	{
-		if (!item->onMap) item->onMap = true;
+		//if (!item->onMap) item->onMap = true;
 		item->updateTile();
 	}
 
 	for (auto& container : debugmap->mapContainerList)
 	{
-		if (!container->item->onMap) container->item->onMap = true;
+		//if (!container->item->onMap) container->item->onMap = true;
 		container->item->updateTile();
 	}
 

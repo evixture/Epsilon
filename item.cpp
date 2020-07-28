@@ -67,10 +67,13 @@ void ActionManager::doAction(Creature* currentOwner)
 Item::Item(const Creature* creature, int size, std::shared_ptr<Block> block, std::shared_ptr<Tool> tool, Position4 position, ItemType type)
 	: owner(creature), size(size), block(block), tool(tool), mapPosition(position), tileRenderPosition(position), distToEnt(5), type(type), barColor(TCODColor::white),
 	lastKnownMapPosition(position), inFov(false), discovered(false), inAir(false)
+	//, projectile(std::make_shared<Projectile>(owner, tool->ch, tool->name, tool->color, tool->mapPosition, owner->targetPosition, 80, 240))
 {
 	createActionManager();
 
 	onMap = (owner == nullptr) ? true : false;
+
+	//projectile = std::make_shared<Projectile>(owner, tool->ch, tool->name, tool->color, tool->mapPosition, owner->targetPosition, 80, 240);
 
 	if (type == ItemType::HAND) tool->effectiveRange = 5; //override effective range for hands
 }
@@ -181,7 +184,7 @@ bool Item::use(bool hold, bool swtch)
 
 bool Item::pickUp(Creature* owner)
 {
-	if (onMap)
+	if (onMap && !inAir)
 	{
 		if (owner->containerIndex != -1)
 		{
@@ -207,9 +210,9 @@ bool Item::pickUp(Creature* owner)
 	return false;
 }
 
-void Item::drop(Creature* owner)
+void Item::drop()
 {
-	if (!onMap)
+	if (!onMap && !inAir)
 	{
 		WORLD->debugmap->mapItemList.push_back(std::make_shared<Item>(*this));
 		owner->inventory[owner->containerIndex]->itemList.erase(owner->inventory[owner->containerIndex]->itemList.begin() + owner->itemIndex);
@@ -223,14 +226,12 @@ void Item::throwItem()
 {
 	if (!onMap)
 	{
-		WORLD->debugmap->mapItemList.push_back(std::make_shared<Item>(*this));
-		owner->inventory[owner->containerIndex]->itemList.erase(owner->inventory[owner->containerIndex]->itemList.begin() + owner->itemIndex);
-		owner = nullptr;
+		inAir = true; //needs to be first?
+		projectile = std::make_shared<Projectile>(owner, tool->ch, tool->name, tool->color, tool->mapPosition, owner->targetPosition, 80, 240);
 
-		//Projectile(const Creature* owner, int ch, std::string name, TCODColor color, const Position4 startPosition, Position2 targetPosition, int velocity, int mass);
-		projectile = std::make_shared<Projectile>(owner, tool->ch, tool->name, tool->color, mapPosition, owner->targetPosition, 80, 240);
-
-		inAir = true;
+		WORLD->debugmap->mapItemList.push_back(std::make_shared<Item>(*this));																   //needs to be last
+		owner->inventory[owner->containerIndex]->itemList.erase(owner->inventory[owner->containerIndex]->itemList.begin() + owner->itemIndex); //needs to be last
+		this->owner = nullptr;																												   //needs to be last
 	}
 }
 
@@ -257,10 +258,10 @@ void Item::updateTile()
 		lastKnownMapPosition = mapPosition;
 	}
 
-	mapPosition.h = WORLD->debugmap->player->mapPosition.h;
+	//mapPosition.h = WORLD->debugmap->player->mapPosition.h;
 	distToEnt = getDistance(WORLD->debugmap->player->mapPosition.x, WORLD->debugmap->player->mapPosition.y, mapPosition.x, mapPosition.y);
 
-	if (inAir)
+	if (inAir == true)
 	{
 		projectile->update();
 		mapPosition = projectile->mapPosition;
@@ -279,7 +280,7 @@ void Item::render(const Pane& pane) const
 {
 	if (discovered)
 	{
-		if (onMap)
+		if (onMap || inAir)
 		{
 			block->render(Position4(tileRenderPosition.x, tileRenderPosition.y, WORLD->debugmap->player->mapPosition.h, tileRenderPosition.z), pane);
 

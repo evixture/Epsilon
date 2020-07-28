@@ -292,7 +292,7 @@ void Player::dropItem()
 			GUI->logWindow->pushMessage(Message("Dropped " + inventory[containerIndex]->itemList[itemIndex]->tool->name, Message::MessageLevel::MEDIUM));
 			AUDIO->playSound(PositionalTrackedSound(("drop"), &mapPosition, 65.0f, 30.0f));
 			
-			selectedItem->drop(this);
+			selectedItem->drop();
 		}
 		else if (itemIndex <= -1)
 		{
@@ -455,6 +455,7 @@ void Player::update()
 			}
 		}
 		
+		if (INPUT->debug1->isSwitched)			selectedItem->throwItem();
 		if (INPUT->pickUp->isSwitched)			pickUpItem();
 		if (INPUT->drop->isSwitched)			dropItem();
 		if (INPUT->reload->isSwitched)			reload();
