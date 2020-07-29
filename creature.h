@@ -41,6 +41,7 @@ protected:
 	//world interact
 	virtual bool pickUpItem(); //should eventually chenge to pure
 	virtual void dropItem();
+	virtual void throwItem();
 
 	//actions
 	virtual bool reload();
@@ -73,6 +74,7 @@ private:
 	//world interact
 	bool pickUpItem();
 	void dropItem();
+	void throwItem();
 
 	//actions
 	bool reload();

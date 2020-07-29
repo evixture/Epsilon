@@ -37,6 +37,10 @@ void Creature::dropItem()
 {
 }
 
+void Creature::throwItem()
+{
+}
+
 void Creature::takeDamage(int damage)
 {
 	if (health - damage > 0) //take normal damage
@@ -305,6 +309,16 @@ void Player::dropItem()
 			}
 		}
 	}
+}
+
+void Player::throwItem()
+{
+	//ITEM INDEXES
+	//	-2 : no item selected
+	//	-1 : container selected
+	//	0+ : item in vector
+
+	//if ()
 }
 
 void Player::takeDamage(int damage)

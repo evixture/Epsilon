@@ -26,9 +26,9 @@ struct Projectile : public Entity
 
 	bool onGround;
 
-	const short int mass;
-	const short int baseVelocity;
-	short int currentVelocity;
+	const short int mass;			//weight is in grams??
+	const short int baseVelocity;	//velocity is in fps / 2
+	short int currentVelocity;		//velocity is in fps / 2
 
 	const Position4 startPosition;
 

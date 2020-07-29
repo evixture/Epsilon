@@ -56,6 +56,7 @@ private:
 	//world interact
 	bool pickUpItem();
 	void dropItem();
+	void throwItem();
 
 	//actions
 	bool reload();

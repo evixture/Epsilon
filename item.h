@@ -129,6 +129,7 @@ struct Container
 
 	bool pickUp(Creature* owner);
 	void drop(Creature* owner);
+	void throwContainer(Creature* owner);
 
 	bool addItem(std::shared_ptr<Item> item);
 };
