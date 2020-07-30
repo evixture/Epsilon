@@ -462,7 +462,7 @@ void Firearm::update(Position4& sourcePosition, int& targetX, int& targetY, bool
 
 	for (int i = 0; i < bulletList.size(); ++i) //update bullets
 	{
-		if (bulletList[i]->currentVelocity <= 0) bulletList.erase(bulletList.begin() + i);
+		if (bulletList[i]->velocity <= 0) bulletList.erase(bulletList.begin() + i);
 		else bulletList[i]->update();
 	}
 

@@ -385,6 +385,15 @@ std::string getTileName(char id)
 	}
 }
 
+int calculateProjectileDamage(bool bullet, int currentVelocityBPS, float massG)
+{
+	if (bullet)
+	{
+		return int((pow(massG, 2.0f) * (float(currentVelocityBPS / 1.64f)) / 500.0f)); //bullet calc
+	}
+	return int(((massG / 2.0f) * (float(currentVelocityBPS / 1.64f)) / 500.0f)); //proj calc
+}
+
 /*
 	CHECK ORDER:
 	1 2 3

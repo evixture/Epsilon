@@ -1,6 +1,7 @@
 #include "main.hpp"
 
 constexpr auto PI = 3.14159265;
+constexpr auto SPEEDOFSOUND = 550; //in blocks per sec
 
 #define ENGINE		engine
 #define SETTINGS	engine->settings
@@ -180,6 +181,8 @@ double			getAngle(int ix, int iy, int tx, int ty);
 double			getDistance(int ix, int iy, int tx, int ty);
 float			getFallTime(int h);
 std::string		getTileName(char id);
+
+int calculateProjectileDamage(bool bullet, int currentVelocityBPS, float massG);
 
 Position3		offsetPosition(Position3 mapPosition, int xOffset, int yOffset); //need??
 Position4		offsetPosition(Position4 mapPosition, int xOffset, int yOffset);

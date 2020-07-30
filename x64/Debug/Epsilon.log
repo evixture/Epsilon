@@ -1,25 +1,12 @@
-﻿  aicreature.cpp
-  audio.cpp
-  creature.cpp
-  engine.cpp
-  environment.cpp
-  gui.cpp
-  input.cpp
-  item.cpp
-  main.cpp
-  map.cpp
-  panel.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(805,71): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  settings.cpp
-  tile.cpp
-  tool.cpp
-  utility.cpp
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(202,37): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(206,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(228,56): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(229,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(233,86): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(234,72): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  window.cpp
-  Generating Code...
+﻿  environment.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\environment.cpp(21,144): warning C4244: 'initializing': conversion from 'float' to 'const short', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\environment.cpp(21,128): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\environment.cpp(36,51): warning C4244: '-=': conversion from 'float' to 'short', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\environment.cpp(39,47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\environment.cpp(45,51): warning C4244: '-=': conversion from 'float' to 'short', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\environment.cpp(55,46): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\environment.cpp(173,51): warning C4244: '-=': conversion from 'float' to 'short', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\environment.cpp(176,46): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\environment.cpp(184,51): warning C4244: '-=': conversion from 'float' to 'short', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\environment.cpp(195,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe

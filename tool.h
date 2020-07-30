@@ -177,12 +177,12 @@ namespace ep
 	{
 		inline static Bullet cal45(const Creature* owner, int ch, Position4 startPosition, Position2 targetPosition)
 		{
-			return Bullet(owner, "cal45", ch, startPosition, targetPosition, 80, 230);
+			return Bullet(owner, "cal45", ch, startPosition, targetPosition, 400, 15);
 		}
 
 		inline static Bullet cal556(const Creature* owner, int ch, Position4 startPosition, Position2 targetPosition)
 		{
-			return Bullet(owner, "cal556", ch, startPosition, targetPosition, 300, 55);
+			return Bullet(owner, "cal556", ch, startPosition, targetPosition, 1500, 3.5f);
 		}
 	};
 }

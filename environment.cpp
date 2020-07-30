@@ -17,32 +17,32 @@ void Entity::render(const Pane& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Projectile::Projectile(const Creature* owner, int ch, std::string name, TCODColor color, const Position4 startPosition, Position2 targetPosition, int velocity, int mass)
-	: Entity(startPosition, ch, name, color), owner(owner), startPosition(startPosition), targetPosition(targetPosition), baseVelocity(velocity), currentVelocity(velocity), mass(mass),
+Projectile::Projectile(const Creature* owner, int ch, std::string name, TCODColor color, const Position4 startPosition, Position2 targetPosition, int velocity, float mass)
+	: Entity(startPosition, ch, name, color), owner(owner), startPosition(startPosition), targetPosition(targetPosition), velocity(velocity), mass(mass),
 	fTravel(FLine(startPosition, targetPosition)), moveClock(1.0f / velocity), fallClock(0), nextPosition(startPosition), inFov(false), onGround(false)
 {
 }
 
 void Projectile::doProjectileDamage(std::shared_ptr<Creature>& creature)
 {
-	int damage = 0;
+	int damage = 0; //can be removed?
 
 	if (creature->health != 0)
 	{
 		if (creature->equippedArmor.durability > 0) //if the armor durability is high enough
 		{
-			if (currentVelocity - creature->equippedArmor.defense > 0) //if bullet is fast enough to pass through armor
+			if (velocity - creature->equippedArmor.defense > 0) //if bullet is fast enough to pass through armor
 			{
-				creature->equippedArmor.durability -= currentVelocity; //should happen before taking damage to prevent high damage
-				currentVelocity -= creature->equippedArmor.defense;
+				creature->equippedArmor.durability -= velocity; //should happen before taking damage to prevent high damage
+				velocity -= creature->equippedArmor.defense;
 
-				damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //2.0f can be changed to manage ttk and bullet damage //velocities can be changed, the difference between the two are whats important
+				damage = calculateProjectileDamage(false, velocity, mass);
 
 				creature->takeDamage(damage);
 			}
 			else //if the bullet is stopped by the armor
 			{
-				creature->equippedArmor.durability -= currentVelocity;
+				creature->equippedArmor.durability -= velocity;
 			}
 
 			if (creature->equippedArmor.durability < 0)
@@ -52,11 +52,11 @@ void Projectile::doProjectileDamage(std::shared_ptr<Creature>& creature)
 		}
 		else
 		{
-			damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass);
+			damage = calculateProjectileDamage(false, velocity, mass);
 
 			creature->takeDamage(damage);
 		}
-		currentVelocity = 0; //stop bullet
+		velocity = 0; //stop bullet
 
 		if (damage > 0)
 		{
@@ -73,7 +73,7 @@ void Projectile::update()
 {
 	inFov = WORLD->isInPlayerFov(mapPosition);
 
-	if (currentVelocity > 0)
+	if (velocity > 0)
 	{
 		moveClock.tickUp();
 		for (int i = 1; i < moveClock.numCalls; moveClock.numCalls--)
@@ -81,8 +81,8 @@ void Projectile::update()
 			if (WORLD->debugmap->inMapBounds(nextPosition))
 			{
 				int decel = WORLD->debugmap->getBlock(nextPosition)->tileList[mapPosition.h].deceleration;
-				if (currentVelocity - decel < 0)	currentVelocity = 0;
-				else								currentVelocity -= decel;
+				if (velocity - decel < 0)	velocity = 0;
+				else								velocity -= decel;
 
 				if (WORLD->debugmap->getBlock(nextPosition)->destroy(mass, mapPosition.h)) //damage something and if it destroys
 				{
@@ -98,11 +98,11 @@ void Projectile::update()
 					}
 				}
 
-				if (currentVelocity > 0) fTravel.stepLine();
+				if (velocity > 0) fTravel.stepLine();
 			}
 			else
 			{
-				currentVelocity = 0;
+				velocity = 0;
 				mapPosition.h = 0;
 			}
 		}
@@ -129,7 +129,7 @@ void Projectile::render(const Pane& pane) const
 {
 	if (inFov)
 	{
-		if (currentVelocity > 0)
+		if (velocity > 0)
 		{
 			if (mapPosition.h > 0) //in the air
 			{
@@ -155,34 +155,34 @@ void Projectile::render(const Pane& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Bullet::Bullet(const Creature* owner, std::string name, int ch, const Position4 startPosition, Position2 targetPosition, int velocity, int mass)
+Bullet::Bullet(const Creature* owner, std::string name, int ch, const Position4 startPosition, Position2 targetPosition, int velocity, float mass)
 	: Projectile(owner, ch, name, TCODColor::copper, startPosition, targetPosition, velocity, mass)
 {
 }
 
 void Bullet::doProjectileDamage(std::shared_ptr<Creature>& creature)
 {
-	int damage = 0;
+	int damage = 0; //can be removed?
 
 	if (creature->health != 0)
 	{
 		if (creature->equippedArmor.durability > 0) //if the armor durability is high enough
 		{
-			if (currentVelocity - creature->equippedArmor.defense > 0) //if bullet is fast enough to pass through armor
+			if (velocity - creature->equippedArmor.defense > 0) //if bullet is fast enough to pass through armor
 			{
-				creature->equippedArmor.durability -= currentVelocity; //should happen before taking damage to prevent high damage
-				currentVelocity -= creature->equippedArmor.defense;
+				creature->equippedArmor.durability -= velocity; //should happen before taking damage to prevent high damage
+				velocity -= creature->equippedArmor.defense;
 
-				damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass); //2.0f can be changed to manage ttk and bullet damage //velocities can be changed, the difference between the two are whats important
+				damage = calculateProjectileDamage(true, velocity, mass);
 
 				creature->takeDamage(damage);
 
-				currentVelocity -= 100; //slowdown after going through body
+				velocity -= 100; //slowdown after going through body
 			}
 			else //if the bullet is stopped by the armor
 			{
-				creature->equippedArmor.durability -= currentVelocity;
-				currentVelocity = 0;
+				creature->equippedArmor.durability -= velocity;
+				velocity = 0;
 			}
 
 			if (creature->equippedArmor.durability < 0)
@@ -192,11 +192,11 @@ void Bullet::doProjectileDamage(std::shared_ptr<Creature>& creature)
 		}
 		else
 		{
-			damage = int(float(currentVelocity / (baseVelocity * 2.0f)) * mass);
+			damage = calculateProjectileDamage(true, velocity, mass);
 
 			creature->takeDamage(damage);
 
-			currentVelocity -= 100; //slowdown after going through body
+			velocity -= 100; //slowdown after going through body
 		}
 
 		if (damage > 0)
@@ -214,16 +214,19 @@ void Bullet::update()
 {
 	inFov = WORLD->isInPlayerFov(mapPosition);
 
-	if (currentVelocity > 0)
+	if (velocity > 0)
 	{
 		moveClock.tickUp();
+
+		GUI->logWindow->pushMessage(Message("STEPS: " + std::to_string(moveClock.numCalls), Message::MessageLevel::MEDIUM));
+
 		for (int i = 1; i < moveClock.numCalls; moveClock.numCalls--)
 		{
 			if (WORLD->debugmap->inMapBounds(nextPosition))
 			{
 				int decel = WORLD->debugmap->getBlock(nextPosition)->tileList[mapPosition.h].deceleration;
-				if (currentVelocity - decel < 0)	currentVelocity = 0;
-				else								currentVelocity -= decel;
+				if (velocity - decel < 0)	velocity = 0;
+				else						velocity -= decel;
 
 				if (WORLD->debugmap->getBlock(nextPosition)->destroy(mass, mapPosition.h)) //damage something and if it destroys
 				{
@@ -239,11 +242,14 @@ void Bullet::update()
 					}
 				}
 
-				if (currentVelocity > 0) fTravel.stepLine();
+				if (velocity > 0) fTravel.stepLine();
+
+				mapPosition = Position4(fTravel.getPosition().x, fTravel.getPosition().y, mapPosition.h, startPosition.z);
+				nextPosition = Position4(fTravel.getNextPosition().x, fTravel.getNextPosition().y, mapPosition.h, mapPosition.z);
 			}
 			else
 			{
-				currentVelocity = 0;
+				velocity = 0;
 				mapPosition.h = 0;
 			}
 		}
@@ -256,17 +262,14 @@ void Bullet::update()
 		for (int i = 1; i < fallClock.numCalls; fallClock.numCalls--) mapPosition.h--;
 	}
 
-	mapPosition = Position4(fTravel.getPosition().x, fTravel.getPosition().y, mapPosition.h, startPosition.z);
 	renderPosition = getRenderPosition(mapPosition);
-
-	nextPosition = Position4(fTravel.getNextPosition().x, fTravel.getNextPosition().y, mapPosition.h, mapPosition.z);
 }
 
 void Bullet::render(const Pane& pane) const
 {
 	if (inFov)
 	{
-		if (currentVelocity > 0)
+		if (velocity > 0)
 		{
 			if (mapPosition.h > 0) //in the air
 			{
