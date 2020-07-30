@@ -16,7 +16,7 @@
 */
 struct Action
 {
-	enum class Type {DROP, RELOAD, CHANGEFIREMODE, EQUIP, MELEE} type;
+	enum class Type {DROP, RELOAD, CHANGEFIREMODE, EQUIP, MELEE, THROW} type;
 
 	std::string name;
 

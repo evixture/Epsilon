@@ -109,6 +109,21 @@ void AICreature::dropItem() //prob here
 	}
 }
 
+void AICreature::throwItem()
+{
+	if (itemIndex == -1) // container selected
+	{
+		if (selectedItem->type != Item::ItemType::HAND)
+		{
+			inventory[containerIndex]->throwContainer(this);
+		}
+	}
+	else
+	{
+		selectedItem->throwItem();
+	}
+}
+
 bool AICreature::reload()
 {
 	for (auto& container : inventory)

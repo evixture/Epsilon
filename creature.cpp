@@ -318,7 +318,17 @@ void Player::throwItem()
 	//	-1 : container selected
 	//	0+ : item in vector
 
-	//if ()
+	if (itemIndex == -1) // container selected
+	{
+		if (selectedItem->type != Item::ItemType::HAND)
+		{
+			inventory[containerIndex]->throwContainer(this);
+		}
+	}
+	else
+	{
+		selectedItem->throwItem();
+	}
 }
 
 void Player::takeDamage(int damage)
@@ -469,7 +479,7 @@ void Player::update()
 			}
 		}
 		
-		if (INPUT->debug1->isSwitched)			selectedItem->throwItem();
+		if (INPUT->debug1->isSwitched)			throwItem();
 		if (INPUT->pickUp->isSwitched)			pickUpItem();
 		if (INPUT->drop->isSwitched)			dropItem();
 		if (INPUT->reload->isSwitched)			reload();

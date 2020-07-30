@@ -60,6 +60,7 @@ void ActionManager::doAction(Creature* currentOwner)
 	else if (selectedAction.type == Action::Type::CHANGEFIREMODE)	std::bind(&Creature::changeFireMode, currentOwner)();
 	else if (selectedAction.type == Action::Type::EQUIP)			std::bind(&Creature::equipArmor, currentOwner)();
 	else if (selectedAction.type == Action::Type::MELEE)			std::bind(&Creature::useMelee, currentOwner)();
+	else if (selectedAction.type == Action::Type::THROW)			std::bind(&Creature::throwItem, currentOwner)();
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -84,20 +85,21 @@ void Item::createActionManager()
 	{
 	case ItemType::NORMAL:
 	case ItemType::MAGAZINE:
-		actionManager = std::make_shared<ActionManager>(std::vector<Action>{Action("Drop", Action::Type::DROP)});
+		actionManager = std::make_shared<ActionManager>(std::vector<Action>{Action("Drop", Action::Type::DROP), Action("Throw", Action::Type::THROW)});
 		break;
 
 	case ItemType::MELEE:
-		actionManager = std::make_shared<ActionManager>(std::vector<Action>{Action("Drop", Action::Type::DROP), Action("Melee",Action::Type::MELEE)});
+		actionManager = std::make_shared<ActionManager>(std::vector<Action>{Action("Drop", Action::Type::DROP), Action("Melee",Action::Type::MELEE), Action("Throw", Action::Type::THROW)});
 		break;
 
 	case ItemType::FIREARM:
 		actionManager = std::make_shared<ActionManager>
-			(std::vector<Action>{Action("Reload",Action::Type::RELOAD), Action("Drop",Action::Type::DROP), Action("Change Fire Mode",Action::Type::CHANGEFIREMODE), Action("Melee",Action::Type::MELEE)});
+			(std::vector<Action>{Action("Reload",Action::Type::RELOAD), Action("Drop",Action::Type::DROP), Action("Change Fire Mode",Action::Type::CHANGEFIREMODE), 
+				Action("Melee",Action::Type::MELEE), Action("Throw", Action::Type::THROW)});
 		break;
 
 	case ItemType::ARMOR:
-		actionManager = std::make_shared<ActionManager>(std::vector<Action>{Action("Drop", Action::Type::DROP), Action("Equip", Action::Type::EQUIP)});
+		actionManager = std::make_shared<ActionManager>(std::vector<Action>{Action("Drop", Action::Type::DROP), Action("Equip", Action::Type::EQUIP), Action("Throw", Action::Type::THROW)});
 		break;
 
 	case ItemType::HAND:
