@@ -17,7 +17,7 @@ void Entity::render(const Pane& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Projectile::Projectile(const Creature* owner, int ch, std::string name, TCODColor color, const Position4 startPosition, Position2 targetPosition, int velocity, float mass)
+Projectile::Projectile(const Creature* owner, int ch, std::string name, TCODColor color, const Position4 startPosition, Position2 targetPosition, float velocity, float mass)
 	: Entity(startPosition, ch, name, color), owner(owner), startPosition(startPosition), targetPosition(targetPosition), velocity(velocity), mass(mass),
 	fTravel(FLine(startPosition, targetPosition)), moveClock(1.0f / velocity), fallClock(0), nextPosition(startPosition), inFov(false), onGround(false)
 {
@@ -80,15 +80,17 @@ void Projectile::update()
 		{
 			if (WORLD->debugmap->inMapBounds(nextPosition))
 			{
-				int decel = WORLD->debugmap->getBlock(nextPosition)->tileList[mapPosition.h].deceleration;
-				if (velocity - decel < 0)	velocity = 0;
-				else								velocity -= decel;
+				//int decel = WORLD->debugmap->getBlock(nextPosition)->tileList[mapPosition.h].deceleration;
+				//if (velocity - decel < 0)	velocity = 0;
+				//else								velocity -= decel;
 
-				if (WORLD->debugmap->getBlock(nextPosition)->destroy(mass, mapPosition.h)) //damage something and if it destroys
-				{
-					WORLD->updateBlock(nextPosition, false);
-					AUDIO->playSound(PositionalStaticSound(("crash"), nextPosition, 85.0f, 100.0f));
-				}
+				//if (WORLD->debugmap->getBlock(nextPosition)->destroy(mass, mapPosition.h)) //damage something and if it destroys
+				//{
+				//	//WORLD->updateBlock(nextPosition, false);
+				//	//AUDIO->playSound(PositionalStaticSound(("crash"), nextPosition, 85.0f, 100.0f));
+				//}
+
+				WORLD->debugmap->getBlock(nextPosition)->interact(this);
 
 				for (auto& creature : WORLD->debugmap->creatureList) //check if hit creatures
 				{
@@ -99,6 +101,9 @@ void Projectile::update()
 				}
 
 				if (velocity > 0) fTravel.stepLine();
+
+				mapPosition = Position4(fTravel.getPosition().x, fTravel.getPosition().y, mapPosition.h, startPosition.z);
+				renderPosition = getRenderPosition(mapPosition);
 			}
 			else
 			{
@@ -119,9 +124,6 @@ void Projectile::update()
 		onGround = true;
 	}
 
-	mapPosition = Position4(fTravel.getPosition().x, fTravel.getPosition().y, mapPosition.h, startPosition.z);
-	renderPosition = getRenderPosition(mapPosition);
-
 	nextPosition = Position4(fTravel.getNextPosition().x, fTravel.getNextPosition().y, mapPosition.h, mapPosition.z);
 }
 
@@ -134,15 +136,7 @@ void Projectile::render(const Pane& pane) const
 			if (mapPosition.h > 0) //in the air
 			{
 				pane.console->setCharForeground(renderPosition.x, renderPosition.y, color);
-
-				if (startPosition.x == fTravel.getPosition().x && startPosition.y == fTravel.getPosition().y)
-				{
-					pane.console->setChar(renderPosition.x, renderPosition.y, ch); //muzzle flash
-				}
-				else
-				{
-					pane.console->setChar(renderPosition.x, renderPosition.y, ch);
-				}
+				pane.console->setChar(renderPosition.x, renderPosition.y, ch);
 			}
 			//else //on the ground, use the tile beyond this point
 			//{
@@ -155,7 +149,7 @@ void Projectile::render(const Pane& pane) const
 
 //----------------------------------------------------------------------------------------------------
 
-Bullet::Bullet(const Creature* owner, std::string name, int ch, const Position4 startPosition, Position2 targetPosition, int velocity, float mass)
+Bullet::Bullet(const Creature* owner, std::string name, int ch, const Position4 startPosition, Position2 targetPosition, float velocity, float mass)
 	: Projectile(owner, ch, name, TCODColor::copper, startPosition, targetPosition, velocity, mass)
 {
 }
@@ -217,22 +211,21 @@ void Bullet::update()
 	if (velocity > 0)
 	{
 		moveClock.tickUp();
-
-		GUI->logWindow->pushMessage(Message("STEPS: " + std::to_string(moveClock.numCalls), Message::MessageLevel::MEDIUM));
-
 		for (int i = 1; i < moveClock.numCalls; moveClock.numCalls--)
 		{
 			if (WORLD->debugmap->inMapBounds(nextPosition))
 			{
-				int decel = WORLD->debugmap->getBlock(nextPosition)->tileList[mapPosition.h].deceleration;
-				if (velocity - decel < 0)	velocity = 0;
-				else						velocity -= decel;
+				//int decel = WORLD->debugmap->getBlock(nextPosition)->tileList[mapPosition.h].deceleration;
+				//if (velocity - decel < 0)	velocity = 0;
+				//else						velocity -= decel;
 
-				if (WORLD->debugmap->getBlock(nextPosition)->destroy(mass, mapPosition.h)) //damage something and if it destroys
-				{
-					WORLD->updateBlock(nextPosition, false);
-					AUDIO->playSound(PositionalStaticSound(("crash"), nextPosition, 85.0f, 100.0f));
-				}
+				//if (WORLD->debugmap->getBlock(nextPosition)->destroy(mass, mapPosition.h)) //damage something and if it destroys
+				//{
+				//	WORLD->updateBlock(nextPosition, false);
+				//	//AUDIO->playSound(PositionalStaticSound(("crash"), nextPosition, 85.0f, 100.0f));
+				//}
+
+				WORLD->debugmap->getBlock(nextPosition)->interact(this);
 
 				for (auto& creature : WORLD->debugmap->creatureList) //check if hit creatures
 				{

@@ -179,10 +179,12 @@ void Melee::useMelee()
 		}
 	}
 
-	if (WORLD->debugmap->getBlock(mapPosition)->destroy((bluntDamage + sharpDamage), mapPosition.h))
-	{
-		AUDIO->playSound(PositionalStaticSound(("crash"), mapPosition, 85.0f, 100.0f));
-	}
+	//if (WORLD->debugmap->getBlock(mapPosition)->destroy((bluntDamage + sharpDamage), mapPosition.h))
+	//{
+	//	AUDIO->playSound(PositionalStaticSound(("crash"), mapPosition, 85.0f, 100.0f));
+	//}
+
+	WORLD->debugmap->getBlock(mapPosition)->interact(this);
 
 	WORLD->updateBlock(mapPosition, false);
 }

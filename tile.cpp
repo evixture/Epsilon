@@ -26,8 +26,52 @@ Tile Block::getTileData(int h) const
 	return Tile('%', TCODColor::pink, TCODColor::pink, 999, -1, -1);
 }
 
-bool Block::destroy(int damage, int h)
+//bool Block::destroy(float velocity, float mass, int h)
+//{
+//	if (!destroyed)
+//	{
+//		if (tileList[h].strength != -1) //if can be damaged
+//		{
+//			if	(tileList[h].strength - damage >= 0) tileList[h].strength -= damage;
+//			else tileList[h].strength = 0;
+//
+//			for (auto& tile : tileList)
+//			{
+//				if (tile.strength == 0) //if it has no strength left
+//				{
+//					destroyed = true;
+//					break;
+//				}
+//			}
+//
+//			if (destroyed)
+//			{
+//				tileList = std::array<Tile, 4>
+//				{
+//					Tile('%', tileList[0].foregroundColor * TCODColor::lightGrey, tileList[0].backgroundColor * TCODColor::darkGrey, 0, 21),
+//					Tile(0, TCODColor::pink, TCODColor::pink, 0, 21),
+//					Tile(0, TCODColor::pink, TCODColor::pink, 0, 21),
+//					Tile(0, TCODColor::pink, TCODColor::pink, 0, 21)
+//				};
+//
+//				solidityFlag = ep::tileFlag::OOOOI;
+//				transparentFlag = ep::tileFlag::OOOOI;
+//
+//				return true;
+//			}
+//		}
+//	}
+//	return false;
+//}
+
+void Block::interact()
 {
+	return;
+}
+
+void Block::interact(Projectile* projectile)
+{
+	/*
 	if (!destroyed)
 	{
 		if (tileList[h].strength != -1) //if can be damaged
@@ -62,11 +106,85 @@ bool Block::destroy(int damage, int h)
 		}
 	}
 	return false;
+	*/
+
+	if (!destroyed)
+	{
+		if (tileList[projectile->mapPosition.h].strength != -1)
+		{
+			if (tileList[projectile->mapPosition.h].strength - projectile->mass >= 0)
+			{
+				tileList[projectile->mapPosition.h].strength -= projectile->mass;
+			}
+			else
+			{
+				tileList[projectile->mapPosition.h].strength = 0;
+				destroyed = true;
+			}
+
+			if (projectile->velocity < tileList[projectile->mapPosition.h].deceleration)
+			{
+				projectile->velocity = 0;
+			}
+			else
+			{
+				projectile->velocity -= tileList[projectile->mapPosition.h].deceleration;
+			}
+
+			if (destroyed)
+			{
+				tileList = std::array<Tile, 4>
+				{
+					Tile('%', tileList[0].foregroundColor* TCODColor::lightGrey, tileList[0].backgroundColor* TCODColor::darkGrey, 0, 21),
+						Tile(0, TCODColor::pink, TCODColor::pink, 0, 21),
+						Tile(0, TCODColor::pink, TCODColor::pink, 0, 21),
+						Tile(0, TCODColor::pink, TCODColor::pink, 0, 21)
+				};
+
+				solidityFlag = ep::tileFlag::OOOOI;
+				transparentFlag = ep::tileFlag::OOOOI;
+
+				WORLD->updateBlock(projectile->nextPosition, false);
+				AUDIO->playSound(PositionalStaticSound(("crash"), projectile->nextPosition, 85.0f, 100.0f));
+			}
+		}
+	}
 }
 
-void Block::interact()
+void Block::interact(Melee* melee)
 {
-	return;
+	if (!destroyed)
+	{
+		if (tileList[melee->mapPosition.h].strength != -1)
+		{
+			if (tileList[melee->mapPosition.h].strength - ((melee->bluntDamage + melee->sharpDamage) / 10.0f) >= 0)
+			{
+				tileList[melee->mapPosition.h].strength -= ((melee->bluntDamage + melee->sharpDamage) / 10.0f);
+			}
+			else
+			{
+				tileList[melee->mapPosition.h].strength = 0;
+				destroyed = true;
+			}
+
+			if (destroyed)
+			{
+				tileList = std::array<Tile, 4>
+				{
+					Tile('%', tileList[0].foregroundColor* TCODColor::lightGrey, tileList[0].backgroundColor* TCODColor::darkGrey, 0, 21),
+						Tile(0, TCODColor::pink, TCODColor::pink, 0, 21),
+						Tile(0, TCODColor::pink, TCODColor::pink, 0, 21),
+						Tile(0, TCODColor::pink, TCODColor::pink, 0, 21)
+				};
+
+				solidityFlag = ep::tileFlag::OOOOI;
+				transparentFlag = ep::tileFlag::OOOOI;
+
+				WORLD->updateBlock(melee->mapPosition, false);
+				AUDIO->playSound(PositionalStaticSound(("crash"), melee->mapPosition, 85.0f, 100.0f));
+			}
+		}
+	}
 }
 
 void Block::render(Position4 renderPosition, const Pane& pane) const

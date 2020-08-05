@@ -229,7 +229,7 @@ void Item::throwItem()
 	if (!onMap && !inAir)
 	{
 		inAir = true; //needs to be first?
-		projectile = std::make_shared<Projectile>(owner, block->tileList[0].ch, tool->name, block->tileList[0].foregroundColor, tool->mapPosition, owner->targetPosition, 50, 240);
+		projectile = std::make_shared<Projectile>(owner, block->tileList[0].ch, tool->name, block->tileList[0].foregroundColor, tool->mapPosition, owner->targetPosition, 50.0f, 240.0f);
 
 		WORLD->debugmap->mapItemList.push_back(std::make_shared<Item>(*this));																   //needs to be last
 		owner->inventory[owner->containerIndex]->itemList.erase(owner->inventory[owner->containerIndex]->itemList.begin() + owner->itemIndex); //needs to be last
@@ -390,7 +390,7 @@ void Container::throwContainer(Creature* owner)
 	{
 		item->inAir = true; //needs to be first?
 		item->projectile = std::make_shared<Projectile>(item->owner, item->block->tileList[0].ch, item->tool->name, item->block->tileList[0].foregroundColor, 
-			item->tool->mapPosition, item->owner->targetPosition, 50, 240);
+			item->tool->mapPosition, item->owner->targetPosition, 50.0f, 240.0f);
 
 		WORLD->debugmap->mapContainerList.push_back(std::make_shared<Container>(*this));
 		owner->inventory.erase(item->owner->inventory.begin() + item->owner->containerIndex); //cant access unless owner parameter

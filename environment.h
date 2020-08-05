@@ -26,12 +26,12 @@ struct Projectile : public Entity
 
 	bool onGround;
 
-	const short int mass;			//weight is in grams??
-	float velocity;				//velocity is in fps / 2
+	float mass;			//weight is in grams
+	float velocity;		//velocity is in fps / 2
 
-	const Position4 startPosition;
+	Position4 nextPosition;
 
-	Projectile(const Creature* owner, int ch, std::string name, TCODColor color, const Position4 startPosition, Position2 targetPosition, int velocity, float mass);
+	Projectile(const Creature* owner, int ch, std::string name, TCODColor color, const Position4 startPosition, Position2 targetPosition, float velocity, float mass);
 
 	virtual void doProjectileDamage(std::shared_ptr<Creature>& creature); //damage is calculated differently compared to bullet
 
@@ -39,8 +39,8 @@ struct Projectile : public Entity
 	virtual void render(const Pane& pane) const;
 
 protected:
-	Position2 targetPosition;
-	Position4 nextPosition;
+	const Position4 startPosition;
+	const Position2 targetPosition;
 
 	FLine fTravel;
 
@@ -51,7 +51,7 @@ protected:
 struct Bullet : public Projectile
 {
 	//check if use ref
-	Bullet(const Creature* owner, std::string name, int ch, const Position4 startPosition, Position2 targetPosition, int velocity, float mass);
+	Bullet(const Creature* owner, std::string name, int ch, const Position4 startPosition, Position2 targetPosition, float velocity, float mass);
 
 	void doProjectileDamage(std::shared_ptr<Creature>& creature); //damage is calculated differently compared to projectile
 

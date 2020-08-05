@@ -105,6 +105,12 @@ namespace ep
 				std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(owner, 0, 0, 0)),
 				std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(owner, 0, 0, 0)),
 				std::make_shared<Item>(ep::item::knife(owner, 0, 0, 0))
+			})),
+			std::make_shared<Container>(ep::container::smallBackpack(owner, 0, 0, 0,
+			{
+				std::make_shared<Item>(ep::item::sir556(owner, 0, 0, 0)),
+				std::make_shared<MagazineItem>(ep::magazineItem::cal556Magazine30(owner, 0, 0, 0)),
+				std::make_shared<MagazineItem>(ep::magazineItem::cal556Magazine30(owner, 0, 0, 0)),
 			}))};
 		}
 	};

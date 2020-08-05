@@ -45,6 +45,8 @@ struct Tile
 	Tile(int ch, TCODColor foregroundColor, TCODColor backgroundColor, int deceleration, char nameID, int strength = -1);
 };
 
+struct Melee;
+
 struct Block
 {
 	enum class Tag {STATIC, STAIR} tag;
@@ -65,8 +67,9 @@ struct Block
 
 	void render(Position4 renderPosition, const Pane& pane) const;
 
-	virtual bool destroy(int damage, int h);
 	virtual void interact();
+	virtual void interact(Projectile* projectile);
+	virtual void interact(Melee* melee);
 };
 
 struct Stair : public Block
@@ -170,41 +173,41 @@ namespace ep
 	
 		inline static const std::array<Tile, 4> door =
 		{
-			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		25,		6),
-			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		25,		6),
-			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		25,		6),
-			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		25,		6)
+			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		50,		6),
+			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		50,		6),
+			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		50,		6),
+			Tile(ep::character::door,			ep::color::doorFG,			ep::color::wallBG,		50,		6)
 		};
 	
 		inline static const std::array<Tile, 4> wall =
 		{
-			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7, -1),
-			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7, 1000),
-			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7, 1000),
-			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7, 1000)
+			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		100,	7, -1),
+			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		100,	7, 100),
+			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		100,	7, 100),
+			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		100,	7, 100)
 		};
 	
 		inline static const std::array<Tile, 4> window =
 		{
-			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7,	-1),
-			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7,	1000),
-			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		50,		7,	1000),
-			Tile(ep::character::window,			ep::color::windowFG,		ep::color::windowBG,	0,		8,	100)
+			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		100,	7,	-1),
+			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		100,	7,	100),
+			Tile('#',							ep::color::wallFG,			ep::color::wallBG,		100,	7,	100),
+			Tile(ep::character::window,			ep::color::windowFG,		ep::color::windowBG,	0,		8,	1)
 		};
 	
 		inline static const std::array<Tile, 4> tableLeg =
 		{
 			Tile(' ',							ep::color::floorFG,			ep::color::floorBG,		999,	3),
-			Tile('!',							ep::color::tableFG,			ep::color::floorBG,		25,		9,	200),
-			Tile(ep::character::table,			ep::color::tableFG,			ep::color::floorBG,		25,		10, 500),
+			Tile('!',							ep::color::tableFG,			ep::color::floorBG,		25,		9,	50),
+			Tile(ep::character::table,			ep::color::tableFG,			ep::color::floorBG,		25,		10, 100),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
 		inline static const std::array<Tile, 4> tableTop =
 		{
 			Tile(' ',							ep::color::floorFG,			ep::color::floorBG,		999,	3),
-			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		3,	200),
-			Tile(ep::character::table,			ep::color::tableFG,			ep::color::floorBG,		25,		10,	500),
+			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		3),
+			Tile(ep::character::table,			ep::color::tableFG,			ep::color::floorBG,		25,		10,	100),
 			Tile(0,								TCODColor::pink,			TCODColor::pink,		0,		0)
 		};
 	
