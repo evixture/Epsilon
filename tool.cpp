@@ -486,7 +486,7 @@ void Firearm::render(const Pane& pane) const
 	}
 }
 
-Armor::Armor(const Creature* owner, std::string name, TCODColor color, int defense, int durability)
+Armor::Armor(const Creature* owner, std::string name, TCODColor color, float defense, float durability)
 	: Tool(owner, name, color, ep::character::ballisticVest), defense(defense), durability(durability)
 {
 	type = Tool::Type::ARMOR;
@@ -498,7 +498,7 @@ void Armor::equip(Armor& armor) //if the passed armor is not equal to the armor 
 	{
 		if (this->defense == armor.defense && this->durability == armor.durability) //if armor is already equipped
 		{
-			armor = Armor(owner, "", TCODColor::pink, 0, 0); //??
+			armor = Armor(owner, "", TCODColor::pink, 0.0f, 0.0f); //??
 		}
 		else
 		{

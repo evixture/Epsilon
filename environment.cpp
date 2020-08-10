@@ -33,7 +33,7 @@ void Projectile::doProjectileDamage(std::shared_ptr<Creature>& creature)
 		{
 			if (velocity - creature->equippedArmor.defense > 0) //if bullet is fast enough to pass through armor
 			{
-				creature->equippedArmor.durability -= velocity; //should happen before taking damage to prevent high damage
+				creature->equippedArmor.durability -= mass; //should happen before taking damage to prevent high damage
 				velocity -= creature->equippedArmor.defense;
 
 				damage = calculateProjectileDamage(false, velocity, mass);
@@ -42,7 +42,7 @@ void Projectile::doProjectileDamage(std::shared_ptr<Creature>& creature)
 			}
 			else //if the bullet is stopped by the armor
 			{
-				creature->equippedArmor.durability -= velocity;
+				creature->equippedArmor.durability -= mass;
 			}
 
 			if (creature->equippedArmor.durability < 0)

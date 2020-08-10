@@ -1,2 +1,54 @@
-﻿  main.cpp
-  Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe
+﻿..\..\..\..\pugixml-1.10\src\pugixml.cpp(4976,10): warning : '_wfopen' is deprecated: This function or variable may be unsafe. Consider using _wfopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\corecrt_wstdio.h(129,20): message : '_wfopen' has been explicitly marked deprecated here
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vcruntime.h(316,55): message : expanded from macro '_CRT_INSECURE_DEPRECATE'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vcruntime.h(306,47): message : expanded from macro '_CRT_DEPRECATE_TEXT'
+..\..\..\..\pugixml-1.10\src\pugixml.cpp(7120,27): warning : 'fopen' is deprecated: This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(207,20): message : 'fopen' has been explicitly marked deprecated here
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vcruntime.h(316,55): message : expanded from macro '_CRT_INSECURE_DEPRECATE'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vcruntime.h(306,47): message : expanded from macro '_CRT_DEPRECATE_TEXT'
+..\..\..\..\pugixml-1.10\src\pugixml.cpp(7203,27): warning : 'fopen' is deprecated: This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(207,20): message : 'fopen' has been explicitly marked deprecated here
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vcruntime.h(316,55): message : expanded from macro '_CRT_INSECURE_DEPRECATE'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vcruntime.h(306,47): message : expanded from macro '_CRT_DEPRECATE_TEXT'
+  In file included from aicreature.cpp:1:
+  In file included from ./main.hpp:14:
+  In file included from E:\Libtcod\custom-libtcod-master\src\libtcod.hpp:32:
+  In file included from E:\Libtcod\custom-libtcod-master\src/libtcod.h:32:
+  In file included from E:\Libtcod\custom-libtcod-master\src/libtcod/libtcod.h:54:
+E:\Libtcod\custom-libtcod-master\src/libtcod/sys.h(58,17): error : 'nodiscard' attribute cannot be applied to types
+E:\Libtcod\custom-libtcod-master\src/libtcod/console/../portability.h(199,26): message : expanded from macro 'TCOD_NODISCARD'
+  In file included from aicreature.cpp:1:
+  In file included from ./main.hpp:14:
+  In file included from E:\Libtcod\custom-libtcod-master\src\libtcod.hpp:32:
+  In file included from E:\Libtcod\custom-libtcod-master\src/libtcod.h:32:
+  In file included from E:\Libtcod\custom-libtcod-master\src/libtcod/libtcod.h:64:
+E:\Libtcod\custom-libtcod-master\src/libtcod/engine/display.h(195,14): error : an attribute list cannot appear here
+E:\Libtcod\custom-libtcod-master\src/libtcod/engine/../tileset/../portability.h(199,24): message : expanded from macro 'TCOD_NODISCARD'
+  In file included from aicreature.cpp:1:
+  In file included from ./main.hpp:14:
+  In file included from E:\Libtcod\custom-libtcod-master\src\libtcod.hpp:32:
+  In file included from E:\Libtcod\custom-libtcod-master\src/libtcod.h:32:
+  In file included from E:\Libtcod\custom-libtcod-master\src/libtcod/libtcod.h:64:
+E:\Libtcod\custom-libtcod-master\src/libtcod/engine/display.h(197,14): error : an attribute list cannot appear here
+E:\Libtcod\custom-libtcod-master\src/libtcod/engine/../tileset/../portability.h(199,24): message : expanded from macro 'TCOD_NODISCARD'
+  In file included from aicreature.cpp:1:
+  In file included from ./main.hpp:14:
+  In file included from E:\Libtcod\custom-libtcod-master\src\libtcod.hpp:32:
+  In file included from E:\Libtcod\custom-libtcod-master\src/libtcod.h:32:
+  In file included from E:\Libtcod\custom-libtcod-master\src/libtcod/libtcod.h:64:
+E:\Libtcod\custom-libtcod-master\src/libtcod/engine/display.h(281,14): error : an attribute list cannot appear here
+E:\Libtcod\custom-libtcod-master\src/libtcod/engine/../tileset/../portability.h(199,24): message : expanded from macro 'TCOD_NODISCARD'
+  In file included from aicreature.cpp:1:
+  In file included from ./main.hpp:45:
+./input.h(29,2): warning : explicitly defaulted default constructor is implicitly deleted [-Wdefaulted-function-deleted]
+./input.h(26,25): message : default constructor of 'KeyboardButton' is implicitly deleted because base class 'Button' has no default constructor
+./input.h(40,2): warning : explicitly defaulted default constructor is implicitly deleted [-Wdefaulted-function-deleted]
+./input.h(37,22): message : default constructor of 'MouseButton' is implicitly deleted because base class 'Button' has no default constructor
+aicreature.cpp(4,47): warning : field 'moveSpeedMode' will be initialized after field 'debugBGColor' [-Wreorder-ctor]
+aicreature.cpp(4,97): warning : field 'soundInterest' will be initialized after field 'visualInterest' [-Wreorder-ctor]
+aicreature.cpp(4,118): warning : field 'visualInterest' will be initialized after field 'interestDecay' [-Wreorder-ctor]
+aicreature.cpp(4,161): warning : field 'interestDecayClock' will be initialized after field 'pathStep' [-Wreorder-ctor]
+aicreature.cpp(5,15): warning : field 'reactionFireClock' will be initialized after field 'aggression' [-Wreorder-ctor]
+aicreature.cpp(5,58): warning : field 'inFov' will be initialized after field 'attitude' [-Wreorder-ctor]
+aicreature.cpp(5,85): warning : field 'actionClock' will be initialized after field 'actionIndex' [-Wreorder-ctor]
+aicreature.cpp(5,111): warning : field 'actionIndex' will be initialized after field 'lastKnownMapPosition' [-Wreorder-ctor]

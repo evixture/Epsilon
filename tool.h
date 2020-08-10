@@ -127,10 +127,10 @@ private:
 
 struct Armor : public Tool
 {
-	short int defense;
-	short int durability;
+	float defense;
+	float durability;
 
-	Armor(const Creature* owner, std::string name, TCODColor color, int defense, int durability);
+	Armor(const Creature* owner, std::string name, TCODColor color, float defense, float durability);
 
 	void equip(Armor& armor);
 };
@@ -169,7 +169,7 @@ namespace ep
 		}
 		inline static Armor L1R3Armor(const Creature* owner)
 		{
-			return Armor(owner, "L1R3 Armor", TCODColor::black, 100, 300);
+			return Armor(owner, "L1R3 Armor", TCODColor::black, 500.0f, 100.0f);
 		}
 	};
 
@@ -177,12 +177,11 @@ namespace ep
 	{
 		inline static Bullet cal45(const Creature* owner, int ch, Position4 startPosition, Position2 targetPosition)
 		{
-			return Bullet(owner, "cal45", ch, startPosition, targetPosition, 400, 15);
+			return Bullet(owner, "cal45", ch, startPosition, targetPosition, 400.0f, 15.0f);
 		}
-
 		inline static Bullet cal556(const Creature* owner, int ch, Position4 startPosition, Position2 targetPosition)
 		{
-			return Bullet(owner, "cal556", ch, startPosition, targetPosition, 1500, 3.5f);
+			return Bullet(owner, "cal556", ch, startPosition, targetPosition, 1500.0f, 3.5f);
 		}
 	};
 }
