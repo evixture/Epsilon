@@ -250,84 +250,84 @@
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>aicreature.cpp</FILENAME>
-      <LINE>212</LINE>
+      <LINE>213</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>AICreature::moveSelectorUp</FUNCTION>
     <DECORATED>?moveSelectorUp@AICreature@@AEAAXXZ</DECORATED>
-    <FUNCLINE>194</FUNCLINE>
+    <FUNCLINE>195</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>aicreature.cpp</FILENAME>
-      <LINE>224</LINE>
+      <LINE>225</LINE>
       <COLUMN>16</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>AICreature::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@AICreature@@AEAAXXZ</DECORATED>
-    <FUNCLINE>220</FUNCLINE>
+    <FUNCLINE>221</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>aicreature.cpp</FILENAME>
-      <LINE>228</LINE>
+      <LINE>229</LINE>
       <COLUMN>21</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>AICreature::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@AICreature@@AEAAXXZ</DECORATED>
-    <FUNCLINE>220</FUNCLINE>
+    <FUNCLINE>221</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>aicreature.cpp</FILENAME>
-      <LINE>237</LINE>
+      <LINE>238</LINE>
       <COLUMN>18</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>AICreature::moveSelectorDown</FUNCTION>
     <DECORATED>?moveSelectorDown@AICreature@@AEAAXXZ</DECORATED>
-    <FUNCLINE>220</FUNCLINE>
+    <FUNCLINE>221</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>aicreature.cpp</FILENAME>
-      <LINE>255</LINE>
+      <LINE>256</LINE>
       <COLUMN>20</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>AICreature::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@AICreature@@AEAAXXZ</DECORATED>
-    <FUNCLINE>246</FUNCLINE>
+    <FUNCLINE>247</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>E:\Projects\Visual Studio\Libtcod Development\Epsilon\</FILEPATH>
       <FILENAME>aicreature.cpp</FILENAME>
-      <LINE>268</LINE>
+      <LINE>269</LINE>
       <COLUMN>17</COLUMN>
     </SFA>
     <DEFECTCODE>26451</DEFECTCODE>
     <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
     <FUNCTION>AICreature::filterIndexes</FUNCTION>
     <DECORATED>?filterIndexes@AICreature@@AEAAXXZ</DECORATED>
-    <FUNCLINE>246</FUNCLINE>
+    <FUNCLINE>247</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

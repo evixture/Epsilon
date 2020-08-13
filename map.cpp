@@ -292,7 +292,15 @@ bool Map::getCreatures(pugi::xml_node& dataNode)
 						armorColor = TCODColor::pink;
 					}
 				}
+
 				Creature creature = Creature(Position4(x, y, level, floor), ch, name, Position3(0, 0, 255), health, Armor(&creature, "TEMP", armorColor, armorDefense, armorDurability)); //missing armor name in file
+
+				if (name == "Creature1")
+				{
+					creature.stance.z = 0;
+					creature.stance.x = 255;
+				}
+
 				creatureList.push_back(std::make_shared<AICreature>(creature, fovMapList[creature.mapPosition.h - 1].get()));
 			}	
 		}
@@ -613,6 +621,10 @@ bool World::isInPlayerFov(Position4 position) const
 	if (!debugmap->inMapBounds(position) || position.h < 1)
 	{
 		return false;
+	}
+	else if (SETTINGS->ignoreFOV)
+	{
+		return true;
 	}
 
 	if (position.z == debugmap->player->mapPosition.z) //condense back

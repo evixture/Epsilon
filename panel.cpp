@@ -750,6 +750,15 @@ void CommandWindow::update()
 				}
 			}
 
+			if (command.arg == "IGNOREFOV")
+			{
+				if (command.hasArgVariables)
+				{
+					if (command.argVariables[0] == "1") SETTINGS->ignoreFOV = true;
+					else if (command.argVariables[0] == "0") SETTINGS->ignoreFOV = false;
+				}
+			}
+
 			if (command.arg == "SETSTANCE")
 			{
 				if (command.hasArgVariables && command.argVariables.size() >= 3)
