@@ -1,54 +1,62 @@
-﻿..\..\..\..\pugixml-1.10\src\pugixml.cpp(4976,10): warning : '_wfopen' is deprecated: This function or variable may be unsafe. Consider using _wfopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\corecrt_wstdio.h(129,20): message : '_wfopen' has been explicitly marked deprecated here
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vcruntime.h(316,55): message : expanded from macro '_CRT_INSECURE_DEPRECATE'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vcruntime.h(306,47): message : expanded from macro '_CRT_DEPRECATE_TEXT'
-..\..\..\..\pugixml-1.10\src\pugixml.cpp(7120,27): warning : 'fopen' is deprecated: This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(207,20): message : 'fopen' has been explicitly marked deprecated here
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vcruntime.h(316,55): message : expanded from macro '_CRT_INSECURE_DEPRECATE'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vcruntime.h(306,47): message : expanded from macro '_CRT_DEPRECATE_TEXT'
-..\..\..\..\pugixml-1.10\src\pugixml.cpp(7203,27): warning : 'fopen' is deprecated: This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(207,20): message : 'fopen' has been explicitly marked deprecated here
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vcruntime.h(316,55): message : expanded from macro '_CRT_INSECURE_DEPRECATE'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vcruntime.h(306,47): message : expanded from macro '_CRT_DEPRECATE_TEXT'
-  In file included from aicreature.cpp:1:
-  In file included from ./main.hpp:14:
-  In file included from E:\Libtcod\custom-libtcod-master\src\libtcod.hpp:32:
-  In file included from E:\Libtcod\custom-libtcod-master\src/libtcod.h:32:
-  In file included from E:\Libtcod\custom-libtcod-master\src/libtcod/libtcod.h:54:
-E:\Libtcod\custom-libtcod-master\src/libtcod/sys.h(58,17): error : 'nodiscard' attribute cannot be applied to types
-E:\Libtcod\custom-libtcod-master\src/libtcod/console/../portability.h(199,26): message : expanded from macro 'TCOD_NODISCARD'
-  In file included from aicreature.cpp:1:
-  In file included from ./main.hpp:14:
-  In file included from E:\Libtcod\custom-libtcod-master\src\libtcod.hpp:32:
-  In file included from E:\Libtcod\custom-libtcod-master\src/libtcod.h:32:
-  In file included from E:\Libtcod\custom-libtcod-master\src/libtcod/libtcod.h:64:
-E:\Libtcod\custom-libtcod-master\src/libtcod/engine/display.h(195,14): error : an attribute list cannot appear here
-E:\Libtcod\custom-libtcod-master\src/libtcod/engine/../tileset/../portability.h(199,24): message : expanded from macro 'TCOD_NODISCARD'
-  In file included from aicreature.cpp:1:
-  In file included from ./main.hpp:14:
-  In file included from E:\Libtcod\custom-libtcod-master\src\libtcod.hpp:32:
-  In file included from E:\Libtcod\custom-libtcod-master\src/libtcod.h:32:
-  In file included from E:\Libtcod\custom-libtcod-master\src/libtcod/libtcod.h:64:
-E:\Libtcod\custom-libtcod-master\src/libtcod/engine/display.h(197,14): error : an attribute list cannot appear here
-E:\Libtcod\custom-libtcod-master\src/libtcod/engine/../tileset/../portability.h(199,24): message : expanded from macro 'TCOD_NODISCARD'
-  In file included from aicreature.cpp:1:
-  In file included from ./main.hpp:14:
-  In file included from E:\Libtcod\custom-libtcod-master\src\libtcod.hpp:32:
-  In file included from E:\Libtcod\custom-libtcod-master\src/libtcod.h:32:
-  In file included from E:\Libtcod\custom-libtcod-master\src/libtcod/libtcod.h:64:
-E:\Libtcod\custom-libtcod-master\src/libtcod/engine/display.h(281,14): error : an attribute list cannot appear here
-E:\Libtcod\custom-libtcod-master\src/libtcod/engine/../tileset/../portability.h(199,24): message : expanded from macro 'TCOD_NODISCARD'
-  In file included from aicreature.cpp:1:
-  In file included from ./main.hpp:45:
-./input.h(29,2): warning : explicitly defaulted default constructor is implicitly deleted [-Wdefaulted-function-deleted]
-./input.h(26,25): message : default constructor of 'KeyboardButton' is implicitly deleted because base class 'Button' has no default constructor
-./input.h(40,2): warning : explicitly defaulted default constructor is implicitly deleted [-Wdefaulted-function-deleted]
-./input.h(37,22): message : default constructor of 'MouseButton' is implicitly deleted because base class 'Button' has no default constructor
-aicreature.cpp(4,47): warning : field 'moveSpeedMode' will be initialized after field 'debugBGColor' [-Wreorder-ctor]
-aicreature.cpp(4,97): warning : field 'soundInterest' will be initialized after field 'visualInterest' [-Wreorder-ctor]
-aicreature.cpp(4,118): warning : field 'visualInterest' will be initialized after field 'interestDecay' [-Wreorder-ctor]
-aicreature.cpp(4,161): warning : field 'interestDecayClock' will be initialized after field 'pathStep' [-Wreorder-ctor]
-aicreature.cpp(5,15): warning : field 'reactionFireClock' will be initialized after field 'aggression' [-Wreorder-ctor]
-aicreature.cpp(5,58): warning : field 'inFov' will be initialized after field 'attitude' [-Wreorder-ctor]
-aicreature.cpp(5,85): warning : field 'actionClock' will be initialized after field 'actionIndex' [-Wreorder-ctor]
-aicreature.cpp(5,111): warning : field 'actionIndex' will be initialized after field 'lastKnownMapPosition' [-Wreorder-ctor]
+﻿  tile.cpp
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tile.cpp(80,80): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tile.cpp(84,69): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tile.cpp(129,99): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+  Epsilon.vcxproj -> E:\Projects\Visual Studio\Libtcod Development\x64\Debug\Epsilon.exe
+E:\pugixml-1.10\src\pugixml.cpp(1096): warning C26495: Variable 'pugi::xml_attribute_struct::header' is uninitialized. Always initialize a member variable (type.6).
+E:\pugixml-1.10\src\pugixml.cpp(1112): warning C26495: Variable 'pugi::xml_node_struct::header' is uninitialized. Always initialize a member variable (type.6).
+E:\pugixml-1.10\src\pugixml.cpp(3698): warning C26495: Variable 'pugi::impl::`anonymous-namespace'::xml_buffered_writer::scratch' is uninitialized. Always initialize a member variable (type.6).
+E:\pugixml-1.10\src\pugixml.cpp(4466): warning C28182: Dereferencing NULL pointer. 'dit' contains the same NULL value as 'copy' did. 
+E:\pugixml-1.10\src\pugixml.cpp(8551): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\pugixml-1.10\src\pugixml.cpp(8572): warning C26495: Variable 'pugi::impl::`anonymous-namespace'::xpath_variable_boolean::name' is uninitialized. Always initialize a member variable (type.6).
+E:\pugixml-1.10\src\pugixml.cpp(8582): warning C26495: Variable 'pugi::impl::`anonymous-namespace'::xpath_variable_number::name' is uninitialized. Always initialize a member variable (type.6).
+E:\pugixml-1.10\src\pugixml.cpp(8592): warning C26495: Variable 'pugi::impl::`anonymous-namespace'::xpath_variable_string::name' is uninitialized. Always initialize a member variable (type.6).
+E:\pugixml-1.10\src\pugixml.cpp(8607): warning C26495: Variable 'pugi::impl::`anonymous-namespace'::xpath_variable_node_set::name' is uninitialized. Always initialize a member variable (type.6).
+E:\pugixml-1.10\src\pugixml.cpp(10221): warning C26495: Variable 'pugi::impl::`anonymous-namespace'::xpath_ast_node::_data' is uninitialized. Always initialize a member variable (type.6).
+E:\pugixml-1.10\src\pugixml.cpp(10233): warning C26495: Variable 'pugi::impl::`anonymous-namespace'::xpath_ast_node::_data' is uninitialized. Always initialize a member variable (type.6).
+E:\pugixml-1.10\src\pugixml.cpp(11935): warning C26495: Variable 'pugi::impl::`anonymous-namespace'::xpath_parser::_scratch' is uninitialized. Always initialize a member variable (type.6).
+E:\pugixml-1.10\src\pugixml.cpp(4516): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\pugixml-1.10\src\pugixml.cpp(4518): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\pugixml-1.10\src\pugixml.cpp(4518): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\pugixml-1.10\src\pugixml.cpp(4540): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\pugixml-1.10\src\pugixml.cpp(4847): warning C26495: Variable 'pugi::impl::`anonymous-namespace'::xml_stream_chunk<wchar_t>::data' is uninitialized. Always initialize a member variable (type.6).
+E:\Libtcod\custom-libtcod-master\src\libtcod\console\console.h(122): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
+E:\Libtcod\custom-libtcod-master\src\libtcod\console\console.h(126): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
+E:\Libtcod\custom-libtcod-master\src\libtcod\tileset\tileset.h(52): warning C26495: Variable 'tcod::tileset::Tileset::tiles_last_known_capacity' is uninitialized. Always initialize a member variable (type.6).
+E:\Libtcod\custom-libtcod-master\src\libtcod\tileset\tileset.h(78): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Libtcod\custom-libtcod-master\src\libtcod\bsp.hpp(77): warning C26495: Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6).
+E:\Libtcod\custom-libtcod-master\src\libtcod\bsp.hpp(78): warning C26495: Variable 'TCODBsp::horizontal' is uninitialized. Always initialize a member variable (type.6).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.h(23): warning C26495: Variable 'Position2::y' is uninitialized. Always initialize a member variable (type.6).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.h(37): warning C26495: Variable 'Position3::z' is uninitialized. Always initialize a member variable (type.6).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\aicreature.cpp(212): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\aicreature.cpp(224): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\aicreature.cpp(228): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\aicreature.cpp(237): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\aicreature.cpp(255): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\aicreature.cpp(268): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\creature.cpp(212): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\creature.cpp(226): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\creature.cpp(232): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\creature.cpp(243): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\creature.cpp(368): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\creature.cpp(375): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\input.cpp(259): warning C26495: Variable 'Bind::isSwitched' is uninitialized. Always initialize a member variable (type.6).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\item.cpp(47): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\main.cpp(5): warning C28251: Inconsistent annotation for 'WinMain': this instance has no annotations. See c:\program files (x86)\windows kits\10\include\10.0.18362.0\um\winbase.h(933). 
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.h(52): warning C26495: Variable 'Position4::h' is uninitialized. Always initialize a member variable (type.6).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(169): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(183): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(188): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(296): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(540): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(558): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(580): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\map.cpp(620): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(238): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.cpp(285): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\panel.h(20): warning C26495: Variable 'Command::hasArg' is uninitialized. Always initialize a member variable (type.6).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tile.cpp(10): warning C26495: Variable 'Block::walkableFlag' is uninitialized. Always initialize a member variable (type.6).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tile.cpp(21): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\tool.cpp(463): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(271): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+E:\Projects\Visual Studio\Libtcod Development\Epsilon\utility.cpp(271): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).

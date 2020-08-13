@@ -104,12 +104,6 @@ Player::Player(Position4 position)
 {
 	hasSecondChance = true;
 
-	//inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(this, 0, 0, 0)));
-	//inventory[1]->addItem(	std::make_shared<Item>(ep::item::sip45(this, 0, 0, 0)));
-	//inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(this, 0, 0, 0)));
-	//inventory[1]->addItem(	std::make_shared<MagazineItem>(ep::magazineItem::cal45Magazine7(this, 0, 0, 0)));
-	//inventory.push_back(	std::make_shared<Container>(ep::container::smallBackpack(this, 0, 0, 0)));
-
 	inventory = ep::inventory::testInventory(this);
 
 	if (inventory.size() > 0)
@@ -497,7 +491,7 @@ void Player::update()
 		//world
 		if (INPUT->worldInteract->isSwitched)
 		{
-			if (WORLD->debugmap->getBlock(mapPosition)->tag == Block::Tag::STAIR) WORLD->debugmap->getBlock(mapPosition)->interact();
+			if (WORLD->debugmap->getBlock(mapPosition)->tag == Block::Tag::STAIR) WORLD->debugmap->getBlock(mapPosition)->interact(this);
 		}
 
 		move();

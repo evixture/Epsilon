@@ -21,6 +21,7 @@ Projectile::Projectile(const Creature* owner, int ch, std::string name, TCODColo
 	: Entity(startPosition, ch, name, color), owner(owner), startPosition(startPosition), targetPosition(targetPosition), velocity(velocity), mass(mass),
 	fTravel(FLine(startPosition, targetPosition)), moveClock(1.0f / velocity), fallClock(0), nextPosition(startPosition), inFov(false), onGround(false)
 {
+	type = Type::PROJECTILE;
 }
 
 void Projectile::doProjectileDamage(std::shared_ptr<Creature>& creature)
@@ -152,6 +153,7 @@ void Projectile::render(const Pane& pane) const
 Bullet::Bullet(const Creature* owner, std::string name, int ch, const Position4 startPosition, Position2 targetPosition, float velocity, float mass)
 	: Projectile(owner, ch, name, TCODColor::copper, startPosition, targetPosition, velocity, mass)
 {
+	type = Type::BULLET;
 }
 
 void Bullet::doProjectileDamage(std::shared_ptr<Creature>& creature)

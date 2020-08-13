@@ -21,6 +21,8 @@ protected:
 
 struct Projectile : public Entity
 {
+	enum class Type {PROJECTILE, BULLET} type;
+
 	const Creature* owner;
 	bool inFov;
 

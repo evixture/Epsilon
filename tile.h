@@ -67,7 +67,7 @@ struct Block
 
 	void render(Position4 renderPosition, const Pane& pane) const;
 
-	virtual void interact();
+	virtual void interact(Creature* creature);
 	virtual void interact(Projectile* projectile);
 	virtual void interact(Melee* melee);
 };
@@ -78,7 +78,7 @@ struct Stair : public Block
 	
 	Stair(std::array<Tile, 4> tileList, unsigned char transparentFlag, unsigned char solidityFlag, int moveDistance);
 
-	void interact();
+	void interact(Creature* creature);
 };
 
 namespace ep

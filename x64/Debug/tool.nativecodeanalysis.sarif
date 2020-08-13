@@ -94,30 +94,6 @@
         {
           "ruleId": "C26495",
           "message": {
-            "text": "Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
-                },
-                "region": {
-                  "startLine": 77,
-                  "startColumn": 2,
-                  "endLine": 77,
-                  "endColumn": 2
-                }
-              }
-            }
-          ],
-          "properties": {
-            "targetSymbol": "TCODBsp::y"
-          }
-        },
-        {
-          "ruleId": "C26495",
-          "message": {
             "text": "Variable 'TCODBsp::w' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
@@ -142,6 +118,54 @@
         {
           "ruleId": "C26495",
           "message": {
+            "text": "Variable 'TCODBsp::h' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
+                },
+                "region": {
+                  "startLine": 77,
+                  "startColumn": 2,
+                  "endLine": 77,
+                  "endColumn": 2
+                }
+              }
+            }
+          ],
+          "properties": {
+            "targetSymbol": "TCODBsp::h"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'TCODBsp::horizontal' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
+                },
+                "region": {
+                  "startLine": 77,
+                  "startColumn": 2,
+                  "endLine": 77,
+                  "endColumn": 2
+                }
+              }
+            }
+          ],
+          "properties": {
+            "targetSymbol": "TCODBsp::horizontal"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
             "text": "Variable 'TCODBsp::position' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
@@ -161,6 +185,30 @@
           ],
           "properties": {
             "targetSymbol": "TCODBsp::position"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'TCODBsp::y' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
+                },
+                "region": {
+                  "startLine": 77,
+                  "startColumn": 2,
+                  "endLine": 77,
+                  "endColumn": 2
+                }
+              }
+            }
+          ],
+          "properties": {
+            "targetSymbol": "TCODBsp::y"
           }
         },
         {
@@ -199,9 +247,9 @@
                   "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
                 },
                 "region": {
-                  "startLine": 77,
+                  "startLine": 78,
                   "startColumn": 2,
-                  "endLine": 77,
+                  "endLine": 78,
                   "endColumn": 2
                 }
               }
@@ -209,30 +257,6 @@
           ],
           "properties": {
             "targetSymbol": "TCODBsp::horizontal"
-          }
-        },
-        {
-          "ruleId": "C26495",
-          "message": {
-            "text": "Variable 'TCODBsp::h' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
-                },
-                "region": {
-                  "startLine": 77,
-                  "startColumn": 2,
-                  "endLine": 77,
-                  "endColumn": 2
-                }
-              }
-            }
-          ],
-          "properties": {
-            "targetSymbol": "TCODBsp::h"
           }
         },
         {
@@ -262,121 +286,49 @@
         {
           "ruleId": "C26495",
           "message": {
-            "text": "Variable 'TCODBsp::horizontal' is uninitialized. Always initialize a member variable (type.6)."
+            "text": "Variable 'Position2::y' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "file:///E:/Libtcod/custom-libtcod-master/src/libtcod/bsp.hpp"
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/utility.h"
                 },
                 "region": {
-                  "startLine": 78,
+                  "startLine": 23,
                   "startColumn": 2,
-                  "endLine": 78,
+                  "endLine": 23,
                   "endColumn": 2
                 }
               }
             }
           ],
           "properties": {
-            "targetSymbol": "TCODBsp::horizontal"
+            "targetSymbol": "Position2::y"
           }
         },
         {
           "ruleId": "C26495",
           "message": {
-            "text": "Variable 'KeyboardButton::button' is uninitialized. Always initialize a member variable (type.6)."
+            "text": "Variable 'Position2::x' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/input.h"
+                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/utility.h"
                 },
                 "region": {
-                  "startLine": 21,
+                  "startLine": 23,
                   "startColumn": 2,
-                  "endLine": 21,
+                  "endLine": 23,
                   "endColumn": 2
                 }
               }
             }
           ],
           "properties": {
-            "targetSymbol": "KeyboardButton::button"
-          }
-        },
-        {
-          "ruleId": "C26495",
-          "message": {
-            "text": "Variable 'MouseButton::button' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/input.h"
-                },
-                "region": {
-                  "startLine": 31,
-                  "startColumn": 2,
-                  "endLine": 31,
-                  "endColumn": 2
-                }
-              }
-            }
-          ],
-          "properties": {
-            "targetSymbol": "MouseButton::button"
-          }
-        },
-        {
-          "ruleId": "C26495",
-          "message": {
-            "text": "Variable 'Tool::angle' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/tool.cpp"
-                },
-                "region": {
-                  "startLine": 3,
-                  "startColumn": 7,
-                  "endLine": 3,
-                  "endColumn": 7
-                }
-              }
-            }
-          ],
-          "properties": {
-            "targetSymbol": "Tool::angle"
-          }
-        },
-        {
-          "ruleId": "C26495",
-          "message": {
-            "text": "Variable 'Tool::angle' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/tool.cpp"
-                },
-                "region": {
-                  "startLine": 8,
-                  "startColumn": 7,
-                  "endLine": 8,
-                  "endColumn": 7
-                }
-              }
-            }
-          ],
-          "properties": {
-            "targetSymbol": "Tool::angle"
+            "targetSymbol": "Position2::x"
           }
         },
         {
@@ -391,10 +343,10 @@
                   "uri": "file:///E:/Projects/Visual Studio/Libtcod Development/Epsilon/tool.cpp"
                 },
                 "region": {
-                  "startLine": 673,
+                  "startLine": 463,
                   "startColumn": 26,
-                  "endLine": 673,
-                  "endColumn": 59
+                  "endLine": 463,
+                  "endColumn": 49
                 }
               }
             }
@@ -405,12 +357,12 @@
         "driver": {
           "name": "PREfast",
           "fullName": "PREfast Code Analysis",
-          "version": "14.25.28610.4"
+          "version": "14.27.29110.0"
         }
       },
       "invocations": [
         {
-          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.25.28610\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x003A3190 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_bf1dc64aast -typedil -f tool.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1925 -D_MSC_FULL_VER=192528610 -D_MSC_BUILD=4 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Ot -Oi -DCODE_ANALYSIS -D_DEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -MDd -D_DEBUG -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -std:c++17 -Fox64\\Debug\\tool.obj -Fdx64\\Debug\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeMinimumRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.25.28610\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.25.28610\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.25.28610\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\Include\\um",
+          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.27.29110\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x00E37180 -il C:\\Users\\pixture\\AppData\\Local\\Temp\\_CL_c3414a07ast -typedil -f tool.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1927 -D_MSC_FULL_VER=192729110 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I E:\\Libtcod\\custom-libtcod-master\\src -I E:\\SFML\\SFML-2.5.1\\include -I E:\\SoLoud\\soloud-RELEASE_20200207\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Ot -Oi -DCODE_ANALYSIS -D_DEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -MDd -D_DEBUG -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -std:c++17 -Fox64\\Debug\\tool.obj -Fdx64\\Debug\\vc142.pdb -Gd -analyze:projectdirectory E:\\Projects\\Visual Studio\\Libtcod Development\\Epsilon\\ -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeMinimumRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.27.29110\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.27.29110\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.27.29110\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um",
           "executionSuccessful": true,
           "ruleConfigurationOverrides": [
             {
@@ -4381,7 +4333,23 @@
         },
         {
           "location": {
+            "uri": "file:///e:/soloud/soloud-release_20200207/include/soloud_freeverbfilter.h"
+          },
+          "roles": [
+            "resultFile"
+          ]
+        },
+        {
+          "location": {
             "uri": "file:///e:/libtcod/custom-libtcod-master/src/libtcod/console/rexpaint.h"
+          },
+          "roles": [
+            "resultFile"
+          ]
+        },
+        {
+          "location": {
+            "uri": "file:///e:/soloud/soloud-release_20200207/include/soloud_filter.h"
           },
           "roles": [
             "resultFile"
@@ -4510,6 +4478,14 @@
         {
           "location": {
             "uri": "file:///e:/libtcod/custom-libtcod-master/src/libtcod/sys.h"
+          },
+          "roles": [
+            "resultFile"
+          ]
+        },
+        {
+          "location": {
+            "uri": "file:///e:/soloud/soloud-release_20200207/include/soloud_error.h"
           },
           "roles": [
             "resultFile"
@@ -4717,6 +4693,14 @@
         },
         {
           "location": {
+            "uri": "file:///e:/soloud/soloud-release_20200207/include/soloud_queue.h"
+          },
+          "roles": [
+            "resultFile"
+          ]
+        },
+        {
+          "location": {
             "uri": "file:///e:/libtcod/custom-libtcod-master/src/libtcod/namegen.hpp"
           },
           "roles": [
@@ -4814,6 +4798,22 @@
         {
           "location": {
             "uri": "file:///e:/sfml/sfml-2.5.1/include/sfml/system/fileinputstream.hpp"
+          },
+          "roles": [
+            "resultFile"
+          ]
+        },
+        {
+          "location": {
+            "uri": "file:///e:/soloud/soloud-release_20200207/src/audiosource/speech/tts.h"
+          },
+          "roles": [
+            "resultFile"
+          ]
+        },
+        {
+          "location": {
+            "uri": "file:///e:/soloud/soloud-release_20200207/include/soloud.h"
           },
           "roles": [
             "resultFile"
@@ -5093,6 +5093,78 @@
         },
         {
           "location": {
+            "uri": "file:///e:/soloud/soloud-release_20200207/include/soloud_fader.h"
+          },
+          "roles": [
+            "resultFile"
+          ]
+        },
+        {
+          "location": {
+            "uri": "file:///e:/soloud/soloud-release_20200207/include/soloud_audiosource.h"
+          },
+          "roles": [
+            "resultFile"
+          ]
+        },
+        {
+          "location": {
+            "uri": "file:///e:/soloud/soloud-release_20200207/include/soloud_bus.h"
+          },
+          "roles": [
+            "resultFile"
+          ]
+        },
+        {
+          "location": {
+            "uri": "file:///e:/soloud/soloud-release_20200207/include/soloud_thread.h"
+          },
+          "roles": [
+            "resultFile"
+          ]
+        },
+        {
+          "location": {
+            "uri": "file:///e:/soloud/soloud-release_20200207/include/soloud_speech.h"
+          },
+          "roles": [
+            "resultFile"
+          ]
+        },
+        {
+          "location": {
+            "uri": "file:///e:/soloud/soloud-release_20200207/src/audiosource/speech/darray.h"
+          },
+          "roles": [
+            "resultFile"
+          ]
+        },
+        {
+          "location": {
+            "uri": "file:///e:/soloud/soloud-release_20200207/src/audiosource/speech/klatt.h"
+          },
+          "roles": [
+            "resultFile"
+          ]
+        },
+        {
+          "location": {
+            "uri": "file:///e:/soloud/soloud-release_20200207/src/audiosource/speech/resonator.h"
+          },
+          "roles": [
+            "resultFile"
+          ]
+        },
+        {
+          "location": {
+            "uri": "file:///e:/soloud/soloud-release_20200207/include/soloud_wav.h"
+          },
+          "roles": [
+            "resultFile"
+          ]
+        },
+        {
+          "location": {
             "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/utility.h"
           },
           "roles": [
@@ -5101,7 +5173,15 @@
         },
         {
           "location": {
-            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/sound.h"
+            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/audio.h"
+          },
+          "roles": [
+            "resultFile"
+          ]
+        },
+        {
+          "location": {
+            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/environment.h"
           },
           "roles": [
             "resultFile"
@@ -5125,7 +5205,7 @@
         },
         {
           "location": {
-            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/entity.h"
+            "uri": "file:///e:/projects/visual studio/libtcod development/epsilon/creature.h"
           },
           "roles": [
             "resultFile"

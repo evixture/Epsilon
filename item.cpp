@@ -229,7 +229,7 @@ void Item::throwItem()
 	if (!onMap && !inAir)
 	{
 		inAir = true; //needs to be first?
-		projectile = std::make_shared<Projectile>(owner, block->tileList[0].ch, tool->name, block->tileList[0].foregroundColor, tool->mapPosition, owner->targetPosition, 50.0f, 240.0f);
+		projectile = std::make_shared<Projectile>(owner, block->tileList[0].ch, tool->name, block->tileList[0].foregroundColor, tool->mapPosition, owner->targetPosition, 25.0f, 4500.0f); //10 lbs
 
 		WORLD->debugmap->mapItemList.push_back(std::make_shared<Item>(*this));																   //needs to be last
 		owner->inventory[owner->containerIndex]->itemList.erase(owner->inventory[owner->containerIndex]->itemList.begin() + owner->itemIndex); //needs to be last

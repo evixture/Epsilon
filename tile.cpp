@@ -64,58 +64,25 @@ Tile Block::getTileData(int h) const
 //	return false;
 //}
 
-void Block::interact()
+void Block::interact(Creature* creature)
 {
 	return;
 }
 
 void Block::interact(Projectile* projectile)
 {
-	/*
-	if (!destroyed)
-	{
-		if (tileList[h].strength != -1) //if can be damaged
-		{
-			if	(tileList[h].strength - damage >= 0) tileList[h].strength -= damage;
-			else tileList[h].strength = 0;
-
-			for (auto& tile : tileList)
-			{
-				if (tile.strength == 0) //if it has no strength left
-				{
-					destroyed = true;
-					break;
-				}
-			}
-
-			if (destroyed)
-			{
-				tileList = std::array<Tile, 4>
-				{
-					Tile('%', tileList[0].foregroundColor * TCODColor::lightGrey, tileList[0].backgroundColor * TCODColor::darkGrey, 0, 21),
-					Tile(0, TCODColor::pink, TCODColor::pink, 0, 21),
-					Tile(0, TCODColor::pink, TCODColor::pink, 0, 21),
-					Tile(0, TCODColor::pink, TCODColor::pink, 0, 21)
-				};
-
-				solidityFlag = ep::tileFlag::OOOOI;
-				transparentFlag = ep::tileFlag::OOOOI;
-
-				return true;
-			}
-		}
-	}
-	return false;
-	*/
-
 	if (!destroyed)
 	{
 		if (tileList[projectile->mapPosition.h].strength != -1)
 		{
-			if (tileList[projectile->mapPosition.h].strength - projectile->mass >= 0)
+			if (projectile->type == Projectile::Type::PROJECTILE && tileList[projectile->mapPosition.h].strength - (projectile->mass / 500.0f) >= 0)
+			{
+				tileList[projectile->mapPosition.h].strength -= (projectile->mass / 500.0f);
+			}
+			else if (projectile->type == Projectile::Type::BULLET && tileList[projectile->mapPosition.h].strength - projectile->mass >= 0)
 			{
 				tileList[projectile->mapPosition.h].strength -= projectile->mass;
-			}
+			}			
 			else
 			{
 				tileList[projectile->mapPosition.h].strength = 0;
@@ -217,9 +184,9 @@ Stair::Stair(std::array<Tile, 4> tileList, unsigned char transparentFlag, unsign
 {
 }
 
-void Stair::interact()
+void Stair::interact(Creature* creature)
 {
-	WORLD->debugmap->player->mapPosition.z += moveDistance;
-	WORLD->debugmap->refreshFOV(WORLD->debugmap->player->mapPosition.z);
+	creature->mapPosition.z += moveDistance;
+	WORLD->debugmap->refreshFOV(WORLD->debugmap->player->mapPosition.z); //??????
 }
 
