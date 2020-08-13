@@ -205,6 +205,7 @@ s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
 				<color>pink</color>
 			</armor>
 		</creature>
+<!--
 		<creature name = "Creature1">
 			<x>13</x>
 			<y>38</y>
@@ -220,7 +221,6 @@ s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s` s`
 			</armor>
 		</creature>
 
-<!--
 		<creature name = "Creature2">
 			<x>64</x>
 			<y>21</y>

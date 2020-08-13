@@ -100,7 +100,7 @@ void Creature::render(const Pane& pane) const
 //----------------------------------------------------------------------------------------------------
 
 Player::Player(Position4 position)
-	:Creature(position, '@', "player", Position3(255, 0, 0), 100, Armor(this, "", TCODColor::pink, 0, 0)), backgroundColor(TCODColor::pink), hasSecondChance(true)
+	:Creature(position, '@', "player", Position3(255, 0, 255), 100, Armor(this, "", TCODColor::pink, 0, 0)), backgroundColor(TCODColor::pink), hasSecondChance(true)
 {
 	hasSecondChance = true;
 

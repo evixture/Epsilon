@@ -2,8 +2,7 @@
 
 AICreature::AICreature(Creature creature, TCODMap* fovMap)
 	:Creature(creature), path(TCODPath(fovMap)), moveSpeedMode(1), debugBGColor(TCODColor::black), soundInterest(0.0f), visualInterest(0.0f), interestDecay(.05f), interestDecayClock(0.5f), 
-	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false), attitude(0), actionClock(Clock(1.0f)), actionIndex(0), lastKnownMapPosition(creature.mapPosition), discovered(false),
-	focusCreature(nullptr)
+	pathStep(0), reactionFireClock(1.0f), aggression(0.0f), inFov(false), attitude(0), actionClock(Clock(1.0f)), actionIndex(0), lastKnownMapPosition(creature.mapPosition), discovered(false)
 {
 	inventory = ep::inventory::testInventory(this);
 
@@ -348,36 +347,6 @@ bool AICreature::inEffectiveRange()
 	return ((getDistance(mapPosition.x, mapPosition.y, focusPosition.x, focusPosition.y) <= selectedItem->tool->effectiveRange)); //change to take into account melee weapons
 }
 
-std::shared_ptr<Creature> AICreature::findFocusCreature()
-{
-	int focusIndex = -1;
-	float calcDist;
-	float dist = 30.0f;
-
-	for (int i = 0; i < WORLD->debugmap->creatureList.size(); i++)
-	{
-		if (WORLD->debugmap->creatureList[i]->mapPosition.z == mapPosition.z && WORLD->debugmap->creatureList[i].get() != this && WORLD->debugmap->creatureList[i]->health != 0)
-		{
-			calcDist = getDistance(mapPosition.x, mapPosition.y, WORLD->debugmap->creatureList[i]->mapPosition.x, WORLD->debugmap->creatureList[i]->mapPosition.x);
-
-			if (calcDist < 60.0f) //arbitrary, affects creature focus range (SHOULD BE ~30)
-			{
-				if (calcDist < dist)
-				{
-					dist = calcDist;
-					focusIndex = i;
-				}
-			}
-		}
-	}
-
-	if (focusIndex != -1)
-	{
-		return WORLD->debugmap->creatureList[focusIndex];
-	}
-	return nullptr;
-}
-
 void AICreature::decayInterest()
 {
 	interestDecayClock.tickUp();
@@ -438,9 +407,9 @@ void AICreature::behave()
 
 	if (inFov)
 	{
-		focusPosition = focusCreature->mapPosition; //REPLACE
-		targetPosition = focusCreature->mapPosition; //REPLACE //add random coords (1, -1) for inaccuracy
-		pathfindPosition = getWalkableArea(focusCreature->mapPosition); //REPLACE
+		focusPosition = WORLD->debugmap->player->mapPosition;
+		targetPosition = WORLD->debugmap->player->mapPosition; //add random coords (1, -1) for inaccuracy
+		pathfindPosition = getWalkableArea(WORLD->debugmap->player->mapPosition); //player tile is not walkable
 	}
 	else
 	{
@@ -451,14 +420,11 @@ void AICreature::behave()
 
 void AICreature::act()
 {
-	if (focusCreature)
-	{
-		Position3 deltaStance = this->stance - focusCreature->stance; //REPLACE
-		if (deltaStance.x >= 0) if (attitude < deltaStance.x / 255.0f) attitude = deltaStance.x / 255.0f;
-		if (deltaStance.y >= 0) if (attitude < deltaStance.y / 255.0f) attitude = deltaStance.y / 255.0f;
-		if (deltaStance.z >= 0) if (attitude < deltaStance.z / 255.0f) attitude = deltaStance.z / 255.0f;
-		if (aggression < attitude) aggression = attitude; //keep aggression updated
-	}
+	Position3 deltaStance = this->stance - WORLD->debugmap->player->stance;
+	if (deltaStance.x >= 0) if (attitude < deltaStance.x / 255.0f) attitude = deltaStance.x / 255.0f;
+	if (deltaStance.y >= 0) if (attitude < deltaStance.y / 255.0f) attitude = deltaStance.y / 255.0f;
+	if (deltaStance.z >= 0) if (attitude < deltaStance.z / 255.0f) attitude = deltaStance.z / 255.0f;
+	if (aggression < attitude) aggression = attitude; //keep aggression updated
 
 	if (inFov)
 	{
@@ -507,15 +473,11 @@ void AICreature::act()
 
 void AICreature::update() //ai and behavior attributes update here
 {
-	focusCreature = findFocusCreature();
-
 	inFov = WORLD->isInPlayerFov(mapPosition);
 	if (inFov) discovered = true;
 
 	if (health != 0) //if alive
 	{
-		color = TCODColor(stance.x, stance.y, stance.z);
-
 		behave(); //take in surroundings and change attributes
 		act(); //take actions based on attribute values
 	}
@@ -559,12 +521,12 @@ void AICreature::render(const Pane& pane) const
 
 				pane.console->setCharBackground(x - WORLD->xOffset, y - WORLD->yOffset, TCODColor::pink);
 			}
-			//pane.console->setCharBackground(renderPosition.x, renderPosition.y, debugBGColor);
+			pane.console->setCharBackground(renderPosition.x, renderPosition.y, debugBGColor);
 
 			//render interest points
 			//pane.console->setCharBackground(lookPosition.x - WORLD->xOffset, lookPosition.y - WORLD->yOffset, TCODColor::white);
 			//pane.console->setCharBackground(focusPosition.x - WORLD->xOffset, focusPosition.y - WORLD->yOffset - 1, TCODColor::flame);
-			//pane.console->setCharBackground(pathfindPosition.x - WORLD->xOffset, pathfindPosition.y - WORLD->yOffset, TCODColor::purple);
+			pane.console->setCharBackground(pathfindPosition.x - WORLD->xOffset, pathfindPosition.y - WORLD->yOffset, TCODColor::purple);
 		}
 	
 		if (health != 0)
@@ -573,10 +535,3 @@ void AICreature::render(const Pane& pane) const
 		}
 	}
 }
-
-/*
-Position3 pathfindPosition;
-Position3 lookPosition;
-Position3 focusPosition;
-targetPosition
-*/
